@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import requests
-from .config import settings
+from config import settings
 
 app = FastAPI(title="Sentinel Orchestrator Backend")
 
