@@ -1,15 +1,26 @@
-from pydantic import BaseSettings, Field
+from pydantic_settings import BaseSettings
 from typing import Optional
 
-class BackendConfig(BaseSettings):
-    host: str = Field(default="0.0.0.0", description="API host")
-    port: int = Field(default=8080, description="API port")
-    database_url: Optional[str] = Field(default=None, description="Database URL")
-    log_level: str = Field(default="INFO", description="Logging level")
+class Settings(BaseSettings):
+    """Application settings for the Sentinel Backend."""
+    
+    # Database Configuration
+    DATABASE_URL: str
+    
+    # API Configuration
+    HOST: str = "0.0.0.0"
+    PORT: int = 8080
+    LOG_LEVEL: str = "INFO"
+    
+    # Desktop Engine Configuration
+    DESKTOP_TUNNEL_URL: Optional[str] = None
+    
+    # Google GenAI Configuration
+    GOOGLE_APPLICATION_CREDENTIALS_JSON: Optional[str] = None
 
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
         case_sensitive = False
 
-config = BackendConfig() 
+settings = Settings() 
