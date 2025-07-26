@@ -43,7 +43,7 @@ Local Desktop (Agent Engine)
 - Git
 - Railway account
 - Cloudflare account
-- OpenAI/Anthropic API key
+- Google GenAI (Gemini) account and service account credentials
 
 ### Local Development Setup
 
@@ -108,13 +108,13 @@ Create `.env` files in each component directory:
 ### Backend (.env)
 ```
 DATABASE_URL=postgresql://...
-OPENAI_API_KEY=sk-...
+GOOGLE_APPLICATION_CREDENTIALS=/path/to/your/service-account.json
 RAILWAY_TOKEN=...
 ```
 
 ### Agent Engine (.env)
 ```
-OPENAI_API_KEY=sk-...
+GOOGLE_APPLICATION_CREDENTIALS=/path/to/your/service-account.json
 CLOUDFLARE_TUNNEL_TOKEN=...
 LOCAL_API_PORT=8001
 ```
