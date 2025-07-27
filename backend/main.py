@@ -24,16 +24,25 @@ logger.add("logs/sentinel_backend.log", rotation="10 MB", level=settings.LOG_LEV
 
 def get_llm_client():
     try:
-        from google.oauth2 import service_account
         from langchain_google_genai import ChatGoogleGenerativeAI
 
-        creds_dict = json.loads(settings.GOOGLE_APPLICATION_CREDENTIALS_JSON)
-        credentials = service_account.Credentials.from_service_account_info(creds_dict)
-        return ChatGoogleGenerativeAI(
-            model=settings.DEFAULT_MODEL,
-            credentials=credentials,
-            temperature=0.7
-        )
+        if settings.GOOGLE_API_KEY:
+            return ChatGoogleGenerativeAI(
+                model=settings.DEFAULT_MODEL,
+                google_api_key=settings.GOOGLE_API_KEY,
+                temperature=0.7
+            )
+        elif settings.GOOGLE_APPLICATION_CREDENTIALS_JSON:
+            from google.oauth2 import service_account
+            creds_dict = json.loads(settings.GOOGLE_APPLICATION_CREDENTIALS_JSON)
+            credentials = service_account.Credentials.from_service_account_info(creds_dict)
+            return ChatGoogleGenerativeAI(
+                model=settings.DEFAULT_MODEL,
+                credentials=credentials,
+                temperature=0.7
+            )
+        else:
+            raise ValueError("No Google API key or service account credentials provided.")
     except Exception as e:
         logger.error(f"FATAL: Could not initialize LLM Client. Error: {e}")
         raise
