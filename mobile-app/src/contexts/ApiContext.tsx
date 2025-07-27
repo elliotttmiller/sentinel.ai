@@ -5,13 +5,8 @@ import { ApiConfig } from '@/types';
 interface ApiContextType {
   config: ApiConfig;
   baseUrl: string;
-  railwayUrl: string;
-  ngrokUrl: string;
-  websocketUrl: string;
   isConnected: boolean;
   connectionError: string | null;
-  switchToNgrok: () => void;
-  switchToRailway: () => void;
 }
 
 const ApiContext = createContext<ApiContextType | undefined>(undefined);
@@ -22,18 +17,15 @@ const debugLog = (message: string, data?: any) => {
   console.log(`[${timestamp}] DEBUG: ${message}`, data ? JSON.stringify(data, null, 2) : '');
 };
 
-// Get environment variables with fallbacks
-const getEnvVar = (key: string, fallback: string) => {
-  const value = Constants.expoConfig?.extra?.[key] || fallback;
-  debugLog(`Environment variable ${key}:`, { value, fallback });
-  return value;
+// Get the API URL from environment
+const getApiUrl = () => {
+  const apiUrl = Constants.expoConfig?.extra?.apiUrl || 'https://sentinalai-production.up.railway.app';
+  debugLog(`API URL from environment:`, { apiUrl });
+  return apiUrl;
 };
 
 const defaultConfig: ApiConfig = {
-  railwayUrl: getEnvVar('railwayUrl', 'http://localhost:8080'),
-  ngrokUrl: getEnvVar('ngrokUrl', 'https://thrush-real-lacewing.ngrok-free.app'),
-  websocketUrl: getEnvVar('websocketUrl', 'ws://localhost:8080/ws'),
-  useNgrok: false, // Start with local backend
+  apiUrl: getApiUrl(),
 };
 
 debugLog('Initial configuration:', defaultConfig);
@@ -43,7 +35,7 @@ export const ApiProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [isConnected, setIsConnected] = useState(false);
   const [connectionError, setConnectionError] = useState<string | null>(null);
 
-  const baseUrl = config.useNgrok ? config.ngrokUrl : config.railwayUrl;
+  const baseUrl = config.apiUrl;
 
   debugLog('Current configuration state:', {
     config,
@@ -124,16 +116,6 @@ export const ApiProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
   };
 
-  const switchToNgrok = () => {
-    debugLog('Switching to ngrok URL');
-    setConfig(prev => ({ ...prev, useNgrok: true }));
-  };
-
-  const switchToRailway = () => {
-    debugLog('Switching to Railway URL');
-    setConfig(prev => ({ ...prev, useNgrok: false }));
-  };
-
   useEffect(() => {
     debugLog('Configuration changed, checking connection...');
     debugLog('Current config:', config);
@@ -145,8 +127,7 @@ export const ApiProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       
       debugLog(`Connection result:`, {
         connected,
-        baseUrl,
-        useNgrok: config.useNgrok
+        baseUrl
       });
       
       setIsConnected(connected);
@@ -159,13 +140,8 @@ export const ApiProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const value: ApiContextType = {
     config,
     baseUrl,
-    railwayUrl: config.railwayUrl,
-    ngrokUrl: config.ngrokUrl,
-    websocketUrl: config.websocketUrl,
     isConnected,
     connectionError,
-    switchToNgrok,
-    switchToRailway,
   };
 
   debugLog('ApiContext value:', value);

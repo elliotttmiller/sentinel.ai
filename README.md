@@ -127,7 +127,26 @@ EXPO_PUBLIC_WEBSOCKET_URL=wss://...
 
 ## 🧪 Development
 
-### Running Locally
+### Service Manager (Recommended)
+
+The easiest way to manage all Sentinel services is using the service manager:
+
+1. **Setup ngrok Auth Token** (First time only)
+   ```bash
+   python scripts/setup_ngrok.py
+   ```
+   Follow the prompts to configure your ngrok auth token.
+
+2. **Start All Services**
+   ```bash
+   python scripts/manage_services.py
+   ```
+   Choose option 4 to start all services at once, or use individual options:
+   - Option 1: Start Backend Server
+   - Option 2: Start ngrok Tunnels (Backend + Engine)
+   - Option 3: Start Agent Engine
+
+### Manual Development
 
 1. **Start Backend**
    ```bash
@@ -146,6 +165,26 @@ EXPO_PUBLIC_WEBSOCKET_URL=wss://...
    cd mobile-app
    npx expo start
    ```
+
+### ngrok Tunnel Setup
+
+For local development with mobile app access, you'll need ngrok tunnels:
+
+1. **Get ngrok Auth Token**
+   - Go to https://ngrok.com/ and sign up/login
+   - Visit https://dashboard.ngrok.com/get-started/your-authtoken
+   - Copy your auth token
+
+2. **Setup Auth Token**
+   ```bash
+   python scripts/setup_ngrok.py
+   ```
+
+3. **Start Tunnels**
+   ```bash
+   python scripts/manage_services.py
+   ```
+   Choose option 2 to start both backend and engine tunnels.
 
 ### Testing
 

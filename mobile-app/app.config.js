@@ -36,14 +36,8 @@ export default {
     ],
     scheme: "sentinel",
     extra: {
-      // Railway configuration (local backend by default)
-      railwayUrl: process.env.EXPO_PUBLIC_RAILWAY_API_URL || "http://localhost:8080",
-      
-      // ngrok configuration
-      ngrokUrl: process.env.EXPO_PUBLIC_NGROK_API_URL || "https://thrush-real-lacewing.ngrok-free.app",
-      
-      // WebSocket configuration (local by default)
-      websocketUrl: process.env.EXPO_PUBLIC_WEBSOCKET_URL || "ws://localhost:8080/ws",
+      // API configuration - this is the main URL the app uses
+      apiUrl: process.env.EXPO_PUBLIC_API_URL || "https://sentinalai-production.up.railway.app",
       
       // App configuration
       appName: process.env.EXPO_PUBLIC_APP_NAME || "Sentinel",

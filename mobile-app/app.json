@@ -34,6 +34,7 @@
     ],
     "scheme": "sentinel",
     "extra": {
+      "apiUrl": "https://sentinalai-production.up.railway.app",
       "eas": {
         "projectId": "your-project-id-here"
       }

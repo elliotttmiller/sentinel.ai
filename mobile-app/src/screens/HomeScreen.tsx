@@ -16,7 +16,7 @@ const debugLog = (message: string, data?: any) => {
 
 const HomeScreen: React.FC = () => {
   const theme = useTheme();
-  const { baseUrl, isConnected, connectionError, switchToNgrok, switchToRailway } = useApi();
+  const { baseUrl, isConnected, connectionError } = useApi();
   const [missions, setMissions] = useState<Mission[]>([]);
   const [agents, setAgents] = useState<Agent[]>([]);
   const [loading, setLoading] = useState(false);
@@ -117,7 +117,7 @@ const HomeScreen: React.FC = () => {
             <View style={styles.connectionRow}>
               <Icon name="wifi" size={24} color={theme.colors.primary} />
               <Text variant="titleMedium" style={{ color: theme.colors.primary }}>
-                Connected to {baseUrl.includes('ngrok') ? 'ngrok' : 'Railway'}
+                Connected to Railway
               </Text>
             </View>
             <Text variant="bodySmall" style={{ color: theme.colors.onPrimaryContainer }}>
@@ -138,24 +138,8 @@ const HomeScreen: React.FC = () => {
             </Text>
           </View>
           <Text variant="bodySmall" style={{ color: theme.colors.onErrorContainer }}>
-            {connectionError}
+            {connectionError || 'Unable to connect to server'}
           </Text>
-          <View style={styles.buttonRow}>
-            <Button 
-              mode="outlined" 
-              onPress={switchToRailway}
-              style={styles.switchButton}
-            >
-              Try Railway
-            </Button>
-            <Button 
-              mode="outlined" 
-              onPress={switchToNgrok}
-              style={styles.switchButton}
-            >
-              Try ngrok
-            </Button>
-          </View>
         </Card.Content>
       </Card>
     );

@@ -13,28 +13,31 @@ export interface Mission {
 
 export interface MissionPlan {
   id: string;
-  missionId: string;
+  mission_id: string;
   steps: MissionStep[];
-  estimatedDuration: number;
-  createdAt: string;
+  status: 'draft' | 'approved' | 'executing' | 'completed';
+  created_at: string;
+  updated_at: string;
 }
 
 export interface MissionStep {
   id: string;
+  plan_id: string;
+  order: number;
   title: string;
   description: string;
-  agent: string;
-  status: 'pending' | 'running' | 'completed' | 'failed';
+  agent_type: string;
+  status: 'pending' | 'executing' | 'completed' | 'failed';
   result?: any;
 }
 
 export interface MissionResult {
   id: string;
-  missionId: string;
-  success: boolean;
-  output: any;
-  logs: string[];
-  completedAt: string;
+  mission_id: string;
+  status: 'success' | 'partial' | 'failed';
+  summary: string;
+  details: any;
+  created_at: string;
 }
 
 export interface Agent {
@@ -49,16 +52,13 @@ export interface Agent {
 }
 
 export interface ApiConfig {
-  railwayUrl: string;
-  ngrokUrl: string;
-  websocketUrl: string;
-  useNgrok: boolean;
+  apiUrl: string;
 }
 
 export interface AppState {
   missions: Mission[];
   agents: Agent[];
-  isLoading: boolean;
+  loading: boolean;
   error: string | null;
 }
 

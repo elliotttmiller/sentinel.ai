@@ -11,5 +11,6 @@
   "engine": {
     "port": 8001,
     "host": "0.0.0.0"
-  }
+  },
+  "ngrok_auth_token": "ngrok config add-authtoken 2zgUnM4yVIVtl8IyB31dGqMROT3_3NEzyX7Vb2RjAZCbqnZTp"
 }
