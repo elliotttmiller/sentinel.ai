@@ -1,21 +1,49 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-import requests
-from config import settings
-from typing import List, Optional
-from datetime import datetime
+import json
 import uuid
 import asyncio
+import requests
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+from loguru import logger
+from config import settings
+from core.mission_planner import MissionPlanner, ExecutionPlan
+from agents.agent_factory import AgentFactory
+from core.agent_base import AgentContext, AgentRole
+from typing import List, Optional
+from datetime import datetime
 from pathlib import Path
 
-# Import agent-related modules
-from core.agent_base import AgentContext, AgentRole
-from core.genai_client import genai_client
+# --- Placeholder for ToolManager ---
+class ToolManager:
+    def get_available_tools(self):
+        return {}
+# ------------------------------------
 
-app = FastAPI(title="Sentinel Orchestrator Backend")
+app = FastAPI(title="Sentinel Orchestrator Backend", debug=True)
+logger.add("logs/sentinel_backend.log", rotation="10 MB", level=settings.LOG_LEVEL)
+
+def get_llm_client():
+    try:
+        from google.oauth2 import service_account
+        from langchain_google_genai import ChatGoogleGenerativeAI
+
+        creds_dict = json.loads(settings.GOOGLE_APPLICATION_CREDENTIALS_JSON)
+        credentials = service_account.Credentials.from_service_account_info(creds_dict)
+        return ChatGoogleGenerativeAI(
+            model=settings.DEFAULT_MODEL,
+            credentials=credentials,
+            temperature=0.7
+        )
+    except Exception as e:
+        logger.error(f"FATAL: Could not initialize LLM Client. Error: {e}")
+        raise
+
+llm_client = get_llm_client()
+tool_manager = ToolManager()
+agent_factory = AgentFactory(llm_client=llm_client, tool_manager=tool_manager)
+mission_planner = MissionPlanner(llm_client=llm_client)
 
 class MissionRequest(BaseModel):
-    """The request model for creating a new mission."""
     prompt: str
 
 class Mission(BaseModel):
@@ -151,71 +179,63 @@ def get_missions():
     """Get all missions."""
     return missions_db
 
-@app.post("/missions", tags=["Missions"])
-def create_mission(request: MissionRequest):
-    """
-    This endpoint is the main entrypoint for creating a new mission.
-    It receives a raw user prompt, orchestrates the planning,
-    and dispatches the final plan to the desktop engine.
-    """
-    print(f"Received new mission request: {request.prompt}")
+@app.post("/missions", response_model=MissionDispatchResponse, tags=["Missions"])
+async def create_and_dispatch_mission(request: MissionRequest):
+    mission_id = f"mission_{uuid.uuid4()}"
+    logger.info(f"Received new mission request. Assigning ID: {mission_id}")
 
-    # Create a new mission
-    mission = Mission(
-        id=str(uuid.uuid4()),
-        title=f"Mission: {request.prompt[:50]}...",
-        description=request.prompt,
-        status="pending",
-        created_at=datetime.now().isoformat(),
-        updated_at=datetime.now().isoformat()
-    )
-    
-    missions_db.append(mission)
+    try:
+        # Validate prompt
+        if not request.prompt or len(request.prompt) < 5:
+            raise ValueError("Prompt is too short.")
 
-    # --- Placeholder Logic (to be replaced with real orchestrator call) ---
-    # In the next step, we will replace this with:
-    # json_plan = generate_mission_plan(request.prompt)
-    
-    # For now, let's create a dummy plan to test the connection
-    dummy_plan = {
-        "mission_name": f"Dummy Mission for '{request.prompt}'",
-        "tasks": [
-            {"task_id": 1, "agent_role": "Logger", "description": "Log the received prompt."}
-        ]
-    }
-    # ----------------------------------------------------------------------
+        # Planning phase
+        plan: ExecutionPlan = await mission_planner.create_mission_plan(
+            user_prompt=request.prompt,
+            mission_id=mission_id
+        )
+        logger.info(f"Plan generated for mission {mission_id}.")
 
-    # Dispatch the plan to the desktop agent engine
-    if settings.DESKTOP_TUNNEL_URL:
-        try:
-            desktop_url = f"{settings.DESKTOP_TUNNEL_URL}/execute-mission"
-            print(f"Dispatching plan to desktop at: {desktop_url}")
-            
-            # Use a timeout to prevent the server from hanging indefinitely
-            response = requests.post(desktop_url, json=dummy_plan, timeout=15)
-            
-            # Raise an exception if the desktop returns an error (e.g., 4xx or 5xx)
-            response.raise_for_status()
+        # Dispatch to engine
+        desktop_url = f"{settings.DESKTOP_TUNNEL_URL}/execute_mission"
+        response = await asyncio.to_thread(
+            requests.post,
+            desktop_url,
+            json=plan.model_dump(),
+            timeout=20
+        )
+        response.raise_for_status()
 
-            return {
-                "message": "Mission plan dispatched successfully to desktop.",
-                "dispatched_plan": dummy_plan,
-                "mission": mission
-            }
+        # Poll for result
+        execution_result = None
+        result_url = f"{settings.DESKTOP_TUNNEL_URL}/mission_result/{mission_id}"
+        for _ in range(10):
+            try:
+                poll_resp = await asyncio.to_thread(requests.get, result_url, timeout=10)
+                if poll_resp.status_code == 200:
+                    execution_result = poll_resp.json()
+                    if execution_result and execution_result.get("status") != "pending":
+                        break
+            except Exception as e:
+                logger.warning(f"Polling for execution result failed: {e}")
+            await asyncio.sleep(2)
 
-        except requests.exceptions.RequestException as e:
-            # This handles connection errors, timeouts, etc.
-            raise HTTPException(status_code=502, detail=f"Failed to connect to desktop engine: {e}")
-        except Exception as e:
-            # A general catch-all for other unexpected errors
-            raise HTTPException(status_code=500, detail=f"An internal server error occurred: {e}")
-    else:
-        # If no desktop tunnel URL is configured, just return the plan
-        return {
-            "message": "Mission plan created successfully (desktop not configured).",
-            "plan": dummy_plan,
-            "mission": mission
-        }
+        return MissionDispatchResponse(
+            mission_id=mission_id,
+            message="Mission planned, dispatched, and executed.",
+            plan=plan.model_dump(),
+            execution_result=execution_result
+        )
+
+    except ValueError as e:
+        logger.error(f"Planning failed: {e}")
+        raise HTTPException(status_code=400, detail=str(e))
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Dispatch to engine failed: {e}")
+        raise HTTPException(status_code=502, detail=f"Could not connect to the desktop engine: {e}")
+    except Exception as e:
+        logger.error(f"Unexpected error: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail="An internal server error occurred.")
 
 @app.get("/agents", tags=["Agents"])
 def get_agents():
@@ -294,9 +314,13 @@ async def test_agent():
         }
         
     except Exception as e:
+        import traceback
+        tb = traceback.format_exc()
+        print(f"[AGENT TEST ERROR] {e}\n{tb}")
         return {
             "message": "Agent test failed",
             "error": str(e),
+            "traceback": tb,
             "success": False
         }
 
@@ -306,7 +330,7 @@ async def get_genai_status():
     Get the status of Google GenAI integration.
     """
     try:
-        model_info = genai_client.get_model_info()
+        model_info = llm_client.get_model_info()
         return {
             "message": "GenAI status retrieved successfully",
             "genai_status": model_info,
@@ -326,7 +350,7 @@ async def test_genai():
     """
     try:
         test_prompt = "Hello! Can you tell me about your capabilities?"
-        response = await genai_client.generate_response(test_prompt)
+        response = await llm_client.generate_response(test_prompt)
         
         return {
             "message": "GenAI test completed successfully",
