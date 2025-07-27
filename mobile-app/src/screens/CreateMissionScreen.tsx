@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, Alert } from 'react-native';
 import { Text, TextInput, Button, Card, useTheme, HelperText } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -17,30 +17,55 @@ const CreateMissionScreen: React.FC<NavigationProps> = ({ navigation }) => {
 
   const apiService = new ApiService(baseUrl);
 
+  const debugLog = (message: string, data?: any) => {
+    const timestamp = new Date().toISOString();
+    console.log(`[${timestamp}] CREATE_MISSION_SCREEN: ${message}`, data ? JSON.stringify(data, null, 2) : '');
+  };
+
   const handleCreateMission = async () => {
+    debugLog('Create button pressed', { title, description, isConnected, baseUrl });
     if (!title.trim() || !description.trim()) {
       setError('Please fill in all fields');
+      debugLog('Validation failed: missing fields', { title, description });
+      Alert.alert('Validation Error', 'Please fill in all fields');
       return;
     }
 
     if (!isConnected) {
       setError('Not connected to backend');
+      debugLog('Validation failed: not connected to backend', { isConnected, baseUrl });
+      Alert.alert('Connection Error', 'Not connected to backend');
       return;
     }
 
     try {
       setLoading(true);
       setError('');
-      
-      await apiService.createMission(title.trim(), description.trim());
-      
-      navigation.goBack();
-    } catch (error) {
+      debugLog('Attempting to create mission', { title: title.trim(), description: description.trim() });
+      const result = await apiService.createMission(title.trim(), description.trim());
+      debugLog('Mission created successfully', result);
+      Alert.alert('Success', 'Mission created successfully!', [
+        { text: 'OK', onPress: () => { debugLog('Navigating back after success'); navigation.goBack(); } }
+      ]);
+    } catch (error: any) {
       console.error('Failed to create mission:', error);
       setError('Failed to create mission. Please try again.');
+      debugLog('Mission creation failed', { error: error?.message || error });
+      Alert.alert('Error', 'Failed to create mission. Please try again.');
     } finally {
       setLoading(false);
+      debugLog('Mission creation flow ended', { loading: false });
     }
+  };
+
+  // Add debug logging for input changes
+  const handleTitleChange = (text: string) => {
+    debugLog('Title input changed', { text });
+    setTitle(text);
+  };
+  const handleDescriptionChange = (text: string) => {
+    debugLog('Description input changed', { text });
+    setDescription(text);
   };
 
   return (
@@ -55,7 +80,7 @@ const CreateMissionScreen: React.FC<NavigationProps> = ({ navigation }) => {
             <TextInput
               label="Mission Title"
               value={title}
-              onChangeText={setTitle}
+              onChangeText={handleTitleChange}
               mode="outlined"
               style={styles.input}
               disabled={loading}
@@ -65,7 +90,7 @@ const CreateMissionScreen: React.FC<NavigationProps> = ({ navigation }) => {
             <TextInput
               label="Mission Description"
               value={description}
-              onChangeText={setDescription}
+              onChangeText={handleDescriptionChange}
               mode="outlined"
               multiline
               numberOfLines={4}
@@ -87,7 +112,7 @@ const CreateMissionScreen: React.FC<NavigationProps> = ({ navigation }) => {
             <View style={styles.buttonContainer}>
               <Button
                 mode="outlined"
-                onPress={() => navigation.goBack()}
+                onPress={() => { debugLog('Cancel button pressed'); navigation.goBack(); }}
                 style={styles.button}
                 disabled={loading}
               >
