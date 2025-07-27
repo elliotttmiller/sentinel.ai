@@ -15,13 +15,14 @@ from pathlib import Path
 from typing import Dict, List, Optional
 
 class ServiceManager:
-    def __init__(self):
+    def __init__(self, background_mode: bool = False):
         self.project_root = Path(__file__).parent.parent
         self.backend_dir = self.project_root / "backend"
         self.engine_dir = self.project_root / "engine"
         self.processes: Dict[str, subprocess.Popen] = {}
         self.config_file = self.project_root / "scripts" / "service_config.json"
         self.ngrok_config_file = self.project_root / "ngrok.yml"
+        self.background_mode = background_mode
         self.load_config()
 
     def load_config(self):
@@ -176,13 +177,22 @@ class ServiceManager:
             if reload_flag:
                 cmd.append(reload_flag)
             
-            process = subprocess.Popen(
-                cmd,
-                cwd=self.backend_dir,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                creationflags=subprocess.CREATE_NEW_CONSOLE
-            )
+            if self.background_mode:
+                process = subprocess.Popen(
+                    cmd,
+                    cwd=self.backend_dir,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    creationflags=subprocess.CREATE_NO_WINDOW
+                )
+            else:
+                process = subprocess.Popen(
+                    cmd,
+                    cwd=self.backend_dir,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    creationflags=subprocess.CREATE_NEW_CONSOLE
+                )
             
             self.processes["backend"] = process
             print(f"✅ Backend server started (PID: {process.pid})")
@@ -245,15 +255,33 @@ tunnels:
             
             print(f"📝 Created ngrok config: {self.ngrok_config_file}")
             
-            cmd = ["ngrok", "start", "--all", "--config", str(self.ngrok_config_file)]
+            # Try to find ngrok in PATH or use full path
+            ngrok_path = "ngrok"
+            if not self.background_mode:
+                # Test if ngrok is in PATH
+                try:
+                    subprocess.run(["ngrok", "version"], capture_output=True, check=True)
+                except (subprocess.CalledProcessError, FileNotFoundError):
+                    # Use full path if not in PATH
+                    ngrok_path = r"C:\ProgramData\chocolatey\bin\ngrok.exe"
+            
+            cmd = [ngrok_path, "start", "--all", "--config", str(self.ngrok_config_file)]
             print(f"🚀 Running: {' '.join(cmd)}")
             
-            process = subprocess.Popen(
-                cmd,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                creationflags=subprocess.CREATE_NEW_CONSOLE
-            )
+            if self.background_mode:
+                process = subprocess.Popen(
+                    cmd,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    creationflags=subprocess.CREATE_NO_WINDOW
+                )
+            else:
+                process = subprocess.Popen(
+                    cmd,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    creationflags=subprocess.CREATE_NEW_CONSOLE
+                )
             
             self.processes["ngrok_backend"] = process
             print(f"✅ ngrok tunnels started (PID: {process.pid})")
@@ -289,13 +317,22 @@ tunnels:
         
         try:
             cmd = ["uvicorn", "main:app", "--host", host, "--port", str(port), "--reload"]
-            process = subprocess.Popen(
-                cmd,
-                cwd=self.engine_dir,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                creationflags=subprocess.CREATE_NEW_CONSOLE
-            )
+            if self.background_mode:
+                process = subprocess.Popen(
+                    cmd,
+                    cwd=self.engine_dir,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    creationflags=subprocess.CREATE_NO_WINDOW
+                )
+            else:
+                process = subprocess.Popen(
+                    cmd,
+                    cwd=self.engine_dir,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    creationflags=subprocess.CREATE_NEW_CONSOLE
+                )
             
             self.processes["engine"] = process
             print(f"✅ Agent engine started (PID: {process.pid})")
@@ -480,7 +517,9 @@ tunnels:
 
 def main():
     """Main entry point."""
-    manager = ServiceManager()
+    # Check for background mode flag
+    background_mode = "--background" in sys.argv
+    manager = ServiceManager(background_mode=background_mode)
     
     # Handle command-line arguments
     if len(sys.argv) > 1:
@@ -507,7 +546,7 @@ def main():
             manager.configure_services()
         else:
             print(f"Unknown argument: {arg}")
-            print("Available arguments: --status, --start-all, --stop-all, --start-backend, --start-ngrok, --start-engine, --config")
+            print("Available arguments: --status, --start-all, --stop-all, --start-backend, --start-ngrok, --start-engine, --config, --background")
     else:
         # Run interactive mode
         manager.run_interactive()
