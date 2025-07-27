@@ -5,6 +5,12 @@ from config import settings
 from typing import List, Optional
 from datetime import datetime
 import uuid
+import asyncio
+from pathlib import Path
+
+# Import agent-related modules
+from agents.simple_test_agent import SimpleTestAgent
+from core.agent_base import AgentContext, AgentRole
 
 app = FastAPI(title="Sentinel Orchestrator Backend")
 
@@ -35,6 +41,19 @@ class Agent(BaseModel):
     status: str
     last_active: Optional[str] = None
     missions_completed: Optional[int] = None
+
+class AgentExecutionRequest(BaseModel):
+    """Request model for agent execution."""
+    agent_type: str
+    prompt: str
+    mission_id: Optional[str] = None
+
+class AgentExecutionResponse(BaseModel):
+    """Response model for agent execution."""
+    success: bool
+    output: str
+    error: Optional[str] = None
+    metadata: dict = {}
 
 # In-memory storage for demo purposes
 missions_db = []
@@ -68,6 +87,16 @@ agents_db = [
         status="busy",
         last_active=datetime.now().isoformat(),
         missions_completed=12
+    ),
+    Agent(
+        id="agent-4",
+        name="Simple Test Agent",
+        type="simple_test",
+        description="A basic test agent for validating the deployment system",
+        capabilities=["text_processing", "basic_response_generation", "status_reporting", "activity_logging"],
+        status="available",
+        last_active=datetime.now().isoformat(),
+        missions_completed=0
     )
 ]
 
@@ -191,4 +220,80 @@ def create_mission(request: MissionRequest):
 @app.get("/agents", tags=["Agents"])
 def get_agents():
     """Get all agents."""
-    return agents_db 
+    return agents_db
+
+@app.post("/agents/execute", tags=["Agents"])
+async def execute_agent(request: AgentExecutionRequest):
+    """
+    Execute an agent with the given prompt.
+    
+    This endpoint allows testing agent execution directly.
+    """
+    try:
+        # Create agent context
+        context = AgentContext(
+            mission_id=request.mission_id or str(uuid.uuid4()),
+            user_prompt=request.prompt,
+            workspace_path=Path.cwd(),
+            tools={},
+            memory={}
+        )
+        
+        # Create and execute the simple test agent
+        agent = SimpleTestAgent()
+        agent.set_context(context)
+        
+        # Execute the agent
+        result = await agent.execute(context)
+        
+        return AgentExecutionResponse(
+            success=result.success,
+            output=result.output,
+            error=result.error,
+            metadata=result.metadata
+        )
+        
+    except Exception as e:
+        return AgentExecutionResponse(
+            success=False,
+            output="",
+            error=f"Agent execution failed: {str(e)}",
+            metadata={}
+        )
+
+@app.get("/agents/test", tags=["Agents"])
+async def test_agent():
+    """
+    Test endpoint for the simple test agent.
+    Returns a simple response to verify the agent is working.
+    """
+    try:
+        # Create a test context
+        context = AgentContext(
+            mission_id="test-mission",
+            user_prompt="Hello, this is a test message",
+            workspace_path=Path.cwd(),
+            tools={},
+            memory={}
+        )
+        
+        # Create and execute the simple test agent
+        agent = SimpleTestAgent()
+        agent.set_context(context)
+        
+        # Execute the agent
+        result = await agent.execute(context)
+        
+        return {
+            "message": "Agent test completed successfully",
+            "agent_response": result.output,
+            "success": result.success,
+            "metadata": result.metadata
+        }
+        
+    except Exception as e:
+        return {
+            "message": "Agent test failed",
+            "error": str(e),
+            "success": False
+        } 

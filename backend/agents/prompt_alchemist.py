@@ -9,7 +9,7 @@ from typing import Dict, Any, Optional
 import json
 from loguru import logger
 
-from ..core.agent_base import BaseAgent, AgentRole, AgentContext, AgentResult
+from core.agent_base import BaseAgent, AgentRole, AgentContext, AgentResult
 
 
 class PromptAlchemistAgent(BaseAgent):

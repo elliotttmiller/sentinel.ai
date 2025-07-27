@@ -8,7 +8,7 @@ Provides a centralized way to instantiate and configure agents.
 from typing import Dict, Type, Optional
 from loguru import logger
 
-from ..core.agent_base import BaseAgent, AgentRole
+from core.agent_base import BaseAgent, AgentRole
 from .prompt_alchemist import PromptAlchemistAgent
 from .grand_architect import GrandArchitectAgent
 from .senior_developer import SeniorDeveloperAgent
@@ -16,6 +16,7 @@ from .code_reviewer import CodeReviewerAgent
 from .qa_tester import QATesterAgent
 from .debugger import DebuggerAgent
 from .documentation import DocumentationAgent
+from .simple_test_agent import SimpleTestAgent
 
 
 class AgentFactory:
@@ -41,6 +42,9 @@ class AgentFactory:
             AgentRole.DEBUGGER: DebuggerAgent,
             AgentRole.DOCUMENTATION: DocumentationAgent,
         }
+        
+        # Add simple test agent to registry (using CODE_REVIEWER role for now)
+        self.simple_test_agent = SimpleTestAgent
         
         # Agent configurations
         self.agent_configs = {

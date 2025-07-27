@@ -10,7 +10,7 @@ import json
 from pathlib import Path
 from loguru import logger
 
-from ..core.agent_base import BaseAgent, AgentRole, AgentContext, AgentResult, AgentStatus
+from core.agent_base import BaseAgent, AgentRole, AgentContext, AgentResult, AgentStatus
 
 
 class QATesterAgent(BaseAgent):

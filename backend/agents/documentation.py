@@ -11,7 +11,7 @@ from pathlib import Path
 from datetime import datetime
 from loguru import logger
 
-from ..core.agent_base import BaseAgent, AgentRole, AgentContext, AgentResult, AgentStatus
+from core.agent_base import BaseAgent, AgentRole, AgentContext, AgentResult, AgentStatus
 
 
 class DocumentationAgent(BaseAgent):
