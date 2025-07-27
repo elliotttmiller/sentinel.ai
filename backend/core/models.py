@@ -24,3 +24,14 @@ class Mission(Base):
     steps = Column(JSONB, nullable=True)
     plan = Column(JSONB, nullable=True)
     result = Column(JSONB, nullable=True) 
+
+class Agent(Base):
+    __tablename__ = "agents"
+    id = Column(String, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    type = Column(String, nullable=True)
+    description = Column(Text, nullable=True)
+    capabilities = Column(JSONB, nullable=True)
+    status = Column(String, nullable=False)
+    last_active = Column(DateTime, nullable=True)
+    missions_completed = Column(String, nullable=True) 

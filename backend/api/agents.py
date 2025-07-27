@@ -1,5 +1,9 @@
 from fastapi import APIRouter, HTTPException
-from core.schemas import Agent, AgentExecutionRequest, AgentExecutionResponse
+from core.schemas import Agent as AgentSchema, AgentExecutionRequest, AgentExecutionResponse
+from core.models import Agent as AgentORM
+from sqlalchemy.orm import Session
+from fastapi import Depends
+from core.database import get_db
 from loguru import logger
 import uuid
 from pathlib import Path
@@ -8,7 +12,7 @@ router = APIRouter(prefix="/agents", tags=["Agents"])
 
 # In-memory storage for demo purposes (replace with DB in future)
 agents_db = [
-    Agent(
+    AgentSchema(
         id="agent-1",
         name="Code Reviewer",
         type="code_reviewer",
@@ -18,7 +22,7 @@ agents_db = [
         last_active=None,
         missions_completed=5
     ),
-    Agent(
+    AgentSchema(
         id="agent-2",
         name="Debugger",
         type="debugger",
@@ -28,7 +32,7 @@ agents_db = [
         last_active=None,
         missions_completed=3
     ),
-    Agent(
+    AgentSchema(
         id="agent-3",
         name="Mission Planner",
         type="planner",
@@ -38,7 +42,7 @@ agents_db = [
         last_active=None,
         missions_completed=12
     ),
-    Agent(
+    AgentSchema(
         id="agent-4",
         name="Simple Test Agent",
         type="simple_test",
@@ -50,10 +54,28 @@ agents_db = [
     )
 ]
 
-@router.get("/", response_model=list[Agent])
-def get_agents():
-    """Get all agents."""
-    return agents_db
+@router.get("/", response_model=list[AgentSchema])
+def get_agents(db: Session = Depends(get_db)):
+    """Get all agents from the database, or fall back to in-memory list if none exist."""
+    try:
+        db_agents = db.query(AgentORM).all()
+        if db_agents:
+            # Convert ORM objects to Pydantic schemas
+            return [AgentSchema(
+                id=a.id,
+                name=a.name,
+                type=a.type,
+                description=a.description,
+                capabilities=a.capabilities,
+                status=a.status,
+                last_active=a.last_active.isoformat() if a.last_active else None,
+                missions_completed=a.missions_completed
+            ) for a in db_agents]
+        else:
+            return agents_db
+    except Exception as e:
+        logger.error(f"Failed to fetch agents: {e}")
+        return agents_db
 
 @router.post("/execute", response_model=AgentExecutionResponse)
 async def execute_agent(request: AgentExecutionRequest):
