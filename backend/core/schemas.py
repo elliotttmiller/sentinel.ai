@@ -1,6 +1,17 @@
 from pydantic import BaseModel
 from typing import List, Optional
 
+class MissionRequest(BaseModel):
+    title: Optional[str] = None
+    description: Optional[str] = None
+    prompt: str
+
+class MissionDispatchResponse(BaseModel):
+    message: str
+    mission_id: str
+    plan: dict
+    execution_result: dict = None
+
 class MissionSchema(BaseModel):
     id: str
     title: str
