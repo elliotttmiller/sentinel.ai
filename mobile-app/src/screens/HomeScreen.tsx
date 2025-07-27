@@ -8,6 +8,12 @@ import { useApi } from '@/contexts/ApiContext';
 import { Mission, Agent } from '@/types';
 import ApiService from '@/services/api';
 
+// Enhanced debug logging for HomeScreen
+const debugLog = (message: string, data?: any) => {
+  const timestamp = new Date().toISOString();
+  console.log(`[${timestamp}] HOMESCREEN: ${message}`, data ? JSON.stringify(data, null, 2) : '');
+};
+
 const HomeScreen: React.FC = () => {
   const theme = useTheme();
   const { baseUrl, isConnected, connectionError, switchToNgrok, switchToRailway } = useApi();
@@ -22,41 +28,73 @@ const HomeScreen: React.FC = () => {
     railway: 'unknown'
   });
 
+  debugLog('HomeScreen render state:', {
+    baseUrl,
+    isConnected,
+    connectionError,
+    loading,
+    refreshing,
+    systemStatus,
+    missionsCount: missions.length,
+    agentsCount: agents.length
+  });
+
   const apiService = new ApiService(baseUrl);
 
   const loadData = async () => {
-    if (!isConnected) return;
+    debugLog('loadData called', { isConnected, baseUrl });
+    
+    if (!isConnected) {
+      debugLog('Skipping data load - not connected');
+      return;
+    }
     
     try {
       setLoading(true);
+      debugLog('Starting data load...');
+      
       const [missionsData, agentsData] = await Promise.all([
         apiService.getMissions(),
         apiService.getAgents(),
       ]);
+      
+      debugLog('Data loaded successfully:', {
+        missionsCount: missionsData.length,
+        agentsCount: agentsData.length
+      });
+      
       setMissions(missionsData);
       setAgents(agentsData);
       
       // Check system status
       try {
+        debugLog('Checking backend health...');
         await apiService.healthCheck();
+        debugLog('Backend health check passed');
         setSystemStatus(prev => ({ ...prev, backend: 'online' }));
-      } catch {
+      } catch (error) {
+        debugLog('Backend health check failed:', error);
         setSystemStatus(prev => ({ ...prev, backend: 'offline' }));
       }
     } catch (error) {
+      debugLog('Failed to load data:', error);
       console.error('Failed to load data:', error);
     } finally {
       setLoading(false);
+      debugLog('Data loading completed');
     }
   };
 
   const onRefresh = async () => {
+    debugLog('Manual refresh triggered');
     setRefreshing(true);
     await loadData();
     setRefreshing(false);
+    debugLog('Manual refresh completed');
   };
 
   useEffect(() => {
+    debugLog('HomeScreen useEffect triggered', { isConnected, baseUrl });
     loadData();
   }, [isConnected, baseUrl]);
 
