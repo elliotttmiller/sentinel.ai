@@ -82,10 +82,22 @@ def startup_event():
         try:
             from google.oauth2 import service_account
             from langchain_google_genai import ChatGoogleGenerativeAI
-            creds_dict = json.loads(settings.GOOGLE_APPLICATION_CREDENTIALS_JSON)
-            credentials = service_account.Credentials.from_service_account_info(creds_dict)
-            logger.info(f"GenAI client initialized with model: {settings.DEFAULT_MODEL}")
-            return ChatGoogleGenerativeAI(model=settings.DEFAULT_MODEL, credentials=credentials, temperature=0.7)
+            
+            # Try service account JSON first
+            if settings.GOOGLE_APPLICATION_CREDENTIALS_JSON:
+                creds_dict = json.loads(settings.GOOGLE_APPLICATION_CREDENTIALS_JSON)
+                credentials = service_account.Credentials.from_service_account_info(creds_dict)
+                logger.info(f"GenAI client initialized with service account and model: {settings.DEFAULT_MODEL}")
+                return ChatGoogleGenerativeAI(model=settings.DEFAULT_MODEL, credentials=credentials, temperature=0.7)
+            
+            # Fallback to API key
+            elif settings.GOOGLE_API_KEY:
+                logger.info(f"GenAI client initialized with API key and model: {settings.DEFAULT_MODEL}")
+                return ChatGoogleGenerativeAI(model=settings.DEFAULT_MODEL, google_api_key=settings.GOOGLE_API_KEY, temperature=0.7)
+            
+            else:
+                raise ValueError("Neither GOOGLE_APPLICATION_CREDENTIALS_JSON nor GOOGLE_API_KEY is configured")
+                
         except Exception as e:
             logger.error(f"FATAL: Could not initialize LLM Client. Error: {e}")
             raise

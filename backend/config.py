@@ -9,8 +9,9 @@ class Settings(BaseSettings):
     DATABASE_URL: str
     DESKTOP_TUNNEL_URL: str
 
-    # --- Authentication ---
-    GOOGLE_APPLICATION_CREDENTIALS_JSON: str
+    # --- Authentication (Multiple options for flexibility) ---
+    GOOGLE_APPLICATION_CREDENTIALS_JSON: Optional[str] = None
+    GOOGLE_API_KEY: Optional[str] = None
 
     # --- LLM Settings ---
     DEFAULT_MODEL: str = "gemini-1.5-pro"
