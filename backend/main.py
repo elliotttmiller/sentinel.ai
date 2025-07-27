@@ -2,7 +2,7 @@ import json
 import uuid
 import asyncio
 import requests
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from pydantic import BaseModel
 from loguru import logger
 from config import settings
@@ -165,9 +165,25 @@ def check_service_health(url: str, timeout: int = 5) -> dict:
             "status_code": None
         }
 
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    logger.info(f"Incoming request: {request.method} {request.url}")
+    try:
+        response = await call_next(request)
+        logger.info(f"Response status: {response.status_code} for {request.method} {request.url}")
+        return response
+    except Exception as e:
+        logger.error(f"Exception during request: {request.method} {request.url} - {e}", exc_info=True)
+        raise
+
+@app.get("/", tags=["Root"])
+def root():
+    logger.info("Root endpoint hit")
+    return {"message": "Sentinel backend is running"}
+
 @app.get("/health", status_code=200, tags=["System"])
 def health_check():
-    """Endpoint for Railway health checks."""
+    logger.info("Healthcheck endpoint hit")
     return {"status": "ok", "service": "Sentinel Orchestrator Backend"}
 
 @app.get("/system-status", tags=["System"])
