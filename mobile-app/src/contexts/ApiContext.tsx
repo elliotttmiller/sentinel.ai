@@ -16,10 +16,15 @@ interface ApiContextType {
 
 const ApiContext = createContext<ApiContextType | undefined>(undefined);
 
+// Get environment variables with fallbacks
+const getEnvVar = (key: string, fallback: string) => {
+  return Constants.expoConfig?.extra?.[key] || fallback;
+};
+
 const defaultConfig: ApiConfig = {
-  railwayUrl: Constants.expoConfig?.extra?.railwayUrl || 'http://localhost:8080',
-  ngrokUrl: Constants.expoConfig?.extra?.ngrokUrl || 'https://thrush-real-lacewing.ngrok-free.app',
-  websocketUrl: Constants.expoConfig?.extra?.websocketUrl || 'ws://localhost:8080/ws',
+  railwayUrl: getEnvVar('railwayUrl', 'http://localhost:8080'),
+  ngrokUrl: getEnvVar('ngrokUrl', 'https://thrush-real-lacewing.ngrok-free.app'),
+  websocketUrl: getEnvVar('websocketUrl', 'ws://localhost:8080/ws'),
   useNgrok: false, // Start with local backend
 };
 

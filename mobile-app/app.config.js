@@ -36,14 +36,14 @@ export default {
     ],
     scheme: "sentinel",
     extra: {
-      // Railway configuration
-      railwayUrl: process.env.EXPO_PUBLIC_RAILWAY_API_URL || "https://your-railway-app.railway.app",
+      // Railway configuration (local backend by default)
+      railwayUrl: process.env.EXPO_PUBLIC_RAILWAY_API_URL || "http://localhost:8080",
       
       // ngrok configuration
-      ngrokUrl: process.env.EXPO_PUBLIC_NGROK_API_URL || "https://your-ngrok-subdomain.ngrok.io",
+      ngrokUrl: process.env.EXPO_PUBLIC_NGROK_API_URL || "https://thrush-real-lacewing.ngrok-free.app",
       
-      // WebSocket configuration
-      websocketUrl: process.env.EXPO_PUBLIC_WEBSOCKET_URL || "wss://your-railway-app.railway.app/ws",
+      // WebSocket configuration (local by default)
+      websocketUrl: process.env.EXPO_PUBLIC_WEBSOCKET_URL || "ws://localhost:8080/ws",
       
       // App configuration
       appName: process.env.EXPO_PUBLIC_APP_NAME || "Sentinel",
