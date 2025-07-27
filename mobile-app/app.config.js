@@ -32,7 +32,6 @@ export default {
       bundler: "metro"
     },
     plugins: [
-      "expo-router",
       "expo-notifications"
     ],
     scheme: "sentinel",
