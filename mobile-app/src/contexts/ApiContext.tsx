@@ -17,10 +17,10 @@ interface ApiContextType {
 const ApiContext = createContext<ApiContextType | undefined>(undefined);
 
 const defaultConfig: ApiConfig = {
-  railwayUrl: Constants.expoConfig?.extra?.railwayUrl || 'https://your-railway-app.railway.app',
-  ngrokUrl: Constants.expoConfig?.extra?.ngrokUrl || 'https://your-ngrok-subdomain.ngrok.io',
-  websocketUrl: Constants.expoConfig?.extra?.websocketUrl || 'wss://your-railway-app.railway.app/ws',
-  useNgrok: false,
+  railwayUrl: Constants.expoConfig?.extra?.railwayUrl || 'http://localhost:8080',
+  ngrokUrl: Constants.expoConfig?.extra?.ngrokUrl || 'https://thrush-real-lacewing.ngrok-free.app',
+  websocketUrl: Constants.expoConfig?.extra?.websocketUrl || 'ws://localhost:8080/ws',
+  useNgrok: false, // Start with local backend
 };
 
 export const ApiProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -32,10 +32,12 @@ export const ApiProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const testConnection = async (url: string) => {
     try {
+      console.log(`Testing connection to: ${url}`);
       const response = await fetch(`${url}/health`, {
         method: 'GET',
-        timeout: 5000,
+        timeout: 10000, // Increased timeout
       });
+      console.log(`Connection response: ${response.status}`);
       return response.ok;
     } catch (error) {
       console.error('Connection test failed:', error);
