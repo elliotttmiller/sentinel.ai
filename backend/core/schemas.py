@@ -24,6 +24,9 @@ class Mission(BaseModel):
     plan: Optional[dict] = None
     result: Optional[dict] = None
 
+    class Config:
+        orm_mode = True
+
 class Agent(BaseModel):
     id: str
     name: str
