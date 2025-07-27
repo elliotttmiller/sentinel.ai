@@ -6,11 +6,47 @@ from pydantic import BaseModel
 from typing import Dict, Any
 import os
 from datetime import datetime
+import sys
+from loguru import logger
+from starlette.responses import Response
 
 app = FastAPI(title="Sentinel Desktop Engine")
 
 # In-memory store for mission results (replace with DB for production)
 mission_results: Dict[str, Any] = {}
+
+# Configure loguru
+logger.remove()
+logger.add(sys.stdout, level="DEBUG", format="<green>{time}</green> <level>{level: <8}</level> <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>")
+
+MAX_LOG_BODY = 2048
+
+def safe_log_body(body):
+    if not body:
+        return None
+    if isinstance(body, (bytes, bytearray)):
+        body = body.decode(errors="replace")
+    if len(body) > MAX_LOG_BODY:
+        return body[:MAX_LOG_BODY] + "... [truncated]"
+    return body
+
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    req_body = await request.body()
+    logger.info(f"Incoming request: {request.method} {request.url} | Body: {safe_log_body(req_body)} | Headers: {dict(request.headers)}")
+    try:
+        response = await call_next(request)
+        resp_body = b""
+        async for chunk in response.body_iterator:
+            resp_body += chunk
+        logger.info(f"Response status: {response.status_code} for {request.method} {request.url} | Body: {safe_log_body(resp_body)} | Headers: {dict(response.headers)}")
+        return Response(content=resp_body, status_code=response.status_code, headers=dict(response.headers), media_type=response.media_type)
+    except Exception as e:
+        logger.error(f"Exception during request: {request.method} {request.url} - {e}", exc_info=True)
+        raise
+
+# Log service startup
+logger.info("Sentinel Desktop Engine service started.")
 
 class ExecutionPlan(BaseModel):
     """A simple model to receive the plan from the backend."""

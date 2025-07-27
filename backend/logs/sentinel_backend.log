@@ -33,3 +33,38 @@
 2025-07-27 11:52:21.583 | INFO     | main:log_requests:170 - Incoming request: GET http://192.168.0.106:8081/
 2025-07-27 11:52:21.585 | INFO     | main:root:181 - Root endpoint hit
 2025-07-27 11:52:21.586 | INFO     | main:log_requests:173 - Response status: 200 for GET http://192.168.0.106:8081/
+2025-07-27 12:19:24.119 | INFO     | main:log_requests:170 - Incoming request: GET https://thrush-real-lacewing.ngrok-free.app/
+2025-07-27 12:19:24.122 | INFO     | main:root:181 - Root endpoint hit
+2025-07-27 12:19:24.122 | INFO     | main:log_requests:173 - Response status: 200 for GET https://thrush-real-lacewing.ngrok-free.app/
+2025-07-27 12:19:37.611 | INFO     | main:log_requests:170 - Incoming request: GET http://localhost:8080/health
+2025-07-27 12:19:37.612 | INFO     | main:health_check:186 - Healthcheck endpoint hit
+2025-07-27 12:19:37.613 | INFO     | main:log_requests:173 - Response status: 200 for GET http://localhost:8080/health
+2025-07-27 12:19:37.896 | INFO     | main:log_requests:170 - Incoming request: GET http://localhost:8080/favicon.ico
+2025-07-27 12:19:37.896 | INFO     | main:log_requests:173 - Response status: 404 for GET http://localhost:8080/favicon.ico
+2025-07-27 12:26:24.922 | INFO     | main:log_requests:170 - Incoming request: GET https://thrush-real-lacewing.ngrok-free.app/health
+2025-07-27 12:26:24.922 | INFO     | main:health_check:186 - Healthcheck endpoint hit
+2025-07-27 12:26:24.922 | INFO     | main:log_requests:173 - Response status: 200 for GET https://thrush-real-lacewing.ngrok-free.app/health
+2025-07-27 12:26:25.076 | INFO     | main:log_requests:170 - Incoming request: GET https://thrush-real-lacewing.ngrok-free.app/system-status
+2025-07-27 12:26:25.110 | INFO     | main:log_requests:170 - Incoming request: GET https://thrush-real-lacewing.ngrok-free.app/agents
+2025-07-27 12:26:25.111 | INFO     | main:log_requests:170 - Incoming request: GET https://thrush-real-lacewing.ngrok-free.app/missions
+2025-07-27 12:26:25.117 | INFO     | main:log_requests:173 - Response status: 200 for GET https://thrush-real-lacewing.ngrok-free.app/agents
+2025-07-27 12:26:25.119 | ERROR    | main:log_requests:176 - Exception during request: GET https://thrush-real-lacewing.ngrok-free.app/missions - (psycopg2.OperationalError) SSL SYSCALL error: EOF detected
+
+[SQL: SELECT missions.id AS missions_id, missions.title AS missions_title, missions.description AS missions_description, missions.status AS missions_status, missions.created_at AS missions_created_at, missions.updated_at AS missions_updated_at, missions.completed_at AS missions_completed_at, missions.steps AS missions_steps, missions.plan AS missions_plan, missions.result AS missions_result 
+FROM missions]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-07-27 12:26:28.339 | INFO     | main:log_requests:170 - Incoming request: GET https://thrush-real-lacewing.ngrok-free.app/health
+2025-07-27 12:26:28.340 | INFO     | main:health_check:186 - Healthcheck endpoint hit
+2025-07-27 12:26:28.340 | INFO     | main:log_requests:173 - Response status: 200 for GET https://thrush-real-lacewing.ngrok-free.app/health
+2025-07-27 12:26:28.440 | INFO     | main:log_requests:173 - Response status: 200 for GET https://thrush-real-lacewing.ngrok-free.app/system-status
+2025-07-27 12:38:21.714 | INFO     | main:log_requests:170 - Incoming request: GET https://thrush-real-lacewing.ngrok-free.app/agents
+2025-07-27 12:38:21.715 | INFO     | main:log_requests:170 - Incoming request: GET https://thrush-real-lacewing.ngrok-free.app/system-status
+2025-07-27 12:38:21.718 | INFO     | main:log_requests:170 - Incoming request: GET https://thrush-real-lacewing.ngrok-free.app/missions
+2025-07-27 12:38:21.723 | INFO     | main:log_requests:173 - Response status: 200 for GET https://thrush-real-lacewing.ngrok-free.app/agents
+2025-07-27 12:38:22.585 | INFO     | main:log_requests:173 - Response status: 200 for GET https://thrush-real-lacewing.ngrok-free.app/missions
+2025-07-27 12:38:25.100 | INFO     | main:log_requests:170 - Incoming request: GET https://thrush-real-lacewing.ngrok-free.app/health
+2025-07-27 12:38:25.100 | INFO     | main:health_check:186 - Healthcheck endpoint hit
+2025-07-27 12:38:25.101 | INFO     | main:log_requests:173 - Response status: 200 for GET https://thrush-real-lacewing.ngrok-free.app/health
+2025-07-27 12:38:25.136 | INFO     | main:log_requests:173 - Response status: 200 for GET https://thrush-real-lacewing.ngrok-free.app/system-status
+2025-07-27 12:52:36.000 | INFO     | main:log_config:46 - Loaded config: {'DATABASE_URL': 'postgresql://postgres:LSvFcJSLjYBxsWrcTtgBUgLlLYBdPqiS@trolley.proxy.rlwy.net:44667/railway', 'DESKTOP_TUNNEL_URL': 'https://db8ac4a00f16.ngrok-free.app', 'HOST': '0.0.0.0', 'PORT': 8080, 'VECTOR_DB_URL': 'http://localhost:8000', 'VECTOR_DB_TYPE': 'chromadb', 'CLOUDFLARE_TUNNEL_TOKEN': None, 'WORKSPACE_PATH': '.', 'LOGS_DIR': 'logs', 'DEFAULT_MODEL': 'gemini-1.5-pro', 'MAX_CONCURRENT_MISSIONS': 5, 'MISSION_TIMEOUT': 3600, 'MEMORY_RETENTION_DAYS': 30, 'MAX_MEMORY_ENTRIES': 1000, 'GOOGLE_APPLICATION_CREDENTIALS_JSON': None, 'GOOGLE_APPLICATION_CREDENTIALS': 'D:\\AMD\\secrets\\nexus-ai-466614-377f29052243.json', 'GOOGLE_API_KEY': 'AIzaSyDb0VpQBhxlS6JNWZfQEcgUckY9d4i0ARM', 'LOG_LEVEL': 'INFO'}
+2025-07-27 12:53:24.917 | INFO     | main:log_config:46 - Loaded config: {'DATABASE_URL': 'postgresql://postgres:LSvFcJSLjYBxsWrcTtgBUgLlLYBdPqiS@trolley.proxy.rlwy.net:44667/railway', 'DESKTOP_TUNNEL_URL': 'https://db8ac4a00f16.ngrok-free.app', 'HOST': '0.0.0.0', 'PORT': 8080, 'VECTOR_DB_URL': 'http://localhost:8000', 'VECTOR_DB_TYPE': 'chromadb', 'CLOUDFLARE_TUNNEL_TOKEN': None, 'WORKSPACE_PATH': '.', 'LOGS_DIR': 'logs', 'DEFAULT_MODEL': 'gemini-1.5-pro', 'MAX_CONCURRENT_MISSIONS': 5, 'MISSION_TIMEOUT': 3600, 'MEMORY_RETENTION_DAYS': 30, 'MAX_MEMORY_ENTRIES': 1000, 'GOOGLE_APPLICATION_CREDENTIALS_JSON': None, 'GOOGLE_APPLICATION_CREDENTIALS': 'D:\\AMD\\secrets\\nexus-ai-466614-377f29052243.json', 'GOOGLE_API_KEY': 'AIzaSyDb0VpQBhxlS6JNWZfQEcgUckY9d4i0ARM', 'LOG_LEVEL': 'INFO'}

@@ -1,555 +1,247 @@
 #!/usr/bin/env python3
 """
-Sentinel Service Manager
-A comprehensive script to manage all Sentinel services on Windows.
+Sentinel Service Manager (Optimized)
+A robust script to manage the local development environment for Project Sentinel.
 """
-
 import subprocess
 import sys
 import os
 import time
 import json
-import signal
+import requests
 import psutil
 from pathlib import Path
 from typing import Dict, List, Optional
 
+# --- Configuration ---
+PROJECT_ROOT = Path(__file__).parent.parent
+BACKEND_DIR = PROJECT_ROOT / "backend"
+ENGINE_DIR = PROJECT_ROOT / "engine"
+NGROK_CONFIG_FILE = Path(os.path.expanduser("~/.config/ngrok/ngrok.yml"))
+LOG_DIR = PROJECT_ROOT / "logs"
+
+# Ensure log directory exists
+LOG_DIR.mkdir(exist_ok=True)
+
+# --- Helper Functions ---
+def print_header(title: str):
+    print("\n" + "="*50)
+    print(f" {title.upper()} ".center(50, "="))
+    print("="*50)
+
+def print_success(message: str):
+    print(f"✅ {message}")
+
+def print_error(message: str):
+    print(f"❌ {message}")
+
+def print_info(message: str):
+    print(f"💡 {message}")
+
+def find_process_by_port(port: int) -> Optional[psutil.Process]:
+    """Finds a process listening on a given port."""
+    for proc in psutil.process_iter(['pid', 'name', 'connections']):
+        try:
+            for conn in proc.info['connections']:
+                if conn.laddr.port == port and conn.status == psutil.CONN_LISTEN:
+                    return proc
+        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess, KeyError):
+            pass
+    return None
+
 class ServiceManager:
-    def __init__(self, background_mode: bool = False):
-        self.project_root = Path(__file__).parent.parent
-        self.backend_dir = self.project_root / "backend"
-        self.engine_dir = self.project_root / "engine"
+    def __init__(self):
         self.processes: Dict[str, subprocess.Popen] = {}
-        self.config_file = self.project_root / "scripts" / "service_config.json"
-        self.ngrok_config_file = self.project_root / "ngrok.yml"
-        self.background_mode = background_mode
-        self.load_config()
+        self.ngrok_config = self._load_ngrok_config()
 
-    def load_config(self):
-        """Load service configuration from JSON file."""
-        default_config = {
-            "backend": {
-                "port": 8080,
-                "host": "0.0.0.0",
-                "reload": True
-            },
-            "ngrok_backend": {
-                "port": 8080,
-                "subdomain": None
-            },
-            "ngrok_engine": {
-                "port": 8001,
-                "subdomain": None
-            },
-            "engine": {
-                "port": 8001,
-                "host": "0.0.0.0"
-            },
-            "ngrok_auth_token": None
-        }
-        
-        if self.config_file.exists():
-            try:
-                with open(self.config_file, 'r') as f:
-                    loaded_config = json.load(f)
-                    # Merge with defaults to ensure all required keys exist
-                    self.config = default_config.copy()
-                    self.config.update(loaded_config)
-            except json.JSONDecodeError:
-                print("Warning: Invalid config file, using defaults")
-                self.config = default_config
-        else:
-            self.config = default_config
-            self.save_config()
+    def _load_ngrok_config(self) -> Dict:
+        """Loads ngrok static domains from the user's default ngrok config."""
+        try:
+            import yaml
+            if NGROK_CONFIG_FILE.exists():
+                with open(NGROK_CONFIG_FILE, 'r') as f:
+                    return yaml.safe_load(f)
+        except Exception as e:
+            print_error(f"Could not load ngrok config: {e}")
+        return {}
 
-    def save_config(self):
-        """Save current configuration to JSON file."""
-        self.config_file.parent.mkdir(exist_ok=True)
-        with open(self.config_file, 'w') as f:
-            json.dump(self.config, f, indent=2)
+    def get_service_status(self, service_name: str, port: int) -> bool:
+        """Checks if a service is running by checking its port."""
+        return find_process_by_port(port) is not None
 
-    def get_ngrok_auth_token(self) -> Optional[str]:
-        """Get ngrok auth token from environment or config."""
-        # First try environment variable
-        auth_token = os.getenv('NGROK_AUTHTOKEN')
-        if auth_token:
-            return auth_token
-        
-        # Then try config file
-        if self.config.get('ngrok_auth_token'):
-            return self.config['ngrok_auth_token']
-        
-        return None
+    def _start_service(self, name: str, command: List[str], cwd: Path, port: int) -> bool:
+        """Generic function to start a uvicorn service."""
+        if self.get_service_status(name, port):
+            print_success(f"{name.capitalize()} server is already running.")
+            return True
 
-    def setup_ngrok_auth_token(self) -> bool:
-        """Interactive setup for ngrok auth token."""
-        print("\n" + "="*50)
-        print("NGROK AUTH TOKEN SETUP")
-        print("="*50)
-        print("To use ngrok tunnels, you need an auth token from ngrok.com")
-        print("1. Go to https://ngrok.com/ and sign up/login")
-        print("2. Go to https://dashboard.ngrok.com/get-started/your-authtoken")
-        print("3. Copy your auth token")
-        print("="*50)
-        
-        current_token = self.get_ngrok_auth_token()
-        if current_token and current_token != 'your-auth-token-here':
-            print(f"\nCurrent auth token: {current_token[:10]}...")
-            change = input("Do you want to change it? (y/N): ").lower()
-            if change != 'y':
+        print(f"🚀 Starting {name.capitalize()} server on port {port}...")
+        try:
+            # Open log files for stdout and stderr
+            stdout_log = open(LOG_DIR / f"{name}_stdout.log", "w")
+            stderr_log = open(LOG_DIR / f"{name}_stderr.log", "w")
+
+            process = subprocess.Popen(
+                command,
+                cwd=cwd,
+                stdout=stdout_log,
+                stderr=stderr_log,
+                creationflags=subprocess.CREATE_NEW_CONSOLE
+            )
+            self.processes[name] = process
+            # Give it a moment to start up
+            time.sleep(3)
+            if process.poll() is None:
+                print_success(f"{name.capitalize()} server started (PID: {process.pid}). Logs at {LOG_DIR}")
                 return True
-        
-        auth_token = input("\nEnter your ngrok auth token: ").strip()
-        if not auth_token:
-            print("❌ No auth token provided. ngrok tunnels will not work.")
+            else:
+                print_error(f"{name.capitalize()} server failed to start. Check logs at {LOG_DIR}")
+                return False
+        except Exception as e:
+            print_error(f"Failed to start {name.capitalize()} server: {e}")
             return False
+
+    def start_backend(self) -> bool:
+        return self._start_service("backend", ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080", "--reload"], BACKEND_DIR, 8080)
+
+    def start_engine(self) -> bool:
+        return self._start_service("engine", ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8001", "--reload"], ENGINE_DIR, 8001)
+
+    def start_ngrok(self) -> bool:
+        """Starts the ngrok service, which should be configured to run as a service."""
+        print("🚀 Attempting to manage ngrok service...")
+        if self.get_ngrok_status().get('status') == 'online':
+            print_success("ngrok service is already running.")
+            return True
+        try:
+            # Try to start the service as an admin
+            print_info("Attempting to start ngrok Windows service...")
+            subprocess.run(["sc", "start", "ngrok"], capture_output=True, check=True)
+            time.sleep(5) # Give service time to start
+            status = self.get_ngrok_status()
+            if status.get('status') == 'online':
+                print_success("ngrok service started successfully.")
+                self._print_ngrok_urls(status.get('tunnels', []))
+                return True
+            else:
+                raise Exception("Service started but tunnels are not online.")
+        except Exception as e:
+            print_error(f"Failed to start ngrok service: {e}")
+            print_info("Please ensure ngrok is installed as a service pointing to your default ngrok.yml.")
+            print_info("You can run it manually in another terminal: ngrok start --all")
+            return False
+
+    def _stop_service(self, name: str, port: int) -> bool:
+        """Generic function to stop a service by its port."""
+        proc = find_process_by_port(port)
+        if not proc:
+            print_success(f"{name.capitalize()} is already stopped.")
+            return True
         
-        # Save to config
-        self.config['ngrok_auth_token'] = auth_token
-        self.save_config()
-        
-        # Also set as environment variable for this session
-        os.environ['NGROK_AUTHTOKEN'] = auth_token
-        
-        print("✅ ngrok auth token saved!")
+        try:
+            print(f"🛑 Stopping {name.capitalize()} (PID: {proc.pid})...")
+            proc.terminate()
+            proc.wait(timeout=5)
+            print_success(f"{name.capitalize()} stopped.")
+            return True
+        except psutil.NoSuchProcess:
+             print_success(f"{name.capitalize()} was already stopped.")
+             return True
+        except (psutil.TimeoutExpired, Exception) as e:
+            print(f"Force-killing {name.capitalize()} (PID: {proc.pid})...")
+            proc.kill()
+            print_success(f"{name.capitalize()} stopped.")
+            return False
+
+    def stop_backend(self) -> bool:
+        return self._stop_service("backend", 8080)
+
+    def stop_engine(self) -> bool:
+        return self._stop_service("engine", 8001)
+
+    def stop_ngrok(self) -> bool:
+        print("🛑 To stop the 'always-on' ngrok tunnel, run this in an ADMIN terminal:")
+        print("   ngrok service stop")
         return True
 
-    def check_ngrok_auth_token(self) -> bool:
-        """Check if ngrok auth token is properly configured and valid."""
-        auth_token = self.get_ngrok_auth_token()
-        if not auth_token or auth_token == 'your-auth-token-here':
-            print("⚠️  ngrok auth token not configured!")
-            return self.setup_ngrok_auth_token()
-        
-        # Validate the token
-        print("🔍 Validating ngrok auth token...")
+    def stop_all(self):
+        print_header("Stopping All Services")
+        self.stop_backend()
+        self.stop_engine()
+        self.stop_ngrok()
+
+    def get_ngrok_status(self) -> Dict:
+        """Gets ngrok status from the local agent API."""
         try:
-            import requests
-            headers = {
-                'Authorization': f'Bearer {auth_token}',
-                'Ngrok-Version': '2'
-            }
-            response = requests.get('https://api.ngrok.com/tunnels', headers=headers, timeout=10)
-            
+            response = requests.get("http://127.0.0.1:4040/api/tunnels", timeout=2)
             if response.status_code == 200:
-                print("✅ ngrok auth token is valid!")
-                return True
-            elif response.status_code == 401:
-                print("❌ ngrok auth token is invalid or expired!")
-                print("🔄 Let's refresh your token...")
-                return self.setup_ngrok_auth_token()
-            elif response.status_code == 403:
-                print("⚠️  ngrok auth token may be valid but lacks API permissions")
-                print("💡 This is usually fine for basic tunneling - continuing...")
-                return True
-            else:
-                print(f"⚠️  ngrok API returned status {response.status_code}")
-                print("💡 Continuing anyway - token might still work for tunneling")
-                return True
+                tunnels = response.json().get("tunnels", [])
+                return {"status": "online", "tunnels": tunnels}
+        except requests.ConnectionError:
+            pass # ngrok is not running
         except Exception as e:
-            print(f"⚠️  Could not validate token: {e}")
-            print("💡 Continuing anyway - token might still work for tunneling")
-            return True
+            print_error(f"Error checking ngrok status: {e}")
+        return {"status": "offline", "tunnels": []}
 
-    def get_service_status(self, service_name: str) -> bool:
-        """Check if a service is running."""
-        if service_name not in self.processes:
-            return False
-        process = self.processes[service_name]
-        if process is None:
-            return False
-        return process.poll() is None
-
-    def start_backend(self, port: Optional[int] = None) -> bool:
-        """Start the backend server."""
-        if self.get_service_status("backend"):
-            print("Backend server is already running!")
-            return True
-
-        port = port or self.config["backend"]["port"]
-        host = self.config["backend"]["host"]
-        reload_flag = "--reload" if self.config["backend"]["reload"] else ""
-
-        print(f"Starting backend server on {host}:{port}...")
+    def _print_ngrok_urls(self, tunnels: List[Dict]):
+        backend_url = "Not found"
+        engine_url = "Not found"
+        for tunnel in tunnels:
+            addr = tunnel.get("config", {}).get("addr", "")
+            if "8080" in addr:
+                backend_url = tunnel.get("public_url", "Error")
+            elif "8001" in addr:
+                engine_url = tunnel.get("public_url", "Error")
         
-        try:
-            cmd = ["uvicorn", "main:app", "--host", host, "--port", str(port)]
-            if reload_flag:
-                cmd.append(reload_flag)
-            
-            if self.background_mode:
-                process = subprocess.Popen(
-                    cmd,
-                    cwd=self.backend_dir,
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL,
-                    creationflags=subprocess.CREATE_NO_WINDOW
-                )
-            else:
-                process = subprocess.Popen(
-                    cmd,
-                    cwd=self.backend_dir,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE,
-                    creationflags=subprocess.CREATE_NEW_CONSOLE
-                )
-            
-            self.processes["backend"] = process
-            print(f"✅ Backend server started (PID: {process.pid})")
-            return True
-            
-        except Exception as e:
-            print(f"❌ Failed to start backend server: {e}")
-            return False
-
-    def start_ngrok(self, port: Optional[int] = None, subdomain: Optional[str] = None) -> bool:
-        """Start ngrok tunnel (legacy method - now redirects to start_ngrok_backend)."""
-        print("🔄 Redirecting to enhanced ngrok tunnel setup...")
-        return self.start_ngrok_backend(port, subdomain)
-
-    def start_ngrok_backend(self, port: Optional[int] = None, subdomain: Optional[str] = None) -> bool:
-        """Start ngrok tunnel for backend."""
-        if self.get_service_status("ngrok_backend"):
-            print("ngrok backend tunnel is already running!")
-            return True
-
-        # Check and setup auth token if needed
-        if not self.check_ngrok_auth_token():
-            return False
-
-        # Ensure config has required sections
-        if "ngrok_backend" not in self.config:
-            self.config["ngrok_backend"] = {"port": 8080, "subdomain": None}
-        if "ngrok_engine" not in self.config:
-            self.config["ngrok_engine"] = {"port": 8001, "subdomain": None}
-
-        port = port or self.config["ngrok_backend"]["port"]
-        subdomain = subdomain or self.config["ngrok_backend"]["subdomain"]
-
-        print(f"Starting ngrok backend tunnel for port {port}...")
-        
-        try:
-            # Create ngrok config file for multiple tunnels
-            auth_token = self.get_ngrok_auth_token()
-            if not auth_token:
-                print("❌ No ngrok auth token available!")
-                return False
-                
-            config_content = f"""version: "2"
-authtoken: {auth_token}
-tunnels:
-  backend:
-    addr: {port}
-    proto: http
-    subdomain: {subdomain or ''}
-  engine:
-    addr: 8001
-    proto: http
-"""
-            
-            # Ensure the config directory exists
-            self.ngrok_config_file.parent.mkdir(exist_ok=True)
-            
-            with open(self.ngrok_config_file, 'w') as f:
-                f.write(config_content)
-            
-            print(f"📝 Created ngrok config: {self.ngrok_config_file}")
-            
-            # Try to find ngrok in PATH or use full path
-            ngrok_path = "ngrok"
-            if not self.background_mode:
-                # Test if ngrok is in PATH
-                try:
-                    subprocess.run(["ngrok", "version"], capture_output=True, check=True)
-                except (subprocess.CalledProcessError, FileNotFoundError):
-                    # Use full path if not in PATH
-                    ngrok_path = r"C:\ProgramData\chocolatey\bin\ngrok.exe"
-            
-            cmd = [ngrok_path, "start", "--all", "--config", str(self.ngrok_config_file)]
-            print(f"🚀 Running: {' '.join(cmd)}")
-            
-            if self.background_mode:
-                process = subprocess.Popen(
-                    cmd,
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL,
-                    creationflags=subprocess.CREATE_NO_WINDOW
-                )
-            else:
-                process = subprocess.Popen(
-                    cmd,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE,
-                    creationflags=subprocess.CREATE_NEW_CONSOLE
-                )
-            
-            self.processes["ngrok_backend"] = process
-            print(f"✅ ngrok tunnels started (PID: {process.pid})")
-            print("📱 Check ngrok web interface at http://localhost:4040 for public URLs")
-            print("🔧 Configure your apps with the PUBLIC ngrok URLs:")
-            print("   - Mobile app: EXPO_PUBLIC_API_URL=https://your-backend-url.ngrok-free.app")
-            print("   - Backend: DESKTOP_TUNNEL_URL=https://your-engine-url.ngrok-free.app")
-            return True
-            
-        except FileNotFoundError:
-            print("❌ ngrok command not found! Please install ngrok from https://ngrok.com/download")
-            return False
-        except Exception as e:
-            print(f"❌ Failed to start ngrok tunnels: {e}")
-            return False
-
-    def start_ngrok_engine(self, port: Optional[int] = None, subdomain: Optional[str] = None) -> bool:
-        """Start ngrok tunnel for engine (deprecated - now handled by start_ngrok_backend)."""
-        print("⚠️  Engine tunnel is now handled by the main ngrok session.")
-        print("   Use 'Start ngrok Backend Tunnel' to start both tunnels.")
-        return False
-
-    def start_engine(self, port: Optional[int] = None) -> bool:
-        """Start the agent engine."""
-        if self.get_service_status("engine"):
-            print("Agent engine is already running!")
-            return True
-
-        port = port or self.config["engine"]["port"]
-        host = self.config["engine"]["host"]
-
-        print(f"Starting agent engine on {host}:{port}...")
-        
-        try:
-            cmd = ["uvicorn", "main:app", "--host", host, "--port", str(port), "--reload"]
-            if self.background_mode:
-                process = subprocess.Popen(
-                    cmd,
-                    cwd=self.engine_dir,
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL,
-                    creationflags=subprocess.CREATE_NO_WINDOW
-                )
-            else:
-                process = subprocess.Popen(
-                    cmd,
-                    cwd=self.engine_dir,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE,
-                    creationflags=subprocess.CREATE_NEW_CONSOLE
-                )
-            
-            self.processes["engine"] = process
-            print(f"✅ Agent engine started (PID: {process.pid})")
-            return True
-            
-        except Exception as e:
-            print(f"❌ Failed to start agent engine: {e}")
-            return False
-
-    def stop_service(self, service_name: str) -> bool:
-        """Stop a specific service."""
-        if service_name not in self.processes:
-            print(f"Service '{service_name}' is not running.")
-            return True
-
-        process = self.processes[service_name]
-        try:
-            process.terminate()
-            process.wait(timeout=5)
-            del self.processes[service_name]
-            print(f"✅ {service_name} stopped")
-            return True
-        except subprocess.TimeoutExpired:
-            process.kill()
-            del self.processes[service_name]
-            print(f"⚠️ {service_name} force-killed")
-            return True
-        except Exception as e:
-            print(f"❌ Failed to stop {service_name}: {e}")
-            return False
-
-    def stop_all_services(self):
-        """Stop all running services."""
-        print("Stopping all services...")
-        for service_name in list(self.processes.keys()):
-            self.stop_service(service_name)
+        print_info("--- Tunnel URLs ---")
+        print(f"  Backend: {backend_url}")
+        print(f"  Engine:  {engine_url}")
+        print("---------------------")
 
     def show_status(self):
-        """Show status of all services."""
-        print("\n" + "="*50)
-        print("SERVICE STATUS")
-        print("="*50)
+        print_header("Sentinel Service Status")
+        backend_status = "🟢 ONLINE" if self.get_service_status("backend", 8080) else "🔴 OFFLINE"
+        engine_status = "🟢 ONLINE" if self.get_service_status("engine", 8001) else "🔴 OFFLINE"
+        ngrok_data = self.get_ngrok_status()
+        ngrok_status = f"🟢 ONLINE ({len(ngrok_data['tunnels'])} tunnels)" if ngrok_data['status'] == 'online' else "🔴 OFFLINE"
         
-        services = ["backend", "ngrok_backend", "ngrok_engine", "engine"]
-        for service in services:
-            status = "🟢 RUNNING" if self.get_service_status(service) else "🔴 STOPPED"
-            pid = "N/A"
-            if service in self.processes and self.processes[service] is not None:
-                try:
-                    pid = str(self.processes[service].pid)
-                except:
-                    pid = "N/A"
-            print(f"{service.upper():<15} {status} (PID: {pid})")
+        print(f"  Backend (port 8080): {backend_status}")
+        print(f"  Engine  (port 8001): {engine_status}")
+        print(f"  ngrok   (service):   {ngrok_status}")
         
-        print("="*50)
-
-    def configure_services(self):
-        """Interactive configuration of service settings."""
-        print("\n" + "="*50)
-        print("SERVICE CONFIGURATION")
-        print("="*50)
-        
-        # ngrok auth token configuration
-        print("\nngrok Configuration:")
-        if not self.check_ngrok_auth_token():
-            print("⚠️  ngrok auth token setup failed!")
-            return
-        
-        # Backend configuration
-        print("\nBackend Configuration:")
-        try:
-            port = int(input(f"Port (current: {self.config['backend']['port']}): ") or self.config['backend']['port'])
-            self.config['backend']['port'] = port
-        except ValueError:
-            print("Invalid port number, keeping current setting")
-        
-        reload = input(f"Auto-reload (current: {self.config['backend']['reload']}) [y/N]: ").lower() == 'y'
-        self.config['backend']['reload'] = reload
-        
-        # ngrok backend configuration
-        print("\nngrok Backend Configuration:")
-        try:
-            port = int(input(f"Port (current: {self.config['ngrok_backend']['port']}): ") or self.config['ngrok_backend']['port'])
-            self.config['ngrok_backend']['port'] = port
-        except ValueError:
-            print("Invalid port number, keeping current setting")
-        
-        subdomain = input(f"Subdomain (current: {self.config['ngrok_backend']['subdomain'] or 'None'}): ").strip()
-        self.config['ngrok_backend']['subdomain'] = subdomain if subdomain else None
-        
-        # ngrok engine configuration
-        print("\nngrok Engine Configuration:")
-        try:
-            port = int(input(f"Port (current: {self.config['ngrok_engine']['port']}): ") or self.config['ngrok_engine']['port'])
-            self.config['ngrok_engine']['port'] = port
-        except ValueError:
-            print("Invalid port number, keeping current setting")
-        
-        subdomain = input(f"Subdomain (current: {self.config['ngrok_engine']['subdomain'] or 'None'}): ").strip()
-        self.config['ngrok_engine']['subdomain'] = subdomain if subdomain else None
-        
-        # Engine configuration
-        print("\nEngine Configuration:")
-        try:
-            port = int(input(f"Port (current: {self.config['engine']['port']}): ") or self.config['engine']['port'])
-            self.config['engine']['port'] = port
-        except ValueError:
-            print("Invalid port number, keeping current setting")
-        
-        self.save_config()
-        print("\n✅ Configuration saved!")
-
-    def show_menu(self):
-        """Display the main menu."""
-        print("\n" + "="*50)
-        print("SENTINEL SERVICE MANAGER")
-        print("="*50)
-        print("1. Start Backend Server")
-        print("2. Start ngrok Tunnels (Backend + Engine)")
-        print("3. Start Agent Engine")
-        print("4. Start All Services")
-        print("5. Stop Backend Server")
-        print("6. Stop ngrok Tunnels")
-        print("7. Stop Agent Engine")
-        print("8. Stop All Services")
-        print("9. Show Service Status")
-        print("10. Configure Services")
-        print("11. Setup ngrok Auth Token")
-        print("12. Exit")
-        print("="*50)
+        if ngrok_data['status'] == 'online':
+            self._print_ngrok_urls(ngrok_data['tunnels'])
 
     def run_interactive(self):
-        """Run the interactive menu."""
         while True:
-            self.show_menu()
-            try:
-                choice = input("\nChoose an option (1-12): ").strip()
-                
-                if choice == "1":
-                    self.start_backend()
-                elif choice == "2":
-                    self.start_ngrok_backend()
-                elif choice == "3":
-                    self.start_engine()
-                elif choice == "4":
-                    print("Starting all services...")
-                    self.start_backend()
-                    time.sleep(2)
-                    self.start_ngrok_backend()
-                    time.sleep(1)
-                    self.start_engine()
-                elif choice == "5":
-                    self.stop_service("backend")
-                elif choice == "6":
-                    self.stop_service("ngrok_backend")
-                elif choice == "7":
-                    self.stop_service("engine")
-                elif choice == "8":
-                    self.stop_all_services()
-                elif choice == "9":
-                    self.show_status()
-                elif choice == "10":
-                    self.configure_services()
-                elif choice == "11":
-                    self.setup_ngrok_auth_token()
-                elif choice == "12":
-                    print("\nStopping all services before exit...")
-                    self.stop_all_services()
-                    print("Goodbye!")
-                    break
-                else:
-                    print("Invalid choice. Please try again.")
-                    
-            except KeyboardInterrupt:
-                print("\n\nStopping all services before exit...")
-                self.stop_all_services()
+            print_header("Sentinel Local Development Manager")
+            self.show_status()
+            print("\n--- Actions ---")
+            print("1. Start All Services")
+            print("2. Stop All Services")
+            print("3. Start Backend only")
+            print("4. Start Engine only")
+            print("5. Exit")
+            
+            choice = input("\nChoose an option: ").strip()
+            if choice == "1":
+                self.start_backend()
+                self.start_engine()
+                self.start_ngrok()
+            elif choice == "2":
+                self.stop_all()
+            elif choice == "3":
+                self.start_backend()
+            elif choice == "4":
+                self.start_engine()
+            elif choice == "5":
+                print("Stopping all services before exit...")
+                self.stop_all()
                 print("Goodbye!")
                 break
-            except Exception as e:
-                print(f"An error occurred: {e}")
-                continue
-
-def main():
-    """Main entry point."""
-    # Check for background mode flag
-    background_mode = "--background" in sys.argv
-    manager = ServiceManager(background_mode=background_mode)
-    
-    # Handle command-line arguments
-    if len(sys.argv) > 1:
-        arg = sys.argv[1].lower()
-        
-        if arg == "--status":
-            manager.show_status()
-        elif arg == "--start-all":
-            manager.start_backend()
-            time.sleep(2)
-            manager.start_ngrok()
-            time.sleep(1)
-            manager.start_engine()
-            print("✅ All services started!")
-        elif arg == "--stop-all":
-            manager.stop_all_services()
-        elif arg == "--start-backend":
-            manager.start_backend()
-        elif arg == "--start-ngrok":
-            manager.start_ngrok_backend()
-        elif arg == "--start-engine":
-            manager.start_engine()
-        elif arg == "--config":
-            manager.configure_services()
-        else:
-            print(f"Unknown argument: {arg}")
-            print("Available arguments: --status, --start-all, --stop-all, --start-backend, --start-ngrok, --start-engine, --config, --background")
-    else:
-        # Run interactive mode
-        manager.run_interactive()
+            else:
+                print_error("Invalid choice.")
 
 if __name__ == "__main__":
-    main() 
+    manager = ServiceManager()
+    manager.run_interactive() 

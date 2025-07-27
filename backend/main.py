@@ -2,7 +2,7 @@ import json
 import uuid
 import asyncio
 import requests
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request, Depends
 from pydantic import BaseModel
 from loguru import logger
 from config import settings
@@ -13,7 +13,9 @@ from typing import List, Optional
 from datetime import datetime
 from pathlib import Path
 from core.models import Mission as MissionORM, Base
-from core.database import SessionLocal, engine
+from core.database import engine, Base, get_db
+from sqlalchemy.orm import Session
+from starlette.responses import Response
 
 # --- Placeholder for ToolManager ---
 class ToolManager:
@@ -21,11 +23,28 @@ class ToolManager:
         return {}
 # ------------------------------------
 
+# Utility for safe logging of request/response bodies
+MAX_LOG_BODY = 2048  # bytes
+
+def safe_log_body(body):
+    if not body:
+        return None
+    if isinstance(body, (bytes, bytearray)):
+        body = body.decode(errors="replace")
+    if len(body) > MAX_LOG_BODY:
+        return body[:MAX_LOG_BODY] + "... [truncated]"
+    return body
+
 app = FastAPI(title="Sentinel Orchestrator Backend", debug=True)
 logger.add("logs/sentinel_backend.log", rotation="10 MB", level=settings.LOG_LEVEL)
 
 # Create tables if they don't exist
 Base.metadata.create_all(bind=engine)
+
+# Log config/env loads at startup
+def log_config():
+    logger.info(f"Loaded config: {settings.dict()}")
+log_config()
 
 def get_llm_client():
     try:
@@ -167,11 +186,15 @@ def check_service_health(url: str, timeout: int = 5) -> dict:
 
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
-    logger.info(f"Incoming request: {request.method} {request.url}")
+    req_body = await request.body()
+    logger.info(f"Incoming request: {request.method} {request.url} | Body: {safe_log_body(req_body)} | Headers: {dict(request.headers)}")
     try:
         response = await call_next(request)
-        logger.info(f"Response status: {response.status_code} for {request.method} {request.url}")
-        return response
+        resp_body = b""
+        async for chunk in response.body_iterator:
+            resp_body += chunk
+        logger.info(f"Response status: {response.status_code} for {request.method} {request.url} | Body: {safe_log_body(resp_body)} | Headers: {dict(response.headers)}")
+        return Response(content=resp_body, status_code=response.status_code, headers=dict(response.headers), media_type=response.media_type)
     except Exception as e:
         logger.error(f"Exception during request: {request.method} {request.url} - {e}", exc_info=True)
         raise
@@ -211,8 +234,7 @@ def get_system_status():
     }
 
 @app.get("/missions", tags=["Missions"])
-def get_missions():
-    db = SessionLocal()
+def get_missions(db: Session = Depends(get_db)):
     try:
         missions = db.query(MissionORM).all()
         # Convert SQLAlchemy objects to dicts, removing _sa_instance_state
@@ -226,11 +248,12 @@ def get_missions():
                     d[k] = d[k].isoformat()
             result.append(d)
         return result
-    finally:
-        db.close()
+    except Exception as e:
+        logger.error(f"Failed to fetch missions: {e}")
+        raise HTTPException(status_code=500, detail="Database query failed.")
 
 @app.post("/missions", response_model=MissionDispatchResponse, tags=["Missions"])
-async def create_and_dispatch_mission(request: MissionRequest):
+async def create_and_dispatch_mission(request: MissionRequest, db: Session = Depends(get_db)):
     mission_id = f"mission_{uuid.uuid4()}"
     logger.info(f"Received new mission request. Assigning ID: {mission_id}")
 
@@ -271,25 +294,21 @@ async def create_and_dispatch_mission(request: MissionRequest):
             await asyncio.sleep(2)
 
         # Save mission to DB
-        db = SessionLocal()
-        try:
-            now = datetime.utcnow()
-            mission = MissionORM(
-                id=mission_id,
-                title=request.prompt,
-                description=request.prompt,
-                status="completed" if execution_result and execution_result.get("status") == "success" else "failed",
-                created_at=now,
-                updated_at=now,
-                completed_at=now if execution_result else None,
-                steps=plan.model_dump().get("steps", []),
-                plan=plan.model_dump(),
-                result=execution_result,
-            )
-            db.add(mission)
-            db.commit()
-        finally:
-            db.close()
+        now = datetime.utcnow()
+        mission = MissionORM(
+            id=mission_id,
+            title=request.prompt,
+            description=request.prompt,
+            status="completed" if execution_result and execution_result.get("status") == "success" else "failed",
+            created_at=now,
+            updated_at=now,
+            completed_at=now if execution_result else None,
+            steps=plan.model_dump().get("steps", []),
+            plan=plan.model_dump(),
+            result=execution_result,
+        )
+        db.add(mission)
+        db.commit()
 
         return MissionDispatchResponse(
             mission_id=mission_id,

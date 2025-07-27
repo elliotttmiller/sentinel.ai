@@ -1,11 +1,12 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { Mission, MissionPlan, MissionResult, Agent } from '@/types';
 
-// Enhanced debug logging for ApiService
-const debugLog = (message: string, data?: any) => {
-  const timestamp = new Date().toISOString();
-  console.log(`[${timestamp}] API_SERVICE: ${message}`, data ? JSON.stringify(data, null, 2) : '');
-};
+// Centralized debugLog utility
+export function debugLog(...args: any[]) {
+  if (typeof console !== 'undefined' && console.log) {
+    console.log('[DEBUG]', ...args);
+  }
+}
 
 class ApiService {
   private client: AxiosInstance;
