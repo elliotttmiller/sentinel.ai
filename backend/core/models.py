@@ -1,13 +1,12 @@
-from sqlalchemy import Column, String, Text, DateTime, JSON
+from sqlalchemy import Column, String, Integer, JSON, DateTime
 from sqlalchemy.sql import func
 from .database import Base
 
 class Mission(Base):
     __tablename__ = "missions"
-
     id = Column(String, primary_key=True, index=True)
     title = Column(String, index=True)
-    description = Column(Text)
+    description = Column(String)
     status = Column(String(50), default="pending")
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
@@ -19,10 +18,10 @@ class Mission(Base):
 class Agent(Base):
     __tablename__ = "agents"
     id = Column(String, primary_key=True, index=True)
-    name = Column(String, nullable=False)
-    type = Column(String, nullable=True)
-    description = Column(Text, nullable=True)
-    capabilities = Column(JSON, nullable=True)
-    status = Column(String, nullable=False)
+    name = Column(String, index=True)
+    type = Column(String)
+    description = Column(String)
+    capabilities = Column(JSON)
+    status = Column(String, default="available")
     last_active = Column(DateTime, nullable=True)
-    missions_completed = Column(String, nullable=True) 
+    missions_completed = Column(Integer, default=0) 

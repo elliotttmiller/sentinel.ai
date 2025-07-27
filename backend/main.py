@@ -29,13 +29,32 @@ async def lifespan(app: FastAPI):
     logger.info("Application starting up...")
     logger.info("Verifying database tables...")
     try:
-        # This creates your database tables if they don't exist
         Base.metadata.create_all(bind=engine)
         logger.info("Database tables verified successfully.")
+        seed_agents_to_db()
     except Exception as e:
         logger.error(f"FATAL: Could not connect to database or create tables: {e}")
     yield
     logger.info("Application shutting down...")
+
+
+def seed_agents_to_db():
+    db = next(get_db())
+    try:
+        agent_count = db.query(models.Agent).count()
+        if agent_count == 0:
+            logger.info("No agents found in DB. Seeding initial agents...")
+            agents_to_seed = [
+                models.Agent(id="agent-1", name="Code Reviewer", type="code_reviewer", description="Reviews code for quality and security issues", capabilities=["code_analysis", "security_scanning", "best_practices"], status="available", missions_completed=5),
+                models.Agent(id="agent-2", name="Debugger", type="debugger", description="Analyzes and fixes code issues", capabilities=["error_analysis", "bug_fixing", "performance_optimization"], status="available", missions_completed=3),
+                models.Agent(id="agent-3", name="Mission Planner", type="planner", description="Creates and manages mission plans", capabilities=["planning", "coordination", "execution_tracking"], status="busy", missions_completed=12),
+                models.Agent(id="agent-4", name="Simple Test Agent", type="simple_test", description="A basic test agent for validating the deployment system", capabilities=["text_processing", "basic_response_generation", "status_reporting", "activity_logging"], status="available", missions_completed=0),
+            ]
+            db.add_all(agents_to_seed)
+            db.commit()
+            logger.info("Initial agents have been seeded to the database.")
+    finally:
+        db.close()
 
 # Global instances of your core components
 llm_client = None  # To be initialized after app starts
@@ -80,46 +99,4 @@ def startup_event():
 # --- API Models (Pydantic) ---
 from core.schemas import Mission, Agent, MissionDispatchResponse, MissionRequest, AgentExecutionRequest, AgentExecutionResponse
 
-# --- In-memory DB for agents (replace with real DB later) ---
-agents_db = [
-    Agent(
-        id="agent-1",
-        name="Code Reviewer",
-        type="code_reviewer",
-        description="Reviews code for quality and security issues",
-        capabilities=["code_analysis", "security_scanning", "best_practices"],
-        status="available",
-        last_active=None,
-        missions_completed=5
-    ),
-    Agent(
-        id="agent-2",
-        name="Debugger",
-        type="debugger",
-        description="Analyzes and fixes code issues",
-        capabilities=["error_analysis", "bug_fixing", "performance_optimization"],
-        status="available",
-        last_active=None,
-        missions_completed=3
-    ),
-    Agent(
-        id="agent-3",
-        name="Mission Planner",
-        type="planner",
-        description="Creates and manages mission plans",
-        capabilities=["planning", "coordination", "execution_tracking"],
-        status="busy",
-        last_active=None,
-        missions_completed=12
-    ),
-    Agent(
-        id="agent-4",
-        name="Simple Test Agent",
-        type="simple_test",
-        description="A basic test agent for validating the deployment system",
-        capabilities=["text_processing", "basic_response_generation", "status_reporting", "activity_logging"],
-        status="available",
-        last_active=None,
-        missions_completed=0
-    )
-] 
+# Remove in-memory agents_db and update /agents endpoint to always use DB 
