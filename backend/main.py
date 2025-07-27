@@ -11,6 +11,7 @@ from pathlib import Path
 # Import agent-related modules
 from agents.simple_test_agent import SimpleTestAgent
 from core.agent_base import AgentContext, AgentRole
+from core.genai_client import genai_client
 
 app = FastAPI(title="Sentinel Orchestrator Backend")
 
@@ -294,6 +295,47 @@ async def test_agent():
     except Exception as e:
         return {
             "message": "Agent test failed",
+            "error": str(e),
+            "success": False
+        }
+
+@app.get("/genai/status", tags=["GenAI"])
+async def get_genai_status():
+    """
+    Get the status of Google GenAI integration.
+    """
+    try:
+        model_info = genai_client.get_model_info()
+        return {
+            "message": "GenAI status retrieved successfully",
+            "genai_status": model_info,
+            "success": True
+        }
+    except Exception as e:
+        return {
+            "message": "Failed to get GenAI status",
+            "error": str(e),
+            "success": False
+        }
+
+@app.post("/genai/test", tags=["GenAI"])
+async def test_genai():
+    """
+    Test Google GenAI integration with a simple prompt.
+    """
+    try:
+        test_prompt = "Hello! Can you tell me about your capabilities?"
+        response = await genai_client.generate_response(test_prompt)
+        
+        return {
+            "message": "GenAI test completed successfully",
+            "prompt": test_prompt,
+            "response": response,
+            "success": True
+        }
+    except Exception as e:
+        return {
+            "message": "GenAI test failed",
             "error": str(e),
             "success": False
         } 

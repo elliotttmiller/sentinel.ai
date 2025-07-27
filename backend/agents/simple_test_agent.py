@@ -7,6 +7,7 @@ It provides a simple interface for testing agent execution without complex depen
 
 from typing import Any, Dict, List, Optional
 from core.agent_base import BaseAgent, AgentRole, AgentContext, AgentResult, AgentStatus
+from core.genai_client import genai_client
 from loguru import logger
 
 
@@ -64,8 +65,8 @@ class SimpleTestAgent(BaseAgent):
             user_prompt = context.user_prompt
             self.logger.info(f"Processing user prompt: {user_prompt[:100]}...")
             
-            # Simple response generation (in a real agent, this would use LLM)
-            response = self._generate_response(user_prompt)
+            # Generate response using GenAI
+            response = await self._generate_response(user_prompt)
             
             # Create result
             result = AgentResult(
@@ -97,13 +98,41 @@ class SimpleTestAgent(BaseAgent):
                 tools_used=[]
             )
     
-    def _generate_response(self, user_prompt: str) -> str:
+    async def _generate_response(self, user_prompt: str) -> str:
         """
-        Generate a response to the user prompt.
+        Generate a response to the user prompt using Google GenAI.
         
-        This is a simple implementation for testing purposes.
-        In a real agent, this would use an LLM client.
+        This uses the Gemini model for intelligent responses.
+        Falls back to simple responses if GenAI is not available.
         """
+        try:
+            # Get the system prompt for this agent
+            system_prompt = self.get_system_prompt()
+            
+            # Prepare context for the AI
+            context = {
+                "agent_name": self.name,
+                "agent_role": self.role.value,
+                "agent_status": self.status.value,
+                "agent_capabilities": self.get_capabilities()
+            }
+            
+            # Generate response using GenAI
+            response = await genai_client.generate_response(
+                prompt=user_prompt,
+                system_prompt=system_prompt,
+                context=context
+            )
+            
+            return response
+            
+        except Exception as e:
+            self.logger.error(f"Error generating AI response: {e}")
+            # Fallback to simple responses
+            return self._fallback_response(user_prompt)
+    
+    def _fallback_response(self, user_prompt: str) -> str:
+        """Provide a fallback response when GenAI is not available."""
         prompt_lower = user_prompt.lower()
         
         # Simple keyword-based responses for testing
