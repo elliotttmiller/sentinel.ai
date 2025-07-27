@@ -3,8 +3,10 @@ export interface Mission {
   title: string;
   description: string;
   status: 'pending' | 'planning' | 'executing' | 'completed' | 'failed';
-  createdAt: string;
-  updatedAt: string;
+  created_at: string;
+  updated_at: string;
+  completed_at?: string;
+  steps?: MissionStep[];
   plan?: MissionPlan;
   result?: MissionResult;
 }
@@ -38,9 +40,12 @@ export interface MissionResult {
 export interface Agent {
   id: string;
   name: string;
-  description: string;
-  capabilities: string[];
-  status: 'available' | 'busy' | 'offline';
+  type?: string;
+  description?: string;
+  capabilities?: string[];
+  status: 'available' | 'busy' | 'offline' | 'maintenance';
+  last_active?: string;
+  missions_completed?: number;
 }
 
 export interface ApiConfig {

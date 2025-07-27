@@ -5,6 +5,9 @@ import { ApiConfig } from '@/types';
 interface ApiContextType {
   config: ApiConfig;
   baseUrl: string;
+  railwayUrl: string;
+  ngrokUrl: string;
+  websocketUrl: string;
   isConnected: boolean;
   connectionError: string | null;
   switchToNgrok: () => void;
@@ -61,6 +64,9 @@ export const ApiProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const value: ApiContextType = {
     config,
     baseUrl,
+    railwayUrl: config.railwayUrl,
+    ngrokUrl: config.ngrokUrl,
+    websocketUrl: config.websocketUrl,
     isConnected,
     connectionError,
     switchToNgrok,

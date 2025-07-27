@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, ScrollView, RefreshControl } from 'react-native';
-import { Text, Card, Button, Chip, useTheme, ActivityIndicator } from 'react-native-paper';
+import { View, StyleSheet, ScrollView, RefreshControl, TouchableOpacity } from 'react-native';
+import { Text, Card, Button, Chip, useTheme, ActivityIndicator, IconButton, Divider } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 
@@ -15,6 +15,12 @@ const HomeScreen: React.FC = () => {
   const [agents, setAgents] = useState<Agent[]>([]);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [systemStatus, setSystemStatus] = useState({
+    backend: 'unknown',
+    desktop: 'unknown',
+    ngrok: 'unknown',
+    railway: 'unknown'
+  });
 
   const apiService = new ApiService(baseUrl);
 
@@ -29,6 +35,14 @@ const HomeScreen: React.FC = () => {
       ]);
       setMissions(missionsData);
       setAgents(agentsData);
+      
+      // Check system status
+      try {
+        await apiService.healthCheck();
+        setSystemStatus(prev => ({ ...prev, backend: 'online' }));
+      } catch {
+        setSystemStatus(prev => ({ ...prev, backend: 'offline' }));
+      }
     } catch (error) {
       console.error('Failed to load data:', error);
     } finally {
@@ -48,10 +62,19 @@ const HomeScreen: React.FC = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'completed': return theme.colors.primary;
-      case 'executing': return theme.colors.secondary;
-      case 'failed': return theme.colors.error;
-      default: return theme.colors.outline;
+      case 'completed':
+      case 'online':
+      case 'available':
+        return theme.colors.primary;
+      case 'executing':
+      case 'running':
+        return theme.colors.secondary;
+      case 'failed':
+      case 'offline':
+      case 'error':
+        return theme.colors.error;
+      default:
+        return theme.colors.outline;
     }
   };
 
@@ -107,6 +130,106 @@ const HomeScreen: React.FC = () => {
     );
   };
 
+  const getSystemStatusCard = () => (
+    <Card style={styles.card}>
+      <Card.Title title="System Status" left={(props) => <Icon {...props} name="monitor-dashboard" />} />
+      <Card.Content>
+        <View style={styles.statusGrid}>
+          <View style={styles.statusItem}>
+            <Icon 
+              name={systemStatus.backend === 'online' ? 'server' : 'server-off'} 
+              size={20} 
+              color={getStatusColor(systemStatus.backend)} 
+            />
+            <Text variant="bodySmall">Backend</Text>
+            <Chip 
+              mode="outlined" 
+              compact
+              textStyle={{ color: getStatusColor(systemStatus.backend) }}
+              style={{ borderColor: getStatusColor(systemStatus.backend) }}
+            >
+              {systemStatus.backend}
+            </Chip>
+          </View>
+          <View style={styles.statusItem}>
+            <Icon 
+              name={systemStatus.desktop === 'online' ? 'desktop-tower' : 'desktop-tower-monitor'} 
+              size={20} 
+              color={getStatusColor(systemStatus.desktop)} 
+            />
+            <Text variant="bodySmall">Desktop</Text>
+            <Chip 
+              mode="outlined" 
+              compact
+              textStyle={{ color: getStatusColor(systemStatus.desktop) }}
+              style={{ borderColor: getStatusColor(systemStatus.desktop) }}
+            >
+              {systemStatus.desktop}
+            </Chip>
+          </View>
+          <View style={styles.statusItem}>
+            <Icon 
+              name={systemStatus.ngrok === 'online' ? 'tunnel' : 'tunnel-outline'} 
+              size={20} 
+              color={getStatusColor(systemStatus.ngrok)} 
+            />
+            <Text variant="bodySmall">ngrok</Text>
+            <Chip 
+              mode="outlined" 
+              compact
+              textStyle={{ color: getStatusColor(systemStatus.ngrok) }}
+              style={{ borderColor: getStatusColor(systemStatus.ngrok) }}
+            >
+              {systemStatus.ngrok}
+            </Chip>
+          </View>
+          <View style={styles.statusItem}>
+            <Icon 
+              name={systemStatus.railway === 'online' ? 'cloud' : 'cloud-outline'} 
+              size={20} 
+              color={getStatusColor(systemStatus.railway)} 
+            />
+            <Text variant="bodySmall">Railway</Text>
+            <Chip 
+              mode="outlined" 
+              compact
+              textStyle={{ color: getStatusColor(systemStatus.railway) }}
+              style={{ borderColor: getStatusColor(systemStatus.railway) }}
+            >
+              {systemStatus.railway}
+            </Chip>
+          </View>
+        </View>
+      </Card.Content>
+    </Card>
+  );
+
+  const getQuickActionsCard = () => (
+    <Card style={styles.card}>
+      <Card.Title title="Quick Actions" left={(props) => <Icon {...props} name="lightning-bolt" />} />
+      <Card.Content>
+        <View style={styles.actionsGrid}>
+          <TouchableOpacity style={styles.actionButton}>
+            <Icon name="plus-circle" size={32} color={theme.colors.primary} />
+            <Text variant="bodySmall">New Mission</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.actionButton}>
+            <Icon name="robot" size={32} color={theme.colors.secondary} />
+            <Text variant="bodySmall">Manage Agents</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.actionButton}>
+            <Icon name="cog" size={32} color={theme.colors.tertiary} />
+            <Text variant="bodySmall">Settings</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.actionButton}>
+            <Icon name="refresh" size={32} color={theme.colors.primary} />
+            <Text variant="bodySmall">Refresh</Text>
+          </TouchableOpacity>
+        </View>
+      </Card.Content>
+    </Card>
+  );
+
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <ScrollView 
@@ -120,6 +243,8 @@ const HomeScreen: React.FC = () => {
         </Text>
 
         {getConnectionStatus()}
+        {getSystemStatusCard()}
+        {getQuickActionsCard()}
 
         {loading ? (
           <View style={styles.loadingContainer}>
@@ -131,7 +256,7 @@ const HomeScreen: React.FC = () => {
         ) : (
           <>
             <Card style={styles.card}>
-              <Card.Title title="Recent Missions" />
+              <Card.Title title="Recent Missions" left={(props) => <Icon {...props} name="rocket-launch" />} />
               <Card.Content>
                 {missions.length === 0 ? (
                   <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant }}>
@@ -155,7 +280,7 @@ const HomeScreen: React.FC = () => {
             </Card>
 
             <Card style={styles.card}>
-              <Card.Title title="Available Agents" />
+              <Card.Title title="Available Agents" left={(props) => <Icon {...props} name="robot" />} />
               <Card.Content>
                 {agents.length === 0 ? (
                   <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant }}>
@@ -223,6 +348,29 @@ const styles = StyleSheet.create({
   loadingContainer: {
     alignItems: 'center',
     padding: 32,
+  },
+  statusGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  statusItem: {
+    alignItems: 'center',
+    width: '48%',
+    marginBottom: 16,
+  },
+  actionsGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  actionButton: {
+    alignItems: 'center',
+    width: '48%',
+    padding: 16,
+    marginBottom: 16,
+    borderRadius: 8,
+    backgroundColor: 'rgba(0,0,0,0.05)',
   },
   missionItem: {
     flexDirection: 'row',

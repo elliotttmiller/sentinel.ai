@@ -1,177 +1,322 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, Alert } from 'react-native';
-import { Text, Card, Switch, Button, TextInput, useTheme, Divider } from 'react-native-paper';
+import { Text, Card, Button, Switch, useTheme, TextInput, Divider, List, IconButton, Chip } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 
 import { useApi } from '@/contexts/ApiContext';
+import ApiService from '@/services/api';
 
 const SettingsScreen: React.FC = () => {
   const theme = useTheme();
   const { 
-    config, 
     baseUrl, 
     isConnected, 
     connectionError, 
     switchToNgrok, 
-    switchToRailway 
+    switchToRailway,
+    railwayUrl,
+    ngrokUrl,
+    websocketUrl
   } = useApi();
   
-  const [railwayUrl, setRailwayUrl] = useState(config.railwayUrl);
-  const [ngrokUrl, setNgrokUrl] = useState(config.ngrokUrl);
-  const [useNgrok, setUseNgrok] = useState(config.useNgrok);
+  const [railwayInput, setRailwayInput] = useState(railwayUrl);
+  const [ngrokInput, setNgrokInput] = useState(ngrokUrl);
+  const [websocketInput, setWebsocketInput] = useState(websocketUrl);
+  const [isEditing, setIsEditing] = useState(false);
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+  const [analyticsEnabled, setAnalyticsEnabled] = useState(false);
+  const [debugMode, setDebugMode] = useState(false);
+  const [autoRefresh, setAutoRefresh] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
 
-  const handleConnectionSwitch = (useNgrokConnection: boolean) => {
-    setUseNgrok(useNgrokConnection);
-    if (useNgrokConnection) {
-      switchToNgrok();
-    } else {
-      switchToRailway();
-    }
-  };
+  const apiService = new ApiService(baseUrl);
 
-  const handleTestConnection = async () => {
-    const testUrl = useNgrok ? ngrokUrl : railwayUrl;
+  const testConnection = async (url: string) => {
     try {
-      const response = await fetch(`${testUrl}/health`, {
-        method: 'GET',
-        timeout: 5000,
-      });
-      
-      if (response.ok) {
-        Alert.alert('Success', 'Connection test successful!');
-      } else {
-        Alert.alert('Error', 'Connection test failed. Server returned an error.');
-      }
+      const testService = new ApiService(url);
+      await testService.healthCheck();
+      Alert.alert('Success', 'Connection test successful!');
     } catch (error) {
-      Alert.alert('Error', 'Connection test failed. Please check your URL and try again.');
+      Alert.alert('Error', 'Connection test failed. Please check the URL and try again.');
     }
   };
 
-  const getConnectionStatus = () => {
-    if (isConnected) {
-      return (
-        <View style={styles.statusContainer}>
-          <Icon name="wifi" size={24} color={theme.colors.primary} />
-          <Text variant="titleMedium" style={{ color: theme.colors.primary, marginLeft: 8 }}>
-            Connected
-          </Text>
-        </View>
-      );
-    }
+  const saveSettings = () => {
+    // In a real app, you would save these to AsyncStorage or your state management
+    Alert.alert('Success', 'Settings saved successfully!');
+    setIsEditing(false);
+  };
 
-    return (
-      <View style={styles.statusContainer}>
-        <Icon name="wifi-off" size={24} color={theme.colors.error} />
-        <Text variant="titleMedium" style={{ color: theme.colors.error, marginLeft: 8 }}>
-          Disconnected
-        </Text>
-      </View>
+  const resetSettings = () => {
+    Alert.alert(
+      'Reset Settings',
+      'Are you sure you want to reset all settings to default?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { 
+          text: 'Reset', 
+          style: 'destructive',
+          onPress: () => {
+            setRailwayInput(railwayUrl);
+            setNgrokInput(ngrokUrl);
+            setWebsocketInput(websocketUrl);
+            setNotificationsEnabled(true);
+            setAnalyticsEnabled(false);
+            setDebugMode(false);
+            setAutoRefresh(true);
+            setDarkMode(false);
+            Alert.alert('Success', 'Settings reset to default!');
+          }
+        }
+      ]
     );
   };
+
+  const getConnectionStatusCard = () => (
+    <Card style={styles.card}>
+      <Card.Title title="Connection Status" left={(props) => <Icon {...props} name="wifi" />} />
+      <Card.Content>
+        <View style={styles.connectionStatus}>
+          <View style={styles.statusRow}>
+            <Icon 
+              name={isConnected ? 'check-circle' : 'close-circle'} 
+              size={24} 
+              color={isConnected ? theme.colors.primary : theme.colors.error} 
+            />
+            <Text variant="bodyMedium" style={{ marginLeft: 8, flex: 1 }}>
+              {isConnected ? 'Connected' : 'Disconnected'}
+            </Text>
+            <Chip 
+              mode="outlined" 
+              textStyle={{ color: isConnected ? theme.colors.primary : theme.colors.error }}
+              style={{ borderColor: isConnected ? theme.colors.primary : theme.colors.error }}
+            >
+              {baseUrl.includes('ngrok') ? 'ngrok' : 'Railway'}
+            </Chip>
+          </View>
+          
+          {connectionError && (
+            <Text variant="bodySmall" style={{ color: theme.colors.error, marginTop: 8 }}>
+              Error: {connectionError}
+            </Text>
+          )}
+          
+          <View style={styles.connectionActions}>
+            <Button 
+              mode="outlined" 
+              onPress={() => testConnection(baseUrl)}
+              style={styles.actionButton}
+            >
+              Test Connection
+            </Button>
+            <Button 
+              mode="outlined" 
+              onPress={switchToRailway}
+              style={styles.actionButton}
+            >
+              Switch to Railway
+            </Button>
+            <Button 
+              mode="outlined" 
+              onPress={switchToNgrok}
+              style={styles.actionButton}
+            >
+              Switch to ngrok
+            </Button>
+          </View>
+        </View>
+      </Card.Content>
+    </Card>
+  );
+
+  const getUrlSettingsCard = () => (
+    <Card style={styles.card}>
+      <Card.Title 
+        title="URL Configuration" 
+        left={(props) => <Icon {...props} name="link" />}
+        right={(props) => (
+          <IconButton
+            {...props}
+            icon={isEditing ? 'check' : 'pencil'}
+            onPress={() => isEditing ? saveSettings() : setIsEditing(true)}
+          />
+        )}
+      />
+      <Card.Content>
+        <View style={styles.urlInput}>
+          <Text variant="bodySmall" style={{ marginBottom: 4 }}>Railway API URL:</Text>
+          <TextInput
+            mode="outlined"
+            value={railwayInput}
+            onChangeText={setRailwayInput}
+            disabled={!isEditing}
+            placeholder="https://your-app.railway.app"
+            style={styles.input}
+          />
+        </View>
+        
+        <View style={styles.urlInput}>
+          <Text variant="bodySmall" style={{ marginBottom: 4 }}>ngrok API URL:</Text>
+          <TextInput
+            mode="outlined"
+            value={ngrokInput}
+            onChangeText={setNgrokInput}
+            disabled={!isEditing}
+            placeholder="https://your-tunnel.ngrok.io"
+            style={styles.input}
+          />
+        </View>
+        
+        <View style={styles.urlInput}>
+          <Text variant="bodySmall" style={{ marginBottom: 4 }}>WebSocket URL:</Text>
+          <TextInput
+            mode="outlined"
+            value={websocketInput}
+            onChangeText={setWebsocketInput}
+            disabled={!isEditing}
+            placeholder="wss://your-websocket-url"
+            style={styles.input}
+          />
+        </View>
+      </Card.Content>
+    </Card>
+  );
+
+  const getAppSettingsCard = () => (
+    <Card style={styles.card}>
+      <Card.Title title="App Settings" left={(props) => <Icon {...props} name="cog" />} />
+      <Card.Content>
+        <List.Item
+          title="Push Notifications"
+          description="Receive notifications for mission updates"
+          left={(props) => <List.Icon {...props} icon="bell" />}
+          right={() => (
+            <Switch
+              value={notificationsEnabled}
+              onValueChange={setNotificationsEnabled}
+            />
+          )}
+        />
+        <Divider />
+        <List.Item
+          title="Analytics"
+          description="Send anonymous usage data"
+          left={(props) => <List.Icon {...props} icon="chart-line" />}
+          right={() => (
+            <Switch
+              value={analyticsEnabled}
+              onValueChange={setAnalyticsEnabled}
+            />
+          )}
+        />
+        <Divider />
+        <List.Item
+          title="Debug Mode"
+          description="Show detailed logs and debug information"
+          left={(props) => <List.Icon {...props} icon="bug" />}
+          right={() => (
+            <Switch
+              value={debugMode}
+              onValueChange={setDebugMode}
+            />
+          )}
+        />
+        <Divider />
+        <List.Item
+          title="Auto Refresh"
+          description="Automatically refresh data every 30 seconds"
+          left={(props) => <List.Icon {...props} icon="refresh" />}
+          right={() => (
+            <Switch
+              value={autoRefresh}
+              onValueChange={setAutoRefresh}
+            />
+          )}
+        />
+        <Divider />
+        <List.Item
+          title="Dark Mode"
+          description="Use dark theme (requires app restart)"
+          left={(props) => <List.Icon {...props} icon="theme-light-dark" />}
+          right={() => (
+            <Switch
+              value={darkMode}
+              onValueChange={setDarkMode}
+            />
+          )}
+        />
+      </Card.Content>
+    </Card>
+  );
+
+  const getAppInfoCard = () => (
+    <Card style={styles.card}>
+      <Card.Title title="App Information" left={(props) => <Icon {...props} name="information" />} />
+      <Card.Content>
+        <View style={styles.infoRow}>
+          <Text variant="bodyMedium">App Name:</Text>
+          <Text variant="bodyMedium" style={{ fontWeight: 'bold' }}>Sentinel Mobile</Text>
+        </View>
+        <View style={styles.infoRow}>
+          <Text variant="bodyMedium">Version:</Text>
+          <Text variant="bodyMedium" style={{ fontWeight: 'bold' }}>1.0.0</Text>
+        </View>
+        <View style={styles.infoRow}>
+          <Text variant="bodyMedium">Build:</Text>
+          <Text variant="bodyMedium" style={{ fontWeight: 'bold' }}>2024.1.0</Text>
+        </View>
+        <View style={styles.infoRow}>
+          <Text variant="bodyMedium">SDK:</Text>
+          <Text variant="bodyMedium" style={{ fontWeight: 'bold' }}>Expo SDK 53</Text>
+        </View>
+        <View style={styles.infoRow}>
+          <Text variant="bodyMedium">React Native:</Text>
+          <Text variant="bodyMedium" style={{ fontWeight: 'bold' }}>0.79.5</Text>
+        </View>
+      </Card.Content>
+    </Card>
+  );
+
+  const getActionButtons = () => (
+    <View style={styles.actionButtons}>
+      <Button 
+        mode="outlined" 
+        onPress={resetSettings}
+        style={styles.actionButton}
+        textColor={theme.colors.error}
+      >
+        Reset Settings
+      </Button>
+      <Button 
+        mode="outlined" 
+        onPress={() => {}}
+        style={styles.actionButton}
+      >
+        Export Logs
+      </Button>
+      <Button 
+        mode="outlined" 
+        onPress={() => {}}
+        style={styles.actionButton}
+      >
+        Clear Cache
+      </Button>
+    </View>
+  );
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <ScrollView style={styles.scrollView}>
-        <Card style={styles.card}>
-          <Card.Title title="Connection Status" />
-          <Card.Content>
-            {getConnectionStatus()}
-            {connectionError && (
-              <Text variant="bodySmall" style={{ color: theme.colors.error, marginTop: 8 }}>
-                {connectionError}
-              </Text>
-            )}
-            <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant, marginTop: 8 }}>
-              Current URL: {baseUrl}
-            </Text>
-          </Card.Content>
-        </Card>
+        <Text variant="headlineMedium" style={styles.title}>
+          Settings
+        </Text>
 
-        <Card style={styles.card}>
-          <Card.Title title="Connection Settings" />
-          <Card.Content>
-            <View style={styles.settingRow}>
-              <Text variant="bodyMedium">Use ngrok tunnel</Text>
-              <Switch
-                value={useNgrok}
-                onValueChange={handleConnectionSwitch}
-                color={theme.colors.primary}
-              />
-            </View>
-            
-            <Divider style={styles.divider} />
-            
-            <Text variant="titleSmall" style={styles.sectionTitle}>
-              Railway Backend URL
-            </Text>
-            <TextInput
-              label="Railway URL"
-              value={railwayUrl}
-              onChangeText={setRailwayUrl}
-              mode="outlined"
-              style={styles.input}
-              placeholder="https://your-app.railway.app"
-            />
-            
-            <Text variant="titleSmall" style={styles.sectionTitle}>
-              ngrok Tunnel URL
-            </Text>
-            <TextInput
-              label="ngrok URL"
-              value={ngrokUrl}
-              onChangeText={setNgrokUrl}
-              mode="outlined"
-              style={styles.input}
-              placeholder="https://your-subdomain.ngrok.io"
-            />
-            
-            <Button
-              mode="outlined"
-              onPress={handleTestConnection}
-              style={styles.testButton}
-            >
-              Test Connection
-            </Button>
-          </Card.Content>
-        </Card>
-
-        <Card style={styles.card}>
-          <Card.Title title="App Information" />
-          <Card.Content>
-            <View style={styles.infoRow}>
-              <Text variant="bodyMedium">App Name</Text>
-              <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant }}>
-                Sentinel
-              </Text>
-            </View>
-            <View style={styles.infoRow}>
-              <Text variant="bodyMedium">Version</Text>
-              <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant }}>
-                1.0.0
-              </Text>
-            </View>
-            <View style={styles.infoRow}>
-              <Text variant="bodyMedium">Platform</Text>
-              <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant }}>
-                React Native / Expo
-              </Text>
-            </View>
-          </Card.Content>
-        </Card>
-
-        <Card style={styles.card}>
-          <Card.Title title="About" />
-          <Card.Content>
-            <Text variant="bodyMedium" style={styles.aboutText}>
-              Sentinel is your personal AI agent command center. Create missions and let AI agents 
-              execute complex tasks on your local desktop through secure cloud orchestration.
-            </Text>
-            <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant, marginTop: 16 }}>
-              Built with React Native, Expo, and powered by AI agents running on your desktop.
-            </Text>
-          </Card.Content>
-        </Card>
+        {getConnectionStatusCard()}
+        {getUrlSettingsCard()}
+        {getAppSettingsCard()}
+        {getAppInfoCard()}
+        {getActionButtons()}
       </ScrollView>
     </SafeAreaView>
   );
@@ -185,39 +330,46 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
   },
+  title: {
+    marginBottom: 24,
+    textAlign: 'center',
+  },
   card: {
     marginBottom: 16,
   },
-  statusContainer: {
+  connectionStatus: {
+    gap: 16,
+  },
+  statusRow: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  settingRow: {
+  connectionActions: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 8,
+    flexWrap: 'wrap',
+    gap: 8,
   },
-  divider: {
-    marginVertical: 16,
+  actionButton: {
+    flex: 1,
+    minWidth: 100,
   },
-  sectionTitle: {
-    marginBottom: 8,
-  },
-  input: {
+  urlInput: {
     marginBottom: 16,
   },
-  testButton: {
-    marginTop: 8,
+  input: {
+    backgroundColor: 'transparent',
   },
   infoRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 8,
+    paddingVertical: 4,
   },
-  aboutText: {
-    lineHeight: 24,
+  actionButtons: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+    marginTop: 16,
   },
 });
 
