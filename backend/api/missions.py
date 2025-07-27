@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
+from typing import List
 from sqlalchemy.orm import Session
 from loguru import logger
 from core.database import get_db
@@ -14,14 +15,14 @@ from datetime import datetime
 
 router = APIRouter(prefix="/missions", tags=["Missions"])
 
-@router.get("/", response_model=list[MissionSchema])
+@router.get("/", response_model=List[MissionSchema])
 def get_missions(db: Session = Depends(get_db)):
     """Get all missions."""
     try:
         missions = db.query(Mission).all()
         return [MissionSchema.from_orm(m) for m in missions]
     except Exception as e:
-        logger.error(f"Failed to fetch missions: {e}")
+        logger.error(f"Failed to fetch missions: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail="Database query failed.")
 
 @router.post("/", response_model=MissionDispatchResponse)
@@ -30,16 +31,13 @@ async def create_and_dispatch_mission(request: MissionRequest, db: Session = Dep
     mission_id = f"mission_{uuid.uuid4()}"
     logger.info(f"Received new mission request. Assigning ID: {mission_id}")
     try:
-        # Validate prompt
         if not request.prompt or len(request.prompt) < 5:
             raise ValueError("Prompt is too short.")
-        # Planning phase
         plan: ExecutionPlan = await MissionPlanner().create_mission_plan(
             user_prompt=request.prompt,
             mission_id=mission_id
         )
         logger.info(f"Plan generated for mission {mission_id}.")
-        # Dispatch to engine
         desktop_url = f"{settings.DESKTOP_TUNNEL_URL}/execute_mission"
         response = await asyncio.to_thread(
             requests.post,
@@ -48,7 +46,6 @@ async def create_and_dispatch_mission(request: MissionRequest, db: Session = Dep
             timeout=20
         )
         response.raise_for_status()
-        # Poll for result
         execution_result = None
         result_url = f"{settings.DESKTOP_TUNNEL_URL}/mission_result/{mission_id}"
         for _ in range(10):
@@ -61,7 +58,6 @@ async def create_and_dispatch_mission(request: MissionRequest, db: Session = Dep
             except Exception as e:
                 logger.warning(f"Polling for execution result failed: {e}")
             await asyncio.sleep(2)
-        # Save mission to DB
         now = datetime.utcnow()
         mission = Mission(
             id=mission_id,
@@ -80,7 +76,7 @@ async def create_and_dispatch_mission(request: MissionRequest, db: Session = Dep
         return MissionDispatchResponse(
             mission_id=mission_id,
             message="Mission planned, dispatched, and executed.",
-            plan=plan.model_dump(),
+            plan=plan,
             execution_result=execution_result
         )
     except ValueError as e:

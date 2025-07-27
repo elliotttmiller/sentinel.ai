@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException
+from typing import List
 from core.schemas import AgentSchema, AgentExecutionRequest, AgentExecutionResponse
 from core.models import Agent
 from sqlalchemy.orm import Session
@@ -10,7 +11,7 @@ from pathlib import Path
 
 router = APIRouter(prefix="/agents", tags=["Agents"])
 
-@router.get("/", response_model=list[AgentSchema])
+@router.get("/", response_model=List[AgentSchema])
 def get_agents(db: Session = Depends(get_db)):
     """Get all agents from the database."""
     try:

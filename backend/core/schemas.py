@@ -1,16 +1,6 @@
 from pydantic import BaseModel
-from typing import List, Optional
-
-class MissionRequest(BaseModel):
-    title: Optional[str] = None
-    description: Optional[str] = None
-    prompt: str
-
-class MissionDispatchResponse(BaseModel):
-    message: str
-    mission_id: str
-    plan: dict
-    execution_result: dict = None
+from typing import List, Optional, Dict, Any
+from core.mission_planner import ExecutionPlan
 
 class MissionSchema(BaseModel):
     id: str
@@ -31,11 +21,35 @@ class AgentSchema(BaseModel):
     id: str
     name: str
     type: Optional[str] = None
+    status: str
     description: Optional[str] = None
     capabilities: Optional[List[str]] = None
-    status: str
     last_active: Optional[str] = None
     missions_completed: Optional[int] = None
-
+    
     class Config:
-        from_attributes = True 
+        from_attributes = True
+
+# --- API Request/Response Models ---
+
+class MissionRequest(BaseModel):
+    prompt: str
+    title: Optional[str] = None
+    description: Optional[str] = None
+
+class MissionDispatchResponse(BaseModel):
+    message: str
+    mission_id: str
+    plan: ExecutionPlan
+    execution_result: Optional[dict] = None
+
+class AgentExecutionRequest(BaseModel):
+    agent_type: str
+    prompt: str
+    mission_id: Optional[str] = None
+
+class AgentExecutionResponse(BaseModel):
+    success: bool
+    output: str
+    error: Optional[str] = None
+    metadata: Dict[str, Any] = {} 
