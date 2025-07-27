@@ -1,0 +1,35 @@
+2025-07-27 11:39:30.904 | INFO     | main:log_requests:170 - Incoming request: GET http://localhost:8081/health
+2025-07-27 11:39:30.905 | INFO     | main:health_check:186 - Healthcheck endpoint hit
+2025-07-27 11:39:30.906 | INFO     | main:log_requests:173 - Response status: 200 for GET http://localhost:8081/health
+2025-07-27 11:39:31.197 | INFO     | main:log_requests:170 - Incoming request: GET http://localhost:8081/favicon.ico
+2025-07-27 11:39:31.198 | INFO     | main:log_requests:173 - Response status: 404 for GET http://localhost:8081/favicon.ico
+2025-07-27 11:39:50.769 | INFO     | main:log_requests:170 - Incoming request: GET https://6af8ac9b65aa.ngrok-free.app/health
+2025-07-27 11:39:50.770 | INFO     | main:health_check:186 - Healthcheck endpoint hit
+2025-07-27 11:39:50.771 | INFO     | main:log_requests:173 - Response status: 200 for GET https://6af8ac9b65aa.ngrok-free.app/health
+2025-07-27 11:39:51.162 | INFO     | main:log_requests:170 - Incoming request: GET https://6af8ac9b65aa.ngrok-free.app/favicon.ico
+2025-07-27 11:39:51.163 | INFO     | main:log_requests:173 - Response status: 404 for GET https://6af8ac9b65aa.ngrok-free.app/favicon.ico
+2025-07-27 11:42:06.511 | INFO     | main:log_requests:170 - Incoming request: GET http://192.168.0.106:8081/assets/./assets/icon.png
+2025-07-27 11:42:06.518 | INFO     | main:log_requests:173 - Response status: 404 for GET http://192.168.0.106:8081/assets/./assets/icon.png
+2025-07-27 11:42:06.649 | INFO     | main:log_requests:170 - Incoming request: GET http://192.168.0.106:8081/
+2025-07-27 11:42:06.657 | INFO     | main:root:181 - Root endpoint hit
+2025-07-27 11:42:06.657 | INFO     | main:log_requests:173 - Response status: 200 for GET http://192.168.0.106:8081/
+2025-07-27 11:42:18.513 | INFO     | main:log_requests:170 - Incoming request: GET http://192.168.0.106:8081/assets/./assets/icon.png
+2025-07-27 11:42:18.513 | INFO     | main:log_requests:173 - Response status: 404 for GET http://192.168.0.106:8081/assets/./assets/icon.png
+2025-07-27 11:42:18.580 | INFO     | main:log_requests:170 - Incoming request: GET http://192.168.0.106:8081/
+2025-07-27 11:42:18.580 | INFO     | main:root:181 - Root endpoint hit
+2025-07-27 11:42:18.580 | INFO     | main:log_requests:173 - Response status: 200 for GET http://192.168.0.106:8081/
+2025-07-27 11:46:18.565 | INFO     | main:log_requests:170 - Incoming request: GET http://192.168.0.106:8081/assets/./assets/icon.png
+2025-07-27 11:46:18.572 | INFO     | main:log_requests:173 - Response status: 404 for GET http://192.168.0.106:8081/assets/./assets/icon.png
+2025-07-27 11:46:18.636 | INFO     | main:log_requests:170 - Incoming request: GET http://192.168.0.106:8081/
+2025-07-27 11:46:18.646 | INFO     | main:root:181 - Root endpoint hit
+2025-07-27 11:46:18.646 | INFO     | main:log_requests:173 - Response status: 200 for GET http://192.168.0.106:8081/
+2025-07-27 11:50:15.417 | INFO     | main:log_requests:170 - Incoming request: GET http://192.168.0.106:8081/assets/./assets/icon.png
+2025-07-27 11:50:15.417 | INFO     | main:log_requests:173 - Response status: 404 for GET http://192.168.0.106:8081/assets/./assets/icon.png
+2025-07-27 11:50:15.491 | INFO     | main:log_requests:170 - Incoming request: GET http://192.168.0.106:8081/
+2025-07-27 11:50:15.491 | INFO     | main:root:181 - Root endpoint hit
+2025-07-27 11:50:15.495 | INFO     | main:log_requests:173 - Response status: 200 for GET http://192.168.0.106:8081/
+2025-07-27 11:52:21.525 | INFO     | main:log_requests:170 - Incoming request: GET http://192.168.0.106:8081/assets/./assets/icon.png
+2025-07-27 11:52:21.526 | INFO     | main:log_requests:173 - Response status: 404 for GET http://192.168.0.106:8081/assets/./assets/icon.png
+2025-07-27 11:52:21.583 | INFO     | main:log_requests:170 - Incoming request: GET http://192.168.0.106:8081/
+2025-07-27 11:52:21.585 | INFO     | main:root:181 - Root endpoint hit
+2025-07-27 11:52:21.586 | INFO     | main:log_requests:173 - Response status: 200 for GET http://192.168.0.106:8081/
