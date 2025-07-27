@@ -1,0 +1,79 @@
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import Constants from 'expo-constants';
+import { ApiConfig } from '@/types';
+
+interface ApiContextType {
+  config: ApiConfig;
+  baseUrl: string;
+  isConnected: boolean;
+  connectionError: string | null;
+  switchToNgrok: () => void;
+  switchToRailway: () => void;
+}
+
+const ApiContext = createContext<ApiContextType | undefined>(undefined);
+
+const defaultConfig: ApiConfig = {
+  railwayUrl: Constants.expoConfig?.extra?.railwayUrl || 'https://your-railway-app.railway.app',
+  ngrokUrl: Constants.expoConfig?.extra?.ngrokUrl || 'https://your-ngrok-subdomain.ngrok.io',
+  websocketUrl: Constants.expoConfig?.extra?.websocketUrl || 'wss://your-railway-app.railway.app/ws',
+  useNgrok: false,
+};
+
+export const ApiProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [config, setConfig] = useState<ApiConfig>(defaultConfig);
+  const [isConnected, setIsConnected] = useState(false);
+  const [connectionError, setConnectionError] = useState<string | null>(null);
+
+  const baseUrl = config.useNgrok ? config.ngrokUrl : config.railwayUrl;
+
+  const testConnection = async (url: string) => {
+    try {
+      const response = await fetch(`${url}/health`, {
+        method: 'GET',
+        timeout: 5000,
+      });
+      return response.ok;
+    } catch (error) {
+      console.error('Connection test failed:', error);
+      return false;
+    }
+  };
+
+  const switchToNgrok = () => {
+    setConfig(prev => ({ ...prev, useNgrok: true }));
+  };
+
+  const switchToRailway = () => {
+    setConfig(prev => ({ ...prev, useNgrok: false }));
+  };
+
+  useEffect(() => {
+    const checkConnection = async () => {
+      const connected = await testConnection(baseUrl);
+      setIsConnected(connected);
+      setConnectionError(connected ? null : `Failed to connect to ${baseUrl}`);
+    };
+
+    checkConnection();
+  }, [baseUrl]);
+
+  const value: ApiContextType = {
+    config,
+    baseUrl,
+    isConnected,
+    connectionError,
+    switchToNgrok,
+    switchToRailway,
+  };
+
+  return <ApiContext.Provider value={value}>{children}</ApiContext.Provider>;
+};
+
+export const useApi = () => {
+  const context = useContext(ApiContext);
+  if (context === undefined) {
+    throw new Error('useApi must be used within an ApiProvider');
+  }
+  return context;
+}; 
