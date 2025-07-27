@@ -186,13 +186,13 @@ class ServiceManager:
                     creationflags=subprocess.CREATE_NO_WINDOW
                 )
             else:
-            process = subprocess.Popen(
-                cmd,
-                cwd=self.backend_dir,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                creationflags=subprocess.CREATE_NEW_CONSOLE
-            )
+                process = subprocess.Popen(
+                    cmd,
+                    cwd=self.backend_dir,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    creationflags=subprocess.CREATE_NEW_CONSOLE
+                )
             
             self.processes["backend"] = process
             print(f"✅ Backend server started (PID: {process.pid})")
@@ -276,12 +276,12 @@ tunnels:
                     creationflags=subprocess.CREATE_NO_WINDOW
                 )
             else:
-            process = subprocess.Popen(
-                cmd,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                creationflags=subprocess.CREATE_NEW_CONSOLE
-            )
+                process = subprocess.Popen(
+                    cmd,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    creationflags=subprocess.CREATE_NEW_CONSOLE
+                )
             
             self.processes["ngrok_backend"] = process
             print(f"✅ ngrok tunnels started (PID: {process.pid})")
@@ -326,13 +326,13 @@ tunnels:
                     creationflags=subprocess.CREATE_NO_WINDOW
                 )
             else:
-            process = subprocess.Popen(
-                cmd,
-                cwd=self.engine_dir,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                creationflags=subprocess.CREATE_NEW_CONSOLE
-            )
+                process = subprocess.Popen(
+                    cmd,
+                    cwd=self.engine_dir,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    creationflags=subprocess.CREATE_NEW_CONSOLE
+                )
             
             self.processes["engine"] = process
             print(f"✅ Agent engine started (PID: {process.pid})")

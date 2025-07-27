@@ -7,8 +7,9 @@ import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 import { useApi } from '@/contexts/ApiContext';
 import { Mission } from '@/types';
 import ApiService from '@/services/api';
+import { NavigationProps } from '@/types';
 
-const MissionsScreen: React.FC = () => {
+const MissionsScreen: React.FC<NavigationProps> = ({ navigation }) => {
   const theme = useTheme();
   const { baseUrl, isConnected } = useApi();
   const [missions, setMissions] = useState<Mission[]>([]);
@@ -270,7 +271,7 @@ const MissionsScreen: React.FC = () => {
       <FAB
         icon="plus"
         style={[styles.fab, { backgroundColor: theme.colors.primary }]}
-        onPress={() => {}}
+        onPress={() => navigation.navigate('CreateMission')}
       />
     </SafeAreaView>
   );

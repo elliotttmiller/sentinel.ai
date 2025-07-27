@@ -12,6 +12,8 @@ from core.agent_base import AgentContext, AgentRole
 from typing import List, Optional
 from datetime import datetime
 from pathlib import Path
+from core.models import Mission as MissionORM, Base
+from core.database import SessionLocal, engine
 
 # --- Placeholder for ToolManager ---
 class ToolManager:
@@ -21,6 +23,9 @@ class ToolManager:
 
 app = FastAPI(title="Sentinel Orchestrator Backend", debug=True)
 logger.add("logs/sentinel_backend.log", rotation="10 MB", level=settings.LOG_LEVEL)
+
+# Create tables if they don't exist
+Base.metadata.create_all(bind=engine)
 
 def get_llm_client():
     try:
@@ -191,8 +196,22 @@ def get_system_status():
 
 @app.get("/missions", tags=["Missions"])
 def get_missions():
-    """Get all missions."""
-    return missions_db
+    db = SessionLocal()
+    try:
+        missions = db.query(MissionORM).all()
+        # Convert SQLAlchemy objects to dicts, removing _sa_instance_state
+        result = []
+        for m in missions:
+            d = m.__dict__.copy()
+            d.pop('_sa_instance_state', None)
+            # Convert datetimes to isoformat strings
+            for k in ["created_at", "updated_at", "completed_at"]:
+                if d.get(k):
+                    d[k] = d[k].isoformat()
+            result.append(d)
+        return result
+    finally:
+        db.close()
 
 @app.post("/missions", response_model=MissionDispatchResponse, tags=["Missions"])
 async def create_and_dispatch_mission(request: MissionRequest):
@@ -234,6 +253,27 @@ async def create_and_dispatch_mission(request: MissionRequest):
             except Exception as e:
                 logger.warning(f"Polling for execution result failed: {e}")
             await asyncio.sleep(2)
+
+        # Save mission to DB
+        db = SessionLocal()
+        try:
+            now = datetime.utcnow()
+            mission = MissionORM(
+                id=mission_id,
+                title=request.prompt,
+                description=request.prompt,
+                status="completed" if execution_result and execution_result.get("status") == "success" else "failed",
+                created_at=now,
+                updated_at=now,
+                completed_at=now if execution_result else None,
+                steps=plan.model_dump().get("steps", []),
+                plan=plan.model_dump(),
+                result=execution_result,
+            )
+            db.add(mission)
+            db.commit()
+        finally:
+            db.close()
 
         return MissionDispatchResponse(
             mission_id=mission_id,
