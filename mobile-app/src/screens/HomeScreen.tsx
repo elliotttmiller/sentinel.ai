@@ -53,29 +53,22 @@ const HomeScreen: React.FC = () => {
       setLoading(true);
       debugLog('Starting data load...');
       
-      const [missionsData, agentsData] = await Promise.all([
+      const [missionsData, agentsData, systemStatusData] = await Promise.all([
         apiService.getMissions(),
         apiService.getAgents(),
+        apiService.getSystemStatus(),
       ]);
       
       debugLog('Data loaded successfully:', {
         missionsCount: missionsData.length,
-        agentsCount: agentsData.length
+        agentsCount: agentsData.length,
+        systemStatus: systemStatusData
       });
       
       setMissions(missionsData);
       setAgents(agentsData);
+      setSystemStatus(systemStatusData);
       
-      // Check system status
-      try {
-        debugLog('Checking backend health...');
-        await apiService.healthCheck();
-        debugLog('Backend health check passed');
-        setSystemStatus(prev => ({ ...prev, backend: 'online' }));
-      } catch (error) {
-        debugLog('Backend health check failed:', error);
-        setSystemStatus(prev => ({ ...prev, backend: 'offline' }));
-      }
     } catch (error) {
       debugLog('Failed to load data:', error);
       console.error('Failed to load data:', error);

@@ -164,6 +164,26 @@ class ApiService {
     return response.data;
   }
 
+  // System Status
+  async getSystemStatus(): Promise<{
+    backend: string;
+    desktop: string;
+    railway: string;
+    ngrok: string;
+    details?: any;
+  }> {
+    debugLog('Fetching system status');
+    const response: AxiosResponse<{
+      backend: string;
+      desktop: string;
+      railway: string;
+      ngrok: string;
+      details?: any;
+    }> = await this.client.get('/system-status');
+    debugLog('System status fetched:', response.data);
+    return response.data;
+  }
+
   // WebSocket connection for real-time updates
   getWebSocketUrl(): string {
     const wsUrl = this.baseUrl.replace('https://', 'wss://').replace('http://', 'ws://');
