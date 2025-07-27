@@ -78,7 +78,7 @@ def startup_event():
     logger.info("Core components initialized.")
 
 # --- API Models (Pydantic) ---
-from core.agent_base import Mission, Agent, MissionDispatchResponse, MissionRequest, AgentExecutionRequest, AgentExecutionResponse
+from core.schemas import Mission, Agent, MissionDispatchResponse, MissionRequest, AgentExecutionRequest, AgentExecutionResponse
 
 # --- In-memory DB for agents (replace with real DB later) ---
 agents_db = [

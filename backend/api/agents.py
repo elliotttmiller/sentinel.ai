@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from core.agent_base import Agent, AgentExecutionRequest, AgentExecutionResponse
+from core.schemas import Agent, AgentExecutionRequest, AgentExecutionResponse
 from loguru import logger
 import uuid
 from pathlib import Path

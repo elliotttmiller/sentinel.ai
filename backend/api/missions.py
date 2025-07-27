@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from loguru import logger
 from core.database import get_db
-from core.agent_base import Mission, MissionDispatchResponse, MissionRequest
+from core.schemas import Mission, MissionDispatchResponse, MissionRequest
 from core.mission_planner import ExecutionPlan
 import uuid
 import asyncio
