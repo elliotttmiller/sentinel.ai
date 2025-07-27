@@ -55,6 +55,12 @@ mission_planner = MissionPlanner(llm_client=llm_client)
 class MissionRequest(BaseModel):
     prompt: str
 
+class MissionDispatchResponse(BaseModel):
+    message: str
+    mission_id: str
+    plan: dict
+    execution_result: dict = None
+
 class Mission(BaseModel):
     """The mission model for the mobile app."""
     id: str
