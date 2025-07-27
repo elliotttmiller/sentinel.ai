@@ -9,7 +9,6 @@ import asyncio
 from pathlib import Path
 
 # Import agent-related modules
-from agents.simple_test_agent import SimpleTestAgent
 from core.agent_base import AgentContext, AgentRole
 from core.genai_client import genai_client
 
@@ -230,6 +229,7 @@ async def execute_agent(request: AgentExecutionRequest):
     
     This endpoint allows testing agent execution directly.
     """
+    from agents.simple_test_agent import SimpleTestAgent
     try:
         # Create agent context
         context = AgentContext(
@@ -268,6 +268,7 @@ async def test_agent():
     Test endpoint for the simple test agent.
     Returns a simple response to verify the agent is working.
     """
+    from agents.simple_test_agent import SimpleTestAgent
     try:
         # Create a test context
         context = AgentContext(
