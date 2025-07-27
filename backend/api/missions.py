@@ -2,14 +2,14 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from loguru import logger
 from core.database import get_db
-from core.schemas import Mission as MissionSchema, MissionDispatchResponse, MissionRequest
+from core.schemas import MissionSchema, MissionDispatchResponse, MissionRequest
 from core.mission_planner import ExecutionPlan
 import uuid
 import asyncio
 from config import settings
 import requests
 from core.mission_planner import MissionPlanner
-from core.models import Mission as MissionORM
+from core.models import Mission
 from datetime import datetime
 
 router = APIRouter(prefix="/missions", tags=["Missions"])
@@ -18,7 +18,7 @@ router = APIRouter(prefix="/missions", tags=["Missions"])
 def get_missions(db: Session = Depends(get_db)):
     """Get all missions."""
     try:
-        missions = db.query(MissionORM).all()
+        missions = db.query(Mission).all()
         return [MissionSchema.from_orm(m) for m in missions]
     except Exception as e:
         logger.error(f"Failed to fetch missions: {e}")
@@ -63,7 +63,7 @@ async def create_and_dispatch_mission(request: MissionRequest, db: Session = Dep
             await asyncio.sleep(2)
         # Save mission to DB
         now = datetime.utcnow()
-        mission = MissionORM(
+        mission = Mission(
             id=mission_id,
             title=request.title or request.prompt,
             description=request.description or request.prompt,

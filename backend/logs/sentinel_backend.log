@@ -306,3 +306,8 @@ FROM missions]
 2025-07-27 14:52:31.803 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
 2025-07-27 14:52:32.042 | ERROR    | api.missions:get_missions:22 - Failed to fetch missions: Column expression, FROM clause, or other columns clause element expected, got <class 'core.schemas.Mission'>.
 2025-07-27 14:52:32.044 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-27 14:53:04.655 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-27 14:58:19.012 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-27 14:58:19.220 | ERROR    | api.missions:get_missions:22 - Failed to fetch missions: Column expression, FROM clause, or other columns clause element expected, got <class 'core.schemas.Mission'>.
+2025-07-27 14:58:19.220 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-27 14:58:53.052 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit

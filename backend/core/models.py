@@ -1,29 +1,20 @@
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, String, Text, DateTime
-from sqlalchemy.dialects.postgresql import JSONB
-import datetime
-
-Base = declarative_base()
-
-# Example model
-# from sqlalchemy import Column, Integer, String
-# class Mission(Base):
-#     __tablename__ = "missions"
-#     id = Column(Integer, primary_key=True, index=True)
-#     prompt = Column(String, index=True) 
+from sqlalchemy import Column, String, Text, DateTime, JSON
+from sqlalchemy.sql import func
+from .database import Base
 
 class Mission(Base):
     __tablename__ = "missions"
+
     id = Column(String, primary_key=True, index=True)
-    title = Column(String, nullable=False)
-    description = Column(Text, nullable=False)
-    status = Column(String, nullable=False)
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.datetime.utcnow)
-    completed_at = Column(DateTime, nullable=True)
-    steps = Column(JSONB, nullable=True)
-    plan = Column(JSONB, nullable=True)
-    result = Column(JSONB, nullable=True) 
+    title = Column(String, index=True)
+    description = Column(Text)
+    status = Column(String(50), default="pending")
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+    completed_at = Column(DateTime(timezone=True), nullable=True)
+    steps = Column(JSON, nullable=True)
+    plan = Column(JSON, nullable=True)
+    result = Column(JSON, nullable=True)
 
 class Agent(Base):
     __tablename__ = "agents"
@@ -31,7 +22,7 @@ class Agent(Base):
     name = Column(String, nullable=False)
     type = Column(String, nullable=True)
     description = Column(Text, nullable=True)
-    capabilities = Column(JSONB, nullable=True)
+    capabilities = Column(JSON, nullable=True)
     status = Column(String, nullable=False)
     last_active = Column(DateTime, nullable=True)
     missions_completed = Column(String, nullable=True) 

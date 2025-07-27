@@ -1,18 +1,7 @@
 from pydantic import BaseModel
-from typing import List, Optional, Dict
+from typing import List, Optional
 
-class MissionRequest(BaseModel):
-    title: Optional[str] = None
-    description: Optional[str] = None
-    prompt: str
-
-class MissionDispatchResponse(BaseModel):
-    message: str
-    mission_id: str
-    plan: dict
-    execution_result: dict = None
-
-class Mission(BaseModel):
+class MissionSchema(BaseModel):
     id: str
     title: str
     description: str
@@ -25,9 +14,9 @@ class Mission(BaseModel):
     result: Optional[dict] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
-class Agent(BaseModel):
+class AgentSchema(BaseModel):
     id: str
     name: str
     type: Optional[str] = None
@@ -37,13 +26,5 @@ class Agent(BaseModel):
     last_active: Optional[str] = None
     missions_completed: Optional[int] = None
 
-class AgentExecutionRequest(BaseModel):
-    agent_type: str
-    prompt: str
-    mission_id: Optional[str] = None
-
-class AgentExecutionResponse(BaseModel):
-    success: bool
-    output: str
-    error: Optional[str] = None
-    metadata: Dict = {} 
+    class Config:
+        from_attributes = True 
