@@ -388,3 +388,61 @@ FROM missions]
 2025-07-28 01:05:46.336 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
 2025-07-28 01:05:51.776 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
 2025-07-28 01:09:27.750 | INFO     | main:lifespan:38 - Application shutting down...
+2025-07-28 01:09:31.936 | INFO     | main:lifespan:29 - Application starting up...
+2025-07-28 01:09:31.937 | INFO     | main:lifespan:30 - Verifying database tables...
+2025-07-28 01:09:33.009 | INFO     | main:lifespan:33 - Database tables verified successfully.
+2025-07-28 01:09:33.009 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:13:13.268 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 01:13:13.608 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:13:13.961 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:13:21.679 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:13:47.163 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 01:17:17.796 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 01:18:34.377 | INFO     | api.missions:create_and_dispatch_mission:33 - Received new mission request. Assigning ID: mission_98348204-f82b-4a10-b753-5f90e65a4ff3
+2025-07-28 01:18:34.378 | ERROR    | api.missions:create_and_dispatch_mission:84 - Planning failed: Prompt is too short.
+2025-07-28 01:18:34.378 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:18:34.557 | INFO     | main:lifespan:38 - Application shutting down...
+2025-07-28 01:18:37.878 | INFO     | main:lifespan:29 - Application starting up...
+2025-07-28 01:18:37.878 | INFO     | main:lifespan:30 - Verifying database tables...
+2025-07-28 01:18:40.189 | INFO     | main:lifespan:33 - Database tables verified successfully.
+2025-07-28 01:18:40.189 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:18:52.927 | INFO     | api.missions:create_and_dispatch_mission:33 - Received new mission request. Assigning ID: mission_df4dfc71-109e-4dfe-9365-4d391c8bea6b
+2025-07-28 01:18:52.927 | ERROR    | api.missions:create_and_dispatch_mission:90 - Unexpected error: 'NoneType' object has no attribute 'create_mission_plan'
+2025-07-28 01:18:52.927 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:19:51.623 | INFO     | main:lifespan:29 - Application starting up...
+2025-07-28 01:19:51.623 | INFO     | main:lifespan:30 - Verifying database tables...
+2025-07-28 01:19:52.560 | INFO     | main:lifespan:33 - Database tables verified successfully.
+2025-07-28 01:19:52.560 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:20:09.555 | INFO     | api.missions:create_and_dispatch_mission:33 - Received new mission request. Assigning ID: mission_0d9d23b5-a111-4b7b-b6e8-713a5889c91d
+2025-07-28 01:20:09.556 | ERROR    | api.missions:create_and_dispatch_mission:90 - Unexpected error: 'NoneType' object has no attribute 'create_mission_plan'
+2025-07-28 01:20:09.556 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:21:43.640 | INFO     | main:lifespan:29 - Application starting up...
+2025-07-28 01:21:43.641 | INFO     | main:lifespan:30 - Verifying database tables...
+2025-07-28 01:21:45.529 | INFO     | main:lifespan:33 - Database tables verified successfully.
+2025-07-28 01:21:45.545 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:23:53.750 | INFO     | main:lifespan:35 - Application starting up...
+2025-07-28 01:23:54.737 | INFO     | main:get_llm_client:52 - GenAI client initialized with API key and model: gemini-1.5-pro
+2025-07-28 01:23:54.805 | INFO     | main:lifespan:72 - Verifying database tables...
+2025-07-28 01:23:56.777 | INFO     | main:lifespan:75 - Database tables verified successfully.
+2025-07-28 01:23:56.779 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:24:18.639 | INFO     | main:create_mission:197 - API: Received mission request for 'This is a test mission to verify the new asynchronous system is working properly'. Assigning ID: mission_eef15f80-687f-4bab-9a6f-ef30841bb38d.
+2025-07-28 01:24:18.923 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:24:18.965 | INFO     | main:run_mission_planning_and_dispatch:113 - BACKGROUND TASK: Starting AI planning for mission mission_eef15f80-687f-4bab-9a6f-ef30841bb38d.
+2025-07-28 01:24:18.965 | INFO     | core.mission_planner:create_mission_plan:77 - Creating mission plan for: mission_eef15f80-687f-4bab-9a6f-ef30841bb38d
+2025-07-28 01:24:18.965 | INFO     | core.mission_planner:_optimize_prompt:100 - Starting prompt optimization phase
+2025-07-28 01:24:18.965 | INFO     | core.mission_planner:_create_execution_plan:173 - Starting execution plan creation phase
+2025-07-28 01:24:18.965 | INFO     | core.mission_planner:create_mission_plan:87 - Mission plan created with 3 steps
+2025-07-28 01:24:18.965 | INFO     | main:run_mission_planning_and_dispatch:117 - BACKGROUND TASK: AI planning complete for mission_eef15f80-687f-4bab-9a6f-ef30841bb38d.
+2025-07-28 01:24:46.143 | ERROR    | main:get_missions:183 - Failed to fetch missions: 2 validation errors for MissionSchema
+created_at
+  Input should be a valid string [type=string_type, input_value=datetime.datetime(2025, 7, 28, 6, 24, 18, 639467), input_type=datetime]
+    For further information visit https://errors.pydantic.dev/2.7/v/string_type
+updated_at
+  Input should be a valid string [type=string_type, input_value=datetime.datetime(2025, 7, 28, 6, 24, 10, 614178), input_type=datetime]
+    For further information visit https://errors.pydantic.dev/2.7/v/string_type
+2025-07-28 01:24:46.143 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:26:40.339 | INFO     | main:lifespan:35 - Application starting up...
+2025-07-28 01:26:41.158 | INFO     | main:get_llm_client:52 - GenAI client initialized with API key and model: gemini-1.5-pro
+2025-07-28 01:26:41.200 | INFO     | main:lifespan:72 - Verifying database tables...
+2025-07-28 01:26:43.382 | INFO     | main:lifespan:75 - Database tables verified successfully.
+2025-07-28 01:26:43.387 | INFO     | core.database:get_db:21 - Closing database session for this request.

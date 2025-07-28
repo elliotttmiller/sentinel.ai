@@ -1,5 +1,6 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from typing import List, Optional, Dict, Any
+from datetime import datetime
 from core.mission_planner import ExecutionPlan
 
 class MissionSchema(BaseModel):
@@ -7,9 +8,9 @@ class MissionSchema(BaseModel):
     title: str
     description: str
     status: str
-    created_at: str
-    updated_at: str
-    completed_at: Optional[str] = None
+    created_at: datetime
+    updated_at: datetime
+    completed_at: Optional[datetime] = None
     steps: Optional[List[dict]] = None
     plan: Optional[dict] = None
     result: Optional[dict] = None

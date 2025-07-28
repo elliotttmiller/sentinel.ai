@@ -13,7 +13,7 @@ def health_check():
 @router.get("/system-status")
 def get_system_status():
     """Get status of all system components."""
-    def check_service_health(url: str, timeout: int = 5) -> dict:
+    def check_service_health(url: str, timeout: int = 2) -> dict:
         try:
             health_url = f"{url.rstrip('/')}/health"
             response = requests.get(health_url, timeout=timeout)
