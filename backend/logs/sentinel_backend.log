@@ -574,3 +574,12 @@ updated_at
 2025-07-28 03:17:23.499 | INFO     | core.database:get_db:21 - Closing database session for this request.
 2025-07-28 03:17:25.620 | INFO     | main:run_mission_planning_and_dispatch:136 - BACKGROUND TASK: Mission mission_4b1adb0d-d42c-4020-904e-1a9180d33b00 dispatched to engine.
 2025-07-28 03:18:26.692 | INFO     | main:run_mission_planning_and_dispatch:159 - BACKGROUND TASK: Mission mission_4b1adb0d-d42c-4020-904e-1a9180d33b00 completed with status: failed
+2025-07-28 03:28:23.997 | INFO     | main:lifespan:81 - Application shutting down...
+2025-07-28 03:28:29.327 | INFO     | main:lifespan:36 - Application starting up...
+2025-07-28 03:28:29.973 | INFO     | main:get_llm_client:53 - GenAI client initialized with API key and model: gemini-1.5-pro
+2025-07-28 03:28:30.005 | INFO     | main:lifespan:73 - Verifying database tables...
+2025-07-28 03:28:31.769 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 03:28:32.526 | INFO     | main:lifespan:76 - Database tables verified successfully.
+2025-07-28 03:28:32.526 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 03:29:07.943 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 03:31:00.008 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit

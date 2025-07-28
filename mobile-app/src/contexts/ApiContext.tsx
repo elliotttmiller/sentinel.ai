@@ -9,7 +9,7 @@ interface ApiContextType {
   connectionError: string | null;
 }
 
-const CONFIG_URL = 'https://thrush-real-lacewing.ngrok-free.app/sentinel-config.json'; // Or use your public location
+const CONFIG_URL = 'https://thrush-real-lacewing.ngrok-free.app/static/sentinel-config.json'; // Updated to /static path
 const DEFAULT_API_URL = 'https://thrush-real-lacewing.ngrok-free.app'; // fallback if config fetch fails
 
 export const ApiContext = createContext<any>(null);

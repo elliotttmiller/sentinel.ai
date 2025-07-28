@@ -104,7 +104,7 @@ app = FastAPI(title="Sentinel Backend Orchestrator", lifespan=lifespan)
 # Serve static files (including sentinel-config.json) from the project root
 import os
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-app.mount("/", StaticFiles(directory=PROJECT_ROOT, html=True), name="static")
+app.mount("/static", StaticFiles(directory=PROJECT_ROOT, html=True), name="static")
 
 # Include existing routers
 app.include_router(agents_router)
