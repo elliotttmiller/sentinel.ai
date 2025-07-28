@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, FlatList, RefreshControl, ScrollView } from 'react-native';
+import { View, StyleSheet, FlatList, RefreshControl, ScrollView, Alert, TouchableOpacity } from 'react-native';
 import { Text, Card, Chip, useTheme, ActivityIndicator, Searchbar, FAB, Menu, Divider, IconButton } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
@@ -8,6 +8,10 @@ import { useApi } from '@/contexts/ApiContext';
 import { Mission } from '@/types';
 import ApiService from '@/services/api';
 import { NavigationProps } from '@/types';
+
+const STATUS_PLANNED = ['pending', 'planning', 'created'];
+const STATUS_DEPLOYED = ['dispatched', 'executing', 'completed', 'running'];
+const STATUS_FAILED = ['failed', 'planning_failed'];
 
 const MissionsScreen: React.FC<NavigationProps> = ({ navigation }) => {
   const theme = useTheme();
@@ -19,6 +23,7 @@ const MissionsScreen: React.FC<NavigationProps> = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [menuVisible, setMenuVisible] = useState(false);
+  const [tab, setTab] = useState<'planned' | 'deployed' | 'failed'>('planned');
 
   const apiService = new ApiService(baseUrl);
 
@@ -64,6 +69,40 @@ const MissionsScreen: React.FC<NavigationProps> = ({ navigation }) => {
 
     setFilteredMissions(filtered);
   }, [missions, searchQuery, statusFilter]);
+
+  // Filter missions by tab
+  const plannedMissions = missions.filter(m => STATUS_PLANNED.includes(m.status));
+  const deployedMissions = missions.filter(m => STATUS_DEPLOYED.includes(m.status));
+  const failedMissions = missions.filter(m => STATUS_FAILED.includes(m.status));
+
+  // Deploy, Retry, Delete handlers
+  const handleDeploy = async (missionId: string) => {
+    try {
+      await apiService.deployMission(missionId);
+      Alert.alert('Mission deployed', 'The mission has been dispatched to the engine.');
+      loadMissions();
+    } catch (error) {
+      Alert.alert('Error', 'Failed to deploy mission.');
+    }
+  };
+  const handleRetry = async (missionId: string) => {
+    try {
+      await apiService.retryMission(missionId);
+      Alert.alert('Mission retried', 'The mission has been re-dispatched to the engine.');
+      loadMissions();
+    } catch (error) {
+      Alert.alert('Error', 'Failed to retry mission.');
+    }
+  };
+  const handleDelete = async (missionId: string) => {
+    try {
+      await apiService.deleteMission(missionId);
+      Alert.alert('Mission deleted', 'The mission has been deleted.');
+      loadMissions();
+    } catch (error) {
+      Alert.alert('Error', 'Failed to delete mission.');
+    }
+  };
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -152,6 +191,29 @@ const MissionsScreen: React.FC<NavigationProps> = ({ navigation }) => {
             )}
           </View>
         )}
+        <View style={{ flexDirection: 'row', marginTop: 8 }}>
+          {tab === 'planned' && (
+            <TouchableOpacity onPress={() => handleDeploy(item.id)} style={{ marginRight: 12 }}>
+              <Chip icon="rocket-launch" mode="flat" style={{ backgroundColor: theme.colors.primary, marginRight: 8 }}>
+                Deploy
+              </Chip>
+            </TouchableOpacity>
+          )}
+          {tab === 'failed' && (
+            <>
+              <TouchableOpacity onPress={() => handleRetry(item.id)} style={{ marginRight: 12 }}>
+                <Chip icon="refresh" mode="flat" style={{ backgroundColor: theme.colors.tertiary, marginRight: 8 }}>
+                  Retry
+                </Chip>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => handleDelete(item.id)}>
+                <Chip icon="delete" mode="flat" style={{ backgroundColor: theme.colors.error }}>
+                  Delete
+                </Chip>
+              </TouchableOpacity>
+            </>
+          )}
+        </View>
       </Card.Content>
     </Card>
   );
@@ -242,10 +304,15 @@ const MissionsScreen: React.FC<NavigationProps> = ({ navigation }) => {
         style={styles.searchbar}
       />
 
-      {getFilterChips()}
+      {/* Tab selector */}
+      <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 8 }}>
+        <Chip selected={tab === 'planned'} onPress={() => setTab('planned')} style={styles.filterChip}>Planned</Chip>
+        <Chip selected={tab === 'deployed'} onPress={() => setTab('deployed')} style={styles.filterChip}>Deployed</Chip>
+        <Chip selected={tab === 'failed'} onPress={() => setTab('failed')} style={styles.filterChip}>Failed</Chip>
+      </View>
 
       <FlatList
-        data={filteredMissions}
+        data={tab === 'planned' ? plannedMissions : tab === 'deployed' ? deployedMissions : failedMissions}
         renderItem={renderMissionCard}
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.listContainer}
@@ -256,13 +323,7 @@ const MissionsScreen: React.FC<NavigationProps> = ({ navigation }) => {
           <View style={styles.emptyContainer}>
             <Icon name="rocket-launch-outline" size={64} color={theme.colors.onSurfaceVariant} />
             <Text variant="titleMedium" style={{ color: theme.colors.onSurfaceVariant, marginTop: 16 }}>
-              {searchQuery || statusFilter !== 'all' ? 'No missions found' : 'No missions yet'}
-            </Text>
-            <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant, textAlign: 'center' }}>
-              {searchQuery || statusFilter !== 'all' 
-                ? 'Try adjusting your search or filters' 
-                : 'Create your first mission to get started!'
-              }
+              No missions in this category
             </Text>
           </View>
         }

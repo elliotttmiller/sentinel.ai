@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Path
 from typing import List
 from sqlalchemy.orm import Session
 from loguru import logger
@@ -88,4 +88,72 @@ async def create_and_dispatch_mission(request: MissionRequest, db: Session = Dep
         raise HTTPException(status_code=502, detail=f"Could not connect to the desktop engine: {e}")
     except Exception as e:
         logger.error(f"Unexpected error: {e}", exc_info=True)
-        raise HTTPException(status_code=500, detail="An internal server error occurred.") 
+        raise HTTPException(status_code=500, detail="An internal server error occurred.")
+
+@router.post("/{mission_id}/deploy")
+async def deploy_mission(mission_id: str = Path(...), db: Session = Depends(get_db)):
+    """Deploy a planned mission by ID."""
+    mission = db.query(MissionModel).filter(MissionModel.id == mission_id).first()
+    if not mission:
+        raise HTTPException(status_code=404, detail="Mission not found.")
+    if mission.status not in ["planned", "planning", "created", "pending"]:
+        raise HTTPException(status_code=400, detail="Mission is not in a deployable state.")
+    try:
+        # Re-dispatch the mission plan to the engine
+        plan = mission.plan
+        if not plan:
+            raise HTTPException(status_code=400, detail="No plan found for this mission.")
+        desktop_url = f"{settings.DESKTOP_TUNNEL_URL}/execute_mission"
+        response = await asyncio.to_thread(
+            requests.post,
+            desktop_url,
+            json=plan,
+            timeout=20
+        )
+        response.raise_for_status()
+        mission.status = "dispatched"
+        mission.updated_at = datetime.utcnow()
+        db.commit()
+        return {"message": "Mission dispatched to engine.", "mission_id": mission_id}
+    except Exception as e:
+        logger.error(f"Failed to deploy mission {mission_id}: {e}")
+        raise HTTPException(status_code=500, detail="Failed to deploy mission.")
+
+@router.post("/{mission_id}/retry")
+async def retry_mission(mission_id: str = Path(...), db: Session = Depends(get_db)):
+    """Retry a failed mission by ID."""
+    mission = db.query(MissionModel).filter(MissionModel.id == mission_id).first()
+    if not mission:
+        raise HTTPException(status_code=404, detail="Mission not found.")
+    if mission.status not in ["failed", "planning_failed"]:
+        raise HTTPException(status_code=400, detail="Mission is not in a retryable state.")
+    try:
+        # Optionally, re-plan if needed, or just re-dispatch
+        plan = mission.plan
+        if not plan:
+            raise HTTPException(status_code=400, detail="No plan found for this mission.")
+        desktop_url = f"{settings.DESKTOP_TUNNEL_URL}/execute_mission"
+        response = await asyncio.to_thread(
+            requests.post,
+            desktop_url,
+            json=plan,
+            timeout=20
+        )
+        response.raise_for_status()
+        mission.status = "dispatched"
+        mission.updated_at = datetime.utcnow()
+        db.commit()
+        return {"message": "Mission retried and dispatched to engine.", "mission_id": mission_id}
+    except Exception as e:
+        logger.error(f"Failed to retry mission {mission_id}: {e}")
+        raise HTTPException(status_code=500, detail="Failed to retry mission.")
+
+@router.delete("/{mission_id}")
+def delete_mission(mission_id: str = Path(...), db: Session = Depends(get_db)):
+    """Delete a mission by ID."""
+    mission = db.query(MissionModel).filter(MissionModel.id == mission_id).first()
+    if not mission:
+        raise HTTPException(status_code=404, detail="Mission not found.")
+    db.delete(mission)
+    db.commit()
+    return {"message": "Mission deleted.", "mission_id": mission_id} 

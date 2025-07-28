@@ -8,7 +8,7 @@ export function debugLog(...args: any[]) {
   }
 }
 
-class ApiService {
+export default class ApiService {
   private client: AxiosInstance;
   private baseUrl: string;
 
@@ -126,10 +126,31 @@ class ApiService {
     return response.data;
   }
 
-  async deleteMission(id: string): Promise<void> {
-    debugLog('Deleting mission:', { id });
-    await this.client.delete(`/missions/${id}`);
-    debugLog('Mission deleted:', { id });
+  async deployMission(missionId: string) {
+    const response = await fetch(`${this.baseUrl}/missions/${missionId}/deploy`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    if (!response.ok) throw new Error('Failed to deploy mission');
+    return response.json();
+  }
+
+  async retryMission(missionId: string) {
+    const response = await fetch(`${this.baseUrl}/missions/${missionId}/retry`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    if (!response.ok) throw new Error('Failed to retry mission');
+    return response.json();
+  }
+
+  async deleteMission(missionId: string) {
+    const response = await fetch(`${this.baseUrl}/missions/${missionId}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    if (!response.ok) throw new Error('Failed to delete mission');
+    return response.json();
   }
 
   // Mission Plans
@@ -189,6 +210,4 @@ class ApiService {
     debugLog('WebSocket URL generated:', { baseUrl: this.baseUrl, wsUrl: fullWsUrl });
     return fullWsUrl;
   }
-}
-
-export default ApiService; 
+} 

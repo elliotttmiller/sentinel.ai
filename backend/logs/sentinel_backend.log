@@ -511,3 +511,33 @@ updated_at
 2025-07-28 02:20:44.666 | INFO     | main:lifespan:75 - Database tables verified successfully.
 2025-07-28 02:20:44.666 | INFO     | core.database:get_db:21 - Closing database session for this request.
 2025-07-28 02:21:16.347 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 02:36:09.886 | INFO     | main:lifespan:35 - Application starting up...
+2025-07-28 02:36:10.533 | INFO     | main:get_llm_client:52 - GenAI client initialized with API key and model: gemini-1.5-pro
+2025-07-28 02:36:10.549 | INFO     | main:lifespan:72 - Verifying database tables...
+2025-07-28 02:36:11.697 | INFO     | main:lifespan:75 - Database tables verified successfully.
+2025-07-28 02:36:11.697 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 02:36:12.336 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 02:36:48.792 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 02:40:21.938 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 02:40:22.636 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 02:40:22.660 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 02:40:26.626 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 02:40:36.816 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 02:41:13.709 | INFO     | main:create_mission:197 - API: Received mission request for 'I want you to deploy onto my desktop and open up Google.com in Microsoft edge
+'. Assigning ID: mission_00c3372d-f243-45f9-988b-92cc3fa22f9e.
+2025-07-28 02:41:14.018 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 02:41:14.058 | INFO     | main:run_mission_planning_and_dispatch:113 - BACKGROUND TASK: Starting AI planning for mission mission_00c3372d-f243-45f9-988b-92cc3fa22f9e.
+2025-07-28 02:41:14.058 | INFO     | core.mission_planner:create_mission_plan:77 - Creating mission plan for: mission_00c3372d-f243-45f9-988b-92cc3fa22f9e
+2025-07-28 02:41:14.058 | INFO     | core.mission_planner:_optimize_prompt:100 - Starting prompt optimization phase
+2025-07-28 02:41:14.058 | INFO     | core.mission_planner:_create_execution_plan:173 - Starting execution plan creation phase
+2025-07-28 02:41:14.058 | INFO     | core.mission_planner:create_mission_plan:87 - Mission plan created with 3 steps
+2025-07-28 02:41:14.058 | INFO     | main:run_mission_planning_and_dispatch:117 - BACKGROUND TASK: AI planning complete for mission_00c3372d-f243-45f9-988b-92cc3fa22f9e.
+2025-07-28 02:41:25.899 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 02:41:35.046 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 02:43:14.914 | INFO     | main:run_mission_planning_and_dispatch:136 - BACKGROUND TASK: Mission mission_00c3372d-f243-45f9-988b-92cc3fa22f9e dispatched to engine.
+2025-07-28 02:44:15.894 | INFO     | main:run_mission_planning_and_dispatch:159 - BACKGROUND TASK: Mission mission_00c3372d-f243-45f9-988b-92cc3fa22f9e completed with status: failed
+2025-07-28 02:46:52.801 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 02:47:08.685 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 02:47:08.963 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 02:47:08.996 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 02:47:09.006 | INFO     | core.database:get_db:21 - Closing database session for this request.
