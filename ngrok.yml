@@ -4,6 +4,7 @@ tunnels:
   backend:
     addr: 8080
     proto: http
+    domain: thrush-real-lacewing.ngrok-free.app
   engine:
     addr: 8001
     proto: http

@@ -12,6 +12,7 @@ import requests
 from core.mission_planner import MissionPlanner
 from core.models import Mission
 from datetime import datetime
+from core.globals import mission_planner
 
 router = APIRouter(prefix="/missions", tags=["Missions"])
 
@@ -20,7 +21,7 @@ def get_missions(db: Session = Depends(get_db)):
     """Get all missions."""
     try:
         missions = db.query(Mission).all()
-        return [MissionSchema.from_orm(m) for m in missions]
+        return [MissionSchema.model_validate(m) for m in missions]
     except Exception as e:
         logger.error(f"Failed to fetch missions: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail="Database query failed.")
@@ -33,7 +34,7 @@ async def create_and_dispatch_mission(request: MissionRequest, db: Session = Dep
     try:
         if not request.prompt or len(request.prompt) < 5:
             raise ValueError("Prompt is too short.")
-        plan: ExecutionPlan = await MissionPlanner().create_mission_plan(
+        plan: ExecutionPlan = await mission_planner.create_mission_plan(
             user_prompt=request.prompt,
             mission_id=mission_id
         )

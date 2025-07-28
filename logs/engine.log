@@ -1,0 +1,7 @@
+INFO:     Will watch for changes in these directories: ['C:\\Users\\AMD\\sentinel\\engine']
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+INFO:     Started reloader process [11420] using WatchFiles
+2025-07-28T00:26:58.503355-0500 INFO     main:<module>:49 - Sentinel Desktop Engine service started.
+INFO:     Started server process [18740]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.

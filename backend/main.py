@@ -56,11 +56,8 @@ def seed_agents_to_db():
     finally:
         db.close()
 
-# Global instances of your core components
-llm_client = None  # To be initialized after app starts
-tool_manager = None
-agent_factory = None
-mission_planner = None
+# Import global instances
+from core.globals import llm_client, tool_manager, agent_factory, mission_planner
 
 app = FastAPI(title="Sentinel Backend Orchestrator", lifespan=lifespan)
 app.include_router(missions_router)
@@ -72,6 +69,7 @@ app.include_router(system_router)
 def startup_event():
     """Initializes core components after the app starts."""
     global llm_client, tool_manager, agent_factory, mission_planner
+    from core.globals import llm_client as global_llm, tool_manager as global_tool, agent_factory as global_agent, mission_planner as global_mission
     
     # --- Placeholder for ToolManager ---
     class ToolManager:
@@ -102,10 +100,17 @@ def startup_event():
             logger.error(f"FATAL: Could not initialize LLM Client. Error: {e}")
             raise
             
-    llm_client = get_llm_client()
-    tool_manager = ToolManager()
-    agent_factory = AgentFactory(llm_client=llm_client, tool_manager=tool_manager)
-    mission_planner = MissionPlanner(llm_client=llm_client)
+    global_llm = get_llm_client()
+    global_tool = ToolManager()
+    global_agent = AgentFactory(llm_client=global_llm, tool_manager=global_tool)
+    global_mission = MissionPlanner(llm_client=global_llm)
+    
+    # Update the global variables
+    globals()['llm_client'] = global_llm
+    globals()['tool_manager'] = global_tool
+    globals()['agent_factory'] = global_agent
+    globals()['mission_planner'] = global_mission
+    
     logger.info("Core components initialized.")
 
 # --- API Models (Pydantic) ---
