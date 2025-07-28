@@ -360,3 +360,31 @@ FROM missions]
 2025-07-28 00:46:58.796 | INFO     | core.database:get_db:21 - Closing database session for this request.
 2025-07-28 00:47:16.436 | ERROR    | api.missions:get_missions:22 - Failed to fetch missions: Column expression, FROM clause, or other columns clause element expected, got <class 'core.schemas.Mission'>.
 2025-07-28 00:47:16.436 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 00:55:44.466 | ERROR    | api.missions:get_missions:22 - Failed to fetch missions: Column expression, FROM clause, or other columns clause element expected, got <class 'core.schemas.Mission'>.
+2025-07-28 00:55:44.466 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 00:56:49.908 | INFO     | main:lifespan:38 - Application shutting down...
+2025-07-28 00:56:54.318 | INFO     | main:lifespan:29 - Application starting up...
+2025-07-28 00:56:54.318 | INFO     | main:lifespan:30 - Verifying database tables...
+2025-07-28 00:56:56.256 | INFO     | main:lifespan:33 - Database tables verified successfully.
+2025-07-28 00:56:56.262 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 00:57:25.576 | INFO     | main:lifespan:38 - Application shutting down...
+2025-07-28 00:57:29.588 | INFO     | main:lifespan:29 - Application starting up...
+2025-07-28 00:57:29.590 | INFO     | main:lifespan:30 - Verifying database tables...
+2025-07-28 00:57:31.557 | INFO     | main:lifespan:33 - Database tables verified successfully.
+2025-07-28 00:57:31.557 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:03:21.832 | ERROR    | api.missions:get_missions:22 - Failed to fetch missions: Column expression, FROM clause, or other columns clause element expected, got <class 'core.schemas.Mission'>.
+2025-07-28 01:03:21.832 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:03:48.483 | ERROR    | api.missions:get_missions:22 - Failed to fetch missions: Column expression, FROM clause, or other columns clause element expected, got <class 'core.schemas.Mission'>.
+2025-07-28 01:03:48.484 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:04:31.432 | INFO     | main:lifespan:29 - Application starting up...
+2025-07-28 01:04:31.437 | INFO     | main:lifespan:30 - Verifying database tables...
+2025-07-28 01:04:32.478 | INFO     | main:lifespan:33 - Database tables verified successfully.
+2025-07-28 01:04:32.479 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:05:12.797 | INFO     | api.missions:get_missions:23 - MissionModel type: <class 'sqlalchemy.orm.decl_api.DeclarativeMeta'>
+2025-07-28 01:05:12.797 | INFO     | api.missions:get_missions:24 - MissionModel: <class 'core.models.Mission'>
+2025-07-28 01:05:12.921 | INFO     | api.missions:get_missions:26 - Query successful, found 0 missions
+2025-07-28 01:05:12.921 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:05:37.254 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:05:46.336 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 01:05:51.776 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 01:09:27.750 | INFO     | main:lifespan:38 - Application shutting down...

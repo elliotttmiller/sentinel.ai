@@ -27,3 +27,11 @@ INFO:     73.65.18.121:0 - "GET /health HTTP/1.1" 200 OK
 INFO:     2601:444:882:b090:469:ae3d:28e5:d83:0 - "GET /missions HTTP/1.1" 307 Temporary Redirect
 INFO:     2601:444:882:b090:469:ae3d:28e5:d83:0 - "GET /missions/ HTTP/1.1" 500 Internal Server Error
 INFO:     2601:444:882:b090:469:ae3d:28e5:d83:0 - "POST /missions HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:57040 - "GET /missions HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:57040 - "GET /missions/ HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:57455 - "GET /missions HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:57455 - "GET /missions/ HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:57804 - "GET /missions HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:57804 - "GET /missions/ HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:57815 - "GET /missions HTTP/1.1" 307 Temporary Redirect
+INFO:     127.0.0.1:57815 - "GET /missions/ HTTP/1.1" 500 Internal Server Error

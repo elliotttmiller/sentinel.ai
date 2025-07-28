@@ -10,7 +10,7 @@ import asyncio
 from config import settings
 import requests
 from core.mission_planner import MissionPlanner
-from core.models import Mission
+from core.models import Mission as MissionModel
 from datetime import datetime
 from core.globals import mission_planner
 
@@ -20,7 +20,7 @@ router = APIRouter(prefix="/missions", tags=["Missions"])
 def get_missions(db: Session = Depends(get_db)):
     """Get all missions."""
     try:
-        missions = db.query(Mission).all()
+        missions = db.query(MissionModel).all()
         return [MissionSchema.model_validate(m) for m in missions]
     except Exception as e:
         logger.error(f"Failed to fetch missions: {e}", exc_info=True)
@@ -60,7 +60,7 @@ async def create_and_dispatch_mission(request: MissionRequest, db: Session = Dep
                 logger.warning(f"Polling for execution result failed: {e}")
             await asyncio.sleep(2)
         now = datetime.utcnow()
-        mission = Mission(
+        mission = MissionModel(
             id=mission_id,
             title=request.title or request.prompt,
             description=request.description or request.prompt,
