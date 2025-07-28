@@ -8,8 +8,17 @@ import subprocess
 import time
 import requests
 import psutil
+import sys
+import shutil
+import platform
+import importlib
+import socket
+import re
+import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
+from colorama import init, Fore, Style
+init(autoreset=True)
 
 # --- Configuration ---
 PROJECT_ROOT = Path(__file__).parent.parent
@@ -47,6 +56,147 @@ def stop_process(name, port):
     try: proc.wait(timeout=3)
     except psutil.TimeoutExpired: proc.kill()
     print_success(f"{name.capitalize()} stopped.")
+
+# --- Diagnostics Utilities ---
+DIAGNOSTICS_LOG = LOG_DIR / "diagnostics.log"
+REQUIRED_PYTHON_VERSION = (3, 8)
+REQUIRED_PACKAGES = ["requests", "psutil", "uvicorn", "colorama"]
+REQUIRED_EXECUTABLES = ["ngrok", "uvicorn"]
+REQUIRED_ENV_VARS = ["DESKTOP_TUNNEL_URL", "DATABASE_URL"]
+
+def log_diagnostic(message, level='INFO'):
+    with open(DIAGNOSTICS_LOG, 'a') as f:
+        f.write(f"{datetime.datetime.now().isoformat()} [{level}] {message}\n")
+
+def print_colored(msg, color):
+    print(color + msg + Style.RESET_ALL)
+
+def print_error(msg):
+    print_colored(f"❌ {msg}", Fore.RED)
+    log_diagnostic(msg, level='ERROR')
+
+def print_warning(msg):
+    print_colored(f"⚠️  {msg}", Fore.YELLOW)
+    log_diagnostic(msg, level='WARNING')
+
+def print_success(msg):
+    print_colored(f"✅ {msg}", Fore.GREEN)
+    log_diagnostic(msg, level='SUCCESS')
+
+def print_info(msg):
+    print_colored(f"💡 {msg}", Fore.CYAN)
+    log_diagnostic(msg, level='INFO')
+
+def analyze_log_file(log_path):
+    if not log_path.exists():
+        print_warning(f"Log file {log_path} does not exist.")
+        return
+    print_info(f"Last 20 lines of {log_path}:")
+    with open(log_path, 'r', encoding='utf-8', errors='replace') as f:
+        lines = f.readlines()[-20:]
+        for line in lines:
+            if 'ERROR' in line or 'Traceback' in line or 'Exception' in line:
+                print_colored(line.rstrip(), Fore.RED)
+            else:
+                print(line.rstrip())
+
+def check_health_endpoint(url, service_name):
+    try:
+        resp = requests.get(url, timeout=5)
+        if resp.status_code == 200:
+            print_success(f"{service_name} /health: {resp.text}")
+        else:
+            print_warning(f"{service_name} /health returned HTTP {resp.status_code}: {resp.text}")
+    except Exception as e:
+        print_error(f"{service_name} /health check failed: {e}")
+
+def check_dependencies():
+    print_info("Checking Python version...")
+    if sys.version_info < REQUIRED_PYTHON_VERSION:
+        print_error(f"Python {REQUIRED_PYTHON_VERSION[0]}.{REQUIRED_PYTHON_VERSION[1]}+ required. You have {platform.python_version()}.")
+    else:
+        print_success(f"Python version OK: {platform.python_version()}")
+    print_info("Checking required packages...")
+    for pkg in REQUIRED_PACKAGES:
+        try:
+            importlib.import_module(pkg)
+            print_success(f"Package '{pkg}' is installed.")
+        except ImportError:
+            print_error(f"Package '{pkg}' is missing. Run 'pip install {pkg}'")
+    print_info("Checking required executables...")
+    for exe in REQUIRED_EXECUTABLES:
+        if shutil.which(exe):
+            print_success(f"Executable '{exe}' found.")
+        else:
+            print_error(f"Executable '{exe}' not found in PATH.")
+    print_info("Checking required environment variables...")
+    env_path = BACKEND_DIR / ".env"
+    if env_path.exists():
+        with open(env_path) as f:
+            env_lines = f.read()
+        for var in REQUIRED_ENV_VARS:
+            if re.search(rf"^{var}=", env_lines, re.MULTILINE):
+                print_success(f"Env var '{var}' found in .env.")
+            else:
+                print_warning(f"Env var '{var}' missing in .env.")
+    else:
+        print_warning(".env file not found in backend directory.")
+
+def check_port_conflict(port):
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        result = s.connect_ex(('localhost', port))
+        if result == 0:
+            print_warning(f"Port {port} is already in use. Possible conflict.")
+            for proc in psutil.process_iter(['pid', 'name', 'connections']):
+                try:
+                    for conn in proc.info.get('connections', []):
+                        if conn.laddr.port == port and conn.status == psutil.CONN_LISTEN:
+                            print_info(f"Port {port} is used by PID {proc.pid} ({proc.name()})")
+                except (psutil.NoSuchProcess, psutil.AccessDenied):
+                    pass
+
+def generate_diagnostic_report():
+    report_path = LOG_DIR / "diagnostic_report.txt"
+    with open(report_path, 'w') as f:
+        f.write(f"System Diagnostic Report\nGenerated: {datetime.datetime.now().isoformat()}\n\n")
+        f.write(f"Python version: {platform.python_version()}\n")
+        f.write(f"Platform: {platform.platform()}\n\n")
+        f.write("Recent diagnostics log:\n")
+        if DIAGNOSTICS_LOG.exists():
+            with open(DIAGNOSTICS_LOG) as diag:
+                f.writelines(diag.readlines()[-50:])
+        f.write("\nBackend log (last 20 lines):\n")
+        backend_log = LOG_DIR / "backend.log"
+        if backend_log.exists():
+            with open(backend_log) as bl:
+                f.writelines(bl.readlines()[-20:])
+        f.write("\nEngine log (last 20 lines):\n")
+        engine_log = LOG_DIR / "engine.log"
+        if engine_log.exists():
+            with open(engine_log) as el:
+                f.writelines(el.readlines()[-20:])
+        f.write("\nBackend .env:\n")
+        env_path = BACKEND_DIR / ".env"
+        if env_path.exists():
+            with open(env_path) as envf:
+                f.writelines(envf.readlines())
+    print_info(f"Diagnostic report generated: {report_path}")
+
+def kill_process_on_port(port):
+    killed = False
+    for proc in psutil.process_iter(['pid', 'name', 'connections']):
+        try:
+            for conn in proc.info.get('connections', []):
+                if conn.laddr.port == port and conn.status == psutil.CONN_LISTEN:
+                    print_warning(f"Port {port} is in use by PID {proc.pid} ({proc.name()}). Killing process...")
+                    log_diagnostic(f"Killing process {proc.pid} ({proc.name()}) on port {port}.", level='WARNING')
+                    proc.kill()
+                    killed = True
+                    print_success(f"Killed process {proc.pid} on port {port}.")
+        except (psutil.NoSuchProcess, psutil.AccessDenied):
+            pass
+    if not killed:
+        print_info(f"No process found using port {port}.")
 
 # --- Main Service Manager Class ---
 class ServiceManager:
@@ -382,6 +532,8 @@ class ServiceManager:
             print("5. Test System Configuration")
             print("6. Show Detailed Status")
             print("7. Shutdown All Services")
+            print("8. Restart All Services")
+            print("9. Full Mobile App Startup")
             print("0. Exit (Leave Services Running)")
             
             choice = input("\nChoose an option: ").strip()
@@ -404,6 +556,91 @@ class ServiceManager:
                     stop_process(name, config['port'])
                 print("All services stopped. Goodbye!")
                 break
+            elif choice == "8":
+                print("Restarting all services...")
+                for name, config in SERVICES.items():
+                    stop_process(name, config['port'])
+                time.sleep(2)
+                self.start_all_servers()
+                print_info("Testing and optimizing system configuration...")
+                self.test_system_configuration()
+            elif choice == "9":
+                print_header("Full Mobile App Startup")
+                try:
+                    print_info("Running pre-flight dependency and environment checks...")
+                    check_dependencies()
+                    print_info("Ensuring ngrok is running...")
+                    ngrok_data = self.get_ngrok_status()
+                    if ngrok_data['status'] != 'online':
+                        print_error("ngrok is not running. Please start ngrok and try again.")
+                        print_info("Troubleshooting: Make sure ngrok is installed and running. Run 'ngrok start --all' or check your ngrok.yml.")
+                        generate_diagnostic_report()
+                        return
+                    print_info("Stopping backend and engine if running...")
+                    for name, config in SERVICES.items():
+                        try:
+                            stop_process(name, config['port'])
+                        except Exception as e:
+                            print_error(f"Failed to stop {name}: {e}")
+                            print_info(f"Possible cause: Service may not have been running, or permissions issue.")
+                    time.sleep(2)
+                    print_info("Checking for port conflicts and killing if needed...")
+                    for name, config in SERVICES.items():
+                        kill_process_on_port(config['port'])
+                    print_info("Configuring backend with live engine URL...")
+                    if not self.configure_backend_with_engine_url():
+                        print_error("Failed to configure backend with engine URL.")
+                        print_info("Troubleshooting: Ensure ngrok tunnel for engine is up and .env is writable.")
+                        generate_diagnostic_report()
+                        return
+                    print_info("Starting backend and engine servers...")
+                    for name in ["backend", "engine"]:
+                        try:
+                            self.start_service(name, SERVICES[name])
+                            log_path = LOG_DIR / f"{name}.log"
+                            analyze_log_file(log_path)
+                            if name == "backend":
+                                check_health_endpoint("http://localhost:8080/health", "Backend")
+                            elif name == "engine":
+                                check_health_endpoint("http://localhost:8001/health", "Engine")
+                        except Exception as e:
+                            print_error(f"Failed to start {name}: {e}")
+                            print_info(f"Check logs/{name}.log for details. Possible causes: Port in use, code error, missing dependencies.")
+                            analyze_log_file(LOG_DIR / f"{name}.log")
+                            generate_diagnostic_report()
+                    print_info("Testing and optimizing system configuration...")
+                    try:
+                        self.test_system_configuration()
+                    except Exception as e:
+                        print_error(f"System configuration test failed: {e}")
+                        print_info("Troubleshooting: Check ngrok tunnels, backend/engine logs, and .env config.")
+                        generate_diagnostic_report()
+                    # Print summary with ngrok URLs
+                    ngrok_data = self.get_ngrok_status()
+                    backend_url = None
+                    engine_url = None
+                    for tunnel in ngrok_data['tunnels']:
+                        addr = tunnel.get("config", {}).get("addr", "")
+                        if "8080" in addr:
+                            backend_url = tunnel.get("public_url")
+                        elif "8001" in addr:
+                            engine_url = tunnel.get("public_url")
+                    print_header("Mobile App Remote Access URLs")
+                    if backend_url:
+                        print_success(f"Backend API: {backend_url}")
+                    else:
+                        print_error("Backend ngrok URL not found.")
+                        print_info("Troubleshooting: Is ngrok tunnel for backend running?")
+                    if engine_url:
+                        print_success(f"Engine API:  {engine_url}")
+                    else:
+                        print_error("Engine ngrok URL not found.")
+                        print_info("Troubleshooting: Is ngrok tunnel for engine running?")
+                    print_info("Your mobile app is ready to connect remotely!")
+                except Exception as e:
+                    print_error(f"Full Mobile App Startup failed: {e}")
+                    print_info("Troubleshooting: Check all logs, ngrok status, and .env configuration. If the problem persists, restart your machine and try again.")
+                    generate_diagnostic_report()
             elif choice == "0":
                 print("Exiting without stopping services...")
                 print("Goodbye! All services continue running.")
@@ -414,4 +651,4 @@ class ServiceManager:
 if __name__ == "__main__":
     LOG_DIR.mkdir(exist_ok=True)
     manager = ServiceManager()
-    manager.run() 
+    manager.run()

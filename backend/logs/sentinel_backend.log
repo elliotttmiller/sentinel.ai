@@ -446,3 +446,68 @@ updated_at
 2025-07-28 01:26:41.200 | INFO     | main:lifespan:72 - Verifying database tables...
 2025-07-28 01:26:43.382 | INFO     | main:lifespan:75 - Database tables verified successfully.
 2025-07-28 01:26:43.387 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:26:57.007 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:30:10.425 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 01:30:10.696 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:30:11.355 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:30:15.187 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:30:25.313 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 01:30:26.015 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:36:39.494 | INFO     | main:create_mission:197 - API: Received mission request for 'Create a simple text file on the desktop with the current date and time'. Assigning ID: mission_14469234-0764-4e74-9489-41bf037b949b.
+2025-07-28 01:36:40.631 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:36:40.673 | INFO     | main:run_mission_planning_and_dispatch:113 - BACKGROUND TASK: Starting AI planning for mission mission_14469234-0764-4e74-9489-41bf037b949b.
+2025-07-28 01:36:40.673 | INFO     | core.mission_planner:create_mission_plan:77 - Creating mission plan for: mission_14469234-0764-4e74-9489-41bf037b949b
+2025-07-28 01:36:40.673 | INFO     | core.mission_planner:_optimize_prompt:100 - Starting prompt optimization phase
+2025-07-28 01:36:40.673 | INFO     | core.mission_planner:_create_execution_plan:173 - Starting execution plan creation phase
+2025-07-28 01:36:40.673 | INFO     | core.mission_planner:create_mission_plan:87 - Mission plan created with 3 steps
+2025-07-28 01:36:40.673 | INFO     | main:run_mission_planning_and_dispatch:117 - BACKGROUND TASK: AI planning complete for mission_14469234-0764-4e74-9489-41bf037b949b.
+2025-07-28 01:37:15.841 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:38:41.585 | INFO     | main:run_mission_planning_and_dispatch:136 - BACKGROUND TASK: Mission mission_14469234-0764-4e74-9489-41bf037b949b dispatched to engine.
+2025-07-28 01:39:42.520 | INFO     | main:run_mission_planning_and_dispatch:159 - BACKGROUND TASK: Mission mission_14469234-0764-4e74-9489-41bf037b949b completed with status: failed
+2025-07-28 01:52:07.889 | INFO     | main:create_mission:197 - API: Received mission request for 'Create a Python script on my desktop that prints Hello World and the current date'. Assigning ID: mission_c26562f5-ec42-4ae3-863e-0134910f981f.
+2025-07-28 01:52:08.881 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 01:52:08.921 | INFO     | main:run_mission_planning_and_dispatch:113 - BACKGROUND TASK: Starting AI planning for mission mission_c26562f5-ec42-4ae3-863e-0134910f981f.
+2025-07-28 01:52:08.921 | INFO     | core.mission_planner:create_mission_plan:77 - Creating mission plan for: mission_c26562f5-ec42-4ae3-863e-0134910f981f
+2025-07-28 01:52:08.922 | INFO     | core.mission_planner:_optimize_prompt:100 - Starting prompt optimization phase
+2025-07-28 01:52:08.922 | INFO     | core.mission_planner:_create_execution_plan:173 - Starting execution plan creation phase
+2025-07-28 01:52:08.923 | INFO     | core.mission_planner:create_mission_plan:87 - Mission plan created with 3 steps
+2025-07-28 01:52:08.923 | INFO     | main:run_mission_planning_and_dispatch:117 - BACKGROUND TASK: AI planning complete for mission_c26562f5-ec42-4ae3-863e-0134910f981f.
+2025-07-28 01:54:09.890 | INFO     | main:run_mission_planning_and_dispatch:136 - BACKGROUND TASK: Mission mission_c26562f5-ec42-4ae3-863e-0134910f981f dispatched to engine.
+2025-07-28 01:55:20.477 | WARNING  | main:run_mission_planning_and_dispatch:149 - Polling for execution result failed: HTTPSConnectionPool(host='0d76a841882a.ngrok-free.app', port=443): Read timed out. (read timeout=10)
+2025-07-28 01:56:33.118 | WARNING  | main:run_mission_planning_and_dispatch:149 - Polling for execution result failed: HTTPSConnectionPool(host='0d76a841882a.ngrok-free.app', port=443): Read timed out. (read timeout=10)
+2025-07-28 01:57:46.943 | WARNING  | main:run_mission_planning_and_dispatch:149 - Polling for execution result failed: HTTPSConnectionPool(host='0d76a841882a.ngrok-free.app', port=443): Read timed out. (read timeout=10)
+2025-07-28 01:58:59.497 | WARNING  | main:run_mission_planning_and_dispatch:149 - Polling for execution result failed: HTTPSConnectionPool(host='0d76a841882a.ngrok-free.app', port=443): Read timed out. (read timeout=10)
+2025-07-28 02:00:12.229 | WARNING  | main:run_mission_planning_and_dispatch:149 - Polling for execution result failed: HTTPSConnectionPool(host='0d76a841882a.ngrok-free.app', port=443): Read timed out. (read timeout=10)
+2025-07-28 02:01:30.563 | INFO     | main:lifespan:35 - Application starting up...
+2025-07-28 02:01:31.377 | INFO     | main:get_llm_client:52 - GenAI client initialized with API key and model: gemini-1.5-pro
+2025-07-28 02:01:31.398 | INFO     | main:lifespan:72 - Verifying database tables...
+2025-07-28 02:01:33.319 | INFO     | main:lifespan:75 - Database tables verified successfully.
+2025-07-28 02:01:33.319 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 02:02:07.837 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 02:03:38.241 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 02:12:26.286 | INFO     | main:lifespan:35 - Application starting up...
+2025-07-28 02:12:27.061 | INFO     | main:get_llm_client:52 - GenAI client initialized with API key and model: gemini-1.5-pro
+2025-07-28 02:12:27.097 | INFO     | main:lifespan:72 - Verifying database tables...
+2025-07-28 02:12:28.094 | INFO     | main:lifespan:75 - Database tables verified successfully.
+2025-07-28 02:12:28.094 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 02:13:04.000 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 02:14:19.273 | INFO     | main:lifespan:35 - Application starting up...
+2025-07-28 02:14:20.117 | INFO     | main:get_llm_client:52 - GenAI client initialized with API key and model: gemini-1.5-pro
+2025-07-28 02:14:20.144 | INFO     | main:lifespan:72 - Verifying database tables...
+2025-07-28 02:14:22.116 | INFO     | main:lifespan:75 - Database tables verified successfully.
+2025-07-28 02:14:22.116 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 02:14:57.181 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 02:18:07.252 | INFO     | main:lifespan:35 - Application starting up...
+2025-07-28 02:18:07.938 | INFO     | main:get_llm_client:52 - GenAI client initialized with API key and model: gemini-1.5-pro
+2025-07-28 02:18:07.960 | INFO     | main:lifespan:72 - Verifying database tables...
+2025-07-28 02:18:09.414 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 02:18:09.857 | INFO     | main:lifespan:75 - Database tables verified successfully.
+2025-07-28 02:18:09.857 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 02:18:51.324 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 02:20:41.246 | INFO     | main:lifespan:35 - Application starting up...
+2025-07-28 02:20:42.417 | INFO     | main:get_llm_client:52 - GenAI client initialized with API key and model: gemini-1.5-pro
+2025-07-28 02:20:42.459 | INFO     | main:lifespan:72 - Verifying database tables...
+2025-07-28 02:20:42.925 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 02:20:44.666 | INFO     | main:lifespan:75 - Database tables verified successfully.
+2025-07-28 02:20:44.666 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 02:21:16.347 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit

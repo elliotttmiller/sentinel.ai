@@ -1,7 +1,165 @@
-INFO:     Will watch for changes in these directories: ['C:\\Users\\AMD\\sentinel\\engine']
+INFO:     Will watch for changes in these directories: ['c:\\Users\\AMD\\sentinel\\engine']
 INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
-INFO:     Started reloader process [11420] using WatchFiles
-2025-07-28T00:26:58.503355-0500 INFO     main:<module>:49 - Sentinel Desktop Engine service started.
-INFO:     Started server process [18740]
+INFO:     Started reloader process [9984] using WatchFiles
+Process SpawnProcess-1:
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\_subprocess.py", line 78, in subprocess_started
+    target(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 65, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 69, in serve
+    await self._serve(sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 76, in _serve
+    config.load()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\config.py", line 433, in load
+    self.loaded_app = import_from_string(self.app)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "c:\Users\AMD\sentinel\engine\main.py", line 17, in <module>
+    from core.crew_manager import CrewManager
+  File "c:\Users\AMD\sentinel\engine\core\crew_manager.py", line 3, in <module>
+    from ..agents.agent_factory import AgentFactory
+ImportError: attempted relative import beyond top-level package
+WWARNING:  WatchFiles detected changes in 'core\crew_manager.py'. Reloading...WWARNING:  WatchFiles detected changes in 'core\crew_manager.py'. Reloading...PProcess SpawnProcess-2:Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\_subprocess.py", line 75, in subprocess_started
+    config.configure_logging()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\config.py", line 364, in configure_logging
+    logging.config.dictConfig(s22025-07-28 02:22:54.427 | INFO     | tools.tool_manager:__init__:182 - ToolManager initialized with desktop tools
+2025-07-28 02:22:54.428 | INFO     | agents.agent_factory:__init__:14 - AgentFactory initialized for engine
+2025-07-28 02:22:54.428 | INFO     | core.crew_manager:__init__:12 - CrewManager initialized for engine
+2025-07-28T02:22:54.429314-0500 INFO     main:<module>:60 - Sentinel Desktop Engine service started.
+INFO:     Started server process [7536]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.WWARNING:  WatchFiles detected changes in 'agents\agent_factory.py'. Reloading...IIINFO:     Shutting downINFO:     Waiting for application shutdown.
+IINFO:     Application shutdown complete.IINFO:     Finished server process [15492]Process SpawnProcess-3:
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\_subprocess.py", line 78, in subprocess_started
+    target(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 65, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterruptWARNING:  WatchFiles detected changes in 'agents\agent_factory.py'. Reloading...
+PrProcess SpawnProcess-4:TrTraceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\_subprocess.py", line 72, in subprocess_started
+    sys.stdin = os.fdopen(stdin_fileno)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen os>", line 1031, in fdopen
+  File "<frozen codecs>", line 309, in __init__
+KeyboardInterrupt2025-07-28 02:27:52.862 | INFO     | tools.tool_manager:__init__:182 - ToolManager initialized with desktop tools
+2025-07-28 02:27:52.862 | INFO     | agents.agent_factory:__init__:14 - AgentFactory initialized for engine
+2025-07-28 02:27:52.862 | INFO     | core.crew_manager:__init__:12 - CrewManager initialized for engine
+2025-07-28T02:27:52.862195-0500 INFO     main:<module>:60 - Sentinel Desktop Engine service started.
+INFO:     Started server process [18352]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+
+
+tup.
+INFO:     Application startup complete.
+gging\config.py", line 303, in convert_with_key
+    result = self.configurator.convert(value)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\logging\config.py", line 447, in convert
+    def convert(self, value):
+    
+KeyboardInterrupt
+2025-07-28 02:27:52.290 | INFO     | tools.tool_manager:__init__:182 - ToolManager initialized with desktop tools
+2025-07-28 02:27:52.292 | INFO     | agents.agent_factory:__init__:14 - AgentFactory initialized for engine
+2025-07-28 02:27:52.292 | INFO     | core.crew_manager:__init__:12 - CrewManager initialized for engine
+2025-07-28T02:27:52.294698-0500 INFO     main:<module>:60 - Sentinel Desktop Engine service started.
+INFO:     Started server process [3760]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+a\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\_subprocess.py", line 78, in subprocess_started
+    target(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 65, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+2025-07-28 02:25:45.879 | INFO     | tools.tool_manager:__init__:182 - ToolManager initialized with desktop tools
+2025-07-28 02:25:45.879 | INFO     | agents.agent_factory:__init__:14 - AgentFactory initialized for engine
+2025-07-28 02:25:45.879 | INFO     | core.crew_manager:__init__:12 - CrewManager initialized for engine
+2025-07-28T02:25:45.879123-0500 INFO     main:<module>:60 - Sentinel Desktop Engine service started.
+INFO:     Started server process [18532]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+25-07-28 02:23:13.417 | INFO     | tools.tool_manager:__init__:182 - ToolManager initialized with desktop tools
+2025-07-28 02:23:13.418 | INFO     | agents.agent_factory:__init__:14 - AgentFactory initialized for engine
+2025-07-28 02:23:13.418 | INFO     | core.crew_manager:__init__:12 - CrewManager initialized for engine
+2025-07-28T02:23:13.419318-0500 INFO     main:<module>:60 - Sentinel Desktop Engine service started.
+INFO:     Started server process [11792]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.

@@ -1,6 +1,7 @@
 # File: sentinel/engine/main.py
 
 import asyncio
+import json
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
 from typing import Dict, Any
@@ -10,10 +11,20 @@ import sys
 from loguru import logger
 from starlette.responses import Response
 
+# Import our real AI components
+from tools.tool_manager import ToolManager
+from agents.agent_factory import AgentFactory
+from core.crew_manager import CrewManager
+
 app = FastAPI(title="Sentinel Desktop Engine")
 
 # In-memory store for mission results (replace with DB for production)
 mission_results: Dict[str, Any] = {}
+
+# Initialize our AI components
+tool_manager = ToolManager()
+agent_factory = AgentFactory(tool_manager=tool_manager)
+crew_manager = CrewManager(agent_factory=agent_factory, tool_manager=tool_manager)
 
 # Configure loguru
 logger.remove()
@@ -64,117 +75,46 @@ async def execute_mission(plan: Dict):
     return {"message": f"Execution started for mission {mission_id}."}
 
 async def run_real_agent_task(mission_id: str, plan: Dict):
-    """Execute real agent tasks on the desktop."""
+    """Execute real agent tasks on the desktop using AI agents."""
     try:
-        logger.info(f"Starting real agent execution for mission {mission_id}")
+        logger.info(f"ENGINE: Starting real AI agent execution for mission {mission_id}")
         
-        # Get the steps from the plan
-        steps = plan.get("steps", [])
-        outputs = []
+        # Use the CrewManager to execute the mission with real AI agents
+        result = await crew_manager.execute_mission(plan)
         
-        for step in steps:
-            step_id = step.get("step_id")
-            agent_type = step.get("agent_type")
-            action = step.get("action")
-            parameters = step.get("parameters", {})
-            
-            logger.info(f"Executing step {step_id}: {action}")
-            
-            if action == "execute_desktop_task":
-                # Execute real desktop command
-                command = parameters.get("command")
-                if command:
-                    logger.info(f"Executing command: {command}")
-                    
-                    # Use subprocess to execute the command
-                    import subprocess
-                    import platform
-                    
-                    try:
-                        if platform.system() == "Windows":
-                            # Use PowerShell for Windows
-                            result = subprocess.run(
-                                ["powershell", "-Command", command],
-                                capture_output=True,
-                                text=True,
-                                timeout=30
-                            )
-                        else:
-                            # Use bash for Unix-like systems
-                            result = subprocess.run(
-                                ["bash", "-c", command],
-                                capture_output=True,
-                                text=True,
-                                timeout=30
-                            )
-                        
-                        if result.returncode == 0:
-                            output = f"Command executed successfully: {result.stdout}"
-                            logger.info(f"Step {step_id} completed successfully")
-                        else:
-                            output = f"Command failed: {result.stderr}"
-                            logger.error(f"Step {step_id} failed: {result.stderr}")
-                        
-                        outputs.append({
-                            "step_id": step_id,
-                            "status": "completed" if result.returncode == 0 else "failed",
-                            "output": output
-                        })
-                        
-                    except subprocess.TimeoutExpired:
-                        error_msg = f"Command timed out after 30 seconds"
-                        logger.error(f"Step {step_id} timed out")
-                        outputs.append({
-                            "step_id": step_id,
-                            "status": "failed",
-                            "output": error_msg
-                        })
-                    except Exception as e:
-                        error_msg = f"Command execution error: {str(e)}"
-                        logger.error(f"Step {step_id} error: {str(e)}")
-                        outputs.append({
-                            "step_id": step_id,
-                            "status": "failed",
-                            "output": error_msg
-                        })
-                else:
-                    error_msg = "No command specified in parameters"
-                    logger.error(f"Step {step_id}: {error_msg}")
-                    outputs.append({
-                        "step_id": step_id,
-                        "status": "failed",
-                        "output": error_msg
-                    })
-            else:
-                # Handle other action types
-                output = f"Action '{action}' not implemented yet"
-                logger.warning(f"Step {step_id}: {output}")
-                outputs.append({
-                    "step_id": step_id,
-                    "status": "completed",
-                    "output": output
-                })
-        
-        # Determine overall mission status
-        all_completed = all(output.get("status") == "completed" for output in outputs)
-        
-        mission_results[mission_id] = {
-            "status": "completed" if all_completed else "failed",
-            "output": f"Mission {mission_id} execution completed. Steps: {len(outputs)}",
-            "details": {
-                "plan": plan,
-                "step_outputs": outputs
+        if result.get("success", False):
+            mission_results[mission_id] = {
+                "status": "completed",
+                "output": result.get("summary", f"Mission {mission_id} completed successfully"),
+                "details": {
+                    "plan": plan,
+                    "step_results": result.get("step_results", []),
+                    "total_steps": result.get("total_steps", 0),
+                    "completed_steps": result.get("completed_steps", 0),
+                    "failed_steps": result.get("failed_steps", 0)
+                }
             }
-        }
-        
-        logger.info(f"Mission {mission_id} completed with status: {mission_results[mission_id]['status']}")
+            logger.info(f"ENGINE: Mission {mission_id} completed successfully with AI agents")
+        else:
+            mission_results[mission_id] = {
+                "status": "failed",
+                "output": result.get("error", f"Mission {mission_id} failed"),
+                "details": {
+                    "plan": plan,
+                    "error": result.get("error", "Unknown error")
+                }
+            }
+            logger.error(f"ENGINE: Mission {mission_id} failed during AI agent execution")
         
     except Exception as e:
-        logger.error(f"Mission {mission_id} execution failed: {str(e)}")
+        logger.error(f"ENGINE: Mission {mission_id} execution failed: {str(e)}", exc_info=True)
         mission_results[mission_id] = {
             "status": "failed",
             "output": f"Mission execution failed: {str(e)}",
-            "details": plan
+            "details": {
+                "plan": plan,
+                "error": str(e)
+            }
         }
 
 @app.get("/mission_result/{mission_id}")
