@@ -10,6 +10,7 @@ interface ApiContextType {
 }
 
 const CONFIG_URL = 'https://thrush-real-lacewing.ngrok-free.app/sentinel-config.json'; // Or use your public location
+const DEFAULT_API_URL = 'https://thrush-real-lacewing.ngrok-free.app'; // fallback if config fetch fails
 
 export const ApiContext = createContext<any>(null);
 
@@ -43,11 +44,14 @@ export const ApiProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const fetchConfig = async () => {
       try {
         const res = await fetch(CONFIG_URL);
+        if (!res.ok) throw new Error('Config not found');
         const data = await res.json();
+        if (!data.apiUrl) throw new Error('Invalid config');
         setConfig(data);
         setBaseUrl(data.apiUrl);
       } catch (e) {
-        setConnectionError('Failed to fetch API config.');
+        setConnectionError('Failed to fetch API config. Using default URL.');
+        setBaseUrl(DEFAULT_API_URL);
       }
     };
     fetchConfig();

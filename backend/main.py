@@ -3,6 +3,7 @@ import uuid
 import asyncio
 import requests
 from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 from loguru import logger
 from contextlib import asynccontextmanager
@@ -99,6 +100,11 @@ def seed_agents_to_db():
         db.close()
 
 app = FastAPI(title="Sentinel Backend Orchestrator", lifespan=lifespan)
+
+# Serve static files (including sentinel-config.json) from the project root
+import os
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+app.mount("/", StaticFiles(directory=PROJECT_ROOT, html=True), name="static")
 
 # Include existing routers
 app.include_router(agents_router)
