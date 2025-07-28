@@ -9,7 +9,9 @@ interface ApiContextType {
   connectionError: string | null;
 }
 
-const ApiContext = createContext<ApiContextType | undefined>(undefined);
+const CONFIG_URL = 'https://thrush-real-lacewing.ngrok-free.app/sentinel-config.json'; // Or use your public location
+
+export const ApiContext = createContext<any>(null);
 
 // Enhanced debug logging
 const debugLog = (message: string, data?: any) => {
@@ -31,11 +33,25 @@ const defaultConfig: ApiConfig = {
 debugLog('Initial configuration:', defaultConfig);
 
 export const ApiProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [config, setConfig] = useState<ApiConfig>(defaultConfig);
-  const [isConnected, setIsConnected] = useState(false);
+  const [config, setConfig] = useState<{ apiUrl: string } | null>(null);
+  const [baseUrl, setBaseUrl] = useState<string>('');
+  const [isConnected, setIsConnected] = useState<boolean>(false);
   const [connectionError, setConnectionError] = useState<string | null>(null);
 
-  const baseUrl = config.apiUrl;
+  // Auto-fetch config on startup
+  useEffect(() => {
+    const fetchConfig = async () => {
+      try {
+        const res = await fetch(CONFIG_URL);
+        const data = await res.json();
+        setConfig(data);
+        setBaseUrl(data.apiUrl);
+      } catch (e) {
+        setConnectionError('Failed to fetch API config.');
+      }
+    };
+    fetchConfig();
+  }, []);
 
   debugLog('Current configuration state:', {
     config,
@@ -146,7 +162,11 @@ export const ApiProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   debugLog('ApiContext value:', value);
 
-  return <ApiContext.Provider value={value}>{children}</ApiContext.Provider>;
+  return (
+    <ApiContext.Provider value={{ config, baseUrl, isConnected, connectionError }}>
+      {children}
+    </ApiContext.Provider>
+  );
 };
 
 export const useApi = () => {

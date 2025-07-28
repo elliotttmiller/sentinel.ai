@@ -18,6 +18,7 @@ import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
 from colorama import init, Fore, Style
+import json
 init(autoreset=True)
 
 # --- Configuration ---
@@ -198,6 +199,14 @@ def kill_process_on_port(port):
     if not killed:
         print_info(f"No process found using port {port}.")
 
+def update_public_config_file(backend_url):
+    config = {"apiUrl": backend_url}
+    config_path = PROJECT_ROOT / "sentinel-config.json"
+    with open(config_path, "w") as f:
+        json.dump(config, f)
+    print_success(f"Public config file updated: {config_path} (apiUrl: {backend_url})")
+    log_diagnostic(f"Public config file updated: {config_path} (apiUrl: {backend_url})", level='INFO')
+
 # --- Main Service Manager Class ---
 class ServiceManager:
     def get_ngrok_status(self) -> Dict:
@@ -330,6 +339,15 @@ class ServiceManager:
         self.start_service("backend", SERVICES["backend"])
         self.start_service("engine", SERVICES["engine"])
         
+        # Update public config file
+        ngrok_data = self.get_ngrok_status()
+        backend_url = None
+        for tunnel in ngrok_data['tunnels']:
+            addr = tunnel.get("config", {}).get("addr", "")
+            if "8080" in addr:
+                backend_url = tunnel.get("public_url")
+        if backend_url:
+            update_public_config_file(backend_url)
         print_success("All servers started! Your mobile app can now connect remotely.")
         return True
 
@@ -484,6 +502,15 @@ class ServiceManager:
         self.start_service("backend", SERVICES["backend"])
         self.start_service("engine", SERVICES["engine"])
         
+        # Update public config file
+        ngrok_data = self.get_ngrok_status()
+        backend_url = None
+        for tunnel in ngrok_data['tunnels']:
+            addr = tunnel.get("config", {}).get("addr", "")
+            if "8080" in addr:
+                backend_url = tunnel.get("public_url")
+        if backend_url:
+            update_public_config_file(backend_url)
         print_success("System setup complete! All services are running and configured.")
 
     def run(self):
