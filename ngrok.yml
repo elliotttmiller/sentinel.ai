@@ -4,7 +4,6 @@ tunnels:
   backend:
     addr: 8080
     proto: http
-    subdomain: 
   engine:
     addr: 8001
     proto: http

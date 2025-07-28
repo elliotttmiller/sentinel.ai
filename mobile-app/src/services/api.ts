@@ -98,12 +98,9 @@ class ApiService {
   }
 
   // Missions
-  async createMission(title: string, description: string): Promise<Mission> {
+  async createMission({ title, description, prompt }: { title: string; description?: string; prompt: string }) {
     debugLog('Creating mission:', { title, description });
-    const response: AxiosResponse<Mission> = await this.client.post('/missions', {
-      title,
-      description,
-    });
+    const response: AxiosResponse<Mission> = await this.client.post('/missions', { title, description, prompt });
     debugLog('Mission created:', response.data);
     return response.data;
   }

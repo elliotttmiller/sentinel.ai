@@ -313,3 +313,17 @@ FROM missions]
 2025-07-27 14:58:53.052 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
 2025-07-27 15:04:17.370 | ERROR    | api.missions:get_missions:22 - Failed to fetch missions: Column expression, FROM clause, or other columns clause element expected, got <class 'core.schemas.Mission'>.
 2025-07-27 15:04:17.370 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-27 16:54:11.169 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-27 16:54:12.769 | ERROR    | api.missions:get_missions:22 - Failed to fetch missions: Column expression, FROM clause, or other columns clause element expected, got <class 'core.schemas.Mission'>.
+2025-07-27 16:54:12.803 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-27 16:54:45.981 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-27 19:55:31.533 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-27 19:56:42.457 | ERROR    | api.missions:get_missions:22 - Failed to fetch missions: Column expression, FROM clause, or other columns clause element expected, got <class 'core.schemas.Mission'>.
+2025-07-27 19:56:42.461 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-27 19:57:06.591 | INFO     | main:lifespan:38 - Application shutting down...
+2025-07-27 23:14:59.054 | INFO     | main:lifespan:29 - Application starting up...
+2025-07-27 23:14:59.054 | INFO     | main:lifespan:30 - Verifying database tables...
+2025-07-27 23:15:01.106 | INFO     | main:lifespan:33 - Database tables verified successfully.
+2025-07-27 23:15:01.106 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-27 23:25:59.660 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-27 23:26:32.325 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit

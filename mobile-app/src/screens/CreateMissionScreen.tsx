@@ -12,6 +12,7 @@ const CreateMissionScreen: React.FC<NavigationProps> = ({ navigation }) => {
   const { baseUrl, isConnected } = useApi();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [prompt, setPrompt] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -24,7 +25,7 @@ const CreateMissionScreen: React.FC<NavigationProps> = ({ navigation }) => {
 
   const handleCreateMission = async () => {
     debugLog('Create button pressed', { title, description, isConnected, baseUrl });
-    if (!title.trim() || !description.trim()) {
+    if (!title.trim() || !prompt.trim()) {
       setError('Please fill in all fields');
       debugLog('Validation failed: missing fields', { title, description });
       Alert.alert('Validation Error', 'Please fill in all fields');
@@ -42,7 +43,11 @@ const CreateMissionScreen: React.FC<NavigationProps> = ({ navigation }) => {
       setLoading(true);
       setError('');
       debugLog('Attempting to create mission', { title: title.trim(), description: description.trim() });
-      const result = await apiService.createMission(title.trim(), description.trim());
+      const result = await apiService.createMission({
+        title,
+        description,
+        prompt,
+      });
       debugLog('Mission created successfully', result);
       Alert.alert('Success', 'Mission created successfully!', [
         { text: 'OK', onPress: () => { debugLog('Navigating back after success'); navigation.goBack(); } }
@@ -98,6 +103,18 @@ const CreateMissionScreen: React.FC<NavigationProps> = ({ navigation }) => {
               disabled={loading}
               maxLength={500}
             />
+
+            <TextInput
+              label="Prompt"
+              value={prompt}
+              onChangeText={setPrompt}
+              mode="outlined"
+              multiline
+              numberOfLines={4}
+              style={styles.input}
+              disabled={loading}
+              maxLength={500}
+            />
             
             <HelperText type="info" visible>
               Describe what you want the AI agents to accomplish
@@ -123,7 +140,7 @@ const CreateMissionScreen: React.FC<NavigationProps> = ({ navigation }) => {
                 onPress={handleCreateMission}
                 style={styles.button}
                 loading={loading}
-                disabled={loading || !title.trim() || !description.trim()}
+                disabled={loading || !title.trim() || !prompt.trim()}
               >
                 Create Mission
               </Button>

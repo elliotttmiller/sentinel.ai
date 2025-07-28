@@ -36,8 +36,8 @@ export default {
     ],
     scheme: "sentinel",
     extra: {
-      // API configuration - this is the main URL the app uses
-      apiUrl: process.env.EXPO_PUBLIC_API_URL || "https://sentinalai-production.up.railway.app",
+      // API configuration - using permanent static URL
+      apiUrl: process.env.EXPO_PUBLIC_API_URL || "https://thrush-real-lacewing.ngrok-free.app",
       
       // App configuration
       appName: process.env.EXPO_PUBLIC_APP_NAME || "Sentinel",

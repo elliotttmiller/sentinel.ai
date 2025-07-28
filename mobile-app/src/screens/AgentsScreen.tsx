@@ -7,6 +7,7 @@ import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 import { useApi } from '@/contexts/ApiContext';
 import { Agent } from '@/types';
 import ApiService from '@/services/api';
+import { debugLog } from '@/services/api';
 
 const AgentsScreen: React.FC = () => {
   const theme = useTheme();
@@ -43,10 +44,13 @@ const AgentsScreen: React.FC = () => {
   };
 
   useEffect(() => {
+    debugLog('AgentsScreen mounted', {});
     loadAgents();
+    return () => debugLog('AgentsScreen unmounted', {});
   }, [isConnected, baseUrl]);
 
   useEffect(() => {
+    debugLog('Agents state changed', { agents });
     let filtered = agents;
 
     // Apply search filter
@@ -66,140 +70,177 @@ const AgentsScreen: React.FC = () => {
     setFilteredAgents(filtered);
   }, [agents, searchQuery, statusFilter]);
 
+  useEffect(() => {
+    debugLog('Loading state changed', { loading });
+  }, [loading]);
+
+  useEffect(() => {
+    debugLog('Refreshing state changed', { refreshing });
+  }, [refreshing]);
+
+  useEffect(() => {
+    debugLog('Search query changed', { searchQuery });
+  }, [searchQuery]);
+
+  useEffect(() => {
+    debugLog('Status filter changed', { statusFilter });
+  }, [statusFilter]);
+
   const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'available': return theme.colors.primary;
-      case 'busy': return theme.colors.secondary;
-      case 'offline': return theme.colors.error;
-      case 'maintenance': return theme.colors.tertiary;
-      default: return theme.colors.outline;
-    }
+    const color = (() => {
+      switch (status) {
+        case 'available': return theme.colors.primary;
+        case 'busy': return theme.colors.secondary;
+        case 'offline': return theme.colors.error;
+        case 'maintenance': return theme.colors.tertiary;
+        default: return theme.colors.outline;
+      }
+    })();
+    debugLog('getStatusColor', { status, color });
+    return color;
   };
 
   const getStatusIcon = (status: string) => {
-    switch (status) {
-      case 'available': return 'check-circle';
-      case 'busy': return 'clock';
-      case 'offline': return 'close-circle';
-      case 'maintenance': return 'wrench';
-      default: return 'help-circle';
-    }
+    const icon = (() => {
+      switch (status) {
+        case 'available': return 'check-circle';
+        case 'busy': return 'clock';
+        case 'offline': return 'close-circle';
+        case 'maintenance': return 'wrench';
+        default: return 'help-circle';
+      }
+    })();
+    debugLog('getStatusIcon', { status, icon });
+    return icon;
   };
 
   const getAgentTypeIcon = (type: string) => {
-    switch (type?.toLowerCase()) {
-      case 'code_reviewer': return 'code-braces';
-      case 'debugger': return 'bug';
-      case 'planner': return 'clipboard-list';
-      case 'executor': return 'play-circle';
-      default: return 'robot';
-    }
+    const icon = (() => {
+      switch (type?.toLowerCase()) {
+        case 'code_reviewer': return 'code-braces';
+        case 'debugger': return 'bug';
+        case 'planner': return 'clipboard-list';
+        case 'executor': return 'play-circle';
+        default: return 'robot';
+      }
+    })();
+    debugLog('getAgentTypeIcon', { type, icon });
+    return icon;
   };
 
-  const renderAgentCard = ({ item }: { item: Agent }) => (
-    <Card style={styles.agentCard} mode="outlined">
-      <Card.Content>
-        <View style={styles.agentHeader}>
-          <View style={styles.agentInfo}>
-            <View style={styles.agentTitle}>
-              <Icon 
-                name={getAgentTypeIcon(item.type)} 
-                size={24} 
-                color={theme.colors.primary} 
-              />
-              <Text variant="titleMedium" style={{ marginLeft: 8, flex: 1 }}>
-                {item.name}
-              </Text>
+  const renderAgentCard = ({ item }: { item: Agent }) => {
+    try {
+      debugLog('Rendering agent card', { item });
+      return (
+        <Card style={styles.agentCard} mode="outlined">
+          <Card.Content>
+            <View style={styles.agentHeader}>
+              <View style={styles.agentInfo}>
+                <View style={styles.agentTitle}>
+                  <Icon 
+                    name={getAgentTypeIcon(item.type ?? '')} 
+                    size={24} 
+                    color={theme.colors.primary} 
+                  />
+                  <Text variant="titleMedium" style={{ marginLeft: 8, flex: 1 }}>
+                    {item.name}
+                  </Text>
+                </View>
+                <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant, marginLeft: 32 }}>
+                  {item.type || 'Unknown Type'}
+                </Text>
+              </View>
+              <Chip 
+                mode="outlined" 
+                textStyle={{ color: getStatusColor(item.status) }}
+                style={{ borderColor: getStatusColor(item.status) }}
+                icon={getStatusIcon(item.status)}
+              >
+                {item.status}
+              </Chip>
             </View>
-            <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant, marginLeft: 32 }}>
-              {item.type || 'Unknown Type'}
-            </Text>
-          </View>
-          <Chip 
-            mode="outlined" 
-            textStyle={{ color: getStatusColor(item.status) }}
-            style={{ borderColor: getStatusColor(item.status) }}
-            icon={getStatusIcon(item.status)}
-          >
-            {item.status}
-          </Chip>
-        </View>
-        
-        {item.description && (
-          <Text variant="bodyMedium" style={styles.description} numberOfLines={2}>
-            {item.description}
-          </Text>
-        )}
-        
-        <View style={styles.agentMeta}>
-          <View style={styles.metaItem}>
-            <Icon name="clock" size={16} color={theme.colors.onSurfaceVariant} />
-            <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant, marginLeft: 4 }}>
-              {item.last_active ? new Date(item.last_active).toLocaleDateString() : 'Never'}
-            </Text>
-          </View>
-          {item.missions_completed && (
-            <View style={styles.metaItem}>
-              <Icon name="check-circle" size={16} color={theme.colors.primary} />
-              <Text variant="bodySmall" style={{ color: theme.colors.primary, marginLeft: 4 }}>
-                {item.missions_completed} missions
+            
+            {item.description && (
+              <Text variant="bodyMedium" style={styles.description} numberOfLines={2}>
+                {item.description}
               </Text>
+            )}
+            
+            <View style={styles.agentMeta}>
+              <View style={styles.metaItem}>
+                <Icon name="clock" size={16} color={theme.colors.onSurfaceVariant} />
+                <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant, marginLeft: 4 }}>
+                  {item.last_active ? new Date(item.last_active).toLocaleDateString() : 'Never'}
+                </Text>
+              </View>
+              {/* missions_completed meta item: render only if not undefined/null */}
+              {item.missions_completed !== undefined && item.missions_completed !== null ? (
+                <View style={styles.metaItem}>
+                  <Icon name="check-circle" size={16} color={theme.colors.primary} />
+                  <Text variant="bodySmall" style={{ color: theme.colors.primary, marginLeft: 4 }}>
+                    {item.missions_completed} missions
+                  </Text>
+                </View>
+              ) : null}
             </View>
-          )}
-        </View>
 
-        {item.capabilities && item.capabilities.length > 0 && (
-          <View style={styles.capabilitiesContainer}>
-            <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant, marginBottom: 8 }}>
-              Capabilities:
-            </Text>
-            <View style={styles.capabilitiesList}>
-              {item.capabilities.slice(0, 3).map((capability, index) => (
-                <Chip 
-                  key={index}
-                  mode="outlined" 
+            {item.capabilities && item.capabilities.length > 0 && (
+              <View style={styles.capabilitiesContainer}>
+                <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant, marginBottom: 8 }}>
+                  Capabilities:
+                </Text>
+                <View style={styles.capabilitiesList}>
+                  {item.capabilities.slice(0, 3).map((capability, index) => (
+                    <Chip 
+                      key={index}
+                      mode="outlined" 
+                      compact
+                      style={styles.capabilityChip}
+                    >
+                      {capability}
+                    </Chip>
+                  ))}
+                  {item.capabilities.length > 3 && (
+                    <Chip 
+                      mode="outlined" 
+                      compact
+                      style={styles.capabilityChip}
+                    >
+                      +{item.capabilities.length - 3} more
+                    </Chip>
+                  )}
+                </View>
+              </View>
+            )}
+
+            <View style={styles.agentActions}>
+              <Button 
+                mode="outlined" 
+                compact
+                onPress={() => setSelectedAgent(item)}
+                style={styles.actionButton}
+              >
+                Details
+              </Button>
+              {item.status === 'available' && (
+                <Button 
+                  mode="contained" 
                   compact
-                  style={styles.capabilityChip}
+                  onPress={() => {}}
+                  style={styles.actionButton}
                 >
-                  {capability}
-                </Chip>
-              ))}
-              {item.capabilities.length > 3 && (
-                <Chip 
-                  mode="outlined" 
-                  compact
-                  style={styles.capabilityChip}
-                >
-                  +{item.capabilities.length - 3} more
-                </Chip>
+                  Assign Mission
+                </Button>
               )}
             </View>
-          </View>
-        )}
-
-        <View style={styles.agentActions}>
-          <Button 
-            mode="outlined" 
-            compact
-            onPress={() => setSelectedAgent(item)}
-            style={styles.actionButton}
-          >
-            Details
-          </Button>
-          {item.status === 'available' && (
-            <Button 
-              mode="contained" 
-              compact
-              onPress={() => {}}
-              style={styles.actionButton}
-            >
-              Assign Mission
-            </Button>
-          )}
-        </View>
-      </Card.Content>
-    </Card>
-  );
+          </Card.Content>
+        </Card>
+      );
+    } catch (error) {
+      debugLog('Error rendering agent card', { error, item });
+      return null;
+    }
+  };
 
   const getFilterChips = () => (
     <View style={styles.filterContainer}>
@@ -236,7 +277,9 @@ const AgentsScreen: React.FC = () => {
     </View>
   );
 
+  debugLog('FlatList data', { filteredAgents });
   if (loading && !refreshing) {
+    debugLog('Rendering loading state', {});
     return (
       <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
         <View style={styles.loadingContainer}>
@@ -249,6 +292,7 @@ const AgentsScreen: React.FC = () => {
     );
   }
 
+  debugLog('Rendering main return', {});
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <View style={styles.header}>
@@ -290,22 +334,26 @@ const AgentsScreen: React.FC = () => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
-        ListEmptyComponent={
-          <View style={styles.emptyContainer}>
-            <Icon name="robot-outline" size={64} color={theme.colors.onSurfaceVariant} />
-            <Text variant="titleMedium" style={{ color: theme.colors.onSurfaceVariant, marginTop: 16 }}>
-              {searchQuery || statusFilter !== 'all' ? 'No agents found' : 'No agents available'}
-            </Text>
-            <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant, textAlign: 'center' }}>
-              {searchQuery || statusFilter !== 'all' 
-                ? 'Try adjusting your search or filters' 
-                : 'Agents will appear here when they are registered'
-              }
-            </Text>
-          </View>
-        }
+        ListEmptyComponent={<AgentsEmptyComponent searchQuery={searchQuery} statusFilter={statusFilter} theme={theme} />}
       />
     </SafeAreaView>
+  );
+};
+
+const AgentsEmptyComponent: React.FC<{ searchQuery: string; statusFilter: string; theme: any }> = ({ searchQuery, statusFilter, theme }) => {
+  debugLog('Rendering ListEmptyComponent', { searchQuery, statusFilter });
+  return (
+    <View style={styles.emptyContainer}>
+      <Icon name="robot-outline" size={64} color={theme.colors.onSurfaceVariant} />
+      <Text variant="titleMedium" style={{ color: theme.colors.onSurfaceVariant, marginTop: 16 }}>
+        {searchQuery || statusFilter !== 'all' ? 'No agents found' : 'No agents available'}
+      </Text>
+      <Text variant="bodyMedium" style={{ color: theme.colors.onSurfaceVariant, textAlign: 'center' }}>
+        {searchQuery || statusFilter !== 'all'
+          ? 'Try adjusting your search or filters'
+          : 'Agents will appear here when they are registered'}
+      </Text>
+    </View>
   );
 };
 
@@ -379,10 +427,10 @@ const styles = StyleSheet.create({
   agentActions: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    gap: 8,
   },
   actionButton: {
     minWidth: 80,
+    marginLeft: 8, // Add spacing between buttons
   },
   loadingContainer: {
     flex: 1,
