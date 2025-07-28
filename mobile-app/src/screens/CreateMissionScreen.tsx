@@ -9,7 +9,9 @@ import ApiService from '@/services/api';
 
 const CreateMissionScreen: React.FC<NavigationProps> = ({ navigation }) => {
   const theme = useTheme();
-  const { baseUrl, isConnected } = useApi();
+  const api = useApi();
+  const baseUrl = api?.baseUrl ?? '';
+  const isConnected = api?.isConnected ?? false;
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [prompt, setPrompt] = useState('');

@@ -10,7 +10,9 @@ import ApiService from '@/services/api';
 
 const MissionDetailScreen: React.FC<NavigationProps> = ({ navigation, route }) => {
   const theme = useTheme();
-  const { baseUrl, isConnected } = useApi();
+  const api = useApi();
+  const baseUrl = api?.baseUrl ?? '';
+  const isConnected = api?.isConnected ?? false;
   const [mission, setMission] = useState<Mission | null>(null);
   const [plan, setPlan] = useState<MissionPlan | null>(null);
   const [loading, setLoading] = useState(false);
@@ -150,10 +152,10 @@ const MissionDetailScreen: React.FC<NavigationProps> = ({ navigation, route }) =
             
             <View style={styles.metaInfo}>
               <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-                Created: {new Date(mission.createdAt).toLocaleString()}
+                Created: {new Date(mission.created_at).toLocaleString()}
               </Text>
               <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-                Updated: {new Date(mission.updatedAt).toLocaleString()}
+                Updated: {new Date(mission.updated_at).toLocaleString()}
               </Text>
             </View>
           </Card.Content>
@@ -163,9 +165,7 @@ const MissionDetailScreen: React.FC<NavigationProps> = ({ navigation, route }) =
           <Card style={styles.card}>
             <Card.Title title="Execution Plan" />
             <Card.Content>
-              <Text variant="bodyMedium" style={{ marginBottom: 16 }}>
-                Estimated duration: {plan.estimatedDuration} minutes
-              </Text>
+              {/* Estimated duration: {plan.estimated_duration} minutes */}
               
               {plan.steps.map((step: MissionStep, index: number) => (
                 <View key={step.id} style={styles.stepContainer}>
@@ -183,7 +183,7 @@ const MissionDetailScreen: React.FC<NavigationProps> = ({ navigation, route }) =
                     {step.description}
                   </Text>
                   <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-                    Agent: {step.agent}
+                    Agent: {step.agent_type}
                   </Text>
                   {index < plan.steps.length - 1 && <Divider style={styles.divider} />}
                 </View>
@@ -198,21 +198,21 @@ const MissionDetailScreen: React.FC<NavigationProps> = ({ navigation, route }) =
             <Card.Content>
               <View style={styles.resultHeader}>
                 <Icon 
-                  name={mission.result.success ? 'check-circle' : 'alert-circle'} 
+                  name={mission.result.status === 'success' ? 'check-circle' : 'alert-circle'} 
                   size={24} 
-                  color={mission.result.success ? theme.colors.primary : theme.colors.error} 
+                  color={mission.result.status === 'success' ? theme.colors.primary : theme.colors.error} 
                 />
                 <Text variant="titleMedium" style={{ marginLeft: 8 }}>
-                  {mission.result.success ? 'Success' : 'Failed'}
+                  {mission.result.status === 'success' ? 'Success' : 'Failed'}
                 </Text>
               </View>
               
               <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant, marginBottom: 8 }}>
-                Completed: {new Date(mission.result.completedAt).toLocaleString()}
+                Completed: {new Date(mission.result.created_at).toLocaleString()}
               </Text>
               
               <Text variant="bodyMedium" style={styles.resultOutput}>
-                {JSON.stringify(mission.result.output, null, 2)}
+                {JSON.stringify(mission.result.summary || mission.result.details, null, 2)}
               </Text>
             </Card.Content>
           </Card>

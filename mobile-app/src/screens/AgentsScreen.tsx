@@ -11,7 +11,9 @@ import { debugLog } from '@/services/api';
 
 const AgentsScreen: React.FC = () => {
   const theme = useTheme();
-  const { baseUrl, isConnected } = useApi();
+  const api = useApi();
+  const baseUrl = api?.baseUrl ?? '';
+  const isConnected = api?.isConnected ?? false;
   const [agents, setAgents] = useState<Agent[]>([]);
   const [filteredAgents, setFilteredAgents] = useState<Agent[]>([]);
   const [loading, setLoading] = useState(false);

@@ -2,17 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import Constants from 'expo-constants';
 import { ApiConfig } from '@/types';
 
-interface ApiContextType {
-  config: ApiConfig;
-  baseUrl: string;
-  isConnected: boolean;
-  connectionError: string | null;
-}
-
-const CONFIG_URL = 'https://thrush-real-lacewing.ngrok-free.app/static/sentinel-config.json'; // Updated to /static path
-const DEFAULT_API_URL = 'https://thrush-real-lacewing.ngrok-free.app'; // fallback if config fetch fails
-
-export const ApiContext = createContext<any>(null);
+export const ApiContext = createContext<{ config: ApiConfig | null; baseUrl: string; isConnected: boolean; connectionError: string | null } | null>(null);
 
 // Enhanced debug logging
 const debugLog = (message: string, data?: any) => {
@@ -27,6 +17,9 @@ const getApiUrl = () => {
   return apiUrl;
 };
 
+const CONFIG_URL = 'https://thrush-real-lacewing.ngrok-free.app/static/sentinel-config.json';
+const DEFAULT_API_URL = 'https://thrush-real-lacewing.ngrok-free.app';
+
 const defaultConfig: ApiConfig = {
   apiUrl: getApiUrl(),
 };
@@ -34,7 +27,7 @@ const defaultConfig: ApiConfig = {
 debugLog('Initial configuration:', defaultConfig);
 
 export const ApiProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [config, setConfig] = useState<{ apiUrl: string } | null>(null);
+  const [config, setConfig] = useState<ApiConfig | null>(null);
   const [baseUrl, setBaseUrl] = useState<string>('');
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const [connectionError, setConnectionError] = useState<string | null>(null);
@@ -157,7 +150,7 @@ export const ApiProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     checkConnection();
   }, [baseUrl, config]);
 
-  const value: ApiContextType = {
+  const value: { config: ApiConfig | null; baseUrl: string; isConnected: boolean; connectionError: string | null } = {
     config,
     baseUrl,
     isConnected,
@@ -167,7 +160,7 @@ export const ApiProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   debugLog('ApiContext value:', value);
 
   return (
-    <ApiContext.Provider value={{ config, baseUrl, isConnected, connectionError }}>
+    <ApiContext.Provider value={value}>
       {children}
     </ApiContext.Provider>
   );

@@ -16,7 +16,10 @@ const debugLog = (message: string, data?: any) => {
 
 const HomeScreen: React.FC = () => {
   const theme = useTheme();
-  const { baseUrl, isConnected, connectionError } = useApi();
+  const api = useApi();
+  const baseUrl = api?.baseUrl ?? '';
+  const isConnected = api?.isConnected ?? false;
+  const connectionError = api?.connectionError ?? null;
   const [missions, setMissions] = useState<Mission[]>([]);
   const [agents, setAgents] = useState<Agent[]>([]);
   const [loading, setLoading] = useState(false);

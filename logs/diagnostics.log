@@ -211,3 +211,57 @@
 2025-07-28T03:30:29.278874 [SUCCESS] Found live engine URL: https://0d76a841882a.ngrok-free.app
 2025-07-28T03:30:29.279880 [SUCCESS] Backend '.env' file auto-configured with live engine URL.
 2025-07-28T03:30:29.279880 [SUCCESS] Backend configuration updated.
+2025-07-28T05:48:17.071400 [INFO] Running pre-flight dependency and environment checks...
+2025-07-28T05:48:17.072399 [INFO] Checking Python version...
+2025-07-28T05:48:17.072399 [SUCCESS] Python version OK: 3.11.9
+2025-07-28T05:48:17.072399 [INFO] Checking required packages...
+2025-07-28T05:48:17.072399 [SUCCESS] Package 'requests' is installed.
+2025-07-28T05:48:17.073907 [SUCCESS] Package 'psutil' is installed.
+2025-07-28T05:48:17.213298 [SUCCESS] Package 'uvicorn' is installed.
+2025-07-28T05:48:17.213298 [SUCCESS] Package 'colorama' is installed.
+2025-07-28T05:48:17.213298 [INFO] Checking required executables...
+2025-07-28T05:48:17.225984 [SUCCESS] Executable 'ngrok' found.
+2025-07-28T05:48:17.238729 [SUCCESS] Executable 'uvicorn' found.
+2025-07-28T05:48:17.239734 [INFO] Checking required environment variables...
+2025-07-28T05:48:17.240525 [SUCCESS] Env var 'DESKTOP_TUNNEL_URL' found in .env.
+2025-07-28T05:48:17.240525 [SUCCESS] Env var 'DATABASE_URL' found in .env.
+2025-07-28T05:48:17.241612 [INFO] Ensuring ngrok is running...
+2025-07-28T05:48:17.244257 [INFO] Stopping backend and engine if running...
+2025-07-28T05:48:17.402302 [SUCCESS] Backend stopped.
+2025-07-28T05:48:17.462179 [SUCCESS] Engine stopped.
+2025-07-28T05:48:19.463213 [INFO] Checking for port conflicts and killing if needed...
+2025-07-28T05:48:19.632471 [INFO] No process found using port 8080.
+2025-07-28T05:48:19.799685 [INFO] No process found using port 8001.
+2025-07-28T05:48:19.800688 [INFO] Configuring backend with live engine URL...
+2025-07-28T05:48:19.800688 [INFO] Fetching live ngrok URL for the engine...
+2025-07-28T05:48:19.815628 [SUCCESS] Found live engine URL: https://0d76a841882a.ngrok-free.app
+2025-07-28T05:48:19.817135 [SUCCESS] Backend '.env' file auto-configured with live engine URL.
+2025-07-28T05:48:19.818174 [INFO] Starting backend and engine servers...
+2025-07-28T05:48:23.170578 [ERROR] Backend failed to start. Check logs/backend.log.
+2025-07-28T05:48:23.170578 [INFO] Last 20 lines of c:\Users\AMD\sentinel\logs\backend.log:
+2025-07-28T05:48:25.198612 [SUCCESS] Backend /health: {"status":"ok","service":"Sentinel Orchestrator Backend"}
+2025-07-28T05:48:28.570606 [SUCCESS] Engine started in background. See logs/engine.log.
+2025-07-28T05:48:28.570606 [INFO] Last 20 lines of c:\Users\AMD\sentinel\logs\engine.log:
+2025-07-28T05:48:30.623203 [SUCCESS] Engine /health: {"status":"ok","service":"Sentinel Engine"}
+2025-07-28T05:48:30.624275 [INFO] Testing and optimizing system configuration...
+2025-07-28T05:48:30.967597 [INFO] Auto-optimizing: Configuring backend with current engine URL...
+2025-07-28T05:48:30.967597 [INFO] Fetching live ngrok URL for the engine...
+2025-07-28T05:48:30.984343 [SUCCESS] Found live engine URL: https://0d76a841882a.ngrok-free.app
+2025-07-28T05:48:30.985351 [SUCCESS] Backend '.env' file auto-configured with live engine URL.
+2025-07-28T05:48:30.985351 [SUCCESS] Backend configuration updated.
+2025-07-28T05:49:32.390630 [SUCCESS] System Configuration Test PASSED!
+2025-07-28T05:49:32.390630 [INFO] All services are online and accessible:
+2025-07-28T05:49:32.390630 [INFO] Your mobile app should be able to connect successfully.
+2025-07-28T05:49:32.390630 [SUCCESS] Configuration is already optimized! ✅
+2025-07-28T05:49:32.396387 [SUCCESS] Backend API: https://thrush-real-lacewing.ngrok-free.app
+2025-07-28T05:49:32.396931 [SUCCESS] Engine API:  https://0d76a841882a.ngrok-free.app
+2025-07-28T05:49:32.397418 [INFO] Your mobile app is ready to connect remotely!
+2025-07-28T05:49:44.081989 [INFO] Auto-optimizing: Configuring backend with current engine URL...
+2025-07-28T05:49:44.081989 [INFO] Fetching live ngrok URL for the engine...
+2025-07-28T05:49:44.086041 [SUCCESS] Found live engine URL: https://0d76a841882a.ngrok-free.app
+2025-07-28T05:49:44.086041 [SUCCESS] Backend '.env' file auto-configured with live engine URL.
+2025-07-28T05:49:44.086041 [SUCCESS] Backend configuration updated.
+2025-07-28T05:50:45.383900 [SUCCESS] System Configuration Test PASSED!
+2025-07-28T05:50:45.385000 [INFO] All services are online and accessible:
+2025-07-28T05:50:45.385716 [INFO] Your mobile app should be able to connect successfully.
+2025-07-28T05:50:45.385716 [SUCCESS] Configuration is already optimized! ✅

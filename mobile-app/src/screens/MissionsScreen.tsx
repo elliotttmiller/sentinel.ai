@@ -15,7 +15,9 @@ const STATUS_FAILED = ['failed', 'planning_failed'];
 
 const MissionsScreen: React.FC<NavigationProps> = ({ navigation }) => {
   const theme = useTheme();
-  const { baseUrl, isConnected } = useApi();
+  const api = useApi();
+  const baseUrl = api?.baseUrl ?? '';
+  const isConnected = api?.isConnected ?? false;
   const [missions, setMissions] = useState<Mission[]>([]);
   const [filteredMissions, setFilteredMissions] = useState<Mission[]>([]);
   const [loading, setLoading] = useState(false);

@@ -584,3 +584,16 @@ updated_at
 2025-07-28 03:29:07.943 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
 2025-07-28 03:31:00.008 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
 2025-07-28 03:33:26.775 | INFO     | main:lifespan:82 - Application shutting down...
+2025-07-28 03:33:32.491 | INFO     | main:lifespan:36 - Application starting up...
+2025-07-28 03:33:33.269 | INFO     | main:get_llm_client:53 - GenAI client initialized with API key and model: gemini-1.5-pro
+2025-07-28 03:33:33.299 | INFO     | main:lifespan:73 - Verifying database tables...
+2025-07-28 03:33:34.259 | INFO     | main:lifespan:76 - Database tables verified successfully.
+2025-07-28 03:33:34.261 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 05:48:22.842 | INFO     | main:lifespan:36 - Application starting up...
+2025-07-28 05:48:23.538 | INFO     | main:get_llm_client:53 - GenAI client initialized with API key and model: gemini-1.5-pro
+2025-07-28 05:48:23.564 | INFO     | main:lifespan:73 - Verifying database tables...
+2025-07-28 05:48:24.588 | INFO     | main:lifespan:76 - Database tables verified successfully.
+2025-07-28 05:48:24.588 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-28 05:48:25.198 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 05:49:01.730 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 05:50:14.664 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit

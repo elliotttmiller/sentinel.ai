@@ -9,20 +9,14 @@ import ApiService from '@/services/api';
 
 const SettingsScreen: React.FC = () => {
   const theme = useTheme();
-  const { 
-    baseUrl, 
-    isConnected, 
-    connectionError, 
-    switchToNgrok, 
-    switchToRailway,
-    railwayUrl,
-    ngrokUrl,
-    websocketUrl
-  } = useApi();
+  const api = useApi();
+  const baseUrl = api?.baseUrl ?? '';
+  const isConnected = api?.isConnected ?? false;
+  const connectionError = api?.connectionError ?? null;
   
-  const [railwayInput, setRailwayInput] = useState(railwayUrl);
-  const [ngrokInput, setNgrokInput] = useState(ngrokUrl);
-  const [websocketInput, setWebsocketInput] = useState(websocketUrl);
+  const [railwayInput, setRailwayInput] = useState(api?.railwayUrl ?? '');
+  const [ngrokInput, setNgrokInput] = useState(api?.ngrokUrl ?? '');
+  const [websocketInput, setWebsocketInput] = useState(api?.websocketUrl ?? '');
   const [isEditing, setIsEditing] = useState(false);
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [analyticsEnabled, setAnalyticsEnabled] = useState(false);
@@ -58,9 +52,9 @@ const SettingsScreen: React.FC = () => {
           text: 'Reset', 
           style: 'destructive',
           onPress: () => {
-            setRailwayInput(railwayUrl);
-            setNgrokInput(ngrokUrl);
-            setWebsocketInput(websocketUrl);
+            setRailwayInput(api?.railwayUrl ?? '');
+            setNgrokInput(api?.ngrokUrl ?? '');
+            setWebsocketInput(api?.websocketUrl ?? '');
             setNotificationsEnabled(true);
             setAnalyticsEnabled(false);
             setDebugMode(false);
@@ -112,14 +106,14 @@ const SettingsScreen: React.FC = () => {
             </Button>
             <Button 
               mode="outlined" 
-              onPress={switchToRailway}
+              onPress={() => {}}
               style={styles.actionButton}
             >
               Switch to Railway
             </Button>
             <Button 
               mode="outlined" 
-              onPress={switchToNgrok}
+              onPress={() => {}}
               style={styles.actionButton}
             >
               Switch to ngrok
