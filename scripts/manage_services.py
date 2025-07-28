@@ -66,7 +66,7 @@ REQUIRED_EXECUTABLES = ["ngrok", "uvicorn"]
 REQUIRED_ENV_VARS = ["DESKTOP_TUNNEL_URL", "DATABASE_URL"]
 
 def log_diagnostic(message, level='INFO'):
-    with open(DIAGNOSTICS_LOG, 'a') as f:
+    with open(DIAGNOSTICS_LOG, 'a', encoding='utf-8') as f:
         f.write(f"{datetime.datetime.now().isoformat()} [{level}] {message}\n")
 
 def print_colored(msg, color):
@@ -467,7 +467,7 @@ class ServiceManager:
             return False
         
         # All tests passed
-        print_success("🎉 System Configuration Test PASSED!")
+        print_success("System Configuration Test PASSED!")
         print_info("All services are online and accessible:")
         print(f"  - Backend: {backend_url}")
         print(f"  - Engine:  {engine_url}")

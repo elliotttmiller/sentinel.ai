@@ -583,3 +583,4 @@ updated_at
 2025-07-28 03:28:32.526 | INFO     | core.database:get_db:21 - Closing database session for this request.
 2025-07-28 03:29:07.943 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
 2025-07-28 03:31:00.008 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-28 03:33:26.775 | INFO     | main:lifespan:82 - Application shutting down...
