@@ -597,3 +597,10 @@ updated_at
 2025-07-28 05:48:25.198 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
 2025-07-28 05:49:01.730 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
 2025-07-28 05:50:14.664 | INFO     | api.system:health_check:10 - Healthcheck endpoint hit
+2025-07-29 12:30:30.735 | INFO     | main:lifespan:36 - Application starting up...
+2025-07-29 12:30:31.521 | INFO     | main:get_llm_client:53 - GenAI client initialized with API key and model: gemini-1.5-pro
+2025-07-29 12:30:31.566 | INFO     | main:lifespan:73 - Verifying database tables...
+2025-07-29 12:30:32.558 | INFO     | main:lifespan:76 - Database tables verified successfully.
+2025-07-29 12:30:32.559 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-29 12:30:45.595 | INFO     | core.database:get_db:21 - Closing database session for this request.
+2025-07-29 12:31:45.263 | INFO     | core.database:get_db:21 - Closing database session for this request.

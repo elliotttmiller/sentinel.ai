@@ -18,32 +18,56 @@ from typing import Dict
 from colorama import init, Fore, Style
 import requests
 import os
+
 init(autoreset=True)
 
 APP_DIR = Path(__file__).parent
 LOG_DIR = APP_DIR
 DESKTOP_APP_PORT = 8001
 REQUIRED_PYTHON_VERSION = (3, 9)
-REQUIRED_PACKAGES = ["requests", "psutil", "uvicorn", "loguru", "sqlalchemy", "onnxruntime"]
+REQUIRED_PACKAGES = ["requests", "psutil", "uvicorn", "loguru", "sqlalchemy"]
+OPTIONAL_PACKAGES = ["onnxruntime"]
 REQUIRED_EXECUTABLES = ["uvicorn"]
 ENV_FILE = APP_DIR / ".env"
 LOG_FILE = APP_DIR / "startup_debug.log"
 
 # --- Helper Functions ---
-def print_header(title): print(f"\n{'='*20} {title.upper()} {'='*20}")
-def print_success(msg): print(f"✅ {msg}")
-def print_error(msg): print(f"❌ {msg}")
-def print_info(msg): print(f"💡 {msg}")
-def print_colored(msg, color): print(color + msg + Style.RESET_ALL)
+
+
+def print_header(title):
+    print(f"\n{'='*20} {title.upper()} {'='*20}")
+
+
+def print_success(msg):
+    print(f"✅ {msg}")
+
+
+def print_error(msg):
+    print(f"❌ {msg}")
+
+
+def print_info(msg):
+    print(f"💡 {msg}")
+
+
+def print_warning(msg):
+    print(f"⚠️ {msg}")
+
+
+def print_colored(msg, color):
+    print(color + msg + Style.RESET_ALL)
+
 
 def find_process_by_port(port):
-    for proc in psutil.process_iter(['pid', 'name', 'connections']):
+    for proc in psutil.process_iter(["pid", "name", "connections"]):
         try:
-            for conn in proc.info.get('connections', []):
+            for conn in proc.info.get("connections", []):
                 if conn.laddr.port == port and conn.status == psutil.CONN_LISTEN:
                     return proc
-        except (psutil.NoSuchProcess, psutil.AccessDenied): pass
+        except (psutil.NoSuchProcess, psutil.AccessDenied):
+            pass
     return None
+
 
 def stop_process(port):
     proc = find_process_by_port(port)
@@ -52,18 +76,21 @@ def stop_process(port):
         return
     print(f"🛑 Stopping Desktop App (PID: {proc.pid})...")
     proc.terminate()
-    try: proc.wait(timeout=3)
-    except psutil.TimeoutExpired: proc.kill()
+    try:
+        proc.wait(timeout=3)
+    except psutil.TimeoutExpired:
+        proc.kill()
     print_success(f"Desktop app stopped.")
+
 
 def check_port_conflict(port):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        result = s.connect_ex(('localhost', port))
+        result = s.connect_ex(("localhost", port))
         if result == 0:
             print_error(f"Port {port} is already in use. Possible conflict.")
-            for proc in psutil.process_iter(['pid', 'name', 'connections']):
+            for proc in psutil.process_iter(["pid", "name", "connections"]):
                 try:
-                    for conn in proc.info.get('connections', []):
+                    for conn in proc.info.get("connections", []):
                         if conn.laddr.port == port and conn.status == psutil.CONN_LISTEN:
                             print_info(f"Port {port} is used by PID {proc.pid} ({proc.name()})")
                 except (psutil.NoSuchProcess, psutil.AccessDenied):
@@ -71,10 +98,13 @@ def check_port_conflict(port):
             return True
     return False
 
+
 def check_dependencies():
     print_info("Checking Python version...")
     if sys.version_info < REQUIRED_PYTHON_VERSION:
-        print_error(f"Python {REQUIRED_PYTHON_VERSION[0]}.{REQUIRED_PYTHON_VERSION[1]}+ required. You have {platform.python_version()}.")
+        print_error(
+            f"Python {REQUIRED_PYTHON_VERSION[0]}.{REQUIRED_PYTHON_VERSION[1]}+ required. You have {platform.python_version()}."
+        )
     else:
         print_success(f"Python version OK: {platform.python_version()}")
     print_info("Checking required packages...")
@@ -84,6 +114,14 @@ def check_dependencies():
             print_success(f"Package '{pkg}' is installed.")
         except ImportError:
             print_error(f"Package '{pkg}' is missing. Run 'pip install {pkg}'")
+
+    print_info("Checking optional packages...")
+    for pkg in OPTIONAL_PACKAGES:
+        try:
+            importlib.import_module(pkg)
+            print_success(f"Package '{pkg}' is installed.")
+        except ImportError:
+            print_warning(f"Package '{pkg}' is missing (optional). Run 'pip install {pkg}'")
     print_info("Checking required executables...")
     for exe in REQUIRED_EXECUTABLES:
         if shutil.which(exe):
@@ -96,13 +134,16 @@ def check_dependencies():
     else:
         print_error(".env file not found in desktop-app directory.")
 
+
 def check_db_connection():
     print_info("Testing database connection...")
     try:
         from dotenv import load_dotenv
+
         load_dotenv(ENV_FILE)
         import sqlalchemy
         from sqlalchemy import create_engine
+
         db_url = os.getenv("DATABASE_URL")
         if not db_url:
             raise Exception("DATABASE_URL not set in .env file.")
@@ -113,18 +154,20 @@ def check_db_connection():
     except Exception as e:
         print_error(f"Database connection failed: {e}")
 
+
 def analyze_log_file(log_path):
     if not log_path.exists():
         print_error(f"Log file {log_path} does not exist.")
         return
     print_info(f"Last 20 lines of {log_path}:")
-    with open(log_path, 'r', encoding='utf-8', errors='replace') as f:
+    with open(log_path, "r", encoding="utf-8", errors="replace") as f:
         lines = f.readlines()[-20:]
         for line in lines:
-            if 'ERROR' in line or 'Traceback' in line or 'Exception' in line:
+            if "ERROR" in line or "Traceback" in line or "Exception" in line:
                 print_colored(line.rstrip(), Fore.RED)
             else:
                 print(line.rstrip())
+
 
 def start_desktop_app():
     if find_process_by_port(DESKTOP_APP_PORT):
@@ -134,14 +177,17 @@ def start_desktop_app():
     log_file = open(LOG_DIR / "desktop_app.log", "w")
     subprocess.Popen(
         ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", str(DESKTOP_APP_PORT), "--reload"],
-        cwd=APP_DIR, stdout=log_file, stderr=log_file,
-        creationflags=subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0
+        cwd=APP_DIR,
+        stdout=log_file,
+        stderr=log_file,
+        creationflags=subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0,
     )
     time.sleep(3)
     if find_process_by_port(DESKTOP_APP_PORT):
         print_success(f"Desktop app started in background. See desktop_app.log.")
     else:
         print_error(f"Desktop app failed to start. Check desktop_app.log.")
+
 
 def show_detailed_status():
     print_header("Detailed Service Status")
@@ -159,39 +205,103 @@ def show_detailed_status():
     analyze_log_file(LOG_FILE)
     analyze_log_file(LOG_DIR / "desktop_app.log")
 
+
+def full_desktop_app_startup():
+    print_header("Full Desktop App Startup")
+    print_info("Running pre-flight dependency and environment checks...")
+    check_dependencies()
+    print_info("Testing database connection...")
+    check_db_connection()
+    print_info("Starting Desktop App server (if not running)...")
+    start_desktop_app()
+    print_info("Waiting for server to be ready...")
+    for i in range(15):  # Increased from 10 to 15 attempts
+        try:
+            resp = requests.get(
+                f"http://localhost:{DESKTOP_APP_PORT}/system-stats", timeout=5
+            )  # Increased timeout from 2 to 5 seconds
+            if resp.status_code == 200:
+                print_success("Desktop App server is online!")
+                break
+        except Exception as e:
+            if i < 14:  # Don't print error on last attempt
+                print_info(f"Waiting for server... (attempt {i+1}/15)")
+            time.sleep(2)  # Increased sleep from 1 to 2 seconds
+    else:
+        print_error("Desktop App server did not start in time. Check logs.")
+        return
+    print_info("Opening app in your default browser...")
+    import webbrowser
+
+    webbrowser.open(f"http://localhost:{DESKTOP_APP_PORT}")
+    show_detailed_status()
+
+
+def run_auto_fixer():
+    print_header("Python Auto-Fixer")
+    print_info("Running comprehensive Python syntax and style auto-fixer...")
+    try:
+        result = subprocess.run([sys.executable, "auto_fix.py"], cwd=APP_DIR, check=True)
+        if result.returncode == 0:
+            print_success("Auto-fix completed successfully!")
+        else:
+            print_warning("Auto-fix completed with some issues.")
+    except subprocess.CalledProcessError as e:
+        print_error(f"Auto-fix failed: {e}")
+    except FileNotFoundError:
+        print_error("auto_fix.py not found. Please ensure the file exists.")
+
+
+def shutdown_all_services():
+    print_header("Shutdown All Services")
+    stop_process(DESKTOP_APP_PORT)
+    print_success("All services stopped. Goodbye!")
+
+
 def main():
     while True:
         print_header("Sentinel Desktop App Service Manager")
         status = "🟢 ONLINE" if find_process_by_port(DESKTOP_APP_PORT) else "🔴 OFFLINE"
         print(f"  - Desktop App (Port {DESKTOP_APP_PORT}): {status}")
         print("\n--- Actions ---")
-        print("1. Start Desktop App Server")
-        print("2. Stop Desktop App Server")
-        print("3. Restart Desktop App Server")
-        print("4. Show Detailed Status & Logs")
-        print("5. Check Dependencies & Environment")
-        print("6. Test Database Connection")
-        print("0. Exit")
+        print("1. Full Desktop App Startup")
+        print("2. Start Desktop App Server")
+        print("3. Stop Desktop App Server")
+        print("4. Restart Desktop App Server")
+        print("5. Show Detailed Status & Logs")
+        print("6. Check Dependencies & Environment")
+        print("7. Test Database Connection")
+        print("8. Run Python Auto-Fixer")
+        print("9. Shutdown All Services")
+        print("0. Exit (Leave Services Running)")
         choice = input("\nChoose an option: ").strip()
         if choice == "1":
-            start_desktop_app()
+            full_desktop_app_startup()
         elif choice == "2":
-            stop_process(DESKTOP_APP_PORT)
+            start_desktop_app()
         elif choice == "3":
+            stop_process(DESKTOP_APP_PORT)
+        elif choice == "4":
             stop_process(DESKTOP_APP_PORT)
             time.sleep(2)
             start_desktop_app()
-        elif choice == "4":
-            show_detailed_status()
         elif choice == "5":
-            check_dependencies()
+            show_detailed_status()
         elif choice == "6":
+            check_dependencies()
+        elif choice == "7":
             check_db_connection()
+        elif choice == "8":
+            run_auto_fixer()
+        elif choice == "9":
+            shutdown_all_services()
+            break
         elif choice == "0":
             print("Exiting. Services continue running if not stopped.")
             break
         else:
             print_error("Invalid choice.")
 
+
 if __name__ == "__main__":
-    main() 
+    main()
