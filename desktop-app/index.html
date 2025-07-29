@@ -4,19 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sentinel Desktop Dashboard</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-main: #18181b;
-            --bg-panel: #232136;
-            --accent: #7c3aed;
-            --accent-light: #a78bfa;
-            --text-main: #f3f3f7;
+            --bg-main: #0a0a0a;
+            --bg-glass: rgba(30, 0, 50, 0.25);
+            --glass-blur: 18px;
+            --accent: #a259ff;
+            --accent-glow: 0 0 16px #a259ff, 0 0 32px #a259ff99;
+            --accent-strong: #7c3aed;
+            --text-main: #f8f8ff;
             --text-muted: #b3b3c6;
             --success: #22c55e;
             --pending: #eab308;
             --failed: #ef4444;
             --planning: #38bdf8;
-            --radius: 18px;
+            --radius: 22px;
+            --sidebar-width: 260px;
+            --transition: 0.18s cubic-bezier(.4,0,.2,1);
         }
         html, body {
             height: 100%;
@@ -24,78 +30,96 @@
             padding: 0;
             background: var(--bg-main);
             color: var(--text-main);
-            font-family: 'Segoe UI', Inter, Arial, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            letter-spacing: 0.01em;
         }
         body {
             display: flex;
             min-height: 100vh;
         }
         .sidebar {
-            width: 240px;
-            background: var(--bg-panel);
+            width: var(--sidebar-width);
+            background: var(--bg-glass);
+            backdrop-filter: blur(var(--glass-blur));
+            box-shadow: 2px 0 32px 0 #a259ff22;
             display: flex;
             flex-direction: column;
-            padding: 2rem 1rem;
+            align-items: center;
+            padding: 2.5rem 1rem 1.5rem 1rem;
             border-radius: 0 var(--radius) var(--radius) 0;
-            box-shadow: 2px 0 16px 0 rgba(124, 58, 237, 0.08);
+            border-right: 2px solid #1a0033;
         }
         .sidebar h2 {
+            font-family: 'Orbitron', 'Inter', Arial, sans-serif;
             color: var(--accent);
-            margin-bottom: 2rem;
-            font-size: 1.5rem;
-            text-align: center;
-            letter-spacing: 1px;
+            margin-bottom: 2.5rem;
+            font-size: 2rem;
+            letter-spacing: 0.12em;
+            text-shadow: var(--accent-glow);
         }
         .nav-btn {
             background: none;
             border: none;
             color: var(--text-main);
-            font-size: 1.1rem;
-            padding: 0.8rem 1rem;
-            margin-bottom: 0.7rem;
+            font-size: 1.15rem;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1rem;
             border-radius: var(--radius);
             cursor: pointer;
-            transition: background 0.15s, color 0.15s;
-            text-align: left;
+            font-family: 'Orbitron', 'Inter', Arial, sans-serif;
+            letter-spacing: 0.08em;
+            transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+            box-shadow: none;
         }
         .nav-btn.active, .nav-btn:hover {
-            background: var(--accent);
-            color: #fff;
+            background: linear-gradient(90deg, #a259ff44 0%, #7c3aed33 100%);
+            color: var(--accent);
+            box-shadow: 0 0 8px 2px #a259ff55;
         }
         .main-content {
             flex: 1;
             display: flex;
             flex-direction: column;
-            padding: 2.5rem 3vw;
-            gap: 2rem;
+            padding: 3rem 4vw;
+            gap: 2.5rem;
+            background: linear-gradient(120deg, #0a0a0a 60%, #1a0033 100%);
         }
         .dashboard-row {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             flex-wrap: wrap;
         }
         .panel {
-            background: var(--bg-panel);
+            background: var(--bg-glass);
+            backdrop-filter: blur(var(--glass-blur));
             border-radius: var(--radius);
-            box-shadow: 0 2px 16px 0 rgba(124, 58, 237, 0.10);
-            padding: 2rem;
-            flex: 1 1 350px;
-            min-width: 340px;
+            box-shadow: 0 4px 32px 0 #a259ff22, 0 0 0 1.5px #1a0033;
+            border: 1.5px solid #2d0055;
+            padding: 2.2rem 2rem 2rem 2rem;
+            flex: 1 1 370px;
+            min-width: 350px;
             margin-bottom: 1rem;
+            transition: box-shadow var(--transition), border var(--transition);
+            animation: fadeIn 0.7s cubic-bezier(.4,0,.2,1);
         }
         .panel h3 {
-            color: var(--accent-light);
+            color: var(--accent);
             margin-top: 0;
-            margin-bottom: 1.2rem;
-            font-size: 1.2rem;
+            margin-bottom: 1.3rem;
+            font-size: 1.25rem;
+            font-family: 'Orbitron', 'Inter', Arial, sans-serif;
+            letter-spacing: 0.09em;
+            text-shadow: 0 0 8px #a259ff55;
         }
         .status-badge {
             display: inline-block;
-            padding: 0.3em 0.9em;
+            padding: 0.3em 1em;
             border-radius: 999px;
-            font-size: 0.95em;
-            font-weight: 500;
-            margin-right: 0.5em;
+            font-size: 1em;
+            font-weight: 600;
+            margin-right: 0.7em;
+            box-shadow: 0 0 8px 1px #a259ff33;
+            letter-spacing: 0.04em;
         }
         .status-completed { background: var(--success); color: #fff; }
         .status-pending { background: var(--pending); color: #18181b; }
@@ -107,64 +131,91 @@
             margin: 0;
         }
         .mission-list li {
-            margin-bottom: 1.1em;
-            padding-bottom: 0.7em;
-            border-bottom: 1px solid #28283a;
+            margin-bottom: 1.2em;
+            padding-bottom: 0.8em;
+            border-bottom: 1px solid #2d0055;
+            transition: background 0.15s;
         }
         .mission-list li:last-child {
             border-bottom: none;
         }
         .mission-title {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-main);
+            font-family: 'Inter', Arial, sans-serif;
         }
         .mission-meta {
             color: var(--text-muted);
-            font-size: 0.95em;
+            font-size: 0.98em;
         }
         .prompt-area {
             width: 100%;
-            background: #18181b;
-            border: 1.5px solid var(--accent-light);
+            background: #0a0a0a;
+            border: 2px solid var(--accent);
             border-radius: var(--radius);
             color: var(--text-main);
-            font-size: 1.1rem;
-            padding: 1.2em;
-            margin-bottom: 1.2em;
+            font-size: 1.13rem;
+            padding: 1.3em;
+            margin-bottom: 1.3em;
             resize: vertical;
-            min-height: 80px;
+            min-height: 90px;
+            font-family: 'Inter', Arial, sans-serif;
+            box-shadow: 0 0 12px 0 #a259ff22;
+            transition: border var(--transition), box-shadow var(--transition);
+        }
+        .prompt-area:focus {
+            outline: none;
+            border: 2.5px solid var(--accent-strong);
+            box-shadow: 0 0 16px 2px #a259ff55;
         }
         .deploy-btn {
-            background: var(--accent);
+            background: linear-gradient(90deg, #a259ff 0%, #7c3aed 100%);
             color: #fff;
             border: none;
             border-radius: var(--radius);
-            font-size: 1.1rem;
-            padding: 0.9em 2.2em;
+            font-size: 1.13rem;
+            padding: 1em 2.5em;
             cursor: pointer;
-            transition: background 0.15s;
-            margin-bottom: 1.2em;
+            font-family: 'Orbitron', 'Inter', Arial, sans-serif;
+            letter-spacing: 0.09em;
+            font-weight: 700;
+            box-shadow: 0 0 16px 2px #a259ff55;
+            margin-bottom: 1.3em;
+            transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
         }
         .deploy-btn:disabled {
-            background: #6d28d9;
+            background: #2d0055;
+            color: #b3b3c6;
             cursor: not-allowed;
+            box-shadow: none;
+        }
+        .deploy-btn:hover:not(:disabled) {
+            background: linear-gradient(90deg, #7c3aed 0%, #a259ff 100%);
+            box-shadow: 0 0 32px 4px #a259ff99;
+            transform: scale(1.04);
         }
         .result-box {
-            background: #18181b;
-            border: 1.5px solid var(--accent-light);
+            background: #0a0a0a;
+            border: 2px solid var(--accent-strong);
             border-radius: var(--radius);
             color: var(--success);
-            font-family: monospace;
-            padding: 1.2em;
-            min-height: 60px;
+            font-family: 'Fira Mono', 'Consolas', monospace;
+            padding: 1.3em;
+            min-height: 70px;
             white-space: pre-wrap;
-            margin-top: 0.5em;
+            margin-top: 0.6em;
+            box-shadow: 0 0 12px 0 #a259ff22;
+            font-size: 1.08em;
         }
-        @media (max-width: 900px) {
+        @media (max-width: 1000px) {
             .dashboard-row { flex-direction: column; }
             .panel { min-width: unset; }
-            .sidebar { width: 100px; padding: 1rem 0.5rem; }
+            .sidebar { width: 80px; padding: 1rem 0.5rem; }
             .sidebar h2 { font-size: 1.1rem; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: none; }
         }
     </style>
 </head>
@@ -181,7 +232,7 @@
     <div class="main-content">
         <!-- Mission Hub Page -->
         <div id="mission-hub" class="dashboard-row">
-            <div class="panel" style="max-width: 520px;">
+            <div class="panel" style="max-width: 540px;">
                 <h3>Create & Deploy Mission</h3>
                 <textarea id="prompt-input" class="prompt-area" placeholder="Enter your mission objective for the AI agent..."></textarea>
                 <button id="deploy-button" class="deploy-btn" onclick="deployAgent()">Deploy Agent</button>

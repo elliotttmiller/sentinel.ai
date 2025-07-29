@@ -241,3 +241,165 @@ Traceback (most recent call last):
     raise ValueError(
 ValueError: The onnxruntime python package is not installed. Please install it with `pip install onnxruntime`
 
+2025-07-29 10:38:40.683 | INFO     | __main__:main:100 - === Sentinel Desktop App Startup ===
+2025-07-29 10:38:43.911 | INFO     | __main__:check_requirements:29 - All dependencies installed.
+2025-07-29 10:38:43.911 | INFO     | __main__:check_env:41 - .env file found.
+2025-07-29 10:38:45.359 | INFO     | __main__:check_db_connection:57 - Database connection successful.
+2025-07-29 10:38:49.751 | ERROR    | __main__:log_exception:20 - Import or logic test failed. Exception: The onnxruntime python package is not installed. Please install it with `pip install onnxruntime`
+2025-07-29 10:38:49.965 | DEBUG    | __main__:log_exception:21 - Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\chromadb\utils\embedding_functions.py", line 395, in __init__
+    self.ort = importlib.import_module("onnxruntime")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\onnxruntime\__init__.py", line 61, in <module>
+    raise import_capi_exception
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\onnxruntime\__init__.py", line 24, in <module>
+    from onnxruntime.capi._pybind_state import (
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\onnxruntime\capi\_pybind_state.py", line 32, in <module>
+    from .onnxruntime_pybind11_state import *  # noqa
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ImportError: DLL load failed while importing onnxruntime_pybind11_state: A dynamic link library (DLL) initialization routine failed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\sentinel\desktop-app\start_desktop_app.py", line 66, in run_tests
+    import agent_logic
+  File "C:\Users\AMD\sentinel\desktop-app\agent_logic.py", line 1, in <module>
+    from crewai import Agent, Task, Crew
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\crewai\__init__.py", line 1, in <module>
+    from crewai.agent import Agent
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\crewai\agent.py", line 13, in <module>
+    from crewai.agents import CacheHandler, CrewAgentExecutor, CrewAgentParser
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\crewai\agents\__init__.py", line 2, in <module>
+    from .executor import CrewAgentExecutor
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\crewai\agents\executor.py", line 14, in <module>
+    from crewai.agents.agent_builder.base_agent_executor_mixin import CrewAgentExecutorMixin
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\crewai\agents\agent_builder\base_agent_executor_mixin.py", line 3, in <module>
+    from crewai.memory.entity.entity_memory_item import EntityMemoryItem
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\crewai\memory\__init__.py", line 1, in <module>
+    from .entity.entity_memory import EntityMemory
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\crewai\memory\entity\entity_memory.py", line 3, in <module>
+    from crewai.memory.storage.rag_storage import RAGStorage
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\crewai\memory\storage\rag_storage.py", line 7, in <module>
+    from embedchain import App
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\embedchain\__init__.py", line 5, in <module>
+    from embedchain.app import App  # noqa: F401
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\embedchain\app.py", line 16, in <module>
+    from embedchain.config import AppConfig, CacheConfig, ChunkerConfig
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\embedchain\config\__init__.py", line 4, in <module>
+    from .app_config import AppConfig
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\embedchain\config\app_config.py", line 5, in <module>
+    from .base_app_config import BaseAppConfig
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\embedchain\config\base_app_config.py", line 6, in <module>
+    from embedchain.vectordb.base import BaseVectorDB
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\embedchain\vectordb\base.py", line 2, in <module>
+    from embedchain.embedder.base import BaseEmbedder
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\embedchain\embedder\base.py", line 7, in <module>
+    from chromadb.api.types import Embeddable, EmbeddingFunction, Embeddings
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\chromadb\__init__.py", line 3, in <module>
+    from chromadb.api.client import Client as ClientCreator
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\chromadb\api\__init__.py", line 7, in <module>
+    from chromadb.api.models.Collection import Collection
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\chromadb\api\models\Collection.py", line 57, in <module>
+    class Collection(BaseModel):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\chromadb\api\models\Collection.py", line 74, in Collection
+    ] = ef.DefaultEmbeddingFunction(),  # type: ignore
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\chromadb\utils\embedding_functions.py", line 566, in DefaultEmbeddingFunction
+    return ONNXMiniLM_L6_V2()
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\chromadb\utils\embedding_functions.py", line 397, in __init__
+    raise ValueError(
+ValueError: The onnxruntime python package is not installed. Please install it with `pip install onnxruntime`
+
+2025-07-29 11:01:02.657 | INFO     | __main__:main:100 - === Sentinel Desktop App Startup ===
+2025-07-29 11:01:09.672 | INFO     | __main__:check_requirements:29 - All dependencies installed.
+2025-07-29 11:01:09.673 | INFO     | __main__:check_env:41 - .env file found.
+2025-07-29 11:01:10.777 | INFO     | __main__:check_db_connection:57 - Database connection successful.
+2025-07-29 11:01:13.429 | ERROR    | __main__:log_exception:20 - Import or logic test failed. Exception: The onnxruntime python package is not installed. Please install it with `pip install onnxruntime`
+2025-07-29 11:01:13.661 | DEBUG    | __main__:log_exception:21 - Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\chromadb\utils\embedding_functions.py", line 395, in __init__
+    self.ort = importlib.import_module("onnxruntime")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\onnxruntime\__init__.py", line 61, in <module>
+    raise import_capi_exception
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\onnxruntime\__init__.py", line 24, in <module>
+    from onnxruntime.capi._pybind_state import (
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\onnxruntime\capi\_pybind_state.py", line 32, in <module>
+    from .onnxruntime_pybind11_state import *  # noqa
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ImportError: DLL load failed while importing onnxruntime_pybind11_state: A dynamic link library (DLL) initialization routine failed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\AMD\sentinel\desktop-app\start_desktop_app.py", line 66, in run_tests
+    import agent_logic
+  File "c:\Users\AMD\sentinel\desktop-app\agent_logic.py", line 1, in <module>
+    from crewai import Agent, Task, Crew
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\crewai\__init__.py", line 1, in <module>
+    from crewai.agent import Agent
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\crewai\agent.py", line 13, in <module>
+    from crewai.agents import CacheHandler, CrewAgentExecutor, CrewAgentParser
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\crewai\agents\__init__.py", line 2, in <module>
+    from .executor import CrewAgentExecutor
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\crewai\agents\executor.py", line 14, in <module>
+    from crewai.agents.agent_builder.base_agent_executor_mixin import CrewAgentExecutorMixin
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\crewai\agents\agent_builder\base_agent_executor_mixin.py", line 3, in <module>
+    from crewai.memory.entity.entity_memory_item import EntityMemoryItem
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\crewai\memory\__init__.py", line 1, in <module>
+    from .entity.entity_memory import EntityMemory
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\crewai\memory\entity\entity_memory.py", line 3, in <module>
+    from crewai.memory.storage.rag_storage import RAGStorage
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\crewai\memory\storage\rag_storage.py", line 7, in <module>
+    from embedchain import App
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\embedchain\__init__.py", line 5, in <module>
+    from embedchain.app import App  # noqa: F401
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\embedchain\app.py", line 16, in <module>
+    from embedchain.config import AppConfig, CacheConfig, ChunkerConfig
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\embedchain\config\__init__.py", line 4, in <module>
+    from .app_config import AppConfig
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\embedchain\config\app_config.py", line 5, in <module>
+    from .base_app_config import BaseAppConfig
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\embedchain\config\base_app_config.py", line 6, in <module>
+    from embedchain.vectordb.base import BaseVectorDB
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\embedchain\vectordb\base.py", line 2, in <module>
+    from embedchain.embedder.base import BaseEmbedder
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\embedchain\embedder\base.py", line 7, in <module>
+    from chromadb.api.types import Embeddable, EmbeddingFunction, Embeddings
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\chromadb\__init__.py", line 3, in <module>
+    from chromadb.api.client import Client as ClientCreator
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\chromadb\api\__init__.py", line 7, in <module>
+    from chromadb.api.models.Collection import Collection
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\chromadb\api\models\Collection.py", line 57, in <module>
+    class Collection(BaseModel):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\chromadb\api\models\Collection.py", line 74, in Collection
+    ] = ef.DefaultEmbeddingFunction(),  # type: ignore
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\chromadb\utils\embedding_functions.py", line 566, in DefaultEmbeddingFunction
+    return ONNXMiniLM_L6_V2()
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\chromadb\utils\embedding_functions.py", line 397, in __init__
+    raise ValueError(
+ValueError: The onnxruntime python package is not installed. Please install it with `pip install onnxruntime`
+
