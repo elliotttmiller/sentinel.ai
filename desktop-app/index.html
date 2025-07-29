@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel Desktop Dashboard</title>
+    <style>
+        :root {
+            --bg-main: #18181b;
+            --bg-panel: #232136;
+            --accent: #7c3aed;
+            --accent-light: #a78bfa;
+            --text-main: #f3f3f7;
+            --text-muted: #b3b3c6;
+            --success: #22c55e;
+            --pending: #eab308;
+            --failed: #ef4444;
+            --planning: #38bdf8;
+            --radius: 18px;
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Inter, Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 240px;
+            background: var(--bg-panel);
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1rem;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            box-shadow: 2px 0 16px 0 rgba(124, 58, 237, 0.08);
+        }
+        .sidebar h2 {
+            color: var(--accent);
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+        .nav-btn {
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.1rem;
+            padding: 0.8rem 1rem;
+            margin-bottom: 0.7rem;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s;
+            text-align: left;
+        }
+        .nav-btn.active, .nav-btn:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 2.5rem 3vw;
+            gap: 2rem;
+        }
+        .dashboard-row {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .panel {
+            background: var(--bg-panel);
+            border-radius: var(--radius);
+            box-shadow: 0 2px 16px 0 rgba(124, 58, 237, 0.10);
+            padding: 2rem;
+            flex: 1 1 350px;
+            min-width: 340px;
+            margin-bottom: 1rem;
+        }
+        .panel h3 {
+            color: var(--accent-light);
+            margin-top: 0;
+            margin-bottom: 1.2rem;
+            font-size: 1.2rem;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 0.3em 0.9em;
+            border-radius: 999px;
+            font-size: 0.95em;
+            font-weight: 500;
+            margin-right: 0.5em;
+        }
+        .status-completed { background: var(--success); color: #fff; }
+        .status-pending { background: var(--pending); color: #18181b; }
+        .status-failed { background: var(--failed); color: #fff; }
+        .status-planning { background: var(--planning); color: #18181b; }
+        .mission-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .mission-list li {
+            margin-bottom: 1.1em;
+            padding-bottom: 0.7em;
+            border-bottom: 1px solid #28283a;
+        }
+        .mission-list li:last-child {
+            border-bottom: none;
+        }
+        .mission-title {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+        .mission-meta {
+            color: var(--text-muted);
+            font-size: 0.95em;
+        }
+        .prompt-area {
+            width: 100%;
+            background: #18181b;
+            border: 1.5px solid var(--accent-light);
+            border-radius: var(--radius);
+            color: var(--text-main);
+            font-size: 1.1rem;
+            padding: 1.2em;
+            margin-bottom: 1.2em;
+            resize: vertical;
+            min-height: 80px;
+        }
+        .deploy-btn {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1.1rem;
+            padding: 0.9em 2.2em;
+            cursor: pointer;
+            transition: background 0.15s;
+            margin-bottom: 1.2em;
+        }
+        .deploy-btn:disabled {
+            background: #6d28d9;
+            cursor: not-allowed;
+        }
+        .result-box {
+            background: #18181b;
+            border: 1.5px solid var(--accent-light);
+            border-radius: var(--radius);
+            color: var(--success);
+            font-family: monospace;
+            padding: 1.2em;
+            min-height: 60px;
+            white-space: pre-wrap;
+            margin-top: 0.5em;
+        }
+        @media (max-width: 900px) {
+            .dashboard-row { flex-direction: column; }
+            .panel { min-width: unset; }
+            .sidebar { width: 100px; padding: 1rem 0.5rem; }
+            .sidebar h2 { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Sentinel</h2>
+        <button class="nav-btn active" onclick="showPage('mission-hub')">Mission Hub</button>
+        <button class="nav-btn" onclick="showPage('system-analysis')">System Analysis</button>
+        <button class="nav-btn" onclick="showPage('data-workflows')">Data Workflows</button>
+        <button class="nav-btn" onclick="showPage('settings')">Settings</button>
+        <div style="flex:1"></div>
+        <div style="text-align:center; color:var(--text-muted); font-size:0.9em; margin-top:2em;">v1.0</div>
+    </div>
+    <div class="main-content">
+        <!-- Mission Hub Page -->
+        <div id="mission-hub" class="dashboard-row">
+            <div class="panel" style="max-width: 520px;">
+                <h3>Create & Deploy Mission</h3>
+                <textarea id="prompt-input" class="prompt-area" placeholder="Enter your mission objective for the AI agent..."></textarea>
+                <button id="deploy-button" class="deploy-btn" onclick="deployAgent()">Deploy Agent</button>
+                <div id="result" class="result-box">Agent output will appear here...</div>
+            </div>
+            <div class="panel">
+                <h3>Mission Status</h3>
+                <ul class="mission-list" id="mission-list">
+                    <!-- Mission items will be injected here -->
+                </ul>
+            </div>
+        </div>
+        <!-- System Analysis Page -->
+        <div id="system-analysis" class="dashboard-row" style="display:none;">
+            <div class="panel">
+                <h3>System Analysis</h3>
+                <div id="system-info">
+                    <!-- System info will be injected here -->
+                </div>
+            </div>
+            <div class="panel">
+                <h3>Resource Usage</h3>
+                <div id="resource-usage">
+                    <!-- Resource usage will be injected here -->
+                </div>
+            </div>
+        </div>
+        <!-- Data Workflows Page (Placeholder) -->
+        <div id="data-workflows" class="dashboard-row" style="display:none;">
+            <div class="panel">
+                <h3>Data Workflows</h3>
+                <div style="color:var(--text-muted);">Coming soon: Visualize and manage your data pipelines and agent workflows here.</div>
+            </div>
+        </div>
+        <!-- Settings Page (Placeholder) -->
+        <div id="settings" class="dashboard-row" style="display:none;">
+            <div class="panel">
+                <h3>Settings</h3>
+                <div style="color:var(--text-muted);">Coming soon: Configure your agent environment, themes, and more.</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Navigation logic
+        function showPage(page) {
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.dashboard-row').forEach(row => row.style.display = 'none');
+            document.querySelector(`.nav-btn[onclick*="${page}"]`).classList.add('active');
+            document.getElementById(page).style.display = 'flex';
+        }
+
+        // Fetch and render missions from backend
+        async function fetchMissions() {
+            try {
+                const res = await fetch('/missions');
+                const missions = await res.json();
+                renderMissions(missions);
+            } catch (e) {
+                renderMissions([]);
+            }
+        }
+        function renderMissions(missions) {
+            const list = document.getElementById('mission-list');
+            list.innerHTML = '';
+            missions.forEach(m => {
+                let badgeClass = 'status-pending';
+                if (m.status === 'completed') badgeClass = 'status-completed';
+                if (m.status === 'failed') badgeClass = 'status-failed';
+                if (m.status === 'planning') badgeClass = 'status-planning';
+                list.innerHTML += `<li>
+                    <span class="status-badge ${badgeClass}">${m.status.charAt(0).toUpperCase() + m.status.slice(1)}</span>
+                    <span class="mission-title">${m.prompt}</span><br>
+                    <span class="mission-meta">${new Date(m.created_at).toLocaleString()}</span>
+                    ${m.result ? `<div style='margin-top:0.5em; color:var(--success); font-family:monospace;'>${m.result}</div>` : ''}
+                </li>`;
+            });
+        }
+
+        // Mission deploy logic
+        async function deployAgent() {
+            const promptInput = document.getElementById('prompt-input');
+            const deployButton = document.getElementById('deploy-button');
+            const resultDiv = document.getElementById('result');
+            const prompt = promptInput.value.trim();
+            if (!prompt) {
+                alert('Please enter a prompt.');
+                return;
+            }
+            deployButton.disabled = true;
+            deployButton.innerText = 'Agent is working...';
+            resultDiv.innerText = 'Waiting for agent to complete the mission...';
+            try {
+                const response = await fetch('/run-agent', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    resultDiv.innerText = data.result;
+                } else {
+                    resultDiv.innerText = `Error: ${data.detail || 'Unknown error'}`;
+                }
+            } catch (error) {
+                resultDiv.innerText = `Connection Error: ${error.message}`;
+            } finally {
+                fetchMissions();
+                deployButton.disabled = false;
+                deployButton.innerText = 'Deploy Agent';
+            }
+        }
+
+        // Fetch and render system stats
+        async function loadSystemInfo() {
+            try {
+                const res = await fetch('/system-stats');
+                const stats = await res.json();
+                document.getElementById('system-info').innerHTML = `
+                    <div>OS: ${stats.os}</div>
+                    <div>Python: ${stats.python}</div>
+                    <div>CPU: ${stats.cpu}</div>
+                    <div>RAM: ${stats.ram}</div>
+                    <div>LLM: ${stats.llm}</div>
+                    <div>Status: <span style='color:var(--success)'>${stats.status}</span></div>
+                `;
+                document.getElementById('resource-usage').innerHTML = `
+                    <div>CPU Usage: (see system monitor)</div>
+                    <div>RAM Usage: ${stats.ram}</div>
+                `;
+            } catch (e) {
+                document.getElementById('system-info').innerHTML = '<div style="color:var(--failed)">Failed to load system info</div>';
+                document.getElementById('resource-usage').innerHTML = '';
+            }
+        }
+
+        // Initial render
+        fetchMissions();
+        loadSystemInfo();
+    </script>
+</body>
+</html> 

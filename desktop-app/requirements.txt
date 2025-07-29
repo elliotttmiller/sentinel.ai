@@ -3,4 +3,7 @@ uvicorn
 crewai
 langchain-google-genai
 python-dotenv
-loguru 
+loguru
+sqlalchemy
+psycopg2-binary
+psutil 

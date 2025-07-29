@@ -2,7 +2,8 @@
 
 import asyncio
 import json
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import Dict, Any
 import os
@@ -16,7 +17,10 @@ from tools.tool_manager import ToolManager
 from agents.agent_factory import AgentFactory
 from core.crew_manager import CrewManager
 
-app = FastAPI(title="Sentinel Desktop Engine")
+# Import the core agent logic from our other file
+from agent_logic import run_simple_agent_task
+
+app = FastAPI(title="Sentinel Local Engine & Web UI")
 
 # In-memory store for mission results (replace with DB for production)
 mission_results: Dict[str, Any] = {}
@@ -129,6 +133,31 @@ async def mission_result(mission_id: str):
 async def health():
     return {"status": "ok", "service": "Sentinel Engine"}
 
-@app.get("/")
-def root():
-    return {"message": "Sentinel Desktop Engine is running", "endpoints": ["/health", "/execute_mission"]} 
+@app.get("/", response_class=FileResponse)
+def serve_web_ui():
+    """Serves the main index.html file as the user interface."""
+    return FileResponse("index.html")
+
+# Add AgentRequest model for /run-agent endpoint
+class AgentRequest(BaseModel):
+    prompt: str
+
+@app.post("/run-agent")
+async def run_agent(request: AgentRequest):
+    """
+    Receives a prompt from the web UI, runs the agent task, and returns the result.
+    """
+    logger.info(f"Received request to run agent with prompt: {request.prompt}")
+    try:
+        # FastAPI runs async, but CrewAI's kickoff is synchronous.
+        # Running it in a threadpool prevents the server from blocking.
+        loop = asyncio.get_running_loop()
+        result = await loop.run_in_executor(
+            None, # Use the default thread pool
+            run_simple_agent_task, # The function to run
+            request.prompt # The argument to the function
+        )
+        return {"result": result}
+    except Exception as e:
+        logger.error(f"An error occurred during agent execution: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e)) 

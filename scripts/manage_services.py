@@ -678,4 +678,4 @@ class ServiceManager:
 if __name__ == "__main__":
     LOG_DIR.mkdir(exist_ok=True)
     manager = ServiceManager()
-    manager.run()
+    manager.run() 
