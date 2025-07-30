@@ -17,7 +17,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from loguru import logger
 from dotenv import load_dotenv
 
-from ..agents.advanced_agents import PlannerAgents, WorkerAgents, MemoryAgents
+from ..agents.advanced_agents import PlannerAgents, WorkerAgents, MemoryAgents, PromptOptimizationAgents
 from ..models.advanced_database import db_manager
 from ..utils.phoenix_protocol import PhoenixProtocol
 from ..utils.guardian_protocol import GuardianProtocol
@@ -60,6 +60,7 @@ class CognitiveForgeEngine:
         self.planner_agents = PlannerAgents()
         self.worker_agents = WorkerAgents()
         self.memory_agents = MemoryAgents()
+        self.prompt_optimization_agents = PromptOptimizationAgents()
 
         # Initialize database manager
         self.db_manager = db_manager
@@ -217,6 +218,8 @@ class CognitiveForgeEngine:
                 "failed_at_phase": current_state.value
             }
 
+
+
     async def _execute_prompt_alchemy(
         self, 
         user_prompt: str, 
@@ -224,13 +227,13 @@ class CognitiveForgeEngine:
         update_callback: Callable[[str], None]
     ) -> Dict[str, Any]:
         """
-        Phase 1: Prompt Alchemy using PromptAlchemistAgent
+        Phase 1: Advanced Prompt Optimization using Prompt Optimization Agent
         """
-        update_callback("  ⚗️ Agent [Prompt Alchemist]: Transmuting user prompt into a golden directive...")
+        update_callback("  ⚗️ Agent [Prompt Optimization Specialist]: Transforming raw request into optimized directive...")
 
         try:
-            # Create PromptAlchemistAgent
-            alchemist = self.planner_agents.prompt_alchemist(self.llm)
+            # Create Advanced Prompt Optimization Agent
+            prompt_optimizer = self.prompt_optimization_agents.prompt_optimizer(self.llm)
             
             analysis_task = Task(
                 description=f"""Analyze and optimize the following user prompt: '{user_prompt}'.
@@ -274,11 +277,11 @@ class CognitiveForgeEngine:
             )
 
             # Use non-blocking crew execution
-            optimized_prompt_str = await self._run_crew(agents=[alchemist], tasks=[analysis_task])
+            optimized_prompt_str = await self._run_crew(agents=[prompt_optimizer], tasks=[analysis_task])
             
             try:
                 optimized_prompt_json = json.loads(optimized_prompt_str)
-                update_callback("  ✅ Prompt Alchemist: Transformation complete.")
+                update_callback("  ✅ Prompt Optimization Specialist: Transformation complete.")
                 
                 # Store in database
                 self.db_manager.add_mission_update(
@@ -290,11 +293,11 @@ class CognitiveForgeEngine:
                 return optimized_prompt_json
                 
             except json.JSONDecodeError as e:
-                logger.error(f"Prompt Alchemist returned invalid JSON: {optimized_prompt_str}")
+                logger.error(f"Prompt Optimization Specialist returned invalid JSON: {optimized_prompt_str}")
                 raise ValueError("Prompt optimization failed to produce valid JSON.") from e
                 
         except Exception as e:
-            logger.error(f"Prompt alchemy failed: {e}")
+            logger.error(f"Prompt optimization failed: {e}")
             raise
 
     async def _execute_agent_selection(self, optimized_prompt: Dict[str, Any], mission_id_str: str) -> Dict[str, Any]:

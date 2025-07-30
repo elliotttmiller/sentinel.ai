@@ -69,6 +69,7 @@ start_sentinel.bat  # Windows
 
 ## 📚 Documentation
 
+- `COGNITIVE_FORGE_V5_OPERATIONAL_PROCESS_MAP.md` - **DEFINITIVE** operational process map
 - `STARTUP_GUIDE.md` - Complete startup instructions
 - `DEPLOYMENT_GUIDE.md` - Deployment and production setup
 - `CURRENT_VERSION_SUMMARY.md` - Current system state and capabilities

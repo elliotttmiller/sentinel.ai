@@ -209,6 +209,7 @@ The workspace is immaculate. The architecture is sound. The system is ready.
 
 ## 📚 Related Documentation
 
+- `COGNITIVE_FORGE_V5_OPERATIONAL_PROCESS_MAP.md` - **DEFINITIVE** operational process map
 - `README.md` - Complete system overview and quick start
 - `SYSTEM_STATUS.md` - Detailed system status and capabilities
 - `ARCHITECTURAL_PURITY_ACHIEVED.md` - Final polish and cleanup summary
