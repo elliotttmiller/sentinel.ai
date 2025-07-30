@@ -24,13 +24,45 @@ from colorama import init, Fore, Style, Back
 import requests
 import os
 
+# Import debug killer system
+try:
+    from .debug_killer import (
+        handle_error_with_debug_killer, 
+        run_comprehensive_system_scan,
+        run_system_diagnostics,
+        log_debug_event
+    )
+except ImportError:
+    # Fallback for direct script execution
+    from debug_killer import (
+        handle_error_with_debug_killer, 
+        run_comprehensive_system_scan,
+        run_system_diagnostics,
+        log_debug_event
+    )
+
+# Import onnxruntime fix
+try:
+    from .onnxruntime_fix import (
+        get_onnxruntime,
+        is_onnxruntime_available,
+        get_onnxruntime_error
+    )
+except ImportError:
+    # Fallback for direct script execution
+    from onnxruntime_fix import (
+        get_onnxruntime,
+        is_onnxruntime_available,
+        get_onnxruntime_error
+    )
+
 init(autoreset=True)
 
 # =============================================================================
 # CONFIGURATION & CONSTANTS
 # =============================================================================
 
-APP_DIR = Path(__file__).parent.parent
+APP_DIR = Path(__file__).parent.parent.parent
 LOG_DIR = APP_DIR / "logs"
 DESKTOP_APP_PORT = 8001
 BACKEND_PORT = 8000
@@ -53,23 +85,23 @@ SERVICES = {
     "desktop_app": {
         "name": "Desktop App",
         "port": DESKTOP_APP_PORT,
-        "command": ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", str(DESKTOP_APP_PORT), "--reload"],
+        "command": ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", str(DESKTOP_APP_PORT), "--reload"],
         "cwd": APP_DIR,
         "health_endpoint": "/system-stats",
         "log_file": LOG_DIR / "desktop_app.log"
     },
     "backend": {
-        "name": "Backend API",
-        "port": BACKEND_PORT,
-        "command": ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", str(BACKEND_PORT), "--reload"],
-        "cwd": Path(__file__).parent.parent.parent / "backend",
+        "name": "Backend API (Railway)",
+        "port": None,  # No local port since it's on Railway
+        "url": "https://sentinel-backend-production.up.railway.app",  # Railway backend URL
         "health_endpoint": "/health",
-        "log_file": LOG_DIR / "backend.log"
+        "log_file": LOG_DIR / "backend.log",
+        "is_remote": True
     },
     "cognitive_engine": {
         "name": "Cognitive AI Engine",
         "port": 8002,
-        "command": ["python", "main.py"],
+        "command": ["uvicorn", "src.cognitive_engine:app", "--host", "0.0.0.0", "--port", "8002", "--reload"],
         "cwd": APP_DIR,
         "health_endpoint": "/health",
         "log_file": LOG_DIR / "cognitive_engine.log",
@@ -291,6 +323,27 @@ def get_service_status(service_name: str) -> ServiceStatus:
             last_check=datetime.datetime.now()
         )
     
+    # Handle remote services (like Railway backend)
+    if service_config.get("is_remote"):
+        try:
+            # Check if remote service is accessible
+            response = requests.get(f"{service_config['url']}/health", timeout=5)
+            is_running = response.status_code == 200
+        except:
+            is_running = False
+        
+        return ServiceStatus(
+            name=service_config["name"],
+            port=service_config.get("port", 0),
+            is_running=is_running,
+            pid=None,  # No local PID for remote services
+            memory_usage=None,
+            cpu_usage=None,
+            uptime=None,
+            last_check=datetime.datetime.now()
+        )
+    
+    # Handle local services
     proc = find_process_by_port(service_config["port"])
     if proc:
         try:
@@ -369,6 +422,22 @@ def start_service(service_name: str, background: bool = True) -> bool:
         print_error(f"Unknown service: {service_name}")
         return False
     
+    # Handle remote services (like Railway backend)
+    if service_config.get("is_remote"):
+        print_info(f"Checking remote service: {service_config['name']}")
+        try:
+            response = requests.get(f"{service_config['url']}/health", timeout=10)
+            if response.status_code == 200:
+                print_success(f"{service_config['name']} is accessible")
+                return True
+            else:
+                print_error(f"{service_config['name']} returned status {response.status_code}")
+                return False
+        except Exception as e:
+            print_error(f"Failed to connect to {service_config['name']}: {e}")
+            return False
+    
+    # Handle local services
     # Check if already running
     if find_process_by_port(service_config["port"]):
         print_success(f"{service_config['name']} is already running")
@@ -526,25 +595,24 @@ def full_desktop_app_startup() -> Dict[str, bool]:
     
     # Check cognitive engine configuration
     print_info("Checking cognitive engine configuration...")
-    if not check_cognitive_engine_config():
-        print_warning("Cognitive engine configuration issues detected - AI features may be limited")
+    try:
+        if not check_cognitive_engine_config():
+            print_warning("Cognitive engine configuration issues detected - AI features may be limited")
+    except Exception as e:
+        print_warning(f"Cognitive engine configuration check failed: {e}")
+        print_info("Continuing with startup - AI features may be limited")
     
     # Phase 2: Start core services
     print_header("Phase 2: Starting Core Services", 2)
     
-    # Start backend first (if available)
-    backend_path = Path(__file__).parent.parent.parent / "backend"
-    if backend_path.exists():
-        print_info("Starting Backend API...")
-        results["backend"] = start_service("backend")
-        if results["backend"]:
-            print_success("Backend API started successfully")
-            time.sleep(3)  # Wait for backend to stabilize
-        else:
-            print_warning("Backend API failed to start - continuing with desktop app")
+    # Check Railway backend
+    print_info("Checking Railway Backend API...")
+    results["backend"] = start_service("backend")
+    if results["backend"]:
+        print_success("Railway Backend API is accessible")
+        time.sleep(2)  # Brief wait
     else:
-        print_info("Backend directory not found - skipping backend startup")
-        results["backend"] = False
+        print_warning("Railway Backend API is not accessible - continuing with desktop app")
     
     # Start desktop app
     print_info("Starting Desktop App...")
@@ -633,7 +701,7 @@ def full_desktop_app_startup() -> Dict[str, bool]:
     print(f"\n{Fore.CYAN}Available Endpoints:{Style.RESET_ALL}")
     print(f"  Desktop App: http://localhost:{DESKTOP_APP_PORT}")
     if results.get("backend"):
-        print(f"  Backend API: http://localhost:{BACKEND_PORT}")
+        print(f"  Backend API: {SERVICES['backend']['url']}")
     if results.get("cognitive_engine"):
         print(f"  Cognitive Engine: http://localhost:8002")
     
@@ -660,7 +728,7 @@ def health_check_service(service_name: str) -> Dict[str, Any]:
     
     health_info = {
         "service": service_name,
-        "port": service_config["port"],
+        "port": service_config.get("port"),
         "process_running": False,
         "port_accessible": False,
         "health_endpoint": False,
@@ -669,6 +737,23 @@ def health_check_service(service_name: str) -> Dict[str, Any]:
         "cpu_usage": None
     }
     
+    # Handle remote services (like Railway backend)
+    if service_config.get("is_remote"):
+        try:
+            start_time = time.time()
+            response = requests.get(
+                f"{service_config['url']}{service_config['health_endpoint']}",
+                timeout=10
+            )
+            health_info["response_time"] = (time.time() - start_time) * 1000
+            health_info["health_endpoint"] = response.status_code == 200
+            health_info["status"] = "healthy" if health_info["health_endpoint"] else "unhealthy"
+        except Exception as e:
+            health_info["health_endpoint_error"] = str(e)
+            health_info["status"] = "unreachable"
+        return health_info
+    
+    # Handle local services
     # Check if process is running
     proc = find_process_by_port(service_config["port"])
     if proc:
@@ -888,10 +973,10 @@ def check_cognitive_engine_config():
     """Check if cognitive engine is properly configured"""
     print_header("Cognitive AI Engine Configuration Check", 2)
     
-    # Check if main.py exists
-    main_file = APP_DIR / "main.py"
-    if not main_file.exists():
-        print_error("Cognitive engine main.py not found")
+    # Check if cognitive_engine.py exists
+    cognitive_file = APP_DIR / "src" / "cognitive_engine.py"
+    if not cognitive_file.exists():
+        print_error("Cognitive engine cognitive_engine.py not found")
         return False
     
     # Check for required AI packages
@@ -905,6 +990,23 @@ def check_cognitive_engine_config():
         except ImportError:
             print_warning(f"⚠ {pkg} (required for AI features)")
             missing_ai_packages.append(pkg)
+    
+    # Check for optional AI packages with robust handling
+    optional_ai_packages = ["torch", "transformers"]
+    for pkg in optional_ai_packages:
+        try:
+            importlib.import_module(pkg)
+            print_success(f"✓ {pkg} (optional)")
+        except ImportError:
+            print_info(f"ℹ {pkg} (optional - not installed)")
+    
+    # Special handling for onnxruntime
+    if is_onnxruntime_available():
+        print_success("✓ onnxruntime (optional)")
+    else:
+        error_msg = get_onnxruntime_error()
+        print_info(f"ℹ onnxruntime (optional - {error_msg})")
+        print_info("This is a common Windows DLL issue. AI features may be limited.")
     
     # Check for Google credentials
     try:
@@ -1108,6 +1210,7 @@ def show_main_menu():
     print("12. Service Management (Individual)")
     print("13. System Diagnostics")
     print("14. Check Cognitive Engine Config")
+    print("15. 🔧 Debug Killer Optimization")
     print("0.  Exit")
 
 def service_management_menu():
@@ -1364,6 +1467,94 @@ def show_performance_metrics():
         print(f"  Read count: {disk_io.read_count}")
         print(f"  Write count: {disk_io.write_count}")
 
+def debug_killer_interface():
+    """Debug Killer Optimization Interface"""
+    print_header("🔧 DEBUG KILLER OPTIMIZATION SYSTEM", 1)
+    
+    while True:
+        print(f"\n{Fore.CYAN}Debug Killer Options:{Style.RESET_ALL}")
+        print("1. 🚨 Handle Current Error")
+        print("2. 🔍 Run System Scan")
+        print("3. 📊 View System Diagnostics")
+        print("4. 📋 View Error Log")
+        print("5. 🛠️ Auto-Fix Common Issues")
+        print("6. 🔄 Reset Debug System")
+        print("0. Back to Main Menu")
+        
+        choice = input(f"\n{Fore.GREEN}Choose option: {Style.RESET_ALL}").strip()
+        
+        if choice == "1":
+            error_msg = input("Enter error message: ").strip()
+            if error_msg:
+                try:
+                    # Simulate the error
+                    raise Exception(error_msg)
+                except Exception as e:
+                    handle_error_with_debug_killer(e, "Manual Error Handling")
+        
+        elif choice == "2":
+            scan_results = run_comprehensive_system_scan()
+            
+        elif choice == "3":
+            diagnostic = run_system_diagnostics()
+            
+        elif choice == "4":
+            debug_log_file = Path(__file__).parent.parent.parent / "logs" / "debug_killer.log"
+            if debug_log_file.exists():
+                print_info("Recent debug log entries:")
+                try:
+                    with open(debug_log_file, "r", encoding="utf-8") as f:
+                        lines = f.readlines()[-20:]  # Last 20 lines
+                        for line in lines:
+                            print(line.rstrip())
+                except Exception as e:
+                    print_error(f"Error reading log: {e}")
+            else:
+                print_info("No debug log found")
+        
+        elif choice == "5":
+            print_header("Auto-Fix Common Issues", 2)
+            print_info("Checking for common issues...")
+            
+            # Check and fix missing packages
+            try:
+                import crewai
+                print_success("✓ crewai package found")
+            except ImportError:
+                print_info("Installing crewai...")
+                subprocess.run([sys.executable, "-m", "pip", "install", "crewai"])
+            
+            # Check and fix port conflicts
+            common_ports = [8000, 8001, 8002]
+            for port in common_ports:
+                try:
+                    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                        s.settimeout(1)
+                        result = s.connect_ex(('localhost', port))
+                        if result == 0:
+                            print_info(f"Fixing port conflict on {port}")
+                            kill_process_on_port(port)
+                except:
+                    pass
+            
+            print_success("Auto-fix completed!")
+        
+        elif choice == "6":
+            print_header("Reset Debug System", 2)
+            debug_log_file = Path(__file__).parent.parent.parent / "logs" / "debug_killer.log"
+            if debug_log_file.exists():
+                debug_log_file.unlink()
+                print_success("Debug log cleared")
+            print_success("Debug system reset complete!")
+        
+        elif choice == "0":
+            break
+        
+        else:
+            print_error("Invalid choice")
+        
+        input(f"\n{Fore.YELLOW}Press Enter to continue...{Style.RESET_ALL}")
+
 # =============================================================================
 # MAIN FUNCTION
 # =============================================================================
@@ -1378,41 +1569,43 @@ def main():
             show_main_menu()
             choice = input(f"\n{Fore.GREEN}Choose an option: {Style.RESET_ALL}").strip()
             
-                    if choice == "1":
-            full_desktop_app_startup()
-        elif choice == "2":
-            start_all_services()
-        elif choice == "3":
-            stop_all_services()
-        elif choice == "4":
-            restart_all_services()
-        elif choice == "5":
-            monitor_services_continuous()
-        elif choice == "6":
-            comprehensive_health_check()
-        elif choice == "7":
-            check_dependencies()
-        elif choice == "8":
-            install_missing_dependencies()
-        elif choice == "9":
-            comprehensive_log_analysis()
-        elif choice == "10":
-            backup_configuration()
-        elif choice == "11":
-            killed = kill_all_related_processes()
-            print_info(f"Killed {len(killed)} related processes")
-        elif choice == "12":
-            service_management_menu()
-        elif choice == "13":
-            system_diagnostics_menu()
-        elif choice == "14":
-            check_cognitive_engine_config()
-        elif choice == "0":
-            print_success("Exiting. Services continue running if not stopped.")
-            break
-        else:
-            print_error("Invalid choice. Please try again.")
-            
+            if choice == "1":
+                full_desktop_app_startup()
+            elif choice == "2":
+                start_all_services()
+            elif choice == "3":
+                stop_all_services()
+            elif choice == "4":
+                restart_all_services()
+            elif choice == "5":
+                monitor_services_continuous()
+            elif choice == "6":
+                comprehensive_health_check()
+            elif choice == "7":
+                check_dependencies()
+            elif choice == "8":
+                install_missing_dependencies()
+            elif choice == "9":
+                comprehensive_log_analysis()
+            elif choice == "10":
+                backup_configuration()
+            elif choice == "11":
+                killed = kill_all_related_processes()
+                print_info(f"Killed {len(killed)} related processes")
+            elif choice == "12":
+                service_management_menu()
+            elif choice == "13":
+                system_diagnostics_menu()
+            elif choice == "14":
+                check_cognitive_engine_config()
+            elif choice == "15":
+                debug_killer_interface()
+            elif choice == "0":
+                print_success("Exiting. Services continue running if not stopped.")
+                break
+            else:
+                print_error("Invalid choice. Please try again.")
+                
             if choice != "4":  # Don't pause for continuous monitoring
                 input(f"\n{Fore.YELLOW}Press Enter to continue...{Style.RESET_ALL}")
                 
@@ -1421,6 +1614,11 @@ def main():
             break
         except Exception as e:
             print_critical(f"Unexpected error: {e}")
+            # Use debug killer to handle the error
+            if handle_error_with_debug_killer(e, "Main Service Manager"):
+                print_success("Error was automatically resolved!")
+            else:
+                print_warning("Error could not be automatically resolved. Manual intervention may be required.")
             input("Press Enter to continue...")
 
 if __name__ == "__main__":

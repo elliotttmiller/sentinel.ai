@@ -81,7 +81,7 @@ class SystemLog(Base):
     message = Column(Text, nullable=False)
     component = Column(String, nullable=True)  # agent_core, database, api, etc.
     timestamp = Column(DateTime, default=datetime.utcnow)
-    metadata = Column(JSON, nullable=True)
+    log_metadata = Column(JSON, nullable=True)  # Renamed from 'metadata' to avoid SQLAlchemy conflict
 
 
 class DatabaseManager:
@@ -290,7 +290,7 @@ Timestamp: {datetime.utcnow().isoformat()}"""
                 level=level,
                 message=message,
                 component=component,
-                metadata=metadata
+                log_metadata=metadata
             )
             db.add(log_entry)
             db.commit()

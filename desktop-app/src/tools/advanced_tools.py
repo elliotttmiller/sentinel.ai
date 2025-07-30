@@ -10,7 +10,16 @@ import time
 from typing import List, Dict, Any, Optional
 from pathlib import Path
 from loguru import logger
-from crewai_tools import BaseTool
+
+# Simple BaseTool class to replace crewai-tools dependency
+class BaseTool:
+    """Base class for tools to maintain compatibility"""
+    def __init__(self, name: str, description: str):
+        self.name = name
+        self.description = description
+    
+    def __call__(self, *args, **kwargs):
+        raise NotImplementedError("Subclasses must implement __call__")
 
 
 class FileTools:
@@ -98,41 +107,36 @@ class ShellTools:
         """Execute a shell command with safety checks"""
         try:
             # Extract the base command (first word)
-            base_command = command.split()[0] if command.strip() else ""
+            base_command = command.split()[0] if command.split() else ""
             
             # Check if command is allowed
-            if not any(command.startswith(allowed) for allowed in ShellTools.ALLOWED_COMMANDS):
-                return f"Error: Command '{base_command}' is not permitted. Allowed commands: {list(ShellTools.ALLOWED_COMMANDS)}"
+            if base_command not in ShellTools.ALLOWED_COMMANDS:
+                return f"Error: Command '{base_command}' is not allowed for security reasons."
             
-            # Execute with timeout and capture output
+            # Execute command
             result = subprocess.run(
-                command,
-                shell=True,
-                capture_output=True,
-                text=True,
-                check=True,
-                timeout=60  # 60 second timeout
+                command, 
+                shell=True, 
+                capture_output=True, 
+                text=True, 
+                timeout=30
             )
             
-            output = f"Command executed successfully:\nSTDOUT:\n{result.stdout}"
-            if result.stderr:
-                output += f"\nSTDERR:\n{result.stderr}"
-            
-            logger.info(f"Shell command executed: {command}")
-            return output
-            
-        except subprocess.CalledProcessError as e:
-            error_msg = f"Command failed with exit code {e.returncode}:\nSTDOUT:\n{e.stdout}\nSTDERR:\n{e.stderr}"
-            logger.error(f"Shell command failed: {command} - {error_msg}")
-            return error_msg
-            
+            if result.returncode == 0:
+                output = result.stdout.strip()
+                logger.info(f"Command executed successfully: {command}")
+                return f"Command executed successfully:\n{output}"
+            else:
+                error = result.stderr.strip()
+                logger.warning(f"Command failed: {command} - {error}")
+                return f"Command failed:\n{error}"
+                
         except subprocess.TimeoutExpired:
-            error_msg = f"Command timed out after 60 seconds: {command}"
-            logger.error(f"Shell command timeout: {command}")
+            error_msg = f"Command timed out: {command}"
+            logger.error(error_msg)
             return error_msg
-            
         except Exception as e:
-            error_msg = f"Unexpected error executing command '{command}': {str(e)}"
+            error_msg = f"Error executing command '{command}': {str(e)}"
             logger.error(error_msg)
             return error_msg
 
@@ -145,29 +149,48 @@ class SystemTools:
         """Get comprehensive system information"""
         try:
             import psutil
+            import platform
             
-            # CPU Info
-            cpu_count = psutil.cpu_count()
+            # CPU info
             cpu_percent = psutil.cpu_percent(interval=1)
+            cpu_count = psutil.cpu_count()
             
-            # Memory Info
+            # Memory info
             memory = psutil.virtual_memory()
-            memory_total = memory.total / (1024**3)  # GB
-            memory_used = memory.used / (1024**3)   # GB
             memory_percent = memory.percent
+            memory_total = memory.total / (1024**3)  # GB
             
-            # Disk Info
+            # Disk info
             disk = psutil.disk_usage('/')
-            disk_total = disk.total / (1024**3)     # GB
-            disk_used = disk.used / (1024**3)       # GB
-            disk_percent = (disk.used / disk.total) * 100
+            disk_percent = disk.percent
+            disk_total = disk.total / (1024**3)  # GB
             
-            info = f"""System Information:
-CPU: {cpu_count} cores, {cpu_percent}% usage
-Memory: {memory_used:.1f}GB / {memory_total:.1f}GB ({memory_percent}% used)
-Disk: {disk_used:.1f}GB / {disk_total:.1f}GB ({disk_percent:.1f}% used)
-Platform: {os.name}
-Python: {os.sys.version}
+            # Network info
+            network = psutil.net_io_counters()
+            bytes_sent = network.bytes_sent / (1024**2)  # MB
+            bytes_recv = network.bytes_recv / (1024**2)  # MB
+            
+            info = f"""
+System Information:
+==================
+Platform: {platform.platform()}
+Python: {platform.python_version()}
+
+CPU:
+- Usage: {cpu_percent:.1f}%
+- Cores: {cpu_count}
+
+Memory:
+- Usage: {memory_percent:.1f}%
+- Total: {memory_total:.1f} GB
+
+Disk:
+- Usage: {disk_percent:.1f}%
+- Total: {disk_total:.1f} GB
+
+Network:
+- Bytes Sent: {bytes_sent:.1f} MB
+- Bytes Received: {bytes_recv:.1f} MB
 """
             
             logger.info("System information retrieved")
@@ -177,18 +200,33 @@ Python: {os.sys.version}
             error_msg = f"Error getting system info: {str(e)}"
             logger.error(error_msg)
             return error_msg
-
+    
     @staticmethod
     def check_process_status(process_name: str) -> str:
-        """Check if a specific process is running"""
+        """Check if a process is running"""
         try:
             import psutil
             
+            running_processes = []
             for proc in psutil.process_iter(['pid', 'name']):
-                if process_name.lower() in proc.info['name'].lower():
-                    return f"Process '{process_name}' is running (PID: {proc.info['pid']})"
+                try:
+                    if process_name.lower() in proc.info['name'].lower():
+                        running_processes.append({
+                            'pid': proc.info['pid'],
+                            'name': proc.info['name']
+                        })
+                except (psutil.NoSuchProcess, psutil.AccessDenied):
+                    pass
             
-            return f"Process '{process_name}' is not running"
+            if running_processes:
+                result = f"Found {len(running_processes)} process(es) matching '{process_name}':\n"
+                for proc in running_processes:
+                    result += f"- PID {proc['pid']}: {proc['name']}\n"
+            else:
+                result = f"No processes found matching '{process_name}'"
+            
+            logger.info(f"Process status checked for: {process_name}")
+            return result
             
         except Exception as e:
             error_msg = f"Error checking process status: {str(e)}"
@@ -197,61 +235,78 @@ Python: {os.sys.version}
 
 
 class CodeAnalysisTools:
-    """Advanced code analysis and manipulation tools"""
+    """Code analysis and validation tools"""
     
     @staticmethod
     def analyze_python_file(file_path: str) -> str:
-        """Analyze a Python file for imports, functions, and classes"""
+        """Analyze a Python file for syntax and style"""
         try:
-            if not file_path.endswith('.py'):
-                return "Error: This tool only analyzes Python files."
-            
             if not os.path.exists(file_path):
                 return f"Error: File '{file_path}' not found."
             
+            if not file_path.endswith('.py'):
+                return f"Error: File '{file_path}' is not a Python file."
+            
+            # Read file content
             with open(file_path, 'r', encoding='utf-8') as f:
                 content = f.read()
             
-            # Simple analysis
-            lines = content.split('\n')
-            imports = [line.strip() for line in lines if line.strip().startswith(('import ', 'from '))]
-            functions = [line.strip() for line in lines if line.strip().startswith('def ')]
-            classes = [line.strip() for line in lines if line.strip().startswith('class ')]
+            analysis = {
+                'file_path': file_path,
+                'size': len(content),
+                'lines': len(content.splitlines()),
+                'syntax_valid': True,
+                'issues': []
+            }
             
-            analysis = f"""Python File Analysis: {file_path}
-Lines: {len(lines)}
-Imports: {len(imports)}
-Functions: {len(functions)}
-Classes: {len(classes)}
+            # Check syntax
+            try:
+                compile(content, file_path, 'exec')
+            except SyntaxError as e:
+                analysis['syntax_valid'] = False
+                analysis['issues'].append(f"Syntax error: {e}")
+            
+            # Basic style checks
+            lines = content.splitlines()
+            for i, line in enumerate(lines, 1):
+                if len(line) > 79:
+                    analysis['issues'].append(f"Line {i}: Line too long ({len(line)} chars)")
+                if line.strip() and not line.startswith(' ') and line.endswith(' '):
+                    analysis['issues'].append(f"Line {i}: Trailing whitespace")
+            
+            # Generate report
+            report = f"""
+Code Analysis for {file_path}:
+==============================
+File Size: {analysis['size']} characters
+Lines: {analysis['lines']}
+Syntax Valid: {'Yes' if analysis['syntax_valid'] else 'No'}
 
-Imports:
-{chr(10).join(imports) if imports else 'None'}
-
-Functions:
-{chr(10).join(functions) if functions else 'None'}
-
-Classes:
-{chr(10).join(classes) if classes else 'None'}
+Issues Found: {len(analysis['issues'])}
 """
             
-            logger.info(f"Python file analyzed: {file_path}")
-            return analysis
+            if analysis['issues']:
+                report += "\nIssues:\n"
+                for issue in analysis['issues']:
+                    report += f"- {issue}\n"
+            else:
+                report += "\n✅ No issues found!"
+            
+            logger.info(f"Code analysis completed for: {file_path}")
+            return report
             
         except Exception as e:
-            error_msg = f"Error analyzing Python file '{file_path}': {str(e)}"
+            error_msg = f"Error analyzing Python file: {str(e)}"
             logger.error(error_msg)
             return error_msg
-
+    
     @staticmethod
     def validate_json(json_string: str) -> str:
-        """Validate and format JSON string"""
+        """Validate JSON string"""
         try:
             parsed = json.loads(json_string)
-            formatted = json.dumps(parsed, indent=2)
-            return f"Valid JSON:\n{formatted}"
+            return f"✅ Valid JSON with {len(parsed)} top-level keys"
         except json.JSONDecodeError as e:
-            return f"Invalid JSON: {str(e)}"
-
-
-# Export all tools for easy access
-__all__ = ['FileTools', 'ShellTools', 'SystemTools', 'CodeAnalysisTools'] 
+            return f"❌ Invalid JSON: {str(e)}"
+        except Exception as e:
+            return f"❌ Error validating JSON: {str(e)}" 

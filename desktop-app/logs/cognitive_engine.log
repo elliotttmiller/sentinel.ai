@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "c:\Users\AMD\sentinel\desktop-app\src\main.py", line 17, in <module>
+    from .core.cognitive_forge_engine import cognitive_forge_engine
+ImportError: attempted relative import with no known parent package

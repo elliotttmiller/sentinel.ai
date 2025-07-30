@@ -1,0 +1,88 @@
+2025-07-29 21:21:17.837 | INFO     | src.main:startup_event:298 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-29 21:21:17.840 | INFO     | src.main:startup_event:298 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-29 21:21:17.987 | ERROR    | src.models.advanced_database:log_system_event:300 - Error logging system event: (psycopg2.errors.UndefinedColumn) column "component" of relation "system_logs" does not exist
+LINE 1: INSERT INTO system_logs (level, message, component, timestam...
+                                                 ^
+
+[SQL: INSERT INTO system_logs (level, message, component, timestamp) VALUES (%(level)s, %(message)s, %(component)s, %(timestamp)s) RETURNING system_logs.id]
+[parameters: {'level': 'INFO', 'message': 'Cognitive Forge Desktop App started successfully', 'component': 'main', 'timestamp': datetime.datetime(2025, 7, 30, 2, 21, 17, 847019)}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-29 21:21:17.988 | ERROR    | src.models.advanced_database:log_system_event:300 - Error logging system event: (psycopg2.errors.UndefinedColumn) column "component" of relation "system_logs" does not exist
+LINE 1: INSERT INTO system_logs (level, message, component, timestam...
+                                                 ^
+
+[SQL: INSERT INTO system_logs (level, message, component, timestamp) VALUES (%(level)s, %(message)s, %(component)s, %(timestamp)s) RETURNING system_logs.id]
+[parameters: {'level': 'INFO', 'message': 'Cognitive Forge Desktop App started successfully', 'component': 'main', 'timestamp': datetime.datetime(2025, 7, 30, 2, 21, 17, 850220)}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-29 21:21:39.620 | INFO     | src.main:startup_event:298 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-29 21:21:39.747 | ERROR    | src.models.advanced_database:log_system_event:300 - Error logging system event: (psycopg2.errors.UndefinedColumn) column "component" of relation "system_logs" does not exist
+LINE 1: INSERT INTO system_logs (level, message, component, timestam...
+                                                 ^
+
+[SQL: INSERT INTO system_logs (level, message, component, timestamp) VALUES (%(level)s, %(message)s, %(component)s, %(timestamp)s) RETURNING system_logs.id]
+[parameters: {'level': 'INFO', 'message': 'Cognitive Forge Desktop App started successfully', 'component': 'main', 'timestamp': datetime.datetime(2025, 7, 30, 2, 21, 39, 626835)}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-29 21:22:52.091 | INFO     | src.main:startup_event:298 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-29 21:22:52.223 | ERROR    | src.models.advanced_database:log_system_event:300 - Error logging system event: (psycopg2.errors.UndefinedColumn) column "component" of relation "system_logs" does not exist
+LINE 1: INSERT INTO system_logs (level, message, component, timestam...
+                                                 ^
+
+[SQL: INSERT INTO system_logs (level, message, component, timestamp, log_metadata) VALUES (%(level)s, %(message)s, %(component)s, %(timestamp)s, %(log_metadata)s) RETURNING system_logs.id]
+[parameters: {'level': 'INFO', 'message': 'Cognitive Forge Desktop App started successfully', 'component': 'main', 'timestamp': datetime.datetime(2025, 7, 30, 2, 22, 52, 97770), 'log_metadata': '{"version": "3.0.0", "startup_time": "2025-07-30T02:22:52.091257"}'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-29 21:24:21.723 | INFO     | src.main:shutdown_event:312 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-29 21:24:21.842 | ERROR    | src.models.advanced_database:log_system_event:300 - Error logging system event: (psycopg2.errors.UndefinedColumn) column "component" of relation "system_logs" does not exist
+LINE 1: INSERT INTO system_logs (level, message, component, timestam...
+                                                 ^
+
+[SQL: INSERT INTO system_logs (level, message, component, timestamp) VALUES (%(level)s, %(message)s, %(component)s, %(timestamp)s) RETURNING system_logs.id]
+[parameters: {'level': 'INFO', 'message': 'Cognitive Forge Desktop App shutting down', 'component': 'main', 'timestamp': datetime.datetime(2025, 7, 30, 2, 24, 21, 724985)}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-29 21:24:37.873 | INFO     | src.main:startup_event:298 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-29 21:24:37.995 | ERROR    | src.models.advanced_database:log_system_event:300 - Error logging system event: (psycopg2.errors.UndefinedColumn) column "component" of relation "system_logs" does not exist
+LINE 1: INSERT INTO system_logs (level, message, component, timestam...
+                                                 ^
+
+[SQL: INSERT INTO system_logs (level, message, component, timestamp, log_metadata) VALUES (%(level)s, %(message)s, %(component)s, %(timestamp)s, %(log_metadata)s) RETURNING system_logs.id]
+[parameters: {'level': 'INFO', 'message': 'Cognitive Forge Desktop App started successfully', 'component': 'main', 'timestamp': datetime.datetime(2025, 7, 30, 2, 24, 37, 877178), 'log_metadata': '{"version": "3.0.0", "startup_time": "2025-07-30T02:24:37.874206"}'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-29 21:29:16.948 | INFO     | src.main:shutdown_event:312 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-29 21:29:17.025 | INFO     | src.main:shutdown_event:312 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-29 21:29:17.073 | ERROR    | src.models.advanced_database:log_system_event:300 - Error logging system event: (psycopg2.errors.UndefinedColumn) column "component" of relation "system_logs" does not exist
+LINE 1: INSERT INTO system_logs (level, message, component, timestam...
+                                                 ^
+
+[SQL: INSERT INTO system_logs (level, message, component, timestamp, log_metadata) VALUES (%(level)s, %(message)s, %(component)s, %(timestamp)s, %(log_metadata)s) RETURNING system_logs.id]
+[parameters: {'level': 'INFO', 'message': 'Cognitive Forge Desktop App shutting down', 'component': 'main', 'timestamp': datetime.datetime(2025, 7, 30, 2, 29, 16, 949891), 'log_metadata': '{"shutdown_time": "2025-07-30T02:29:16.948611"}'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-29 21:29:17.182 | ERROR    | src.models.advanced_database:log_system_event:300 - Error logging system event: (psycopg2.errors.UndefinedColumn) column "component" of relation "system_logs" does not exist
+LINE 1: INSERT INTO system_logs (level, message, component, timestam...
+                                                 ^
+
+[SQL: INSERT INTO system_logs (level, message, component, timestamp) VALUES (%(level)s, %(message)s, %(component)s, %(timestamp)s) RETURNING system_logs.id]
+[parameters: {'level': 'INFO', 'message': 'Cognitive Forge Desktop App shutting down', 'component': 'main', 'timestamp': datetime.datetime(2025, 7, 30, 2, 29, 17, 27780)}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-29 21:31:26.902 | INFO     | src.main:startup_event:298 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-29 21:31:27.045 | ERROR    | src.models.advanced_database:log_system_event:300 - Error logging system event: (psycopg2.errors.UndefinedColumn) column "component" of relation "system_logs" does not exist
+LINE 1: INSERT INTO system_logs (level, message, component, timestam...
+                                                 ^
+
+[SQL: INSERT INTO system_logs (level, message, component, timestamp, log_metadata) VALUES (%(level)s, %(message)s, %(component)s, %(timestamp)s, %(log_metadata)s) RETURNING system_logs.id]
+[parameters: {'level': 'INFO', 'message': 'Cognitive Forge Desktop App started successfully', 'component': 'main', 'timestamp': datetime.datetime(2025, 7, 30, 2, 31, 26, 914727), 'log_metadata': '{"version": "3.0.0", "startup_time": "2025-07-30T02:31:26.903165"}'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-29 21:33:33.924 | INFO     | src.main:shutdown_event:312 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-29 21:33:34.047 | ERROR    | src.models.advanced_database:log_system_event:300 - Error logging system event: (psycopg2.errors.UndefinedColumn) column "component" of relation "system_logs" does not exist
+LINE 1: INSERT INTO system_logs (level, message, component, timestam...
+                                                 ^
+
+[SQL: INSERT INTO system_logs (level, message, component, timestamp, log_metadata) VALUES (%(level)s, %(message)s, %(component)s, %(timestamp)s, %(log_metadata)s) RETURNING system_logs.id]
+[parameters: {'level': 'INFO', 'message': 'Cognitive Forge Desktop App shutting down', 'component': 'main', 'timestamp': datetime.datetime(2025, 7, 30, 2, 33, 33, 926145), 'log_metadata': '{"shutdown_time": "2025-07-30T02:33:33.925149"}'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-29 21:34:35.249 | INFO     | src.main:startup_event:298 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-29 21:34:35.399 | ERROR    | src.models.advanced_database:log_system_event:300 - Error logging system event: (psycopg2.errors.UndefinedColumn) column "component" of relation "system_logs" does not exist
+LINE 1: INSERT INTO system_logs (level, message, component, timestam...
+                                                 ^
+
+[SQL: INSERT INTO system_logs (level, message, component, timestamp, log_metadata) VALUES (%(level)s, %(message)s, %(component)s, %(timestamp)s, %(log_metadata)s) RETURNING system_logs.id]
+[parameters: {'level': 'INFO', 'message': 'Cognitive Forge Desktop App started successfully', 'component': 'main', 'timestamp': datetime.datetime(2025, 7, 30, 2, 34, 35, 253061), 'log_metadata': '{"version": "3.0.0", "startup_time": "2025-07-30T02:34:35.249059"}'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)

@@ -28,7 +28,7 @@ app = FastAPI(
 )
 
 # Mount static files
-app.mount("/static", StaticFiles(directory="../static"), name="static")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # In-memory store for real-time mission status
 mission_status_db: Dict[str, Any] = {}
