@@ -96,3 +96,237 @@ INFO:     127.0.0.1:50620 - "GET /health HTTP/1.1" 200 OK
 INFO:     127.0.0.1:50642 - "GET /health HTTP/1.1" 200 OK
 INFO:     127.0.0.1:50652 - "GET /health HTTP/1.1" 200 OK
 INFO:     127.0.0.1:50672 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50682 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50698 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50714 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50744 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50748 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50766 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50783 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50793 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50804 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50815 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50826 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50837 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50847 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50855 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50870 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50884 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50929 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50937 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50960 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50977 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50986 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51000 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51017 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51027 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51036 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51048 - "GET /health HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'src\core\agent_optimizer.py'. Reloading...
+INFO:     127.0.0.1:51072 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51081 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51093 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51110 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51119 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51131 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51141 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51163 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51194 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51215 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51234 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51252 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51283 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51304 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51317 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51331 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51351 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51382 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51413 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51427 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51437 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51448 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51459 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51478 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51491 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51501 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51512 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51528 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51553 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51570 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51587 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51600 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51609 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51629 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51641 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51654 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51665 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51680 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51703 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51715 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51726 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51738 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51754 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51782 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51798 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51810 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51848 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51866 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51897 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51913 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51934 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51945 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51958 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51979 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51990 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52005 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52030 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52047 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52070 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52087 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52117 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52134 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52143 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52177 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52195 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52224 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52235 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52247 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52265 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52280 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52298 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52313 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52325 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52345 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52375 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52387 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52402 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52446 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52470 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52502 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52521 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52558 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52575 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52597 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52620 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52634 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52643 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52655 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52676 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52709 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52721 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52738 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52779 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52799 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52825 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52840 - "GET /health HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [18048]
+WARNING:  WatchFiles detected changes in 'ai_agent_optimizer.py', 'src\core\agent_optimizer.py', 'run_optimization_suite.py', 'src\agents\advanced_agents.py', 'src\utils\self_learning_module.py', 'src\utils\phoenix_protocol.py', 'src\utils\synapse_logging.py', 'src\utils\guardian_protocol.py', 'run_supercharged_optimization.py', 'src\core\cognitive_forge_engine.py', 'run_comprehensive_optimization.py', 'src\core\supercharged_agent_optimizer.py'. Reloading...
+INFO:     Started server process [20348]
+INFO:     Waiting for application startup.
+ERROR:    Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 686, in lifespan
+    await receive()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+
+Process SpawnProcess-4:
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\_subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 61, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+INFO:     Started server process [10236]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'src\cognitive_engine.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [10236]
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'debug_agent_creation.py', 'run_agent_optimization.py', 'run_optimization_suite.py', 'comprehensive_test_suite.py', 'run_comprehensive_optimization.py', 'test_upgraded_system.py', 'test_sentinel.py', 'check_single_mission.py', 'test_optimization_simple.py', 'test_api_direct.py', 'simple_tool_test.py', 'test_new_tools.py', 'ai_agent_optimizer.py', 'src\core\agent_optimizer.py', 'run_supercharged_optimization.py', 'test_simple_agent.py', 'manual_agent_test.py', 'verify_agent_results.py', 'test_mission_details.py', 'check_mission_results.py', 'test_ai_planning.py', 'test_agent_deployment.py', 'debug_mission_data.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'advanced_logging_config.py', 'run_comprehensive_tests.py', 'ai_agent_testing.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'agent_self_learning.py', 'live_agent_monitor.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'fix_postgresql_sequence.py', 'fix_mission_data.py', 'backend_fix_script.py', 'fix_mission_id_simple.py', 'fix_manage_services.py', 'check_table_structure.py', 'fix_unicode_issues.py', 'fix_unicode.py', 'fix_database_schema.py', 'fix_mission_id_autoincrement.py', 'migrate_database_simple.py', 'migrate_database.py', 'init_database_simple.py', 'init_database.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'start_unified_services.py', 'start_desktop_app.py', 'start_cognitive_forge.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'src\core\supercharged_agent_optimizer.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'src\core\agent_logic.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'start_sentinel.py', 'scripts\start_sentinel.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'src\models\db.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'src\tools\crewai_tools.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
