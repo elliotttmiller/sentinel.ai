@@ -1,802 +1,98 @@
 INFO:     Will watch for changes in these directories: ['c:\\Users\\AMD\\sentinel\\desktop-app']
 INFO:     Uvicorn running on http://0.0.0.0:8002 (Press CTRL+C to quit)
-INFO:     Started reloader process [5972] using WatchFiles
-INFO:     Started server process [7176]
+INFO:     Started reloader process [6304] using WatchFiles
+INFO:     Started server process [2360]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-INFO:     127.0.0.1:51342 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:51440 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:51467 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:51547 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50294 - "GET /health HTTP/1.1" 200 OK
 WARNING:  WatchFiles detected changes in 'src\utils\manage_services.py'. Reloading...
+INFO:     127.0.0.1:50611 - "GET /health HTTP/1.1" 200 OK
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [7176]
-2025-07-30 02:32:50.844 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 02:33:20.999 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 02:33:21.000 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 02:33:48.863 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/ai/status | Body: None
-2025-07-30 02:33:48.865 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/ai/status
-2025-07-30 02:38:03.220 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 02:39:10.222 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 02:39:10.225 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 02:54:34.757 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 02:54:34.759 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 02:54:48.496 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 02:54:48.856 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 02:54:48.859 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 02:55:32.941 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 02:55:32.943 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 02:55:33.128 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 02:57:44.227 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 02:57:44.228 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 02:57:58.355 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 02:57:58.356 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 02:57:58.936 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 02:58:42.454 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 02:58:42.454 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 02:58:58.940 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 03:05:00.166 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 04:21:47.302 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 04:22:13.252 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:22:13.253 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:22:47.355 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:22:47.356 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:23:21.461 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:23:21.462 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:23:55.577 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:23:55.579 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:24:29.670 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:24:29.672 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:25:03.800 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:25:03.800 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:25:37.903 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:25:37.904 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:26:12.037 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:26:12.038 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:26:46.130 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:26:46.131 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:27:20.247 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:27:20.247 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:27:54.341 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:27:54.342 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:28:28.445 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:28:39.481 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:28:39.588 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 04:35:11.468 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 04:35:53.212 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:35:53.214 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:37:14.870 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:37:14.871 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:37:47.544 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:37:47.544 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:38:15.063 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:38:15.064 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:38:27.724 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:38:27.727 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:38:57.721 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:38:57.722 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:38:57.907 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 04:39:35.454 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 04:39:43.231 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:39:43.232 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:39:46.299 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:39:46.300 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:39:50.616 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:39:50.618 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:40:20.898 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:40:20.898 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:40:50.921 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:40:50.922 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:41:20.682 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:41:20.688 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:41:50.934 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:41:50.935 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:42:20.689 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:42:20.695 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:42:49.664 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:42:49.667 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:42:52.743 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:42:52.744 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:43:20.597 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:43:20.598 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:43:23.642 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:43:23.643 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:43:50.656 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:43:50.657 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:43:53.716 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:43:53.716 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:44:20.913 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:44:20.913 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:44:24.009 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:44:24.010 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:44:40.779 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:44:40.780 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:44:50.923 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:44:50.924 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:45:13.871 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:45:13.872 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:45:20.627 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:45:20.628 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:45:44.172 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:45:44.174 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:45:50.928 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:45:50.930 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:46:14.141 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:46:14.143 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:46:20.685 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:46:20.688 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:46:40.278 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:46:40.281 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:46:50.647 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:46:50.648 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:47:13.371 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:47:13.372 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:47:20.622 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:47:20.623 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:47:44.162 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:47:44.163 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:47:50.607 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:47:50.608 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:48:14.160 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:48:14.161 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:48:20.663 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:48:20.663 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:48:44.172 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:48:44.174 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:48:50.613 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:48:50.614 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:49:14.144 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:49:14.145 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:49:20.625 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:49:20.626 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:49:44.162 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:49:44.163 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:49:50.638 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:49:50.639 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:50:20.909 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:50:20.911 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:50:28.163 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:50:28.165 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:50:50.921 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:50:50.924 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:51:20.936 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:51:20.937 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:51:28.468 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:51:28.469 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:51:50.676 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:51:50.677 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:52:20.665 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:52:20.666 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:52:28.166 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:52:28.166 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:52:50.643 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:52:50.644 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:53:20.704 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:53:20.706 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:53:28.147 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:53:28.148 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:53:50.677 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:53:50.678 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:54:20.933 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:54:20.935 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:54:28.375 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:54:28.376 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:54:50.909 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:54:50.910 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:55:20.662 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:55:20.662 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:55:28.162 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:55:28.163 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:55:50.651 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:55:50.651 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:56:14.543 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:56:14.543 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:56:20.611 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:56:20.612 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:56:44.168 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:56:44.169 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:56:50.582 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:56:50.582 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:57:14.166 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:57:14.167 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:57:20.656 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:57:20.657 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:57:50.655 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:57:50.656 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:58:20.661 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:58:20.662 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:58:28.165 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:58:28.166 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:58:50.671 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:58:50.672 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:59:20.660 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:59:20.661 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:59:28.153 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:59:28.155 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 04:59:50.662 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 04:59:50.663 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:00:20.652 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:00:20.653 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:00:28.167 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:00:28.168 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:00:50.676 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:00:50.678 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:00:53.887 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:00:53.888 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:00:57.354 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:00:57.354 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:01:20.655 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:01:20.657 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:01:31.169 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:01:31.170 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:01:49.794 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:01:49.795 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:01:52.864 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:01:52.866 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:02:01.148 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:02:01.149 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:02:20.633 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:02:20.636 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:02:31.152 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:02:31.153 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:02:50.691 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:02:50.695 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:03:01.145 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:03:01.147 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:03:20.682 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:03:20.684 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:03:31.160 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:03:31.162 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:03:50.882 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:03:50.884 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:04:01.168 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:04:01.170 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:04:05.265 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:04:05.266 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:04:20.619 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:04:20.620 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:04:39.167 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:04:39.169 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:04:50.676 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:04:50.677 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:05:09.174 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:05:09.175 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:05:20.655 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:05:20.656 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:05:39.456 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:05:39.458 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:05:50.929 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:05:50.930 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:06:08.591 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:06:08.592 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:06:20.608 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:06:20.609 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:06:39.146 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:06:39.147 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:06:50.643 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:06:50.645 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:07:09.128 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:07:09.130 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:07:20.938 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:07:20.941 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:07:50.907 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:07:50.909 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:08:20.669 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:08:20.671 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:08:24.946 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:08:24.948 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:08:28.467 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:08:28.468 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:08:50.633 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:08:50.635 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:09:02.162 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:09:02.163 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:09:20.588 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:09:20.589 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:09:32.160 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:09:32.160 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:09:50.931 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:09:50.932 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:10:02.168 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:10:02.170 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:10:20.700 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:10:20.701 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:10:32.136 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:10:32.137 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:10:50.681 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:10:50.682 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:11:02.179 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:11:02.180 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:11:20.682 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:11:20.683 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:11:32.139 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:11:32.140 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:11:50.652 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:11:50.654 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:12:20.638 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:12:20.639 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:12:28.137 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:12:28.138 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:12:50.639 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:12:50.640 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:12:50.809 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 05:13:25.179 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 05:13:25.313 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 05:13:49.949 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 05:13:50.101 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:13:50.103 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:13:50.105 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:13:50.106 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:13:50.620 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:13:50.621 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:14:20.935 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:14:20.937 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:14:28.163 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:14:28.166 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:14:50.892 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:14:50.894 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:15:20.668 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:15:20.669 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:15:28.163 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:15:28.165 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:15:50.675 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:15:50.679 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:15:50.902 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 05:16:22.978 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 05:16:34.839 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:16:34.841 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:16:37.901 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:16:37.903 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:17:16.015 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:17:16.017 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:17:16.216 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 05:17:50.223 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 05:17:53.021 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:17:53.022 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:17:56.074 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:17:56.075 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:17:59.356 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:17:59.361 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:18:20.668 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:18:20.671 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:18:20.822 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 05:18:52.821 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 05:18:52.972 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:18:52.975 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:19:15.011 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:19:15.013 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:19:20.600 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:19:20.602 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:19:28.161 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:19:28.162 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:19:50.639 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:19:50.640 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:20:20.667 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:20:20.668 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:20:28.174 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:20:28.175 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:20:50.684 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:20:50.687 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:21:20.687 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:21:20.688 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:21:28.147 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:21:28.148 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:22:13.666 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:22:13.669 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:22:13.822 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 05:22:41.159 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 05:22:41.310 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 05:23:20.211 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 05:23:20.389 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:23:20.392 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:23:20.398 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:23:20.403 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:23:25.619 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:23:25.620 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:23:28.700 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:23:28.701 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:23:31.927 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:23:31.929 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:23:32.096 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 05:24:05.175 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 05:24:05.321 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 05:24:48.917 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 05:24:54.059 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 05:25:30.742 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 05:25:30.919 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:25:30.921 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:25:34.688 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:25:34.691 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:25:37.767 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:25:37.769 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:25:40.852 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:25:40.853 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:25:43.919 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:25:43.922 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:25:47.051 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:25:47.053 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:25:50.609 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:25:50.609 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:26:20.923 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:26:20.924 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:26:28.150 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:26:28.152 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:26:50.941 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:26:50.943 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:27:20.740 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:27:20.741 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:27:28.137 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:27:28.139 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:27:50.801 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:27:50.802 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:28:20.711 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:28:20.713 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:28:20.912 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 05:28:41.348 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 05:28:41.487 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 05:29:00.504 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 05:29:00.648 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:29:00.649 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:29:17.370 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:29:17.371 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:29:20.614 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:29:20.615 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:29:28.151 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:29:28.152 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:29:50.656 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:29:50.657 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:30:20.662 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:30:20.663 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:30:28.133 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:30:28.135 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:30:50.693 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:30:50.694 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:31:20.671 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:31:20.672 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:31:28.149 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:31:28.151 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:31:43.468 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:31:43.469 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:31:47.325 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:31:47.329 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:31:50.612 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:31:50.614 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:32:20.406 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:32:20.406 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:32:23.742 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:32:23.744 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:32:50.405 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:32:50.406 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:32:53.459 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:32:53.460 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:33:20.623 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:33:20.625 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:33:23.673 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:33:23.674 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:33:50.623 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:33:50.624 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:33:53.707 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:33:53.708 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:34:20.916 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:34:20.917 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:34:23.999 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:34:24.000 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:34:50.672 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:34:50.673 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:34:53.730 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:34:53.732 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:35:20.684 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:35:20.689 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:35:20.827 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 05:35:57.190 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 05:35:57.342 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:35:57.345 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:36:15.331 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:36:15.333 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:36:20.603 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:36:20.607 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:36:28.171 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:36:28.174 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:36:28.327 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 05:37:08.658 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 05:37:11.344 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:37:11.345 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:37:20.923 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:37:20.924 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:37:28.166 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:37:28.168 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:37:50.918 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:37:50.920 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:38:32.322 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:38:32.324 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:38:32.542 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 05:39:02.903 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 05:39:03.047 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:39:03.049 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:39:03.052 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:39:03.053 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:39:20.937 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:39:20.939 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:39:28.168 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:39:28.170 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:39:50.926 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:39:50.927 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:40:20.749 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:40:20.750 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:40:28.166 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:40:28.167 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:40:50.740 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:40:50.742 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:41:20.712 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:41:20.715 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:41:28.156 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:41:28.158 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:41:50.701 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:41:50.706 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:42:20.720 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:42:20.721 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:42:28.157 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:42:28.157 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:42:50.662 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:42:50.663 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:43:20.725 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:43:20.727 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:43:20.883 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 05:43:48.482 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 05:43:49.246 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:43:49.248 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:44:04.690 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:44:04.692 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:44:08.090 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:44:08.091 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:44:20.401 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:44:20.402 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:44:23.460 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:44:23.463 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:45:10.645 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:45:10.647 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:45:10.832 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 05:45:37.638 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 05:45:37.801 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:45:37.802 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:45:37.802 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:45:37.803 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:45:37.804 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:45:37.804 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:45:42.826 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 05:46:09.694 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 05:46:18.263 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:46:18.266 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:46:21.335 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:46:21.338 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:46:24.392 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:46:24.393 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:46:27.459 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:46:27.460 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:46:50.921 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:46:50.922 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:47:20.680 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:47:20.682 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:47:20.853 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 05:53:03.502 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 05:53:03.631 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 05:53:23.777 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 05:53:23.940 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:53:23.941 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:54:20.675 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:54:20.676 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:54:28.174 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:54:28.175 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:54:50.694 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:54:50.695 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:55:20.674 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:55:20.675 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:55:28.145 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:55:28.146 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:55:50.758 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:55:50.759 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:56:09.659 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:56:09.663 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:56:13.507 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:56:13.509 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:56:20.602 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:56:20.604 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:56:47.166 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:56:47.168 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:56:50.625 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:56:50.626 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:57:17.158 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:57:17.159 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:57:20.744 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:57:20.747 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:57:47.442 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:57:47.444 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:57:50.606 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:57:50.606 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:58:17.164 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:58:17.166 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:58:20.678 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:58:20.679 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:58:47.163 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:58:47.164 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:58:50.691 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:58:50.692 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:59:17.148 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:59:17.148 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:59:20.719 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:59:20.719 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 05:59:50.702 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 05:59:50.703 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:00:20.677 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:00:20.677 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:00:28.159 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:00:28.159 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:00:50.753 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:00:50.755 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:01:20.898 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:01:20.899 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:01:28.155 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:01:28.156 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:01:50.701 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:01:50.702 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:02:20.708 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:02:20.709 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:02:28.157 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:02:28.158 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:02:50.738 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:02:50.740 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:02:53.857 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:02:53.859 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:02:57.892 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:02:57.893 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:03:20.610 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:03:20.610 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:03:31.007 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:03:31.008 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:03:50.602 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:03:50.603 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:04:00.987 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:04:00.989 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:04:01.096 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 06:04:20.525 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 06:04:20.682 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:04:20.684 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:04:30.955 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:04:30.956 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:04:50.606 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:04:50.609 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:05:00.984 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:05:00.985 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:05:20.623 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:05:20.625 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:05:30.987 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:05:30.987 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:05:50.616 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:05:50.618 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:06:00.985 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:06:00.986 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:06:20.611 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:06:20.612 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:06:30.998 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:06:31.000 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:06:50.601 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:06:50.602 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:07:00.969 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:07:00.970 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:07:20.623 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:07:20.625 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:07:20.794 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 06:07:39.592 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 06:07:39.720 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 06:07:59.924 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 06:08:00.065 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:08:00.066 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:08:00.068 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:08:00.068 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:08:00.988 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:08:00.989 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:08:20.620 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:08:20.621 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:08:50.600 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:08:50.601 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:09:01.002 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:09:01.003 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:09:20.597 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:09:20.597 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:09:30.969 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:09:30.970 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:09:50.608 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:09:50.609 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:09:50.807 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 06:10:10.192 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 06:10:10.332 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:10:10.333 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:10:20.621 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:10:20.622 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:10:30.971 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:10:30.971 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:10:50.627 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:10:50.629 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:11:00.978 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:11:00.979 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:11:20.612 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:11:20.613 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:11:31.022 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:11:31.023 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:11:50.739 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:11:50.740 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:12:00.996 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:12:00.997 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:12:20.698 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:12:20.699 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:12:30.966 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:12:30.966 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:12:50.611 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:12:50.612 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:12:50.795 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 06:13:12.723 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 06:13:13.593 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:13:13.594 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:13:20.608 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:13:20.609 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:13:30.995 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:13:30.996 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:13:50.627 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:13:50.628 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:13:50.814 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 06:14:17.398 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 06:14:17.593 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:14:17.595 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:14:20.621 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:14:20.624 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:14:20.838 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 06:14:37.950 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 06:14:38.088 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 06:14:59.992 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 06:15:00.141 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:15:00.142 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:15:00.143 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:15:00.144 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:15:01.141 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:15:01.142 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:15:20.640 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:15:20.641 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:15:50.725 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:15:50.725 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:16:20.696 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:16:20.697 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:16:28.151 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:16:28.152 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:16:50.728 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:16:50.729 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:17:20.727 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:17:20.727 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:17:28.163 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:17:28.164 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:17:50.772 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:17:50.775 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:18:20.797 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:18:20.797 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:18:28.133 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:18:28.133 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:18:50.777 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:18:50.778 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:19:20.704 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:19:20.705 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:19:28.151 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:19:28.153 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:19:28.369 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
-2025-07-30 06:19:48.769 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
-2025-07-30 06:19:50.786 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:19:50.787 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:20:20.747 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:20:20.748 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:20:28.136 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:20:28.137 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:20:50.693 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:20:50.694 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:21:20.694 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
-2025-07-30 06:21:20.695 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
-2025-07-30 06:21:20.834 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
+INFO:     Finished server process [2360]
+WARNING:  WatchFiles detected changes in 'src\utils\manage_services.py'. Reloading...
+INFO:     Started server process [17024]
+INFO:     Waiting for application startup.
+ERROR:    Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 686, in lifespan
+    await receive()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+
+Process SpawnProcess-2:
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\_subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 61, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+INFO:     Started server process [18048]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:50620 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50642 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50652 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50672 - "GET /health HTTP/1.1" 200 OK
