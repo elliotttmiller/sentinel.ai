@@ -307,6 +307,105 @@ def search_memory(query: str, limit: int = 5):
         raise HTTPException(status_code=500, detail="Failed to search memory")
 
 
+@app.get("/service-status")
+async def get_service_status():
+    """Get comprehensive service status including Railway connection"""
+    try:
+        import requests
+        import psutil
+        import os
+        from datetime import datetime
+        
+        # Check local services
+        services = {
+            "cognitive_engine": {
+                "url": "http://localhost:8002/health", 
+                "name": "Cognitive Engine",
+                "port": 8002
+            }
+        }
+        
+        # Check Railway deployment if available
+        railway_status = {
+            "available": False,
+            "url": None,
+            "status": "unknown"
+        }
+        
+        # Try to get Railway URL from environment
+        railway_url = os.getenv("RAILWAY_STATIC_URL") or os.getenv("RAILWAY_PUBLIC_DOMAIN")
+        if railway_url:
+            try:
+                response = requests.get(f"https://{railway_url}/health", timeout=5)
+                railway_status = {
+                    "available": True,
+                    "url": f"https://{railway_url}",
+                    "status": "online" if response.status_code == 200 else "offline"
+                }
+            except:
+                railway_status = {
+                    "available": True,
+                    "url": f"https://{railway_url}",
+                    "status": "offline"
+                }
+        
+        # Check local services
+        service_status = {}
+        for service_id, service in services.items():
+            try:
+                response = requests.get(service["url"], timeout=5)
+                service_status[service_id] = {
+                    "name": service["name"],
+                    "status": "online" if response.status_code == 200 else "offline",
+                    "port": service["port"],
+                    "response_time": response.elapsed.total_seconds(),
+                    "last_check": datetime.now().isoformat()
+                }
+            except Exception as e:
+                service_status[service_id] = {
+                    "name": service["name"],
+                    "status": "offline",
+                    "port": service["port"],
+                    "error": str(e),
+                    "last_check": datetime.now().isoformat()
+                }
+        
+        # Add Desktop App status (always online since we're running from it)
+        service_status["desktop_app"] = {
+            "name": "Desktop App",
+            "status": "online",
+            "port": 8001,
+            "response_time": 0.001,
+            "last_check": datetime.now().isoformat()
+        }
+        
+        # Get system metrics
+        memory = psutil.virtual_memory()
+        cpu = psutil.cpu_percent(interval=1)
+        disk = psutil.disk_usage('/')
+        
+        return {
+            "timestamp": datetime.now().isoformat(),
+            "services": service_status,
+            "railway": railway_status,
+            "system": {
+                "memory_usage": memory.percent,
+                "cpu_usage": cpu,
+                "disk_usage": disk.percent,
+                "memory_available": memory.available / 1024 / 1024,  # MB
+                "disk_free": disk.free / 1024 / 1024 / 1024  # GB
+            },
+            "overall_status": "healthy" if all(s["status"] == "online" for s in service_status.values()) else "degraded"
+        }
+        
+    except Exception as e:
+        return {
+            "timestamp": datetime.now().isoformat(),
+            "error": str(e),
+            "overall_status": "error"
+        }
+
+
 # Startup and Shutdown Events
 @app.on_event("startup")
 async def startup_event():

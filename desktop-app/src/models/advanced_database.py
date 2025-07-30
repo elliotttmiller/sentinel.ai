@@ -45,6 +45,7 @@ class Mission(Base):
     id = Column(Integer, primary_key=True, index=True)
     mission_id_str = Column(String, unique=True, index=True)
     title = Column(String, nullable=True)
+    description = Column(Text, nullable=True)  # Added missing description field
     prompt = Column(Text, nullable=False)
     agent_type = Column(String, default="developer")
     status = Column(String, default="pending")  # pending, planning, executing, completed, failed
@@ -135,6 +136,7 @@ class DatabaseManager:
             mission = Mission(
                 mission_id_str=mission_id_str,
                 title=title,
+                description=title,  # Use title as description for now
                 prompt=prompt,
                 agent_type=agent_type,
                 status="pending",

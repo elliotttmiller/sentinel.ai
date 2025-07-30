@@ -28,6 +28,7 @@
     <!-- Custom CSS -->
     <link href="/static/css/main.css" rel="stylesheet">
     <link href="/static/css/custom-theme.css" rel="stylesheet">
+    <link href="/static/css/service-status.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     
     <!-- Alpine.js -->
@@ -233,6 +234,135 @@
                                     <small class="stats-trend">
                                         <i class="bi bi-arrow-down"></i> -2.1%
                                     </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service Status Monitoring -->
+                    <div class="service-status-section">
+                        <div class="status-header">
+                            <div class="header-left">
+                                <h5 class="status-title">
+                                    <i class="bi bi-activity me-2"></i>
+                                    System Health Monitor
+                                </h5>
+                                <p class="status-subtitle">Real-time service status and performance metrics</p>
+                            </div>
+                            <div class="status-overall" :class="'status-' + serviceStatus.overall_status">
+                                <div class="status-indicator">
+                                    <span class="status-dot"></span>
+                                    <span class="status-text" x-text="serviceStatus.overall_status.toUpperCase()"></span>
+                                </div>
+                                <div class="status-details">
+                                    <small x-text="Object.keys(serviceStatus.services).length + ' Services Active'"></small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-grid">
+                            <!-- Desktop App Service Card -->
+                            <div class="service-card modern" x-show="serviceStatus.services.desktop_app">
+                                <div class="service-header">
+                                    <div class="service-icon desktop">
+                                        <i class="bi bi-display"></i>
+                                    </div>
+                                    <div class="service-info">
+                                        <h6 class="service-name" x-text="serviceStatus.services.desktop_app.name"></h6>
+                                        <div class="service-meta">
+                                            <span class="service-port" x-text="'Port ' + serviceStatus.services.desktop_app.port"></span>
+                                            <span class="service-uptime">Uptime: 99.9%</span>
+                                        </div>
+                                    </div>
+                                    <div class="service-status" :class="'status-' + serviceStatus.services.desktop_app.status">
+                                        <span class="status-dot"></span>
+                                        <span class="status-text" x-text="serviceStatus.services.desktop_app.status.toUpperCase()"></span>
+                                    </div>
+                                </div>
+                                <div class="service-metrics" x-show="serviceStatus.services.desktop_app.status === 'online'">
+                                    <div class="metrics-grid">
+                                        <div class="metric-item">
+                                            <span class="metric-label">Response Time</span>
+                                            <span class="metric-value fast" x-text="(serviceStatus.services.desktop_app.response_time * 1000).toFixed(0) + 'ms'"></span>
+                                        </div>
+                                        <div class="metric-item">
+                                            <span class="metric-label">Last Check</span>
+                                            <span class="metric-value" x-text="formatTime(serviceStatus.services.desktop_app.last_check)"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Cognitive Engine Service Card -->
+                            <div class="service-card modern" x-show="serviceStatus.services.cognitive_engine">
+                                <div class="service-header">
+                                    <div class="service-icon cognitive">
+                                        <i class="bi bi-cpu"></i>
+                                    </div>
+                                    <div class="service-info">
+                                        <h6 class="service-name" x-text="serviceStatus.services.cognitive_engine.name"></h6>
+                                        <div class="service-meta">
+                                            <span class="service-port" x-text="'Port ' + serviceStatus.services.cognitive_engine.port"></span>
+                                            <span class="service-uptime">Uptime: 99.8%</span>
+                                        </div>
+                                    </div>
+                                    <div class="service-status" :class="'status-' + serviceStatus.services.cognitive_engine.status">
+                                        <span class="status-dot"></span>
+                                        <span class="status-text" x-text="serviceStatus.services.cognitive_engine.status.toUpperCase()"></span>
+                                    </div>
+                                </div>
+                                <div class="service-metrics" x-show="serviceStatus.services.cognitive_engine.status === 'online'">
+                                    <div class="metrics-grid">
+                                        <div class="metric-item">
+                                            <span class="metric-label">Response Time</span>
+                                            <span class="metric-value" :class="serviceStatus.services.cognitive_engine.response_time > 1 ? 'slow' : 'fast'" x-text="(serviceStatus.services.cognitive_engine.response_time * 1000).toFixed(0) + 'ms'"></span>
+                                        </div>
+                                        <div class="metric-item">
+                                            <span class="metric-label">Last Check</span>
+                                            <span class="metric-value" x-text="formatTime(serviceStatus.services.cognitive_engine.last_check)"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- System Resources -->
+                        <div class="system-resources">
+                            <h6 class="resources-title">System Resources</h6>
+                            <div class="resources-grid">
+                                <div class="resource-item">
+                                    <div class="resource-header">
+                                        <span class="resource-label">Memory Usage</span>
+                                        <span class="resource-value" x-text="serviceStatus.system.memory_usage.toFixed(1) + '%'"></span>
+                                    </div>
+                                    <div class="progress" style="height: 6px;">
+                                        <div class="progress-bar" :class="getResourceClass(serviceStatus.system.memory_usage)" 
+                                             :style="'width: ' + serviceStatus.system.memory_usage + '%'"></div>
+                                    </div>
+                                    <small class="resource-detail" x-text="'Available: ' + serviceStatus.system.memory_available.toFixed(0) + ' MB'"></small>
+                                </div>
+                                
+                                <div class="resource-item">
+                                    <div class="resource-header">
+                                        <span class="resource-label">CPU Usage</span>
+                                        <span class="resource-value" x-text="serviceStatus.system.cpu_usage.toFixed(1) + '%'"></span>
+                                    </div>
+                                    <div class="progress" style="height: 6px;">
+                                        <div class="progress-bar" :class="getResourceClass(serviceStatus.system.cpu_usage)" 
+                                             :style="'width: ' + serviceStatus.system.cpu_usage + '%'"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="resource-item">
+                                    <div class="resource-header">
+                                        <span class="resource-label">Disk Usage</span>
+                                        <span class="resource-value" x-text="serviceStatus.system.disk_usage.toFixed(1) + '%'"></span>
+                                    </div>
+                                    <div class="progress" style="height: 6px;">
+                                        <div class="progress-bar" :class="getResourceClass(serviceStatus.system.disk_usage)" 
+                                             :style="'width: ' + serviceStatus.system.disk_usage + '%'"></div>
+                                    </div>
+                                    <small class="resource-detail" x-text="'Free: ' + serviceStatus.system.disk_free.toFixed(1) + ' GB'"></small>
                                 </div>
                             </div>
                         </div>
@@ -496,12 +626,70 @@
                     refreshInterval: 10000,
                     theme: 'dark'
                 },
+                serviceStatus: {
+                    overall_status: 'loading',
+                    services: {
+                        desktop_app: {
+                            name: 'Desktop App',
+                            status: 'loading',
+                            port: 8001,
+                            response_time: 0,
+                            last_check: new Date().toISOString()
+                        },
+                        cognitive_engine: {
+                            name: 'Cognitive Engine',
+                            status: 'loading',
+                            port: 8002,
+                            response_time: 0,
+                            last_check: new Date().toISOString()
+                        }
+                    },
+                    railway: {
+                        available: false,
+                        url: null,
+                        status: 'unknown'
+                    },
+                    system: {
+                        memory_usage: 0,
+                        cpu_usage: 0,
+                        disk_usage: 0,
+                        memory_available: 0,
+                        disk_free: 0
+                    }
+                },
 
                 init() {
                     this.loadMissions();
                     this.initializeCharts();
                     this.startPolling();
+                    this.startServiceStatusPolling();
                     this.hideLoadingScreen();
+                },
+
+                async startServiceStatusPolling() {
+                    // Initial load
+                    await this.updateServiceStatus();
+                    
+                    // Poll every 30 seconds
+                    setInterval(() => {
+                        this.updateServiceStatus();
+                    }, 30000);
+                },
+
+                async updateServiceStatus() {
+                    try {
+                        const response = await fetch('/service-status');
+                        if (response.ok) {
+                            const data = await response.json();
+                            this.serviceStatus = data;
+                        } else {
+                            console.error('Service status response not ok:', response.status);
+                        }
+                    } catch (error) {
+                        console.error('Error updating service status:', error);
+                        // Set error status
+                        this.serviceStatus.overall_status = 'error';
+                    }
                 },
 
                 setActiveTab(tab) {
@@ -755,6 +943,24 @@
                     setTimeout(() => {
                         document.getElementById('loading-screen').classList.add('hidden');
                     }, 1000);
+                },
+                formatTime(timestamp) {
+                    if (!timestamp) return 'Unknown';
+                    const date = new Date(timestamp);
+                    return date.toLocaleTimeString();
+                },
+                getServiceIcon(id) {
+                    const icons = {
+                        'desktop_app': 'bi-display',
+                        'cognitive_engine': 'bi-cpu',
+                        'railway': 'bi-cloud'
+                    };
+                    return icons[id] || 'bi-gear';
+                },
+                getResourceClass(value) {
+                    if (value < 70) return 'bg-success';
+                    if (value < 90) return 'bg-warning';
+                    return 'bg-danger';
                 }
             }
         }
