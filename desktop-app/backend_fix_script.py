@@ -1,4 +1,3 @@
-
 # Backend Database Schema Fix
 # This should be applied to the Railway backend
 
@@ -8,9 +7,10 @@ from datetime import datetime
 
 Base = declarative_base()
 
+
 class SystemLog(Base):
     __tablename__ = "system_logs"
-    
+
     id = Column(Integer, primary_key=True, index=True)
     level = Column(String, nullable=False)
     message = Column(Text, nullable=False)
@@ -19,7 +19,10 @@ class SystemLog(Base):
     created_at = Column(DateTime, default=datetime.utcnow)  # Use created_at instead of timestamp
     log_metadata = Column(JSON, nullable=True)  # Use log_metadata instead of metadata
 
+
 # Update the logging function
+
+
 def log_system_event(level: str, message: str, component: str = None, metadata: dict = None):
     db = SessionLocal()
     try:
@@ -28,7 +31,7 @@ def log_system_event(level: str, message: str, component: str = None, metadata: 
             message=message,
             component=component,
             source=component,  # Use component as source
-            log_metadata=metadata  # Use log_metadata
+            log_metadata=metadata,  # Use log_metadata
         )
         db.add(log_entry)
         db.commit()

@@ -1,1 +1,1 @@
-# Sentinel Desktop App Source Package 
+# Sentinel Desktop App Source Package

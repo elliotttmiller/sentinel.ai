@@ -1,1 +1,1 @@
-# Configuration Package for Cognitive Forge 
+# Configuration Package for Cognitive Forge

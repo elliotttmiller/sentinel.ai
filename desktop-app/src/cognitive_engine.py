@@ -18,7 +18,7 @@ import requests
 app = FastAPI(
     title="Sentinel Cognitive AI Engine",
     description="AI-powered services for the Sentinel ecosystem",
-    version="1.0.0"
+    version="1.0.0",
 )
 
 # Add CORS middleware
@@ -31,11 +31,14 @@ app.add_middleware(
 )
 
 # Pydantic models
+
+
 class AIRequest(BaseModel):
     prompt: str
     model: str = "gemini-pro"
     temperature: float = 0.7
     max_tokens: Optional[int] = None
+
 
 class AIResponse(BaseModel):
     response: str
@@ -43,10 +46,12 @@ class AIResponse(BaseModel):
     tokens_used: Optional[int] = None
     timestamp: str
 
+
 class CodeAnalysisRequest(BaseModel):
     code: str
     language: str = "python"
     analysis_type: str = "general"
+
 
 class CodeAnalysisResponse(BaseModel):
     analysis: str
@@ -54,7 +59,10 @@ class CodeAnalysisResponse(BaseModel):
     issues: List[str]
     score: float
 
+
 # Mock AI responses for demo (in production, this would use real AI models)
+
+
 def get_mock_ai_response(prompt: str, model: str = "gemini-pro") -> str:
     """Generate a mock AI response for demonstration"""
     if "code" in prompt.lower() or "programming" in prompt.lower():
@@ -64,26 +72,28 @@ def get_mock_ai_response(prompt: str, model: str = "gemini-pro") -> str:
     else:
         return f"AI response to: {prompt[:50]}...\n\nThis is a comprehensive answer addressing your question with detailed explanations and examples."
 
+
 def analyze_code(code: str, language: str = "python") -> Dict[str, Any]:
     """Mock code analysis"""
     issues = []
     suggestions = []
-    
+
     if "print(" in code:
         suggestions.append("Consider using logging instead of print statements for production code")
-    
+
     if "TODO" in code:
         issues.append("Found TODO comment - should be addressed")
-    
+
     if len(code) > 1000:
         suggestions.append("Consider breaking this into smaller functions")
-    
+
     return {
         "analysis": "Code analysis completed successfully",
         "suggestions": suggestions,
         "issues": issues,
-        "score": 8.5 if len(issues) == 0 else 7.0
+        "score": 8.5 if len(issues) == 0 else 7.0,
     }
+
 
 @app.get("/")
 async def root():
@@ -92,8 +102,9 @@ async def root():
         "message": "Sentinel Cognitive AI Engine",
         "version": "1.0.0",
         "status": "operational",
-        "models": ["gemini-pro", "gpt-4", "claude-3"]
+        "models": ["gemini-pro", "gpt-4", "claude-3"],
     }
+
 
 @app.get("/health")
 async def health_check():
@@ -105,57 +116,61 @@ async def health_check():
         "services": {
             "ai_engine": "operational",
             "model_access": "available",
-            "code_analysis": "available"
-        }
+            "code_analysis": "available",
+        },
     }
+
 
 @app.post("/ai/generate")
 async def generate_ai_response(request: AIRequest):
     """Generate AI response"""
     try:
         response_text = get_mock_ai_response(request.prompt, request.model)
-        
+
         return AIResponse(
             response=response_text,
             model=request.model,
             tokens_used=len(response_text.split()),
-            timestamp=datetime.utcnow().isoformat()
+            timestamp=datetime.utcnow().isoformat(),
         )
     except Exception as e:
         logger.error(f"AI generation failed: {e}")
         raise HTTPException(status_code=500, detail="AI generation failed")
+
 
 @app.post("/ai/analyze-code")
 async def analyze_code_endpoint(request: CodeAnalysisRequest):
     """Analyze code and provide feedback"""
     try:
         analysis_result = analyze_code(request.code, request.language)
-        
+
         return CodeAnalysisResponse(
             analysis=analysis_result["analysis"],
             suggestions=analysis_result["suggestions"],
             issues=analysis_result["issues"],
-            score=analysis_result["score"]
+            score=analysis_result["score"],
         )
     except Exception as e:
         logger.error(f"Code analysis failed: {e}")
         raise HTTPException(status_code=500, detail="Code analysis failed")
+
 
 @app.post("/ai/chat")
 async def chat_with_ai(request: AIRequest):
     """Chat with AI"""
     try:
         response_text = get_mock_ai_response(request.prompt, request.model)
-        
+
         return {
             "message": response_text,
             "model": request.model,
             "timestamp": datetime.utcnow().isoformat(),
-            "conversation_id": f"conv_{datetime.utcnow().timestamp()}"
+            "conversation_id": f"conv_{datetime.utcnow().timestamp()}",
         }
     except Exception as e:
         logger.error(f"Chat failed: {e}")
         raise HTTPException(status_code=500, detail="Chat failed")
+
 
 @app.get("/ai/models")
 async def list_available_models():
@@ -166,22 +181,23 @@ async def list_available_models():
                 "id": "gemini-pro",
                 "name": "Google Gemini Pro",
                 "type": "text-generation",
-                "status": "available"
+                "status": "available",
             },
             {
                 "id": "gpt-4",
                 "name": "OpenAI GPT-4",
                 "type": "text-generation",
-                "status": "available"
+                "status": "available",
             },
             {
                 "id": "claude-3",
                 "name": "Anthropic Claude 3",
                 "type": "text-generation",
-                "status": "available"
-            }
+                "status": "available",
+            },
         ]
     }
+
 
 @app.get("/ai/status")
 async def ai_status():
@@ -190,14 +206,9 @@ async def ai_status():
         "engine": "operational",
         "version": "1.0.0",
         "timestamp": datetime.utcnow().isoformat(),
-        "endpoints": [
-            "/ai/generate",
-            "/ai/analyze-code",
-            "/ai/chat",
-            "/ai/models",
-            "/ai/status"
-        ]
+        "endpoints": ["/ai/generate", "/ai/analyze-code", "/ai/chat", "/ai/models", "/ai/status"],
     }
+
 
 @app.post("/mission/execute")
 async def execute_mission(mission_data: Dict[str, Any]):
@@ -205,22 +216,24 @@ async def execute_mission(mission_data: Dict[str, Any]):
     try:
         prompt = mission_data.get("prompt", "No prompt provided")
         mission_id = mission_data.get("id", "unknown")
-        
+
         logger.info(f"Executing mission {mission_id}")
-        
+
         # Simulate mission execution
         response_text = get_mock_ai_response(prompt)
-        
+
         return {
             "mission_id": mission_id,
             "status": "completed",
             "result": response_text,
-            "timestamp": datetime.utcnow().isoformat()
+            "timestamp": datetime.utcnow().isoformat(),
         }
     except Exception as e:
         logger.error(f"Mission execution failed: {e}")
         raise HTTPException(status_code=500, detail="Mission execution failed")
 
+
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8002) 
+
+    uvicorn.run(app, host="0.0.0.0", port=8002)

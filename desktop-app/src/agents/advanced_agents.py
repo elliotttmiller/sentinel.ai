@@ -13,7 +13,7 @@ from ..tools.advanced_tools import FileTools, ShellTools, SystemTools, CodeAnaly
 
 class PlannerAgents:
     """Advanced planning agents with sophisticated reasoning capabilities"""
-    
+
     def lead_architect(self, llm: ChatGoogleGenerativeAI) -> Agent:
         """Lead AI Architect with strategic planning capabilities"""
         return Agent(
@@ -32,9 +32,9 @@ class PlannerAgents:
             backstory="""A world-class AI architect, renowned for designing elegant and fault-tolerant systems. You see the end from the beginning and have a deep understanding of software architecture, system design, and the art of breaking down complex problems into manageable, executable components. You've designed systems that handle millions of users and have learned that the best plans are those that anticipate failure and build resilience from the start.""",
             llm=llm,
             verbose=True,
-            allow_delegation=False
+            allow_delegation=False,
         )
-    
+
     def plan_validator(self, llm: ChatGoogleGenerativeAI) -> Agent:
         """Quality assurance specialist for plan validation"""
         return Agent(
@@ -50,13 +50,13 @@ class PlannerAgents:
             backstory="""An exacting standards-keeper who ensures every plan is flawless before execution. You have a keen eye for detail and a deep understanding of what makes a plan executable versus what makes it fail. Your validation has prevented countless mission failures.""",
             llm=llm,
             verbose=True,
-            allow_delegation=False
+            allow_delegation=False,
         )
 
 
 class WorkerAgents:
     """Advanced worker agents with real tool capabilities"""
-    
+
     def senior_developer(self, llm: ChatGoogleGenerativeAI) -> Agent:
         """Senior Python Software Engineer with production-grade capabilities"""
         return Agent(
@@ -80,11 +80,11 @@ class WorkerAgents:
                 FileTools.write_file,
                 FileTools.list_files,
                 ShellTools.execute_shell_command,
-                CodeAnalysisTools.analyze_python_file
+                CodeAnalysisTools.analyze_python_file,
             ],
-            allow_delegation=False
+            allow_delegation=False,
         )
-    
+
     def qa_tester(self, llm: ChatGoogleGenerativeAI) -> Agent:
         """Adversarial Quality Assurance Engineer"""
         return Agent(
@@ -109,11 +109,11 @@ class WorkerAgents:
             tools=[
                 FileTools.read_file,
                 ShellTools.execute_shell_command,
-                CodeAnalysisTools.analyze_python_file
+                CodeAnalysisTools.analyze_python_file,
             ],
-            allow_delegation=False
+            allow_delegation=False,
         )
-    
+
     def code_analyzer(self, llm: ChatGoogleGenerativeAI) -> Agent:
         """Code analysis and optimization specialist"""
         return Agent(
@@ -133,11 +133,11 @@ class WorkerAgents:
             tools=[
                 FileTools.read_file,
                 CodeAnalysisTools.analyze_python_file,
-                FileTools.list_files
+                FileTools.list_files,
             ],
-            allow_delegation=False
+            allow_delegation=False,
         )
-    
+
     def system_integrator(self, llm: ChatGoogleGenerativeAI) -> Agent:
         """System integration and deployment specialist"""
         return Agent(
@@ -158,15 +158,15 @@ class WorkerAgents:
                 FileTools.read_file,
                 ShellTools.execute_shell_command,
                 SystemTools.get_system_info,
-                SystemTools.check_process_status
+                SystemTools.check_process_status,
             ],
-            allow_delegation=False
+            allow_delegation=False,
         )
 
 
 class MemoryAgents:
     """Agents specialized in memory and learning capabilities"""
-    
+
     def memory_synthesizer(self, llm: ChatGoogleGenerativeAI) -> Agent:
         """Agent responsible for synthesizing mission outcomes into long-term memory"""
         return Agent(
@@ -183,9 +183,9 @@ class MemoryAgents:
             backstory="""A specialist in knowledge management and pattern recognition. You excel at distilling complex mission outcomes into actionable insights that can guide future AI operations. Your summaries have helped improve mission success rates by identifying and sharing best practices.""",
             llm=llm,
             verbose=True,
-            allow_delegation=False
+            allow_delegation=False,
         )
 
 
 # Export agent classes for easy access
-__all__ = ['PlannerAgents', 'WorkerAgents', 'MemoryAgents'] 
+__all__ = ["PlannerAgents", "WorkerAgents", "MemoryAgents"]

@@ -1,1 +1,1 @@
-# Core Business Logic Package 
+# Core Business Logic Package

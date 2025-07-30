@@ -24,7 +24,7 @@ logger.add("logs/cognitive_forge.log", rotation="10 MB", retention="7 days")
 app = FastAPI(
     title="Sentinel Cognitive Forge",
     description="Advanced AI Agent Engine with Memory and Learning",
-    version="3.0.0"
+    version="3.0.0",
 )
 
 # Mount static files
@@ -50,7 +50,7 @@ class MissionResponse(BaseModel):
     status: str
     execution_time: Optional[int]
     created_at: datetime
-    
+
     class Config:
         from_attributes = True
 
@@ -69,43 +69,46 @@ def run_mission_in_background(mission_id_str: str, prompt: str, agent_type: str)
     Background task to run a complete mission with real-time updates
     """
     logger.info(f"BACKGROUND TASK: Starting mission {mission_id_str}")
-    
+
     def update_callback(update_message: str):
         """Callback function for real-time mission updates"""
         if mission_id_str in mission_status_db:
-            mission_status_db[mission_id_str]["updates"].append({
-                "timestamp": datetime.utcnow().isoformat(),
-                "message": update_message
-            })
+            mission_status_db[mission_id_str]["updates"].append(
+                {"timestamp": datetime.utcnow().isoformat(), "message": update_message}
+            )
             mission_status_db[mission_id_str]["last_update"] = datetime.utcnow().isoformat()
-            
+
             # Also log to database
             db_manager.add_mission_update(mission_id_str, update_message, "info")
-    
+
     # Initialize mission status
     mission_status_db[mission_id_str] = {
         "status": "PLANNING",
-        "updates": [{
-            "timestamp": datetime.utcnow().isoformat(),
-            "message": "🚀 Mission accepted. Initializing Cognitive Forge Engine..."
-        }],
+        "updates": [
+            {
+                "timestamp": datetime.utcnow().isoformat(),
+                "message": "🚀 Mission accepted. Initializing Cognitive Forge Engine...",
+            }
+        ],
         "result": None,
-        "last_update": datetime.utcnow().isoformat()
+        "last_update": datetime.utcnow().isoformat(),
     }
-    
+
     try:
         # Run the mission using the Cognitive Forge Engine
         final_result = cognitive_forge_engine.run_mission(
             prompt, mission_id_str, agent_type, update_callback
         )
-        
+
         # Update final status
-        mission_status_db[mission_id_str]["status"] = final_result.get("status", "completed").upper()
+        mission_status_db[mission_id_str]["status"] = final_result.get(
+            "status", "completed"
+        ).upper()
         mission_status_db[mission_id_str]["result"] = final_result
         mission_status_db[mission_id_str]["last_update"] = datetime.utcnow().isoformat()
-        
+
         logger.info(f"BACKGROUND TASK: Mission {mission_id_str} completed successfully")
-        
+
     except Exception as e:
         logger.error(f"BACKGROUND TASK: Mission {mission_id_str} failed. Error: {e}", exc_info=True)
         mission_status_db[mission_id_str]["status"] = "FAILED"
@@ -123,48 +126,38 @@ def serve_web_ui():
 @app.get("/health")
 def health_check():
     """Health check endpoint"""
-    return {
-        "status": "healthy",
-        "timestamp": datetime.utcnow().isoformat(),
-        "version": "3.0.0"
-    }
+    return {"status": "healthy", "timestamp": datetime.utcnow().isoformat(), "version": "3.0.0"}
 
 
 @app.post("/advanced-mission")
-async def create_advanced_mission(
-    request: MissionRequest, 
-    background_tasks: BackgroundTasks
-):
+async def create_advanced_mission(request: MissionRequest, background_tasks: BackgroundTasks):
     """
     Create and start a new advanced mission using the Cognitive Forge Engine
     """
     mission_id_str = f"mission_{uuid.uuid4().hex[:8]}"
-    
+
     # Create mission record in database
     try:
         mission = db_manager.create_mission(
             mission_id_str=mission_id_str,
             title=request.title or request.prompt[:50],
             prompt=request.prompt,
-            agent_type=request.agent_type
+            agent_type=request.agent_type,
         )
-        
+
         # Add background task
         background_tasks.add_task(
-            run_mission_in_background, 
-            mission_id_str, 
-            request.prompt, 
-            request.agent_type
+            run_mission_in_background, mission_id_str, request.prompt, request.agent_type
         )
-        
+
         logger.info(f"Created new mission: {mission_id_str}")
-        
+
         return {
             "mission_id": mission_id_str,
             "message": "🚀 Advanced mission accepted and planning has begun.",
-            "status": "accepted"
+            "status": "accepted",
         }
-        
+
     except Exception as e:
         logger.error(f"Error creating mission: {e}")
         raise HTTPException(status_code=500, detail=f"Failed to create mission: {str(e)}")
@@ -179,25 +172,23 @@ def get_mission_status(mission_id: str):
     live_status = mission_status_db.get(mission_id)
     if live_status:
         return live_status
-    
+
     # Fallback to database
     mission = db_manager.get_mission(mission_id)
     if not mission:
         raise HTTPException(status_code=404, detail="Mission not found")
-    
+
     # Get recent updates from database
     updates = db_manager.get_mission_updates(mission_id, limit=50)
-    
+
     return {
         "status": mission.status.upper(),
         "result": mission.result,
         "updates": [
-            {
-                "timestamp": update.timestamp.isoformat(),
-                "message": update.update_message
-            } for update in updates
+            {"timestamp": update.timestamp.isoformat(), "message": update.update_message}
+            for update in updates
         ],
-        "last_update": mission.updated_at.isoformat()
+        "last_update": mission.updated_at.isoformat(),
     }
 
 
@@ -237,18 +228,18 @@ def api_status():
             "Multi-Agent Execution",
             "Real-time Observability",
             "Long-term Memory",
-            "Learning & Adaptation"
+            "Learning & Adaptation",
         ],
         "agents": [
             "Lead AI Architect",
-            "Plan Validator", 
+            "Plan Validator",
             "Senior Developer",
             "QA Tester",
             "Code Analyzer",
             "System Integrator",
-            "Memory Synthesizer"
+            "Memory Synthesizer",
         ],
-        "timestamp": datetime.utcnow().isoformat()
+        "timestamp": datetime.utcnow().isoformat(),
     }
 
 
@@ -260,15 +251,14 @@ def delete_mission(mission_id: str):
     try:
         # Update mission as archived
         success = db_manager.update_mission_status(
-            mission_id, "archived", 
-            metadata={"archived_at": datetime.utcnow().isoformat()}
+            mission_id, "archived", metadata={"archived_at": datetime.utcnow().isoformat()}
         )
-        
+
         if success:
             return {"message": f"Mission {mission_id} archived successfully"}
         else:
             raise HTTPException(status_code=404, detail="Mission not found")
-            
+
     except Exception as e:
         logger.error(f"Error archiving mission: {e}")
         raise HTTPException(status_code=500, detail="Failed to archive mission")
@@ -281,11 +271,7 @@ def search_memory(query: str, limit: int = 5):
     """
     try:
         memories = db_manager.search_memory(query, limit=limit)
-        return {
-            "query": query,
-            "results": memories,
-            "count": len(memories)
-        }
+        return {"query": query, "results": memories, "count": len(memories)}
     except Exception as e:
         logger.error(f"Error searching memory: {e}")
         raise HTTPException(status_code=500, detail="Failed to search memory")
@@ -296,13 +282,13 @@ def search_memory(query: str, limit: int = 5):
 async def startup_event():
     """Initialize the application on startup"""
     logger.info("🚀 Cognitive Forge Desktop App starting up...")
-    
+
     # Log system startup
     db_manager.log_system_event(
-        "INFO", 
+        "INFO",
         "Cognitive Forge Desktop App started successfully",
         "main",
-        {"version": "3.0.0", "startup_time": datetime.utcnow().isoformat()}
+        {"version": "3.0.0", "startup_time": datetime.utcnow().isoformat()},
     )
 
 
@@ -310,16 +296,17 @@ async def startup_event():
 async def shutdown_event():
     """Cleanup on application shutdown"""
     logger.info("🛑 Cognitive Forge Desktop App shutting down...")
-    
+
     # Log system shutdown
     db_manager.log_system_event(
-        "INFO", 
+        "INFO",
         "Cognitive Forge Desktop App shutting down",
         "main",
-        {"shutdown_time": datetime.utcnow().isoformat()}
+        {"shutdown_time": datetime.utcnow().isoformat()},
     )
 
 
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="0.0.0.0", port=8001)

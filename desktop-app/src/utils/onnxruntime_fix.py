@@ -10,6 +10,7 @@ import importlib
 from typing import Optional, Any
 from loguru import logger
 
+
 def safe_import_onnxruntime() -> Optional[Any]:
     """
     Safely import onnxruntime with comprehensive error handling
@@ -18,6 +19,7 @@ def safe_import_onnxruntime() -> Optional[Any]:
     try:
         # First, try direct import
         import onnxruntime
+
         logger.info("ONNX Runtime imported successfully")
         return onnxruntime
     except ImportError as e:
@@ -25,7 +27,7 @@ def safe_import_onnxruntime() -> Optional[Any]:
         return None
     except Exception as e:
         logger.error(f"ONNX Runtime import failed: {e}")
-        
+
         # Try to diagnose the issue
         if "DLL" in str(e) or "dynamic link library" in str(e).lower():
             logger.error("DLL loading issue detected - this is a common Windows problem")
@@ -33,8 +35,9 @@ def safe_import_onnxruntime() -> Optional[Any]:
             logger.info("1. Install Microsoft Visual C++ Redistributable")
             logger.info("2. Try a different onnxruntime version")
             logger.info("3. Use CPU-only version: pip install onnxruntime-cpu")
-        
+
         return None
+
 
 def install_onnxruntime_cpu() -> bool:
     """
@@ -43,12 +46,14 @@ def install_onnxruntime_cpu() -> bool:
     try:
         import subprocess
         import sys
-        
+
         logger.info("Installing onnxruntime-cpu as fallback...")
-        result = subprocess.run([
-            sys.executable, "-m", "pip", "install", "onnxruntime-cpu"
-        ], capture_output=True, text=True)
-        
+        result = subprocess.run(
+            [sys.executable, "-m", "pip", "install", "onnxruntime-cpu"],
+            capture_output=True,
+            text=True,
+        )
+
         if result.returncode == 0:
             logger.success("onnxruntime-cpu installed successfully")
             return True
@@ -59,6 +64,7 @@ def install_onnxruntime_cpu() -> bool:
         logger.error(f"Error installing onnxruntime-cpu: {e}")
         return False
 
+
 def get_onnxruntime_with_fallback() -> Optional[Any]:
     """
     Get onnxruntime with automatic fallback to CPU version
@@ -67,10 +73,11 @@ def get_onnxruntime_with_fallback() -> Optional[Any]:
     ort = safe_import_onnxruntime()
     if ort:
         return ort
-    
+
     # Try CPU version
     try:
         import onnxruntime_cpu
+
         logger.info("Using onnxruntime-cpu as fallback")
         return onnxruntime_cpu
     except ImportError:
@@ -78,6 +85,7 @@ def get_onnxruntime_with_fallback() -> Optional[Any]:
         if install_onnxruntime_cpu():
             try:
                 import onnxruntime_cpu
+
                 logger.info("Successfully imported onnxruntime-cpu after installation")
                 return onnxruntime_cpu
             except ImportError:
@@ -87,16 +95,18 @@ def get_onnxruntime_with_fallback() -> Optional[Any]:
             logger.error("Failed to install onnxruntime-cpu")
             return None
 
+
 def create_onnxruntime_proxy():
     """
     Create a proxy module that handles onnxruntime import gracefully
     """
+
     class ONNXRuntimeProxy:
         def __init__(self):
             self._ort = None
             self._available = False
             self._error_message = None
-            
+
             # Try to import onnxruntime
             try:
                 self._ort = get_onnxruntime_with_fallback()
@@ -109,31 +119,33 @@ def create_onnxruntime_proxy():
             except Exception as e:
                 self._error_message = str(e)
                 logger.error(f"ONNX Runtime proxy initialization failed: {e}")
-        
+
         def is_available(self) -> bool:
             """Check if onnxruntime is available"""
             return self._available
-        
+
         def get_error_message(self) -> Optional[str]:
             """Get error message if onnxruntime is not available"""
             return self._error_message
-        
+
         def __getattr__(self, name):
             """Proxy attribute access to the actual onnxruntime module"""
             if not self._available:
                 raise AttributeError(f"ONNX Runtime not available: {self._error_message}")
             return getattr(self._ort, name)
-        
+
         def __call__(self, *args, **kwargs):
             """Proxy function calls to the actual onnxruntime module"""
             if not self._available:
                 raise RuntimeError(f"ONNX Runtime not available: {self._error_message}")
             return self._ort(*args, **kwargs)
-    
+
     return ONNXRuntimeProxy()
+
 
 # Create a global proxy instance
 onnxruntime_proxy = create_onnxruntime_proxy()
+
 
 def get_onnxruntime():
     """
@@ -141,14 +153,16 @@ def get_onnxruntime():
     """
     return onnxruntime_proxy
 
+
 def is_onnxruntime_available() -> bool:
     """
     Check if onnxruntime is available
     """
     return onnxruntime_proxy.is_available()
 
+
 def get_onnxruntime_error() -> Optional[str]:
     """
     Get error message if onnxruntime is not available
     """
-    return onnxruntime_proxy.get_error_message() 
+    return onnxruntime_proxy.get_error_message()

@@ -295,11 +295,6 @@ def main():
     print("🐍 Python Auto-Fixer (Similar to npx ts-autofix)")
     print("=" * 50)
 
-    # Check if we're in the right directory
-    if not (project_dir / "main.py").exists():
-        print("❌ Error: main.py not found. Please run this script from the desktop-app directory.")
-        sys.exit(1)
-
     # Create auto-fixer instance
     auto_fixer = PythonAutoFixer(project_dir)
 
