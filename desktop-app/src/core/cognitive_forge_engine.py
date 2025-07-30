@@ -273,7 +273,7 @@ class CognitiveForgeEngine:
                     ]
                 }}""",
                 expected_output="A structured JSON object with the optimized mission parameters.",
-                agent="prompt_optimizer"
+                agent=prompt_optimizer
             )
 
             # Use non-blocking crew execution

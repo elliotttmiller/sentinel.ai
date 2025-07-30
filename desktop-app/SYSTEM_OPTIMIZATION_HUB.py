@@ -247,12 +247,19 @@ class SystemOptimizationHub:
         
         env_status = {}
         missing_vars = []
+        present_vars = []
         
         for var in required_env_vars:
             value = os.getenv(var)
             env_status[var] = value is not None
             if value is None:
                 missing_vars.append(var)
+            else:
+                present_vars.append(var)
+                # Mask sensitive values for logging
+                if var in ["GOOGLE_API_KEY", "DATABASE_URL"]:
+                    masked_value = value[:10] + "..." if len(value) > 10 else "***"
+                    env_status[f"{var}_masked"] = masked_value
         
         all_vars_present = len(missing_vars) == 0
         
@@ -260,7 +267,9 @@ class SystemOptimizationHub:
             "status": "PASS" if all_vars_present else "FAIL",
             "environment_variables": env_status,
             "missing_variables": missing_vars,
+            "present_variables": present_vars,
             "database_url_type": "postgresql" if os.getenv("DATABASE_URL", "").startswith("postgresql") else "sqlite",
+            "message": f"Missing {len(missing_vars)} required environment variables: {', '.join(missing_vars)}" if missing_vars else "All critical environment variables are present"
         }
     
     # ============================================================================
