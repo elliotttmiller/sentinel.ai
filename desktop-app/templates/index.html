@@ -463,14 +463,212 @@
                                                 </td>
                                                 <td x-text="formatDate(mission.created_at)"></td>
                                                 <td>
-                                                    <button class="btn btn-sm btn-outline-primary" @click="viewMission(mission)">
-                                                        <i class="bi bi-eye"></i>
-                                                    </button>
+                                                                    <button class="btn btn-sm btn-outline-primary" @click="viewMission(mission)">
+                    <i class="bi bi-eye"></i> View Details
+                </button>
+                <button class="btn btn-sm btn-outline-secondary" @click="testModal()">
+                    <i class="bi bi-bug"></i> Test Modal
+                </button>
                                                 </td>
                                             </tr>
                                         </template>
                                     </tbody>
                                 </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mission Details Modal -->
+                <div class="modal fade" id="missionDetailsModal" tabindex="-1" aria-labelledby="missionDetailsModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="missionDetailsModalLabel">
+                                    <i class="bi bi-robot me-2"></i>
+                                    Mission Details
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" x-show="selectedMission">
+                                <!-- Mission Overview -->
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h6 class="card-title mb-0">Mission Overview</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-3">
+                                                    <strong>Mission ID:</strong>
+                                                    <span x-text="selectedMission.mission_id_str || selectedMission.id"></span>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <strong>Title:</strong>
+                                                    <span x-text="selectedMission.title"></span>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <strong>Agent Type:</strong>
+                                                    <span class="badge bg-primary" x-text="selectedMission.agent_type"></span>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <strong>Status:</strong>
+                                                    <span class="badge" :class="'badge-' + getStatusClass(selectedMission.status)" x-text="selectedMission.status"></span>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <strong>Created:</strong>
+                                                    <span x-text="formatDate(selectedMission.created_at)"></span>
+                                                </div>
+                                                <div class="mb-3" x-show="selectedMission.completed_at">
+                                                    <strong>Completed:</strong>
+                                                    <span x-text="formatDate(selectedMission.completed_at)"></span>
+                                                </div>
+                                                <div class="mb-3" x-show="selectedMission.execution_time">
+                                                    <strong>Execution Time:</strong>
+                                                    <span x-text="selectedMission.execution_time + ' seconds'"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h6 class="card-title mb-0">Performance Metrics</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-3" x-show="selectedMission.tokens_used">
+                                                    <strong>Tokens Used:</strong>
+                                                    <span x-text="selectedMission.tokens_used"></span>
+                                                </div>
+                                                <div class="mb-3" x-show="selectedMission.error_message">
+                                                    <strong>Error:</strong>
+                                                    <span class="text-danger" x-text="selectedMission.error_message"></span>
+                                                </div>
+                                                <div class="mb-3" x-show="selectedMission.plan">
+                                                    <strong>Plan Steps:</strong>
+                                                    <span x-text="selectedMission.plan && selectedMission.plan.steps ? selectedMission.plan.steps.length : 0"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Original Prompt -->
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <h6 class="card-title mb-0">
+                                            <i class="bi bi-chat-quote me-2"></i>
+                                            Original Prompt
+                                        </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="bg-light p-3 rounded">
+                                            <pre class="mb-0" x-text="selectedMission.prompt"></pre>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Execution Plan -->
+                                <div class="card mb-4" x-show="selectedMission.plan">
+                                    <div class="card-header">
+                                        <h6 class="card-title mb-0">
+                                            <i class="bi bi-diagram-3 me-2"></i>
+                                            AI Execution Plan
+                                        </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="accordion" id="planAccordion">
+                                            <template x-for="(step, index) in selectedMission.plan.steps" :key="index">
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header">
+                                                        <button class="accordion-button" :class="index === 0 ? '' : 'collapsed'" type="button" data-bs-toggle="collapse" :data-bs-target="'#planStep' + index">
+                                                            <strong x-text="'Step ' + (index + 1) + ': ' + (step.agent_role || 'Unknown Agent')"></strong>
+                                                        </button>
+                                                    </h2>
+                                                    <div :id="'planStep' + index" class="accordion-collapse collapse" :class="index === 0 ? 'show' : ''" data-bs-parent="#planAccordion">
+                                                        <div class="accordion-body">
+                                                            <div class="mb-3">
+                                                                <strong>Task Description:</strong>
+                                                                <p x-text="step.task_description"></p>
+                                                            </div>
+                                                            <div class="mb-3" x-show="step.expected_output">
+                                                                <strong>Expected Output:</strong>
+                                                                <p x-text="step.expected_output"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- AI Agent Actions & Results -->
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <h6 class="card-title mb-0">
+                                            <i class="bi bi-gear me-2"></i>
+                                            AI Agent Actions & Results
+                                        </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div x-show="selectedMission.result">
+                                            <h6 class="mb-3">Final Result:</h6>
+                                            <div class="bg-light p-3 rounded mb-3">
+                                                <pre class="mb-0" x-text="selectedMission.result"></pre>
+                                            </div>
+                                        </div>
+                                        
+                                        <div x-show="!selectedMission.result && selectedMission.status === 'completed'">
+                                            <div class="alert alert-info">
+                                                <i class="bi bi-info-circle me-2"></i>
+                                                Mission completed but no detailed result available. Check the mission status for more information.
+                                            </div>
+                                        </div>
+                                        
+                                        <div x-show="selectedMission.status === 'executing'">
+                                            <div class="alert alert-warning">
+                                                <i class="bi bi-clock me-2"></i>
+                                                Mission is currently executing. Results will be available when complete.
+                                            </div>
+                                        </div>
+                                        
+                                        <div x-show="selectedMission.status === 'failed'">
+                                            <div class="alert alert-danger">
+                                                <i class="bi bi-exclamation-triangle me-2"></i>
+                                                Mission failed. Check the error message above for details.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- File Operations (if any) -->
+                                <div class="card mb-4" x-show="selectedMission.result && selectedMission.result.includes('File')">
+                                    <div class="card-header">
+                                        <h6 class="card-title mb-0">
+                                            <i class="bi bi-file-earmark me-2"></i>
+                                            File Operations
+                                        </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="alert alert-info">
+                                            <i class="bi bi-info-circle me-2"></i>
+                                            Check your file system for any files created by this mission. Common locations:
+                                            <ul class="mb-0 mt-2">
+                                                <li>Current directory: <code>./</code></li>
+                                                <li>Desktop: <code>~/Desktop/</code></li>
+                                                <li>Documents: <code>~/Documents/</code></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" @click="refreshMissionDetails()">
+                                    <i class="bi bi-arrow-clockwise me-2"></i>
+                                    Refresh
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -614,6 +812,7 @@
                     objective: ''
                 },
                 missions: [],
+                selectedMission: null,
                 agents: [
                     { type: 'researcher', name: 'Research Agent', description: 'Specializes in data analysis and research tasks', missions: 12 },
                     { type: 'developer', name: 'Development Agent', description: 'Handles coding and development tasks', missions: 8 },
@@ -790,8 +989,36 @@
                     }
                 },
 
-                viewMission(mission) {
-                    this.showToast(`Viewing mission ${mission.id}`, 'info');
+                async viewMission(mission) {
+                    try {
+                        console.log('Viewing mission:', mission);
+                        // Fetch detailed mission information
+                        const missionId = mission.mission_id_str || mission.id;
+                        console.log('Mission ID:', missionId);
+                        
+                        const response = await fetch(`/mission/${missionId}`);
+                        console.log('Response status:', response.status);
+                        
+                        if (response.ok) {
+                            this.selectedMission = await response.json();
+                            console.log('Selected mission data:', this.selectedMission);
+                            
+                            // Show the modal using Bootstrap
+                            const modal = new bootstrap.Modal(document.getElementById('missionDetailsModal'));
+                            modal.show();
+                        } else {
+                            console.error('Failed to fetch mission details:', response.status);
+                            console.error('Response text:', await response.text());
+                            // Fallback to basic mission data
+                            this.selectedMission = mission;
+                            const modal = new bootstrap.Modal(document.getElementById('missionDetailsModal'));
+                            modal.show();
+                            this.showToast('Using basic mission data', 'warning');
+                        }
+                    } catch (error) {
+                        console.error('Error fetching mission details:', error);
+                        this.showToast('Error loading mission details', 'error');
+                    }
                 },
 
                 clearMission() {
@@ -961,6 +1188,56 @@
                     if (value < 70) return 'bg-success';
                     if (value < 90) return 'bg-warning';
                     return 'bg-danger';
+                },
+                async refreshMissionDetails() {
+                    if (this.selectedMission) {
+                        try {
+                            const response = await fetch(`/mission/${this.selectedMission.mission_id_str || this.selectedMission.id}`);
+                            if (response.ok) {
+                                this.selectedMission = await response.json();
+                                this.showToast('Mission details refreshed', 'success');
+                            } else {
+                                this.showToast('Failed to refresh mission details', 'error');
+                            }
+                        } catch (error) {
+                            console.error('Error refreshing mission details:', error);
+                            this.showToast('Error refreshing mission details', 'error');
+                        }
+                    }
+                },
+
+                testModal() {
+                    // Test the modal with sample data
+                    this.selectedMission = {
+                        mission_id_str: 'test_mission_123',
+                        title: 'Test Mission',
+                        agent_type: 'developer',
+                        status: 'completed',
+                        created_at: new Date().toISOString(),
+                        completed_at: new Date().toISOString(),
+                        execution_time: 45,
+                        tokens_used: 1500,
+                        prompt: 'This is a test prompt to verify the modal is working correctly.',
+                        result: 'Test mission completed successfully. Files created: test_file.py',
+                        plan: {
+                            steps: [
+                                {
+                                    agent_role: 'Senior Developer',
+                                    task_description: 'Create a test Python file',
+                                    expected_output: 'A working Python script'
+                                },
+                                {
+                                    agent_role: 'QA Tester',
+                                    task_description: 'Test the created file',
+                                    expected_output: 'Verification that the file works'
+                                }
+                            ]
+                        }
+                    };
+                    
+                    const modal = new bootstrap.Modal(document.getElementById('missionDetailsModal'));
+                    modal.show();
+                    this.showToast('Test modal opened with sample data', 'info');
                 }
             }
         }
