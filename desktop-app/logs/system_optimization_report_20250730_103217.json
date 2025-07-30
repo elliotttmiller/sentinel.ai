@@ -1,0 +1,311 @@
+{
+  "summary": {
+    "total_tests": 10,
+    "passed_tests": 8,
+    "failed_tests": 2,
+    "warning_tests": 0,
+    "success_rate": 80.0,
+    "total_execution_time": 16.044355869293213,
+    "average_execution_time": 1.6044355869293212
+  },
+  "results_by_category": {
+    "system_initialization": [
+      "TestResult(test_name='System Initialization', category=<TestCategory.SYSTEM_INITIALIZATION: 'system_initialization'>, status='PASS', execution_time=0.023805618286132812, details={'status': 'PASS', 'components': {'llm': True, 'planner_agents': True, 'worker_agents': True, 'memory_agents': True, 'prompt_optimization_agents': True, 'db_manager': True, 'phoenix_protocol': True, 'guardian_protocol': True, 'synapse_logging': True, 'self_learning_module': True}, 'system_info': {'system_name': 'Cognitive Forge Engine v5.0', 'version': '5.0.0', 'architecture': 'Sentient Operating System', 'features': ['8-phase mission workflow', 'Phoenix Protocol (Self-Healing)', 'Guardian Protocol (Quality Assurance)', 'Synapse Logging System', 'Self-Learning Module', 'Advanced multi-agent workflows', 'Memory and learning capabilities', 'Real-time performance monitoring', 'Adaptive execution strategies', 'Advanced memory synthesis', 'Non-blocking async execution', 'Formal solution contracts'], 'protocols': {'phoenix_protocol': 'Self-healing debug and resolve system', 'guardian_protocol': 'Proactive quality assurance and auto-fixing', 'synapse_logging': 'Unified consciousness and pattern recognition', 'self_learning': 'Continuous improvement and adaptation'}, 'optimization_capabilities': ['Prompt analysis and optimization', 'Intelligent agent selection', 'Comprehensive agent testing', 'Performance-driven refinement', 'Adaptive learning', 'Context-aware optimization'], 'integrated_services': ['Planner Agents', 'Worker Agents', 'Memory Agents', 'Phoenix Protocol', 'Guardian Protocol', 'Synapse Logging System', 'Self-Learning Module', 'Advanced Database Manager'], 'mission_states': ['pending', 'prompt_alchemy', 'agent_selection', 'testing_and_tuning', 'planning', 'executing', 'awaiting_healing', 'synthesizing_memory', 'evolving', 'completed', 'failed'], 'status': 'operational'}, 'initialization_time': 1753889520.9647818}, error_message=None, performance_metrics={'memory_start': 48.7, 'memory_end': 48.8, 'memory_delta': 0.09999999999999432, 'cpu_usage': 10.4})"
+    ],
+    "environment_validation": [
+      "TestResult(test_name='Environment Validation', category=<TestCategory.ENVIRONMENT_VALIDATION: 'environment_validation'>, status='FAIL', execution_time=0.0059642791748046875, details={'status': 'FAIL', 'environment_variables': {'DATABASE_URL': True, 'GOOGLE_API_KEY': True, 'LLM_MODEL': False, 'LLM_TEMPERATURE': False}, 'missing_variables': ['LLM_MODEL', 'LLM_TEMPERATURE'], 'database_url_type': 'postgresql'}, error_message=None, performance_metrics={'memory_start': 48.8, 'memory_end': 48.8, 'memory_delta': 0.0, 'cpu_usage': 12.5})"
+    ],
+    "database_integration": [
+      "TestResult(test_name='Database Connectivity', category=<TestCategory.DATABASE_INTEGRATION: 'database_integration'>, status='PASS', execution_time=0.38109564781188965, details={'status': 'PASS', 'postgresql_connection': 'PASS', 'mission_creation': True, 'chromadb_status': 'SKIP', 'test_mission_id': 'test_db_1753889520'}, error_message=None, performance_metrics={'memory_start': 48.8, 'memory_end': 48.8, 'memory_delta': 0.0, 'cpu_usage': 2.5})"
+    ],
+    "agent_factory": [
+      "TestResult(test_name='Agent Factory', category=<TestCategory.AGENT_FACTORY: 'agent_factory'>, status='PASS', execution_time=0.031063079833984375, details={'status': 'PASS', 'agents': {'prompt_optimizer': True, 'blueprint_planner': True, 'lead_architect': True, 'plan_validator': True, 'prompt_alchemist': True, 'senior_developer': True, 'code_analyzer': True, 'qa_tester': True, 'system_integrator': True, 'debugger': True, 'memory_synthesizer': True}, 'total_agents': 11, 'valid_agents': 11}, error_message=None, performance_metrics={'memory_start': 48.8, 'memory_end': 48.8, 'memory_delta': 0.0, 'cpu_usage': 13.6})"
+    ],
+    "protocol_systems": [
+      "TestResult(test_name='Protocol Systems', category=<TestCategory.PROTOCOL_SYSTEMS: 'protocol_systems'>, status='PASS', execution_time=0.004686594009399414, details={'status': 'PASS', 'protocols': {'phoenix_protocol': True, 'guardian_protocol': True, 'synapse_logging': True, 'self_learning_module': True}, 'protocol_count': 4, 'valid_protocols': 4}, error_message=None, performance_metrics={'memory_start': 48.8, 'memory_end': 48.8, 'memory_delta': 0.0, 'cpu_usage': 0.0})"
+    ],
+    "workflow_phases": [
+      "TestResult(test_name='Workflow Phases', category=<TestCategory.WORKFLOW_PHASES: 'workflow_phases'>, status='FAIL', execution_time=0.006426095962524414, details={'status': 'FAIL', 'error': \"unsupported operand type(s) for +: 'int' and 'str'\", 'traceback': 'Traceback (most recent call last):\\n  File \"C:\\\\Users\\\\AMD\\\\sentinel\\\\desktop-app\\\\SYSTEM_OPTIMIZATION_HUB.py\", line 443, in test_workflow_phases\\n    successful_phases = sum(phases.values())\\n                        ^^^^^^^^^^^^^^^^^^^^\\nTypeError: unsupported operand type(s) for +: \\'int\\' and \\'str\\'\\n'}, error_message=None, performance_metrics={'memory_start': 48.8, 'memory_end': 48.8, 'memory_delta': 0.0, 'cpu_usage': 18.8})"
+    ],
+    "performance_optimization": [
+      "TestResult(test_name='Performance Optimization', category=<TestCategory.PERFORMANCE_OPTIMIZATION: 'performance_optimization'>, status='PASS', execution_time=1.3486757278442383, details={'status': 'PASS', 'performance_metrics': {'memory_usage_percent': 48.8, 'memory_available_gb': 8.159255981445312, 'cpu_usage_percent': 10.3, 'disk_usage_percent': 56.46129083277788, 'load_average': (0.0, 0.0, 0.0), 'memory_ok': True, 'cpu_ok': True}, 'thresholds': {'memory_threshold': 0.8, 'cpu_threshold': 80}}, error_message=None, performance_metrics={'memory_start': 48.8, 'memory_end': 48.9, 'memory_delta': 0.10000000000000142, 'cpu_usage': 9.3})"
+    ],
+    "error_handling": [
+      "TestResult(test_name='Error Handling', category=<TestCategory.ERROR_HANDLING: 'error_handling'>, status='PASS', execution_time=0.11829566955566406, details={'status': 'PASS', 'error_tests': {'empty_prompt_handling': True, 'database_error_handling': True, 'agent_creation_error_handling': True}, 'successful_error_handling': 3, 'total_error_tests': 3}, error_message=None, performance_metrics={'memory_start': 48.9, 'memory_end': 48.9, 'memory_delta': 0.0, 'cpu_usage': 4.1})"
+    ],
+    "integration_tests": [
+      "TestResult(test_name='Integration Tests', category=<TestCategory.INTEGRATION_TESTS: 'integration_tests'>, status='PASS', execution_time=0.004090785980224609, details={'status': 'PASS', 'integration_tests': {'complete_mission_execution': True, 'agent_communication': True, 'database_operations': True, 'protocol_interactions': True}, 'successful_integration': 4, 'total_integration_tests': 4}, error_message=None, performance_metrics={'memory_start': 48.9, 'memory_end': 48.9, 'memory_delta': 0.0, 'cpu_usage': 100.0})"
+    ],
+    "stress_testing": [
+      "TestResult(test_name='Stress Testing', category=<TestCategory.STRESS_TESTING: 'stress_testing'>, status='PASS', execution_time=14.12025237083435, details={'status': 'PASS', 'stress_tests': {'concurrent_agent_creation': True, 'agent_creation_time': 0.022922754287719727, 'memory_management': True, 'database_stress': True, 'database_operation_time': 14.076342105865479}, 'successful_stress_tests': 17.0992648601532, 'total_stress_tests': 5}, error_message=None, performance_metrics={'memory_start': 48.9, 'memory_end': 48.8, 'memory_delta': -0.10000000000000142, 'cpu_usage': 1.7})"
+    ]
+  },
+  "performance_metrics": {
+    "avg_memory_start": 48.82,
+    "max_memory_start": 48.9,
+    "min_memory_start": 48.7,
+    "avg_memory_end": 48.83,
+    "max_memory_end": 48.9,
+    "min_memory_end": 48.8,
+    "avg_memory_delta": 0.009999999999999431,
+    "max_memory_delta": 0.10000000000000142,
+    "min_memory_delta": -0.10000000000000142,
+    "avg_cpu_usage": 17.29,
+    "max_cpu_usage": 100.0,
+    "min_cpu_usage": 0.0
+  },
+  "detailed_results": [
+    {
+      "test_name": "System Initialization",
+      "category": "system_initialization",
+      "status": "PASS",
+      "execution_time": 0.023805618286132812,
+      "details": {
+        "status": "PASS",
+        "components": {
+          "llm": true,
+          "planner_agents": true,
+          "worker_agents": true,
+          "memory_agents": true,
+          "prompt_optimization_agents": true,
+          "db_manager": true,
+          "phoenix_protocol": true,
+          "guardian_protocol": true,
+          "synapse_logging": true,
+          "self_learning_module": true
+        },
+        "system_info": {
+          "system_name": "Cognitive Forge Engine v5.0",
+          "version": "5.0.0",
+          "architecture": "Sentient Operating System",
+          "features": [
+            "8-phase mission workflow",
+            "Phoenix Protocol (Self-Healing)",
+            "Guardian Protocol (Quality Assurance)",
+            "Synapse Logging System",
+            "Self-Learning Module",
+            "Advanced multi-agent workflows",
+            "Memory and learning capabilities",
+            "Real-time performance monitoring",
+            "Adaptive execution strategies",
+            "Advanced memory synthesis",
+            "Non-blocking async execution",
+            "Formal solution contracts"
+          ],
+          "protocols": {
+            "phoenix_protocol": "Self-healing debug and resolve system",
+            "guardian_protocol": "Proactive quality assurance and auto-fixing",
+            "synapse_logging": "Unified consciousness and pattern recognition",
+            "self_learning": "Continuous improvement and adaptation"
+          },
+          "optimization_capabilities": [
+            "Prompt analysis and optimization",
+            "Intelligent agent selection",
+            "Comprehensive agent testing",
+            "Performance-driven refinement",
+            "Adaptive learning",
+            "Context-aware optimization"
+          ],
+          "integrated_services": [
+            "Planner Agents",
+            "Worker Agents",
+            "Memory Agents",
+            "Phoenix Protocol",
+            "Guardian Protocol",
+            "Synapse Logging System",
+            "Self-Learning Module",
+            "Advanced Database Manager"
+          ],
+          "mission_states": [
+            "pending",
+            "prompt_alchemy",
+            "agent_selection",
+            "testing_and_tuning",
+            "planning",
+            "executing",
+            "awaiting_healing",
+            "synthesizing_memory",
+            "evolving",
+            "completed",
+            "failed"
+          ],
+          "status": "operational"
+        },
+        "initialization_time": 1753889520.9647818
+      },
+      "error_message": null
+    },
+    {
+      "test_name": "Environment Validation",
+      "category": "environment_validation",
+      "status": "FAIL",
+      "execution_time": 0.0059642791748046875,
+      "details": {
+        "status": "FAIL",
+        "environment_variables": {
+          "DATABASE_URL": true,
+          "GOOGLE_API_KEY": true,
+          "LLM_MODEL": false,
+          "LLM_TEMPERATURE": false
+        },
+        "missing_variables": [
+          "LLM_MODEL",
+          "LLM_TEMPERATURE"
+        ],
+        "database_url_type": "postgresql"
+      },
+      "error_message": null
+    },
+    {
+      "test_name": "Database Connectivity",
+      "category": "database_integration",
+      "status": "PASS",
+      "execution_time": 0.38109564781188965,
+      "details": {
+        "status": "PASS",
+        "postgresql_connection": "PASS",
+        "mission_creation": true,
+        "chromadb_status": "SKIP",
+        "test_mission_id": "test_db_1753889520"
+      },
+      "error_message": null
+    },
+    {
+      "test_name": "Agent Factory",
+      "category": "agent_factory",
+      "status": "PASS",
+      "execution_time": 0.031063079833984375,
+      "details": {
+        "status": "PASS",
+        "agents": {
+          "prompt_optimizer": true,
+          "blueprint_planner": true,
+          "lead_architect": true,
+          "plan_validator": true,
+          "prompt_alchemist": true,
+          "senior_developer": true,
+          "code_analyzer": true,
+          "qa_tester": true,
+          "system_integrator": true,
+          "debugger": true,
+          "memory_synthesizer": true
+        },
+        "total_agents": 11,
+        "valid_agents": 11
+      },
+      "error_message": null
+    },
+    {
+      "test_name": "Protocol Systems",
+      "category": "protocol_systems",
+      "status": "PASS",
+      "execution_time": 0.004686594009399414,
+      "details": {
+        "status": "PASS",
+        "protocols": {
+          "phoenix_protocol": true,
+          "guardian_protocol": true,
+          "synapse_logging": true,
+          "self_learning_module": true
+        },
+        "protocol_count": 4,
+        "valid_protocols": 4
+      },
+      "error_message": null
+    },
+    {
+      "test_name": "Workflow Phases",
+      "category": "workflow_phases",
+      "status": "FAIL",
+      "execution_time": 0.006426095962524414,
+      "details": {
+        "status": "FAIL",
+        "error": "unsupported operand type(s) for +: 'int' and 'str'",
+        "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\AMD\\sentinel\\desktop-app\\SYSTEM_OPTIMIZATION_HUB.py\", line 443, in test_workflow_phases\n    successful_phases = sum(phases.values())\n                        ^^^^^^^^^^^^^^^^^^^^\nTypeError: unsupported operand type(s) for +: 'int' and 'str'\n"
+      },
+      "error_message": null
+    },
+    {
+      "test_name": "Performance Optimization",
+      "category": "performance_optimization",
+      "status": "PASS",
+      "execution_time": 1.3486757278442383,
+      "details": {
+        "status": "PASS",
+        "performance_metrics": {
+          "memory_usage_percent": 48.8,
+          "memory_available_gb": 8.159255981445312,
+          "cpu_usage_percent": 10.3,
+          "disk_usage_percent": 56.46129083277788,
+          "load_average": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "memory_ok": true,
+          "cpu_ok": true
+        },
+        "thresholds": {
+          "memory_threshold": 0.8,
+          "cpu_threshold": 80
+        }
+      },
+      "error_message": null
+    },
+    {
+      "test_name": "Error Handling",
+      "category": "error_handling",
+      "status": "PASS",
+      "execution_time": 0.11829566955566406,
+      "details": {
+        "status": "PASS",
+        "error_tests": {
+          "empty_prompt_handling": true,
+          "database_error_handling": true,
+          "agent_creation_error_handling": true
+        },
+        "successful_error_handling": 3,
+        "total_error_tests": 3
+      },
+      "error_message": null
+    },
+    {
+      "test_name": "Integration Tests",
+      "category": "integration_tests",
+      "status": "PASS",
+      "execution_time": 0.004090785980224609,
+      "details": {
+        "status": "PASS",
+        "integration_tests": {
+          "complete_mission_execution": true,
+          "agent_communication": true,
+          "database_operations": true,
+          "protocol_interactions": true
+        },
+        "successful_integration": 4,
+        "total_integration_tests": 4
+      },
+      "error_message": null
+    },
+    {
+      "test_name": "Stress Testing",
+      "category": "stress_testing",
+      "status": "PASS",
+      "execution_time": 14.12025237083435,
+      "details": {
+        "status": "PASS",
+        "stress_tests": {
+          "concurrent_agent_creation": true,
+          "agent_creation_time": 0.022922754287719727,
+          "memory_management": true,
+          "database_stress": true,
+          "database_operation_time": 14.076342105865479
+        },
+        "successful_stress_tests": 17.0992648601532,
+        "total_stress_tests": 5
+      },
+      "error_message": null
+    }
+  ],
+  "system_status": "OPERATIONAL"
+}

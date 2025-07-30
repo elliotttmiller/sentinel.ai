@@ -95,7 +95,7 @@ class CognitiveForgeEngine:
         result = await asyncio.to_thread(crew.kickoff)
         return result
 
-    def run_mission(
+    async def run_mission(
         self,
         user_prompt: str,
         mission_id_str: str,
@@ -273,7 +273,7 @@ class CognitiveForgeEngine:
                     ]
                 }}""",
                 expected_output="A structured JSON object with the optimized mission parameters.",
-                agent=alchemist
+                agent="prompt_optimizer"
             )
 
             # Use non-blocking crew execution
