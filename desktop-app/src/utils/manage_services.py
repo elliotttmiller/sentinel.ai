@@ -302,16 +302,16 @@ def stop_process(port: int, force: bool = False) -> bool:
     
     try:
         print_info(f"Stopping process {proc.pid} on port {port}...")
-        proc.terminate()
+    proc.terminate()
         
         # Wait for graceful shutdown
-        try:
+    try:
             proc.wait(timeout=5)
             print_success(f"Process {proc.pid} stopped gracefully")
             return True
-        except psutil.TimeoutExpired:
+    except psutil.TimeoutExpired:
             if force:
-                proc.kill()
+        proc.kill()
                 print_warning(f"Force killed process {proc.pid}")
                 return True
             else:
@@ -322,32 +322,166 @@ def stop_process(port: int, force: bool = False) -> bool:
         return False
 
 def kill_all_related_processes():
-    """Kill all processes related to Sentinel services"""
+    """Kill all processes related to Sentinel services with enhanced detection and force killing"""
     killed_processes = []
     
-    for proc in psutil.process_iter(["pid", "name", "cmdline"]):
+    print_header("🔪 Enhanced Process Killer", 2)
+    print_info("Scanning for all related processes...")
+    
+    # Define comprehensive process patterns to kill
+    kill_patterns = [
+        "uvicorn",
+        "sentinel", 
+        "main:app",
+        "cognitive_engine",
+        "desktop_app",
+        "fastapi",
+        "python.*main",
+        "python.*cognitive",
+        "python.*desktop"
+    ]
+    
+    # Define ports to check and kill processes on
+    target_ports = [8000, 8001, 8002, 8080, 3000, 5000]
+    
+    # Phase 1: Kill processes by command line patterns
+    print_info("Phase 1: Killing processes by command line patterns...")
+    for proc in psutil.process_iter(["pid", "name", "cmdline", "exe"]):
         try:
             cmdline = " ".join(proc.cmdline()).lower()
-            if any(keyword in cmdline for keyword in ["uvicorn", "sentinel", "main:app"]):
-                print_info(f"Killing related process: {proc.pid} ({proc.name()})")
-                proc.terminate()
-                killed_processes.append(proc.pid)
+            proc_name = proc.name().lower()
+            
+            # Check if process matches any kill pattern
+            should_kill = any(pattern in cmdline for pattern in kill_patterns) or \
+                         any(pattern in proc_name for pattern in ["uvicorn", "python"])
+            
+            if should_kill:
+                print_warning(f"Killing process: {proc.pid} ({proc.name()}) - {cmdline[:100]}")
+                try:
+                    proc.terminate()
+                    killed_processes.append(proc.pid)
+                except (psutil.NoSuchProcess, psutil.AccessDenied):
+                    pass
+                    
         except (psutil.NoSuchProcess, psutil.AccessDenied):
             pass
     
-    # Wait for processes to terminate
-    time.sleep(2)
-    
-    # Force kill any remaining processes
-    for proc in psutil.process_iter(["pid", "name", "cmdline"]):
-        try:
-            cmdline = " ".join(proc.cmdline()).lower()
-            if any(keyword in cmdline for keyword in ["uvicorn", "sentinel", "main:app"]):
-                proc.kill()
-                killed_processes.append(proc.pid)
+    # Phase 2: Kill processes by port usage
+    print_info("Phase 2: Killing processes using target ports...")
+            for proc in psutil.process_iter(["pid", "name", "connections"]):
+                try:
+            connections = proc.connections()
+            for conn in connections:
+                if conn.laddr.port in target_ports:
+                    print_warning(f"Killing process on port {conn.laddr.port}: {proc.pid} ({proc.name()})")
+                    try:
+                        proc.terminate()
+                        killed_processes.append(proc.pid)
+                except (psutil.NoSuchProcess, psutil.AccessDenied):
+                    pass
         except (psutil.NoSuchProcess, psutil.AccessDenied):
             pass
     
+    # Phase 3: Force kill any remaining processes
+    print_info("Phase 3: Force killing remaining processes...")
+    time.sleep(3)  # Wait longer for graceful termination
+    
+    for proc in psutil.process_iter(["pid", "name", "cmdline"]):
+        try:
+            cmdline = " ".join(proc.cmdline()).lower()
+            proc_name = proc.name().lower()
+            
+            should_kill = any(pattern in cmdline for pattern in kill_patterns) or \
+                         any(pattern in proc_name for pattern in ["uvicorn", "python"])
+            
+            if should_kill:
+                print_critical(f"Force killing process: {proc.pid} ({proc.name()})")
+                try:
+                    proc.kill()
+                    killed_processes.append(proc.pid)
+                except (psutil.NoSuchProcess, psutil.AccessDenied):
+                    pass
+                    
+        except (psutil.NoSuchProcess, psutil.AccessDenied):
+            pass
+    
+    # Phase 4: Kill processes by port usage (force kill)
+    print_info("Phase 4: Force killing processes on target ports...")
+    for proc in psutil.process_iter(["pid", "name", "connections"]):
+        try:
+            connections = proc.connections()
+            for conn in connections:
+                if conn.laddr.port in target_ports:
+                    print_critical(f"Force killing process on port {conn.laddr.port}: {proc.pid} ({proc.name()})")
+                    try:
+                        proc.kill()
+                        killed_processes.append(proc.pid)
+                    except (psutil.NoSuchProcess, psutil.AccessDenied):
+                        pass
+        except (psutil.NoSuchProcess, psutil.AccessDenied):
+            pass
+    
+    # Phase 5: Use system commands for stubborn processes
+    print_info("Phase 5: Using system commands for stubborn processes...")
+    try:
+        # Windows specific commands
+        if platform.system() == "Windows":
+            # Kill processes by port using netstat and taskkill
+            for port in target_ports:
+                try:
+                    # Find PID using port
+                    result = subprocess.run(
+                        f'netstat -ano | findstr :{port}',
+                        shell=True, capture_output=True, text=True
+                    )
+                    if result.stdout:
+                        for line in result.stdout.split('\n'):
+                            if f':{port}' in line:
+                                parts = line.split()
+                                if len(parts) > 4:
+                                    pid = parts[-1]
+                                    print_critical(f"System killing process {pid} on port {port}")
+                                    subprocess.run(f'taskkill /F /PID {pid}', shell=True)
+                                    killed_processes.append(int(pid))
+                except Exception as e:
+                    print_warning(f"System command failed for port {port}: {e}")
+        else:
+            # Linux/Mac specific commands
+            for port in target_ports:
+                try:
+                    result = subprocess.run(
+                        f'lsof -ti:{port}',
+                        shell=True, capture_output=True, text=True
+                    )
+                    if result.stdout:
+                        pids = result.stdout.strip().split('\n')
+                        for pid in pids:
+                            if pid:
+                                print_critical(f"System killing process {pid} on port {port}")
+                                subprocess.run(f'kill -9 {pid}', shell=True)
+                                killed_processes.append(int(pid))
+                except Exception as e:
+                    print_warning(f"System command failed for port {port}: {e}")
+    except Exception as e:
+        print_warning(f"System command execution failed: {e}")
+    
+    # Final verification
+    print_info("Final verification: Checking for remaining processes...")
+    remaining_processes = []
+    for proc in psutil.process_iter(["pid", "name", "cmdline"]):
+        try:
+            cmdline = " ".join(proc.cmdline()).lower()
+            if any(pattern in cmdline for pattern in kill_patterns):
+                remaining_processes.append(f"{proc.pid} ({proc.name()})")
+        except (psutil.NoSuchProcess, psutil.AccessDenied):
+            pass
+    
+    if remaining_processes:
+        print_warning(f"Remaining processes: {', '.join(remaining_processes)}")
+    else:
+        print_success("All related processes successfully terminated!")
+    
+    print_success(f"Killed {len(killed_processes)} processes")
     return killed_processes
 
 # =============================================================================
@@ -545,14 +679,14 @@ def start_service(service_name: str, background: bool = True) -> bool:
             response = requests.get(f"{service_config['url']}/health", timeout=10)
             if response.status_code == 200:
                 print_success(f"{service_config['name']} is accessible")
-                return True
+            return True
             else:
                 print_error(f"{service_config['name']} returned status {response.status_code}")
                 return False
         except Exception as e:
             print_error(f"Failed to connect to {service_config['name']}: {e}")
-            return False
-    
+    return False
+
     # Handle local services
     # Check if already running
     if find_process_by_port(service_config["port"]):
@@ -587,7 +721,7 @@ def start_service(service_name: str, background: bool = True) -> bool:
             if find_process_by_port(service_config["port"]):
                 print_success(f"{service_config['name']} started successfully")
                 return True
-            else:
+    else:
                 print_error(f"{service_config['name']} failed to start")
                 return False
         else:
@@ -836,6 +970,65 @@ def check_port_conflict(port: int) -> bool:
         result = s.connect_ex(("localhost", port))
         return result == 0
 
+def kill_process_on_port(port: int) -> bool:
+    """Kill any process using the specified port"""
+    print_warning(f"Killing process on port {port}...")
+    
+    killed = False
+    
+    # Method 1: Use psutil to find and kill process
+    for proc in psutil.process_iter(["pid", "name", "connections"]):
+        try:
+            connections = proc.connections()
+            for conn in connections:
+                if conn.laddr.port == port:
+                    print_warning(f"Found process {proc.pid} ({proc.name()}) on port {port}")
+                    try:
+                        proc.terminate()
+                        time.sleep(1)
+                        proc.kill()  # Force kill if terminate didn't work
+                        killed = True
+                        print_success(f"Killed process {proc.pid} on port {port}")
+                    except (psutil.NoSuchProcess, psutil.AccessDenied):
+                        pass
+        except (psutil.NoSuchProcess, psutil.AccessDenied):
+            pass
+    
+    # Method 2: Use system commands for stubborn processes
+    try:
+        if platform.system() == "Windows":
+            # Windows: Use netstat and taskkill
+            result = subprocess.run(
+                f'netstat -ano | findstr :{port}',
+                shell=True, capture_output=True, text=True
+            )
+            if result.stdout:
+                for line in result.stdout.split('\n'):
+                    if f':{port}' in line:
+                        parts = line.split()
+                        if len(parts) > 4:
+                            pid = parts[-1]
+                            print_critical(f"System killing process {pid} on port {port}")
+                            subprocess.run(f'taskkill /F /PID {pid}', shell=True)
+                            killed = True
+        else:
+            # Linux/Mac: Use lsof and kill
+            result = subprocess.run(
+                f'lsof -ti:{port}',
+                shell=True, capture_output=True, text=True
+            )
+            if result.stdout:
+                pids = result.stdout.strip().split('\n')
+                for pid in pids:
+                    if pid:
+                        print_critical(f"System killing process {pid} on port {port}")
+                        subprocess.run(f'kill -9 {pid}', shell=True)
+                        killed = True
+    except Exception as e:
+        print_warning(f"System command failed for port {port}: {e}")
+    
+    return killed
+
 def health_check_service(service_name: str) -> Dict[str, Any]:
     """Perform comprehensive health check on a service with enhanced debug logging"""
     with DebugContext("health_check_service", service_name) as ctx:
@@ -1053,7 +1246,7 @@ def check_dependencies() -> Dict[str, bool]:
         except ImportError:
             print_error(f"✗ {pkg} (missing)")
             results["required_packages"][pkg] = False
-    
+
     # Check optional packages
     print_info("Checking optional packages...")
     for pkg in OPTIONAL_PACKAGES:
@@ -1099,12 +1292,12 @@ def check_dependencies() -> Dict[str, bool]:
         load_dotenv(ENV_FILE)
         import sqlalchemy
         from sqlalchemy import create_engine
-        
+
         db_url = os.getenv("DATABASE_URL")
         if db_url:
-            engine = create_engine(db_url, connect_args={"connect_timeout": 5})
-            with engine.connect() as conn:
-                conn.execute(sqlalchemy.text("SELECT 1"))
+        engine = create_engine(db_url, connect_args={"connect_timeout": 5})
+        with engine.connect() as conn:
+            conn.execute(sqlalchemy.text("SELECT 1"))
             print_success("✓ Database connection successful")
             results["database_connection"] = True
         else:
@@ -1248,7 +1441,7 @@ def analyze_log_file(log_path: Path, lines: int = 50) -> Dict[str, Any]:
     }
     
     try:
-        with open(log_path, "r", encoding="utf-8", errors="replace") as f:
+    with open(log_path, "r", encoding="utf-8", errors="replace") as f:
             all_lines = f.readlines()
             analysis["total_lines"] = len(all_lines)
             
@@ -1340,7 +1533,7 @@ def analyze_debug_logs():
         if http_requests:
             for req in http_requests[-5:]:  # Last 5 requests
                 print(f"  {req}")
-        else:
+            else:
             print("  No HTTP requests found")
         
         print(f"\n{Fore.CYAN}Service Check Analysis:{Style.RESET_ALL}")
@@ -1625,7 +1818,7 @@ def manage_individual_service(service_name: str):
                 if "last_lines" in analysis:
                     print_info("Last 10 log lines:")
                     for line in analysis["last_lines"][-10:]:
-                        print(line.rstrip())
+                print(line.rstrip())
             else:
                 print_warning("Log file does not exist")
         elif choice == "0":
@@ -1659,7 +1852,7 @@ def system_diagnostics_menu():
             show_performance_metrics()
         elif choice == "0":
             break
-        else:
+    else:
             print_error("Invalid choice")
 
 def show_system_information():
@@ -1755,7 +1948,7 @@ def show_network_analysis():
                 conn['status']
             ])
         print_table(headers, rows)
-    else:
+        else:
         print_info("No active connections found")
 
 def scan_ports():
@@ -1823,7 +2016,7 @@ def debug_killer_interface():
                 try:
                     # Simulate the error
                     raise Exception(error_msg)
-                except Exception as e:
+    except Exception as e:
                     handle_error_with_debug_killer(e, "Manual Error Handling")
         
         elif choice == "2":
@@ -1841,9 +2034,9 @@ def debug_killer_interface():
                         lines = f.readlines()[-20:]  # Last 20 lines
                         for line in lines:
                             print(line.rstrip())
-                except Exception as e:
+        except Exception as e:
                     print_error(f"Error reading log: {e}")
-            else:
+    else:
                 print_info("No debug log found")
         
         elif choice == "5":
@@ -1903,23 +2096,23 @@ def main():
             show_main_menu()
             choice = input(f"\n{Fore.GREEN}Choose an option: {Style.RESET_ALL}").strip()
             
-            if choice == "1":
-                full_desktop_app_startup()
-            elif choice == "2":
+        if choice == "1":
+            full_desktop_app_startup()
+        elif choice == "2":
                 start_all_services()
-            elif choice == "3":
+        elif choice == "3":
                 stop_all_services()
-            elif choice == "4":
+        elif choice == "4":
                 restart_all_services()
-            elif choice == "5":
+        elif choice == "5":
                 monitor_services_continuous()
-            elif choice == "6":
+        elif choice == "6":
                 comprehensive_health_check()
-            elif choice == "7":
+        elif choice == "7":
                 check_dependencies()
-            elif choice == "8":
+        elif choice == "8":
                 install_missing_dependencies()
-            elif choice == "9":
+        elif choice == "9":
                 comprehensive_log_analysis()
             elif choice == "10":
                 backup_configuration()
@@ -1938,10 +2131,10 @@ def main():
                 analyze_debug_logs()
             elif choice == "17":
                 run_network_diagnostics()
-            elif choice == "0":
+        elif choice == "0":
                 print_success("Exiting. Services continue running if not stopped.")
-                break
-            else:
+            break
+        else:
                 print_error("Invalid choice. Please try again.")
                 
             if choice != "4":  # Don't pause for continuous monitoring
