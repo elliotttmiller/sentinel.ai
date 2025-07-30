@@ -23,6 +23,80 @@ from dataclasses import dataclass
 from colorama import init, Fore, Style, Back
 import requests
 import os
+import logging
+from loguru import logger
+
+# Enhanced debug logging configuration
+DEBUG_LOG_FILE = Path(__file__).parent.parent.parent / "logs" / "debug_services.log"
+DEBUG_LOG_FILE.parent.mkdir(exist_ok=True)
+
+# Configure advanced debug logging
+logger.remove()
+logger.add(
+    DEBUG_LOG_FILE,
+    level="DEBUG",
+    format="<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>",
+    rotation="10 MB",
+    retention="7 days",
+    compression="zip"
+)
+logger.add(
+    sys.stderr,
+    level="INFO",
+    format="<green>{time:HH:mm:ss}</green> | <level>{level: <8}</level> | <level>{message}</level>"
+)
+
+# Debug context manager for detailed logging
+class DebugContext:
+    def __init__(self, operation: str, service: str = None):
+        self.operation = operation
+        self.service = service
+        self.start_time = time.time()
+        self.details = {}
+        
+    def __enter__(self):
+        logger.debug(f"🚀 Starting operation: {self.operation}" + (f" for service: {self.service}" if self.service else ""))
+        return self
+        
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        duration = time.time() - self.start_time
+        if exc_type:
+            logger.error(f"❌ Operation failed: {self.operation} after {duration:.2f}s - {exc_type.__name__}: {exc_val}")
+        else:
+            logger.debug(f"✅ Operation completed: {self.operation} in {duration:.2f}s")
+            if self.details:
+                logger.debug(f"📊 Operation details: {json.dumps(self.details, indent=2)}")
+    
+    def add_detail(self, key: str, value: Any):
+        self.details[key] = value
+        logger.debug(f"📝 {key}: {value}")
+
+# Enhanced HTTP request with detailed logging
+def debug_request(method: str, url: str, **kwargs) -> requests.Response:
+    with DebugContext(f"HTTP {method}", url) as ctx:
+        ctx.add_detail("method", method)
+        ctx.add_detail("url", url)
+        ctx.add_detail("headers", kwargs.get('headers', {}))
+        ctx.add_detail("timeout", kwargs.get('timeout', 30))
+        
+        try:
+            response = requests.request(method, url, **kwargs)
+            ctx.add_detail("status_code", response.status_code)
+            ctx.add_detail("response_time", response.elapsed.total_seconds())
+            ctx.add_detail("response_size", len(response.content))
+            ctx.add_detail("response_headers", dict(response.headers))
+            
+            if response.status_code >= 400:
+                logger.warning(f"⚠️ HTTP {method} {url} returned {response.status_code}")
+                logger.debug(f"Response content: {response.text[:500]}...")
+            else:
+                logger.debug(f"✅ HTTP {method} {url} successful")
+                
+            return response
+        except requests.exceptions.RequestException as e:
+            ctx.add_detail("error", str(e))
+            logger.error(f"❌ HTTP {method} {url} failed: {e}")
+            raise
 
 # Import debug killer system
 try:
@@ -309,63 +383,105 @@ def get_system_info() -> SystemInfo:
     )
 
 def get_service_status(service_name: str) -> ServiceStatus:
-    """Get detailed status of a specific service"""
-    service_config = SERVICES.get(service_name)
-    if not service_config:
-        return ServiceStatus(
-            name=service_name,
-            port=0,
-            is_running=False,
-            pid=None,
-            memory_usage=None,
-            cpu_usage=None,
-            uptime=None,
-            last_check=datetime.datetime.now()
-        )
-    
-    # Handle remote services (like Railway backend)
-    if service_config.get("is_remote"):
-        try:
-            # Check if remote service is accessible
-            response = requests.get(f"{service_config['url']}/health", timeout=5)
-            is_running = response.status_code == 200
-        except:
-            is_running = False
+    """Get detailed status of a specific service with enhanced debug logging"""
+    with DebugContext("get_service_status", service_name) as ctx:
+        service_config = SERVICES.get(service_name)
+        if not service_config:
+            ctx.add_detail("error", f"Service {service_name} not found in SERVICES")
+            return ServiceStatus(
+                name=service_name,
+                port=0,
+                is_running=False,
+                pid=None,
+                memory_usage=None,
+                cpu_usage=None,
+                uptime=None,
+                last_check=datetime.datetime.now()
+            )
         
+        ctx.add_detail("service_config", {
+            "name": service_config["name"],
+            "port": service_config.get("port"),
+            "url": service_config.get("url"),
+            "health_endpoint": service_config.get("health_endpoint"),
+            "is_remote": service_config.get("is_remote", False)
+        })
+        
+        # Handle remote services (like Railway backend)
+        if service_config.get("is_remote"):
+            ctx.add_detail("service_type", "remote")
+            try:
+                # Check if remote service is accessible
+                health_url = f"{service_config['url']}/health"
+                ctx.add_detail("health_url", health_url)
+                
+                response = debug_request("GET", health_url, timeout=5)
+                is_running = response.status_code == 200
+                
+                ctx.add_detail("response_status", response.status_code)
+                ctx.add_detail("response_time", response.elapsed.total_seconds())
+                ctx.add_detail("is_running", is_running)
+                
+                if not is_running:
+                    logger.warning(f"⚠️ Remote service {service_name} returned status {response.status_code}")
+                    ctx.add_detail("error", f"HTTP {response.status_code}")
+                
+            except Exception as e:
+                is_running = False
+                ctx.add_detail("remote_error", str(e))
+                logger.error(f"❌ Remote service {service_name} check failed: {e}")
+            
+            return ServiceStatus(
+                name=service_config["name"],
+                port=service_config.get("port", 0),
+                is_running=is_running,
+                pid=None,  # No local PID for remote services
+                memory_usage=None,
+                cpu_usage=None,
+                uptime=None,
+                last_check=datetime.datetime.now()
+            )
+        
+        # Handle local services
+        ctx.add_detail("service_type", "local")
+        port = service_config["port"]
+        ctx.add_detail("port", port)
+        
+        proc = find_process_by_port(port)
+        if proc:
+            ctx.add_detail("process_found", True)
+            ctx.add_detail("process_pid", proc.pid)
+            ctx.add_detail("process_cmdline", " ".join(proc.cmdline()))
+            
+            try:
+                memory_usage = proc.memory_percent()
+                cpu_usage = proc.cpu_percent()
+                uptime = time.time() - proc.create_time()
+                
+                ctx.add_detail("memory_usage", memory_usage)
+                ctx.add_detail("cpu_usage", cpu_usage)
+                ctx.add_detail("uptime", uptime)
+                
+            except (psutil.NoSuchProcess, psutil.AccessDenied) as e:
+                memory_usage = cpu_usage = uptime = None
+                ctx.add_detail("process_access_error", str(e))
+                logger.warning(f"⚠️ Could not access process {proc.pid}: {e}")
+        else:
+            proc = None
+            memory_usage = cpu_usage = uptime = None
+            ctx.add_detail("process_found", False)
+        
+        ctx.add_detail("final_is_running", proc is not None)
         return ServiceStatus(
             name=service_config["name"],
-            port=service_config.get("port", 0),
-            is_running=is_running,
-            pid=None,  # No local PID for remote services
-            memory_usage=None,
-            cpu_usage=None,
-            uptime=None,
+            port=service_config["port"],
+            is_running=proc is not None,
+            pid=proc.pid if proc else None,
+            memory_usage=memory_usage,
+            cpu_usage=cpu_usage,
+            uptime=uptime,
             last_check=datetime.datetime.now()
         )
-    
-    # Handle local services
-    proc = find_process_by_port(service_config["port"])
-    if proc:
-        try:
-            memory_usage = proc.memory_percent()
-            cpu_usage = proc.cpu_percent()
-            uptime = time.time() - proc.create_time()
-        except (psutil.NoSuchProcess, psutil.AccessDenied):
-            memory_usage = cpu_usage = uptime = None
-    else:
-        proc = None
-        memory_usage = cpu_usage = uptime = None
-    
-    return ServiceStatus(
-        name=service_config["name"],
-        port=service_config["port"],
-        is_running=proc is not None,
-        pid=proc.pid if proc else None,
-        memory_usage=memory_usage,
-        cpu_usage=cpu_usage,
-        uptime=uptime,
-        last_check=datetime.datetime.now()
-    )
 
 def monitor_services_continuous():
     """Continuous monitoring of all services"""
@@ -721,65 +837,129 @@ def check_port_conflict(port: int) -> bool:
         return result == 0
 
 def health_check_service(service_name: str) -> Dict[str, Any]:
-    """Perform comprehensive health check on a service"""
-    service_config = SERVICES.get(service_name)
-    if not service_config:
-        return {"status": "unknown", "error": f"Unknown service: {service_name}"}
-    
-    health_info = {
-        "service": service_name,
-        "port": service_config.get("port"),
-        "process_running": False,
-        "port_accessible": False,
-        "health_endpoint": False,
-        "response_time": None,
-        "memory_usage": None,
-        "cpu_usage": None
-    }
-    
-    # Handle remote services (like Railway backend)
-    if service_config.get("is_remote"):
-        try:
-            start_time = time.time()
-            response = requests.get(
-                f"{service_config['url']}{service_config['health_endpoint']}",
-                timeout=10
-            )
-            health_info["response_time"] = (time.time() - start_time) * 1000
-            health_info["health_endpoint"] = response.status_code == 200
-            health_info["status"] = "healthy" if health_info["health_endpoint"] else "unhealthy"
-        except Exception as e:
-            health_info["health_endpoint_error"] = str(e)
-            health_info["status"] = "unreachable"
+    """Perform comprehensive health check on a service with enhanced debug logging"""
+    with DebugContext("health_check_service", service_name) as ctx:
+        service_config = SERVICES.get(service_name)
+        if not service_config:
+            ctx.add_detail("error", f"Unknown service: {service_name}")
+            return {"status": "unknown", "error": f"Unknown service: {service_name}"}
+        
+        ctx.add_detail("service_config", {
+            "name": service_config["name"],
+            "port": service_config.get("port"),
+            "url": service_config.get("url"),
+            "health_endpoint": service_config.get("health_endpoint"),
+            "is_remote": service_config.get("is_remote", False)
+        })
+        
+        health_info = {
+            "service": service_name,
+            "port": service_config.get("port"),
+            "process_running": False,
+            "port_accessible": False,
+            "health_endpoint": False,
+            "response_time": None,
+            "memory_usage": None,
+            "cpu_usage": None
+        }
+        
+        # Handle remote services (like Railway backend)
+        if service_config.get("is_remote"):
+            ctx.add_detail("service_type", "remote")
+            try:
+                health_url = f"{service_config['url']}{service_config['health_endpoint']}"
+                ctx.add_detail("health_url", health_url)
+                
+                start_time = time.time()
+                response = debug_request("GET", health_url, timeout=10)
+                health_info["response_time"] = (time.time() - start_time) * 1000
+                health_info["health_endpoint"] = response.status_code == 200
+                health_info["status"] = "healthy" if health_info["health_endpoint"] else "unhealthy"
+                
+                ctx.add_detail("response_status", response.status_code)
+                ctx.add_detail("response_time_ms", health_info["response_time"])
+                ctx.add_detail("health_endpoint_ok", health_info["health_endpoint"])
+                ctx.add_detail("final_status", health_info["status"])
+                
+                if not health_info["health_endpoint"]:
+                    logger.warning(f"⚠️ Remote service {service_name} health check failed: HTTP {response.status_code}")
+                    ctx.add_detail("health_error", f"HTTP {response.status_code}")
+                
+            except Exception as e:
+                health_info["health_endpoint_error"] = str(e)
+                health_info["status"] = "unreachable"
+                ctx.add_detail("remote_error", str(e))
+                logger.error(f"❌ Remote service {service_name} health check failed: {e}")
+            
+            return health_info
+        
+        # Handle local services
+        ctx.add_detail("service_type", "local")
+        port = service_config["port"]
+        ctx.add_detail("port", port)
+        
+        # Check if process is running
+        proc = find_process_by_port(port)
+        if proc:
+            ctx.add_detail("process_found", True)
+            ctx.add_detail("process_pid", proc.pid)
+            health_info["process_running"] = True
+            
+            try:
+                health_info["memory_usage"] = proc.memory_percent()
+                health_info["cpu_usage"] = proc.cpu_percent()
+                ctx.add_detail("memory_usage", health_info["memory_usage"])
+                ctx.add_detail("cpu_usage", health_info["cpu_usage"])
+            except (psutil.NoSuchProcess, psutil.AccessDenied) as e:
+                ctx.add_detail("process_access_error", str(e))
+                logger.warning(f"⚠️ Could not access process {proc.pid}: {e}")
+        else:
+            ctx.add_detail("process_found", False)
+        
+        # Check if port is accessible
+        port_conflict = check_port_conflict(port)
+        ctx.add_detail("port_conflict", port_conflict)
+        if not port_conflict:
+            health_info["port_accessible"] = True
+            ctx.add_detail("port_accessible", True)
+        else:
+            ctx.add_detail("port_accessible", False)
+        
+        # Check health endpoint
+        if health_info["process_running"] and health_info["port_accessible"]:
+            try:
+                health_url = f"http://localhost:{port}{service_config['health_endpoint']}"
+                ctx.add_detail("local_health_url", health_url)
+                
+                start_time = time.time()
+                response = debug_request("GET", health_url, timeout=5)
+                health_info["response_time"] = (time.time() - start_time) * 1000
+                health_info["health_endpoint"] = response.status_code == 200
+                
+                ctx.add_detail("health_response_status", response.status_code)
+                ctx.add_detail("health_response_time_ms", health_info["response_time"])
+                ctx.add_detail("health_endpoint_ok", health_info["health_endpoint"])
+                
+                if not health_info["health_endpoint"]:
+                    logger.warning(f"⚠️ Local service {service_name} health check failed: HTTP {response.status_code}")
+                    ctx.add_detail("health_error", f"HTTP {response.status_code}")
+                    
+            except Exception as e:
+                ctx.add_detail("health_check_error", str(e))
+                logger.error(f"❌ Local service {service_name} health check failed: {e}")
+        
+        # Determine final status
+        if health_info["process_running"] and health_info["port_accessible"] and health_info["health_endpoint"]:
+            health_info["status"] = "healthy"
+        elif health_info["process_running"] and health_info["port_accessible"]:
+            health_info["status"] = "unhealthy"
+        elif health_info["process_running"]:
+            health_info["status"] = "process_only"
+        else:
+            health_info["status"] = "offline"
+        
+        ctx.add_detail("final_status", health_info["status"])
         return health_info
-    
-    # Handle local services
-    # Check if process is running
-    proc = find_process_by_port(service_config["port"])
-    if proc:
-        health_info["process_running"] = True
-        try:
-            health_info["memory_usage"] = proc.memory_percent()
-            health_info["cpu_usage"] = proc.cpu_percent()
-        except (psutil.NoSuchProcess, psutil.AccessDenied):
-            pass
-    
-    # Check if port is accessible
-    if not check_port_conflict(service_config["port"]):
-        health_info["port_accessible"] = True
-    
-    # Check health endpoint
-    if health_info["process_running"] and health_info["port_accessible"]:
-        try:
-            start_time = time.time()
-            response = requests.get(
-                f"http://localhost:{service_config['port']}{service_config['health_endpoint']}",
-                timeout=5
-            )
-            health_info["response_time"] = (time.time() - start_time) * 1000
-            health_info["health_endpoint"] = response.status_code == 200
-        except Exception as e:
-            health_info["health_endpoint_error"] = str(e)
     
     # Determine overall status
     if health_info["process_running"] and health_info["port_accessible"] and health_info["health_endpoint"]:
@@ -1127,6 +1307,158 @@ def comprehensive_log_analysis():
         else:
             print_warning(f"Log file {log_file.name} does not exist")
 
+def analyze_debug_logs():
+    """Analyze debug logs to pinpoint issues"""
+    print_header("🔍 Advanced Debug Log Analysis", 2)
+    
+    debug_log_file = Path(__file__).parent.parent.parent / "logs" / "debug_services.log"
+    if not debug_log_file.exists():
+        print_error("Debug log file not found")
+        return
+    
+    print_info("Analyzing debug logs for service connectivity issues...")
+    
+    # Read recent debug logs
+    try:
+        with open(debug_log_file, 'r', encoding='utf-8') as f:
+            lines = f.readlines()[-100:]  # Last 100 lines
+        
+        # Analyze patterns
+        http_requests = []
+        service_checks = []
+        errors = []
+        
+        for line in lines:
+            if "HTTP GET" in line or "HTTP POST" in line:
+                http_requests.append(line.strip())
+            elif "get_service_status" in line or "health_check_service" in line:
+                service_checks.append(line.strip())
+            elif "ERROR" in line or "❌" in line:
+                errors.append(line.strip())
+        
+        print(f"\n{Fore.CYAN}HTTP Request Analysis:{Style.RESET_ALL}")
+        if http_requests:
+            for req in http_requests[-5:]:  # Last 5 requests
+                print(f"  {req}")
+        else:
+            print("  No HTTP requests found")
+        
+        print(f"\n{Fore.CYAN}Service Check Analysis:{Style.RESET_ALL}")
+        if service_checks:
+            for check in service_checks[-5:]:  # Last 5 checks
+                print(f"  {check}")
+        else:
+            print("  No service checks found")
+        
+        print(f"\n{Fore.CYAN}Error Analysis:{Style.RESET_ALL}")
+        if errors:
+            for error in errors[-5:]:  # Last 5 errors
+                print(f"  {error}")
+        else:
+            print("  No errors found")
+        
+        # Look for specific Railway backend issues
+        railway_issues = [line for line in lines if "Railway" in line or "sentinel-backend" in line]
+        if railway_issues:
+            print(f"\n{Fore.YELLOW}Railway Backend Issues:{Style.RESET_ALL}")
+            for issue in railway_issues[-3:]:
+                print(f"  {issue}")
+        
+        # Network connectivity analysis
+        network_errors = [line for line in lines if "ConnectionError" in line or "Timeout" in line]
+        if network_errors:
+            print(f"\n{Fore.RED}Network Connectivity Issues:{Style.RESET_ALL}")
+            for error in network_errors[-3:]:
+                print(f"  {error}")
+        
+        # DNS resolution issues
+        dns_errors = [line for line in lines if "NameResolution" in line or "getaddrinfo" in line]
+        if dns_errors:
+            print(f"\n{Fore.RED}DNS Resolution Issues:{Style.RESET_ALL}")
+            for error in dns_errors[-3:]:
+                print(f"  {error}")
+        
+        # SSL/TLS issues
+        ssl_errors = [line for line in lines if "SSL" in line or "certificate" in line]
+        if ssl_errors:
+            print(f"\n{Fore.RED}SSL/TLS Issues:{Style.RESET_ALL}")
+            for error in ssl_errors[-3:]:
+                print(f"  {error}")
+        
+        print(f"\n{Fore.GREEN}Debug log analysis complete. Check the full log at:{Style.RESET_ALL}")
+        print(f"  {debug_log_file}")
+        
+    except Exception as e:
+        print_error(f"Error analyzing debug logs: {e}")
+
+def run_network_diagnostics():
+    """Run comprehensive network diagnostics"""
+    print_header("🌐 Network Diagnostics", 2)
+    
+    with DebugContext("network_diagnostics") as ctx:
+        # Test basic connectivity
+        print_info("Testing basic internet connectivity...")
+        try:
+            response = debug_request("GET", "https://httpbin.org/get", timeout=10)
+            ctx.add_detail("internet_connectivity", "OK")
+            print_success("✅ Internet connectivity: OK")
+        except Exception as e:
+            ctx.add_detail("internet_connectivity", f"FAILED: {e}")
+            print_error(f"❌ Internet connectivity failed: {e}")
+        
+        # Test DNS resolution
+        print_info("Testing DNS resolution...")
+        try:
+            import socket
+            ip = socket.gethostbyname("sentinel-backend-production.up.railway.app")
+            ctx.add_detail("dns_resolution", f"OK: {ip}")
+            print_success(f"✅ DNS resolution: OK ({ip})")
+        except Exception as e:
+            ctx.add_detail("dns_resolution", f"FAILED: {e}")
+            print_error(f"❌ DNS resolution failed: {e}")
+        
+        # Test Railway backend connectivity
+        print_info("Testing Railway backend connectivity...")
+        try:
+            response = debug_request("GET", "https://sentinel-backend-production.up.railway.app/health", timeout=10)
+            ctx.add_detail("railway_connectivity", f"OK: HTTP {response.status_code}")
+            print_success(f"✅ Railway backend: OK (HTTP {response.status_code})")
+        except Exception as e:
+            ctx.add_detail("railway_connectivity", f"FAILED: {e}")
+            print_error(f"❌ Railway backend failed: {e}")
+        
+        # Test local services
+        print_info("Testing local service connectivity...")
+        local_services = ["desktop_app", "cognitive_engine"]
+        for service in local_services:
+            if service in SERVICES:
+                service_config = SERVICES[service]
+                if "health_endpoint" in service_config:
+                    try:
+                        url = f"http://localhost:{service_config['port']}{service_config['health_endpoint']}"
+                        response = debug_request("GET", url, timeout=5)
+                        ctx.add_detail(f"{service}_connectivity", f"OK: HTTP {response.status_code}")
+                        print_success(f"✅ {service}: OK (HTTP {response.status_code})")
+                    except Exception as e:
+                        ctx.add_detail(f"{service}_connectivity", f"FAILED: {e}")
+                        print_error(f"❌ {service} failed: {e}")
+        
+        # Network interface analysis
+        print_info("Analyzing network interfaces...")
+        try:
+            import psutil
+            interfaces = psutil.net_if_addrs()
+            for interface, addrs in interfaces.items():
+                for addr in addrs:
+                    if addr.family == socket.AF_INET:
+                        ctx.add_detail(f"interface_{interface}", addr.address)
+                        print_info(f"  {interface}: {addr.address}")
+        except Exception as e:
+            ctx.add_detail("interface_analysis_error", str(e))
+            print_error(f"❌ Interface analysis failed: {e}")
+        
+        print_success("Network diagnostics complete!")
+
 # =============================================================================
 # CONFIGURATION MANAGEMENT
 # =============================================================================
@@ -1211,6 +1543,8 @@ def show_main_menu():
     print("13. System Diagnostics")
     print("14. Check Cognitive Engine Config")
     print("15. 🔧 Debug Killer Optimization")
+    print("16. 🔍 Advanced Debug Log Analysis")
+    print("17. 🌐 Network Diagnostics")
     print("0.  Exit")
 
 def service_management_menu():
@@ -1600,6 +1934,10 @@ def main():
                 check_cognitive_engine_config()
             elif choice == "15":
                 debug_killer_interface()
+            elif choice == "16":
+                analyze_debug_logs()
+            elif choice == "17":
+                run_network_diagnostics()
             elif choice == "0":
                 print_success("Exiting. Services continue running if not stopped.")
                 break
