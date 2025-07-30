@@ -1,4 +1,29 @@
+INFO:     Will watch for changes in these directories: ['c:\\Users\\AMD\\sentinel\\desktop-app']
+INFO:     Uvicorn running on http://0.0.0.0:8002 (Press CTRL+C to quit)
+INFO:     Started reloader process [5416] using WatchFiles
+INFO:     Started server process [4460]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:53815 - "GET /health HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'src\models\fix_database_schema.py'. Reloading...
+INFO:     127.0.0.1:54005 - "GET /health HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [4460]
+WARNING:  WatchFiles detected changes in 'src\models\advanced_database.py', 'src\models\fix_database_schema.py'. Reloading...
+Process SpawnProcess-2:
 Traceback (most recent call last):
-  File "c:\Users\AMD\sentinel\desktop-app\src\main.py", line 17, in <module>
-    from .core.cognitive_forge_engine import cognitive_forge_engine
-ImportError: attempted relative import with no known parent package
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\_subprocess.py", line 70, in subprocess_started
+    sys.stdin = os.fdopen(stdin_fileno)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen os>", line 1031, in fdopen
+  File "<frozen codecs>", line 309, in __init__
+KeyboardInterrupt
+INFO:     Started server process [14572]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.

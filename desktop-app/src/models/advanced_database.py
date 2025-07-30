@@ -80,7 +80,8 @@ class SystemLog(Base):
     level = Column(String, nullable=False)  # DEBUG, INFO, WARNING, ERROR
     message = Column(Text, nullable=False)
     component = Column(String, nullable=True)  # agent_core, database, api, etc.
-    timestamp = Column(DateTime, default=datetime.utcnow)
+    source = Column(String, nullable=True)  # source field for database compatibility
+    created_at = Column(DateTime, default=datetime.utcnow)  # Changed from timestamp to created_at
     log_metadata = Column(JSON, nullable=True)  # Renamed from 'metadata' to avoid SQLAlchemy conflict
 
 
@@ -290,6 +291,7 @@ Timestamp: {datetime.utcnow().isoformat()}"""
                 level=level,
                 message=message,
                 component=component,
+                source=component,  # Use component as source for database compatibility
                 log_metadata=metadata
             )
             db.add(log_entry)

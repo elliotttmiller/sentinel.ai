@@ -14,3 +14,228 @@ LINE 1: INSERT INTO system_logs (level, message, component, timestam...
 [parameters: {'level': 'INFO', 'message': 'Cognitive Forge Desktop App started successfully', 'component': 'main', 'timestamp': datetime.datetime(2025, 7, 30, 2, 34, 35, 253061), 'log_metadata': '{"version": "3.0.0", "startup_time": "2025-07-30T02:34:35.249059"}'}]
 (Background on this error at: https://sqlalche.me/e/20/f405)
 INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'src\utils\manage_services.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+2025-07-29 21:39:20.128 | INFO     | src.main:shutdown_event:312 - \U0001f6d1 Cognitive Forge Desktop App shutting down...
+2025-07-29 21:39:20.251 | ERROR    | src.models.advanced_database:log_system_event:300 - Error logging system event: (psycopg2.errors.UndefinedColumn) column "component" of relation "system_logs" does not exist
+LINE 1: INSERT INTO system_logs (level, message, component, timestam...
+                                                 ^
+
+[SQL: INSERT INTO system_logs (level, message, component, timestamp, log_metadata) VALUES (%(level)s, %(message)s, %(component)s, %(timestamp)s, %(log_metadata)s) RETURNING system_logs.id]
+[parameters: {'level': 'INFO', 'message': 'Cognitive Forge Desktop App shutting down', 'component': 'main', 'timestamp': datetime.datetime(2025, 7, 30, 2, 39, 20, 128170), 'log_metadata': '{"shutdown_time": "2025-07-30T02:39:20.128170"}'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+INFO:     Application shutdown complete.
+INFO:     Finished server process [9436]
+WARNING:  WatchFiles detected changes in 'src\utils\manage_services.py'. Reloading...
+2025-07-29 21:39:35.814 | INFO     | src.models.advanced_database:__init__:108 - Database system initialized successfully with postgresql://postgres:LSvFcJSLjYBxsWrcTtgBUgLlLYBdPqiS@trolley.proxy.rlwy.net:44667/railway
+2025-07-29 21:39:35.824 | INFO     | src.core.cognitive_forge_engine:__init__:48 - Cognitive Forge Engine initialized with model: gemini-1.5-pro-latest
+INFO:     Started server process [16952]
+INFO:     Waiting for application startup.
+2025-07-29 21:39:35.830 | INFO     | src.main:startup_event:298 - \U0001f680 Cognitive Forge Desktop App starting up...
+2025-07-29 21:39:35.961 | ERROR    | src.models.advanced_database:log_system_event:300 - Error logging system event: (psycopg2.errors.UndefinedColumn) column "component" of relation "system_logs" does not exist
+LINE 1: INSERT INTO system_logs (level, message, component, timestam...
+                                                 ^
+
+[SQL: INSERT INTO system_logs (level, message, component, timestamp, log_metadata) VALUES (%(level)s, %(message)s, %(component)s, %(timestamp)s, %(log_metadata)s) RETURNING system_logs.id]
+[parameters: {'level': 'INFO', 'message': 'Cognitive Forge Desktop App started successfully', 'component': 'main', 'timestamp': datetime.datetime(2025, 7, 30, 2, 39, 35, 830325), 'log_metadata': '{"version": "3.0.0", "startup_time": "2025-07-30T02:39:35.830325"}'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-29 21:39:35.961 | INFO     | src.main:shutdown_event:312 - \U0001f6d1 Cognitive Forge Desktop App shutting down...
+2025-07-29 21:39:36.082 | ERROR    | src.models.advanced_database:log_system_event:300 - Error logging system event: (psycopg2.errors.UndefinedColumn) column "component" of relation "system_logs" does not exist
+LINE 1: INSERT INTO system_logs (level, message, component, timestam...
+                                                 ^
+
+[SQL: INSERT INTO system_logs (level, message, component, timestamp, log_metadata) VALUES (%(level)s, %(message)s, %(component)s, %(timestamp)s, %(log_metadata)s) RETURNING system_logs.id]
+[parameters: {'level': 'INFO', 'message': 'Cognitive Forge Desktop App shutting down', 'component': 'main', 'timestamp': datetime.datetime(2025, 7, 30, 2, 39, 35, 961590), 'log_metadata': '{"shutdown_time": "2025-07-30T02:39:35.961590"}'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ERROR:    Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 686, in lifespan
+    await receive()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+
+Process SpawnProcess-2:
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\_subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 61, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+2025-07-29 21:39:51.682 | INFO     | src.models.advanced_database:__init__:108 - Database system initialized successfully with postgresql://postgres:LSvFcJSLjYBxsWrcTtgBUgLlLYBdPqiS@trolley.proxy.rlwy.net:44667/railway
+2025-07-29 21:39:51.698 | INFO     | src.core.cognitive_forge_engine:__init__:48 - Cognitive Forge Engine initialized with model: gemini-1.5-pro-latest
+INFO:     Started server process [6508]
+INFO:     Waiting for application startup.
+2025-07-29 21:39:51.711 | INFO     | src.main:startup_event:298 - \U0001f680 Cognitive Forge Desktop App starting up...
+2025-07-29 21:39:51.841 | ERROR    | src.models.advanced_database:log_system_event:300 - Error logging system event: (psycopg2.errors.UndefinedColumn) column "component" of relation "system_logs" does not exist
+LINE 1: INSERT INTO system_logs (level, message, component, timestam...
+                                                 ^
+
+[SQL: INSERT INTO system_logs (level, message, component, timestamp, log_metadata) VALUES (%(level)s, %(message)s, %(component)s, %(timestamp)s, %(log_metadata)s) RETURNING system_logs.id]
+[parameters: {'level': 'INFO', 'message': 'Cognitive Forge Desktop App started successfully', 'component': 'main', 'timestamp': datetime.datetime(2025, 7, 30, 2, 39, 51, 714212), 'log_metadata': '{"version": "3.0.0", "startup_time": "2025-07-30T02:39:51.711651"}'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+INFO:     Application startup complete.
+INFO:     127.0.0.1:53826 - "GET / HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\responses.py", line 335, in __call__
+    stat_result = await anyio.to_thread.run_sync(os.stat, self.path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\anyio\to_thread.py", line 33, in run_sync
+    return await get_asynclib().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\anyio\_backends\_asyncio.py", line 877, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\anyio\_backends\_asyncio.py", line 807, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 3] The system cannot find the path specified: '../templates/index.html'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py", line 426, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 84, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\applications.py", line 1106, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\applications.py", line 122, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\errors.py", line 184, in __call__
+    raise exc
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\exceptions.py", line 79, in __call__
+    raise exc
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 69, in app
+    await response(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\responses.py", line 338, in __call__
+    raise RuntimeError(f"File at path {self.path} does not exist.")
+RuntimeError: File at path ../templates/index.html does not exist.
+WARNING:  WatchFiles detected changes in 'src\models\fix_database_schema.py'. Reloading...
+INFO:     127.0.0.1:54016 - "GET / HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\responses.py", line 335, in __call__
+    stat_result = await anyio.to_thread.run_sync(os.stat, self.path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\anyio\to_thread.py", line 33, in run_sync
+    return await get_asynclib().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\anyio\_backends\_asyncio.py", line 877, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\anyio\_backends\_asyncio.py", line 807, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 3] The system cannot find the path specified: '../templates/index.html'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py", line 426, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 84, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\applications.py", line 1106, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\applications.py", line 122, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\errors.py", line 184, in __call__
+    raise exc
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\exceptions.py", line 79, in __call__
+    raise exc
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 69, in app
+    await response(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\responses.py", line 338, in __call__
+    raise RuntimeError(f"File at path {self.path} does not exist.")
+RuntimeError: File at path ../templates/index.html does not exist.
