@@ -33,6 +33,11 @@ class AdvancedDatabase:
             ))
             self.memory_collection = self.chroma_client.get_or_create_collection("mission_memory")
             self.logger.info("ChromaDB memory system initialized successfully")
+        except ImportError as e:
+            self.logger.warning(f"ChromaDB not available (missing dependencies): {e}")
+            self.logger.info("Continuing without vector memory capabilities")
+            self.chroma_client = None
+            self.memory_collection = None
         except Exception as e:
             self.logger.error(f"Failed to initialize ChromaDB: {e}")
             self.chroma_client = None

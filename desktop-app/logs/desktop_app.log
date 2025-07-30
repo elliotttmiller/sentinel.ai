@@ -3260,3 +3260,396 @@ INFO:     Started server process [10024]
 INFO:     Waiting for application startup.
 2025-07-30 10:51:38.929 | INFO     | src.main:startup_event:413 - \U0001f680 Cognitive Forge Desktop App starting up...
 INFO:     Application startup complete.
+INFO:     127.0.0.1:56809 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56809 - "GET /css/main.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56810 - "GET /css/custom-theme.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56809 - "GET /css/service-status.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56810 - "GET /js/main.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56809 - "GET /js/lucide.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56810 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56809 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56809 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56813 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56813 - "GET /mission/stress_test_49_1753893291 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56814 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56815 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56833 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56833 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56841 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56842 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56846 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56846 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56853 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56854 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56860 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56860 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56868 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56869 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56875 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56875 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56890 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56891 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56896 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56896 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56905 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56910 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56911 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56919 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56921 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56919 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56929 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56930 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56936 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56936 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56944 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56946 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56945 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56954 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56954 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56979 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56980 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56995 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56993 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56993 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57003 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57004 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57012 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57012 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57022 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57025 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57026 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57033 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57033 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57054 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57055 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57092 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57090 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57090 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57100 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57103 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57117 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57117 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57141 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57144 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57145 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57154 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57154 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57176 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57177 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57185 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57182 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57182 - "GET /missions HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'scripts\fix_database_schema.py'. Reloading...
+INFO:     127.0.0.1:57199 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57200 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57206 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57206 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57219 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57222 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57223 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57231 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57231 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57272 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57273 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57293 - "GET /health HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     127.0.0.1:57279 - "GET /missions HTTP/1.1" 200 OK
+INFO:     Waiting for application shutdown.
+2025-07-30 12:04:25.363 | INFO     | src.main:shutdown_event:427 - \U0001f6d1 Cognitive Forge Desktop App shutting down...
+INFO:     Application shutdown complete.
+INFO:     Finished server process [10024]
+WARNING:  WatchFiles detected changes in 'scripts\fix_database_schema.py'. Reloading...
+2025-07-30 12:04:43.000 | INFO     | src.models.advanced_database:__init__:113 - ChromaDB memory system initialized successfully
+2025-07-30 12:04:43.940 | INFO     | src.models.advanced_database:__init__:120 - Database system initialized successfully with postgresql://postgres:LSvFcJSLjYBxsWrcTtgBUgLlLYBdPqiS@trolley.proxy.rlwy.net:44667/railway
+2025-07-30 12:04:43.967 | INFO     | src.utils.phoenix_protocol:__init__:24 - Phoenix Protocol initialized - Self-healing system active
+2025-07-30 12:04:43.974 | INFO     | src.utils.guardian_protocol:__init__:26 - Guardian Protocol initialized - Quality assurance system active
+2025-07-30 12:04:43.974 | INFO     | src.utils.synapse_logging:__init__:33 - Synapse Logging System initialized - Unified consciousness active
+2025-07-30 12:04:43.981 | INFO     | src.utils.self_learning_module:__init__:26 - Self-Learning Module initialized - Continuous improvement active
+2025-07-30 12:04:43.981 | INFO     | src.core.cognitive_forge_engine:__init__:78 - Cognitive Forge Engine v5.0 initialized with model: gemini-1.5-pro
+2025-07-30 12:04:43.981 | INFO     | src.core.cognitive_forge_engine:__init__:79 - Sentient Operating System: Phoenix Protocol, Guardian Protocol, and Synapse Logging active
+INFO:     Started server process [4256]
+INFO:     Waiting for application startup.
+2025-07-30 12:04:43.995 | INFO     | src.main:startup_event:413 - \U0001f680 Cognitive Forge Desktop App starting up...
+2025-07-30 12:04:44.134 | INFO     | src.main:shutdown_event:427 - \U0001f6d1 Cognitive Forge Desktop App shutting down...
+ERROR:    Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 686, in lifespan
+    await receive()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+
+Process SpawnProcess-68:
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\_subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 61, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+2025-07-30 12:05:01.361 | INFO     | src.models.advanced_database:__init__:113 - ChromaDB memory system initialized successfully
+2025-07-30 12:05:02.357 | INFO     | src.models.advanced_database:__init__:120 - Database system initialized successfully with postgresql://postgres:LSvFcJSLjYBxsWrcTtgBUgLlLYBdPqiS@trolley.proxy.rlwy.net:44667/railway
+2025-07-30 12:05:02.385 | INFO     | src.utils.phoenix_protocol:__init__:24 - Phoenix Protocol initialized - Self-healing system active
+2025-07-30 12:05:02.386 | INFO     | src.utils.guardian_protocol:__init__:26 - Guardian Protocol initialized - Quality assurance system active
+2025-07-30 12:05:02.386 | INFO     | src.utils.synapse_logging:__init__:33 - Synapse Logging System initialized - Unified consciousness active
+2025-07-30 12:05:02.392 | INFO     | src.utils.self_learning_module:__init__:26 - Self-Learning Module initialized - Continuous improvement active
+2025-07-30 12:05:02.392 | INFO     | src.core.cognitive_forge_engine:__init__:78 - Cognitive Forge Engine v5.0 initialized with model: gemini-1.5-pro
+2025-07-30 12:05:02.392 | INFO     | src.core.cognitive_forge_engine:__init__:79 - Sentient Operating System: Phoenix Protocol, Guardian Protocol, and Synapse Logging active
+INFO:     Started server process [7876]
+INFO:     Waiting for application startup.
+2025-07-30 12:05:02.406 | INFO     | src.main:startup_event:413 - \U0001f680 Cognitive Forge Desktop App starting up...
+INFO:     Application startup complete.
+INFO:     127.0.0.1:57300 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57336 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57325 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57299 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57337 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57325 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57337 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57344 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57346 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57346 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57363 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57365 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57386 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57383 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57383 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57394 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57395 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57399 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57399 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57420 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57423 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57424 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57431 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57431 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57438 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57439 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57454 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57448 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57448 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57468 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57469 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57475 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57475 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57478 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57481 - "GET /missions HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'scripts\fix_database_schema.py'. Reloading...
+INFO:     127.0.0.1:57482 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57504 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57504 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57520 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57521 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57532 - "GET /health HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     127.0.0.1:57528 - "GET /missions HTTP/1.1" 200 OK
+INFO:     Waiting for application shutdown.
+2025-07-30 12:08:55.392 | INFO     | src.main:shutdown_event:427 - \U0001f6d1 Cognitive Forge Desktop App shutting down...
+INFO:     Application shutdown complete.
+INFO:     Finished server process [7876]
+WARNING:  WatchFiles detected changes in 'scripts\manage_services.py', 'scripts\integration_test.py'. Reloading...
+2025-07-30 12:09:13.088 | INFO     | src.models.advanced_database:__init__:113 - ChromaDB memory system initialized successfully
+2025-07-30 12:09:16.080 | INFO     | src.models.advanced_database:__init__:120 - Database system initialized successfully with postgresql://postgres:LSvFcJSLjYBxsWrcTtgBUgLlLYBdPqiS@trolley.proxy.rlwy.net:44667/railway
+2025-07-30 12:09:16.106 | INFO     | src.utils.phoenix_protocol:__init__:24 - Phoenix Protocol initialized - Self-healing system active
+2025-07-30 12:09:16.109 | INFO     | src.utils.guardian_protocol:__init__:26 - Guardian Protocol initialized - Quality assurance system active
+2025-07-30 12:09:16.109 | INFO     | src.utils.synapse_logging:__init__:33 - Synapse Logging System initialized - Unified consciousness active
+2025-07-30 12:09:16.109 | INFO     | src.utils.self_learning_module:__init__:26 - Self-Learning Module initialized - Continuous improvement active
+2025-07-30 12:09:16.115 | INFO     | src.core.cognitive_forge_engine:__init__:78 - Cognitive Forge Engine v5.0 initialized with model: gemini-1.5-pro
+2025-07-30 12:09:16.115 | INFO     | src.core.cognitive_forge_engine:__init__:79 - Sentient Operating System: Phoenix Protocol, Guardian Protocol, and Synapse Logging active
+INFO:     Started server process [17684]
+INFO:     Waiting for application startup.
+2025-07-30 12:09:16.129 | INFO     | src.main:startup_event:413 - \U0001f680 Cognitive Forge Desktop App starting up...
+2025-07-30 12:09:16.275 | INFO     | src.main:shutdown_event:427 - \U0001f6d1 Cognitive Forge Desktop App shutting down...
+ERROR:    Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 686, in lifespan
+    await receive()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+
+Process SpawnProcess-70:
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\_subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 61, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+2025-07-30 12:09:32.756 | INFO     | src.models.advanced_database:__init__:113 - ChromaDB memory system initialized successfully
+2025-07-30 12:09:33.761 | INFO     | src.models.advanced_database:__init__:120 - Database system initialized successfully with postgresql://postgres:LSvFcJSLjYBxsWrcTtgBUgLlLYBdPqiS@trolley.proxy.rlwy.net:44667/railway
+2025-07-30 12:09:33.790 | INFO     | src.utils.phoenix_protocol:__init__:24 - Phoenix Protocol initialized - Self-healing system active
+2025-07-30 12:09:33.797 | INFO     | src.utils.guardian_protocol:__init__:26 - Guardian Protocol initialized - Quality assurance system active
+2025-07-30 12:09:33.797 | INFO     | src.utils.synapse_logging:__init__:33 - Synapse Logging System initialized - Unified consciousness active
+2025-07-30 12:09:33.804 | INFO     | src.utils.self_learning_module:__init__:26 - Self-Learning Module initialized - Continuous improvement active
+2025-07-30 12:09:33.804 | INFO     | src.core.cognitive_forge_engine:__init__:78 - Cognitive Forge Engine v5.0 initialized with model: gemini-1.5-pro
+2025-07-30 12:09:33.804 | INFO     | src.core.cognitive_forge_engine:__init__:79 - Sentient Operating System: Phoenix Protocol, Guardian Protocol, and Synapse Logging active
+INFO:     Started server process [19800]
+INFO:     Waiting for application startup.
+2025-07-30 12:09:33.819 | INFO     | src.main:startup_event:413 - \U0001f680 Cognitive Forge Desktop App starting up...
+INFO:     Application startup complete.
+INFO:     127.0.0.1:57539 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57577 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57538 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57539 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57538 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57557 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57578 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57578 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57557 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57557 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57592 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57593 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57601 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57603 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57601 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57618 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57619 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57623 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57623 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57629 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57630 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57634 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57634 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57647 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57648 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57654 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57654 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57662 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57663 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57666 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57666 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57688 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57689 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57698 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57712 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57711 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57714 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57714 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57727 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57727 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57738 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57738 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57753 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57753 - "GET /service-status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57772 - "GET /missions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57772 - "GET /service-status HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'Fix-AI.py'. Reloading...
