@@ -280,7 +280,8 @@ class CognitiveForgeEngine:
             optimized_prompt_str = await self._run_crew(agents=[prompt_optimizer], tasks=[analysis_task])
             
             try:
-                optimized_prompt_json = json.loads(optimized_prompt_str)
+                # Clean and parse the JSON response
+                optimized_prompt_json = self._parse_agent_json_response(optimized_prompt_str)
                 update_callback("  ✅ Prompt Optimization Specialist: Transformation complete.")
                 
                 # Store in database
@@ -1038,6 +1039,50 @@ class CognitiveForgeEngine:
             "efficiency_gain": 0.15,
             "agent_improvement_score": 0.9
         }
+    
+    def _parse_agent_json_response(self, response_str: str) -> Dict[str, Any]:
+        """
+        Robustly parse JSON responses from agents that may include markdown formatting
+        Handles cases where JSON is wrapped in ```json ... ``` blocks
+        """
+        import re
+        
+        # Clean the response string
+        cleaned_response = response_str.strip()
+        
+        # Try to extract JSON from markdown code blocks
+        json_pattern = r'```(?:json)?\s*(\{.*?\})\s*```'
+        match = re.search(json_pattern, cleaned_response, re.DOTALL)
+        
+        if match:
+            # Extract JSON from the code block
+            json_str = match.group(1)
+        else:
+            # If no code block found, try to find JSON in the response
+            # Look for the first { and last } to extract JSON
+            start_idx = cleaned_response.find('{')
+            end_idx = cleaned_response.rfind('}')
+            
+            if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
+                json_str = cleaned_response[start_idx:end_idx + 1]
+            else:
+                # If no JSON found, use the entire response
+                json_str = cleaned_response
+        
+        # Clean up the JSON string
+        json_str = json_str.strip()
+        
+        # Remove any leading/trailing non-JSON characters
+        json_str = re.sub(r'^[^{]*', '', json_str)
+        json_str = re.sub(r'[^}]*$', '', json_str)
+        
+        try:
+            # Parse the JSON
+            return json.loads(json_str)
+        except json.JSONDecodeError as e:
+            logger.error(f"Failed to parse JSON: {json_str}")
+            logger.error(f"Original response: {response_str}")
+            raise ValueError(f"Invalid JSON format: {str(e)}") from e
 
     def get_system_info(self) -> Dict[str, Any]:
         """
