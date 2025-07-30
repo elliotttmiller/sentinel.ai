@@ -167,7 +167,7 @@ SERVICES = {
     "backend": {
         "name": "Backend API (Railway)",
         "port": None,  # No local port since it's on Railway
-        "url": "https://sentinel-backend-production.up.railway.app",  # Railway backend URL
+        "url": "https://sentinelai-production.up.railway.app",  # Railway backend URL
         "health_endpoint": "/health",
         "log_file": LOG_DIR / "backend.log",
         "is_remote": True
@@ -1410,7 +1410,7 @@ def run_network_diagnostics():
         print_info("Testing DNS resolution...")
         try:
             import socket
-            ip = socket.gethostbyname("sentinel-backend-production.up.railway.app")
+            ip = socket.gethostbyname("sentinelai-production.up.railway.app")
             ctx.add_detail("dns_resolution", f"OK: {ip}")
             print_success(f"✅ DNS resolution: OK ({ip})")
         except Exception as e:
@@ -1420,7 +1420,7 @@ def run_network_diagnostics():
         # Test Railway backend connectivity
         print_info("Testing Railway backend connectivity...")
         try:
-            response = debug_request("GET", "https://sentinel-backend-production.up.railway.app/health", timeout=10)
+            response = debug_request("GET", "https://sentinelai-production.up.railway.app/health", timeout=10)
             ctx.add_detail("railway_connectivity", f"OK: HTTP {response.status_code}")
             print_success(f"✅ Railway backend: OK (HTTP {response.status_code})")
         except Exception as e:

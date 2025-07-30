@@ -18,7 +18,7 @@ def fix_railway_backend_schema():
     print("🔧 Fixing Railway Backend Database Schema")
     
     # The Railway backend URL
-    railway_url = "https://sentinel-backend-production.up.railway.app"
+    railway_url = "https://sentinelai-production.up.railway.app"
     
     # Test the current backend
     print("Testing current Railway backend...")
