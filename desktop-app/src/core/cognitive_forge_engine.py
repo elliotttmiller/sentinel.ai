@@ -15,7 +15,6 @@ from dotenv import load_dotenv
 
 from ..agents.advanced_agents import PlannerAgents, WorkerAgents, MemoryAgents
 from ..models.advanced_database import db_manager
-from ..tools.advanced_tools import SystemTools
 
 # Load environment variables
 load_dotenv()
@@ -189,16 +188,46 @@ class CognitiveForgeEngine:
 
         # Parse the plan
         try:
+            # First try to parse as-is
             plan = json.loads(plan_str)
             update_callback(
                 f"  ✅ Execution plan generated successfully with {len(plan.get('steps', []))} steps"
             )
             return plan
         except json.JSONDecodeError:
-            # If JSON parsing fails, try to extract JSON from the response
-            logger.warning("Failed to parse plan as JSON, attempting to extract...")
-            # This is a fallback - in production, you'd want more robust JSON extraction
-            raise ValueError("Generated plan is not valid JSON")
+            # If JSON parsing fails, try to extract JSON from markdown code blocks
+            logger.warning("Failed to parse plan as JSON, attempting to extract from markdown...")
+            
+            # Look for JSON code blocks
+            import re
+            json_pattern = r'```(?:json)?\s*\n(.*?)\n```'
+            matches = re.findall(json_pattern, plan_str, re.DOTALL)
+            
+            if matches:
+                # Try the first match
+                json_content = matches[0].strip()
+                try:
+                    plan = json.loads(json_content)
+                    update_callback(
+                        f"  ✅ Execution plan extracted from markdown with {len(plan.get('steps', []))} steps"
+                    )
+                    return plan
+                except json.JSONDecodeError as e:
+                    logger.error(f"Failed to parse extracted JSON: {e}")
+                    logger.error(f"Extracted content: {json_content}")
+            
+            # If still failing, try to find any JSON-like structure
+            try:
+                # Remove markdown and try to find JSON
+                cleaned = plan_str.replace('```json', '').replace('```', '').strip()
+                plan = json.loads(cleaned)
+                update_callback(
+                    f"  ✅ Execution plan cleaned and parsed with {len(plan.get('steps', []))} steps"
+                )
+                return plan
+            except json.JSONDecodeError:
+                logger.error(f"All JSON parsing attempts failed. Raw response: {plan_str}")
+                raise ValueError("Generated plan is not valid JSON")
 
     def _execute_worker_crew(
         self, plan: Dict[str, Any], mission_id_str: str, update_callback: Callable[[str], None]
@@ -334,11 +363,11 @@ class CognitiveForgeEngine:
             db_stats = self.db_manager.get_system_stats()
 
             # Get system information
-            system_info = SystemTools.get_system_info()
+            # system_info = SystemTools.get_system_info() # This line is removed
 
             return {
                 "database_stats": db_stats,
-                "system_info": system_info,
+                "system_info": "System information unavailable", # This line is changed
                 "engine_status": "operational",
                 "model": os.getenv("LLM_MODEL", "gemini-1.5-pro-latest"),
                 "last_updated": datetime.utcnow().isoformat(),

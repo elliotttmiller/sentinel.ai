@@ -1,6 +1,6 @@
 """
-Advanced Tools System for Cognitive Forge
-Provides real file I/O, shell execution, and system interaction capabilities
+CrewAI-Compatible Tools System
+Proper implementation of tools that work with CrewAI
 """
 
 import os
@@ -11,8 +11,8 @@ from typing import List, Dict, Any, Optional
 from pathlib import Path
 from loguru import logger
 
-# CrewAI-compatible tool classes
-class BaseTool:
+# CrewAI Tool base class
+class CrewAITool:
     """Base class for CrewAI-compatible tools"""
     
     def __init__(self, name: str, description: str):
@@ -24,7 +24,7 @@ class BaseTool:
         raise NotImplementedError("Subclasses must implement _run")
 
 
-class WriteFileTool(BaseTool):
+class WriteFileTool(CrewAITool):
     """Tool for writing content to files"""
     
     def __init__(self):
@@ -37,12 +37,14 @@ class WriteFileTool(BaseTool):
         """Safely write content to a file with directory creation"""
         try:
             # Ensure the file has an allowed extension
-            allowed_extensions = {".py", ".js", ".html", ".css", ".json", ".txt", ".md", ".yml", ".yaml"}
+            allowed_extensions = {".py", ".js", ".html", ".css", ".json", ".txt", ".md", ".yml", ".yaml", ".bat", ".ps1"}
             if not any(file_path.endswith(ext) for ext in allowed_extensions):
                 return f"Error: File extension not allowed. Allowed: {allowed_extensions}"
 
             # Create directory if it doesn't exist
-            os.makedirs(os.path.dirname(file_path), exist_ok=True)
+            dir_path = os.path.dirname(file_path)
+            if dir_path and not os.path.exists(dir_path):
+                os.makedirs(dir_path, exist_ok=True)
 
             with open(file_path, "w", encoding="utf-8") as f:
                 f.write(content)
@@ -56,7 +58,7 @@ class WriteFileTool(BaseTool):
             return error_msg
 
 
-class ReadFileTool(BaseTool):
+class ReadFileTool(CrewAITool):
     """Tool for reading content from files"""
     
     def __init__(self):
@@ -83,7 +85,7 @@ class ReadFileTool(BaseTool):
             return error_msg
 
 
-class ListFilesTool(BaseTool):
+class ListFilesTool(CrewAITool):
     """Tool for listing files in directories"""
     
     def __init__(self):
@@ -117,7 +119,7 @@ class ListFilesTool(BaseTool):
             return error_msg
 
 
-class ExecuteShellCommandTool(BaseTool):
+class ExecuteShellCommandTool(CrewAITool):
     """Tool for executing shell commands safely"""
     
     def __init__(self):
@@ -172,7 +174,7 @@ class ExecuteShellCommandTool(BaseTool):
             return error_msg
 
 
-class AnalyzePythonFileTool(BaseTool):
+class AnalyzePythonFileTool(CrewAITool):
     """Tool for analyzing Python files"""
     
     def __init__(self):
@@ -234,9 +236,64 @@ class AnalyzePythonFileTool(BaseTool):
             return error_msg
 
 
+class SystemInfoTool(CrewAITool):
+    """Tool for getting system information"""
+    
+    def __init__(self):
+        super().__init__(
+            name="get_system_info",
+            description="Get comprehensive system information. Args: none"
+        )
+    
+    def _run(self) -> str:
+        """Get comprehensive system information"""
+        try:
+            import platform
+            import psutil
+            
+            info = []
+            info.append("=== System Information ===")
+            info.append(f"OS: {platform.system()} {platform.release()}")
+            info.append(f"Architecture: {platform.machine()}")
+            info.append(f"Python Version: {platform.python_version()}")
+            
+            # CPU Info
+            cpu_count = psutil.cpu_count()
+            cpu_percent = psutil.cpu_percent(interval=1)
+            info.append(f"CPU Cores: {cpu_count}")
+            info.append(f"CPU Usage: {cpu_percent}%")
+            
+            # Memory Info
+            memory = psutil.virtual_memory()
+            info.append(f"Memory Total: {memory.total / (1024**3):.2f} GB")
+            info.append(f"Memory Available: {memory.available / (1024**3):.2f} GB")
+            info.append(f"Memory Usage: {memory.percent}%")
+            
+            # Disk Info
+            disk = psutil.disk_usage('/')
+            info.append(f"Disk Total: {disk.total / (1024**3):.2f} GB")
+            info.append(f"Disk Free: {disk.free / (1024**3):.2f} GB")
+            info.append(f"Disk Usage: {disk.percent}%")
+            
+            # Network Info
+            network = psutil.net_io_counters()
+            info.append(f"Network Bytes Sent: {network.bytes_sent / (1024**2):.2f} MB")
+            info.append(f"Network Bytes Received: {network.bytes_recv / (1024**2):.2f} MB")
+            
+            result = "\n".join(info)
+            logger.info("System information retrieved successfully")
+            return result
+            
+        except Exception as e:
+            error_msg = f"Error getting system information: {str(e)}"
+            logger.error(error_msg)
+            return error_msg
+
+
 # Create tool instances
 write_file_tool = WriteFileTool()
 read_file_tool = ReadFileTool()
 list_files_tool = ListFilesTool()
 execute_shell_command_tool = ExecuteShellCommandTool()
 analyze_python_file_tool = AnalyzePythonFileTool()
+system_info_tool = SystemInfoTool() 

@@ -562,3 +562,180 @@ DETAIL:  Failing row contains (12, Test, null, pending, 2025-07-30 10:27:48.6035
 2025-07-30 05:28:58.695 | INFO     | src.main:shutdown_event:427 - 🛑 Cognitive Forge Desktop App shutting down...
 2025-07-30 05:29:15.190 | INFO     | src.main:startup_event:413 - 🚀 Cognitive Forge Desktop App starting up...
 2025-07-30 05:29:29.323 | INFO     | src.main:shutdown_event:427 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 05:29:48.101 | INFO     | src.main:startup_event:413 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 05:29:56.003 | INFO     | src.main:shutdown_event:427 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 05:30:19.041 | INFO     | src.main:startup_event:413 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 05:32:21.648 | INFO     | src.models.advanced_database:create_mission:147 - Created mission: mission_af1579a1
+2025-07-30 05:32:21.698 | INFO     | src.main:create_advanced_mission:163 - Created new mission: mission_af1579a1
+2025-07-30 05:32:21.699 | INFO     | src.main:run_mission_in_background:71 - BACKGROUND TASK: Starting mission mission_af1579a1
+2025-07-30 05:32:21.887 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_af1579a1 status to planning
+2025-07-30 05:32:22.730 | INFO     | src.models.advanced_database:search_memory:316 - Memory search returned 0 results
+2025-07-30 05:32:34.165 | WARNING  | src.core.cognitive_forge_engine:_generate_execution_plan:199 - Failed to parse plan as JSON, attempting to extract...
+2025-07-30 05:32:34.166 | ERROR    | src.core.cognitive_forge_engine:run_mission:106 - Mission mission_af1579a1 failed: Generated plan is not valid JSON
+2025-07-30 05:32:41.285 | INFO     | src.models.advanced_database:store_memory:291 - Memory stored for mission: mission_af1579a1
+2025-07-30 05:32:41.287 | INFO     | src.core.cognitive_forge_engine:_synthesize_memory:323 - Memory synthesis completed for mission: mission_af1579a1
+2025-07-30 05:32:41.455 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_af1579a1 status to failed
+2025-07-30 05:32:41.456 | INFO     | src.main:run_mission_in_background:110 - BACKGROUND TASK: Mission mission_af1579a1 completed successfully
+2025-07-30 05:32:47.301 | INFO     | src.models.advanced_database:create_mission:147 - Created mission: mission_b6446709
+2025-07-30 05:32:47.344 | INFO     | src.main:create_advanced_mission:163 - Created new mission: mission_b6446709
+2025-07-30 05:32:47.345 | INFO     | src.main:run_mission_in_background:71 - BACKGROUND TASK: Starting mission mission_b6446709
+2025-07-30 05:32:47.527 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_b6446709 status to planning
+2025-07-30 05:32:47.874 | INFO     | src.models.advanced_database:search_memory:316 - Memory search returned 1 results
+2025-07-30 05:33:04.492 | WARNING  | src.core.cognitive_forge_engine:_generate_execution_plan:199 - Failed to parse plan as JSON, attempting to extract...
+2025-07-30 05:33:04.492 | ERROR    | src.core.cognitive_forge_engine:run_mission:106 - Mission mission_b6446709 failed: Generated plan is not valid JSON
+2025-07-30 05:33:13.186 | INFO     | src.models.advanced_database:store_memory:291 - Memory stored for mission: mission_b6446709
+2025-07-30 05:33:13.186 | INFO     | src.core.cognitive_forge_engine:_synthesize_memory:323 - Memory synthesis completed for mission: mission_b6446709
+2025-07-30 05:33:13.360 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_b6446709 status to failed
+2025-07-30 05:33:13.361 | INFO     | src.main:run_mission_in_background:110 - BACKGROUND TASK: Mission mission_b6446709 completed successfully
+2025-07-30 05:33:16.912 | INFO     | src.models.advanced_database:create_mission:147 - Created mission: mission_1a46d08c
+2025-07-30 05:33:16.951 | INFO     | src.main:create_advanced_mission:163 - Created new mission: mission_1a46d08c
+2025-07-30 05:33:16.953 | INFO     | src.main:run_mission_in_background:71 - BACKGROUND TASK: Starting mission mission_1a46d08c
+2025-07-30 05:33:17.120 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_1a46d08c status to planning
+2025-07-30 05:33:17.433 | INFO     | src.models.advanced_database:search_memory:316 - Memory search returned 2 results
+2025-07-30 05:33:34.923 | WARNING  | src.core.cognitive_forge_engine:_generate_execution_plan:199 - Failed to parse plan as JSON, attempting to extract...
+2025-07-30 05:33:34.923 | ERROR    | src.core.cognitive_forge_engine:run_mission:106 - Mission mission_1a46d08c failed: Generated plan is not valid JSON
+2025-07-30 05:33:43.468 | INFO     | src.models.advanced_database:store_memory:291 - Memory stored for mission: mission_1a46d08c
+2025-07-30 05:33:43.469 | INFO     | src.core.cognitive_forge_engine:_synthesize_memory:323 - Memory synthesis completed for mission: mission_1a46d08c
+2025-07-30 05:33:43.647 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_1a46d08c status to failed
+2025-07-30 05:33:43.647 | INFO     | src.main:run_mission_in_background:110 - BACKGROUND TASK: Mission mission_1a46d08c completed successfully
+2025-07-30 05:33:48.185 | INFO     | src.models.advanced_database:create_mission:147 - Created mission: mission_fd38d1c5
+2025-07-30 05:33:48.224 | INFO     | src.main:create_advanced_mission:163 - Created new mission: mission_fd38d1c5
+2025-07-30 05:33:48.228 | INFO     | src.main:run_mission_in_background:71 - BACKGROUND TASK: Starting mission mission_fd38d1c5
+2025-07-30 05:33:48.422 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_fd38d1c5 status to planning
+2025-07-30 05:33:48.802 | INFO     | src.models.advanced_database:search_memory:316 - Memory search returned 3 results
+2025-07-30 05:34:06.229 | WARNING  | src.core.cognitive_forge_engine:_generate_execution_plan:199 - Failed to parse plan as JSON, attempting to extract...
+2025-07-30 05:34:06.230 | ERROR    | src.core.cognitive_forge_engine:run_mission:106 - Mission mission_fd38d1c5 failed: Generated plan is not valid JSON
+2025-07-30 05:34:15.434 | INFO     | src.models.advanced_database:store_memory:291 - Memory stored for mission: mission_fd38d1c5
+2025-07-30 05:34:15.435 | INFO     | src.core.cognitive_forge_engine:_synthesize_memory:323 - Memory synthesis completed for mission: mission_fd38d1c5
+2025-07-30 05:34:15.612 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_fd38d1c5 status to failed
+2025-07-30 05:34:15.613 | INFO     | src.main:run_mission_in_background:110 - BACKGROUND TASK: Mission mission_fd38d1c5 completed successfully
+2025-07-30 05:35:39.507 | INFO     | src.main:shutdown_event:427 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 05:36:13.103 | INFO     | src.main:startup_event:413 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 05:36:29.421 | INFO     | src.main:shutdown_event:427 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 05:37:09.130 | INFO     | src.main:startup_event:413 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 05:37:58.859 | INFO     | src.main:shutdown_event:427 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 05:38:30.121 | INFO     | src.main:startup_event:413 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 05:39:03.649 | INFO     | src.models.advanced_database:create_mission:147 - Created mission: mission_32255e64
+2025-07-30 05:39:03.689 | INFO     | src.main:create_advanced_mission:163 - Created new mission: mission_32255e64
+2025-07-30 05:39:03.691 | INFO     | src.main:run_mission_in_background:71 - BACKGROUND TASK: Starting mission mission_32255e64
+2025-07-30 05:39:03.855 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_32255e64 status to planning
+2025-07-30 05:39:04.678 | INFO     | src.models.advanced_database:search_memory:316 - Memory search returned 3 results
+2025-07-30 05:39:16.609 | WARNING  | src.core.cognitive_forge_engine:_generate_execution_plan:200 - Failed to parse plan as JSON, attempting to extract from markdown...
+2025-07-30 05:39:16.942 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_32255e64 status to planning
+2025-07-30 05:39:17.079 | ERROR    | src.main:run_mission_in_background:113 - BACKGROUND TASK: Mission mission_32255e64 failed. Error: "'role'"
+2025-07-30 05:39:22.262 | INFO     | src.models.advanced_database:create_mission:147 - Created mission: mission_ccd100b8
+2025-07-30 05:39:22.321 | INFO     | src.main:create_advanced_mission:163 - Created new mission: mission_ccd100b8
+2025-07-30 05:39:22.325 | INFO     | src.main:run_mission_in_background:71 - BACKGROUND TASK: Starting mission mission_ccd100b8
+2025-07-30 05:39:22.503 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_ccd100b8 status to planning
+2025-07-30 05:39:22.868 | INFO     | src.models.advanced_database:search_memory:316 - Memory search returned 3 results
+2025-07-30 05:39:40.691 | WARNING  | src.core.cognitive_forge_engine:_generate_execution_plan:200 - Failed to parse plan as JSON, attempting to extract from markdown...
+2025-07-30 05:39:40.996 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_ccd100b8 status to planning
+2025-07-30 05:39:41.126 | ERROR    | src.main:run_mission_in_background:113 - BACKGROUND TASK: Mission mission_ccd100b8 failed. Error: "'role'"
+2025-07-30 05:39:43.639 | INFO     | src.models.advanced_database:create_mission:147 - Created mission: mission_689ad310
+2025-07-30 05:39:43.679 | INFO     | src.main:create_advanced_mission:163 - Created new mission: mission_689ad310
+2025-07-30 05:39:43.680 | INFO     | src.main:run_mission_in_background:71 - BACKGROUND TASK: Starting mission mission_689ad310
+2025-07-30 05:39:43.851 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_689ad310 status to planning
+2025-07-30 05:39:44.166 | INFO     | src.models.advanced_database:search_memory:316 - Memory search returned 3 results
+2025-07-30 05:40:01.063 | INFO     | src.main:shutdown_event:427 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 05:40:02.500 | WARNING  | src.core.cognitive_forge_engine:_generate_execution_plan:200 - Failed to parse plan as JSON, attempting to extract from markdown...
+2025-07-30 05:40:02.904 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_689ad310 status to planning
+2025-07-30 05:40:03.046 | ERROR    | src.main:run_mission_in_background:113 - BACKGROUND TASK: Mission mission_689ad310 failed. Error: "'role'"
+2025-07-30 05:40:06.399 | INFO     | src.models.advanced_database:create_mission:147 - Created mission: mission_f325c70f
+2025-07-30 05:40:06.448 | INFO     | src.main:create_advanced_mission:163 - Created new mission: mission_f325c70f
+2025-07-30 05:40:06.449 | INFO     | src.main:run_mission_in_background:71 - BACKGROUND TASK: Starting mission mission_f325c70f
+2025-07-30 05:40:06.618 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_f325c70f status to planning
+2025-07-30 05:40:06.952 | INFO     | src.models.advanced_database:search_memory:316 - Memory search returned 3 results
+2025-07-30 05:40:25.452 | INFO     | src.main:startup_event:413 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 05:40:26.554 | WARNING  | src.core.cognitive_forge_engine:_generate_execution_plan:200 - Failed to parse plan as JSON, attempting to extract from markdown...
+2025-07-30 05:40:27.099 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_f325c70f status to planning
+2025-07-30 05:40:27.230 | ERROR    | src.main:run_mission_in_background:113 - BACKGROUND TASK: Mission mission_f325c70f failed. Error: "'role'"
+2025-07-30 05:43:39.475 | INFO     | src.main:shutdown_event:427 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 05:44:02.477 | INFO     | src.main:startup_event:413 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 05:44:45.987 | INFO     | src.main:shutdown_event:427 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 05:45:08.420 | INFO     | src.main:startup_event:413 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 05:45:46.773 | INFO     | src.main:shutdown_event:427 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 05:46:16.046 | INFO     | src.main:startup_event:413 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 05:47:39.374 | INFO     | src.main:shutdown_event:427 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 05:47:50.248 | INFO     | src.main:shutdown_event:427 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 05:54:04.329 | INFO     | src.main:startup_event:413 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 05:55:21.889 | INFO     | src.models.advanced_database:create_mission:147 - Created mission: mission_8c23f7b8
+2025-07-30 05:55:21.931 | INFO     | src.main:create_advanced_mission:163 - Created new mission: mission_8c23f7b8
+2025-07-30 05:55:21.932 | INFO     | src.main:run_mission_in_background:71 - BACKGROUND TASK: Starting mission mission_8c23f7b8
+2025-07-30 05:55:22.346 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_8c23f7b8 status to planning
+2025-07-30 05:55:22.921 | INFO     | src.models.advanced_database:search_memory:316 - Memory search returned 3 results
+2025-07-30 05:55:32.158 | WARNING  | src.core.cognitive_forge_engine:_generate_execution_plan:199 - Failed to parse plan as JSON, attempting to extract from markdown...
+2025-07-30 05:55:32.714 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_8c23f7b8 status to planning
+2025-07-30 05:55:34.142 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_8c23f7b8 status to executing
+2025-07-30 05:56:06.927 | INFO     | src.models.advanced_database:store_memory:291 - Memory stored for mission: mission_8c23f7b8
+2025-07-30 05:56:06.927 | INFO     | src.core.cognitive_forge_engine:_synthesize_memory:352 - Memory synthesis completed for mission: mission_8c23f7b8
+2025-07-30 05:56:07.091 | ERROR    | src.models.advanced_database:update_mission_status:194 - Error updating mission: (psycopg2.errors.InvalidTextRepresentation) invalid input syntax for type json
+LINE 1: UPDATE missions SET status='completed', result='## QA Report...
+                                                       ^
+DETAIL:  Token "#" is invalid.
+CONTEXT:  JSON data, line 1: #...
+
+[SQL: UPDATE missions SET status=%(status)s, result=%(result)s, execution_time=%(execution_time)s, updated_at=%(updated_at)s, completed_at=%(completed_at)s WHERE missions.id = %(missions_id)s]
+[parameters: {'status': 'completed', 'result': '## QA Report: Sentinel File Creation Verification\n\n**Test Summary:**\n\nThis test verifies the correct construction of the timestamp, file path, an ... (1251 characters truncated) ...  - will vary)\n```\n\n--- File Path: ---\n\n```\n/Users/yourusername/Desktop/sentinel_test.txt #(Example path - will vary depending on the user)\n```', 'execution_time': 45.0, 'updated_at': datetime.datetime(2025, 7, 30, 10, 56, 7, 10113), 'completed_at': datetime.datetime(2025, 7, 30, 10, 56, 7, 10113), 'missions_id': '21'}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2025-07-30 05:56:07.215 | INFO     | src.main:run_mission_in_background:110 - BACKGROUND TASK: Mission mission_8c23f7b8 completed successfully
+2025-07-30 05:56:15.006 | INFO     | src.models.advanced_database:create_mission:147 - Created mission: mission_e971c3ae
+2025-07-30 05:56:15.056 | INFO     | src.main:create_advanced_mission:163 - Created new mission: mission_e971c3ae
+2025-07-30 05:56:15.066 | INFO     | src.main:run_mission_in_background:71 - BACKGROUND TASK: Starting mission mission_e971c3ae
+2025-07-30 05:56:15.272 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_e971c3ae status to planning
+2025-07-30 05:56:15.689 | INFO     | src.models.advanced_database:search_memory:316 - Memory search returned 3 results
+2025-07-30 05:56:32.088 | WARNING  | src.core.cognitive_forge_engine:_generate_execution_plan:199 - Failed to parse plan as JSON, attempting to extract from markdown...
+2025-07-30 05:56:32.428 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_e971c3ae status to planning
+2025-07-30 05:56:35.155 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_e971c3ae status to executing
+2025-07-30 05:57:26.228 | INFO     | src.models.advanced_database:store_memory:291 - Memory stored for mission: mission_e971c3ae
+2025-07-30 05:57:26.228 | INFO     | src.core.cognitive_forge_engine:_synthesize_memory:352 - Memory synthesis completed for mission: mission_e971c3ae
+2025-07-30 05:57:26.392 | ERROR    | src.models.advanced_database:update_mission_status:194 - Error updating mission: (psycopg2.errors.InvalidTextRepresentation) invalid input syntax for type json
+LINE 1: UPDATE missions SET status='completed', result='## Code Anal...
+                                                       ^
+DETAIL:  Token "#" is invalid.
+CONTEXT:  JSON data, line 1: #...
+
+[SQL: UPDATE missions SET status=%(status)s, result=%(result)s, execution_time=%(execution_time)s, updated_at=%(updated_at)s, completed_at=%(completed_at)s WHERE missions.id = %(missions_id)s]
+[parameters: {'status': 'completed', 'result': '## Code Analysis Report: test_random_generator.py\n\n**File:** `test_random_generator.py`\n\n**Date:** October 26, 2023\n\n**Author:** Bard (Code Qua ... (4692 characters truncated) ... ability.  The suggested changes will make the script more versatile, easier to use, and better equipped to handle errors in a production environment.', 'execution_time': 71.16, 'updated_at': datetime.datetime(2025, 7, 30, 10, 57, 26, 308663), 'completed_at': datetime.datetime(2025, 7, 30, 10, 57, 26, 308663), 'missions_id': '22'}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2025-07-30 05:57:26.520 | INFO     | src.main:run_mission_in_background:110 - BACKGROUND TASK: Mission mission_e971c3ae completed successfully
+2025-07-30 05:57:32.561 | INFO     | src.models.advanced_database:create_mission:147 - Created mission: mission_12906f68
+2025-07-30 05:57:32.603 | INFO     | src.main:create_advanced_mission:163 - Created new mission: mission_12906f68
+2025-07-30 05:57:32.603 | INFO     | src.main:run_mission_in_background:71 - BACKGROUND TASK: Starting mission mission_12906f68
+2025-07-30 05:57:32.775 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_12906f68 status to planning
+2025-07-30 05:57:33.090 | INFO     | src.models.advanced_database:search_memory:316 - Memory search returned 3 results
+2025-07-30 05:57:50.125 | WARNING  | src.core.cognitive_forge_engine:_generate_execution_plan:199 - Failed to parse plan as JSON, attempting to extract from markdown...
+2025-07-30 05:57:50.411 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_12906f68 status to planning
+2025-07-30 05:57:54.151 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_12906f68 status to executing
+2025-07-30 05:59:22.931 | INFO     | src.models.advanced_database:store_memory:291 - Memory stored for mission: mission_12906f68
+2025-07-30 05:59:22.932 | INFO     | src.core.cognitive_forge_engine:_synthesize_memory:352 - Memory synthesis completed for mission: mission_12906f68
+2025-07-30 05:59:23.098 | ERROR    | src.models.advanced_database:update_mission_status:194 - Error updating mission: (psycopg2.errors.InvalidTextRepresentation) invalid input syntax for type json
+LINE 1: UPDATE missions SET status='completed', result='```python
+                                                       ^
+DETAIL:  Token "`" is invalid.
+CONTEXT:  JSON data, line 1: `...
+
+[SQL: UPDATE missions SET status=%(status)s, result=%(result)s, execution_time=%(execution_time)s, updated_at=%(updated_at)s, completed_at=%(completed_at)s WHERE missions.id = %(missions_id)s]
+[parameters: {'status': 'completed', 'result': '```python\nimport shutil\nimport psutil\nimport os\nimport platform  # Import platform to get OS details\nimport cpuinfo # Import cpuinfo for better  ... (2190 characters truncated) ... /error message.\n\n    summary_result = summarize_system_report()\n    print(summary_result)\n\n\n```\n\nPath to modified file: `utils/disk_utils.py`', 'execution_time': 110.33, 'updated_at': datetime.datetime(2025, 7, 30, 10, 59, 23, 13353), 'completed_at': datetime.datetime(2025, 7, 30, 10, 59, 23, 13353), 'missions_id': '23'}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2025-07-30 05:59:23.223 | INFO     | src.main:run_mission_in_background:110 - BACKGROUND TASK: Mission mission_12906f68 completed successfully
+2025-07-30 05:59:28.639 | INFO     | src.models.advanced_database:create_mission:147 - Created mission: mission_56461d4a
+2025-07-30 05:59:28.725 | INFO     | src.main:create_advanced_mission:163 - Created new mission: mission_56461d4a
+2025-07-30 05:59:28.727 | INFO     | src.main:run_mission_in_background:71 - BACKGROUND TASK: Starting mission mission_56461d4a
+2025-07-30 05:59:28.927 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_56461d4a status to planning
+2025-07-30 05:59:29.241 | INFO     | src.models.advanced_database:search_memory:316 - Memory search returned 3 results
+2025-07-30 05:59:47.369 | WARNING  | src.core.cognitive_forge_engine:_generate_execution_plan:199 - Failed to parse plan as JSON, attempting to extract from markdown...
+2025-07-30 05:59:47.669 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_56461d4a status to planning
+2025-07-30 05:59:50.711 | INFO     | src.models.advanced_database:update_mission_status:189 - Updated mission mission_56461d4a status to executing
+2025-07-30 06:00:58.706 | INFO     | src.models.advanced_database:store_memory:291 - Memory stored for mission: mission_56461d4a
+2025-07-30 06:00:58.706 | INFO     | src.core.cognitive_forge_engine:_synthesize_memory:352 - Memory synthesis completed for mission: mission_56461d4a
+2025-07-30 06:00:58.882 | ERROR    | src.models.advanced_database:update_mission_status:194 - Error updating mission: (psycopg2.errors.InvalidTextRepresentation) invalid input syntax for type json
+LINE 1: UPDATE missions SET status='completed', result='```markdown
+                                                       ^
+DETAIL:  Token "`" is invalid.
+CONTEXT:  JSON data, line 1: `...
+
+[SQL: UPDATE missions SET status=%(status)s, result=%(result)s, execution_time=%(execution_time)s, updated_at=%(updated_at)s, completed_at=%(completed_at)s WHERE missions.id = %(missions_id)s]
+[parameters: {'status': 'completed', 'result': '```markdown\n# Setting Up and Running the Flask Application\n\nThis document provides instructions on how to set up and run the Flask application, in ... (2859 characters truncated) ... lask application successfully. If you encounter any issues, please consult the Flask documentation or seek assistance from the development team.\n```', 'execution_time': 89.98, 'updated_at': datetime.datetime(2025, 7, 30, 11, 0, 58, 788821), 'completed_at': datetime.datetime(2025, 7, 30, 11, 0, 58, 788821), 'missions_id': '24'}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2025-07-30 06:00:59.025 | INFO     | src.main:run_mission_in_background:110 - BACKGROUND TASK: Mission mission_56461d4a completed successfully
+2025-07-30 06:08:45.650 | INFO     | src.main:startup_event:413 - 🚀 Cognitive Forge Desktop App starting up...
