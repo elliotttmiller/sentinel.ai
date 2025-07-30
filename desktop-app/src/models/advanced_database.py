@@ -97,15 +97,22 @@ class DatabaseManager:
         self.SessionLocal = SessionLocal
         self.Base = Base
 
-        # Initialize ChromaDB for vector memory
-        chroma_path = os.getenv("CHROMA_PATH", "db/chroma_memory")
-        self.chroma_client = chromadb.PersistentClient(
-            path=chroma_path, settings=Settings(anonymized_telemetry=False)
-        )
-        self.memory_collection = self.chroma_client.get_or_create_collection(
-            name="sentinel_mission_memory",
-            metadata={"description": "Long-term memory for mission outcomes and learnings"},
-        )
+        # Initialize ChromaDB for vector memory (optional)
+        self.memory_collection = None
+        try:
+            # Initialize ChromaDB for vector memory
+            self.chroma_client = chromadb.PersistentClient(
+                path="db/chroma_memory",
+                settings=Settings(anonymized_telemetry=False)
+            )
+            self.memory_collection = self.chroma_client.get_or_create_collection(
+                name="mission_memory",
+                metadata={"description": "Long-term mission memory and learnings"}
+            )
+            logger.info("ChromaDB memory system initialized successfully")
+        except Exception as e:
+            logger.warning(f"ChromaDB initialization failed (memory features disabled): {e}")
+            self.memory_collection = None
 
         # Create all tables
         Base.metadata.create_all(bind=engine)
@@ -253,6 +260,10 @@ class DatabaseManager:
         self, mission_id_str: str, prompt: str, result: str, success: bool, metadata: Dict = None
     ) -> bool:
         """Store mission outcome in ChromaDB for long-term memory"""
+        if self.memory_collection is None:
+            logger.warning(f"ChromaDB memory collection not initialized, skipping memory storage for mission: {mission_id_str}")
+            return False
+
         try:
             # Create a comprehensive memory entry
             memory_text = f"""Mission ID: {mission_id_str}
@@ -284,6 +295,10 @@ Timestamp: {datetime.utcnow().isoformat()}"""
 
     def search_memory(self, query: str, limit: int = 5) -> List[Dict]:
         """Search mission memory for relevant past experiences"""
+        if self.memory_collection is None:
+            logger.warning("ChromaDB memory collection not initialized, skipping memory search.")
+            return []
+
         try:
             results = self.memory_collection.query(query_texts=[query], n_results=limit)
 
@@ -307,50 +322,85 @@ Timestamp: {datetime.utcnow().isoformat()}"""
         self, level: str, message: str, component: str = None, metadata: Dict = None
     ) -> bool:
         """Log system-level events"""
-        db = SessionLocal()
         try:
-            log_entry = SystemLog(
-                level=level,
-                message=message,
-                component=component,
-                source=component,  # Use component as source for database compatibility
-                log_metadata=metadata,
-            )
-            db.add(log_entry)
-            db.commit()
-            return True
-        except SQLAlchemyError as e:
-            db.rollback()
-            logger.error(f"Error logging system event: {e}")
+            db = SessionLocal()
+            try:
+                log_entry = SystemLog(
+                    level=level,
+                    message=message,
+                    component=component,
+                    source=component,  # Use component as source for database compatibility
+                    log_metadata=metadata,
+                )
+                db.add(log_entry)
+                db.commit()
+                return True
+            except SQLAlchemyError as e:
+                db.rollback()
+                logger.warning(f"Database logging failed (continuing without logging): {e}")
+                return False
+            finally:
+                db.close()
+        except Exception as e:
+            logger.warning(f"System event logging failed: {e}")
             return False
-        finally:
-            db.close()
 
     def get_system_stats(self) -> Dict[str, Any]:
         """Get comprehensive system statistics"""
-        db = SessionLocal()
         try:
-            total_missions = db.query(Mission).count()
-            completed_missions = db.query(Mission).filter(Mission.status == "completed").count()
-            failed_missions = db.query(Mission).filter(Mission.status == "failed").count()
-            pending_missions = db.query(Mission).filter(Mission.status == "pending").count()
+            db = SessionLocal()
+            try:
+                total_missions = db.query(Mission).count()
+                completed_missions = db.query(Mission).filter(Mission.status == "completed").count()
+                failed_missions = db.query(Mission).filter(Mission.status == "failed").count()
+                pending_missions = db.query(Mission).filter(Mission.status == "pending").count()
 
-            # Get memory stats
-            memory_count = self.memory_collection.count()
+                # Get memory stats
+                memory_count = 0
+                if self.memory_collection:
+                    try:
+                        memory_count = self.memory_collection.count()
+                    except Exception as e:
+                        logger.warning(f"Error getting memory count: {e}")
+                        memory_count = 0
 
+                return {
+                    "total_missions": total_missions,
+                    "completed_missions": completed_missions,
+                    "failed_missions": failed_missions,
+                    "pending_missions": pending_missions,
+                    "success_rate": (
+                        (completed_missions / total_missions * 100) if total_missions > 0 else 0
+                    ),
+                    "memory_entries": memory_count,
+                    "last_updated": datetime.utcnow().isoformat(),
+                }
+            except SQLAlchemyError as e:
+                logger.warning(f"Database stats query failed: {e}")
+                return {
+                    "total_missions": 0,
+                    "completed_missions": 0,
+                    "failed_missions": 0,
+                    "pending_missions": 0,
+                    "success_rate": 0,
+                    "memory_entries": 0,
+                    "last_updated": datetime.utcnow().isoformat(),
+                    "error": "Database connection issue"
+                }
+            finally:
+                db.close()
+        except Exception as e:
+            logger.error(f"Error getting system stats: {e}")
             return {
-                "total_missions": total_missions,
-                "completed_missions": completed_missions,
-                "failed_missions": failed_missions,
-                "pending_missions": pending_missions,
-                "success_rate": (
-                    (completed_missions / total_missions * 100) if total_missions > 0 else 0
-                ),
-                "memory_entries": memory_count,
+                "total_missions": 0,
+                "completed_missions": 0,
+                "failed_missions": 0,
+                "pending_missions": 0,
+                "success_rate": 0,
+                "memory_entries": 0,
                 "last_updated": datetime.utcnow().isoformat(),
+                "error": str(e)
             }
-        finally:
-            db.close()
 
 
 # Global database manager instance

@@ -161,3 +161,153 @@ model
 last_updated
   Field required [type=missing, input_value={'error': '(psycopg2.erro...sqlalche.me/e/20/f405)'}, input_type=dict]
     For further information visit https://errors.pydantic.dev/2.5/v/missing
+2025-07-30 01:10:27.267 | INFO     | src.main:startup_event:284 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 01:21:05.450 | ERROR    | src.core.cognitive_forge_engine:get_system_info:347 - Error getting system info: (psycopg2.errors.UndefinedColumn) column missions.mission_id_str does not exist
+LINE 2: FROM (SELECT missions.id AS missions_id, missions.mission_id...
+                                                 ^
+
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT missions.id AS missions_id, missions.mission_id_str AS missions_mission_id_str, missions.title AS missions_title, missions.prompt AS missions_prompt, missions.agent_type AS missions_agent_type, missions.status AS missions_status, missions.result AS missions_result, missions.plan AS missions_plan, missions.execution_time AS missions_execution_time, missions.tokens_used AS missions_tokens_used, missions.error_message AS missions_error_message, missions.created_at AS missions_created_at, missions.updated_at AS missions_updated_at, missions.completed_at AS missions_completed_at, missions.is_archived AS missions_is_archived 
+FROM missions) AS anon_1]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-30 01:21:05.456 | ERROR    | src.main:get_system_stats:213 - Error getting system stats: 5 validation errors for SystemStatsResponse
+engine_status
+  Field required [type=missing, input_value={'error': '(psycopg2.erro...sqlalche.me/e/20/f405)'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.5/v/missing
+database_stats
+  Field required [type=missing, input_value={'error': '(psycopg2.erro...sqlalche.me/e/20/f405)'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.5/v/missing
+system_info
+  Field required [type=missing, input_value={'error': '(psycopg2.erro...sqlalche.me/e/20/f405)'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.5/v/missing
+model
+  Field required [type=missing, input_value={'error': '(psycopg2.erro...sqlalche.me/e/20/f405)'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.5/v/missing
+last_updated
+  Field required [type=missing, input_value={'error': '(psycopg2.erro...sqlalche.me/e/20/f405)'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.5/v/missing
+2025-07-30 01:25:26.117 | INFO     | src.main:shutdown_event:298 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 01:26:39.879 | INFO     | src.main:startup_event:284 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 01:44:13.483 | ERROR    | src.core.cognitive_forge_engine:get_system_info:347 - Error getting system info: (psycopg2.errors.UndefinedColumn) column missions.mission_id_str does not exist
+LINE 2: FROM (SELECT missions.id AS missions_id, missions.mission_id...
+                                                 ^
+
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT missions.id AS missions_id, missions.mission_id_str AS missions_mission_id_str, missions.title AS missions_title, missions.prompt AS missions_prompt, missions.agent_type AS missions_agent_type, missions.status AS missions_status, missions.result AS missions_result, missions.plan AS missions_plan, missions.execution_time AS missions_execution_time, missions.tokens_used AS missions_tokens_used, missions.error_message AS missions_error_message, missions.created_at AS missions_created_at, missions.updated_at AS missions_updated_at, missions.completed_at AS missions_completed_at, missions.is_archived AS missions_is_archived 
+FROM missions) AS anon_1]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-30 01:44:13.483 | ERROR    | src.main:get_system_stats:213 - Error getting system stats: 5 validation errors for SystemStatsResponse
+engine_status
+  Field required [type=missing, input_value={'error': '(psycopg2.erro...sqlalche.me/e/20/f405)'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.5/v/missing
+database_stats
+  Field required [type=missing, input_value={'error': '(psycopg2.erro...sqlalche.me/e/20/f405)'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.5/v/missing
+system_info
+  Field required [type=missing, input_value={'error': '(psycopg2.erro...sqlalche.me/e/20/f405)'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.5/v/missing
+model
+  Field required [type=missing, input_value={'error': '(psycopg2.erro...sqlalche.me/e/20/f405)'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.5/v/missing
+last_updated
+  Field required [type=missing, input_value={'error': '(psycopg2.erro...sqlalche.me/e/20/f405)'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.5/v/missing
+2025-07-30 01:47:13.110 | ERROR    | src.core.cognitive_forge_engine:get_system_info:347 - Error getting system info: (psycopg2.errors.UndefinedColumn) column missions.mission_id_str does not exist
+LINE 2: FROM (SELECT missions.id AS missions_id, missions.mission_id...
+                                                 ^
+
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT missions.id AS missions_id, missions.mission_id_str AS missions_mission_id_str, missions.title AS missions_title, missions.prompt AS missions_prompt, missions.agent_type AS missions_agent_type, missions.status AS missions_status, missions.result AS missions_result, missions.plan AS missions_plan, missions.execution_time AS missions_execution_time, missions.tokens_used AS missions_tokens_used, missions.error_message AS missions_error_message, missions.created_at AS missions_created_at, missions.updated_at AS missions_updated_at, missions.completed_at AS missions_completed_at, missions.is_archived AS missions_is_archived 
+FROM missions) AS anon_1]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-30 01:47:13.111 | ERROR    | src.main:get_system_stats:213 - Error getting system stats: 5 validation errors for SystemStatsResponse
+engine_status
+  Field required [type=missing, input_value={'error': '(psycopg2.erro...sqlalche.me/e/20/f405)'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.5/v/missing
+database_stats
+  Field required [type=missing, input_value={'error': '(psycopg2.erro...sqlalche.me/e/20/f405)'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.5/v/missing
+system_info
+  Field required [type=missing, input_value={'error': '(psycopg2.erro...sqlalche.me/e/20/f405)'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.5/v/missing
+model
+  Field required [type=missing, input_value={'error': '(psycopg2.erro...sqlalche.me/e/20/f405)'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.5/v/missing
+last_updated
+  Field required [type=missing, input_value={'error': '(psycopg2.erro...sqlalche.me/e/20/f405)'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.5/v/missing
+2025-07-30 01:53:27.120 | INFO     | src.main:startup_event:284 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 01:55:19.733 | INFO     | src.main:startup_event:304 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 01:56:04.373 | WARNING  | src.models.advanced_database:get_system_stats:379 - Database stats query failed: (psycopg2.errors.UndefinedColumn) column missions.mission_id_str does not exist
+LINE 2: FROM (SELECT missions.id AS missions_id, missions.mission_id...
+                                                 ^
+
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT missions.id AS missions_id, missions.mission_id_str AS missions_mission_id_str, missions.title AS missions_title, missions.prompt AS missions_prompt, missions.agent_type AS missions_agent_type, missions.status AS missions_status, missions.result AS missions_result, missions.plan AS missions_plan, missions.execution_time AS missions_execution_time, missions.tokens_used AS missions_tokens_used, missions.error_message AS missions_error_message, missions.created_at AS missions_created_at, missions.updated_at AS missions_updated_at, missions.completed_at AS missions_completed_at, missions.is_archived AS missions_is_archived 
+FROM missions) AS anon_1]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-30 01:56:05.436 | INFO     | src.tools.advanced_tools:get_system_info:214 - System information retrieved
+2025-07-30 02:21:34.198 | WARNING  | src.models.advanced_database:get_system_stats:379 - Database stats query failed: (psycopg2.errors.UndefinedColumn) column missions.mission_id_str does not exist
+LINE 2: FROM (SELECT missions.id AS missions_id, missions.mission_id...
+                                                 ^
+
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT missions.id AS missions_id, missions.mission_id_str AS missions_mission_id_str, missions.title AS missions_title, missions.prompt AS missions_prompt, missions.agent_type AS missions_agent_type, missions.status AS missions_status, missions.result AS missions_result, missions.plan AS missions_plan, missions.execution_time AS missions_execution_time, missions.tokens_used AS missions_tokens_used, missions.error_message AS missions_error_message, missions.created_at AS missions_created_at, missions.updated_at AS missions_updated_at, missions.completed_at AS missions_completed_at, missions.is_archived AS missions_is_archived 
+FROM missions) AS anon_1]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-30 02:21:35.261 | INFO     | src.tools.advanced_tools:get_system_info:214 - System information retrieved
+2025-07-30 02:32:48.234 | INFO     | src.main:startup_event:306 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 02:33:29.548 | WARNING  | src.models.advanced_database:get_system_stats:379 - Database stats query failed: (psycopg2.errors.UndefinedColumn) column missions.prompt does not exist
+LINE 2: ...mission_id_str, missions.title AS missions_title, missions.p...
+                                                             ^
+
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT missions.id AS missions_id, missions.mission_id_str AS missions_mission_id_str, missions.title AS missions_title, missions.prompt AS missions_prompt, missions.agent_type AS missions_agent_type, missions.status AS missions_status, missions.result AS missions_result, missions.plan AS missions_plan, missions.execution_time AS missions_execution_time, missions.tokens_used AS missions_tokens_used, missions.error_message AS missions_error_message, missions.created_at AS missions_created_at, missions.updated_at AS missions_updated_at, missions.completed_at AS missions_completed_at, missions.is_archived AS missions_is_archived 
+FROM missions) AS anon_1]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-30 02:33:30.601 | INFO     | src.tools.advanced_tools:get_system_info:214 - System information retrieved
+2025-07-30 02:38:00.105 | INFO     | src.main:startup_event:314 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 02:38:36.732 | INFO     | src.main:startup_event:314 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 02:39:18.752 | INFO     | src.tools.advanced_tools:get_system_info:214 - System information retrieved
+2025-07-30 02:54:32.682 | INFO     | src.main:startup_event:314 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 02:55:33.128 | INFO     | src.main:shutdown_event:328 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 02:57:41.191 | INFO     | src.main:startup_event:314 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 02:58:58.909 | INFO     | src.main:shutdown_event:328 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 03:05:00.075 | INFO     | src.main:shutdown_event:328 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 03:05:00.732 | INFO     | src.main:shutdown_event:328 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 03:05:18.488 | INFO     | src.main:startup_event:314 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 03:05:18.883 | INFO     | src.main:shutdown_event:328 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 03:05:36.256 | INFO     | src.main:startup_event:314 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 03:19:50.654 | INFO     | src.main:shutdown_event:328 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 03:20:18.347 | INFO     | src.main:startup_event:314 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 03:20:18.476 | INFO     | src.main:shutdown_event:328 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 03:20:38.675 | INFO     | src.main:startup_event:314 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 04:05:26.528 | INFO     | src.main:shutdown_event:328 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 04:05:55.651 | INFO     | src.main:startup_event:314 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 04:05:55.800 | INFO     | src.main:shutdown_event:328 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 04:06:26.671 | INFO     | src.main:startup_event:314 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 04:07:26.825 | INFO     | src.main:shutdown_event:328 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 04:07:57.063 | INFO     | src.main:startup_event:314 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 04:08:02.221 | INFO     | src.main:shutdown_event:328 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 04:08:32.042 | INFO     | src.main:startup_event:314 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 04:08:32.183 | INFO     | src.main:shutdown_event:328 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 04:08:58.678 | INFO     | src.main:startup_event:314 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 04:09:18.673 | INFO     | src.tools.advanced_tools:get_system_info:214 - System information retrieved
+2025-07-30 04:10:26.603 | INFO     | src.main:shutdown_event:328 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-30 04:10:52.211 | INFO     | src.main:startup_event:314 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-30 04:17:21.272 | INFO     | src.tools.advanced_tools:get_system_info:214 - System information retrieved
+2025-07-30 04:17:37.572 | ERROR    | src.models.advanced_database:create_mission:149 - Error creating mission: (psycopg2.errors.NotNullViolation) null value in column "id" of relation "missions" violates not-null constraint
+DETAIL:  Failing row contains (null, Comprehensive Test Mission, null, pending, 2025-07-30 09:17:37.449513, 2025-07-30 09:17:37.449513, null, null, null, null, mission_eacfc0cd, developer, null, null, null, f, Test mission for comprehensive testing).
+
+[SQL: INSERT INTO missions (mission_id_str, title, prompt, agent_type, status, result, execution_time, tokens_used, error_message, created_at, updated_at, completed_at, is_archived) VALUES (%(mission_id_str)s, %(title)s, %(prompt)s, %(agent_type)s, %(status)s, %(result)s, %(execution_time)s, %(tokens_used)s, %(error_message)s, %(created_at)s, %(updated_at)s, %(completed_at)s, %(is_archived)s) RETURNING missions.id]
+[parameters: {'mission_id_str': 'mission_eacfc0cd', 'title': 'Comprehensive Test Mission', 'prompt': 'Test mission for comprehensive testing', 'agent_type': 'developer', 'status': 'pending', 'result': None, 'execution_time': None, 'tokens_used': None, 'error_message': None, 'created_at': datetime.datetime(2025, 7, 30, 9, 17, 37, 449513), 'updated_at': datetime.datetime(2025, 7, 30, 9, 17, 37, 449513), 'completed_at': None, 'is_archived': False}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-07-30 04:17:37.573 | ERROR    | src.main:create_advanced_mission:172 - Error creating mission: (psycopg2.errors.NotNullViolation) null value in column "id" of relation "missions" violates not-null constraint
+DETAIL:  Failing row contains (null, Comprehensive Test Mission, null, pending, 2025-07-30 09:17:37.449513, 2025-07-30 09:17:37.449513, null, null, null, null, mission_eacfc0cd, developer, null, null, null, f, Test mission for comprehensive testing).
+
+[SQL: INSERT INTO missions (mission_id_str, title, prompt, agent_type, status, result, execution_time, tokens_used, error_message, created_at, updated_at, completed_at, is_archived) VALUES (%(mission_id_str)s, %(title)s, %(prompt)s, %(agent_type)s, %(status)s, %(result)s, %(execution_time)s, %(tokens_used)s, %(error_message)s, %(created_at)s, %(updated_at)s, %(completed_at)s, %(is_archived)s) RETURNING missions.id]
+[parameters: {'mission_id_str': 'mission_eacfc0cd', 'title': 'Comprehensive Test Mission', 'prompt': 'Test mission for comprehensive testing', 'agent_type': 'developer', 'status': 'pending', 'result': None, 'execution_time': None, 'tokens_used': None, 'error_message': None, 'created_at': datetime.datetime(2025, 7, 30, 9, 17, 37, 449513), 'updated_at': datetime.datetime(2025, 7, 30, 9, 17, 37, 449513), 'completed_at': None, 'is_archived': False}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-07-30 04:17:38.104 | INFO     | src.models.advanced_database:search_memory:314 - Memory search returned 0 results
+2025-07-30 04:19:36.566 | INFO     | src.tools.advanced_tools:get_system_info:214 - System information retrieved
+2025-07-30 04:20:25.360 | INFO     | src.main:shutdown_event:328 - 🛑 Cognitive Forge Desktop App shutting down...

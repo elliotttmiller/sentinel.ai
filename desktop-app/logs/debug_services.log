@@ -2368,3 +2368,2862 @@ ERROR: No matching distribution found for onnxruntime-cpu
   "process_found": false,
   "final_is_running": false
 }
+2025-07-30 01:14:19.907 | WARNING  | onnxruntime_fix:safe_import_onnxruntime:26 - ONNX Runtime not installed: DLL load failed while importing onnxruntime_pybind11_state: A dynamic link library (DLL) initialization routine failed.
+2025-07-30 01:14:19.909 | INFO     | onnxruntime_fix:install_onnxruntime_cpu:50 - Installing onnxruntime-cpu as fallback...
+2025-07-30 01:14:21.812 | ERROR    | onnxruntime_fix:install_onnxruntime_cpu:61 - Failed to install onnxruntime-cpu: WARNING: Ignoring invalid distribution ~vicorn (C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages)
+ERROR: Could not find a version that satisfies the requirement onnxruntime-cpu (from versions: none)
+ERROR: No matching distribution found for onnxruntime-cpu
+
+2025-07-30 01:14:21.812 | ERROR    | onnxruntime_fix:get_onnxruntime_with_fallback:95 - Failed to install onnxruntime-cpu
+2025-07-30 01:14:21.812 | WARNING  | onnxruntime_fix:__init__:118 - ONNX Runtime proxy initialized with fallback mode
+2025-07-30 01:14:22.954 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: desktop_app
+2025-07-30 01:14:22.954 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:14:22.954 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:14:22.955 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:14:23.053 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:14:23.054 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 12396
+2025-07-30 01:14:23.056 | DEBUG    | __main__:add_detail:79 - 📝 process_cmdline: C:\Users\AMD\AppData\Local\Programs\Python\Python311\python.exe C:\Users\AMD\AppData\Local\Programs\Python\Python311\Scripts\uvicorn.exe src.main:app --host 0.0.0.0 --port 8001 --reload
+2025-07-30 01:14:23.056 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.18030075353643835
+2025-07-30 01:14:23.056 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.0
+2025-07-30 01:14:23.056 | DEBUG    | __main__:add_detail:79 - 📝 uptime: 258.6976521015167
+2025-07-30 01:14:23.056 | DEBUG    | __main__:add_detail:79 - 📝 final_is_running: True
+2025-07-30 01:14:23.056 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.10s
+2025-07-30 01:14:23.056 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": true,
+  "process_pid": 12396,
+  "process_cmdline": "C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\python.exe C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\uvicorn.exe src.main:app --host 0.0.0.0 --port 8001 --reload",
+  "memory_usage": 0.18030075353643835,
+  "cpu_usage": 0.0,
+  "uptime": 258.6976521015167,
+  "final_is_running": true
+}
+2025-07-30 01:14:23.058 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: backend
+2025-07-30 01:14:23.058 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:14:23.059 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:14:23.059 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:14:23.059 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:14:23.059 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:14:23.059 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:14:23.059 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:14:23.059 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 5
+2025-07-30 01:14:24.786 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:14:24.786 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 1.718876
+2025-07-30 01:14:24.787 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:14:24.787 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:14:22 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'LoKkoyHURhGTwKUsCx5-qw'}
+2025-07-30 01:14:24.787 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:14:24.787 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 1.73s
+2025-07-30 01:14:24.787 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 5,
+  "status_code": 200,
+  "response_time": 1.718876,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:14:22 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "LoKkoyHURhGTwKUsCx5-qw"
+  }
+}
+2025-07-30 01:14:24.787 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:14:24.787 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 1.718876
+2025-07-30 01:14:24.787 | DEBUG    | __main__:add_detail:79 - 📝 is_running: True
+2025-07-30 01:14:24.787 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 1.73s
+2025-07-30 01:14:24.787 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time": 1.718876,
+  "is_running": true
+}
+2025-07-30 01:14:24.789 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: cognitive_engine
+2025-07-30 01:14:24.789 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:14:24.789 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:14:24.789 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:14:24.906 | DEBUG    | __main__:add_detail:79 - 📝 process_found: False
+2025-07-30 01:14:24.907 | DEBUG    | __main__:add_detail:79 - 📝 final_is_running: False
+2025-07-30 01:14:24.907 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.12s
+2025-07-30 01:14:24.907 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": false,
+  "final_is_running": false
+}
+2025-07-30 01:16:04.951 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: desktop_app
+2025-07-30 01:16:04.951 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:16:04.951 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:16:04.951 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:16:05.038 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:16:05.038 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 12396
+2025-07-30 01:16:05.038 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.18080371791266908
+2025-07-30 01:16:05.038 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.1
+2025-07-30 01:16:05.041 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: True
+2025-07-30 01:16:05.041 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: False
+2025-07-30 01:16:05.041 | DEBUG    | __main__:add_detail:79 - 📝 final_status: process_only
+2025-07-30 01:16:05.041 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.09s
+2025-07-30 01:16:05.042 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": true,
+  "process_pid": 12396,
+  "memory_usage": 0.18080371791266908,
+  "cpu_usage": 0.1,
+  "port_conflict": true,
+  "port_accessible": false,
+  "final_status": "process_only"
+}
+2025-07-30 01:16:05.042 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: backend
+2025-07-30 01:16:05.043 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:16:05.043 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:16:05.043 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:16:05.043 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:16:05.043 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:16:05.043 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:16:05.043 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:16:05.043 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 10
+2025-07-30 01:16:05.677 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:16:05.677 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.632196
+2025-07-30 01:16:05.678 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:16:05.678 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:16:02 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'KusMn0SYTRCMvCl0Cx5-qw'}
+2025-07-30 01:16:05.678 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:16:05.678 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.64s
+2025-07-30 01:16:05.678 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 10,
+  "status_code": 200,
+  "response_time": 0.632196,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:16:02 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "KusMn0SYTRCMvCl0Cx5-qw"
+  }
+}
+2025-07-30 01:16:05.678 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:16:05.678 | DEBUG    | __main__:add_detail:79 - 📝 response_time_ms: 635.0510120391846
+2025-07-30 01:16:05.678 | DEBUG    | __main__:add_detail:79 - 📝 health_endpoint_ok: True
+2025-07-30 01:16:05.679 | DEBUG    | __main__:add_detail:79 - 📝 final_status: healthy
+2025-07-30 01:16:05.679 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.64s
+2025-07-30 01:16:05.679 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time_ms": 635.0510120391846,
+  "health_endpoint_ok": true,
+  "final_status": "healthy"
+}
+2025-07-30 01:16:05.681 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: cognitive_engine
+2025-07-30 01:16:05.681 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:16:05.681 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:16:05.681 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:16:05.737 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:16:05.738 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 5972
+2025-07-30 01:16:05.738 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.1808276685972515
+2025-07-30 01:16:05.738 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.0
+2025-07-30 01:16:05.738 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: True
+2025-07-30 01:16:05.738 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: False
+2025-07-30 01:16:05.738 | DEBUG    | __main__:add_detail:79 - 📝 final_status: process_only
+2025-07-30 01:16:05.738 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.06s
+2025-07-30 01:16:05.738 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": true,
+  "process_pid": 5972,
+  "memory_usage": 0.1808276685972515,
+  "cpu_usage": 0.0,
+  "port_conflict": true,
+  "port_accessible": false,
+  "final_status": "process_only"
+}
+2025-07-30 01:19:40.579 | WARNING  | onnxruntime_fix:safe_import_onnxruntime:26 - ONNX Runtime not installed: DLL load failed while importing onnxruntime_pybind11_state: A dynamic link library (DLL) initialization routine failed.
+2025-07-30 01:19:40.583 | INFO     | onnxruntime_fix:install_onnxruntime_cpu:50 - Installing onnxruntime-cpu as fallback...
+2025-07-30 01:19:42.941 | ERROR    | onnxruntime_fix:install_onnxruntime_cpu:61 - Failed to install onnxruntime-cpu: WARNING: Ignoring invalid distribution ~vicorn (C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages)
+ERROR: Could not find a version that satisfies the requirement onnxruntime-cpu (from versions: none)
+ERROR: No matching distribution found for onnxruntime-cpu
+
+2025-07-30 01:19:42.941 | ERROR    | onnxruntime_fix:get_onnxruntime_with_fallback:95 - Failed to install onnxruntime-cpu
+2025-07-30 01:19:42.941 | WARNING  | onnxruntime_fix:__init__:118 - ONNX Runtime proxy initialized with fallback mode
+2025-07-30 01:19:44.106 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: desktop_app
+2025-07-30 01:19:44.107 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:19:44.107 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:19:44.107 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:19:44.202 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:19:44.203 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 12396
+2025-07-30 01:19:44.204 | DEBUG    | __main__:add_detail:79 - 📝 process_cmdline: C:\Users\AMD\AppData\Local\Programs\Python\Python311\python.exe C:\Users\AMD\AppData\Local\Programs\Python\Python311\Scripts\uvicorn.exe src.main:app --host 0.0.0.0 --port 8001 --reload
+2025-07-30 01:19:44.204 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.18080371791266908
+2025-07-30 01:19:44.204 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.0
+2025-07-30 01:19:44.204 | DEBUG    | __main__:add_detail:79 - 📝 uptime: 579.8454329967499
+2025-07-30 01:19:44.204 | DEBUG    | __main__:add_detail:79 - 📝 final_is_running: True
+2025-07-30 01:19:44.204 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.10s
+2025-07-30 01:19:44.205 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": true,
+  "process_pid": 12396,
+  "process_cmdline": "C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\python.exe C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\uvicorn.exe src.main:app --host 0.0.0.0 --port 8001 --reload",
+  "memory_usage": 0.18080371791266908,
+  "cpu_usage": 0.0,
+  "uptime": 579.8454329967499,
+  "final_is_running": true
+}
+2025-07-30 01:19:44.206 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: backend
+2025-07-30 01:19:44.206 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:19:44.206 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:19:44.206 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:19:44.206 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:19:44.206 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:19:44.206 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:19:44.206 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:19:44.206 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 5
+2025-07-30 01:19:44.893 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:19:44.893 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.682968
+2025-07-30 01:19:44.894 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:19:44.894 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:19:41 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'S0CEYb0-QVm7H-2gg4a9AQ'}
+2025-07-30 01:19:44.894 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:19:44.894 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.69s
+2025-07-30 01:19:44.894 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 5,
+  "status_code": 200,
+  "response_time": 0.682968,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:19:41 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "S0CEYb0-QVm7H-2gg4a9AQ"
+  }
+}
+2025-07-30 01:19:44.894 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:19:44.894 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.682968
+2025-07-30 01:19:44.894 | DEBUG    | __main__:add_detail:79 - 📝 is_running: True
+2025-07-30 01:19:44.895 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.69s
+2025-07-30 01:19:44.895 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time": 0.682968,
+  "is_running": true
+}
+2025-07-30 01:19:44.897 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: cognitive_engine
+2025-07-30 01:19:44.897 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:19:44.897 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:19:44.899 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:19:44.968 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:19:44.969 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 5972
+2025-07-30 01:19:44.969 | DEBUG    | __main__:add_detail:79 - 📝 process_cmdline: C:\Users\AMD\AppData\Local\Programs\Python\Python311\python.exe C:\Users\AMD\AppData\Local\Programs\Python\Python311\Scripts\uvicorn.exe src.cognitive_engine:app --host 0.0.0.0 --port 8002 --reload
+2025-07-30 01:19:44.969 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.1804205069593504
+2025-07-30 01:19:44.969 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.0
+2025-07-30 01:19:44.969 | DEBUG    | __main__:add_detail:79 - 📝 uptime: 231.1974606513977
+2025-07-30 01:19:44.970 | DEBUG    | __main__:add_detail:79 - 📝 final_is_running: True
+2025-07-30 01:19:44.970 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.07s
+2025-07-30 01:19:44.970 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": true,
+  "process_pid": 5972,
+  "process_cmdline": "C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\python.exe C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\uvicorn.exe src.cognitive_engine:app --host 0.0.0.0 --port 8002 --reload",
+  "memory_usage": 0.1804205069593504,
+  "cpu_usage": 0.0,
+  "uptime": 231.1974606513977,
+  "final_is_running": true
+}
+2025-07-30 01:20:15.158 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: desktop_app
+2025-07-30 01:20:15.158 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:20:15.158 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:20:15.158 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:20:15.246 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:20:15.246 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 12396
+2025-07-30 01:20:15.246 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.18087556996641635
+2025-07-30 01:20:15.246 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.2
+2025-07-30 01:20:15.246 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: True
+2025-07-30 01:20:15.246 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: False
+2025-07-30 01:20:15.246 | DEBUG    | __main__:add_detail:79 - 📝 final_status: process_only
+2025-07-30 01:20:15.246 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.09s
+2025-07-30 01:20:15.246 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": true,
+  "process_pid": 12396,
+  "memory_usage": 0.18087556996641635,
+  "cpu_usage": 0.2,
+  "port_conflict": true,
+  "port_accessible": false,
+  "final_status": "process_only"
+}
+2025-07-30 01:20:15.246 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: backend
+2025-07-30 01:20:15.246 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:20:15.246 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:20:15.246 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:20:15.246 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:20:15.246 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:20:15.250 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:20:15.250 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:20:15.250 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 10
+2025-07-30 01:20:15.975 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:20:15.975 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.724403
+2025-07-30 01:20:15.975 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:20:15.975 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:20:12 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'ewAY50I7TPSsXKknAax-fw'}
+2025-07-30 01:20:15.975 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:20:15.975 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.73s
+2025-07-30 01:20:15.975 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 10,
+  "status_code": 200,
+  "response_time": 0.724403,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:20:12 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "ewAY50I7TPSsXKknAax-fw"
+  }
+}
+2025-07-30 01:20:15.975 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:20:15.975 | DEBUG    | __main__:add_detail:79 - 📝 response_time_ms: 729.3837070465088
+2025-07-30 01:20:15.975 | DEBUG    | __main__:add_detail:79 - 📝 health_endpoint_ok: True
+2025-07-30 01:20:15.975 | DEBUG    | __main__:add_detail:79 - 📝 final_status: healthy
+2025-07-30 01:20:15.975 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.73s
+2025-07-30 01:20:15.975 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time_ms": 729.3837070465088,
+  "health_endpoint_ok": true,
+  "final_status": "healthy"
+}
+2025-07-30 01:20:15.975 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: cognitive_engine
+2025-07-30 01:20:15.975 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:20:15.975 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:20:15.975 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:20:16.045 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:20:16.045 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 5972
+2025-07-30 01:20:16.045 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.1804205069593504
+2025-07-30 01:20:16.045 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.2
+2025-07-30 01:20:16.046 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: True
+2025-07-30 01:20:16.046 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: False
+2025-07-30 01:20:16.046 | DEBUG    | __main__:add_detail:79 - 📝 final_status: process_only
+2025-07-30 01:20:16.046 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.07s
+2025-07-30 01:20:16.047 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": true,
+  "process_pid": 5972,
+  "memory_usage": 0.1804205069593504,
+  "cpu_usage": 0.2,
+  "port_conflict": true,
+  "port_accessible": false,
+  "final_status": "process_only"
+}
+2025-07-30 01:20:48.534 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: desktop_app
+2025-07-30 01:20:48.535 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:20:48.535 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:20:48.535 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:20:48.623 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:20:48.623 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 12396
+2025-07-30 01:20:48.623 | DEBUG    | __main__:add_detail:79 - 📝 process_cmdline: C:\Users\AMD\AppData\Local\Programs\Python\Python311\python.exe C:\Users\AMD\AppData\Local\Programs\Python\Python311\Scripts\uvicorn.exe src.main:app --host 0.0.0.0 --port 8001 --reload
+2025-07-30 01:20:48.623 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.18087556996641635
+2025-07-30 01:20:48.623 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.2
+2025-07-30 01:20:48.623 | DEBUG    | __main__:add_detail:79 - 📝 uptime: 644.2640199661255
+2025-07-30 01:20:48.623 | DEBUG    | __main__:add_detail:79 - 📝 final_is_running: True
+2025-07-30 01:20:48.623 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.09s
+2025-07-30 01:20:48.623 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": true,
+  "process_pid": 12396,
+  "process_cmdline": "C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\python.exe C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\uvicorn.exe src.main:app --host 0.0.0.0 --port 8001 --reload",
+  "memory_usage": 0.18087556996641635,
+  "cpu_usage": 0.2,
+  "uptime": 644.2640199661255,
+  "final_is_running": true
+}
+2025-07-30 01:20:48.623 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: backend
+2025-07-30 01:20:48.623 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:20:48.623 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:20:48.623 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:20:48.623 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:20:48.628 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:20:48.628 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:20:48.628 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:20:48.628 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 5
+2025-07-30 01:20:49.283 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:20:49.283 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.653057
+2025-07-30 01:20:49.283 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:20:49.283 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:20:46 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'nmyfU1RSSJuhxvORAax-fw'}
+2025-07-30 01:20:49.283 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:20:49.283 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.66s
+2025-07-30 01:20:49.283 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 5,
+  "status_code": 200,
+  "response_time": 0.653057,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:20:46 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "nmyfU1RSSJuhxvORAax-fw"
+  }
+}
+2025-07-30 01:20:49.283 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:20:49.283 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.653057
+2025-07-30 01:20:49.283 | DEBUG    | __main__:add_detail:79 - 📝 is_running: True
+2025-07-30 01:20:49.283 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.66s
+2025-07-30 01:20:49.283 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time": 0.653057,
+  "is_running": true
+}
+2025-07-30 01:20:49.283 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: cognitive_engine
+2025-07-30 01:20:49.283 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:20:49.283 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:20:49.283 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:20:49.353 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:20:49.353 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 5972
+2025-07-30 01:20:49.353 | DEBUG    | __main__:add_detail:79 - 📝 process_cmdline: C:\Users\AMD\AppData\Local\Programs\Python\Python311\python.exe C:\Users\AMD\AppData\Local\Programs\Python\Python311\Scripts\uvicorn.exe src.cognitive_engine:app --host 0.0.0.0 --port 8002 --reload
+2025-07-30 01:20:49.353 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.1804205069593504
+2025-07-30 01:20:49.353 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.2
+2025-07-30 01:20:49.353 | DEBUG    | __main__:add_detail:79 - 📝 uptime: 295.5815260410309
+2025-07-30 01:20:49.353 | DEBUG    | __main__:add_detail:79 - 📝 final_is_running: True
+2025-07-30 01:20:49.353 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.07s
+2025-07-30 01:20:49.353 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": true,
+  "process_pid": 5972,
+  "process_cmdline": "C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\python.exe C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\uvicorn.exe src.cognitive_engine:app --host 0.0.0.0 --port 8002 --reload",
+  "memory_usage": 0.1804205069593504,
+  "cpu_usage": 0.2,
+  "uptime": 295.5815260410309,
+  "final_is_running": true
+}
+2025-07-30 01:20:58.310 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: desktop_app
+2025-07-30 01:20:58.310 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:20:58.310 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:20:58.310 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:20:58.407 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:20:58.407 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 12396
+2025-07-30 01:20:58.407 | DEBUG    | __main__:add_detail:79 - 📝 process_cmdline: C:\Users\AMD\AppData\Local\Programs\Python\Python311\python.exe C:\Users\AMD\AppData\Local\Programs\Python\Python311\Scripts\uvicorn.exe src.main:app --host 0.0.0.0 --port 8001 --reload
+2025-07-30 01:20:58.407 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.180971372704746
+2025-07-30 01:20:58.408 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.2
+2025-07-30 01:20:58.408 | DEBUG    | __main__:add_detail:79 - 📝 uptime: 654.0479848384857
+2025-07-30 01:20:58.408 | DEBUG    | __main__:add_detail:79 - 📝 final_is_running: True
+2025-07-30 01:20:58.408 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.10s
+2025-07-30 01:20:58.408 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": true,
+  "process_pid": 12396,
+  "process_cmdline": "C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\python.exe C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\uvicorn.exe src.main:app --host 0.0.0.0 --port 8001 --reload",
+  "memory_usage": 0.180971372704746,
+  "cpu_usage": 0.2,
+  "uptime": 654.0479848384857,
+  "final_is_running": true
+}
+2025-07-30 01:20:58.409 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: backend
+2025-07-30 01:20:58.409 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:20:58.409 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:20:58.409 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:20:58.409 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:20:58.409 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:20:58.409 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:20:58.409 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:20:58.409 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 5
+2025-07-30 01:20:59.013 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:20:59.013 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.602213
+2025-07-30 01:20:59.013 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:20:59.013 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:20:55 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'dKLPfDPaRsur4YqZCx5-qw'}
+2025-07-30 01:20:59.013 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:20:59.013 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.60s
+2025-07-30 01:20:59.013 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 5,
+  "status_code": 200,
+  "response_time": 0.602213,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:20:55 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "dKLPfDPaRsur4YqZCx5-qw"
+  }
+}
+2025-07-30 01:20:59.013 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:20:59.013 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.602213
+2025-07-30 01:20:59.013 | DEBUG    | __main__:add_detail:79 - 📝 is_running: True
+2025-07-30 01:20:59.013 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.60s
+2025-07-30 01:20:59.013 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time": 0.602213,
+  "is_running": true
+}
+2025-07-30 01:20:59.013 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: cognitive_engine
+2025-07-30 01:20:59.013 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:20:59.013 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:20:59.013 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:20:59.076 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:20:59.076 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 5972
+2025-07-30 01:20:59.076 | DEBUG    | __main__:add_detail:79 - 📝 process_cmdline: C:\Users\AMD\AppData\Local\Programs\Python\Python311\python.exe C:\Users\AMD\AppData\Local\Programs\Python\Python311\Scripts\uvicorn.exe src.cognitive_engine:app --host 0.0.0.0 --port 8002 --reload
+2025-07-30 01:20:59.076 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.18099532338932842
+2025-07-30 01:20:59.076 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.2
+2025-07-30 01:20:59.076 | DEBUG    | __main__:add_detail:79 - 📝 uptime: 305.30473804473877
+2025-07-30 01:20:59.076 | DEBUG    | __main__:add_detail:79 - 📝 final_is_running: True
+2025-07-30 01:20:59.076 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.06s
+2025-07-30 01:20:59.076 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": true,
+  "process_pid": 5972,
+  "process_cmdline": "C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\python.exe C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\uvicorn.exe src.cognitive_engine:app --host 0.0.0.0 --port 8002 --reload",
+  "memory_usage": 0.18099532338932842,
+  "cpu_usage": 0.2,
+  "uptime": 305.30473804473877,
+  "final_is_running": true
+}
+2025-07-30 01:21:02.006 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: network_diagnostics
+2025-07-30 01:21:02.007 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://httpbin.org/get
+2025-07-30 01:21:02.007 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:21:02.007 | DEBUG    | __main__:add_detail:79 - 📝 url: https://httpbin.org/get
+2025-07-30 01:21:02.007 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:21:02.007 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 10
+2025-07-30 01:21:02.663 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:21:02.663 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.65356
+2025-07-30 01:21:02.663 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 312
+2025-07-30 01:21:02.663 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Date': 'Wed, 30 Jul 2025 06:21:00 GMT', 'Content-Type': 'application/json', 'Content-Length': '312', 'Connection': 'keep-alive', 'Server': 'gunicorn/19.9.0', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Credentials': 'true'}
+2025-07-30 01:21:02.664 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://httpbin.org/get successful
+2025-07-30 01:21:02.664 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.66s
+2025-07-30 01:21:02.664 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://httpbin.org/get",
+  "headers": {},
+  "timeout": 10,
+  "status_code": 200,
+  "response_time": 0.65356,
+  "response_size": 312,
+  "response_headers": {
+    "Date": "Wed, 30 Jul 2025 06:21:00 GMT",
+    "Content-Type": "application/json",
+    "Content-Length": "312",
+    "Connection": "keep-alive",
+    "Server": "gunicorn/19.9.0",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Credentials": "true"
+  }
+}
+2025-07-30 01:21:02.664 | DEBUG    | __main__:add_detail:79 - 📝 internet_connectivity: OK
+2025-07-30 01:21:02.718 | DEBUG    | __main__:add_detail:79 - 📝 dns_resolution: OK: 66.33.22.87
+2025-07-30 01:21:02.720 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:21:02.720 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:21:02.720 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:21:02.720 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:21:02.720 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 10
+2025-07-30 01:21:03.310 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:21:03.310 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.587313
+2025-07-30 01:21:03.310 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:21:03.311 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:20:59 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'IgoxYl1rTBeS0-3ECx5-qw'}
+2025-07-30 01:21:03.311 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:21:03.311 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.59s
+2025-07-30 01:21:03.311 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 10,
+  "status_code": 200,
+  "response_time": 0.587313,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:20:59 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "IgoxYl1rTBeS0-3ECx5-qw"
+  }
+}
+2025-07-30 01:21:03.312 | DEBUG    | __main__:add_detail:79 - 📝 railway_connectivity: OK: HTTP 200
+2025-07-30 01:21:03.314 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: http://localhost:8001/system-stats
+2025-07-30 01:21:03.314 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:21:03.314 | DEBUG    | __main__:add_detail:79 - 📝 url: http://localhost:8001/system-stats
+2025-07-30 01:21:03.314 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:21:03.314 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 5
+2025-07-30 01:21:05.459 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 500
+2025-07-30 01:21:05.459 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 2.144387
+2025-07-30 01:21:05.459 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 39
+2025-07-30 01:21:05.459 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'date': 'Wed, 30 Jul 2025 06:21:04 GMT', 'server': 'uvicorn', 'content-length': '39', 'content-type': 'application/json'}
+2025-07-30 01:21:05.459 | WARNING  | __main__:debug_request:100 - ⚠️ HTTP GET http://localhost:8001/system-stats returned 500
+2025-07-30 01:21:05.459 | DEBUG    | __main__:debug_request:101 - Response content: {"detail":"Failed to get system stats"}...
+2025-07-30 01:21:05.459 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 2.15s
+2025-07-30 01:21:05.462 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "http://localhost:8001/system-stats",
+  "headers": {},
+  "timeout": 5,
+  "status_code": 500,
+  "response_time": 2.144387,
+  "response_size": 39,
+  "response_headers": {
+    "date": "Wed, 30 Jul 2025 06:21:04 GMT",
+    "server": "uvicorn",
+    "content-length": "39",
+    "content-type": "application/json"
+  }
+}
+2025-07-30 01:21:05.466 | DEBUG    | __main__:add_detail:79 - 📝 desktop_app_connectivity: OK: HTTP 500
+2025-07-30 01:21:05.467 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: http://localhost:8002/health
+2025-07-30 01:21:05.467 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:21:05.467 | DEBUG    | __main__:add_detail:79 - 📝 url: http://localhost:8002/health
+2025-07-30 01:21:05.467 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:21:05.467 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 5
+2025-07-30 01:21:07.484 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:21:07.485 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 2.014125
+2025-07-30 01:21:07.485 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 173
+2025-07-30 01:21:07.485 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'date': 'Wed, 30 Jul 2025 06:21:06 GMT', 'server': 'uvicorn', 'content-length': '173', 'content-type': 'application/json'}
+2025-07-30 01:21:07.485 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET http://localhost:8002/health successful
+2025-07-30 01:21:07.485 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 2.02s
+2025-07-30 01:21:07.485 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "http://localhost:8002/health",
+  "headers": {},
+  "timeout": 5,
+  "status_code": 200,
+  "response_time": 2.014125,
+  "response_size": 173,
+  "response_headers": {
+    "date": "Wed, 30 Jul 2025 06:21:06 GMT",
+    "server": "uvicorn",
+    "content-length": "173",
+    "content-type": "application/json"
+  }
+}
+2025-07-30 01:21:07.485 | DEBUG    | __main__:add_detail:79 - 📝 cognitive_engine_connectivity: OK: HTTP 200
+2025-07-30 01:21:07.491 | DEBUG    | __main__:add_detail:79 - 📝 interface_Ethernet 5: 192.168.0.141
+2025-07-30 01:21:07.491 | DEBUG    | __main__:add_detail:79 - 📝 interface_Ethernet 4: 169.254.9.106
+2025-07-30 01:21:07.491 | DEBUG    | __main__:add_detail:79 - 📝 interface_vEthernet (Default Switch): 172.18.112.1
+2025-07-30 01:21:07.491 | DEBUG    | __main__:add_detail:79 - 📝 interface_Loopback Pseudo-Interface 1: 127.0.0.1
+2025-07-30 01:21:07.491 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: network_diagnostics in 5.48s
+2025-07-30 01:21:07.491 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "internet_connectivity": "OK",
+  "dns_resolution": "OK: 66.33.22.87",
+  "railway_connectivity": "OK: HTTP 200",
+  "desktop_app_connectivity": "OK: HTTP 500",
+  "cognitive_engine_connectivity": "OK: HTTP 200",
+  "interface_Ethernet 5": "192.168.0.141",
+  "interface_Ethernet 4": "169.254.9.106",
+  "interface_vEthernet (Default Switch)": "172.18.112.1",
+  "interface_Loopback Pseudo-Interface 1": "127.0.0.1"
+}
+2025-07-30 01:21:11.386 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: desktop_app
+2025-07-30 01:21:11.387 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:21:11.387 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:21:11.387 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:21:11.475 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:21:11.476 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 12396
+2025-07-30 01:21:11.476 | DEBUG    | __main__:add_detail:79 - 📝 process_cmdline: C:\Users\AMD\AppData\Local\Programs\Python\Python311\python.exe C:\Users\AMD\AppData\Local\Programs\Python\Python311\Scripts\uvicorn.exe src.main:app --host 0.0.0.0 --port 8001 --reload
+2025-07-30 01:21:11.476 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.180971372704746
+2025-07-30 01:21:11.476 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.1
+2025-07-30 01:21:11.477 | DEBUG    | __main__:add_detail:79 - 📝 uptime: 667.1169331073761
+2025-07-30 01:21:11.477 | DEBUG    | __main__:add_detail:79 - 📝 final_is_running: True
+2025-07-30 01:21:11.477 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.09s
+2025-07-30 01:21:11.477 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": true,
+  "process_pid": 12396,
+  "process_cmdline": "C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\python.exe C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\uvicorn.exe src.main:app --host 0.0.0.0 --port 8001 --reload",
+  "memory_usage": 0.180971372704746,
+  "cpu_usage": 0.1,
+  "uptime": 667.1169331073761,
+  "final_is_running": true
+}
+2025-07-30 01:21:11.477 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: backend
+2025-07-30 01:21:11.477 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:21:11.477 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:21:11.477 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:21:11.477 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:21:11.477 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:21:11.477 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:21:11.477 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:21:11.477 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 5
+2025-07-30 01:21:12.090 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:21:12.090 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.612369
+2025-07-30 01:21:12.092 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:21:12.092 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:21:08 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'X0xecMsDSpGkILsnCx5-qw'}
+2025-07-30 01:21:12.092 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:21:12.092 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.61s
+2025-07-30 01:21:12.092 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 5,
+  "status_code": 200,
+  "response_time": 0.612369,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:21:08 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "X0xecMsDSpGkILsnCx5-qw"
+  }
+}
+2025-07-30 01:21:12.092 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:21:12.094 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.612369
+2025-07-30 01:21:12.094 | DEBUG    | __main__:add_detail:79 - 📝 is_running: True
+2025-07-30 01:21:12.094 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.62s
+2025-07-30 01:21:12.094 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time": 0.612369,
+  "is_running": true
+}
+2025-07-30 01:21:12.095 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: cognitive_engine
+2025-07-30 01:21:12.095 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:21:12.095 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:21:12.095 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:21:12.160 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:21:12.163 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 5972
+2025-07-30 01:21:12.163 | DEBUG    | __main__:add_detail:79 - 📝 process_cmdline: C:\Users\AMD\AppData\Local\Programs\Python\Python311\python.exe C:\Users\AMD\AppData\Local\Programs\Python\Python311\Scripts\uvicorn.exe src.cognitive_engine:app --host 0.0.0.0 --port 8002 --reload
+2025-07-30 01:21:12.163 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.18099532338932842
+2025-07-30 01:21:12.163 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.2
+2025-07-30 01:21:12.163 | DEBUG    | __main__:add_detail:79 - 📝 uptime: 318.39186573028564
+2025-07-30 01:21:12.163 | DEBUG    | __main__:add_detail:79 - 📝 final_is_running: True
+2025-07-30 01:21:12.163 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.07s
+2025-07-30 01:21:12.163 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": true,
+  "process_pid": 5972,
+  "process_cmdline": "C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\python.exe C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\uvicorn.exe src.cognitive_engine:app --host 0.0.0.0 --port 8002 --reload",
+  "memory_usage": 0.18099532338932842,
+  "cpu_usage": 0.2,
+  "uptime": 318.39186573028564,
+  "final_is_running": true
+}
+2025-07-30 01:21:18.069 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: desktop_app
+2025-07-30 01:21:18.069 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:21:18.069 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:21:18.069 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:21:18.163 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:21:18.164 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 12396
+2025-07-30 01:21:18.164 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.180971372704746
+2025-07-30 01:21:18.164 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.0
+2025-07-30 01:21:18.166 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: True
+2025-07-30 01:21:18.166 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: False
+2025-07-30 01:21:18.167 | DEBUG    | __main__:add_detail:79 - 📝 final_status: process_only
+2025-07-30 01:21:18.167 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.10s
+2025-07-30 01:21:18.167 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": true,
+  "process_pid": 12396,
+  "memory_usage": 0.180971372704746,
+  "cpu_usage": 0.0,
+  "port_conflict": true,
+  "port_accessible": false,
+  "final_status": "process_only"
+}
+2025-07-30 01:21:18.167 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: backend
+2025-07-30 01:21:18.168 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:21:18.168 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:21:18.168 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:21:18.168 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:21:18.168 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:21:18.168 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:21:18.168 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:21:18.168 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 10
+2025-07-30 01:21:18.778 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:21:18.778 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.607622
+2025-07-30 01:21:18.778 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:21:18.778 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:21:15 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'x3ZOcVHEQqGVYf0Pg4a9AQ'}
+2025-07-30 01:21:18.778 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:21:18.778 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.61s
+2025-07-30 01:21:18.778 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 10,
+  "status_code": 200,
+  "response_time": 0.607622,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:21:15 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "x3ZOcVHEQqGVYf0Pg4a9AQ"
+  }
+}
+2025-07-30 01:21:18.778 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:21:18.778 | DEBUG    | __main__:add_detail:79 - 📝 response_time_ms: 609.7357273101807
+2025-07-30 01:21:18.778 | DEBUG    | __main__:add_detail:79 - 📝 health_endpoint_ok: True
+2025-07-30 01:21:18.778 | DEBUG    | __main__:add_detail:79 - 📝 final_status: healthy
+2025-07-30 01:21:18.778 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.61s
+2025-07-30 01:21:18.778 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time_ms": 609.7357273101807,
+  "health_endpoint_ok": true,
+  "final_status": "healthy"
+}
+2025-07-30 01:21:18.778 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: cognitive_engine
+2025-07-30 01:21:18.782 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:21:18.782 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:21:18.782 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:21:18.841 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:21:18.841 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 5972
+2025-07-30 01:21:18.841 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.18099532338932842
+2025-07-30 01:21:18.841 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.2
+2025-07-30 01:21:18.844 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: True
+2025-07-30 01:21:18.844 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: False
+2025-07-30 01:21:18.845 | DEBUG    | __main__:add_detail:79 - 📝 final_status: process_only
+2025-07-30 01:21:18.845 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.07s
+2025-07-30 01:21:18.845 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": true,
+  "process_pid": 5972,
+  "memory_usage": 0.18099532338932842,
+  "cpu_usage": 0.2,
+  "port_conflict": true,
+  "port_accessible": false,
+  "final_status": "process_only"
+}
+2025-07-30 01:21:57.426 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: desktop_app
+2025-07-30 01:21:57.429 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:21:57.429 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:21:57.429 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:21:57.516 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:21:57.516 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 12396
+2025-07-30 01:21:57.516 | DEBUG    | __main__:add_detail:79 - 📝 process_cmdline: C:\Users\AMD\AppData\Local\Programs\Python\Python311\python.exe C:\Users\AMD\AppData\Local\Programs\Python\Python311\Scripts\uvicorn.exe src.main:app --host 0.0.0.0 --port 8001 --reload
+2025-07-30 01:21:57.516 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.180971372704746
+2025-07-30 01:21:57.516 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.2
+2025-07-30 01:21:57.516 | DEBUG    | __main__:add_detail:79 - 📝 uptime: 713.1572670936584
+2025-07-30 01:21:57.516 | DEBUG    | __main__:add_detail:79 - 📝 final_is_running: True
+2025-07-30 01:21:57.516 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.09s
+2025-07-30 01:21:57.516 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": true,
+  "process_pid": 12396,
+  "process_cmdline": "C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\python.exe C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\uvicorn.exe src.main:app --host 0.0.0.0 --port 8001 --reload",
+  "memory_usage": 0.180971372704746,
+  "cpu_usage": 0.2,
+  "uptime": 713.1572670936584,
+  "final_is_running": true
+}
+2025-07-30 01:21:57.516 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: backend
+2025-07-30 01:21:57.516 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:21:57.516 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:21:57.516 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:21:57.516 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:21:57.516 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:21:57.519 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:21:57.519 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:21:57.519 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 5
+2025-07-30 01:21:58.125 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:21:58.125 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.604367
+2025-07-30 01:21:58.125 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:21:58.125 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:21:55 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'PgqYKrTxT4Kk_awvAax-fw'}
+2025-07-30 01:21:58.125 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:21:58.125 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.61s
+2025-07-30 01:21:58.125 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 5,
+  "status_code": 200,
+  "response_time": 0.604367,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:21:55 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "PgqYKrTxT4Kk_awvAax-fw"
+  }
+}
+2025-07-30 01:21:58.126 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:21:58.126 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.604367
+2025-07-30 01:21:58.126 | DEBUG    | __main__:add_detail:79 - 📝 is_running: True
+2025-07-30 01:21:58.126 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.61s
+2025-07-30 01:21:58.126 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time": 0.604367,
+  "is_running": true
+}
+2025-07-30 01:21:58.126 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: cognitive_engine
+2025-07-30 01:21:58.126 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:21:58.126 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:21:58.126 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:21:58.190 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:21:58.190 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 5972
+2025-07-30 01:21:58.190 | DEBUG    | __main__:add_detail:79 - 📝 process_cmdline: C:\Users\AMD\AppData\Local\Programs\Python\Python311\python.exe C:\Users\AMD\AppData\Local\Programs\Python\Python311\Scripts\uvicorn.exe src.cognitive_engine:app --host 0.0.0.0 --port 8002 --reload
+2025-07-30 01:21:58.190 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.18099532338932842
+2025-07-30 01:21:58.190 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.1
+2025-07-30 01:21:58.190 | DEBUG    | __main__:add_detail:79 - 📝 uptime: 364.4191119670868
+2025-07-30 01:21:58.190 | DEBUG    | __main__:add_detail:79 - 📝 final_is_running: True
+2025-07-30 01:21:58.190 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.06s
+2025-07-30 01:21:58.190 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": true,
+  "process_pid": 5972,
+  "process_cmdline": "C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\python.exe C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\uvicorn.exe src.cognitive_engine:app --host 0.0.0.0 --port 8002 --reload",
+  "memory_usage": 0.18099532338932842,
+  "cpu_usage": 0.1,
+  "uptime": 364.4191119670868,
+  "final_is_running": true
+}
+2025-07-30 01:22:13.337 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: desktop_app
+2025-07-30 01:22:13.337 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:22:13.337 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:22:13.337 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:22:13.426 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:22:13.426 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 12396
+2025-07-30 01:22:13.426 | DEBUG    | __main__:add_detail:79 - 📝 process_cmdline: C:\Users\AMD\AppData\Local\Programs\Python\Python311\python.exe C:\Users\AMD\AppData\Local\Programs\Python\Python311\Scripts\uvicorn.exe src.main:app --host 0.0.0.0 --port 8001 --reload
+2025-07-30 01:22:13.426 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.180971372704746
+2025-07-30 01:22:13.426 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.2
+2025-07-30 01:22:13.426 | DEBUG    | __main__:add_detail:79 - 📝 uptime: 729.0668280124664
+2025-07-30 01:22:13.426 | DEBUG    | __main__:add_detail:79 - 📝 final_is_running: True
+2025-07-30 01:22:13.426 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.09s
+2025-07-30 01:22:13.426 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": true,
+  "process_pid": 12396,
+  "process_cmdline": "C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\python.exe C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\uvicorn.exe src.main:app --host 0.0.0.0 --port 8001 --reload",
+  "memory_usage": 0.180971372704746,
+  "cpu_usage": 0.2,
+  "uptime": 729.0668280124664,
+  "final_is_running": true
+}
+2025-07-30 01:22:13.426 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: backend
+2025-07-30 01:22:13.426 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:22:13.426 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:22:13.426 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:22:13.426 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:22:13.426 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:22:13.426 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:22:13.426 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:22:13.426 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 5
+2025-07-30 01:22:14.049 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:22:14.052 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.621921
+2025-07-30 01:22:14.052 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:22:14.052 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:22:11 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': '67x11dJ0Smyv7IfLAax-fw'}
+2025-07-30 01:22:14.052 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:22:14.052 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.63s
+2025-07-30 01:22:14.052 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 5,
+  "status_code": 200,
+  "response_time": 0.621921,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:22:11 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "67x11dJ0Smyv7IfLAax-fw"
+  }
+}
+2025-07-30 01:22:14.052 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:22:14.052 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.621921
+2025-07-30 01:22:14.052 | DEBUG    | __main__:add_detail:79 - 📝 is_running: True
+2025-07-30 01:22:14.052 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.63s
+2025-07-30 01:22:14.052 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time": 0.621921,
+  "is_running": true
+}
+2025-07-30 01:22:14.056 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: cognitive_engine
+2025-07-30 01:22:14.056 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:22:14.057 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:22:14.057 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:22:14.119 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:22:14.119 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 5972
+2025-07-30 01:22:14.119 | DEBUG    | __main__:add_detail:79 - 📝 process_cmdline: C:\Users\AMD\AppData\Local\Programs\Python\Python311\python.exe C:\Users\AMD\AppData\Local\Programs\Python\Python311\Scripts\uvicorn.exe src.cognitive_engine:app --host 0.0.0.0 --port 8002 --reload
+2025-07-30 01:22:14.120 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.18099532338932842
+2025-07-30 01:22:14.120 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.1
+2025-07-30 01:22:14.120 | DEBUG    | __main__:add_detail:79 - 📝 uptime: 380.3491539955139
+2025-07-30 01:22:14.121 | DEBUG    | __main__:add_detail:79 - 📝 final_is_running: True
+2025-07-30 01:22:14.121 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.07s
+2025-07-30 01:22:14.121 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": true,
+  "process_pid": 5972,
+  "process_cmdline": "C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\python.exe C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\uvicorn.exe src.cognitive_engine:app --host 0.0.0.0 --port 8002 --reload",
+  "memory_usage": 0.18099532338932842,
+  "cpu_usage": 0.1,
+  "uptime": 380.3491539955139,
+  "final_is_running": true
+}
+2025-07-30 01:22:26.278 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: desktop_app
+2025-07-30 01:22:26.278 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:22:26.278 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:22:26.278 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:22:26.363 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:22:26.363 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 12396
+2025-07-30 01:22:26.363 | DEBUG    | __main__:add_detail:79 - 📝 process_cmdline: C:\Users\AMD\AppData\Local\Programs\Python\Python311\python.exe C:\Users\AMD\AppData\Local\Programs\Python\Python311\Scripts\uvicorn.exe src.main:app --host 0.0.0.0 --port 8001 --reload
+2025-07-30 01:22:26.363 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.180971372704746
+2025-07-30 01:22:26.363 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.2
+2025-07-30 01:22:26.363 | DEBUG    | __main__:add_detail:79 - 📝 uptime: 742.0045459270477
+2025-07-30 01:22:26.363 | DEBUG    | __main__:add_detail:79 - 📝 final_is_running: True
+2025-07-30 01:22:26.363 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.09s
+2025-07-30 01:22:26.363 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": true,
+  "process_pid": 12396,
+  "process_cmdline": "C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\python.exe C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\uvicorn.exe src.main:app --host 0.0.0.0 --port 8001 --reload",
+  "memory_usage": 0.180971372704746,
+  "cpu_usage": 0.2,
+  "uptime": 742.0045459270477,
+  "final_is_running": true
+}
+2025-07-30 01:22:26.363 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: backend
+2025-07-30 01:22:26.363 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:22:26.363 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:22:26.363 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:22:26.363 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:22:26.363 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:22:26.367 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:22:26.367 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:22:26.367 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 5
+2025-07-30 01:22:26.979 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:22:26.980 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.611174
+2025-07-30 01:22:26.980 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:22:26.980 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:22:24 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'lqhiQlV3QVunCqzwCx5-qw'}
+2025-07-30 01:22:26.980 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:22:26.980 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.62s
+2025-07-30 01:22:26.980 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 5,
+  "status_code": 200,
+  "response_time": 0.611174,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:22:24 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "lqhiQlV3QVunCqzwCx5-qw"
+  }
+}
+2025-07-30 01:22:26.980 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:22:26.980 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.611174
+2025-07-30 01:22:26.980 | DEBUG    | __main__:add_detail:79 - 📝 is_running: True
+2025-07-30 01:22:26.980 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.62s
+2025-07-30 01:22:26.980 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time": 0.611174,
+  "is_running": true
+}
+2025-07-30 01:22:26.983 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: cognitive_engine
+2025-07-30 01:22:26.983 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:22:26.983 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:22:26.983 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:22:27.042 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:22:27.042 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 5972
+2025-07-30 01:22:27.042 | DEBUG    | __main__:add_detail:79 - 📝 process_cmdline: C:\Users\AMD\AppData\Local\Programs\Python\Python311\python.exe C:\Users\AMD\AppData\Local\Programs\Python\Python311\Scripts\uvicorn.exe src.cognitive_engine:app --host 0.0.0.0 --port 8002 --reload
+2025-07-30 01:22:27.042 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.1810911261276581
+2025-07-30 01:22:27.043 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.1
+2025-07-30 01:22:27.043 | DEBUG    | __main__:add_detail:79 - 📝 uptime: 393.27037358283997
+2025-07-30 01:22:27.043 | DEBUG    | __main__:add_detail:79 - 📝 final_is_running: True
+2025-07-30 01:22:27.043 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.06s
+2025-07-30 01:22:27.043 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": true,
+  "process_pid": 5972,
+  "process_cmdline": "C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\python.exe C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\uvicorn.exe src.cognitive_engine:app --host 0.0.0.0 --port 8002 --reload",
+  "memory_usage": 0.1810911261276581,
+  "cpu_usage": 0.1,
+  "uptime": 393.27037358283997,
+  "final_is_running": true
+}
+2025-07-30 01:22:49.456 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: desktop_app
+2025-07-30 01:22:49.456 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:22:49.456 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:22:49.456 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:22:49.548 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:22:49.548 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 12396
+2025-07-30 01:22:49.549 | DEBUG    | __main__:add_detail:79 - 📝 process_cmdline: C:\Users\AMD\AppData\Local\Programs\Python\Python311\python.exe C:\Users\AMD\AppData\Local\Programs\Python\Python311\Scripts\uvicorn.exe src.main:app --host 0.0.0.0 --port 8001 --reload
+2025-07-30 01:22:49.549 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.180971372704746
+2025-07-30 01:22:49.549 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.3
+2025-07-30 01:22:49.549 | DEBUG    | __main__:add_detail:79 - 📝 uptime: 765.1897602081299
+2025-07-30 01:22:49.549 | DEBUG    | __main__:add_detail:79 - 📝 final_is_running: True
+2025-07-30 01:22:49.549 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.09s
+2025-07-30 01:22:49.550 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": true,
+  "process_pid": 12396,
+  "process_cmdline": "C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\python.exe C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\uvicorn.exe src.main:app --host 0.0.0.0 --port 8001 --reload",
+  "memory_usage": 0.180971372704746,
+  "cpu_usage": 0.3,
+  "uptime": 765.1897602081299,
+  "final_is_running": true
+}
+2025-07-30 01:22:49.550 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: backend
+2025-07-30 01:22:49.550 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:22:49.550 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:22:49.550 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:22:49.550 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:22:49.550 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:22:49.550 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:22:49.550 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:22:49.550 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 5
+2025-07-30 01:22:50.173 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:22:50.174 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.620457
+2025-07-30 01:22:50.174 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:22:50.174 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:22:47 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'cCXD1X9CQ3GhTlefg4a9AQ'}
+2025-07-30 01:22:50.174 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:22:50.174 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.62s
+2025-07-30 01:22:50.174 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 5,
+  "status_code": 200,
+  "response_time": 0.620457,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:22:47 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "cCXD1X9CQ3GhTlefg4a9AQ"
+  }
+}
+2025-07-30 01:22:50.174 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:22:50.174 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.620457
+2025-07-30 01:22:50.176 | DEBUG    | __main__:add_detail:79 - 📝 is_running: True
+2025-07-30 01:22:50.176 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.63s
+2025-07-30 01:22:50.176 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time": 0.620457,
+  "is_running": true
+}
+2025-07-30 01:22:50.177 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: cognitive_engine
+2025-07-30 01:22:50.177 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:22:50.177 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:22:50.177 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:22:50.237 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:22:50.237 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 5972
+2025-07-30 01:22:50.237 | DEBUG    | __main__:add_detail:79 - 📝 process_cmdline: C:\Users\AMD\AppData\Local\Programs\Python\Python311\python.exe C:\Users\AMD\AppData\Local\Programs\Python\Python311\Scripts\uvicorn.exe src.cognitive_engine:app --host 0.0.0.0 --port 8002 --reload
+2025-07-30 01:22:50.237 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.1810911261276581
+2025-07-30 01:22:50.237 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.1
+2025-07-30 01:22:50.237 | DEBUG    | __main__:add_detail:79 - 📝 uptime: 416.4658896923065
+2025-07-30 01:22:50.237 | DEBUG    | __main__:add_detail:79 - 📝 final_is_running: True
+2025-07-30 01:22:50.237 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.06s
+2025-07-30 01:22:50.237 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": true,
+  "process_pid": 5972,
+  "process_cmdline": "C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\python.exe C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\uvicorn.exe src.cognitive_engine:app --host 0.0.0.0 --port 8002 --reload",
+  "memory_usage": 0.1810911261276581,
+  "cpu_usage": 0.1,
+  "uptime": 416.4658896923065,
+  "final_is_running": true
+}
+2025-07-30 01:23:19.891 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: desktop_app
+2025-07-30 01:23:19.891 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:23:19.891 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:23:19.891 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:23:19.980 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:23:19.981 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 12396
+2025-07-30 01:23:19.981 | DEBUG    | __main__:add_detail:79 - 📝 process_cmdline: C:\Users\AMD\AppData\Local\Programs\Python\Python311\python.exe C:\Users\AMD\AppData\Local\Programs\Python\Python311\Scripts\uvicorn.exe src.main:app --host 0.0.0.0 --port 8001 --reload
+2025-07-30 01:23:19.981 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.180971372704746
+2025-07-30 01:23:19.981 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.1
+2025-07-30 01:23:19.981 | DEBUG    | __main__:add_detail:79 - 📝 uptime: 795.6222512722015
+2025-07-30 01:23:19.981 | DEBUG    | __main__:add_detail:79 - 📝 final_is_running: True
+2025-07-30 01:23:19.981 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.09s
+2025-07-30 01:23:19.981 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": true,
+  "process_pid": 12396,
+  "process_cmdline": "C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\python.exe C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\uvicorn.exe src.main:app --host 0.0.0.0 --port 8001 --reload",
+  "memory_usage": 0.180971372704746,
+  "cpu_usage": 0.1,
+  "uptime": 795.6222512722015,
+  "final_is_running": true
+}
+2025-07-30 01:23:19.981 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: backend
+2025-07-30 01:23:19.981 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:23:19.981 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:23:19.981 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:23:19.981 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:23:19.981 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:23:19.981 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:23:19.981 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:23:19.981 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 5
+2025-07-30 01:23:20.597 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:23:20.598 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.612079
+2025-07-30 01:23:20.598 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:23:20.598 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:23:17 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'LaQctA-vRDa6KN8-Cx5-qw'}
+2025-07-30 01:23:20.598 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:23:20.598 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.62s
+2025-07-30 01:23:20.599 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 5,
+  "status_code": 200,
+  "response_time": 0.612079,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:23:17 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "LaQctA-vRDa6KN8-Cx5-qw"
+  }
+}
+2025-07-30 01:23:20.599 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:23:20.599 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.612079
+2025-07-30 01:23:20.599 | DEBUG    | __main__:add_detail:79 - 📝 is_running: True
+2025-07-30 01:23:20.599 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.62s
+2025-07-30 01:23:20.599 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time": 0.612079,
+  "is_running": true
+}
+2025-07-30 01:23:20.599 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: cognitive_engine
+2025-07-30 01:23:20.603 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:23:20.603 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:23:20.603 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:23:20.661 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:23:20.661 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 5972
+2025-07-30 01:23:20.661 | DEBUG    | __main__:add_detail:79 - 📝 process_cmdline: C:\Users\AMD\AppData\Local\Programs\Python\Python311\python.exe C:\Users\AMD\AppData\Local\Programs\Python\Python311\Scripts\uvicorn.exe src.cognitive_engine:app --host 0.0.0.0 --port 8002 --reload
+2025-07-30 01:23:20.661 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.1810911261276581
+2025-07-30 01:23:20.661 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.2
+2025-07-30 01:23:20.662 | DEBUG    | __main__:add_detail:79 - 📝 uptime: 446.89018034935
+2025-07-30 01:23:20.662 | DEBUG    | __main__:add_detail:79 - 📝 final_is_running: True
+2025-07-30 01:23:20.662 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.06s
+2025-07-30 01:23:20.662 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": true,
+  "process_pid": 5972,
+  "process_cmdline": "C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\python.exe C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\uvicorn.exe src.cognitive_engine:app --host 0.0.0.0 --port 8002 --reload",
+  "memory_usage": 0.1810911261276581,
+  "cpu_usage": 0.2,
+  "uptime": 446.89018034935,
+  "final_is_running": true
+}
+2025-07-30 01:23:55.304 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: desktop_app
+2025-07-30 01:23:55.304 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:23:55.304 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:23:55.304 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:23:55.396 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:23:55.396 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 12396
+2025-07-30 01:23:55.396 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.180971372704746
+2025-07-30 01:23:55.398 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.1
+2025-07-30 01:23:55.399 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: True
+2025-07-30 01:23:55.399 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: False
+2025-07-30 01:23:55.399 | DEBUG    | __main__:add_detail:79 - 📝 final_status: process_only
+2025-07-30 01:23:55.399 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.10s
+2025-07-30 01:23:55.399 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": true,
+  "process_pid": 12396,
+  "memory_usage": 0.180971372704746,
+  "cpu_usage": 0.1,
+  "port_conflict": true,
+  "port_accessible": false,
+  "final_status": "process_only"
+}
+2025-07-30 01:23:55.399 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: backend
+2025-07-30 01:23:55.399 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:23:55.399 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:23:55.399 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:23:55.399 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:23:55.399 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:23:55.399 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:23:55.399 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:23:55.399 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 10
+2025-07-30 01:23:56.075 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:23:56.075 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.672872
+2025-07-30 01:23:56.075 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:23:56.075 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:23:53 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'c5uzMTU_RdySm9opg4a9AQ'}
+2025-07-30 01:23:56.075 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:23:56.075 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.68s
+2025-07-30 01:23:56.075 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 10,
+  "status_code": 200,
+  "response_time": 0.672872,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:23:53 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "c5uzMTU_RdySm9opg4a9AQ"
+  }
+}
+2025-07-30 01:23:56.075 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:23:56.075 | DEBUG    | __main__:add_detail:79 - 📝 response_time_ms: 675.349235534668
+2025-07-30 01:23:56.075 | DEBUG    | __main__:add_detail:79 - 📝 health_endpoint_ok: True
+2025-07-30 01:23:56.075 | DEBUG    | __main__:add_detail:79 - 📝 final_status: healthy
+2025-07-30 01:23:56.075 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.68s
+2025-07-30 01:23:56.075 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time_ms": 675.349235534668,
+  "health_endpoint_ok": true,
+  "final_status": "healthy"
+}
+2025-07-30 01:23:56.086 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: cognitive_engine
+2025-07-30 01:23:56.087 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:23:56.087 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:23:56.087 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:23:56.153 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:23:56.153 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 5972
+2025-07-30 01:23:56.153 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.1810911261276581
+2025-07-30 01:23:56.153 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.1
+2025-07-30 01:23:56.155 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: True
+2025-07-30 01:23:56.156 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: False
+2025-07-30 01:23:56.156 | DEBUG    | __main__:add_detail:79 - 📝 final_status: process_only
+2025-07-30 01:23:56.156 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.07s
+2025-07-30 01:23:56.156 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": true,
+  "process_pid": 5972,
+  "memory_usage": 0.1810911261276581,
+  "cpu_usage": 0.1,
+  "port_conflict": true,
+  "port_accessible": false,
+  "final_status": "process_only"
+}
+2025-07-30 01:24:13.753 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: desktop_app
+2025-07-30 01:24:13.754 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:24:13.754 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:24:13.754 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:24:13.839 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:24:13.839 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 12396
+2025-07-30 01:24:13.839 | DEBUG    | __main__:add_detail:79 - 📝 process_cmdline: C:\Users\AMD\AppData\Local\Programs\Python\Python311\python.exe C:\Users\AMD\AppData\Local\Programs\Python\Python311\Scripts\uvicorn.exe src.main:app --host 0.0.0.0 --port 8001 --reload
+2025-07-30 01:24:13.839 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.180971372704746
+2025-07-30 01:24:13.839 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.2
+2025-07-30 01:24:13.839 | DEBUG    | __main__:add_detail:79 - 📝 uptime: 849.4801089763641
+2025-07-30 01:24:13.839 | DEBUG    | __main__:add_detail:79 - 📝 final_is_running: True
+2025-07-30 01:24:13.839 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.09s
+2025-07-30 01:24:13.839 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": true,
+  "process_pid": 12396,
+  "process_cmdline": "C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\python.exe C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\uvicorn.exe src.main:app --host 0.0.0.0 --port 8001 --reload",
+  "memory_usage": 0.180971372704746,
+  "cpu_usage": 0.2,
+  "uptime": 849.4801089763641,
+  "final_is_running": true
+}
+2025-07-30 01:24:13.843 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: backend
+2025-07-30 01:24:13.843 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:24:13.843 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:24:13.843 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:24:13.843 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:24:13.844 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:24:13.844 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:24:13.844 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:24:13.844 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 5
+2025-07-30 01:24:14.477 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:24:14.477 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.635141
+2025-07-30 01:24:14.477 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:24:14.482 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:24:11 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'R0M7bK_CTbCiCG0tg4a9AQ'}
+2025-07-30 01:24:14.482 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:24:14.482 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.64s
+2025-07-30 01:24:14.482 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 5,
+  "status_code": 200,
+  "response_time": 0.635141,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:24:11 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "R0M7bK_CTbCiCG0tg4a9AQ"
+  }
+}
+2025-07-30 01:24:14.482 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:24:14.483 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.635141
+2025-07-30 01:24:14.483 | DEBUG    | __main__:add_detail:79 - 📝 is_running: True
+2025-07-30 01:24:14.483 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.64s
+2025-07-30 01:24:14.483 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time": 0.635141,
+  "is_running": true
+}
+2025-07-30 01:24:14.484 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: get_service_status for service: cognitive_engine
+2025-07-30 01:24:14.486 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:24:14.486 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:24:14.486 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:24:14.550 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:24:14.550 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 5972
+2025-07-30 01:24:14.550 | DEBUG    | __main__:add_detail:79 - 📝 process_cmdline: C:\Users\AMD\AppData\Local\Programs\Python\Python311\python.exe C:\Users\AMD\AppData\Local\Programs\Python\Python311\Scripts\uvicorn.exe src.cognitive_engine:app --host 0.0.0.0 --port 8002 --reload
+2025-07-30 01:24:14.550 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.1810911261276581
+2025-07-30 01:24:14.550 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.1
+2025-07-30 01:24:14.551 | DEBUG    | __main__:add_detail:79 - 📝 uptime: 500.77853083610535
+2025-07-30 01:24:14.551 | DEBUG    | __main__:add_detail:79 - 📝 final_is_running: True
+2025-07-30 01:24:14.551 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: get_service_status in 0.07s
+2025-07-30 01:24:14.551 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": true,
+  "process_pid": 5972,
+  "process_cmdline": "C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\python.exe C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\uvicorn.exe src.cognitive_engine:app --host 0.0.0.0 --port 8002 --reload",
+  "memory_usage": 0.1810911261276581,
+  "cpu_usage": 0.1,
+  "uptime": 500.77853083610535,
+  "final_is_running": true
+}
+2025-07-30 01:25:15.167 | WARNING  | onnxruntime_fix:safe_import_onnxruntime:26 - ONNX Runtime not installed: DLL load failed while importing onnxruntime_pybind11_state: A dynamic link library (DLL) initialization routine failed.
+2025-07-30 01:25:15.174 | INFO     | onnxruntime_fix:install_onnxruntime_cpu:50 - Installing onnxruntime-cpu as fallback...
+2025-07-30 01:25:17.588 | ERROR    | onnxruntime_fix:install_onnxruntime_cpu:61 - Failed to install onnxruntime-cpu: WARNING: Ignoring invalid distribution ~vicorn (C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages)
+ERROR: Could not find a version that satisfies the requirement onnxruntime-cpu (from versions: none)
+ERROR: No matching distribution found for onnxruntime-cpu
+
+2025-07-30 01:25:17.589 | ERROR    | onnxruntime_fix:get_onnxruntime_with_fallback:95 - Failed to install onnxruntime-cpu
+2025-07-30 01:25:17.589 | WARNING  | onnxruntime_fix:__init__:118 - ONNX Runtime proxy initialized with fallback mode
+2025-07-30 01:25:18.748 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: desktop_app
+2025-07-30 01:25:18.748 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:25:18.748 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:25:18.749 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:25:18.851 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:25:18.851 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 12396
+2025-07-30 01:25:18.851 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.18101927407391086
+2025-07-30 01:25:18.851 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.0
+2025-07-30 01:25:18.858 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: True
+2025-07-30 01:25:18.858 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: False
+2025-07-30 01:25:18.858 | DEBUG    | __main__:add_detail:79 - 📝 final_status: process_only
+2025-07-30 01:25:18.858 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.11s
+2025-07-30 01:25:18.858 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": true,
+  "process_pid": 12396,
+  "memory_usage": 0.18101927407391086,
+  "cpu_usage": 0.0,
+  "port_conflict": true,
+  "port_accessible": false,
+  "final_status": "process_only"
+}
+2025-07-30 01:25:18.859 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: backend
+2025-07-30 01:25:18.860 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:25:18.860 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:25:18.860 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:25:18.861 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:25:18.861 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:25:18.861 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:25:18.861 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:25:18.861 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 10
+2025-07-30 01:25:19.552 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:25:19.552 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.68565
+2025-07-30 01:25:19.552 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:25:19.553 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:25:16 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'xGI07ldYTCiIU-ofCx5-qw'}
+2025-07-30 01:25:19.553 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:25:19.553 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.69s
+2025-07-30 01:25:19.553 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 10,
+  "status_code": 200,
+  "response_time": 0.68565,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:25:16 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "xGI07ldYTCiIU-ofCx5-qw"
+  }
+}
+2025-07-30 01:25:19.553 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:25:19.553 | DEBUG    | __main__:add_detail:79 - 📝 response_time_ms: 691.7588710784912
+2025-07-30 01:25:19.553 | DEBUG    | __main__:add_detail:79 - 📝 health_endpoint_ok: True
+2025-07-30 01:25:19.553 | DEBUG    | __main__:add_detail:79 - 📝 final_status: healthy
+2025-07-30 01:25:19.554 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.69s
+2025-07-30 01:25:19.554 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time_ms": 691.7588710784912,
+  "health_endpoint_ok": true,
+  "final_status": "healthy"
+}
+2025-07-30 01:25:19.555 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: cognitive_engine
+2025-07-30 01:25:19.555 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:25:19.555 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:25:19.555 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:25:19.668 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:25:19.668 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 5972
+2025-07-30 01:25:19.668 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.18116297818140537
+2025-07-30 01:25:19.668 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.0
+2025-07-30 01:25:19.673 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: True
+2025-07-30 01:25:19.674 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: False
+2025-07-30 01:25:19.674 | DEBUG    | __main__:add_detail:79 - 📝 final_status: process_only
+2025-07-30 01:25:19.675 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.12s
+2025-07-30 01:25:19.675 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": true,
+  "process_pid": 5972,
+  "memory_usage": 0.18116297818140537,
+  "cpu_usage": 0.0,
+  "port_conflict": true,
+  "port_accessible": false,
+  "final_status": "process_only"
+}
+2025-07-30 01:25:29.735 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: desktop_app
+2025-07-30 01:25:29.736 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:25:29.736 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:25:29.737 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:25:29.872 | DEBUG    | __main__:add_detail:79 - 📝 process_found: False
+2025-07-30 01:25:31.883 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: False
+2025-07-30 01:25:31.883 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: True
+2025-07-30 01:25:31.883 | DEBUG    | __main__:add_detail:79 - 📝 final_status: offline
+2025-07-30 01:25:31.883 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 2.15s
+2025-07-30 01:25:31.883 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": false,
+  "port_conflict": false,
+  "port_accessible": true,
+  "final_status": "offline"
+}
+2025-07-30 01:25:31.883 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: backend
+2025-07-30 01:25:31.883 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:25:31.883 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:25:31.883 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:25:31.887 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:25:31.887 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:25:31.887 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:25:31.887 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:25:31.887 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 10
+2025-07-30 01:25:32.503 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:25:32.503 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.615245
+2025-07-30 01:25:32.504 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:25:32.504 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:25:29 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'CN-3pf_BT5uIS_qzg4a9AQ'}
+2025-07-30 01:25:32.504 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:25:32.504 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.62s
+2025-07-30 01:25:32.504 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 10,
+  "status_code": 200,
+  "response_time": 0.615245,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:25:29 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "CN-3pf_BT5uIS_qzg4a9AQ"
+  }
+}
+2025-07-30 01:25:32.504 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:25:32.504 | DEBUG    | __main__:add_detail:79 - 📝 response_time_ms: 617.8960800170898
+2025-07-30 01:25:32.504 | DEBUG    | __main__:add_detail:79 - 📝 health_endpoint_ok: True
+2025-07-30 01:25:32.504 | DEBUG    | __main__:add_detail:79 - 📝 final_status: healthy
+2025-07-30 01:25:32.506 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.62s
+2025-07-30 01:25:32.506 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time_ms": 617.8960800170898,
+  "health_endpoint_ok": true,
+  "final_status": "healthy"
+}
+2025-07-30 01:25:32.506 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: cognitive_engine
+2025-07-30 01:25:32.506 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:25:32.506 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:25:32.506 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:25:32.630 | DEBUG    | __main__:add_detail:79 - 📝 process_found: False
+2025-07-30 01:25:34.661 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: False
+2025-07-30 01:25:34.661 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: True
+2025-07-30 01:25:34.662 | DEBUG    | __main__:add_detail:79 - 📝 final_status: offline
+2025-07-30 01:25:34.662 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 2.16s
+2025-07-30 01:25:34.662 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": false,
+  "port_conflict": false,
+  "port_accessible": true,
+  "final_status": "offline"
+}
+2025-07-30 01:25:51.363 | WARNING  | onnxruntime_fix:safe_import_onnxruntime:26 - ONNX Runtime not installed: DLL load failed while importing onnxruntime_pybind11_state: A dynamic link library (DLL) initialization routine failed.
+2025-07-30 01:25:51.365 | INFO     | onnxruntime_fix:install_onnxruntime_cpu:50 - Installing onnxruntime-cpu as fallback...
+2025-07-30 01:25:53.090 | ERROR    | onnxruntime_fix:install_onnxruntime_cpu:61 - Failed to install onnxruntime-cpu: WARNING: Ignoring invalid distribution ~vicorn (C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages)
+ERROR: Could not find a version that satisfies the requirement onnxruntime-cpu (from versions: none)
+ERROR: No matching distribution found for onnxruntime-cpu
+
+2025-07-30 01:25:53.092 | ERROR    | onnxruntime_fix:get_onnxruntime_with_fallback:95 - Failed to install onnxruntime-cpu
+2025-07-30 01:25:53.092 | WARNING  | onnxruntime_fix:__init__:118 - ONNX Runtime proxy initialized with fallback mode
+2025-07-30 01:25:54.227 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: desktop_app
+2025-07-30 01:25:54.227 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:25:54.227 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:25:54.227 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:25:54.352 | DEBUG    | __main__:add_detail:79 - 📝 process_found: False
+2025-07-30 01:25:56.381 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: False
+2025-07-30 01:25:56.382 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: True
+2025-07-30 01:25:56.382 | DEBUG    | __main__:add_detail:79 - 📝 final_status: offline
+2025-07-30 01:25:56.382 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 2.15s
+2025-07-30 01:25:56.382 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": false,
+  "port_conflict": false,
+  "port_accessible": true,
+  "final_status": "offline"
+}
+2025-07-30 01:25:56.382 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: backend
+2025-07-30 01:25:56.382 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:25:56.382 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:25:56.382 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:25:56.382 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:25:56.382 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:25:56.382 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:25:56.382 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:25:56.382 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 10
+2025-07-30 01:25:57.025 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:25:57.026 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.638385
+2025-07-30 01:25:57.026 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:25:57.026 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:25:53 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'QahQJo2NR0u5aX5Ng4a9AQ'}
+2025-07-30 01:25:57.026 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:25:57.026 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.64s
+2025-07-30 01:25:57.026 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 10,
+  "status_code": 200,
+  "response_time": 0.638385,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:25:53 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "QahQJo2NR0u5aX5Ng4a9AQ"
+  }
+}
+2025-07-30 01:25:57.026 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:25:57.026 | DEBUG    | __main__:add_detail:79 - 📝 response_time_ms: 643.4283256530762
+2025-07-30 01:25:57.027 | DEBUG    | __main__:add_detail:79 - 📝 health_endpoint_ok: True
+2025-07-30 01:25:57.027 | DEBUG    | __main__:add_detail:79 - 📝 final_status: healthy
+2025-07-30 01:25:57.027 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.64s
+2025-07-30 01:25:57.027 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time_ms": 643.4283256530762,
+  "health_endpoint_ok": true,
+  "final_status": "healthy"
+}
+2025-07-30 01:25:57.029 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: cognitive_engine
+2025-07-30 01:25:57.030 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:25:57.030 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:25:57.030 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:25:57.144 | DEBUG    | __main__:add_detail:79 - 📝 process_found: False
+2025-07-30 01:25:59.159 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: False
+2025-07-30 01:25:59.159 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: True
+2025-07-30 01:25:59.160 | DEBUG    | __main__:add_detail:79 - 📝 final_status: offline
+2025-07-30 01:25:59.160 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 2.13s
+2025-07-30 01:25:59.160 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": false,
+  "port_conflict": false,
+  "port_accessible": true,
+  "final_status": "offline"
+}
+2025-07-30 01:26:36.609 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: desktop_app
+2025-07-30 01:26:36.610 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:26:36.610 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:26:36.610 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:26:36.729 | DEBUG    | __main__:add_detail:79 - 📝 process_found: False
+2025-07-30 01:26:38.745 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: False
+2025-07-30 01:26:38.745 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: True
+2025-07-30 01:26:38.745 | DEBUG    | __main__:add_detail:79 - 📝 final_status: offline
+2025-07-30 01:26:38.745 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 2.14s
+2025-07-30 01:26:38.745 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": false,
+  "port_conflict": false,
+  "port_accessible": true,
+  "final_status": "offline"
+}
+2025-07-30 01:26:38.747 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: backend
+2025-07-30 01:26:38.747 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:26:38.748 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:26:38.748 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:26:38.748 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:26:38.748 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:26:38.748 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:26:38.748 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:26:38.748 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 10
+2025-07-30 01:26:39.325 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:26:39.325 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.575378
+2025-07-30 01:26:39.325 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:26:39.325 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:26:36 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'DQ9-9KrURPGiZwVpAax-fw'}
+2025-07-30 01:26:39.325 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:26:39.325 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.58s
+2025-07-30 01:26:39.325 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 10,
+  "status_code": 200,
+  "response_time": 0.575378,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:26:36 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "DQ9-9KrURPGiZwVpAax-fw"
+  }
+}
+2025-07-30 01:26:39.326 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:26:39.326 | DEBUG    | __main__:add_detail:79 - 📝 response_time_ms: 578.2575607299805
+2025-07-30 01:26:39.326 | DEBUG    | __main__:add_detail:79 - 📝 health_endpoint_ok: True
+2025-07-30 01:26:39.326 | DEBUG    | __main__:add_detail:79 - 📝 final_status: healthy
+2025-07-30 01:26:39.326 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.58s
+2025-07-30 01:26:39.326 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time_ms": 578.2575607299805,
+  "health_endpoint_ok": true,
+  "final_status": "healthy"
+}
+2025-07-30 01:26:39.328 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: cognitive_engine
+2025-07-30 01:26:39.329 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:26:39.329 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:26:39.329 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:26:39.442 | DEBUG    | __main__:add_detail:79 - 📝 process_found: False
+2025-07-30 01:26:41.447 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: False
+2025-07-30 01:26:41.447 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: True
+2025-07-30 01:26:41.447 | DEBUG    | __main__:add_detail:79 - 📝 final_status: offline
+2025-07-30 01:26:41.447 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 2.12s
+2025-07-30 01:26:41.447 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": false,
+  "port_conflict": false,
+  "port_accessible": true,
+  "final_status": "offline"
+}
+2025-07-30 01:52:28.386 | WARNING  | onnxruntime_fix:safe_import_onnxruntime:26 - ONNX Runtime not installed: DLL load failed while importing onnxruntime_pybind11_state: A dynamic link library (DLL) initialization routine failed.
+2025-07-30 01:52:28.390 | INFO     | onnxruntime_fix:install_onnxruntime_cpu:50 - Installing onnxruntime-cpu as fallback...
+2025-07-30 01:52:31.870 | ERROR    | onnxruntime_fix:install_onnxruntime_cpu:61 - Failed to install onnxruntime-cpu: WARNING: Ignoring invalid distribution ~vicorn (C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages)
+ERROR: Could not find a version that satisfies the requirement onnxruntime-cpu (from versions: none)
+ERROR: No matching distribution found for onnxruntime-cpu
+
+2025-07-30 01:52:31.871 | ERROR    | onnxruntime_fix:get_onnxruntime_with_fallback:95 - Failed to install onnxruntime-cpu
+2025-07-30 01:52:31.872 | WARNING  | onnxruntime_fix:__init__:118 - ONNX Runtime proxy initialized with fallback mode
+2025-07-30 01:52:33.045 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: desktop_app
+2025-07-30 01:52:33.045 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:52:33.045 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:52:33.046 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:52:33.173 | DEBUG    | __main__:add_detail:79 - 📝 process_found: False
+2025-07-30 01:52:35.205 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: False
+2025-07-30 01:52:35.205 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: True
+2025-07-30 01:52:35.205 | DEBUG    | __main__:add_detail:79 - 📝 final_status: offline
+2025-07-30 01:52:35.207 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 2.16s
+2025-07-30 01:52:35.207 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": false,
+  "port_conflict": false,
+  "port_accessible": true,
+  "final_status": "offline"
+}
+2025-07-30 01:52:35.208 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: backend
+2025-07-30 01:52:35.209 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:52:35.209 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:52:35.209 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:52:35.210 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:52:35.210 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:52:35.210 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:52:35.210 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:52:35.210 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 10
+2025-07-30 01:52:35.914 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:52:35.914 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.698201
+2025-07-30 01:52:35.915 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:52:35.915 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:52:32 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'bBY-3qDNRnW6LPrGg4a9AQ'}
+2025-07-30 01:52:35.915 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:52:35.916 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.71s
+2025-07-30 01:52:35.917 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 10,
+  "status_code": 200,
+  "response_time": 0.698201,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:52:32 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "bBY-3qDNRnW6LPrGg4a9AQ"
+  }
+}
+2025-07-30 01:52:35.917 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:52:35.917 | DEBUG    | __main__:add_detail:79 - 📝 response_time_ms: 707.1795463562012
+2025-07-30 01:52:35.918 | DEBUG    | __main__:add_detail:79 - 📝 health_endpoint_ok: True
+2025-07-30 01:52:35.918 | DEBUG    | __main__:add_detail:79 - 📝 final_status: healthy
+2025-07-30 01:52:35.918 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.71s
+2025-07-30 01:52:35.919 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time_ms": 707.1795463562012,
+  "health_endpoint_ok": true,
+  "final_status": "healthy"
+}
+2025-07-30 01:52:35.922 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: cognitive_engine
+2025-07-30 01:52:35.923 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:52:35.923 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:52:35.923 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:52:36.062 | DEBUG    | __main__:add_detail:79 - 📝 process_found: False
+2025-07-30 01:52:38.073 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: False
+2025-07-30 01:52:38.073 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: True
+2025-07-30 01:52:38.073 | DEBUG    | __main__:add_detail:79 - 📝 final_status: offline
+2025-07-30 01:52:38.073 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 2.15s
+2025-07-30 01:52:38.073 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": false,
+  "port_conflict": false,
+  "port_accessible": true,
+  "final_status": "offline"
+}
+2025-07-30 01:53:14.092 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: desktop_app
+2025-07-30 01:53:14.092 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:53:14.092 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:53:14.092 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:53:14.234 | DEBUG    | __main__:add_detail:79 - 📝 process_found: False
+2025-07-30 01:53:16.256 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: False
+2025-07-30 01:53:16.256 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: True
+2025-07-30 01:53:16.256 | DEBUG    | __main__:add_detail:79 - 📝 final_status: offline
+2025-07-30 01:53:16.256 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 2.16s
+2025-07-30 01:53:16.256 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": false,
+  "port_conflict": false,
+  "port_accessible": true,
+  "final_status": "offline"
+}
+2025-07-30 01:53:16.256 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: backend
+2025-07-30 01:53:16.258 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:53:16.258 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:53:16.258 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:53:16.258 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:53:16.258 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:53:16.258 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:53:16.259 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:53:16.259 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 10
+2025-07-30 01:53:16.927 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:53:16.927 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.667358
+2025-07-30 01:53:16.927 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:53:16.927 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:53:14 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': '3BUiJhifQc-HUXxeCx5-qw'}
+2025-07-30 01:53:16.927 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:53:16.927 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.67s
+2025-07-30 01:53:16.927 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 10,
+  "status_code": 200,
+  "response_time": 0.667358,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:53:14 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "3BUiJhifQc-HUXxeCx5-qw"
+  }
+}
+2025-07-30 01:53:16.927 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:53:16.927 | DEBUG    | __main__:add_detail:79 - 📝 response_time_ms: 668.2252883911133
+2025-07-30 01:53:16.927 | DEBUG    | __main__:add_detail:79 - 📝 health_endpoint_ok: True
+2025-07-30 01:53:16.927 | DEBUG    | __main__:add_detail:79 - 📝 final_status: healthy
+2025-07-30 01:53:16.927 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.67s
+2025-07-30 01:53:16.927 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time_ms": 668.2252883911133,
+  "health_endpoint_ok": true,
+  "final_status": "healthy"
+}
+2025-07-30 01:53:16.932 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: cognitive_engine
+2025-07-30 01:53:16.932 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:53:16.933 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:53:16.933 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:53:17.058 | DEBUG    | __main__:add_detail:79 - 📝 process_found: False
+2025-07-30 01:53:19.100 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: False
+2025-07-30 01:53:19.100 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: True
+2025-07-30 01:53:19.100 | DEBUG    | __main__:add_detail:79 - 📝 final_status: offline
+2025-07-30 01:53:19.100 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 2.17s
+2025-07-30 01:53:19.100 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": false,
+  "port_conflict": false,
+  "port_accessible": true,
+  "final_status": "offline"
+}
+2025-07-30 01:54:33.714 | WARNING  | onnxruntime_fix:safe_import_onnxruntime:26 - ONNX Runtime not installed: DLL load failed while importing onnxruntime_pybind11_state: A dynamic link library (DLL) initialization routine failed.
+2025-07-30 01:54:33.716 | INFO     | onnxruntime_fix:install_onnxruntime_cpu:50 - Installing onnxruntime-cpu as fallback...
+2025-07-30 01:54:35.455 | ERROR    | onnxruntime_fix:install_onnxruntime_cpu:61 - Failed to install onnxruntime-cpu: WARNING: Ignoring invalid distribution ~vicorn (C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages)
+ERROR: Could not find a version that satisfies the requirement onnxruntime-cpu (from versions: none)
+ERROR: No matching distribution found for onnxruntime-cpu
+
+2025-07-30 01:54:35.455 | ERROR    | onnxruntime_fix:get_onnxruntime_with_fallback:95 - Failed to install onnxruntime-cpu
+2025-07-30 01:54:35.457 | WARNING  | onnxruntime_fix:__init__:118 - ONNX Runtime proxy initialized with fallback mode
+2025-07-30 01:54:36.572 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: desktop_app
+2025-07-30 01:54:36.572 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:54:36.573 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:54:36.573 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:54:36.680 | DEBUG    | __main__:add_detail:79 - 📝 process_found: False
+2025-07-30 01:54:38.698 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: False
+2025-07-30 01:54:38.698 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: True
+2025-07-30 01:54:38.698 | DEBUG    | __main__:add_detail:79 - 📝 final_status: offline
+2025-07-30 01:54:38.698 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 2.13s
+2025-07-30 01:54:38.698 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": false,
+  "port_conflict": false,
+  "port_accessible": true,
+  "final_status": "offline"
+}
+2025-07-30 01:54:38.700 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: backend
+2025-07-30 01:54:38.700 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:54:38.700 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:54:38.700 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:54:38.700 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:54:38.700 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:54:38.700 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:54:38.700 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:54:38.700 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 10
+2025-07-30 01:54:39.385 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:54:39.385 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.678036
+2025-07-30 01:54:39.385 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:54:39.385 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:54:36 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'i0hHKEVbT92nfBOHg4a9AQ'}
+2025-07-30 01:54:39.386 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:54:39.386 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.69s
+2025-07-30 01:54:39.386 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 10,
+  "status_code": 200,
+  "response_time": 0.678036,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:54:36 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "i0hHKEVbT92nfBOHg4a9AQ"
+  }
+}
+2025-07-30 01:54:39.387 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:54:39.387 | DEBUG    | __main__:add_detail:79 - 📝 response_time_ms: 686.2294673919678
+2025-07-30 01:54:39.387 | DEBUG    | __main__:add_detail:79 - 📝 health_endpoint_ok: True
+2025-07-30 01:54:39.387 | DEBUG    | __main__:add_detail:79 - 📝 final_status: healthy
+2025-07-30 01:54:39.387 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.69s
+2025-07-30 01:54:39.387 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time_ms": 686.2294673919678,
+  "health_endpoint_ok": true,
+  "final_status": "healthy"
+}
+2025-07-30 01:54:39.391 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: cognitive_engine
+2025-07-30 01:54:39.392 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:54:39.392 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:54:39.392 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:54:39.517 | DEBUG    | __main__:add_detail:79 - 📝 process_found: False
+2025-07-30 01:54:41.550 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: False
+2025-07-30 01:54:41.550 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: True
+2025-07-30 01:54:41.550 | DEBUG    | __main__:add_detail:79 - 📝 final_status: offline
+2025-07-30 01:54:41.551 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 2.16s
+2025-07-30 01:54:41.551 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": false,
+  "port_conflict": false,
+  "port_accessible": true,
+  "final_status": "offline"
+}
+2025-07-30 01:55:15.309 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: desktop_app
+2025-07-30 01:55:15.309 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:55:15.309 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:55:15.309 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:55:15.420 | DEBUG    | __main__:add_detail:79 - 📝 process_found: False
+2025-07-30 01:55:17.448 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: False
+2025-07-30 01:55:17.448 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: True
+2025-07-30 01:55:17.448 | DEBUG    | __main__:add_detail:79 - 📝 final_status: offline
+2025-07-30 01:55:17.448 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 2.14s
+2025-07-30 01:55:17.448 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": false,
+  "port_conflict": false,
+  "port_accessible": true,
+  "final_status": "offline"
+}
+2025-07-30 01:55:17.448 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: backend
+2025-07-30 01:55:17.448 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:55:17.448 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:55:17.448 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:55:17.448 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:55:17.448 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:55:17.448 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:55:17.448 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:55:17.448 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 10
+2025-07-30 01:55:18.094 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:55:18.094 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.643039
+2025-07-30 01:55:18.094 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:55:18.094 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:55:15 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'HLokklMYTRC9YuS0Cx5-qw'}
+2025-07-30 01:55:18.094 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:55:18.094 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.65s
+2025-07-30 01:55:18.094 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 10,
+  "status_code": 200,
+  "response_time": 0.643039,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:55:15 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "HLokklMYTRC9YuS0Cx5-qw"
+  }
+}
+2025-07-30 01:55:18.094 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:55:18.094 | DEBUG    | __main__:add_detail:79 - 📝 response_time_ms: 645.2381610870361
+2025-07-30 01:55:18.097 | DEBUG    | __main__:add_detail:79 - 📝 health_endpoint_ok: True
+2025-07-30 01:55:18.097 | DEBUG    | __main__:add_detail:79 - 📝 final_status: healthy
+2025-07-30 01:55:18.097 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.65s
+2025-07-30 01:55:18.097 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time_ms": 645.2381610870361,
+  "health_endpoint_ok": true,
+  "final_status": "healthy"
+}
+2025-07-30 01:55:18.097 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: cognitive_engine
+2025-07-30 01:55:18.097 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:55:18.097 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:55:18.097 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:55:18.207 | DEBUG    | __main__:add_detail:79 - 📝 process_found: False
+2025-07-30 01:55:20.235 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: False
+2025-07-30 01:55:20.235 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: True
+2025-07-30 01:55:20.235 | DEBUG    | __main__:add_detail:79 - 📝 final_status: offline
+2025-07-30 01:55:20.235 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 2.14s
+2025-07-30 01:55:20.235 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": false,
+  "port_conflict": false,
+  "port_accessible": true,
+  "final_status": "offline"
+}
+2025-07-30 01:55:53.643 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: desktop_app
+2025-07-30 01:55:53.643 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Desktop App', 'port': 8001, 'url': None, 'health_endpoint': '/system-stats', 'is_remote': False}
+2025-07-30 01:55:53.643 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:55:53.643 | DEBUG    | __main__:add_detail:79 - 📝 port: 8001
+2025-07-30 01:55:53.706 | DEBUG    | __main__:add_detail:79 - 📝 process_found: True
+2025-07-30 01:55:53.706 | DEBUG    | __main__:add_detail:79 - 📝 process_pid: 7608
+2025-07-30 01:55:53.706 | DEBUG    | __main__:add_detail:79 - 📝 memory_usage: 0.18058816175142736
+2025-07-30 01:55:53.707 | DEBUG    | __main__:add_detail:79 - 📝 cpu_usage: 0.0
+2025-07-30 01:55:53.707 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: True
+2025-07-30 01:55:53.707 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: False
+2025-07-30 01:55:53.707 | DEBUG    | __main__:add_detail:79 - 📝 final_status: process_only
+2025-07-30 01:55:53.707 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.06s
+2025-07-30 01:55:53.707 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Desktop App",
+    "port": 8001,
+    "url": null,
+    "health_endpoint": "/system-stats",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8001,
+  "process_found": true,
+  "process_pid": 7608,
+  "memory_usage": 0.18058816175142736,
+  "cpu_usage": 0.0,
+  "port_conflict": true,
+  "port_accessible": false,
+  "final_status": "process_only"
+}
+2025-07-30 01:55:53.707 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: backend
+2025-07-30 01:55:53.707 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Backend API (Railway)', 'port': None, 'url': 'https://sentinelai-production.up.railway.app', 'health_endpoint': '/health', 'is_remote': True}
+2025-07-30 01:55:53.707 | DEBUG    | __main__:add_detail:79 - 📝 service_type: remote
+2025-07-30 01:55:53.707 | DEBUG    | __main__:add_detail:79 - 📝 health_url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:55:53.707 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:55:53.707 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:55:53.707 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:55:53.707 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:55:53.707 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 10
+2025-07-30 01:55:54.283 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:55:54.283 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.573349
+2025-07-30 01:55:54.283 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:55:54.283 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:55:51 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'yqhn1-5HS76E8L6kg4a9AQ'}
+2025-07-30 01:55:54.283 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:55:54.283 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.58s
+2025-07-30 01:55:54.283 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 10,
+  "status_code": 200,
+  "response_time": 0.573349,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:55:51 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "yqhn1-5HS76E8L6kg4a9AQ"
+  }
+}
+2025-07-30 01:55:54.283 | DEBUG    | __main__:add_detail:79 - 📝 response_status: 200
+2025-07-30 01:55:54.283 | DEBUG    | __main__:add_detail:79 - 📝 response_time_ms: 576.1404037475586
+2025-07-30 01:55:54.283 | DEBUG    | __main__:add_detail:79 - 📝 health_endpoint_ok: True
+2025-07-30 01:55:54.283 | DEBUG    | __main__:add_detail:79 - 📝 final_status: healthy
+2025-07-30 01:55:54.283 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 0.58s
+2025-07-30 01:55:54.283 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Backend API (Railway)",
+    "port": null,
+    "url": "https://sentinelai-production.up.railway.app",
+    "health_endpoint": "/health",
+    "is_remote": true
+  },
+  "service_type": "remote",
+  "health_url": "https://sentinelai-production.up.railway.app/health",
+  "response_status": 200,
+  "response_time_ms": 576.1404037475586,
+  "health_endpoint_ok": true,
+  "final_status": "healthy"
+}
+2025-07-30 01:55:54.286 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: health_check_service for service: cognitive_engine
+2025-07-30 01:55:54.286 | DEBUG    | __main__:add_detail:79 - 📝 service_config: {'name': 'Cognitive AI Engine', 'port': 8002, 'url': None, 'health_endpoint': '/health', 'is_remote': False}
+2025-07-30 01:55:54.286 | DEBUG    | __main__:add_detail:79 - 📝 service_type: local
+2025-07-30 01:55:54.286 | DEBUG    | __main__:add_detail:79 - 📝 port: 8002
+2025-07-30 01:55:54.395 | DEBUG    | __main__:add_detail:79 - 📝 process_found: False
+2025-07-30 01:55:56.414 | DEBUG    | __main__:add_detail:79 - 📝 port_conflict: False
+2025-07-30 01:55:56.414 | DEBUG    | __main__:add_detail:79 - 📝 port_accessible: True
+2025-07-30 01:55:56.415 | DEBUG    | __main__:add_detail:79 - 📝 final_status: offline
+2025-07-30 01:55:56.415 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: health_check_service in 2.13s
+2025-07-30 01:55:56.415 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "service_config": {
+    "name": "Cognitive AI Engine",
+    "port": 8002,
+    "url": null,
+    "health_endpoint": "/health",
+    "is_remote": false
+  },
+  "service_type": "local",
+  "port": 8002,
+  "process_found": false,
+  "port_conflict": false,
+  "port_accessible": true,
+  "final_status": "offline"
+}
+2025-07-30 01:56:00.615 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: network_diagnostics
+2025-07-30 01:56:00.617 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://httpbin.org/get
+2025-07-30 01:56:00.617 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:56:00.618 | DEBUG    | __main__:add_detail:79 - 📝 url: https://httpbin.org/get
+2025-07-30 01:56:00.618 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:56:00.618 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 10
+2025-07-30 01:56:01.587 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:56:01.587 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.967668
+2025-07-30 01:56:01.587 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 312
+2025-07-30 01:56:01.587 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Date': 'Wed, 30 Jul 2025 06:55:59 GMT', 'Content-Type': 'application/json', 'Content-Length': '312', 'Connection': 'keep-alive', 'Server': 'gunicorn/19.9.0', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Credentials': 'true'}
+2025-07-30 01:56:01.587 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://httpbin.org/get successful
+2025-07-30 01:56:01.588 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.97s
+2025-07-30 01:56:01.588 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://httpbin.org/get",
+  "headers": {},
+  "timeout": 10,
+  "status_code": 200,
+  "response_time": 0.967668,
+  "response_size": 312,
+  "response_headers": {
+    "Date": "Wed, 30 Jul 2025 06:55:59 GMT",
+    "Content-Type": "application/json",
+    "Content-Length": "312",
+    "Connection": "keep-alive",
+    "Server": "gunicorn/19.9.0",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Credentials": "true"
+  }
+}
+2025-07-30 01:56:01.588 | DEBUG    | __main__:add_detail:79 - 📝 internet_connectivity: OK
+2025-07-30 01:56:01.657 | DEBUG    | __main__:add_detail:79 - 📝 dns_resolution: OK: 66.33.22.87
+2025-07-30 01:56:01.659 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:56:01.659 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:56:01.659 | DEBUG    | __main__:add_detail:79 - 📝 url: https://sentinelai-production.up.railway.app/health
+2025-07-30 01:56:01.659 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:56:01.659 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 10
+2025-07-30 01:56:02.248 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:56:02.248 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 0.589615
+2025-07-30 01:56:02.248 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 159
+2025-07-30 01:56:02.248 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'Content-Length': '159', 'Content-Type': 'application/json', 'Date': 'Wed, 30 Jul 2025 06:55:59 GMT', 'Server': 'railway-edge', 'X-Railway-Edge': 'railway/us-east4-eqdc4a', 'X-Railway-Request-Id': 'T6BH1E5kTAOPuA6mAax-fw'}
+2025-07-30 01:56:02.248 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET https://sentinelai-production.up.railway.app/health successful
+2025-07-30 01:56:02.248 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 0.59s
+2025-07-30 01:56:02.248 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "https://sentinelai-production.up.railway.app/health",
+  "headers": {},
+  "timeout": 10,
+  "status_code": 200,
+  "response_time": 0.589615,
+  "response_size": 159,
+  "response_headers": {
+    "Content-Length": "159",
+    "Content-Type": "application/json",
+    "Date": "Wed, 30 Jul 2025 06:55:59 GMT",
+    "Server": "railway-edge",
+    "X-Railway-Edge": "railway/us-east4-eqdc4a",
+    "X-Railway-Request-Id": "T6BH1E5kTAOPuA6mAax-fw"
+  }
+}
+2025-07-30 01:56:02.252 | DEBUG    | __main__:add_detail:79 - 📝 railway_connectivity: OK: HTTP 200
+2025-07-30 01:56:02.252 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: http://localhost:8001/system-stats
+2025-07-30 01:56:02.252 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:56:02.252 | DEBUG    | __main__:add_detail:79 - 📝 url: http://localhost:8001/system-stats
+2025-07-30 01:56:02.252 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:56:02.252 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 5
+2025-07-30 01:56:05.443 | DEBUG    | __main__:add_detail:79 - 📝 status_code: 200
+2025-07-30 01:56:05.443 | DEBUG    | __main__:add_detail:79 - 📝 response_time: 3.187152
+2025-07-30 01:56:05.443 | DEBUG    | __main__:add_detail:79 - 📝 response_size: 627
+2025-07-30 01:56:05.443 | DEBUG    | __main__:add_detail:79 - 📝 response_headers: {'date': 'Wed, 30 Jul 2025 06:56:03 GMT', 'server': 'uvicorn', 'content-length': '627', 'content-type': 'application/json'}
+2025-07-30 01:56:05.443 | DEBUG    | __main__:debug_request:103 - ✅ HTTP GET http://localhost:8001/system-stats successful
+2025-07-30 01:56:05.443 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: HTTP GET in 3.19s
+2025-07-30 01:56:05.443 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "method": "GET",
+  "url": "http://localhost:8001/system-stats",
+  "headers": {},
+  "timeout": 5,
+  "status_code": 200,
+  "response_time": 3.187152,
+  "response_size": 627,
+  "response_headers": {
+    "date": "Wed, 30 Jul 2025 06:56:03 GMT",
+    "server": "uvicorn",
+    "content-length": "627",
+    "content-type": "application/json"
+  }
+}
+2025-07-30 01:56:05.445 | DEBUG    | __main__:add_detail:79 - 📝 desktop_app_connectivity: OK: HTTP 200
+2025-07-30 01:56:05.445 | DEBUG    | __main__:__enter__:60 - 🚀 Starting operation: HTTP GET for service: http://localhost:8002/health
+2025-07-30 01:56:05.445 | DEBUG    | __main__:add_detail:79 - 📝 method: GET
+2025-07-30 01:56:05.445 | DEBUG    | __main__:add_detail:79 - 📝 url: http://localhost:8002/health
+2025-07-30 01:56:05.445 | DEBUG    | __main__:add_detail:79 - 📝 headers: {}
+2025-07-30 01:56:05.445 | DEBUG    | __main__:add_detail:79 - 📝 timeout: 5
+2025-07-30 01:56:09.498 | DEBUG    | __main__:add_detail:79 - 📝 error: HTTPConnectionPool(host='localhost', port=8002): Max retries exceeded with url: /health (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000023BA7087110>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2025-07-30 01:56:09.498 | ERROR    | __main__:debug_request:108 - ❌ HTTP GET http://localhost:8002/health failed: HTTPConnectionPool(host='localhost', port=8002): Max retries exceeded with url: /health (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000023BA7087110>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2025-07-30 01:56:09.498 | ERROR    | __main__:__exit__:69 - ❌ Operation failed: HTTP GET after 4.05s - ConnectionError: HTTPConnectionPool(host='localhost', port=8002): Max retries exceeded with url: /health (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000023BA7087110>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2025-07-30 01:56:09.498 | DEBUG    | __main__:add_detail:79 - 📝 cognitive_engine_connectivity: FAILED: HTTPConnectionPool(host='localhost', port=8002): Max retries exceeded with url: /health (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000023BA7087110>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2025-07-30 01:56:09.505 | DEBUG    | __main__:add_detail:79 - 📝 interface_Ethernet 5: 192.168.0.141
+2025-07-30 01:56:09.506 | DEBUG    | __main__:add_detail:79 - 📝 interface_Ethernet 4: 169.254.9.106
+2025-07-30 01:56:09.507 | DEBUG    | __main__:add_detail:79 - 📝 interface_vEthernet (Default Switch): 172.18.112.1
+2025-07-30 01:56:09.507 | DEBUG    | __main__:add_detail:79 - 📝 interface_Loopback Pseudo-Interface 1: 127.0.0.1
+2025-07-30 01:56:09.508 | DEBUG    | __main__:__exit__:73 - ✅ Operation completed: network_diagnostics in 8.89s
+2025-07-30 01:56:09.508 | DEBUG    | __main__:__exit__:75 - 📊 Operation details: {
+  "internet_connectivity": "OK",
+  "dns_resolution": "OK: 66.33.22.87",
+  "railway_connectivity": "OK: HTTP 200",
+  "desktop_app_connectivity": "OK: HTTP 200",
+  "cognitive_engine_connectivity": "FAILED: HTTPConnectionPool(host='localhost', port=8002): Max retries exceeded with url: /health (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000023BA7087110>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))",
+  "interface_Ethernet 5": "192.168.0.141",
+  "interface_Ethernet 4": "169.254.9.106",
+  "interface_vEthernet (Default Switch)": "172.18.112.1",
+  "interface_Loopback Pseudo-Interface 1": "127.0.0.1"
+}

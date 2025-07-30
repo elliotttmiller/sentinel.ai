@@ -1828,12 +1828,26 @@ def show_main_menu():
         f"Disk: {sys_info.disk_usage:.1f}%"
     )
 
-    # Show service status
+    # Show service status using comprehensive health checks
     print(f"{Fore.CYAN}Service Status:{Style.RESET_ALL}")
     for service_name in SERVICES:
-        status = get_service_status(service_name)
-        status_icon = "🟢" if status.is_running else "🔴"
-        print(f"  {status_icon} {status.name}: {'ONLINE' if status.is_running else 'OFFLINE'}")
+        health = health_check_service(service_name)
+        
+        # Determine status based on comprehensive health check
+        if health["status"] == "healthy":
+            status_icon = "🟢"
+            status_text = "ONLINE"
+        elif health["status"] == "running":
+            status_icon = "🟡"
+            status_text = "RUNNING"
+        elif health["status"] == "process_only":
+            status_icon = "🟠"
+            status_text = "PROCESS_ONLY"
+        else:
+            status_icon = "🔴"
+            status_text = "OFFLINE"
+        
+        print(f"  {status_icon} {SERVICES[service_name]['name']}: {status_text}")
 
     print(f"\n{Fore.YELLOW}Available Actions:{Style.RESET_ALL}")
     print("1.  🚀 Full Desktop App System Startup")

@@ -1,291 +1,40 @@
 INFO:     Will watch for changes in these directories: ['c:\\Users\\AMD\\sentinel\\desktop-app']
 INFO:     Uvicorn running on http://0.0.0.0:8002 (Press CTRL+C to quit)
-INFO:     Started reloader process [5416] using WatchFiles
-INFO:     Started server process [4460]
+INFO:     Started reloader process [5972] using WatchFiles
+INFO:     Started server process [7176]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-INFO:     127.0.0.1:53815 - "GET /health HTTP/1.1" 200 OK
-WARNING:  WatchFiles detected changes in 'src\models\fix_database_schema.py'. Reloading...
-INFO:     127.0.0.1:54005 - "GET /health HTTP/1.1" 200 OK
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [4460]
-WARNING:  WatchFiles detected changes in 'src\models\advanced_database.py', 'src\models\fix_database_schema.py'. Reloading...
-Process SpawnProcess-2:
-Traceback (most recent call last):
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
-    self.run()
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
-    self._target(*self._args, **self._kwargs)
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\_subprocess.py", line 70, in subprocess_started
-    sys.stdin = os.fdopen(stdin_fileno)
-                ^^^^^^^^^^^^^^^^^^^^^^^
-  File "<frozen os>", line 1031, in fdopen
-  File "<frozen codecs>", line 309, in __init__
-KeyboardInterrupt
-INFO:     Started server process [14572]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-INFO:     127.0.0.1:54104 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51342 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51440 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51467 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51547 - "GET /health HTTP/1.1" 200 OK
 WARNING:  WatchFiles detected changes in 'src\utils\manage_services.py'. Reloading...
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [14572]
-WARNING:  WatchFiles detected changes in 'src\utils\manage_services.py'. Reloading...
-INFO:     Started server process [3200]
-INFO:     Waiting for application startup.
-ERROR:    Traceback (most recent call last):
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
-    return self._loop.run_until_complete(task)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
-    return future.result()
-           ^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 78, in serve
-    await self.startup(sockets=sockets)
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 89, in startup
-    await self.lifespan.startup()
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
-    await self.startup_event.wait()
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\locks.py", line 213, in wait
-    await fut
-asyncio.exceptions.CancelledError
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
-    return runner.run(main)
-           ^^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
-    raise KeyboardInterrupt()
-KeyboardInterrupt
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 686, in lifespan
-    await receive()
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
-    return await self.receive_queue.get()
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\queues.py", line 158, in get
-    await getter
-asyncio.exceptions.CancelledError
-
-Process SpawnProcess-4:
-Traceback (most recent call last):
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
-    return self._loop.run_until_complete(task)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
-    return future.result()
-           ^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 78, in serve
-    await self.startup(sockets=sockets)
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 89, in startup
-    await self.lifespan.startup()
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
-    await self.startup_event.wait()
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\locks.py", line 213, in wait
-    await fut
-asyncio.exceptions.CancelledError
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
-    self.run()
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
-    self._target(*self._args, **self._kwargs)
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\_subprocess.py", line 76, in subprocess_started
-    target(sockets=sockets)
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 61, in run
-    return asyncio.run(self.serve(sockets=sockets))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
-    return runner.run(main)
-           ^^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
-    raise KeyboardInterrupt()
-KeyboardInterrupt
-INFO:     Started server process [12316]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'src\utils\manage_services.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [12316]
-WARNING:  WatchFiles detected changes in 'src\utils\manage_services.py', 'backend_fix_script.py', 'src\models\fix_railway_database.py'. Reloading...
-INFO:     Started server process [13944]
-INFO:     Waiting for application startup.
-ERROR:    Traceback (most recent call last):
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
-    return self._loop.run_until_complete(task)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
-    return future.result()
-           ^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 78, in serve
-    await self.startup(sockets=sockets)
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 89, in startup
-    await self.lifespan.startup()
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
-    await self.startup_event.wait()
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\locks.py", line 213, in wait
-    await fut
-asyncio.exceptions.CancelledError
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
-    return runner.run(main)
-           ^^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
-    raise KeyboardInterrupt()
-KeyboardInterrupt
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 686, in lifespan
-    await receive()
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
-    return await self.receive_queue.get()
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\queues.py", line 158, in get
-    await getter
-asyncio.exceptions.CancelledError
-
-Process SpawnProcess-6:
-Traceback (most recent call last):
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
-    return self._loop.run_until_complete(task)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
-    return future.result()
-           ^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 78, in serve
-    await self.startup(sockets=sockets)
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 89, in startup
-    await self.lifespan.startup()
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
-    await self.startup_event.wait()
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\locks.py", line 213, in wait
-    await fut
-asyncio.exceptions.CancelledError
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
-    self.run()
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
-    self._target(*self._args, **self._kwargs)
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\_subprocess.py", line 76, in subprocess_started
-    target(sockets=sockets)
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 61, in run
-    return asyncio.run(self.serve(sockets=sockets))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
-    return runner.run(main)
-           ^^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
-    raise KeyboardInterrupt()
-KeyboardInterrupt
-INFO:     Started server process [2932]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-INFO:     127.0.0.1:54454 - "GET /health HTTP/1.1" 200 OK
-WARNING:  WatchFiles detected changes in 'src\utils\manage_services.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [2932]
-WARNING:  WatchFiles detected changes in 'src\utils\manage_services.py', 'src\models\fix_railway_database.py'. Reloading...
-INFO:     Started server process [3424]
-INFO:     Waiting for application startup.
-ERROR:    Traceback (most recent call last):
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
-    return self._loop.run_until_complete(task)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
-    return future.result()
-           ^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 78, in serve
-    await self.startup(sockets=sockets)
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 89, in startup
-    await self.lifespan.startup()
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
-    await self.startup_event.wait()
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\locks.py", line 213, in wait
-    await fut
-asyncio.exceptions.CancelledError
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
-    return runner.run(main)
-           ^^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
-    raise KeyboardInterrupt()
-KeyboardInterrupt
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 686, in lifespan
-    await receive()
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
-    return await self.receive_queue.get()
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\queues.py", line 158, in get
-    await getter
-asyncio.exceptions.CancelledError
-
-Process SpawnProcess-8:
-Traceback (most recent call last):
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
-    return self._loop.run_until_complete(task)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
-    return future.result()
-           ^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 78, in serve
-    await self.startup(sockets=sockets)
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 89, in startup
-    await self.lifespan.startup()
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
-    await self.startup_event.wait()
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\locks.py", line 213, in wait
-    await fut
-asyncio.exceptions.CancelledError
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
-    self.run()
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
-    self._target(*self._args, **self._kwargs)
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\_subprocess.py", line 76, in subprocess_started
-    target(sockets=sockets)
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 61, in run
-    return asyncio.run(self.serve(sockets=sockets))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
-    return runner.run(main)
-           ^^^^^^^^^^^^^^^^
-  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
-    raise KeyboardInterrupt()
-KeyboardInterrupt
-INFO:     Started server process [18856]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-INFO:     127.0.0.1:54689 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54783 - "GET /health HTTP/1.1" 200 OK
+INFO:     Finished server process [7176]
+2025-07-30 02:32:50.844 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
+2025-07-30 02:33:20.999 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
+2025-07-30 02:33:21.000 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
+2025-07-30 02:33:48.863 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/ai/status | Body: None
+2025-07-30 02:33:48.865 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/ai/status
+2025-07-30 02:38:03.220 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
+2025-07-30 02:39:10.222 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
+2025-07-30 02:39:10.225 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
+2025-07-30 02:54:34.757 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
+2025-07-30 02:54:34.759 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
+2025-07-30 02:54:48.496 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
+2025-07-30 02:54:48.856 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
+2025-07-30 02:54:48.859 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
+2025-07-30 02:55:32.941 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
+2025-07-30 02:55:32.943 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
+2025-07-30 02:55:33.128 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
+2025-07-30 02:57:44.227 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
+2025-07-30 02:57:44.228 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
+2025-07-30 02:57:58.355 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
+2025-07-30 02:57:58.356 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
+2025-07-30 02:57:58.936 | INFO     | src.cognitive_engine_service:startup_event:323 - 🚀 Cognitive AI Engine starting up...
+2025-07-30 02:58:42.454 | INFO     | src.cognitive_engine_service:log_requests:80 - ENGINE: GET http://localhost:8002/health | Body: None
+2025-07-30 02:58:42.454 | INFO     | src.cognitive_engine_service:log_requests:86 - ENGINE: Response 200 for GET http://localhost:8002/health
+2025-07-30 02:58:58.940 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...
+2025-07-30 03:05:00.166 | INFO     | src.cognitive_engine_service:shutdown_event:336 - 🛑 Cognitive AI Engine shutting down...

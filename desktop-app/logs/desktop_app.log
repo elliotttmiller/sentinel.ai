@@ -1,9 +1,298 @@
-INFO:     Will watch for changes in these directories: ['C:\\Users\\AMD\\sentinel\\desktop-app']
+INFO:     Will watch for changes in these directories: ['c:\\Users\\AMD\\sentinel\\desktop-app']
 INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
-INFO:     Started reloader process [12396] using WatchFiles
-2025-07-30 01:10:27.188 | INFO     | src.models.advanced_database:__init__:112 - Database system initialized successfully with postgresql://postgres:LSvFcJSLjYBxsWrcTtgBUgLlLYBdPqiS@trolley.proxy.rlwy.net:44667/railway
-2025-07-30 01:10:27.251 | INFO     | src.core.cognitive_forge_engine:__init__:45 - Cognitive Forge Engine initialized with model: gemini-1.5-pro-latest
-INFO:     Started server process [20196]
+INFO:     Started reloader process [7608] using WatchFiles
+2025-07-30 01:55:18.520 | INFO     | src.models.advanced_database:__init__:112 - ChromaDB memory system initialized successfully
+2025-07-30 01:55:19.698 | INFO     | src.models.advanced_database:__init__:119 - Database system initialized successfully with postgresql://postgres:LSvFcJSLjYBxsWrcTtgBUgLlLYBdPqiS@trolley.proxy.rlwy.net:44667/railway
+2025-07-30 01:55:19.717 | INFO     | src.core.cognitive_forge_engine:__init__:45 - Cognitive Forge Engine initialized with model: gemini-1.5-pro-latest
+INFO:     Started server process [20128]
 INFO:     Waiting for application startup.
-2025-07-30 01:10:27.267 | INFO     | src.main:startup_event:284 - \U0001f680 Cognitive Forge Desktop App starting up...
+2025-07-30 01:55:19.733 | INFO     | src.main:startup_event:304 - \U0001f680 Cognitive Forge Desktop App starting up...
 INFO:     Application startup complete.
+2025-07-30 01:56:04.373 | WARNING  | src.models.advanced_database:get_system_stats:379 - Database stats query failed: (psycopg2.errors.UndefinedColumn) column missions.mission_id_str does not exist
+LINE 2: FROM (SELECT missions.id AS missions_id, missions.mission_id...
+                                                 ^
+
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT missions.id AS missions_id, missions.mission_id_str AS missions_mission_id_str, missions.title AS missions_title, missions.prompt AS missions_prompt, missions.agent_type AS missions_agent_type, missions.status AS missions_status, missions.result AS missions_result, missions.plan AS missions_plan, missions.execution_time AS missions_execution_time, missions.tokens_used AS missions_tokens_used, missions.error_message AS missions_error_message, missions.created_at AS missions_created_at, missions.updated_at AS missions_updated_at, missions.completed_at AS missions_completed_at, missions.is_archived AS missions_is_archived 
+FROM missions) AS anon_1]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-30 01:56:05.436 | INFO     | src.tools.advanced_tools:get_system_info:214 - System information retrieved
+INFO:     127.0.0.1:52392 - "GET /system-stats HTTP/1.1" 200 OK
+2025-07-30 02:21:34.198 | WARNING  | src.models.advanced_database:get_system_stats:379 - Database stats query failed: (psycopg2.errors.UndefinedColumn) column missions.mission_id_str does not exist
+LINE 2: FROM (SELECT missions.id AS missions_id, missions.mission_id...
+                                                 ^
+
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT missions.id AS missions_id, missions.mission_id_str AS missions_mission_id_str, missions.title AS missions_title, missions.prompt AS missions_prompt, missions.agent_type AS missions_agent_type, missions.status AS missions_status, missions.result AS missions_result, missions.plan AS missions_plan, missions.execution_time AS missions_execution_time, missions.tokens_used AS missions_tokens_used, missions.error_message AS missions_error_message, missions.created_at AS missions_created_at, missions.updated_at AS missions_updated_at, missions.completed_at AS missions_completed_at, missions.is_archived AS missions_is_archived 
+FROM missions) AS anon_1]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-30 02:21:35.261 | INFO     | src.tools.advanced_tools:get_system_info:214 - System information retrieved
+INFO:     127.0.0.1:52696 - "GET /system-stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52700 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52707 - "GET / HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\responses.py", line 335, in __call__
+    stat_result = await anyio.to_thread.run_sync(os.stat, self.path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\anyio\to_thread.py", line 33, in run_sync
+    return await get_asynclib().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\anyio\_backends\_asyncio.py", line 877, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\anyio\_backends\_asyncio.py", line 807, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 3] The system cannot find the path specified: '../templates/index.html'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py", line 426, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 84, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\applications.py", line 1106, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\applications.py", line 122, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\errors.py", line 184, in __call__
+    raise exc
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\exceptions.py", line 79, in __call__
+    raise exc
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 69, in app
+    await response(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\responses.py", line 338, in __call__
+    raise RuntimeError(f"File at path {self.path} does not exist.")
+RuntimeError: File at path ../templates/index.html does not exist.
+WARNING:  WatchFiles detected changes in 'src\main.py'. Reloading...
+INFO:     127.0.0.1:52722 - "GET / HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\responses.py", line 335, in __call__
+    stat_result = await anyio.to_thread.run_sync(os.stat, self.path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\anyio\to_thread.py", line 33, in run_sync
+    return await get_asynclib().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\anyio\_backends\_asyncio.py", line 877, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\anyio\_backends\_asyncio.py", line 807, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 3] The system cannot find the path specified: '../templates/index.html'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py", line 426, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 84, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\applications.py", line 1106, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\applications.py", line 122, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\errors.py", line 184, in __call__
+    raise exc
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\exceptions.py", line 79, in __call__
+    raise exc
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 69, in app
+    await response(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\responses.py", line 338, in __call__
+    raise RuntimeError(f"File at path {self.path} does not exist.")
+RuntimeError: File at path ../templates/index.html does not exist.
+INFO:     127.0.0.1:53116 - "GET /health HTTP/1.1" 200 OK
+2025-07-30 02:33:29.548 | WARNING  | src.models.advanced_database:get_system_stats:379 - Database stats query failed: (psycopg2.errors.UndefinedColumn) column missions.prompt does not exist
+LINE 2: ...mission_id_str, missions.title AS missions_title, missions.p...
+                                                             ^
+
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT missions.id AS missions_id, missions.mission_id_str AS missions_mission_id_str, missions.title AS missions_title, missions.prompt AS missions_prompt, missions.agent_type AS missions_agent_type, missions.status AS missions_status, missions.result AS missions_result, missions.plan AS missions_plan, missions.execution_time AS missions_execution_time, missions.tokens_used AS missions_tokens_used, missions.error_message AS missions_error_message, missions.created_at AS missions_created_at, missions.updated_at AS missions_updated_at, missions.completed_at AS missions_completed_at, missions.is_archived AS missions_is_archived 
+FROM missions) AS anon_1]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-30 02:33:30.601 | INFO     | src.tools.advanced_tools:get_system_info:214 - System information retrieved
+INFO:     127.0.0.1:53134 - "GET /system-stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53175 - "GET / HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\responses.py", line 335, in __call__
+    stat_result = await anyio.to_thread.run_sync(os.stat, self.path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\anyio\to_thread.py", line 33, in run_sync
+    return await get_asynclib().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\anyio\_backends\_asyncio.py", line 877, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\anyio\_backends\_asyncio.py", line 807, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 3] The system cannot find the path specified: '../templates/index.html'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py", line 426, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 84, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\applications.py", line 1106, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\applications.py", line 122, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\errors.py", line 184, in __call__
+    raise exc
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\exceptions.py", line 79, in __call__
+    raise exc
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 69, in app
+    await response(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\responses.py", line 338, in __call__
+    raise RuntimeError(f"File at path {self.path} does not exist.")
+RuntimeError: File at path ../templates/index.html does not exist.
+INFO:     127.0.0.1:53210 - "GET / HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\responses.py", line 335, in __call__
+    stat_result = await anyio.to_thread.run_sync(os.stat, self.path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\anyio\to_thread.py", line 33, in run_sync
+    return await get_asynclib().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\anyio\_backends\_asyncio.py", line 877, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\anyio\_backends\_asyncio.py", line 807, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 3] The system cannot find the path specified: '../templates/index.html'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py", line 426, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 84, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\applications.py", line 1106, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\applications.py", line 122, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\errors.py", line 184, in __call__
+    raise exc
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\exceptions.py", line 79, in __call__
+    raise exc
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 69, in app
+    await response(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\responses.py", line 338, in __call__
+    raise RuntimeError(f"File at path {self.path} does not exist.")
+RuntimeError: File at path ../templates/index.html does not exist.
+INFO:     127.0.0.1:53261 - "GET / HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\responses.py", line 335, in __call__
+    stat_result = await anyio.to_thread.run_sync(os.stat, self.path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\anyio\to_thread.py", line 33, in run_sync
+    return await get_asynclib().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\anyio\_backends\_asyncio.py", line 877, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\anyio\_backends\_asyncio.py", line 807, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 3] The system cannot find the path specified: '../templates/index.html'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py", line 426, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 84, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\applications.py", line 1106, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\applications.py", line 122, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\errors.py", line 184, in __call__
+    raise exc
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\exceptions.py", line 79, in __call__
+    raise exc
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 69, in app
+    await response(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\responses.py", line 338, in __call__
+    raise RuntimeError(f"File at path {self.path} does not exist.")
+RuntimeError: File at path ../templates/index.html does not exist.

@@ -345,7 +345,23 @@ class CognitiveForgeEngine:
             }
         except Exception as e:
             logger.error(f"Error getting system info: {e}")
-            return {"error": str(e)}
+            # Return a valid structure even when there are errors
+            return {
+                "database_stats": {
+                    "total_missions": 0,
+                    "completed_missions": 0,
+                    "failed_missions": 0,
+                    "pending_missions": 0,
+                    "success_rate": 0,
+                    "memory_entries": 0,
+                    "last_updated": datetime.utcnow().isoformat(),
+                    "error": str(e)
+                },
+                "system_info": "System information unavailable",
+                "engine_status": "error",
+                "model": os.getenv("LLM_MODEL", "gemini-1.5-pro-latest"),
+                "last_updated": datetime.utcnow().isoformat(),
+            }
 
 
 # Global instance of the Cognitive Forge Engine

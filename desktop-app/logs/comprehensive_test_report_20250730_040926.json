@@ -1,0 +1,84 @@
+{
+  "test_summary": {
+    "total_tests": 10,
+    "passed": 5,
+    "failed": 5,
+    "warnings": 0,
+    "success_rate": "50.0%",
+    "total_duration": "10.18s"
+  },
+  "detailed_results": {
+    "System Integration Tests": {
+      "module": "System Integration Tests",
+      "status": "FAIL",
+      "duration": 1.8689284324645996,
+      "return_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\AMD\\sentinel\\desktop-app\\comprehensive_test_suite.py\", line 681, in <module>\n    main() \n    ^^^^^^\n  File \"C:\\Users\\AMD\\sentinel\\desktop-app\\comprehensive_test_suite.py\", line 658, in main\n    print(f\"{Fore.CYAN}\\U0001f680 Sentinel Comprehensive Test Suite{Style.RESET_ALL}\")\n  File \"C:\\Users\\AMD\\AppData\\Roaming\\Python\\Python311\\site-packages\\colorama\\ansitowin32.py\", line 47, in write\n    self.__convertor.write(text)\n  File \"C:\\Users\\AMD\\AppData\\Roaming\\Python\\Python311\\site-packages\\colorama\\ansitowin32.py\", line 177, in write\n    self.write_and_convert(text)\n  File \"C:\\Users\\AMD\\AppData\\Roaming\\Python\\Python311\\site-packages\\colorama\\ansitowin32.py\", line 202, in write_and_convert\n    self.write_plain_text(text, cursor, start)\n  File \"C:\\Users\\AMD\\AppData\\Roaming\\Python\\Python311\\site-packages\\colorama\\ansitowin32.py\", line 210, in write_plain_text\n    self.wrapped.write(text[start:end])\n  File \"C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode character '\\U0001f680' in position 0: character maps to <undefined>\n"
+    },
+    "AI Agent Tests": {
+      "module": "AI Agent Tests",
+      "status": "FAIL",
+      "duration": 1.8087530136108398,
+      "return_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\AMD\\sentinel\\desktop-app\\ai_agent_testing.py\", line 533, in <module>\n    success = main()\n              ^^^^^^\n  File \"C:\\Users\\AMD\\sentinel\\desktop-app\\ai_agent_testing.py\", line 504, in main\n    print(f\"\\U0001f9e0 Starting Sentinel AI Comprehensive Testing...\")\n  File \"C:\\Users\\AMD\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode character '\\U0001f9e0' in position 0: character maps to <undefined>\n"
+    },
+    "Logging System Tests": {
+      "module": "Logging System Tests",
+      "status": "FAIL",
+      "duration": 3.6003522872924805,
+      "return_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\AMD\\sentinel\\desktop-app\\advanced_logging_config.py\", line 301, in <module>\n    logger.log_system_startup({\n  File \"C:\\Users\\AMD\\sentinel\\desktop-app\\advanced_logging_config.py\", line 134, in log_system_startup\n    logger.info(f\"\\U0001f680 {self.system_name} System Starting Up\")\n    ^^^^^^^^^^^\nAttributeError: 'AdvancedLogger' object has no attribute 'info'\n"
+    },
+    "Database Schema": {
+      "test": "Database Schema",
+      "status": "FAIL",
+      "details": "Database error: The onnxruntime python package is not installed. Please install it with `pip install onnxruntime`",
+      "duration": 0.1
+    },
+    "Service Health": {
+      "test": "Service Health",
+      "status": "FAIL",
+      "details": "\u2705 Desktop App; \u274c Cognitive Engine (Error: HTTPConnectionPool(host='localhost', port=8002): Max retries exceeded with url: /health (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000011B35667590>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it')))",
+      "duration": 0.5
+    },
+    "Static Files": {
+      "test": "Static Files",
+      "status": "PASS",
+      "details": "\u2705 /static/js/main.js; \u2705 /static/css/main.css; \u2705 /static/images/favicon.png",
+      "duration": 0.5
+    },
+    "Web Interface": {
+      "test": "Web Interface",
+      "status": "PASS",
+      "details": "Main page loads successfully",
+      "duration": 0.2
+    },
+    "API Endpoints": {
+      "test": "API Endpoints",
+      "status": "PASS",
+      "details": "\u2705 GET /missions; \u2705 GET /system-stats; \u2705 GET /api/status",
+      "duration": 0.5
+    },
+    "Performance": {
+      "test": "Performance",
+      "status": "PASS",
+      "details": "Memory: 51.8%, CPU: 24.3%, Response: 2.23s",
+      "duration": 1.0
+    },
+    "Security": {
+      "test": "Security",
+      "status": "PASS",
+      "details": "Invalid endpoints properly return 404",
+      "duration": 0.1
+    }
+  },
+  "recommendations": [
+    "\ud83d\udd34 5 tests failed - Review and fix critical issues",
+    "\ud83d\udd34 Module tests failed - Check system integration"
+  ],
+  "timestamp": "2025-07-30T04:09:26.002384",
+  "test_duration": 39.337947
+}

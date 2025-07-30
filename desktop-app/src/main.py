@@ -120,7 +120,17 @@ def run_mission_in_background(mission_id_str: str, prompt: str, agent_type: str)
 @app.get("/", response_class=FileResponse)
 def serve_web_ui():
     """Serve the main web interface"""
-    return FileResponse("../templates/index.html")
+    import os
+    # Get the absolute path to the templates directory
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(current_dir)
+    template_path = os.path.join(project_root, "templates", "index.html")
+    
+    # Check if file exists
+    if not os.path.exists(template_path):
+        raise HTTPException(status_code=404, detail="Template file not found")
+    
+    return FileResponse(template_path)
 
 
 @app.get("/health")
@@ -208,10 +218,30 @@ def get_system_stats():
     """
     try:
         stats = cognitive_forge_engine.get_system_info()
+        
+        # Ensure all required fields are present
+        if "engine_status" not in stats:
+            stats["engine_status"] = "error"
+        if "database_stats" not in stats:
+            stats["database_stats"] = {"error": "Database stats unavailable"}
+        if "system_info" not in stats:
+            stats["system_info"] = "System info unavailable"
+        if "model" not in stats:
+            stats["model"] = "unknown"
+        if "last_updated" not in stats:
+            stats["last_updated"] = datetime.utcnow().isoformat()
+            
         return SystemStatsResponse(**stats)
     except Exception as e:
         logger.error(f"Error getting system stats: {e}")
-        raise HTTPException(status_code=500, detail="Failed to get system stats")
+        # Return a minimal valid response
+        return SystemStatsResponse(
+            engine_status="error",
+            database_stats={"error": str(e)},
+            system_info="System information unavailable",
+            model="unknown",
+            last_updated=datetime.utcnow().isoformat()
+        )
 
 
 @app.get("/api/status")
