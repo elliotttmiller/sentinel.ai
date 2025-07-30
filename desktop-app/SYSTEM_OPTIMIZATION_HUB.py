@@ -27,6 +27,8 @@ import logging
 sys.path.append(str(Path(__file__).parent / "src"))
 
 from src.core.cognitive_forge_engine import CognitiveForgeEngine
+from src.utils.weave_observability import observability_manager, WeaveObservabilityManager
+from src.utils.weave_enhanced_fix_ai import WeaveEnhancedFixAI
 from src.models.advanced_database import db_manager
 from src.utils.synapse_logging import SynapseLoggingSystem
 from src.utils.phoenix_protocol import PhoenixProtocol
@@ -75,6 +77,9 @@ class SystemOptimizationHub:
         self.debug_mode = True
         self.verbose_output = True
         
+        # Initialize Weave observability
+        self.observability = observability_manager
+        
         # Initialize logging
         self.setup_logging()
         
@@ -85,9 +90,12 @@ class SystemOptimizationHub:
             "enable_performance_tracking": True,
             "enable_memory_validation": True,
             "enable_agent_evolution": True,
+            "enable_weave_observability": True,  # Enable Weave observability
             "max_execution_time": 300,  # 5 minutes per test
             "memory_threshold": 0.8,  # 80% memory usage threshold
         }
+        
+        self.logger.info("🔍 Weave observability initialized for system optimization hub")
     
     def setup_logging(self):
         """Setup advanced logging system"""
@@ -133,68 +141,113 @@ class SystemOptimizationHub:
             print(f"{'='*80}")
     
     async def run_test(self, test_func: Callable, test_name: str, category: TestCategory) -> TestResult:
-        """Execute a test with comprehensive monitoring"""
-        start_time = time.time()
-        start_memory = psutil.virtual_memory().percent
+        """Execute a test with comprehensive monitoring and Weave observability"""
+        operation_id = f"test_{test_name.lower().replace(' ', '_')}_{int(time.time())}"
         
-        try:
-            self.log_test_start(test_name, category)
+        with self.observability.agent_trace(f"test_agent_{test_name}", operation_id, f"Executing {test_name}") as metrics:
+            start_time = time.time()
+            start_memory = psutil.virtual_memory().percent
+            start_cpu = psutil.cpu_percent()
             
-            # Execute the test
-            result = await test_func()
-            
-            execution_time = time.time() - start_time
-            end_memory = psutil.virtual_memory().percent
-            memory_delta = end_memory - start_memory
-            
-            # Determine status
-            status = "PASS"
-            if isinstance(result, dict) and result.get("status") == "FAIL":
-                status = "FAIL"
-            elif memory_delta > 10:  # Memory usage increased by more than 10%
-                status = "WARNING"
-            
-            test_result = TestResult(
-                test_name=test_name,
-                category=category,
-                status=status,
-                execution_time=execution_time,
-                details=result if isinstance(result, dict) else {"result": result},
-                performance_metrics={
-                    "memory_start": start_memory,
-                    "memory_end": end_memory,
-                    "memory_delta": memory_delta,
-                    "cpu_usage": psutil.cpu_percent(),
-                }
-            )
-            
-            self.test_results.append(test_result)
-            self.log_test_result(test_result)
-            
-            return test_result
-            
-        except Exception as e:
-            execution_time = time.time() - start_time
-            error_msg = f"Test failed: {str(e)}\n{traceback.format_exc()}"
-            
-            test_result = TestResult(
-                test_name=test_name,
-                category=category,
-                status="FAIL",
-                execution_time=execution_time,
-                details={"error": str(e)},
-                error_message=error_msg,
-                performance_metrics={
-                    "memory_start": start_memory,
-                    "memory_end": psutil.virtual_memory().percent,
-                    "cpu_usage": psutil.cpu_percent(),
-                }
-            )
-            
-            self.test_results.append(test_result)
-            self.log_test_result(test_result)
-            
-            return test_result
+            try:
+                self.log_test_start(test_name, category)
+                
+                # Execute the test
+                result = await test_func()
+                
+                execution_time = time.time() - start_time
+                end_memory = psutil.virtual_memory().percent
+                end_cpu = psutil.cpu_percent()
+                memory_delta = end_memory - start_memory
+                
+                # Update Weave metrics
+                metrics.execution_time = execution_time
+                metrics.memory_usage = end_memory
+                metrics.cpu_usage = (start_cpu + end_cpu) / 2
+                
+                # Determine status
+                status = "PASS"
+                if isinstance(result, dict) and result.get("status") == "FAIL":
+                    status = "FAIL"
+                    metrics.success = False
+                elif memory_delta > 10:  # Memory usage increased by more than 10%
+                    status = "WARNING"
+                    metrics.success = True
+                else:
+                    metrics.success = True
+                
+                test_result = TestResult(
+                    test_name=test_name,
+                    category=category,
+                    status=status,
+                    execution_time=execution_time,
+                    details=result if isinstance(result, dict) else {"result": result},
+                    performance_metrics={
+                        "memory_start": start_memory,
+                        "memory_end": end_memory,
+                        "memory_delta": memory_delta,
+                        "cpu_start": start_cpu,
+                        "cpu_end": end_cpu,
+                        "cpu_usage": (start_cpu + end_cpu) / 2,
+                    }
+                )
+                
+                self.test_results.append(test_result)
+                self.log_test_result(test_result)
+                
+                # Log test result with observability
+                if status == "PASS":
+                    self.observability.log_system_event("test_success", {
+                        "test_name": test_name,
+                        "category": category.value,
+                        "execution_time": execution_time,
+                        "performance_metrics": test_result.performance_metrics
+                    }, operation_id)
+                else:
+                    self.observability.log_system_event("test_failure", {
+                        "test_name": test_name,
+                        "category": category.value,
+                        "execution_time": execution_time,
+                        "error": result.get("error", "Unknown error") if isinstance(result, dict) else "Test failed",
+                        "performance_metrics": test_result.performance_metrics
+                    }, operation_id)
+                
+                return test_result
+                
+            except Exception as e:
+                execution_time = time.time() - start_time
+                error_msg = f"Test failed: {str(e)}\n{traceback.format_exc()}"
+                
+                # Update Weave metrics for error
+                metrics.success = False
+                metrics.error_message = str(e)
+                metrics.execution_time = execution_time
+                
+                test_result = TestResult(
+                    test_name=test_name,
+                    category=category,
+                    status="FAIL",
+                    execution_time=execution_time,
+                    details={"error": str(e)},
+                    error_message=error_msg,
+                    performance_metrics={
+                        "memory_start": start_memory,
+                        "memory_end": psutil.virtual_memory().percent,
+                        "cpu_usage": psutil.cpu_percent(),
+                    }
+                )
+                
+                self.test_results.append(test_result)
+                self.log_test_result(test_result)
+                
+                # Log error with observability
+                self.observability.log_error(e, {
+                    "test_name": test_name,
+                    "category": category.value,
+                    "execution_time": execution_time
+                }, operation_id)
+                
+                return test_result
     
     # ============================================================================
     # SYSTEM INITIALIZATION TESTS
@@ -691,27 +744,45 @@ class SystemOptimizationHub:
     # ============================================================================
     
     async def run_all_tests(self) -> Dict[str, Any]:
-        """Run all tests in the system optimization hub"""
-        print("🚀 SYSTEM OPTIMIZATION HUB - Starting Comprehensive Test Suite")
-        print("=" * 80)
+        """Run all tests in the system optimization hub with Weave observability"""
+        operation_id = f"comprehensive_test_suite_{int(time.time())}"
         
-        test_suites = [
-            (self.test_system_initialization, "System Initialization", TestCategory.SYSTEM_INITIALIZATION),
-            (self.test_environment_validation, "Environment Validation", TestCategory.ENVIRONMENT_VALIDATION),
-            (self.test_database_connectivity, "Database Connectivity", TestCategory.DATABASE_INTEGRATION),
-            (self.test_agent_factory, "Agent Factory", TestCategory.AGENT_FACTORY),
-            (self.test_protocol_systems, "Protocol Systems", TestCategory.PROTOCOL_SYSTEMS),
-            (self.test_workflow_phases, "Workflow Phases", TestCategory.WORKFLOW_PHASES),
-            (self.test_performance_optimization, "Performance Optimization", TestCategory.PERFORMANCE_OPTIMIZATION),
-            (self.test_error_handling, "Error Handling", TestCategory.ERROR_HANDLING),
-            (self.test_integration_tests, "Integration Tests", TestCategory.INTEGRATION_TESTS),
-            (self.test_stress_testing, "Stress Testing", TestCategory.STRESS_TESTING),
-        ]
-        
-        for test_func, test_name, category in test_suites:
-            await self.run_test(test_func, test_name, category)
-        
-        return self.generate_comprehensive_report()
+        with self.observability.mission_trace(operation_id, "Comprehensive System Optimization") as trace_data:
+            print("🚀 WEAVE-ENHANCED SYSTEM OPTIMIZATION HUB - Starting Comprehensive Test Suite")
+            print("=" * 80)
+            print("🔍 Full observability and monitoring enabled")
+            print("=" * 80)
+            
+            start_time = time.time()
+            
+            test_suites = [
+                (self.test_system_initialization, "System Initialization", TestCategory.SYSTEM_INITIALIZATION),
+                (self.test_environment_validation, "Environment Validation", TestCategory.ENVIRONMENT_VALIDATION),
+                (self.test_database_connectivity, "Database Connectivity", TestCategory.DATABASE_INTEGRATION),
+                (self.test_agent_factory, "Agent Factory", TestCategory.AGENT_FACTORY),
+                (self.test_protocol_systems, "Protocol Systems", TestCategory.PROTOCOL_SYSTEMS),
+                (self.test_workflow_phases, "Workflow Phases", TestCategory.WORKFLOW_PHASES),
+                (self.test_performance_optimization, "Performance Optimization", TestCategory.PERFORMANCE_OPTIMIZATION),
+                (self.test_error_handling, "Error Handling", TestCategory.ERROR_HANDLING),
+                (self.test_integration_tests, "Integration Tests", TestCategory.INTEGRATION_TESTS),
+                (self.test_stress_testing, "Stress Testing", TestCategory.STRESS_TESTING),
+            ]
+            
+            for test_func, test_name, category in test_suites:
+                await self.run_test(test_func, test_name, category)
+            
+            total_time = time.time() - start_time
+            
+            # Log completion with observability
+            self.observability.log_system_event("test_suite_completed", {
+                "total_tests": len(test_suites),
+                "total_time": total_time,
+                "successful_tests": len([r for r in self.test_results if r.status == "PASS"]),
+                "failed_tests": len([r for r in self.test_results if r.status == "FAIL"]),
+                "warning_tests": len([r for r in self.test_results if r.status == "WARNING"])
+            }, operation_id)
+            
+            return self.generate_comprehensive_report()
     
     async def run_specific_test(self, test_name: str) -> TestResult:
         """Run a specific test by name"""

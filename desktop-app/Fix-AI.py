@@ -24,6 +24,7 @@ from datetime import datetime
 from loguru import logger
 from langchain_google_genai import ChatGoogleGenerativeAI
 from crewai import Agent, Task, Crew, Process
+from src.utils.weave_observability import observability_manager, WeaveObservabilityManager
 
 # --- CONFIGURATION ---
 PROJECT_ROOT = Path(__file__).parent
@@ -287,6 +288,9 @@ class CodebaseHealer:
         self.report: Dict[str, Any] = {"summary": {}, "details": []}
         self.performance_issues: List[Dict[str, Any]] = []
         
+        # Initialize Weave observability
+        self.observability = observability_manager
+        
         # Initialize enhanced components
         self.phoenix = PhoenixProtocol()
         self.mission_healer = MissionAwareHealer()
@@ -294,6 +298,8 @@ class CodebaseHealer:
 
         REPORTS_DIRECTORY.mkdir(exist_ok=True, parents=True)
         BACKUP_DIRECTORY.mkdir(exist_ok=True, parents=True)
+        
+        logger.info("🔍 Weave observability initialized for Fix-AI")
 
     def _log_phase(self, phase_name: str):
         logger.info(f"\n{'='*25}\n🚀 PHASE: {phase_name}\n{'='*25}")
@@ -303,29 +309,53 @@ class CodebaseHealer:
         return list(SRC_DIRECTORY.rglob("*.py"))
 
     def run(self):
-        """Executes the full end-to-end healing process."""
-        logger.info("🚀 Initiating Fix-AI: The Sentient Codebase Healer")
-        logger.info("🔧 Enhanced with Phoenix Protocol, Mission Awareness, and Performance Optimization")
-        self.report['start_time'] = datetime.now().isoformat()
-
-        # Create a backup of the source directory first
-        logger.info(f"Creating a backup of the 'src' directory at: {BACKUP_DIRECTORY}")
-        shutil.copytree(SRC_DIRECTORY, BACKUP_DIRECTORY)
-        logger.success("Backup complete. Proceeding with healing process.")
-
-        self.run_diagnosis_phase()
-        self.run_performance_analysis_phase()
+        """Executes the full end-to-end healing process with Weave observability."""
+        operation_id = f"fix_ai_{int(time.time())}"
         
-        if not self.issues and not self.performance_issues:
-            logger.success("🎉 No issues found. The codebase is already in excellent health!")
-            return
+        with self.observability.mission_trace(operation_id, "Comprehensive Codebase Healing") as trace_data:
+            logger.info("🚀 Initiating Weave-Enhanced Fix-AI: The Sentient Codebase Healer")
+            logger.info("🔧 Enhanced with Phoenix Protocol, Mission Awareness, Performance Optimization, and Full Observability")
+            self.report['start_time'] = datetime.now().isoformat()
 
-        self.run_planning_phase()
-        self.run_execution_phase()
-        self.run_final_validation_phase()
-        self.generate_report()
+            # Create a backup of the source directory first
+            logger.info(f"Creating a backup of the 'src' directory at: {BACKUP_DIRECTORY}")
+            shutil.copytree(SRC_DIRECTORY, BACKUP_DIRECTORY)
+            logger.success("Backup complete. Proceeding with healing process.")
 
-        logger.info("✅ Fix-AI process complete.")
+            # Log backup creation with observability
+            self.observability.log_system_event("backup_created", {
+                "backup_directory": str(BACKUP_DIRECTORY),
+                "source_directory": str(SRC_DIRECTORY)
+            }, operation_id)
+
+            self.run_diagnosis_phase()
+            self.run_performance_analysis_phase()
+            
+            if not self.issues and not self.performance_issues:
+                logger.success("🎉 No issues found. The codebase is already in excellent health!")
+                
+                # Log success with observability
+                self.observability.log_system_event("healing_completed", {
+                    "status": "no_issues_found",
+                    "issues_count": 0,
+                    "performance_issues_count": 0
+                }, operation_id)
+                return
+
+            self.run_planning_phase()
+            self.run_execution_phase()
+            self.run_final_validation_phase()
+            self.generate_report()
+
+            # Log completion with observability
+            self.observability.log_system_event("healing_completed", {
+                "status": "completed",
+                "issues_count": len(self.issues),
+                "performance_issues_count": len(self.performance_issues),
+                "healing_plan_count": len(self.healing_plan)
+            }, operation_id)
+
+            logger.info("✅ Weave-Enhanced Fix-AI process complete.")
 
     def run_diagnosis_phase(self):
         """Phase 1: Scan the codebase for all potential issues."""

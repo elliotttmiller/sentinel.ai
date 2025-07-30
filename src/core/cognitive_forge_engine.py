@@ -15,6 +15,7 @@ from src.utils.phoenix_protocol import PhoenixProtocol
 from src.utils.guardian_protocol import GuardianProtocol
 from src.utils.synapse_logging import SynapseLogging
 from src.utils.self_learning_module import SelfLearningModule
+from src.utils.weave_observability import observability_manager, WeaveEnhancedEngine
 
 class CognitiveForgeEngine:
     """Enhanced Cognitive Forge Engine with Phase 2 capabilities"""
@@ -48,8 +49,13 @@ class CognitiveForgeEngine:
         self.enhanced_memory_manager = EnhancedMemoryManager()
         self.performance_monitor = PerformanceMonitor()
         
+        # Initialize Weave observability
+        self.observability = observability_manager
+        self.weave_enhanced_engine = WeaveEnhancedEngine(self, observability_manager)
+        
         self.logger.info(f"Cognitive Forge Engine v5.0 initialized with model: {model_name}")
         self.logger.info("Sentient Operating System: Phoenix Protocol, Guardian Protocol, and Synapse Logging active")
+        self.logger.info("🔍 Weave Observability: Full mission tracing and analytics enabled")
     
     async def run_mission(self, user_request: str) -> Dict[str, Any]:
         """Enhanced mission execution with Phase 2 planning and execution"""
@@ -149,6 +155,14 @@ class CognitiveForgeEngine:
             
             self.logger.info(f"Mission {mission['id']} completed in {total_execution_time:.2f}s")
             
+            # Log mission completion with observability
+            self.observability.log_system_event("mission_completed", {
+                "mission_id": mission['id'],
+                "execution_time": total_execution_time,
+                "phases_completed": ["prompt_optimization", "planning", "validation", "execution"],
+                "status": final_status
+            })
+            
             return {
                 'mission_id': mission['id'],
                 'status': final_status,
@@ -168,6 +182,10 @@ class CognitiveForgeEngine:
                     result_data={'error': str(e)}
                 )
             raise
+    
+    async def run_mission_with_observability(self, user_request: str) -> Dict[str, Any]:
+        """Run mission with comprehensive Weave observability and tracing."""
+        return await self.weave_enhanced_engine.run_mission_with_observability(user_request)
     
     async def _execute_prompt_alchemy(self, user_request: str) -> Dict[str, Any]:
         """Execute prompt optimization (Phase 1)"""
