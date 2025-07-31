@@ -13,7 +13,7 @@ from datetime import datetime
 from typing import Dict, Any, List, Optional, Callable
 from enum import Enum
 from crewai import Task, Crew, Process
-from langchain_google_genai import ChatGoogleGenerativeAI
+from ..utils.google_ai_wrapper import create_google_ai_llm
 from loguru import logger
 from dotenv import load_dotenv
 
@@ -25,7 +25,7 @@ from ..utils.synapse_logging import SynapseLoggingSystem
 from ..utils.self_learning_module import SelfLearningModule
 
 # Load environment variables
-load_dotenv()
+load_dotenv(os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
 
 
 class MissionState(Enum):
@@ -51,10 +51,19 @@ class CognitiveForgeEngine:
 
     def __init__(self):
         # Initialize LLM with environment configuration
-        model_name = os.getenv("LLM_MODEL", "gemini-1.5-pro-latest")
+        model_name = os.getenv("LLM_MODEL", "gemini-1.5-pro")
         temperature = float(os.getenv("LLM_TEMPERATURE", "0.7"))
 
-        self.llm = ChatGoogleGenerativeAI(model=model_name, temperature=temperature)
+        # Use our custom Google Generative AI wrapper
+        try:
+            self.llm = create_google_ai_llm(
+                model_name=model_name,
+                temperature=temperature
+            )
+            logger.info(f"Google Generative AI initialized with model: {model_name}")
+        except Exception as e:
+            logger.error(f"Failed to initialize Google Generative AI: {e}")
+            raise ValueError(f"Google Generative AI initialization failed: {e}")
 
         # Initialize agent factories
         self.planner_agents = PlannerAgents()
@@ -765,7 +774,7 @@ class CognitiveForgeEngine:
         max_tokens = config.get("max_tokens", 4000)
         
         # Create LLM with optimized settings
-        optimized_llm = ChatGoogleGenerativeAI(
+        optimized_llm = create_google_ai_llm(
             model=model,
             temperature=temperature,
             max_tokens=max_tokens

@@ -1,0 +1,51 @@
+{
+  "status": "FAILED",
+  "total_tests": 5,
+  "passed_tests": 2,
+  "success_rate": 40.0,
+  "execution_time": 100.34121060371399,
+  "detailed_results": [
+    [
+      "Service Management",
+      {
+        "status": "PASS",
+        "services_found": 4,
+        "desktop_app_configured": true,
+        "cognitive_engine_configured": true
+      }
+    ],
+    [
+      "Service Startup",
+      {
+        "status": "PASS",
+        "services_started": 1,
+        "health_check_passed": true
+      }
+    ],
+    [
+      "System Optimization Hub",
+      {
+        "status": "FAIL",
+        "error": "metaclass conflict: the metaclass of a derived class must be a (non-strict) subclass of the metaclasses of all its bases"
+      }
+    ],
+    [
+      "API Endpoints",
+      {
+        "status": "FAIL",
+        "endpoints_tested": 4,
+        "endpoints_passed": 0,
+        "success_rate": 0.0
+      }
+    ],
+    [
+      "Stress Testing",
+      {
+        "status": "FAIL",
+        "concurrent_requests": 10,
+        "successful_requests": 0,
+        "success_rate": 0.0
+      }
+    ]
+  ]
+}

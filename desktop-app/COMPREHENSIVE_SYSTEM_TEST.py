@@ -144,7 +144,7 @@ class ComprehensiveSystemTest:
             sys.path.append(str(Path(__file__).parent))
             
             # Import the hub
-            from SYSTEM_OPTIMIZATION_HUB import SystemOptimizationHub
+            from system_optimization_hub import SystemOptimizationHub
             
             # Create and run the hub
             hub = SystemOptimizationHub()

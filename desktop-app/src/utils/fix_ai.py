@@ -19,7 +19,7 @@ from dataclasses import dataclass, asdict
 from contextlib import contextmanager
 
 try:
-    from langchain_google_genai import ChatGoogleGenerativeAI
+    from .google_ai_wrapper import create_google_ai_llm
     LLM_AVAILABLE = True
 except ImportError:
     LLM_AVAILABLE = False
@@ -67,7 +67,7 @@ class WeaveEnhancedFixAI:
                 from dotenv import load_dotenv
                 load_dotenv()
                 
-                self.llm = ChatGoogleGenerativeAI(
+                self.llm = create_google_ai_llm(
                     model=os.getenv("LLM_MODEL", "gemini-1.5-pro"),
                     temperature=0.3
                 )

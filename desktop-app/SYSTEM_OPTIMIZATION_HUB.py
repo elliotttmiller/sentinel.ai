@@ -22,6 +22,11 @@ from typing import Dict, Any, List, Optional, Callable
 from dataclasses import dataclass
 from enum import Enum
 import logging
+import warnings
+
+# Suppress metaclass conflict warnings
+warnings.filterwarnings("ignore", message=".*metaclass conflict.*")
+warnings.filterwarnings("ignore", message=".*LangChainDeprecationWarning.*")
 
 # Add the src directory to the path
 sys.path.append(str(Path(__file__).parent / "src"))

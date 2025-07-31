@@ -8,7 +8,6 @@ import time
 from datetime import datetime
 from typing import Dict, Any, List, Optional
 from loguru import logger
-from langchain_google_genai import ChatGoogleGenerativeAI
 from crewai import Task, Crew, Process, Agent
 
 
@@ -18,7 +17,7 @@ class SelfLearningModule:
     Analyzes mission outcomes and generates agent improvements
     """
 
-    def __init__(self, llm: ChatGoogleGenerativeAI, db_manager):
+    def __init__(self, llm, db_manager):
         self.llm = llm
         self.db_manager = db_manager
         self.learning_agent = self._create_learning_agent()

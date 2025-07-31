@@ -8,7 +8,6 @@ import traceback
 from datetime import datetime
 from typing import Dict, Any, Optional
 from loguru import logger
-from langchain_google_genai import ChatGoogleGenerativeAI
 from crewai import Task, Crew, Process, Agent
 
 
@@ -18,7 +17,7 @@ class PhoenixProtocol:
     Analyzes failures and provides precise, actionable solutions
     """
 
-    def __init__(self, llm: ChatGoogleGenerativeAI):
+    def __init__(self, llm):
         self.llm = llm
         self.debugger_agent = self._create_debugger_agent()
         logger.info("Phoenix Protocol initialized - Self-healing system active")

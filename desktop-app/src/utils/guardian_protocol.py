@@ -9,7 +9,6 @@ import subprocess
 from datetime import datetime
 from typing import Dict, Any, List, Optional
 from loguru import logger
-from langchain_google_genai import ChatGoogleGenerativeAI
 from crewai import Task, Crew, Process, Agent
 
 
@@ -19,7 +18,7 @@ class GuardianProtocol:
     Validates code quality and agent improvements with automated fixes
     """
 
-    def __init__(self, llm: ChatGoogleGenerativeAI):
+    def __init__(self, llm):
         self.llm = llm
         self.quality_agent = self._create_quality_agent()
         self.test_agent = self._create_test_agent()

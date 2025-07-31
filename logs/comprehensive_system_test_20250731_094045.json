@@ -1,0 +1,49 @@
+{
+  "status": "FAILED",
+  "total_tests": 5,
+  "passed_tests": 2,
+  "success_rate": 40.0,
+  "execution_time": 17.470314264297485,
+  "detailed_results": [
+    [
+      "Service Management",
+      {
+        "status": "FAIL",
+        "error": "'ServiceManager' object has no attribute 'SERVICES'"
+      }
+    ],
+    [
+      "Service Startup",
+      {
+        "status": "PASS",
+        "services_started": 1,
+        "health_check_passed": true
+      }
+    ],
+    [
+      "System Optimization Hub",
+      {
+        "status": "FAIL",
+        "error": "No module named 'SYSTEM_OPTIMIZATION_HUB'"
+      }
+    ],
+    [
+      "API Endpoints",
+      {
+        "status": "FAIL",
+        "endpoints_tested": 4,
+        "endpoints_passed": 3,
+        "success_rate": 75.0
+      }
+    ],
+    [
+      "Stress Testing",
+      {
+        "status": "PASS",
+        "concurrent_requests": 10,
+        "successful_requests": 10,
+        "success_rate": 100.0
+      }
+    ]
+  ]
+}

@@ -4,13 +4,13 @@ Enhanced with specialized agents for sentient capabilities
 """
 
 from crewai import Agent
-from langchain_google_genai import ChatGoogleGenerativeAI
+from ..utils.google_ai_wrapper import create_google_ai_llm
 
 
 class PromptOptimizationAgents:
     """Specialized agents for prompt optimization and blueprint planning"""
 
-    def prompt_optimizer(self, llm: ChatGoogleGenerativeAI) -> Agent:
+    def prompt_optimizer(self, llm) -> Agent:
         """Advanced Prompt Optimization Agent - Phase 1 of Blueprint System"""
         return Agent(
             role="Advanced Prompt Optimization Specialist",
@@ -38,7 +38,7 @@ class PromptOptimizationAgents:
             allow_delegation=False
         )
 
-    def blueprint_planner(self, llm: ChatGoogleGenerativeAI) -> Agent:
+    def blueprint_planner(self, llm) -> Agent:
         """Blueprint Planning Specialist - Phase 2 of Blueprint System"""
         return Agent(
             role="Blueprint Planning Specialist & Strategic Architect",
@@ -70,7 +70,7 @@ class PromptOptimizationAgents:
 class PlannerAgents:
     """Planner agents for mission planning and optimization"""
 
-    def lead_architect(self, llm: ChatGoogleGenerativeAI) -> Agent:
+    def lead_architect(self, llm) -> Agent:
         """Lead Architect for comprehensive system design"""
         return Agent(
             role="Lead AI Architect & System Designer",
@@ -87,7 +87,7 @@ class PlannerAgents:
             allow_delegation=True
         )
 
-    def plan_validator(self, llm: ChatGoogleGenerativeAI) -> Agent:
+    def plan_validator(self, llm) -> Agent:
         """Plan Validator for quality assurance"""
         return Agent(
             role="Plan Validator & Quality Assurance Specialist",
@@ -105,7 +105,7 @@ class PlannerAgents:
             allow_delegation=False
         )
 
-    def prompt_alchemist(self, llm: ChatGoogleGenerativeAI) -> Agent:
+    def prompt_alchemist(self, llm) -> Agent:
         """Master Prompt Engineer & AI Alchemist"""
         return Agent(
             role="Master Prompt Engineer & AI Alchemist",
@@ -131,7 +131,7 @@ class PlannerAgents:
 class WorkerAgents:
     """Worker agents for task execution"""
 
-    def senior_developer(self, llm: ChatGoogleGenerativeAI) -> Agent:
+    def senior_developer(self, llm) -> Agent:
         """Senior Developer for code generation and implementation"""
         return Agent(
             role="Senior Software Developer & Code Architect",
@@ -148,7 +148,7 @@ class WorkerAgents:
             allow_delegation=True
         )
 
-    def code_analyzer(self, llm: ChatGoogleGenerativeAI) -> Agent:
+    def code_analyzer(self, llm) -> Agent:
         """Code Analyzer for code review and analysis"""
         return Agent(
             role="Code Analyzer & Quality Assurance Specialist",
@@ -164,7 +164,7 @@ class WorkerAgents:
             allow_delegation=False
         )
 
-    def qa_tester(self, llm: ChatGoogleGenerativeAI) -> Agent:
+    def qa_tester(self, llm) -> Agent:
         """QA Tester for comprehensive testing"""
         return Agent(
             role="QA Tester & Quality Assurance Specialist",
@@ -181,7 +181,7 @@ class WorkerAgents:
             allow_delegation=False
         )
 
-    def system_integrator(self, llm: ChatGoogleGenerativeAI) -> Agent:
+    def system_integrator(self, llm) -> Agent:
         """System Integrator for deployment and integration"""
         return Agent(
             role="System Integrator & Deployment Specialist",
@@ -198,7 +198,7 @@ class WorkerAgents:
             allow_delegation=True
         )
 
-    def debugger(self, llm: ChatGoogleGenerativeAI) -> Agent:
+    def debugger(self, llm) -> Agent:
         """Debugger for troubleshooting and problem resolution"""
         return Agent(
             role="Debugger & Problem Resolution Specialist",
@@ -218,7 +218,7 @@ class WorkerAgents:
 class MemoryAgents:
     """Memory agents for learning and synthesis"""
 
-    def memory_synthesizer(self, llm: ChatGoogleGenerativeAI) -> Agent:
+    def memory_synthesizer(self, llm) -> Agent:
         """Memory Synthesizer for learning and knowledge extraction"""
         return Agent(
             role="Memory Synthesizer & Knowledge Extraction Specialist",

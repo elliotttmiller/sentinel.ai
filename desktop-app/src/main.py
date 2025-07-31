@@ -298,6 +298,60 @@ def api_status():
     }
 
 
+@app.post("/api/missions")
+async def create_mission_api(request: MissionRequest, background_tasks: BackgroundTasks):
+    """
+    Create a new mission via the /api/missions endpoint
+    This is the standard REST API endpoint for mission creation
+    """
+    try:
+        # Generate unique mission ID
+        mission_id_str = f"mission_{int(time.time())}_{uuid.uuid4().hex[:8]}"
+        
+        # Create mission in database
+        mission = Mission(
+            mission_id_str=mission_id_str,
+            title=request.title or f"Mission: {request.prompt[:50]}...",
+            prompt=request.prompt,
+            agent_type=request.agent_type,
+            status="pending"
+        )
+        
+        # Save to database using the create_mission method
+        mission = db_manager.create_mission(
+            mission_id_str=mission_id_str,
+            title=request.title or f"Mission: {request.prompt[:50]}...",
+            prompt=request.prompt,
+            agent_type=request.agent_type
+        )
+        
+        # Initialize status tracking
+        mission_status_db[mission_id_str] = {
+            "status": "pending",
+            "progress": 0,
+            "messages": [],
+            "start_time": time.time(),
+            "last_update": time.time()
+        }
+        
+        # Add background task for mission execution
+        background_tasks.add_task(run_mission_in_background, mission_id_str, request.prompt, request.agent_type)
+        
+        logger.info(f"API MISSION CREATED: {mission_id_str} - {request.prompt[:50]}...")
+        
+        return {
+            "mission_id": mission_id_str,
+            "status": "pending",
+            "message": "Mission created and queued for execution",
+            "created_at": mission.created_at.isoformat(),
+            "estimated_duration": "2-5 minutes"
+        }
+        
+    except Exception as e:
+        logger.error(f"Failed to create mission via API: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to create mission: {str(e)}")
+
+
 @app.delete("/mission/{mission_id}")
 def delete_mission(mission_id: str):
     """
