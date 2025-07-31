@@ -96,6 +96,11 @@
             position: relative;
             height: 300px;
         }
+        
+        /* Weave Service Icon */
+        .service-icon.weave {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
     </style>
 </head>
 
@@ -137,9 +142,12 @@
                     <a class="nav-item" href="#" @click="setActiveTab('analytics')" title="Analytics">
                         <i class="bi bi-graph-up"></i>
                     </a>
+                    <a class="nav-item" href="#" @click="setActiveTab('observability')" title="Observability">
+                        <i class="bi bi-eye"></i>
+                    </a>
                     <a class="nav-item" href="#" @click="setActiveTab('settings')" title="Settings">
                         <i class="bi bi-gear"></i>
-            </a>
+                    </a>
         </nav>
 
                 <!-- System Status -->
@@ -185,7 +193,7 @@
                                 </div>
                                 <div class="stats-info">
                                     <h6 class="stats-label">Active Missions</h6>
-                                    <h3 class="stats-value" x-text="stats.activeMissions">0</h3>
+                                    <h3 class="stats-value" x-text="observabilityData.active_missions">0</h3>
                                     <small class="stats-trend">
                                         <i class="bi bi-arrow-up"></i> +12.5%
                                     </small>
@@ -200,7 +208,7 @@
                                 </div>
                                 <div class="stats-info">
                                     <h6 class="stats-label">Available Agents</h6>
-                                    <h3 class="stats-value" x-text="stats.availableAgents">6</h3>
+                                    <h3 class="stats-value" x-text="Object.keys(observabilityData.agent_performance).length">6</h3>
                                     <small class="stats-trend">
                                         <i class="bi bi-arrow-up"></i> +8.2%
                                     </small>
@@ -215,7 +223,7 @@
                                 </div>
                                 <div class="stats-info">
                                     <h6 class="stats-label">Completed Today</h6>
-                                    <h3 class="stats-value" x-text="stats.completedToday">24</h3>
+                                    <h3 class="stats-value" x-text="observabilityData.total_missions">24</h3>
                                     <small class="stats-trend">
                                         <i class="bi bi-arrow-up"></i> +15.3%
                                     </small>
@@ -230,7 +238,7 @@
                                 </div>
                                 <div class="stats-info">
                                     <h6 class="stats-label">System Load</h6>
-                                    <h3 class="stats-value" x-text="stats.systemLoad + '%'">45%</h3>
+                                    <h3 class="stats-value" x-text="observabilityData.system_metrics.cpu_usage + '%'">45%</h3>
                                     <small class="stats-trend">
                                         <i class="bi bi-arrow-down"></i> -2.1%
                                     </small>
@@ -288,6 +296,38 @@
                                         <div class="metric-item">
                                             <span class="metric-label">Last Check</span>
                                             <span class="metric-value" x-text="formatTime(serviceStatus.services.desktop_app.last_check)"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Weave Observability Service Card -->
+                            <div class="service-card modern">
+                                <div class="service-header">
+                                    <div class="service-icon weave">
+                                        <i class="bi bi-eye"></i>
+                                    </div>
+                                    <div class="service-info">
+                                        <h6 class="service-name">Weave Observability</h6>
+                                        <div class="service-meta">
+                                            <span class="service-port">Observability</span>
+                                            <span class="service-uptime">Uptime: 99.9%</span>
+                                        </div>
+                                    </div>
+                                    <div class="service-status" :class="'status-' + observabilityData.weave_status">
+                                        <span class="status-dot"></span>
+                                        <span class="status-text" x-text="observabilityData.weave_status.toUpperCase()"></span>
+                                    </div>
+                                </div>
+                                <div class="service-metrics" x-show="observabilityData.weave_status === 'online'">
+                                    <div class="metrics-grid">
+                                        <div class="metric-item">
+                                            <span class="metric-label">Active Traces</span>
+                                            <span class="metric-value fast" x-text="observabilityData.recent_traces.length"></span>
+                                        </div>
+                                        <div class="metric-item">
+                                            <span class="metric-label">Agents Monitored</span>
+                                            <span class="metric-value" x-text="Object.keys(observabilityData.agent_performance).length"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -747,6 +787,230 @@
             </div>
         </div>
 
+                <!-- Observability Tab -->
+                <div x-show="activeTab === 'observability'" class="fade-in">
+                    <div class="row g-4">
+                        <!-- Weave Status Card -->
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6 class="card-title mb-0">
+                                        <i class="bi bi-eye me-2"></i>
+                                        Weave Observability Status
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="status-indicator me-3" :class="'status-' + observabilityData.weave_status">
+                                            <span class="status-dot"></span>
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-1" x-text="observabilityData.weave_status.toUpperCase()"></h6>
+                                            <small class="text-muted">Observability System</small>
+                                        </div>
+                                    </div>
+                                    <div class="row text-center">
+                                        <div class="col-6">
+                                            <h5 class="mb-1" x-text="observabilityData.active_missions"></h5>
+                                            <small class="text-muted">Active Missions</small>
+                                        </div>
+                                        <div class="col-6">
+                                            <h5 class="mb-1" x-text="observabilityData.total_missions"></h5>
+                                            <small class="text-muted">Total Missions</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- System Performance Card -->
+                        <div class="col-lg-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6 class="card-title mb-0">
+                                        <i class="bi bi-speedometer2 me-2"></i>
+                                        System Performance Metrics
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="metric-item">
+                                                <div class="metric-header">
+                                                    <span class="metric-label">Memory Usage</span>
+                                                    <span class="metric-value" x-text="observabilityData.system_metrics.memory_usage + '%'"></span>
+                                                </div>
+                                                <div class="progress" style="height: 6px;">
+                                                    <div class="progress-bar" :class="getResourceClass(observabilityData.system_metrics.memory_usage)" 
+                                                         :style="'width: ' + observabilityData.system_metrics.memory_usage + '%'"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="metric-item">
+                                                <div class="metric-header">
+                                                    <span class="metric-label">CPU Usage</span>
+                                                    <span class="metric-value" x-text="observabilityData.system_metrics.cpu_usage + '%'"></span>
+                                                </div>
+                                                <div class="progress" style="height: 6px;">
+                                                    <div class="progress-bar" :class="getResourceClass(observabilityData.system_metrics.cpu_usage)" 
+                                                         :style="'width: ' + observabilityData.system_metrics.cpu_usage + '%'"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="metric-item">
+                                                <div class="metric-header">
+                                                    <span class="metric-label">Disk Usage</span>
+                                                    <span class="metric-value" x-text="observabilityData.system_metrics.disk_usage + '%'"></span>
+                                                </div>
+                                                <div class="progress" style="height: 6px;">
+                                                    <div class="progress-bar" :class="getResourceClass(observabilityData.system_metrics.disk_usage)" 
+                                                         :style="'width: ' + observabilityData.system_metrics.disk_usage + '%'"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Agent Performance -->
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6 class="card-title mb-0">
+                                        <i class="bi bi-robot me-2"></i>
+                                        Agent Performance Analytics
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Agent Name</th>
+                                                    <th>Grade</th>
+                                                    <th>Success Rate</th>
+                                                    <th>Avg Execution Time</th>
+                                                    <th>Total Executions</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <template x-for="(agent, name) in observabilityData.agent_performance" :key="name">
+                                                    <tr>
+                                                        <td x-text="name"></td>
+                                                        <td>
+                                                            <span class="badge" :class="'badge-' + getGradeClass(observabilityData.performance_grades[name])" 
+                                                                  x-text="observabilityData.performance_grades[name]"></span>
+                                                        </td>
+                                                        <td x-text="(agent.success_rate * 100).toFixed(1) + '%'"></td>
+                                                        <td x-text="agent.avg_execution_time.toFixed(2) + 's'"></td>
+                                                        <td x-text="agent.total_executions"></td>
+                                                        <td>
+                                                            <button class="btn btn-sm btn-outline-primary" @click="viewAgentDetails(name)">
+                                                                <i class="bi bi-eye"></i> Details
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Traces -->
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6 class="card-title mb-0">
+                                        <i class="bi bi-diagram-3 me-2"></i>
+                                        Recent Mission Traces
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Trace ID</th>
+                                                    <th>Mission Name</th>
+                                                    <th>Duration</th>
+                                                    <th>Status</th>
+                                                    <th>Timestamp</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <template x-for="trace in observabilityData.recent_traces" :key="trace.trace_id">
+                                                    <tr>
+                                                        <td x-text="trace.trace_id"></td>
+                                                        <td x-text="trace.trace_name"></td>
+                                                        <td x-text="trace.duration + 's'"></td>
+                                                        <td>
+                                                            <span class="badge" :class="'badge-' + getStatusClass(trace.status)" 
+                                                                  x-text="trace.status"></span>
+                                                        </td>
+                                                        <td x-text="formatTime(trace.timestamp)"></td>
+                                                    </tr>
+                                                </template>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- WandB Runs -->
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6 class="card-title mb-0">
+                                        <i class="bi bi-cloud me-2"></i>
+                                        WandB Experiment Runs
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Run ID</th>
+                                                    <th>Project</th>
+                                                    <th>Status</th>
+                                                    <th>Start Time</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <template x-for="run in observabilityData.wandb_runs" :key="run.run_id">
+                                                    <tr>
+                                                        <td x-text="run.run_id"></td>
+                                                        <td x-text="run.project"></td>
+                                                        <td>
+                                                            <span class="badge" :class="'badge-' + getStatusClass(run.status)" 
+                                                                  x-text="run.status"></span>
+                                                        </td>
+                                                        <td x-text="formatTime(run.start_time)"></td>
+                                                        <td>
+                                                            <a href="https://wandb.ai/elliotttmiller-north-hennepin-community-college/cognitive-forge-v5" 
+                                                               target="_blank" class="btn btn-sm btn-outline-primary">
+                                                                <i class="bi bi-box-arrow-up-right"></i> View
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Settings Tab -->
                 <div x-show="activeTab === 'settings'" class="fade-in">
                     <div class="card">
@@ -825,6 +1089,20 @@
                     refreshInterval: 10000,
                     theme: 'dark'
                 },
+                observabilityData: {
+                    active_missions: 0,
+                    total_missions: 0,
+                    agent_performance: {},
+                    system_metrics: {
+                        memory_usage: 0,
+                        cpu_usage: 0,
+                        disk_usage: 0
+                    },
+                    recent_traces: [],
+                    performance_grades: {},
+                    weave_status: 'offline',
+                    wandb_runs: []
+                },
                 serviceStatus: {
                     overall_status: 'loading',
                     services: {
@@ -859,9 +1137,11 @@
 
                 init() {
                     this.loadMissions();
+                    this.loadObservabilityData();
                     this.initializeCharts();
                     this.startPolling();
                     this.startServiceStatusPolling();
+                    this.startObservabilityPolling();
                     this.hideLoadingScreen();
                 },
 
@@ -888,6 +1168,52 @@
                         console.error('Error updating service status:', error);
                         // Set error status
                         this.serviceStatus.overall_status = 'error';
+                    }
+                },
+
+                async loadObservabilityData() {
+                    try {
+                        const response = await fetch('/observability/data');
+                        if (response.ok) {
+                            this.observabilityData = await response.json();
+                        } else {
+                            console.error('Observability data response not ok:', response.status);
+                        }
+                    } catch (error) {
+                        console.error('Error loading observability data:', error);
+                    }
+                },
+
+                async startObservabilityPolling() {
+                    // Poll every 10 seconds
+                    setInterval(() => {
+                        this.loadObservabilityData();
+                    }, 10000);
+                },
+
+                async viewAgentDetails(agentName) {
+                    try {
+                        const response = await fetch(`/observability/agents/${agentName}`);
+                        if (response.ok) {
+                            const agentData = await response.json();
+                            this.showToast(`Agent ${agentName}: ${(agentData.success_rate * 100).toFixed(1)}% success rate`, 'info');
+                        } else {
+                            this.showToast('Failed to load agent details', 'error');
+                        }
+                    } catch (error) {
+                        console.error('Error loading agent details:', error);
+                        this.showToast('Error loading agent details', 'error');
+                    }
+                },
+
+                getGradeClass(grade) {
+                    switch(grade) {
+                        case 'A+': return 'success';
+                        case 'A': return 'success';
+                        case 'B': return 'info';
+                        case 'C': return 'warning';
+                        case 'D': return 'danger';
+                        default: return 'secondary';
                     }
                 },
 

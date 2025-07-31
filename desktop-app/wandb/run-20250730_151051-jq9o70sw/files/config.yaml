@@ -1,0 +1,66 @@
+_wandb:
+    value:
+        cli_version: 0.21.0
+        e:
+            ce2p6w5uh8fenuyucy2zzz3np2rrrf2r:
+                codePath: desktop-app\test_performance_demo.py
+                codePathLocal: test_performance_demo.py
+                cpu_count: 8
+                cpu_count_logical: 16
+                cudaVersion: "12.9"
+                disk:
+                    /:
+                        total: "498684919808"
+                        used: "283125911552"
+                executable: C:\Users\AMD\AppData\Local\Programs\Python\Python311\python.exe
+                git:
+                    commit: 377e1324a89c70de21cc9a7d4d67d57fbc0186fe
+                    remote: https://github.com/elliotttmiller/sentinel.ai.git
+                gpu: NVIDIA GeForce GTX 1070
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Pascal
+                      cudaCores: 1920
+                      memoryTotal: "8589934592"
+                      name: NVIDIA GeForce GTX 1070
+                      uuid: GPU-ceb7970b-f836-81d2-c126-25b8b7e0da61
+                host: DESKTOP-7CFR9JU
+                memory:
+                    total: "17101807616"
+                os: Windows-10-10.0.26100-SP0
+                program: C:\Users\AMD\sentinel\desktop-app\test_performance_demo.py
+                python: CPython 3.11.9
+                root: C:\Users\AMD\sentinel\desktop-app
+                startedAt: "2025-07-30T20:10:51.976132Z"
+                writerId: ce2p6w5uh8fenuyucy2zzz3np2rrrf2r
+        m: []
+        python_version: 3.11.9
+        t:
+            "1":
+                - 86
+                - 92
+                - 95
+                - 96
+                - 97
+                - 105
+            "2":
+                - 86
+                - 92
+                - 95
+                - 96
+                - 97
+                - 105
+            "3":
+                - 16
+            "4": 3.11.9
+            "5": 0.21.0
+            "8":
+                - 3
+            "12": 0.21.0
+            "13": windows-amd64
+observability_enabled:
+    value: true
+system_version:
+    value: v5.0
+weave_integration:
+    value: true

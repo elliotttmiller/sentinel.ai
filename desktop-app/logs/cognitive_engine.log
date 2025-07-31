@@ -432,3 +432,177 @@ WARNING:  WatchFiles detected changes in 'Fix-AI.py'. Reloading...
 ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
 WARNING:  WatchFiles detected changes in 'Fix-AI.py'. Reloading...
 ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'src\utils\weave_observability.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'src\utils\weave_observability.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'src\utils\weave_observability.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'src\utils\weave_enhanced_fix_ai.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'src\utils\weave_enhanced_fix_ai.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'src\utils\weave_enhanced_fix_ai.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'SYSTEM_OPTIMIZATION_HUB.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'fix_ai.py', 'Fix-AI.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'COMPREHENSIVE_SYSTEM_TEST.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'system_optimization_hub.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'system_optimization_hub.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'system_optimization_hub.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'system_optimization_hub.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'system_optimization_hub.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'system_optimization_hub.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'system_optimization_hub.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'test_performance_demo.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'test_performance_demo.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'test_performance_demo.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'src\utils\fix_ai.py', 'src\utils\weave_enhanced_fix_ai.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'system_optimization_hub.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'system_optimization_hub.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'system_optimization_hub.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'system_optimization_hub.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'fix_ai.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'src\utils\fix_ai.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'src\utils\fix_ai.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "src.cognitive_engine".
+WARNING:  WatchFiles detected changes in 'test_weave_integration.py'. Reloading...
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 132, in _main
+    self = reduction.pickle.load(from_parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'uvicorn'
+WARNING:  WatchFiles detected changes in 'test_weave_integration.py'. Reloading...
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 132, in _main
+    self = reduction.pickle.load(from_parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'uvicorn'
+WARNING:  WatchFiles detected changes in 'test_weave_integration.py'. Reloading...
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 132, in _main
+    self = reduction.pickle.load(from_parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'uvicorn'
+WARNING:  WatchFiles detected changes in 'wandb_login.py'. Reloading...
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 132, in _main
+    self = reduction.pickle.load(from_parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'uvicorn'
+WARNING:  WatchFiles detected changes in 'wandb_login.py'. Reloading...
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 132, in _main
+    self = reduction.pickle.load(from_parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'uvicorn'
+WARNING:  WatchFiles detected changes in 'wandb_login.py'. Reloading...
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 132, in _main
+    self = reduction.pickle.load(from_parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'uvicorn'
+WARNING:  WatchFiles detected changes in 'test_weave_integration.py'. Reloading...
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 132, in _main
+    self = reduction.pickle.load(from_parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'uvicorn'
+WARNING:  WatchFiles detected changes in 'test_weave_integration.py'. Reloading...
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 132, in _main
+    self = reduction.pickle.load(from_parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'uvicorn'
+WARNING:  WatchFiles detected changes in 'src\main.py'. Reloading...
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 132, in _main
+    self = reduction.pickle.load(from_parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'uvicorn'
+WARNING:  WatchFiles detected changes in 'src\main.py'. Reloading...
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 132, in _main
+    self = reduction.pickle.load(from_parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'uvicorn'
+WARNING:  WatchFiles detected changes in 'src\main.py'. Reloading...
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 132, in _main
+    self = reduction.pickle.load(from_parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'uvicorn'
+WARNING:  WatchFiles detected changes in 'src\main.py'. Reloading...
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 122, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\spawn.py", line 132, in _main
+    self = reduction.pickle.load(from_parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'uvicorn'

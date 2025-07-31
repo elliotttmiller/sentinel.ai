@@ -3653,3 +3653,354 @@ INFO:     127.0.0.1:57753 - "GET /service-status HTTP/1.1" 200 OK
 INFO:     127.0.0.1:57772 - "GET /missions HTTP/1.1" 200 OK
 INFO:     127.0.0.1:57772 - "GET /service-status HTTP/1.1" 200 OK
 WARNING:  WatchFiles detected changes in 'Fix-AI.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+2025-07-30 14:30:43.850 | INFO     | src.main:shutdown_event:427 - \U0001f6d1 Cognitive Forge Desktop App shutting down...
+2025-07-30 14:30:43.853 | WARNING  | src.models.advanced_database:log_system_event:342 - Database logging failed (continuing without logging): (psycopg2.OperationalError) server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+[SQL: INSERT INTO system_logs (level, message, component, source, created_at, log_metadata) VALUES (%(level)s, %(message)s, %(component)s, %(source)s, %(created_at)s, %(log_metadata)s) RETURNING system_logs.id]
+[parameters: {'level': 'INFO', 'message': 'Cognitive Forge Desktop App shutting down', 'component': 'main', 'source': 'main', 'created_at': datetime.datetime(2025, 7, 30, 19, 30, 43, 852775), 'log_metadata': '{"shutdown_time": "2025-07-30T19:30:43.850721"}'}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+INFO:     Application shutdown complete.
+INFO:     Finished server process [19800]
+WARNING:  WatchFiles detected changes in 'test_performance_demo.py', 'src\utils\weave_observability.py', 'system_optimization_hub.py', 'COMPREHENSIVE_SYSTEM_TEST.py', 'fix_ai.py', 'src\utils\weave_enhanced_fix_ai.py', 'Fix-AI.py'. Reloading...
+2025-07-30 14:30:58.900 | INFO     | src.models.advanced_database:__init__:113 - ChromaDB memory system initialized successfully
+2025-07-30 14:30:59.839 | INFO     | src.models.advanced_database:__init__:120 - Database system initialized successfully with postgresql://postgres:LSvFcJSLjYBxsWrcTtgBUgLlLYBdPqiS@trolley.proxy.rlwy.net:44667/railway
+2025-07-30 14:30:59.860 | INFO     | src.utils.phoenix_protocol:__init__:24 - Phoenix Protocol initialized - Self-healing system active
+2025-07-30 14:30:59.860 | INFO     | src.utils.guardian_protocol:__init__:26 - Guardian Protocol initialized - Quality assurance system active
+2025-07-30 14:30:59.860 | INFO     | src.utils.synapse_logging:__init__:33 - Synapse Logging System initialized - Unified consciousness active
+2025-07-30 14:30:59.860 | INFO     | src.utils.self_learning_module:__init__:26 - Self-Learning Module initialized - Continuous improvement active
+2025-07-30 14:30:59.860 | INFO     | src.core.cognitive_forge_engine:__init__:78 - Cognitive Forge Engine v5.0 initialized with model: gemini-1.5-pro
+2025-07-30 14:30:59.860 | INFO     | src.core.cognitive_forge_engine:__init__:79 - Sentient Operating System: Phoenix Protocol, Guardian Protocol, and Synapse Logging active
+INFO:     Started server process [17684]
+INFO:     Waiting for application startup.
+2025-07-30 14:30:59.886 | INFO     | src.main:startup_event:413 - \U0001f680 Cognitive Forge Desktop App starting up...
+2025-07-30 14:31:00.018 | INFO     | src.main:shutdown_event:427 - \U0001f6d1 Cognitive Forge Desktop App shutting down...
+ERROR:    Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 686, in lifespan
+    await receive()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+
+Process SpawnProcess-72:
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\_subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 61, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+WARNING:  WatchFiles detected changes in 'src\utils\weave_enhanced_fix_ai.py', 'src\utils\fix_ai.py'. Reloading...
+2025-07-30 14:31:17.605 | INFO     | src.models.advanced_database:__init__:113 - ChromaDB memory system initialized successfully
+2025-07-30 14:31:18.813 | INFO     | src.models.advanced_database:__init__:120 - Database system initialized successfully with postgresql://postgres:LSvFcJSLjYBxsWrcTtgBUgLlLYBdPqiS@trolley.proxy.rlwy.net:44667/railway
+2025-07-30 14:31:18.841 | INFO     | src.utils.phoenix_protocol:__init__:24 - Phoenix Protocol initialized - Self-healing system active
+2025-07-30 14:31:18.842 | INFO     | src.utils.guardian_protocol:__init__:26 - Guardian Protocol initialized - Quality assurance system active
+2025-07-30 14:31:18.842 | INFO     | src.utils.synapse_logging:__init__:33 - Synapse Logging System initialized - Unified consciousness active
+2025-07-30 14:31:18.849 | INFO     | src.utils.self_learning_module:__init__:26 - Self-Learning Module initialized - Continuous improvement active
+2025-07-30 14:31:18.849 | INFO     | src.core.cognitive_forge_engine:__init__:78 - Cognitive Forge Engine v5.0 initialized with model: gemini-1.5-pro
+2025-07-30 14:31:18.849 | INFO     | src.core.cognitive_forge_engine:__init__:79 - Sentient Operating System: Phoenix Protocol, Guardian Protocol, and Synapse Logging active
+INFO:     Started server process [19524]
+INFO:     Waiting for application startup.
+2025-07-30 14:31:18.861 | INFO     | src.main:startup_event:413 - \U0001f680 Cognitive Forge Desktop App starting up...
+2025-07-30 14:31:18.986 | INFO     | src.main:shutdown_event:427 - \U0001f6d1 Cognitive Forge Desktop App shutting down...
+ERROR:    Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 686, in lifespan
+    await receive()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+
+Process SpawnProcess-73:
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\_subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 61, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+2025-07-30 14:31:33.300 | INFO     | src.models.advanced_database:__init__:113 - ChromaDB memory system initialized successfully
+2025-07-30 14:31:34.245 | INFO     | src.models.advanced_database:__init__:120 - Database system initialized successfully with postgresql://postgres:LSvFcJSLjYBxsWrcTtgBUgLlLYBdPqiS@trolley.proxy.rlwy.net:44667/railway
+2025-07-30 14:31:34.269 | INFO     | src.utils.phoenix_protocol:__init__:24 - Phoenix Protocol initialized - Self-healing system active
+2025-07-30 14:31:34.272 | INFO     | src.utils.guardian_protocol:__init__:26 - Guardian Protocol initialized - Quality assurance system active
+2025-07-30 14:31:34.274 | INFO     | src.utils.synapse_logging:__init__:33 - Synapse Logging System initialized - Unified consciousness active
+2025-07-30 14:31:34.276 | INFO     | src.utils.self_learning_module:__init__:26 - Self-Learning Module initialized - Continuous improvement active
+2025-07-30 14:31:34.277 | INFO     | src.core.cognitive_forge_engine:__init__:78 - Cognitive Forge Engine v5.0 initialized with model: gemini-1.5-pro
+2025-07-30 14:31:34.277 | INFO     | src.core.cognitive_forge_engine:__init__:79 - Sentient Operating System: Phoenix Protocol, Guardian Protocol, and Synapse Logging active
+INFO:     Started server process [3904]
+INFO:     Waiting for application startup.
+2025-07-30 14:31:34.290 | INFO     | src.main:startup_event:413 - \U0001f680 Cognitive Forge Desktop App starting up...
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'system_optimization_hub.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+2025-07-30 14:41:23.681 | INFO     | src.main:shutdown_event:427 - \U0001f6d1 Cognitive Forge Desktop App shutting down...
+INFO:     Application shutdown complete.
+INFO:     Finished server process [3904]
+WARNING:  WatchFiles detected changes in 'fix_ai.py', 'system_optimization_hub.py'. Reloading...
+2025-07-30 14:41:38.188 | INFO     | src.models.advanced_database:__init__:113 - ChromaDB memory system initialized successfully
+2025-07-30 14:41:39.222 | INFO     | src.models.advanced_database:__init__:120 - Database system initialized successfully with postgresql://postgres:LSvFcJSLjYBxsWrcTtgBUgLlLYBdPqiS@trolley.proxy.rlwy.net:44667/railway
+2025-07-30 14:41:39.240 | INFO     | src.utils.phoenix_protocol:__init__:24 - Phoenix Protocol initialized - Self-healing system active
+2025-07-30 14:41:39.248 | INFO     | src.utils.guardian_protocol:__init__:26 - Guardian Protocol initialized - Quality assurance system active
+2025-07-30 14:41:39.248 | INFO     | src.utils.synapse_logging:__init__:33 - Synapse Logging System initialized - Unified consciousness active
+2025-07-30 14:41:39.248 | INFO     | src.utils.self_learning_module:__init__:26 - Self-Learning Module initialized - Continuous improvement active
+2025-07-30 14:41:39.248 | INFO     | src.core.cognitive_forge_engine:__init__:78 - Cognitive Forge Engine v5.0 initialized with model: gemini-1.5-pro
+2025-07-30 14:41:39.248 | INFO     | src.core.cognitive_forge_engine:__init__:79 - Sentient Operating System: Phoenix Protocol, Guardian Protocol, and Synapse Logging active
+INFO:     Started server process [16616]
+INFO:     Waiting for application startup.
+2025-07-30 14:41:39.254 | INFO     | src.main:startup_event:413 - \U0001f680 Cognitive Forge Desktop App starting up...
+2025-07-30 14:41:39.422 | INFO     | src.main:shutdown_event:427 - \U0001f6d1 Cognitive Forge Desktop App shutting down...
+ERROR:    Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 686, in lifespan
+    await receive()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+
+Process SpawnProcess-75:
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\_subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 61, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+2025-07-30 14:41:53.952 | INFO     | src.models.advanced_database:__init__:113 - ChromaDB memory system initialized successfully
+2025-07-30 14:41:55.132 | INFO     | src.models.advanced_database:__init__:120 - Database system initialized successfully with postgresql://postgres:LSvFcJSLjYBxsWrcTtgBUgLlLYBdPqiS@trolley.proxy.rlwy.net:44667/railway
+2025-07-30 14:41:55.154 | INFO     | src.utils.phoenix_protocol:__init__:24 - Phoenix Protocol initialized - Self-healing system active
+2025-07-30 14:41:55.161 | INFO     | src.utils.guardian_protocol:__init__:26 - Guardian Protocol initialized - Quality assurance system active
+2025-07-30 14:41:55.161 | INFO     | src.utils.synapse_logging:__init__:33 - Synapse Logging System initialized - Unified consciousness active
+2025-07-30 14:41:55.165 | INFO     | src.utils.self_learning_module:__init__:26 - Self-Learning Module initialized - Continuous improvement active
+2025-07-30 14:41:55.165 | INFO     | src.core.cognitive_forge_engine:__init__:78 - Cognitive Forge Engine v5.0 initialized with model: gemini-1.5-pro
+2025-07-30 14:41:55.165 | INFO     | src.core.cognitive_forge_engine:__init__:79 - Sentient Operating System: Phoenix Protocol, Guardian Protocol, and Synapse Logging active
+INFO:     Started server process [16784]
+INFO:     Waiting for application startup.
+2025-07-30 14:41:55.182 | INFO     | src.main:startup_event:413 - \U0001f680 Cognitive Forge Desktop App starting up...
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'src\utils\fix_ai.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+2025-07-30 14:42:15.426 | INFO     | src.main:shutdown_event:427 - \U0001f6d1 Cognitive Forge Desktop App shutting down...
+INFO:     Application shutdown complete.
+INFO:     Finished server process [16784]
+2025-07-30 14:42:31.522 | INFO     | src.models.advanced_database:__init__:113 - ChromaDB memory system initialized successfully
+2025-07-30 14:42:32.891 | INFO     | src.models.advanced_database:__init__:120 - Database system initialized successfully with postgresql://postgres:LSvFcJSLjYBxsWrcTtgBUgLlLYBdPqiS@trolley.proxy.rlwy.net:44667/railway
+2025-07-30 14:42:32.915 | INFO     | src.utils.phoenix_protocol:__init__:24 - Phoenix Protocol initialized - Self-healing system active
+2025-07-30 14:42:32.920 | INFO     | src.utils.guardian_protocol:__init__:26 - Guardian Protocol initialized - Quality assurance system active
+2025-07-30 14:42:32.920 | INFO     | src.utils.synapse_logging:__init__:33 - Synapse Logging System initialized - Unified consciousness active
+2025-07-30 14:42:32.927 | INFO     | src.utils.self_learning_module:__init__:26 - Self-Learning Module initialized - Continuous improvement active
+2025-07-30 14:42:32.927 | INFO     | src.core.cognitive_forge_engine:__init__:78 - Cognitive Forge Engine v5.0 initialized with model: gemini-1.5-pro
+2025-07-30 14:42:32.927 | INFO     | src.core.cognitive_forge_engine:__init__:79 - Sentient Operating System: Phoenix Protocol, Guardian Protocol, and Synapse Logging active
+INFO:     Started server process [3912]
+INFO:     Waiting for application startup.
+2025-07-30 14:42:32.936 | INFO     | src.main:startup_event:413 - \U0001f680 Cognitive Forge Desktop App starting up...
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'src\utils\fix_ai.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+2025-07-30 14:42:52.455 | INFO     | src.main:shutdown_event:427 - \U0001f6d1 Cognitive Forge Desktop App shutting down...
+INFO:     Application shutdown complete.
+INFO:     Finished server process [3912]
+2025-07-30 14:43:08.780 | INFO     | src.models.advanced_database:__init__:113 - ChromaDB memory system initialized successfully
+2025-07-30 14:43:09.714 | INFO     | src.models.advanced_database:__init__:120 - Database system initialized successfully with postgresql://postgres:LSvFcJSLjYBxsWrcTtgBUgLlLYBdPqiS@trolley.proxy.rlwy.net:44667/railway
+2025-07-30 14:43:09.756 | INFO     | src.utils.phoenix_protocol:__init__:24 - Phoenix Protocol initialized - Self-healing system active
+2025-07-30 14:43:09.762 | INFO     | src.utils.guardian_protocol:__init__:26 - Guardian Protocol initialized - Quality assurance system active
+2025-07-30 14:43:09.762 | INFO     | src.utils.synapse_logging:__init__:33 - Synapse Logging System initialized - Unified consciousness active
+2025-07-30 14:43:09.768 | INFO     | src.utils.self_learning_module:__init__:26 - Self-Learning Module initialized - Continuous improvement active
+2025-07-30 14:43:09.768 | INFO     | src.core.cognitive_forge_engine:__init__:78 - Cognitive Forge Engine v5.0 initialized with model: gemini-1.5-pro
+2025-07-30 14:43:09.770 | INFO     | src.core.cognitive_forge_engine:__init__:79 - Sentient Operating System: Phoenix Protocol, Guardian Protocol, and Synapse Logging active
+INFO:     Started server process [10196]
+INFO:     Waiting for application startup.
+2025-07-30 14:43:09.789 | INFO     | src.main:startup_event:413 - \U0001f680 Cognitive Forge Desktop App starting up...
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'test_weave_integration.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+2025-07-30 15:47:24.039 | INFO     | src.main:shutdown_event:427 - \U0001f6d1 Cognitive Forge Desktop App shutting down...
+INFO:     Application shutdown complete.
+INFO:     Finished server process [10196]
