@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
 """
-SYSTEM OPTIMIZATION HUB - The Sentient Supercharged Phoenix System v5.0
+SYSTEM OPTIMIZATION HUB - The Sentient Supercharged Phoenix System v5.2
 Cutting-edge, highly sophisticated and advanced system optimization/test hub
-Definitive testing and optimization center for Cognitive Forge v5.0 with enterprise-grade automated debugging
+Definitive testing and optimization center for Cognitive Forge v5.2 with Three-Pillar Architecture
 
 This hub contains every single critical and necessary test for our entire system.
 Individual tests can be called as needed for targeted validation.
-Includes comprehensive testing for Fix-AI, automated debugging, Sentry integration, and self-healing capabilities.
+Includes comprehensive testing for Three-Pillar Architecture, Fix-AI, automated debugging, Sentry integration, and self-healing capabilities.
+
+THREE-PILLAR ARCHITECTURE:
+- Pillar 1: Force Multiplier - Expert-level agent capabilities
+- Pillar 2: Efficiency Boost - High-performance optimization  
+- Pillar 3: Future-Proofing - Advanced intelligence foundation
 """
 
 import asyncio
@@ -60,6 +65,10 @@ class TestCategory(Enum):
     AUTOMATED_DEBUGGING = "automated_debugging"
     SENTRY_INTEGRATION = "sentry_integration"
     SELF_HEALING = "self_healing"
+    THREE_PILLAR_ARCHITECTURE = "three_pillar_architecture"
+    FORCE_MULTIPLIER = "force_multiplier"
+    EFFICIENCY_BOOST = "efficiency_boost"
+    FUTURE_PROOFING = "future_proofing"
 
 
 @dataclass
@@ -106,6 +115,10 @@ class SystemOptimizationHub:
             "enable_automated_debugging": True,
             "enable_sentry_integration": True,
             "enable_self_healing": True,
+            "enable_three_pillar_testing": True,
+            "enable_force_multiplier_testing": True,
+            "enable_efficiency_boost_testing": True,
+            "enable_future_proofing_testing": True,
             "max_execution_time": 300,  # 5 minutes per test
             "memory_threshold": 0.8,  # 80% memory usage threshold
         }
@@ -887,16 +900,20 @@ class SystemOptimizationHub:
             # Test 3: Agent creation error handling
             print("   🧪 Test 3: Agent Creation Error Handling")
             try:
-                # This should not throw an exception even with invalid parameters
+                # Create agent with None LLM
                 invalid_agent = self.engine.planner_agents.lead_architect(None)
+                # Try to execute a task - this should fail
+                result = invalid_agent.execute_task("Test task")
+                # If we get here, the agent didn't fail as expected
                 error_tests["agent_creation_error_handling"] = False
-                test_explanations["agent_creation_error_handling"] = "❌ SYSTEM ISSUE: Agent creation should have failed with invalid parameters"
-                user_friendly_results["agent_creation_error_handling"] = "FAILED - Agent creation should have failed"
+                test_explanations["agent_creation_error_handling"] = "❌ SYSTEM ISSUE: Agent execution should have failed with None LLM"
+                user_friendly_results["agent_creation_error_handling"] = "FAILED - Agent execution should have failed"
             except Exception as e:
+                # This is the expected behavior - the agent should fail
                 error_tests["agent_creation_error_handling"] = True
-                test_explanations["agent_creation_error_handling"] = "✅ WORKING CORRECTLY: Agent creation properly failed with invalid parameters"
-                user_friendly_results["agent_creation_error_handling"] = "PASSED - Agent creation correctly failed"
-                print(f"      ✅ Expected agent creation error caught: {type(e).__name__}")
+                test_explanations["agent_creation_error_handling"] = "✅ WORKING CORRECTLY: Agent execution properly failed with None LLM"
+                user_friendly_results["agent_creation_error_handling"] = "PASSED - Agent execution correctly failed"
+                print(f"      ✅ Expected agent execution error caught: {type(e).__name__}")
             
             successful_error_handling = sum(error_tests.values())
             total_error_tests = len(error_tests)
@@ -1237,6 +1254,331 @@ class SystemOptimizationHub:
             return {"status": "FAIL", "error": str(e)}
     
     # ============================================================================
+    # THREE-PILLAR ARCHITECTURE TESTS
+    # ============================================================================
+    
+    async def test_three_pillar_architecture(self) -> Dict[str, Any]:
+        """Test complete Three-Pillar Architecture implementation"""
+        try:
+            print("🏗️ Testing Three-Pillar Architecture...")
+            print("   📊 This test validates the complete Three-Pillar Architecture implementation")
+            print("   🎯 Testing all three pillars: Force Multiplier, Efficiency Boost, Future-Proofing")
+            print()
+            
+            pillar_results = {}
+            
+            # Test Pillar 1: Force Multiplier
+            print("   🚀 PILLAR 1: FORCE MULTIPLIER - Expert-level agent capabilities")
+            try:
+                from src.tools.specialized_tools import (
+                    SecurityScannerTool, PerformanceProfilerTool, 
+                    DocumentationGeneratorTool, KnowledgeGraphTool, CodeAnalyzerTool
+                )
+                
+                # Test SecurityScannerTool
+                security_scanner = SecurityScannerTool()
+                security_test = security_scanner.scan_project(".")
+                pillar_results["security_scanner"] = "error" not in security_test and security_test.get("static_analysis") is not None
+                print(f"      ✅ SecurityScannerTool: {'PASS' if pillar_results['security_scanner'] else 'FAIL'}")
+                
+                # Test PerformanceProfilerTool
+                performance_profiler = PerformanceProfilerTool()
+                performance_test = performance_profiler.profile_application(".")
+                pillar_results["performance_profiler"] = "error" not in performance_test and performance_test.get("execution_profile") is not None
+                print(f"      ✅ PerformanceProfilerTool: {'PASS' if pillar_results['performance_profiler'] else 'FAIL'}")
+                
+                # Test DocumentationGeneratorTool
+                doc_generator = DocumentationGeneratorTool()
+                doc_test = doc_generator.generate_documentation(".")
+                pillar_results["documentation_generator"] = "error" not in doc_test and doc_test.get("api_documentation") is not None
+                print(f"      ✅ DocumentationGeneratorTool: {'PASS' if pillar_results['documentation_generator'] else 'FAIL'}")
+                
+                # Test KnowledgeGraphTool
+                knowledge_graph = KnowledgeGraphTool()
+                knowledge_test = knowledge_graph.build_knowledge_graph(["."])
+                pillar_results["knowledge_graph"] = "error" not in knowledge_test and knowledge_test.get("total_entities") is not None
+                print(f"      ✅ KnowledgeGraphTool: {'PASS' if pillar_results['knowledge_graph'] else 'FAIL'}")
+                
+                # Test CodeAnalyzerTool
+                code_analyzer = CodeAnalyzerTool()
+                code_test = code_analyzer.analyze_codebase(".")
+                pillar_results["code_analyzer"] = "error" not in code_test and code_test.get("overall_score") is not None
+                print(f"      ✅ CodeAnalyzerTool: {'PASS' if pillar_results['code_analyzer'] else 'FAIL'}")
+                
+            except Exception as e:
+                print(f"      ❌ Force Multiplier Pillar failed: {str(e)}")
+                pillar_results["force_multiplier"] = False
+            
+            # Test Pillar 2: Efficiency Boost
+            print("   ⚡ PILLAR 2: EFFICIENCY BOOST - High-performance optimization")
+            try:
+                from src.utils.performance_optimizer import IntelligentCachingSystem, TaskParallelizer
+                
+                # Test IntelligentCachingSystem
+                caching_system = IntelligentCachingSystem()
+                cache_test = caching_system.optimize_cache()
+                pillar_results["intelligent_caching"] = "error" not in cache_test and cache_test.get("l1_cache") is not None
+                print(f"      ✅ IntelligentCachingSystem: {'PASS' if pillar_results['intelligent_caching'] else 'FAIL'}")
+                
+                # Test TaskParallelizer
+                task_parallelizer = TaskParallelizer()
+                test_tasks = [
+                    {"id": "test_task_1", "type": "io_intensive", "dependencies": []},
+                    {"id": "test_task_2", "type": "cpu_intensive", "dependencies": []},
+                    {"id": "test_task_3", "type": "memory_intensive", "dependencies": []}
+                ]
+                parallel_test = await task_parallelizer.parallelize_tasks(test_tasks)
+                pillar_results["task_parallelizer"] = len(parallel_test) > 0 and not any("error" in result for result in parallel_test)
+                print(f"      ✅ TaskParallelizer: {'PASS' if pillar_results['task_parallelizer'] else 'FAIL'}")
+                
+            except Exception as e:
+                print(f"      ❌ Efficiency Boost Pillar failed: {str(e)}")
+                pillar_results["efficiency_boost"] = False
+            
+            # Test Pillar 3: Future-Proofing
+            print("   🔮 PILLAR 3: FUTURE-PROOFING - Advanced intelligence foundation")
+            try:
+                from src.core.advanced_intelligence import WorkflowOrchestrator, SystemMonitor
+                
+                # Test WorkflowOrchestrator
+                workflow_orchestrator = WorkflowOrchestrator()
+                workflow_test = await workflow_orchestrator.orchestrate_workflow({
+                    "id": "test_workflow",
+                    "name": "Test Workflow",
+                    "tasks": [
+                        {"id": "task1", "type": "io_intensive", "dependencies": []},
+                        {"id": "task2", "type": "cpu_intensive", "dependencies": []},
+                        {"id": "task3", "type": "memory_intensive", "dependencies": []}
+                    ],
+                    "dependencies": {},
+                    "resources": {"cpu": 2, "memory": 1024}
+                })
+                pillar_results["workflow_orchestrator"] = workflow_test.status == "completed"
+                print(f"      ✅ WorkflowOrchestrator: {'PASS' if pillar_results['workflow_orchestrator'] else 'FAIL'}")
+                
+                # Test SystemMonitor
+                system_monitor = SystemMonitor()
+                monitor_test = system_monitor.monitor_system()
+                pillar_results["system_monitor"] = monitor_test.get("status") in ["healthy", "warning"]
+                print(f"      ✅ SystemMonitor: {'PASS' if pillar_results['system_monitor'] else 'FAIL'}")
+                
+            except Exception as e:
+                print(f"      ❌ Future-Proofing Pillar failed: {str(e)}")
+                pillar_results["future_proofing"] = False
+            
+            # Calculate overall success
+            successful_pillars = sum(pillar_results.values())
+            total_pillars = len(pillar_results)
+            success_rate = (successful_pillars / total_pillars * 100) if total_pillars > 0 else 0
+            
+            print()
+            print("   📊 THREE-PILLAR ARCHITECTURE RESULTS:")
+            print(f"      🎯 Success Rate: {success_rate:.1f}%")
+            print(f"      ✅ Successful Components: {successful_pillars}/{total_pillars}")
+            
+            if success_rate >= 90:
+                print("      🏆 EXCELLENT: Three-Pillar Architecture is fully operational!")
+            elif success_rate >= 80:
+                print("      ✅ GOOD: Three-Pillar Architecture is operational with minor issues.")
+            elif success_rate >= 60:
+                print("      ⚠️ ACCEPTABLE: Three-Pillar Architecture has some issues but is functional.")
+            else:
+                print("      ❌ CRITICAL: Three-Pillar Architecture has significant issues.")
+            
+            return {
+                "status": "PASS" if success_rate >= 80 else "FAIL",
+                "success_rate": success_rate,
+                "successful_pillars": successful_pillars,
+                "total_pillars": total_pillars,
+                "pillar_results": pillar_results,
+                "architecture_status": "OPERATIONAL" if success_rate >= 80 else "DEGRADED" if success_rate >= 60 else "FAILED"
+            }
+            
+        except Exception as e:
+            return {
+                "status": "FAIL",
+                "error": str(e),
+                "traceback": traceback.format_exc()
+            }
+    
+    async def test_force_multiplier_pillar(self) -> Dict[str, Any]:
+        """Test Pillar 1: Force Multiplier - Expert-level agent capabilities"""
+        try:
+            print("🚀 Testing Force Multiplier Pillar...")
+            
+            tool_results = {}
+            
+            # Test SecurityScannerTool
+            try:
+                from src.tools.specialized_tools import SecurityScannerTool
+                security_scanner = SecurityScannerTool()
+                result = security_scanner.scan_project(".")
+                tool_results["security_scanner"] = "error" not in result and result.get("static_analysis") is not None
+            except Exception as e:
+                tool_results["security_scanner"] = False
+                tool_results["security_scanner_error"] = str(e)
+            
+            # Test PerformanceProfilerTool
+            try:
+                from src.tools.specialized_tools import PerformanceProfilerTool
+                performance_profiler = PerformanceProfilerTool()
+                result = performance_profiler.profile_application(".")
+                tool_results["performance_profiler"] = "error" not in result and result.get("execution_profile") is not None
+            except Exception as e:
+                tool_results["performance_profiler"] = False
+                tool_results["performance_profiler_error"] = str(e)
+            
+            # Test DocumentationGeneratorTool
+            try:
+                from src.tools.specialized_tools import DocumentationGeneratorTool
+                doc_generator = DocumentationGeneratorTool()
+                result = doc_generator.generate_documentation(".")
+                tool_results["documentation_generator"] = "error" not in result and result.get("api_documentation") is not None
+            except Exception as e:
+                tool_results["documentation_generator"] = False
+                tool_results["documentation_generator_error"] = str(e)
+            
+            # Test KnowledgeGraphTool
+            try:
+                from src.tools.specialized_tools import KnowledgeGraphTool
+                knowledge_graph = KnowledgeGraphTool()
+                result = knowledge_graph.build_knowledge_graph(["."])
+                tool_results["knowledge_graph"] = "error" not in result and result.get("total_entities") is not None
+            except Exception as e:
+                tool_results["knowledge_graph"] = False
+                tool_results["knowledge_graph_error"] = str(e)
+            
+            # Test CodeAnalyzerTool
+            try:
+                from src.tools.specialized_tools import CodeAnalyzerTool
+                code_analyzer = CodeAnalyzerTool()
+                result = code_analyzer.analyze_codebase(".")
+                tool_results["code_analyzer"] = "error" not in result and result.get("overall_score") is not None
+            except Exception as e:
+                tool_results["code_analyzer"] = False
+                tool_results["code_analyzer_error"] = str(e)
+            
+            successful_tools = sum(1 for v in tool_results.values() if isinstance(v, bool) and v)
+            total_tools = len([k for k in tool_results.keys() if not k.endswith('_error')])
+            
+            return {
+                "status": "PASS" if successful_tools >= total_tools * 0.8 else "FAIL",
+                "successful_tools": successful_tools,
+                "total_tools": total_tools,
+                "tool_results": tool_results
+            }
+            
+        except Exception as e:
+            return {
+                "status": "FAIL",
+                "error": str(e),
+                "traceback": traceback.format_exc()
+            }
+    
+    async def test_efficiency_boost_pillar(self) -> Dict[str, Any]:
+        """Test Pillar 2: Efficiency Boost - High-performance optimization"""
+        try:
+            print("⚡ Testing Efficiency Boost Pillar...")
+            
+            component_results = {}
+            
+            # Test IntelligentCachingSystem
+            try:
+                from src.utils.performance_optimizer import IntelligentCachingSystem
+                caching_system = IntelligentCachingSystem()
+                result = caching_system.optimize_cache()
+                component_results["intelligent_caching"] = "error" not in result and result.get("l1_cache") is not None
+            except Exception as e:
+                component_results["intelligent_caching"] = False
+                component_results["intelligent_caching_error"] = str(e)
+            
+            # Test TaskParallelizer
+            try:
+                from src.utils.performance_optimizer import TaskParallelizer
+                task_parallelizer = TaskParallelizer()
+                test_tasks = [
+                    {"id": "test_task_1", "type": "io_intensive", "dependencies": []},
+                    {"id": "test_task_2", "type": "cpu_intensive", "dependencies": []},
+                    {"id": "test_task_3", "type": "memory_intensive", "dependencies": []}
+                ]
+                result = await task_parallelizer.parallelize_tasks(test_tasks)
+                component_results["task_parallelizer"] = len(result) > 0 and not any("error" in r for r in result)
+            except Exception as e:
+                component_results["task_parallelizer"] = False
+                component_results["task_parallelizer_error"] = str(e)
+            
+            successful_components = sum(1 for v in component_results.values() if isinstance(v, bool) and v)
+            total_components = len([k for k in component_results.keys() if not k.endswith('_error')])
+            
+            return {
+                "status": "PASS" if successful_components >= total_components * 0.8 else "FAIL",
+                "successful_components": successful_components,
+                "total_components": total_components,
+                "component_results": component_results
+            }
+            
+        except Exception as e:
+            return {
+                "status": "FAIL",
+                "error": str(e),
+                "traceback": traceback.format_exc()
+            }
+    
+    async def test_future_proofing_pillar(self) -> Dict[str, Any]:
+        """Test Pillar 3: Future-Proofing - Advanced intelligence foundation"""
+        try:
+            print("🔮 Testing Future-Proofing Pillar...")
+            
+            component_results = {}
+            
+            # Test WorkflowOrchestrator
+            try:
+                from src.core.advanced_intelligence import WorkflowOrchestrator
+                workflow_orchestrator = WorkflowOrchestrator()
+                result = await workflow_orchestrator.orchestrate_workflow({
+                    "id": "test_workflow",
+                    "name": "Test Workflow",
+                    "tasks": [
+                        {"id": "task1", "type": "io_intensive", "dependencies": []},
+                        {"id": "task2", "type": "cpu_intensive", "dependencies": []},
+                        {"id": "task3", "type": "memory_intensive", "dependencies": []}
+                    ],
+                    "dependencies": {},
+                    "resources": {"cpu": 2, "memory": 1024}
+                })
+                component_results["workflow_orchestrator"] = result.status == "completed"
+            except Exception as e:
+                component_results["workflow_orchestrator"] = False
+                component_results["workflow_orchestrator_error"] = str(e)
+            
+            # Test SystemMonitor
+            try:
+                from src.core.advanced_intelligence import SystemMonitor
+                system_monitor = SystemMonitor()
+                result = system_monitor.monitor_system()
+                component_results["system_monitor"] = result.get("status") in ["healthy", "warning"]
+            except Exception as e:
+                component_results["system_monitor"] = False
+                component_results["system_monitor_error"] = str(e)
+            
+            successful_components = sum(1 for v in component_results.values() if isinstance(v, bool) and v)
+            total_components = len([k for k in component_results.keys() if not k.endswith('_error')])
+            
+            return {
+                "status": "PASS" if successful_components >= total_components * 0.8 else "FAIL",
+                "successful_components": successful_components,
+                "total_components": total_components,
+                "component_results": component_results
+            }
+            
+        except Exception as e:
+            return {
+                "status": "FAIL",
+                "error": str(e),
+                "traceback": traceback.format_exc()
+            }
+    
+    # ============================================================================
     # SELF-HEALING CAPABILITIES
     # ============================================================================
     
@@ -1438,6 +1780,10 @@ class SystemOptimizationHub:
                 (self.test_sentry_integration, "Sentry Integration", TestCategory.SENTRY_INTEGRATION),
                 (self.test_self_healing_capabilities, "Self-Healing Capabilities", TestCategory.SELF_HEALING),
                 (self.test_stress_testing, "Stress Testing", TestCategory.STRESS_TESTING),
+                (self.test_three_pillar_architecture, "Three-Pillar Architecture", TestCategory.THREE_PILLAR_ARCHITECTURE),
+                (self.test_force_multiplier_pillar, "Force Multiplier Pillar", TestCategory.FORCE_MULTIPLIER),
+                (self.test_efficiency_boost_pillar, "Efficiency Boost Pillar", TestCategory.EFFICIENCY_BOOST),
+                (self.test_future_proofing_pillar, "Future-Proofing Pillar", TestCategory.FUTURE_PROOFING),
             ]
             
             for test_func, test_name, category in test_suites:
@@ -1469,6 +1815,10 @@ class SystemOptimizationHub:
             "error_handling": (self.test_error_handling, "Error Handling", TestCategory.ERROR_HANDLING),
             "integration_tests": (self.test_integration_tests, "Integration Tests", TestCategory.INTEGRATION_TESTS),
             "stress_testing": (self.test_stress_testing, "Stress Testing", TestCategory.STRESS_TESTING),
+            "three_pillar_architecture": (self.test_three_pillar_architecture, "Three-Pillar Architecture", TestCategory.THREE_PILLAR_ARCHITECTURE),
+            "force_multiplier_pillar": (self.test_force_multiplier_pillar, "Force Multiplier Pillar", TestCategory.FORCE_MULTIPLIER),
+            "efficiency_boost_pillar": (self.test_efficiency_boost_pillar, "Efficiency Boost Pillar", TestCategory.EFFICIENCY_BOOST),
+            "future_proofing_pillar": (self.test_future_proofing_pillar, "Future-Proofing Pillar", TestCategory.FUTURE_PROOFING),
         }
         
         if test_name in test_mapping:

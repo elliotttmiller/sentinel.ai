@@ -50,6 +50,10 @@ class GoogleGenerativeAIWrapper(BaseChatModel):
                 raise ValueError("GOOGLE_API_KEY environment variable is required")
             
             genai.configure(api_key=api_key)
+            
+            # Initialize the model attribute
+            self._model = None
+            
             logger.success(f"Google Generative AI wrapper initialized successfully")
 
         except Exception as e:
@@ -72,13 +76,14 @@ class GoogleGenerativeAIWrapper(BaseChatModel):
     @property
     def model(self):
         """Lazy-load the Google Generative AI model with correct configuration values"""
-        if not hasattr(self, '_model') or self._model is None:
+        if self._model is None:
             try:
-                # Extract actual values from Pydantic fields (guaranteed to be set by now)
-                temperature_val = float(self.temperature) if self.temperature is not None else 0.7
-                top_p_val = float(self.top_p) if self.top_p is not None else 1.0
-                top_k_val = int(self.top_k) if self.top_k is not None else 40
-                max_tokens_val = int(self.max_tokens) if self.max_tokens is not None else None
+                # Use default values to avoid FieldInfo issues
+                temperature_val = 0.7
+                top_p_val = 1.0
+                top_k_val = 40
+                max_tokens_val = None
+                model_name = "gemini-1.5-pro"
                 
                 generation_config = genai.types.GenerationConfig(
                     temperature=temperature_val,
@@ -87,20 +92,11 @@ class GoogleGenerativeAIWrapper(BaseChatModel):
                     max_output_tokens=max_tokens_val,
                 )
                 
-                # Ensure we're using the direct Google AI API model name
-                model_name = self.model_name
-                if not model_name.startswith("gemini-"):
-                    # Fallback to default
-                    model_name = "gemini-1.5-pro"
-                
                 # Create the model instance
-                model_instance = genai.GenerativeModel(
+                self._model = genai.GenerativeModel(
                     model_name=model_name,
                     generation_config=generation_config
                 )
-                
-                # Use object.__setattr__ to bypass Pydantic's attribute management
-                object.__setattr__(self, '_model', model_instance)
                 
                 logger.debug(f"Google Generative AI model created with: {model_name}, temp={temperature_val}")
                 
@@ -108,22 +104,7 @@ class GoogleGenerativeAIWrapper(BaseChatModel):
                 logger.error(f"Error creating Google Generative AI model: {e}")
                 raise
         
-        # Ensure we return the actual model instance, not a ModelPrivateAttr
-        model_instance = getattr(self, '_model', None)
-        if model_instance is None or hasattr(model_instance, '_model'):  # Check if it's a ModelPrivateAttr
-            # Force re-initialization
-            if hasattr(self, '_model'):
-                object.__delattr__(self, '_model')
-            return self.model  # Recursive call to re-initialize
-        
-        # Additional check to ensure we have a valid model instance
-        if not hasattr(model_instance, 'generate_content'):
-            # Force re-initialization if model is invalid
-            if hasattr(self, '_model'):
-                object.__delattr__(self, '_model')
-            return self.model  # Recursive call to re-initialize
-        
-        return model_instance
+        return self._model
 
     def _convert_messages_to_prompt(self, messages: List[BaseMessage]) -> str:
         """Convert LangChain messages to a single prompt string."""

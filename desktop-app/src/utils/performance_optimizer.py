@@ -276,6 +276,10 @@ class IntelligentCachingSystem:
             logger.error(f"Cache optimization failed: {e}")
             return {"error": str(e)}
     
+    def optimize_cache(self) -> Dict[str, Any]:
+        """Alias for optimize_cache_performance for compatibility"""
+        return self.optimize_cache_performance()
+    
     def _generate_cache_key(self, key: str) -> str:
         """Generate consistent cache key hash"""
         return hashlib.md5(key.encode()).hexdigest()

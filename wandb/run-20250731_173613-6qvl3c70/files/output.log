@@ -1,0 +1,403 @@
+[32m2025-07-31 17:36:14.435[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36m_initialize_wandb[0m:[36m107[0m - [1m✅ Weights & Biases initialized successfully[0m
+2025-07-31 17:36:14,438 - SystemOptimizationHub - INFO - [INFO] Weave observability initialized for system optimization hub
+🧪 Running comprehensive test suite...
+🚀 WEAVE-ENHANCED SYSTEM OPTIMIZATION HUB - Starting Comprehensive Test Suite
+================================================================================
+🔍 Full observability and monitoring enabled
+================================================================================
+2025-07-31 17:36:14,446 - SystemOptimizationHub - INFO - [START] STARTING TEST: System Initialization (system_initialization)
+[32m2025-07-31 17:36:14.483[0m | [32m[1mSUCCESS [0m | [36msrc.utils.sentry_integration[0m:[36m_initialize_sentry[0m:[36m78[0m - [32m[1mSentry integration initialized successfully[0m
+[32m2025-07-31 17:36:14.485[0m | [32m[1mSUCCESS [0m | [36msrc.utils.google_ai_wrapper[0m:[36m__init__[0m:[36m53[0m - [32m[1mGoogle Generative AI wrapper initialized successfully[0m
+[32m2025-07-31 17:36:14.486[0m | [1mINFO    [0m | [36msrc.core.cognitive_forge_engine[0m:[36m__init__[0m:[36m80[0m - [1mGoogle Generative AI initialized with model: gemini-1.5-pro[0m
+[32m2025-07-31 17:36:14.492[0m | [1mINFO    [0m | [36msrc.agents.specialized_agents[0m:[36m__init__[0m:[36m18[0m - [1mAutonomous Orchestrator Agent initialized[0m
+[32m2025-07-31 17:36:14.493[0m | [1mINFO    [0m | [36msrc.agents.specialized_agents[0m:[36m__init__[0m:[36m94[0m - [1mSelf-Optimization Engineer Agent initialized[0m
+[32m2025-07-31 17:36:14.493[0m | [1mINFO    [0m | [36msrc.agents.specialized_agents[0m:[36m__init__[0m:[36m173[0m - [1mContext Synthesis Agent initialized[0m
+[32m2025-07-31 17:36:14.494[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36m__init__[0m:[36m53[0m - [1mCodeAnalyzerTool initialized[0m
+2025-07-31 17:36:14,494 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): o4509683080822784.ingest.us.sentry.io:443
+[32m2025-07-31 17:36:14.495[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36m__init__[0m:[36m212[0m - [1mSecurityScannerTool initialized[0m
+[32m2025-07-31 17:36:14.496[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36m__init__[0m:[36m695[0m - [1mPerformanceProfilerTool initialized[0m
+[32m2025-07-31 17:36:14.496[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36m__init__[0m:[36m1024[0m - [1mKnowledgeGraphTool initialized[0m
+[32m2025-07-31 17:36:14.496[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36m__init__[0m:[36m1131[0m - [1mDocumentationGeneratorTool initialized[0m
+[32m2025-07-31 17:36:14.497[0m | [1mINFO    [0m | [36msrc.core.cognitive_forge_engine[0m:[36m__init__[0m:[36m116[0m - [1mSpecialized tools suite initialized - Force Multiplier active[0m
+[32m2025-07-31 17:36:14.499[0m | [1mINFO    [0m | [36msrc.utils.performance_optimizer[0m:[36m__init__[0m:[36m169[0m - [1mIntelligentCachingSystem initialized[0m
+[32m2025-07-31 17:36:14.499[0m | [1mINFO    [0m | [36msrc.utils.performance_optimizer[0m:[36m__init__[0m:[36m458[0m - [1mTaskParallelizer initialized[0m
+[32m2025-07-31 17:36:14.500[0m | [1mINFO    [0m | [36msrc.core.cognitive_forge_engine[0m:[36m__init__[0m:[36m120[0m - [1mPerformance optimization system initialized - Efficiency Boost active[0m
+[32m2025-07-31 17:36:14.501[0m | [1mINFO    [0m | [36msrc.core.advanced_intelligence[0m:[36m__init__[0m:[36m69[0m - [1mWorkflowOrchestrator initialized[0m
+[32m2025-07-31 17:36:14.501[0m | [1mINFO    [0m | [36msrc.core.advanced_intelligence[0m:[36m__init__[0m:[36m510[0m - [1mSystemMonitor initialized[0m
+[32m2025-07-31 17:36:14.501[0m | [1mINFO    [0m | [36msrc.core.cognitive_forge_engine[0m:[36m__init__[0m:[36m124[0m - [1mAdvanced intelligence foundation initialized - Future-Proofing active[0m
+[32m2025-07-31 17:36:14.501[0m | [1mINFO    [0m | [36msrc.utils.phoenix_protocol[0m:[36m__init__[0m:[36m24[0m - [1mPhoenix Protocol initialized - Self-healing system active[0m
+[32m2025-07-31 17:36:14.502[0m | [1mINFO    [0m | [36msrc.utils.guardian_protocol[0m:[36m__init__[0m:[36m34[0m - [1mGuardian Protocol initialized - Quality assurance system active[0m
+[32m2025-07-31 17:36:14.503[0m | [1mINFO    [0m | [36msrc.utils.synapse_logging[0m:[36m__init__[0m:[36m33[0m - [1mSynapse Logging System initialized - Unified consciousness active[0m
+[32m2025-07-31 17:36:14.504[0m | [1mINFO    [0m | [36msrc.utils.self_learning_module[0m:[36m__init__[0m:[36m26[0m - [1mSelf-Learning Module initialized - Continuous improvement active[0m
+[32m2025-07-31 17:36:14.504[0m | [1mINFO    [0m | [36msrc.core.cognitive_forge_engine[0m:[36m__init__[0m:[36m139[0m - [1mCognitive Forge Engine v5.0 initialized with model: gemini-1.5-pro[0m
+[32m2025-07-31 17:36:14.504[0m | [1mINFO    [0m | [36msrc.core.cognitive_forge_engine[0m:[36m__init__[0m:[36m140[0m - [1mSentient Operating System: Phoenix Protocol, Guardian Protocol, and Synapse Logging active[0m
+2025-07-31 17:36:14,517 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: System Initialization - PASS
+[32m2025-07-31 17:36:14.517[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_success - {'test_name': 'System Initialization', 'category': 'system_initialization', 'execution_time': 0.07010483741760254, 'performance_metrics': {'memory_start': 57.5, 'memory_end': 57.5, 'memory_delta': 0.0, 'cpu_start': 16.6, 'cpu_end': 18.8, 'cpu_usage': 17.700000000000003}}[0m
+2025-07-31 17:36:14,521 - SystemOptimizationHub - INFO - [START] STARTING TEST: Environment Validation (environment_validation)
+2025-07-31 17:36:14,530 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Environment Validation - PASS
+[32m2025-07-31 17:36:14.531[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_success - {'test_name': 'Environment Validation', 'category': 'environment_validation', 'execution_time': 0.005873441696166992, 'performance_metrics': {'memory_start': 57.5, 'memory_end': 57.5, 'memory_delta': 0.0, 'cpu_start': 0.0, 'cpu_end': 16.7, 'cpu_usage': 8.35}}[0m
+2025-07-31 17:36:14,537 - SystemOptimizationHub - INFO - [START] STARTING TEST: Database Connectivity (database_integration)
+[32m2025-07-31 17:36:14.771[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: test_db_1754001374[0m
+2025-07-31 17:36:14,937 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Database Connectivity - PASS
+[32m2025-07-31 17:36:14.940[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_success - {'test_name': 'Database Connectivity', 'category': 'database_integration', 'execution_time': 0.3988204002380371, 'performance_metrics': {'memory_start': 57.5, 'memory_end': 57.5, 'memory_delta': 0.0, 'cpu_start': 0.0, 'cpu_end': 9.6, 'cpu_usage': 4.8}}[0m
+2025-07-31 17:36:14,942 - SystemOptimizationHub - INFO - [START] STARTING TEST: Agent Factory (agent_factory)
+2025-07-31 17:36:14,953 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Agent Factory - PASS
+[32m2025-07-31 17:36:14.954[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_success - {'test_name': 'Agent Factory', 'category': 'agent_factory', 'execution_time': 0.0053827762603759766, 'performance_metrics': {'memory_start': 57.5, 'memory_end': 57.5, 'memory_delta': 0.0, 'cpu_start': 0.0, 'cpu_end': 31.2, 'cpu_usage': 15.6}}[0m
+2025-07-31 17:36:14,962 - SystemOptimizationHub - INFO - [START] STARTING TEST: Protocol Systems (protocol_systems)
+2025-07-31 17:36:14,969 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Protocol Systems - PASS
+[32m2025-07-31 17:36:14.970[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_success - {'test_name': 'Protocol Systems', 'category': 'protocol_systems', 'execution_time': 0.007801532745361328, 'performance_metrics': {'memory_start': 57.5, 'memory_end': 57.5, 'memory_delta': 0.0, 'cpu_start': 0.0, 'cpu_end': 18.8, 'cpu_usage': 9.4}}[0m
+2025-07-31 17:36:14,977 - SystemOptimizationHub - INFO - [START] STARTING TEST: Workflow Phases (workflow_phases)
+[32m2025-07-31 17:36:14.979[0m | [1mINFO    [0m | [36msrc.utils.crewai_bypass[0m:[36mexecute[0m:[36m81[0m - [1mExecuting task 1/1[0m
+[32m2025-07-31 17:36:14.988[0m | [31m[1mERROR   [0m | [36msrc.utils.google_ai_wrapper[0m:[36m_generate[0m:[36m169[0m - [31m[1mError during Google AI generation: 'GoogleGenerativeAIWrapper' object has no attribute '_model'[0m
+[32m2025-07-31 17:36:14.999[0m | [31m[1mERROR   [0m | [36msrc.core.cognitive_forge_engine[0m:[36m_parse_agent_json_response[0m:[36m1255[0m - [31m[1mFailed to parse JSON: [0m
+[32m2025-07-31 17:36:15.010[0m | [31m[1mERROR   [0m | [36msrc.core.cognitive_forge_engine[0m:[36m_parse_agent_json_response[0m:[36m1256[0m - [31m[1mOriginal response: An error occurred: 'GoogleGenerativeAIWrapper' object has no attribute '_model'[0m
+[32m2025-07-31 17:36:15.019[0m | [31m[1mERROR   [0m | [36msrc.core.cognitive_forge_engine[0m:[36m_execute_prompt_alchemy[0m:[36m384[0m - [31m[1mPrompt optimization failed: Invalid JSON format: Expecting value: line 1 column 1 (char 0)[0m
+2025-07-31 17:36:15,049 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:15,120 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:15,189 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:15,257 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:15,340 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:15,407 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+[32m2025-07-31 17:36:17.043[0m | [1mINFO    [0m | [36msrc.utils.crewai_bypass[0m:[36mexecute[0m:[36m81[0m - [1mExecuting task 1/1[0m
+[32m2025-07-31 17:36:17.044[0m | [31m[1mERROR   [0m | [36msrc.utils.google_ai_wrapper[0m:[36m_generate[0m:[36m169[0m - [31m[1mError during Google AI generation: 'GoogleGenerativeAIWrapper' object has no attribute '_model'[0m
+[32m2025-07-31 17:36:17.051[0m | [31m[1mERROR   [0m | [36msrc.core.cognitive_forge_engine[0m:[36m_parse_agent_json_response[0m:[36m1255[0m - [31m[1mFailed to parse JSON: [0m
+[32m2025-07-31 17:36:17.063[0m | [31m[1mERROR   [0m | [36msrc.core.cognitive_forge_engine[0m:[36m_parse_agent_json_response[0m:[36m1256[0m - [31m[1mOriginal response: An error occurred: 'GoogleGenerativeAIWrapper' object has no attribute '_model'[0m
+[32m2025-07-31 17:36:17.073[0m | [31m[1mERROR   [0m | [36msrc.core.cognitive_forge_engine[0m:[36m_execute_prompt_alchemy[0m:[36m384[0m - [31m[1mPrompt optimization failed: Invalid JSON format: Expecting value: line 1 column 1 (char 0)[0m
+2025-07-31 17:36:17,133 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:17,207 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:17,273 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:17,358 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+[32m2025-07-31 17:36:19.099[0m | [1mINFO    [0m | [36msrc.utils.crewai_bypass[0m:[36mexecute[0m:[36m81[0m - [1mExecuting task 1/1[0m
+[32m2025-07-31 17:36:19.100[0m | [31m[1mERROR   [0m | [36msrc.utils.google_ai_wrapper[0m:[36m_generate[0m:[36m169[0m - [31m[1mError during Google AI generation: 'GoogleGenerativeAIWrapper' object has no attribute '_model'[0m
+[32m2025-07-31 17:36:19.109[0m | [31m[1mERROR   [0m | [36msrc.core.cognitive_forge_engine[0m:[36m_parse_agent_json_response[0m:[36m1255[0m - [31m[1mFailed to parse JSON: [0m
+[32m2025-07-31 17:36:19.120[0m | [31m[1mERROR   [0m | [36msrc.core.cognitive_forge_engine[0m:[36m_parse_agent_json_response[0m:[36m1256[0m - [31m[1mOriginal response: An error occurred: 'GoogleGenerativeAIWrapper' object has no attribute '_model'[0m
+[32m2025-07-31 17:36:19.132[0m | [31m[1mERROR   [0m | [36msrc.core.cognitive_forge_engine[0m:[36m_execute_prompt_alchemy[0m:[36m384[0m - [31m[1mPrompt optimization failed: Invalid JSON format: Expecting value: line 1 column 1 (char 0)[0m
+2025-07-31 17:36:19,149 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Workflow Phases - FAIL
+[32m2025-07-31 17:36:19.150[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_failure - {'test_name': 'Workflow Phases', 'category': 'workflow_phases', 'execution_time': 4.172138690948486, 'error': "unsupported operand type(s) for +: 'int' and 'str'", 'performance_metrics': {'memory_start': 57.5, 'memory_end': 57.5, 'memory_delta': 0.0, 'cpu_start': 0.0, 'cpu_end': 5.3, 'cpu_usage': 2.65}}[0m
+2025-07-31 17:36:19,157 - SystemOptimizationHub - INFO - [START] STARTING TEST: Performance Optimization (performance_optimization)
+🚀 Testing System Performance & Optimization...
+   📊 This test evaluates your system's resource usage and performance capabilities
+   🎯 Each metric is graded from A+ (Excellent) to F (Critical)
+
+   🧠 MEMORY USAGE ANALYSIS
+      📊 Usage: 57.5% (9.2GB / 15.9GB)
+      📊 Available: 6.8GB
+      🎯 Grade: A
+      💡 GOOD: Your system has adequate memory for most operations. Performance should be smooth.
+      🔧 Recommendation: Memory usage is healthy. Monitor during heavy workloads.
+
+   ⚡ CPU USAGE ANALYSIS
+2025-07-31 17:36:19,190 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:19,259 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:19,325 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:19,391 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+      📊 Usage: 10.6%
+      📊 Cores: 16
+      📊 Frequency: 3700MHz
+      🎯 Grade: A+
+      💡 EXCELLENT: CPU usage is very low. Your system has plenty of processing power available.
+      🔧 Recommendation: CPU performance is optimal. No action needed.
+
+   💾 DISK USAGE ANALYSIS
+      📊 Usage: 57.0% (199.8GB free / 464.4GB total)
+      🎯 Grade: A+
+      💡 EXCELLENT: Plenty of disk space available. No storage concerns.
+      🔧 Recommendation: Disk space is optimal. No action needed.
+
+   📈 SYSTEM LOAD ANALYSIS
+      📊 1min: 0.00, 5min: 0.00, 15min: 0.00
+      🎯 Grade: A+
+      💡 EXCELLENT: System load is very low. Plenty of processing capacity available.
+
+   🎯 OVERALL PERFORMANCE ASSESSMENT
+      🎯 Overall Grade: A+ (94/100)
+      📊 Status: EXCELLENT
+      💡 Your system is performing exceptionally well! All resources are optimally utilized.
+      🔧 Your system is ready for intensive AI operations. No optimizations needed.
+
+2025-07-31 17:36:20,497 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Performance Optimization - PASS
+[32m2025-07-31 17:36:20.502[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_success - {'test_name': 'Performance Optimization', 'category': 'performance_optimization', 'execution_time': 1.3453881740570068, 'performance_metrics': {'memory_start': 57.5, 'memory_end': 57.6, 'memory_delta': 0.10000000000000142, 'cpu_start': 18.8, 'cpu_end': 12.6, 'cpu_usage': 15.7}}[0m
+2025-07-31 17:36:20,508 - SystemOptimizationHub - INFO - [START] STARTING TEST: Error Handling (error_handling)
+🔍 Testing Error Handling Capabilities...
+   📝 Note: These tests INTENTIONALLY trigger errors to verify proper handling
+   ✅ A 'PASS' means the system correctly detected and handled the error
+   ❌ A 'FAIL' means the system failed to handle the error properly
+
+   🧪 Test 1: Empty Prompt Detection
+[32m2025-07-31 17:36:20.511[0m | [1mINFO    [0m | [36msrc.utils.crewai_bypass[0m:[36mexecute[0m:[36m81[0m - [1mExecuting task 1/1[0m
+[32m2025-07-31 17:36:20.512[0m | [31m[1mERROR   [0m | [36msrc.utils.google_ai_wrapper[0m:[36m_generate[0m:[36m169[0m - [31m[1mError during Google AI generation: 'GoogleGenerativeAIWrapper' object has no attribute '_model'[0m
+[32m2025-07-31 17:36:20.523[0m | [31m[1mERROR   [0m | [36msrc.core.cognitive_forge_engine[0m:[36m_parse_agent_json_response[0m:[36m1255[0m - [31m[1mFailed to parse JSON: [0m
+[32m2025-07-31 17:36:20.534[0m | [31m[1mERROR   [0m | [36msrc.core.cognitive_forge_engine[0m:[36m_parse_agent_json_response[0m:[36m1256[0m - [31m[1mOriginal response: An error occurred: 'GoogleGenerativeAIWrapper' object has no attribute '_model'[0m
+[32m2025-07-31 17:36:20.545[0m | [31m[1mERROR   [0m | [36msrc.core.cognitive_forge_engine[0m:[36m_execute_prompt_alchemy[0m:[36m384[0m - [31m[1mPrompt optimization failed: Invalid JSON format: Expecting value: line 1 column 1 (char 0)[0m
+      ✅ Expected error caught: ValueError
+   🧪 Test 2: Database Error Handling
+2025-07-31 17:36:20,618 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+      ✅ Database gracefully returned None for invalid mission ID
+   🧪 Test 3: Agent Creation Error Handling
+
+📊 Error Handling Test Summary:
+   ✅ empty_prompt_handling: PASSED - System correctly detected empty prompt
+   ✅ database_error_handling: PASSED - Database returned None for invalid ID
+   ❌ agent_creation_error_handling: FAILED - Agent creation should have failed
+
+💡 Understanding Error Handling Tests:
+   • These tests INTENTIONALLY trigger error conditions
+   • A 'PASS' means the system correctly detected and handled the error
+   • A 'FAIL' means the system failed to handle the error properly
+   • The goal is to ensure the system is robust and doesn't crash
+
+📊 PERFORMANCE GRADING SCALE:
+   🏆 A+ (95-100): EXCELLENT - Optimal performance, ready for intensive operations
+   🥇 A  (90-94): GOOD - Strong performance with minor optimization opportunities
+   🥈 B  (80-89): ACCEPTABLE - Adequate performance, some areas for improvement
+   🥉 C  (70-79): CONCERNING - Performance issues that should be addressed
+   ⚠️  D  (60-69): PROBLEMATIC - Significant performance problems
+   🚨 F  (50-59): CRITICAL - Severe performance issues requiring immediate attention
+
+🎯 WHY PERFORMANCE MATTERS FOR AI:
+   • Memory: AI operations require significant RAM for processing large datasets
+   • CPU: Complex AI calculations need processing power for timely results
+   • Disk: AI models and data storage require adequate space
+   • Load: System responsiveness affects AI operation efficiency
+2025-07-31 17:36:20,691 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Error Handling - FAIL
+[32m2025-07-31 17:36:20.692[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_failure - {'test_name': 'Error Handling', 'category': 'error_handling', 'execution_time': 0.1830151081085205, 'error': 'Unknown error', 'performance_metrics': {'memory_start': 57.6, 'memory_end': 57.6, 'memory_delta': 0.0, 'cpu_start': 0.0, 'cpu_end': 20.1, 'cpu_usage': 10.05}}[0m
+2025-07-31 17:36:20,699 - SystemOptimizationHub - INFO - [START] STARTING TEST: Integration Tests (integration_tests)
+2025-07-31 17:36:20,701 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:20,707 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Integration Tests - PASS
+[32m2025-07-31 17:36:20.709[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_success - {'test_name': 'Integration Tests', 'category': 'integration_tests', 'execution_time': 0.007535219192504883, 'performance_metrics': {'memory_start': 57.6, 'memory_end': 57.6, 'memory_delta': 0.0, 'cpu_start': 53.8, 'cpu_end': 0.0, 'cpu_usage': 26.9}}[0m
+2025-07-31 17:36:20,718 - SystemOptimizationHub - INFO - [START] STARTING TEST: Fix-AI Integration (fix_ai_integration)
+2025-07-31 17:36:20,720 - SystemOptimizationHub - INFO - [START] STARTING TEST: Fix-AI Integration (fix_ai_integration)
+[32m2025-07-31 17:36:20.729[0m | [32m[1mSUCCESS [0m | [36msrc.utils.google_ai_wrapper[0m:[36m__init__[0m:[36m53[0m - [32m[1mGoogle Generative AI wrapper initialized successfully[0m
+[32m2025-07-31 17:36:20.731[0m | [1mINFO    [0m | [36msrc.utils.crewai_bypass[0m:[36mconfigure_direct_ai_environment[0m:[36m112[0m - [1mDirect AI environment configured - LiteLLM disabled[0m
+2025-07-31 17:36:20,733 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Fix-AI Integration - PASS
+2025-07-31 17:36:20,742 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Fix-AI Integration - PASS
+[32m2025-07-31 17:36:20.743[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_success - {'test_name': 'Fix-AI Integration', 'category': 'fix_ai_integration', 'execution_time': 0.0239102840423584, 'performance_metrics': {'memory_start': 57.6, 'memory_end': 57.6, 'memory_delta': 0.0, 'cpu_start': 31.2, 'cpu_end': 50.0, 'cpu_usage': 40.6}}[0m
+2025-07-31 17:36:20,752 - SystemOptimizationHub - INFO - [START] STARTING TEST: Automated Debugging System (automated_debugging)
+2025-07-31 17:36:20,754 - SystemOptimizationHub - INFO - [START] STARTING TEST: Automated Debugging System (automated_debugging)
+[32m2025-07-31 17:36:20.757[0m | [1mINFO    [0m | [36msrc.utils.automated_debugger[0m:[36m__init__[0m:[36m36[0m - [1mAutomated Debugger initialized[0m
+[32m2025-07-31 17:36:20.758[0m | [1mINFO    [0m | [36msrc.utils.crewai_bypass[0m:[36mconfigure_direct_ai_environment[0m:[36m112[0m - [1mDirect AI environment configured - LiteLLM disabled[0m
+2025-07-31 17:36:20,760 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Automated Debugging System - PASS
+2025-07-31 17:36:20,768 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Automated Debugging System - PASS
+[32m2025-07-31 17:36:20.770[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_success - {'test_name': 'Automated Debugging System', 'category': 'automated_debugging', 'execution_time': 0.016603469848632812, 'performance_metrics': {'memory_start': 57.6, 'memory_end': 57.6, 'memory_delta': 0.0, 'cpu_start': 68.8, 'cpu_end': 56.2, 'cpu_usage': 62.5}}[0m
+2025-07-31 17:36:20,780 - SystemOptimizationHub - INFO - [START] STARTING TEST: Sentry Integration (sentry_integration)
+2025-07-31 17:36:20,781 - SystemOptimizationHub - INFO - [START] STARTING TEST: Sentry Integration (sentry_integration)
+2025-07-31 17:36:20,790 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+[32m2025-07-31 17:36:20.828[0m | [32m[1mSUCCESS [0m | [36msrc.utils.sentry_integration[0m:[36m_initialize_sentry[0m:[36m78[0m - [32m[1mSentry integration initialized successfully[0m
+2025-07-31 17:36:20,829 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Sentry Integration - PASS
+2025-07-31 17:36:20,836 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Sentry Integration - PASS
+[32m2025-07-31 17:36:20.837[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_success - {'test_name': 'Sentry Integration', 'category': 'sentry_integration', 'execution_time': 0.05794882774353027, 'performance_metrics': {'memory_start': 57.6, 'memory_end': 57.6, 'memory_delta': 0.0, 'cpu_start': 40.0, 'cpu_end': 44.0, 'cpu_usage': 42.0}}[0m
+2025-07-31 17:36:20,847 - SystemOptimizationHub - INFO - [START] STARTING TEST: Self-Healing Capabilities (self_healing)
+2025-07-31 17:36:20,848 - SystemOptimizationHub - INFO - [START] STARTING TEST: Self-Healing Capabilities (self_healing)
+[32m2025-07-31 17:36:20.849[0m | [1mINFO    [0m | [36msrc.utils.guardian_protocol[0m:[36m__init__[0m:[36m34[0m - [1mGuardian Protocol initialized - Quality assurance system active[0m
+[32m2025-07-31 17:36:20.850[0m | [1mINFO    [0m | [36msrc.utils.phoenix_protocol[0m:[36m__init__[0m:[36m24[0m - [1mPhoenix Protocol initialized - Self-healing system active[0m
+2025-07-31 17:36:20,850 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Self-Healing Capabilities - PASS
+2025-07-31 17:36:20,858 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Self-Healing Capabilities - PASS
+[32m2025-07-31 17:36:20.859[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_success - {'test_name': 'Self-Healing Capabilities', 'category': 'self_healing', 'execution_time': 0.011907815933227539, 'performance_metrics': {'memory_start': 57.6, 'memory_end': 57.6, 'memory_delta': 0.0, 'cpu_start': 100.0, 'cpu_end': 46.7, 'cpu_usage': 73.35}}[0m
+2025-07-31 17:36:20,868 - SystemOptimizationHub - INFO - [START] STARTING TEST: Stress Testing (stress_testing)
+2025-07-31 17:36:20,868 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+[32m2025-07-31 17:36:21.123[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_0_1754001380[0m
+[32m2025-07-31 17:36:21.389[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_1_1754001381[0m
+[32m2025-07-31 17:36:21.642[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_2_1754001381[0m
+[32m2025-07-31 17:36:21.886[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_3_1754001381[0m
+[32m2025-07-31 17:36:22.157[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_4_1754001381[0m
+[32m2025-07-31 17:36:22.407[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_5_1754001382[0m
+[32m2025-07-31 17:36:22.698[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_6_1754001382[0m
+[32m2025-07-31 17:36:23.117[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_7_1754001382[0m
+[32m2025-07-31 17:36:23.403[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_8_1754001383[0m
+[32m2025-07-31 17:36:23.677[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_9_1754001383[0m
+[32m2025-07-31 17:36:23.930[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_10_1754001383[0m
+[32m2025-07-31 17:36:24.188[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_11_1754001383[0m
+[32m2025-07-31 17:36:24.454[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_12_1754001384[0m
+[32m2025-07-31 17:36:24.706[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_13_1754001384[0m
+[32m2025-07-31 17:36:24.962[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_14_1754001384[0m
+[32m2025-07-31 17:36:25.208[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_15_1754001385[0m
+[32m2025-07-31 17:36:25.465[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_16_1754001385[0m
+[32m2025-07-31 17:36:25.716[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_17_1754001385[0m
+[32m2025-07-31 17:36:25.987[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_18_1754001385[0m
+[32m2025-07-31 17:36:26.241[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_19_1754001386[0m
+[32m2025-07-31 17:36:26.521[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_20_1754001386[0m
+[32m2025-07-31 17:36:26.781[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_21_1754001386[0m
+[32m2025-07-31 17:36:27.034[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_22_1754001386[0m
+[32m2025-07-31 17:36:27.282[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_23_1754001387[0m
+[32m2025-07-31 17:36:27.586[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_24_1754001387[0m
+[32m2025-07-31 17:36:27.855[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_25_1754001387[0m
+[32m2025-07-31 17:36:28.111[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_26_1754001387[0m
+[32m2025-07-31 17:36:28.357[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_27_1754001388[0m
+[32m2025-07-31 17:36:28.629[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_28_1754001388[0m
+[32m2025-07-31 17:36:28.888[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_29_1754001388[0m
+[32m2025-07-31 17:36:29.151[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_30_1754001388[0m
+[32m2025-07-31 17:36:29.402[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_31_1754001389[0m
+[32m2025-07-31 17:36:29.657[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_32_1754001389[0m
+[32m2025-07-31 17:36:29.919[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_33_1754001389[0m
+[32m2025-07-31 17:36:30.188[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_34_1754001389[0m
+[32m2025-07-31 17:36:30.457[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_35_1754001390[0m
+[32m2025-07-31 17:36:30.716[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_36_1754001390[0m
+[32m2025-07-31 17:36:30.962[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_37_1754001390[0m
+[32m2025-07-31 17:36:31.215[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_38_1754001391[0m
+[32m2025-07-31 17:36:31.487[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_39_1754001391[0m
+[32m2025-07-31 17:36:31.735[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_40_1754001391[0m
+[32m2025-07-31 17:36:31.985[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_41_1754001391[0m
+[32m2025-07-31 17:36:32.240[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_42_1754001392[0m
+[32m2025-07-31 17:36:32.504[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_43_1754001392[0m
+[32m2025-07-31 17:36:32.776[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_44_1754001392[0m
+[32m2025-07-31 17:36:33.383[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_45_1754001392[0m
+[32m2025-07-31 17:36:33.635[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_46_1754001393[0m
+[32m2025-07-31 17:36:33.887[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_47_1754001393[0m
+[32m2025-07-31 17:36:34.164[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_48_1754001393[0m
+[32m2025-07-31 17:36:34.421[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_49_1754001394[0m
+[32m2025-07-31 17:36:34.463[0m | [1mINFO    [0m | [36msrc.utils.automated_debugger[0m:[36m__init__[0m:[36m36[0m - [1mAutomated Debugger initialized[0m
+[32m2025-07-31 17:36:34.468[0m | [32m[1mSUCCESS [0m | [36msrc.utils.google_ai_wrapper[0m:[36m__init__[0m:[36m53[0m - [32m[1mGoogle Generative AI wrapper initialized successfully[0m
+[32m2025-07-31 17:36:34.470[0m | [1mINFO    [0m | [36msrc.utils.crewai_bypass[0m:[36mconfigure_direct_ai_environment[0m:[36m112[0m - [1mDirect AI environment configured - LiteLLM disabled[0m
+2025-07-31 17:36:34,476 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Stress Testing - PASS
+[32m2025-07-31 17:36:34.476[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_success - {'test_name': 'Stress Testing', 'category': 'stress_testing', 'execution_time': 13.60993480682373, 'performance_metrics': {'memory_start': 57.6, 'memory_end': 57.6, 'memory_delta': 0.0, 'cpu_start': 0.0, 'cpu_end': 8.6, 'cpu_usage': 4.3}}[0m
+2025-07-31 17:36:34,484 - SystemOptimizationHub - INFO - [START] STARTING TEST: Three-Pillar Architecture (three_pillar_architecture)
+🏗️ Testing Three-Pillar Architecture...
+   📊 This test validates the complete Three-Pillar Architecture implementation
+   🎯 Testing all three pillars: Force Multiplier, Efficiency Boost, Future-Proofing
+
+   🚀 PILLAR 1: FORCE MULTIPLIER - Expert-level agent capabilities
+[32m2025-07-31 17:36:34.486[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36m__init__[0m:[36m212[0m - [1mSecurityScannerTool initialized[0m
+[32m2025-07-31 17:36:34.487[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36mscan_for_vulnerabilities[0m:[36m216[0m - [1mStarting security scan for: .[0m
+[32m2025-07-31 17:37:09.271[0m | [32m[1mSUCCESS [0m | [36msrc.tools.specialized_tools[0m:[36mscan_for_vulnerabilities[0m:[36m241[0m - [32m[1mSecurity scan completed for .[0m
+      ✅ SecurityScannerTool: PASS
+[32m2025-07-31 17:37:09.277[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36m__init__[0m:[36m695[0m - [1mPerformanceProfilerTool initialized[0m
+[32m2025-07-31 17:37:09.277[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36mprofile_application[0m:[36m699[0m - [1mStarting performance profiling for: .[0m
+[32m2025-07-31 17:37:09.278[0m | [32m[1mSUCCESS [0m | [36msrc.tools.specialized_tools[0m:[36mprofile_application[0m:[36m724[0m - [32m[1mPerformance profiling completed for .[0m
+      ✅ PerformanceProfilerTool: PASS
+[32m2025-07-31 17:37:09.278[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36m__init__[0m:[36m1131[0m - [1mDocumentationGeneratorTool initialized[0m
+[32m2025-07-31 17:37:09.279[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36mgenerate_code_documentation[0m:[36m1135[0m - [1mGenerating code documentation for: .[0m
+[32m2025-07-31 17:37:09.280[0m | [32m[1mSUCCESS [0m | [36msrc.tools.specialized_tools[0m:[36mgenerate_code_documentation[0m:[36m1156[0m - [32m[1mCode documentation generated for .[0m
+      ✅ DocumentationGeneratorTool: PASS
+[32m2025-07-31 17:37:09.280[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36m__init__[0m:[36m1024[0m - [1mKnowledgeGraphTool initialized[0m
+[32m2025-07-31 17:37:09.281[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36mbuild_knowledge_graph[0m:[36m1028[0m - [1mBuilding knowledge graph from 1 sources[0m
+[32m2025-07-31 17:37:09.284[0m | [32m[1mSUCCESS [0m | [36msrc.tools.specialized_tools[0m:[36mbuild_knowledge_graph[0m:[36m1054[0m - [32m[1mKnowledge graph built with 2 entities and 1 relationships[0m
+      ✅ KnowledgeGraphTool: FAIL
+[32m2025-07-31 17:37:09.286[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36m__init__[0m:[36m53[0m - [1mCodeAnalyzerTool initialized[0m
+[32m2025-07-31 17:37:09.286[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36manalyze_codebase[0m:[36m57[0m - [1mStarting comprehensive codebase analysis for: .[0m
+[32m2025-07-31 17:37:09.287[0m | [32m[1mSUCCESS [0m | [36msrc.tools.specialized_tools[0m:[36manalyze_codebase[0m:[36m81[0m - [32m[1mCodebase analysis completed for .[0m
+      ✅ CodeAnalyzerTool: PASS
+   ⚡ PILLAR 2: EFFICIENCY BOOST - High-performance optimization
+[32m2025-07-31 17:37:09.289[0m | [1mINFO    [0m | [36msrc.utils.performance_optimizer[0m:[36m__init__[0m:[36m169[0m - [1mIntelligentCachingSystem initialized[0m
+[32m2025-07-31 17:37:09.290[0m | [1mINFO    [0m | [36msrc.utils.performance_optimizer[0m:[36moptimize_cache_performance[0m:[36m272[0m - [1mCache performance optimization completed[0m
+      ✅ IntelligentCachingSystem: PASS
+[32m2025-07-31 17:37:09.291[0m | [1mINFO    [0m | [36msrc.utils.performance_optimizer[0m:[36m__init__[0m:[36m458[0m - [1mTaskParallelizer initialized[0m
+[32m2025-07-31 17:37:09.292[0m | [1mINFO    [0m | [36msrc.utils.performance_optimizer[0m:[36mparallelize_tasks[0m:[36m462[0m - [1mStarting parallel execution of 3 tasks[0m
+[32m2025-07-31 17:37:09.392[0m | [32m[1mSUCCESS [0m | [36msrc.utils.performance_optimizer[0m:[36mparallelize_tasks[0m:[36m488[0m - [32m[1mParallel execution completed: 3 results[0m
+      ✅ TaskParallelizer: PASS
+   🔮 PILLAR 3: FUTURE-PROOFING - Advanced intelligence foundation
+[32m2025-07-31 17:37:09.394[0m | [1mINFO    [0m | [36msrc.core.advanced_intelligence[0m:[36m__init__[0m:[36m69[0m - [1mWorkflowOrchestrator initialized[0m
+[32m2025-07-31 17:37:09.396[0m | [1mINFO    [0m | [36msrc.core.advanced_intelligence[0m:[36morchestrate_workflow[0m:[36m73[0m - [1mStarting workflow orchestration: Test Workflow[0m
+[32m2025-07-31 17:37:09.721[0m | [32m[1mSUCCESS [0m | [36msrc.core.advanced_intelligence[0m:[36morchestrate_workflow[0m:[36m101[0m - [32m[1mWorkflow orchestration completed: test_workflow[0m
+      ✅ WorkflowOrchestrator: PASS
+[32m2025-07-31 17:37:09.722[0m | [1mINFO    [0m | [36msrc.core.advanced_intelligence[0m:[36m__init__[0m:[36m510[0m - [1mSystemMonitor initialized[0m
+      ✅ SystemMonitor: FAIL
+
+   📊 THREE-PILLAR ARCHITECTURE RESULTS:
+      🎯 Success Rate: 77.8%
+      ✅ Successful Components: 7/9
+      ⚠️ ACCEPTABLE: Three-Pillar Architecture has some issues but is functional.
+2025-07-31 17:37:10,748 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Three-Pillar Architecture - FAIL
+[32m2025-07-31 17:37:10.749[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_failure - {'test_name': 'Three-Pillar Architecture', 'category': 'three_pillar_architecture', 'execution_time': 36.265427112579346, 'error': 'Unknown error', 'performance_metrics': {'memory_start': 57.6, 'memory_end': 56.7, 'memory_delta': -0.8999999999999986, 'cpu_start': 29.4, 'cpu_end': 7.1, 'cpu_usage': 18.25}}[0m
+2025-07-31 17:37:10,754 - SystemOptimizationHub - INFO - [START] STARTING TEST: Force Multiplier Pillar (force_multiplier)
+🚀 Testing Force Multiplier Pillar...
+[32m2025-07-31 17:37:10.756[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36m__init__[0m:[36m212[0m - [1mSecurityScannerTool initialized[0m
+[32m2025-07-31 17:37:10.756[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36mscan_for_vulnerabilities[0m:[36m216[0m - [1mStarting security scan for: .[0m
+[32m2025-07-31 17:37:44.820[0m | [32m[1mSUCCESS [0m | [36msrc.tools.specialized_tools[0m:[36mscan_for_vulnerabilities[0m:[36m241[0m - [32m[1mSecurity scan completed for .[0m
+[32m2025-07-31 17:37:44.821[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36m__init__[0m:[36m695[0m - [1mPerformanceProfilerTool initialized[0m
+[32m2025-07-31 17:37:44.822[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36mprofile_application[0m:[36m699[0m - [1mStarting performance profiling for: .[0m
+[32m2025-07-31 17:37:44.823[0m | [32m[1mSUCCESS [0m | [36msrc.tools.specialized_tools[0m:[36mprofile_application[0m:[36m724[0m - [32m[1mPerformance profiling completed for .[0m
+[32m2025-07-31 17:37:44.830[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36m__init__[0m:[36m1131[0m - [1mDocumentationGeneratorTool initialized[0m
+[32m2025-07-31 17:37:44.832[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36mgenerate_code_documentation[0m:[36m1135[0m - [1mGenerating code documentation for: .[0m
+[32m2025-07-31 17:37:44.833[0m | [32m[1mSUCCESS [0m | [36msrc.tools.specialized_tools[0m:[36mgenerate_code_documentation[0m:[36m1156[0m - [32m[1mCode documentation generated for .[0m
+[32m2025-07-31 17:37:44.834[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36m__init__[0m:[36m1024[0m - [1mKnowledgeGraphTool initialized[0m
+[32m2025-07-31 17:37:44.834[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36mbuild_knowledge_graph[0m:[36m1028[0m - [1mBuilding knowledge graph from 1 sources[0m
+[32m2025-07-31 17:37:44.837[0m | [32m[1mSUCCESS [0m | [36msrc.tools.specialized_tools[0m:[36mbuild_knowledge_graph[0m:[36m1054[0m - [32m[1mKnowledge graph built with 2 entities and 1 relationships[0m
+[32m2025-07-31 17:37:44.840[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36m__init__[0m:[36m53[0m - [1mCodeAnalyzerTool initialized[0m
+[32m2025-07-31 17:37:44.841[0m | [1mINFO    [0m | [36msrc.tools.specialized_tools[0m:[36manalyze_codebase[0m:[36m57[0m - [1mStarting comprehensive codebase analysis for: .[0m
+[32m2025-07-31 17:37:44.841[0m | [32m[1mSUCCESS [0m | [36msrc.tools.specialized_tools[0m:[36manalyze_codebase[0m:[36m81[0m - [32m[1mCodebase analysis completed for .[0m
+2025-07-31 17:37:44,848 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Force Multiplier Pillar - FAIL
+[32m2025-07-31 17:37:44.849[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_failure - {'test_name': 'Force Multiplier Pillar', 'category': 'force_multiplier', 'execution_time': 34.09191274642944, 'error': 'Unknown error', 'performance_metrics': {'memory_start': 56.7, 'memory_end': 56.4, 'memory_delta': -0.30000000000000426, 'cpu_start': 0.0, 'cpu_end': 23.6, 'cpu_usage': 11.8}}[0m
+2025-07-31 17:37:44,857 - SystemOptimizationHub - INFO - [START] STARTING TEST: Efficiency Boost Pillar (efficiency_boost)
+⚡ Testing Efficiency Boost Pillar...
+[32m2025-07-31 17:37:44.860[0m | [1mINFO    [0m | [36msrc.utils.performance_optimizer[0m:[36m__init__[0m:[36m169[0m - [1mIntelligentCachingSystem initialized[0m
+[32m2025-07-31 17:37:44.861[0m | [1mINFO    [0m | [36msrc.utils.performance_optimizer[0m:[36moptimize_cache_performance[0m:[36m272[0m - [1mCache performance optimization completed[0m
+[32m2025-07-31 17:37:44.862[0m | [1mINFO    [0m | [36msrc.utils.performance_optimizer[0m:[36m__init__[0m:[36m458[0m - [1mTaskParallelizer initialized[0m
+[32m2025-07-31 17:37:44.863[0m | [1mINFO    [0m | [36msrc.utils.performance_optimizer[0m:[36mparallelize_tasks[0m:[36m462[0m - [1mStarting parallel execution of 3 tasks[0m
+[32m2025-07-31 17:37:44.969[0m | [32m[1mSUCCESS [0m | [36msrc.utils.performance_optimizer[0m:[36mparallelize_tasks[0m:[36m488[0m - [32m[1mParallel execution completed: 3 results[0m
+2025-07-31 17:37:44,975 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Efficiency Boost Pillar - PASS
+[32m2025-07-31 17:37:44.977[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_success - {'test_name': 'Efficiency Boost Pillar', 'category': 'efficiency_boost', 'execution_time': 0.1194756031036377, 'performance_metrics': {'memory_start': 56.4, 'memory_end': 56.4, 'memory_delta': 0.0, 'cpu_start': 30.8, 'cpu_end': 22.4, 'cpu_usage': 26.6}}[0m
+2025-07-31 17:37:44,984 - SystemOptimizationHub - INFO - [START] STARTING TEST: Future-Proofing Pillar (future_proofing)
+🔮 Testing Future-Proofing Pillar...
+[32m2025-07-31 17:37:44.986[0m | [1mINFO    [0m | [36msrc.core.advanced_intelligence[0m:[36m__init__[0m:[36m69[0m - [1mWorkflowOrchestrator initialized[0m
+[32m2025-07-31 17:37:44.987[0m | [1mINFO    [0m | [36msrc.core.advanced_intelligence[0m:[36morchestrate_workflow[0m:[36m73[0m - [1mStarting workflow orchestration: Test Workflow[0m
+[32m2025-07-31 17:37:45.306[0m | [32m[1mSUCCESS [0m | [36msrc.core.advanced_intelligence[0m:[36morchestrate_workflow[0m:[36m101[0m - [32m[1mWorkflow orchestration completed: test_workflow[0m
+[32m2025-07-31 17:37:45.307[0m | [1mINFO    [0m | [36msrc.core.advanced_intelligence[0m:[36m__init__[0m:[36m510[0m - [1mSystemMonitor initialized[0m
+2025-07-31 17:37:46,328 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Future-Proofing Pillar - FAIL
+[32m2025-07-31 17:37:46.330[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_failure - {'test_name': 'Future-Proofing Pillar', 'category': 'future_proofing', 'execution_time': 1.3462138175964355, 'error': 'Unknown error', 'performance_metrics': {'memory_start': 56.4, 'memory_end': 56.3, 'memory_delta': -0.10000000000000142, 'cpu_start': 18.8, 'cpu_end': 10.7, 'cpu_usage': 14.75}}[0m
+[32m2025-07-31 17:37:46.333[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_suite_completed - {'total_tests': 18, 'total_time': 91.89085578918457, 'successful_tests': 13, 'failed_tests': 5, 'warning_tests': 0}[0m
+
+================================================================================
+📊 COMPREHENSIVE TEST REPORT
+================================================================================
+🎯 TOTAL TESTS: 18
+✅ PASSED: 13
+❌ FAILED: 5
+⚠️ WARNINGS: 0
+📈 SUCCESS RATE: 72.2%
+⏱️ TOTAL EXECUTION TIME: 91.74s
+📊 AVERAGE EXECUTION TIME: 5.10s
+🚀 SYSTEM STATUS: DEGRADED
+
+📈 PERFORMANCE METRICS:
+   avg_memory_start: 57.38
+   max_memory_start: 57.60
+   min_memory_start: 56.40
+   avg_memory_end: 57.31
+   max_memory_end: 57.60
+   min_memory_end: 56.30
+   avg_memory_delta: -0.07
+   max_memory_delta: 0.10
+   min_memory_delta: -0.90
+   avg_cpu_start: 22.68
+   max_cpu_start: 100.00
+   min_cpu_start: 0.00
+   avg_cpu_end: 22.36
+   max_cpu_end: 56.20
+   min_cpu_end: 0.00
+   avg_cpu_usage: 22.52
+   max_cpu_usage: 73.35
+   min_cpu_usage: 2.65
+
+🎯 DETAILED PERFORMANCE ANALYSIS:
+   MEMORY: A - GOOD: Your system has adequate memory for most operations. Performance should be smooth.
+      🔧 Memory usage is healthy. Monitor during heavy workloads.
+   CPU: A+ - EXCELLENT: CPU usage is very low. Your system has plenty of processing power available.
+      🔧 CPU performance is optimal. No action needed.
+   DISK: A+ - EXCELLENT: Plenty of disk space available. No storage concerns.
+      🔧 Disk space is optimal. No action needed.
+   LOAD_AVERAGE: A+ - EXCELLENT: System load is very low. Plenty of processing capacity available.
+      🔧 No recommendation available
+
+   🎯 OVERALL: A+ (94/100)
+      💡 Your system is performing exceptionally well! All resources are optimally utilized.
+      🔧 Your system is ready for intensive AI operations. No optimizations needed.
+
+================================================================================
+💡 USER GUIDANCE & EXPLANATIONS
+================================================================================
+📊 STATUS: DEGRADED
+📝 EXPLANATION: ⚠️ DEGRADED: Your system has some issues that may affect performance but core functionality remains.
+🔍 FAILED TESTS: 🔧 Workflow Phases: This component may need attention or configuration. | 🔍 Error Handling Test: This test INTENTIONALLY triggers errors to verify the system can handle them properly. A 'FAIL' here might actually indicate the system is working correctly by detecting errors. | 🔧 Three-Pillar Architecture: This component may need attention or configuration. | 🔧 Force Multiplier Pillar: This component may need attention or configuration. | 🔧 Future-Proofing Pillar: This component may need attention or configuration.
+
+🎯 RECOMMENDATIONS:
+   1. 🚨 Address critical issues immediately
+   2. 🔍 Review system configuration and dependencies
+   3. 📞 Consider seeking technical support
+
+🚀 NEXT STEPS:
+   1. 🔧 Fix the issues identified in failed tests
+   2. 🔄 Re-run this test suite after fixes
+   3. 📞 Contact support if issues persist
+================================================================================
+
+📄 Detailed report saved to: logs/system_optimization_report_20250731_173746.json

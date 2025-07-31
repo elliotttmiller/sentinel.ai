@@ -1,515 +1,141 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en">
 <head>
     <!-- Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Sentinel AI Command Center - Advanced Mission Control System">
-    <meta name="keywords" content="AI, mission control, agents, automation, sentinel">
-    <meta name="author" content="Sentinel AI">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/static/images/favicon.png">
-    <link rel="icon" type="image/svg+xml" href="/static/images/favicon.svg">
-    
-    <!-- Preconnect to external domains -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-    
-    <!-- Title -->
     <title>Sentinel Command Center</title>
     
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700;800&family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     
-    <!-- Custom CSS -->
+    <!-- Core Bootstrap & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Sentinel Application Styles (Order is important) -->
     <link href="/static/css/main.css" rel="stylesheet">
     <link href="/static/css/custom-theme.css" rel="stylesheet">
     <link href="/static/css/service-status.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- The NEW Dashboard Theme (Loaded LAST to override styles) -->
+    <link href="/static/css/sentinel-dash.css" rel="stylesheet">
     
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <style>
-        /* Loading Screen */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.3s ease;
-        }
-        .loading-screen.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* Admin Layout */
-        .admin-wrapper {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        .admin-main {
-            flex: 1;
-            margin-left: 80px;
-            transition: margin-left 0.3s ease;
-        }
-
-        .admin-wrapper.sidebar-collapsed .admin-main {
-            margin-left: 80px;
-        }
-
-        /* Stats Icon */
-        .stats-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in {
-            animation: fadeIn 0.5s ease;
-        }
-        .chart-container {
-            position: relative;
-            height: 300px;
-        }
-        
-        /* Weave Service Icon */
-        .service-icon.weave {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-    </style>
 </head>
 
-<body>
-    <!-- Loading Screen -->
+<body x-data="sentinelApp()" :data-bs-theme="settings.theme">
+
     <div id="loading-screen" class="loading-screen">
         <div class="text-center">
-            <div class="spinner-border text-primary mb-3" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
+            <div class="spinner-border text-primary mb-3" role="status"><span class="visually-hidden">Loading...</span></div>
             <h5 class="text-light">Initializing Sentinel Command Center...</h5>
         </div>
     </div>
 
-    <!-- Main Wrapper -->
-    <div class="admin-wrapper" id="admin-wrapper" x-data="sentinelApp()">
-        
-        <!-- Sidebar -->
-        <aside class="admin-sidebar">
-            <div class="sidebar-content">
-                <!-- Logo -->
-                <div class="sidebar-logo">
-                    <div class="logo-icon">
-                        <i class="bi bi-shield-check"></i>
-                    </div>
-                </div>
+    <div class="dash">
 
-                <!-- Navigation -->
-                <nav class="sidebar-nav">
-                    <a class="nav-item active" href="#" @click="setActiveTab('dashboard')" title="Dashboard">
-                        <i class="bi bi-speedometer2"></i>
-                    </a>
-                    <a class="nav-item" href="#" @click="setActiveTab('missions')" title="Missions">
-                        <i class="bi bi-rocket-takeoff"></i>
-                    </a>
-                    <a class="nav-item" href="#" @click="setActiveTab('agents')" title="Agents">
-                        <i class="bi bi-robot"></i>
-                    </a>
-                    <a class="nav-item" href="#" @click="setActiveTab('analytics')" title="Analytics">
-                        <i class="bi bi-graph-up"></i>
-                    </a>
-                    <a class="nav-item" href="#" @click="setActiveTab('observability')" title="Observability">
-                        <i class="bi bi-eye"></i>
-                    </a>
-                    <a class="nav-item" href="#" @click="setActiveTab('settings')" title="Settings">
-                        <i class="bi bi-gear"></i>
-                    </a>
-        </nav>
-
-                <!-- System Status -->
-                <div class="sidebar-status">
-            <div class="status-indicator">
+        <!-- HEADER -->
+        <header class="header">
+            <h1 class="header__heading"><a href="#" rel="noreferrer noopener">SENTINEL</a></h1>
+            <div class="header__search">
+                <!-- Search functionality can be added here later -->
+            </div>
+            <div class="header__options">
+                <div class="sidebar-status me-5">
+                    <div class="status-indicator" :class="serviceStatus.overall_status">
                         <div class="status-dot"></div>
+                        <span class="status-text small ms-2" x-text="serviceStatus.overall_status.toUpperCase()">OPERATIONAL</span>
                     </div>
                 </div>
-        </div>
-    </aside>
-
-        <!-- Main Content -->
-        <main class="admin-main">
-            <!-- Header -->
-            <header class="admin-header">
-                <div class="header-content">
-                    <div class="header-title">
-                        <h4 class="header-main-title">Command Center</h4>
-                        <small class="header-subtitle" x-text="getActiveTabDescription()"></small>
-                    </div>
-                    <div class="header-actions">
-                        <button class="btn btn-outline-secondary" @click="toggleSidebar()">
-                            <i class="bi bi-list"></i>
-                        </button>
-                        <button class="btn btn-outline-secondary" @click="refreshData()">
-                            <i class="bi bi-arrow-clockwise"></i>
-                        </button>
-                    </div>
+                <button class="header__pro" @click="refreshAllData()">
+                    <i class="bi bi-arrow-clockwise"></i> REFRESH
+                </button>
+            </div>
+        </header>
+      
+        <!-- BODY -->
+        <div class="body">
+      
+            <!-- SIDEBAR -->
+            <div class="sidebar">
+                <div class="sidebar__icon" :class="{ 'active': activeTab === 'dashboard' }" @click="setActiveTab('dashboard')" title="Dashboard">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
                 </div>
-            </header>
-
-            <!-- Content Area -->
-            <div class="content-wrapper">
-                
-                <!-- Dashboard Tab -->
-                <div x-show="activeTab === 'dashboard'" class="fade-in">
-                    <!-- Stats Cards -->
-                    <div class="stats-grid">
-                        <div class="stats-card info">
-                            <div class="stats-content">
-                                <div class="stats-icon">
-                                    <i class="bi bi-rocket-takeoff"></i>
-                                </div>
-                                <div class="stats-info">
-                                    <h6 class="stats-label">Active Missions</h6>
-                                    <h3 class="stats-value" x-text="observabilityData.active_missions">0</h3>
-                                    <small class="stats-trend">
-                                        <i class="bi bi-arrow-up"></i> +12.5%
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="stats-card success">
-                            <div class="stats-content">
-                                <div class="stats-icon">
-                                    <i class="bi bi-robot"></i>
-                                </div>
-                                <div class="stats-info">
-                                    <h6 class="stats-label">Available Agents</h6>
-                                    <h3 class="stats-value" x-text="Object.keys(observabilityData.agent_performance).length">6</h3>
-                                    <small class="stats-trend">
-                                        <i class="bi bi-arrow-up"></i> +8.2%
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="stats-card warning">
-                            <div class="stats-content">
-                                <div class="stats-icon">
-                                    <i class="bi bi-clock-history"></i>
-                                </div>
-                                <div class="stats-info">
-                                    <h6 class="stats-label">Completed Today</h6>
-                                    <h3 class="stats-value" x-text="observabilityData.total_missions">24</h3>
-                                    <small class="stats-trend">
-                                        <i class="bi bi-arrow-up"></i> +15.3%
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="stats-card danger">
-                            <div class="stats-content">
-                                <div class="stats-icon">
-                                    <i class="bi bi-cpu"></i>
-                                </div>
-                                <div class="stats-info">
-                                    <h6 class="stats-label">System Load</h6>
-                                    <h3 class="stats-value" x-text="observabilityData.system_metrics.cpu_usage + '%'">45%</h3>
-                                    <small class="stats-trend">
-                                        <i class="bi bi-arrow-down"></i> -2.1%
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Service Status Monitoring -->
-                    <div class="service-status-section">
-                        <div class="status-header">
-                            <div class="header-left">
-                                <h5 class="status-title">
-                                    <i class="bi bi-activity me-2"></i>
-                                    System Health Monitor
-                                </h5>
-                                <p class="status-subtitle">Real-time service status and performance metrics</p>
-                            </div>
-                            <div class="status-overall" :class="'status-' + serviceStatus.overall_status">
-                                <div class="status-indicator">
-                                    <span class="status-dot"></span>
-                                    <span class="status-text" x-text="serviceStatus.overall_status.toUpperCase()"></span>
-                                </div>
-                                <div class="status-details">
-                                    <small x-text="Object.keys(serviceStatus.services).length + ' Services Active'"></small>
-                                </div>
-                            </div>
+                <div class="sidebar__icon" :class="{ 'active': activeTab === 'missions' }" @click="setActiveTab('missions')" title="Missions">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                </div>
+                <div class="sidebar__icon" :class="{ 'active': activeTab === 'observability' }" @click="setActiveTab('observability')" title="Observability">
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                </div>
+                <div class="sidebar__icon" :class="{ 'active': activeTab === 'settings' }" @click="setActiveTab('settings')" title="Settings">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                </div>
+            </div>
+      
+            <!-- MAIN -->
+            <main class="main">
+                <!-- DASHBOARD TAB -->
+                <div x-show="activeTab === 'dashboard'" class="fade-in d-flex flex-column" style="width: 100%;">
+                    <div class="main__col-1">
+                        <div>
+                            <h2 class="main__heading"><span style="background: linear-gradient(to bottom, hsl(247, 88%, 70%), hsl(282, 82%, 51%)); box-shadow: 0 2px 12px hsla(247, 88%, 70%, .3)"><i class="bi bi-shield-check text-white"></i></span> Sentinel OS</h2>
+                            <p class="main__desc">The Sentient Supercharged Phoenix System. Ready for mission deployment.</p>
+                            <p class="main__sub"><span>System Status:</span> <span class="text-success fw-bold" x-text="serviceStatus.overall_status.toUpperCase()">OPERATIONAL</span></p>
                         </div>
                         
-                        <div class="service-grid">
-                            <!-- Desktop App Service Card -->
-                            <div class="service-card modern" x-show="serviceStatus.services.desktop_app">
-                                <div class="service-header">
-                                    <div class="service-icon desktop">
-                                        <i class="bi bi-display"></i>
-                                    </div>
-                                    <div class="service-info">
-                                        <h6 class="service-name" x-text="serviceStatus.services.desktop_app.name"></h6>
-                                        <div class="service-meta">
-                                            <span class="service-port" x-text="'Port ' + serviceStatus.services.desktop_app.port"></span>
-                                            <span class="service-uptime">Uptime: 99.9%</span>
-                                        </div>
-                                    </div>
-                                    <div class="service-status" :class="'status-' + serviceStatus.services.desktop_app.status">
-                                        <span class="status-dot"></span>
-                                        <span class="status-text" x-text="serviceStatus.services.desktop_app.status.toUpperCase()"></span>
-                                    </div>
-                                </div>
-                                <div class="service-metrics" x-show="serviceStatus.services.desktop_app.status === 'online'">
-                                    <div class="metrics-grid">
-                                        <div class="metric-item">
-                                            <span class="metric-label">Response Time</span>
-                                            <span class="metric-value fast" x-text="(serviceStatus.services.desktop_app.response_time * 1000).toFixed(0) + 'ms'"></span>
-                                        </div>
-                                        <div class="metric-item">
-                                            <span class="metric-label">Last Check</span>
-                                            <span class="metric-value" x-text="formatTime(serviceStatus.services.desktop_app.last_check)"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Weave Observability Service Card -->
-                            <div class="service-card modern">
-                                <div class="service-header">
-                                    <div class="service-icon weave">
-                                        <i class="bi bi-eye"></i>
-                                    </div>
-                                    <div class="service-info">
-                                        <h6 class="service-name">Weave Observability</h6>
-                                        <div class="service-meta">
-                                            <span class="service-port">Observability</span>
-                                            <span class="service-uptime">Uptime: 99.9%</span>
-                                        </div>
-                                    </div>
-                                    <div class="service-status" :class="'status-' + observabilityData.weave_status">
-                                        <span class="status-dot"></span>
-                                        <span class="status-text" x-text="observabilityData.weave_status.toUpperCase()"></span>
-                                    </div>
-                                </div>
-                                <div class="service-metrics" x-show="observabilityData.weave_status === 'online'">
-                                    <div class="metrics-grid">
-                                        <div class="metric-item">
-                                            <span class="metric-label">Active Traces</span>
-                                            <span class="metric-value fast" x-text="observabilityData.recent_traces.length"></span>
-                                        </div>
-                                        <div class="metric-item">
-                                            <span class="metric-label">Agents Monitored</span>
-                                            <span class="metric-value" x-text="Object.keys(observabilityData.agent_performance).length"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Cognitive Engine Service Card -->
-                            <div class="service-card modern" x-show="serviceStatus.services.cognitive_engine">
-                                <div class="service-header">
-                                    <div class="service-icon cognitive">
-                                        <i class="bi bi-cpu"></i>
-                                    </div>
-                                    <div class="service-info">
-                                        <h6 class="service-name" x-text="serviceStatus.services.cognitive_engine.name"></h6>
-                                        <div class="service-meta">
-                                            <span class="service-port" x-text="'Port ' + serviceStatus.services.cognitive_engine.port"></span>
-                                            <span class="service-uptime">Uptime: 99.8%</span>
-                                        </div>
-                                    </div>
-                                    <div class="service-status" :class="'status-' + serviceStatus.services.cognitive_engine.status">
-                                        <span class="status-dot"></span>
-                                        <span class="status-text" x-text="serviceStatus.services.cognitive_engine.status.toUpperCase()"></span>
-                                    </div>
-                                </div>
-                                <div class="service-metrics" x-show="serviceStatus.services.cognitive_engine.status === 'online'">
-                                    <div class="metrics-grid">
-                                        <div class="metric-item">
-                                            <span class="metric-label">Response Time</span>
-                                            <span class="metric-value" :class="serviceStatus.services.cognitive_engine.response_time > 1 ? 'slow' : 'fast'" x-text="(serviceStatus.services.cognitive_engine.response_time * 1000).toFixed(0) + 'ms'"></span>
-                                        </div>
-                                        <div class="metric-item">
-                                            <span class="metric-label">Last Check</span>
-                                            <span class="metric-value" x-text="formatTime(serviceStatus.services.cognitive_engine.last_check)"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="main__list-heading-wrap mt-5 mb-4">
+                            <h2 class="main__list-heading ss-heading">Live Mission Feed</h2>
                         </div>
-
-                        <!-- System Resources -->
-                        <div class="system-resources">
-                            <h6 class="resources-title">System Resources</h6>
-                            <div class="resources-grid">
-                                <div class="resource-item">
-                                    <div class="resource-header">
-                                        <span class="resource-label">Memory Usage</span>
-                                        <span class="resource-value" x-text="serviceStatus.system.memory_usage.toFixed(1) + '%'"></span>
-                                    </div>
-                                    <div class="progress" style="height: 6px;">
-                                        <div class="progress-bar" :class="getResourceClass(serviceStatus.system.memory_usage)" 
-                                             :style="'width: ' + serviceStatus.system.memory_usage + '%'"></div>
-                                    </div>
-                                    <small class="resource-detail" x-text="'Available: ' + serviceStatus.system.memory_available.toFixed(0) + ' MB'"></small>
-                                </div>
-                                
-                                <div class="resource-item">
-                                    <div class="resource-header">
-                                        <span class="resource-label">CPU Usage</span>
-                                        <span class="resource-value" x-text="serviceStatus.system.cpu_usage.toFixed(1) + '%'"></span>
-                                    </div>
-                                    <div class="progress" style="height: 6px;">
-                                        <div class="progress-bar" :class="getResourceClass(serviceStatus.system.cpu_usage)" 
-                                             :style="'width: ' + serviceStatus.system.cpu_usage + '%'"></div>
-                                    </div>
-                                </div>
-                                
-                                <div class="resource-item">
-                                    <div class="resource-header">
-                                        <span class="resource-label">Disk Usage</span>
-                                        <span class="resource-value" x-text="serviceStatus.system.disk_usage.toFixed(1) + '%'"></span>
-                                    </div>
-                                    <div class="progress" style="height: 6px;">
-                                        <div class="progress-bar" :class="getResourceClass(serviceStatus.system.disk_usage)" 
-                                             :style="'width: ' + serviceStatus.system.disk_usage + '%'"></div>
-                                    </div>
-                                    <small class="resource-detail" x-text="'Free: ' + serviceStatus.system.disk_free.toFixed(1) + ' GB'"></small>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="terminal" style="height: 250px; color: var(--sentinel-white-secondary); background: var(--sentinel-black-primary);" x-html="liveFeed.replace(/\n/g, '<br>')"></div>
                     </div>
-
-                    <!-- Mission Control Panel -->
-                    <div class="control-panel">
-                        <div class="mission-form">
-                            <div class="panel-header">
-                                <h5 class="panel-title">Deploy New Mission</h5>
+            
+                    <div class="main__col-2">
+                        <div class="main__cards-container">
+                            <div class="main__cards-container-heading-wrap">
+                                <h2 class="main__cards-container-heading ss-heading">Deploy New Mission</h2>
                             </div>
-                            <div class="panel-body">
-                                <div class="form-grid">
-                                    <div class="form-group">
-                                        <label class="form-label">Mission Title</label>
-                                        <input type="text" class="form-control" x-model="newMission.title" placeholder="Enter mission title">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">Agent Type</label>
-                                        <select class="form-select" x-model="newMission.agentType">
-                                    <option value="researcher">Researcher</option>
-                                    <option value="developer">Developer</option>
-                                    <option value="analyst">Analyst</option>
-                                    <option value="qa">QA Tester</option>
-                                    <option value="debugger">Debugger</option>
-                                    <option value="documentation">Documentation</option>
-                                </select>
+                            <div class="p-3">
+                                <input type="text" class="form-control mb-3" x-model="newMission.title" placeholder="Mission Title (Optional)">
+                                <textarea class="form-control" rows="4" x-model="newMission.objective" placeholder="Describe the mission objective in detail..."></textarea>
+                                <button class="btn btn-primary w-100 mt-3 header__pro" @click="deployMission()" :disabled="deploying">
+                                    <i class="bi bi-rocket-takeoff me-2"></i>
+                                    <span x-text="deploying ? 'DEPLOYING...' : 'DEPLOY MISSION'"></span>
+                                </button>
                             </div>
-                                    <div class="form-group full-width">
-                                        <label class="form-label">Mission Objective</label>
-                                        <textarea class="form-control" rows="4" x-model="newMission.objective" placeholder="Describe the mission objective in detail..."></textarea>
-                                    </div>
-                                    <div class="form-group full-width">
-                                        <button class="btn btn-primary" @click="deployMission()" :disabled="deploying">
-                                            <i class="bi bi-rocket-takeoff me-2"></i>
-                                            <span x-text="deploying ? 'Deploying...' : 'Deploy Mission'"></span>
-                                        </button>
-                                        <button class="btn btn-outline-secondary ms-2" @click="clearMission()">
-                                            <i class="bi bi-arrow-clockwise me-2"></i>
-                                            Clear Form
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="live-feed">
-                            <div class="panel-header">
-                                <h5 class="panel-title">Live Mission Feed</h5>
-                            </div>
-                            <div class="panel-body">
-                                <div class="terminal" x-text="liveFeed"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Charts Row -->
-                    <div class="charts-grid">
-                        <div class="chart-container">
-                            <h5 class="chart-title">Mission Success Rate</h5>
-                            <canvas id="successRateChart" height="200"></canvas>
-                        </div>
-
-                        <div class="chart-container">
-                            <h5 class="chart-title">Agent Performance</h5>
-                            <canvas id="agentPerformanceChart" height="200"></canvas>
                         </div>
                     </div>
                 </div>
 
-                <!-- Missions Tab -->
-                <div x-show="activeTab === 'missions'" class="fade-in">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title mb-0">Mission History</h5>
+                <!-- MISSIONS TAB -->
+                <div x-show="activeTab === 'missions'" class="fade-in" style="width: 100%;">
+                    <div class="card" style="background: hsl(270, 50%, 11%); border: 1px solid var(--sentinel-black-accent);">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0 ss-heading">Mission History</h5>
+                            <a href="#" class="ss-show" @click.prevent="loadMissions()">Refresh List</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Title</th>
-                                            <th>Agent</th>
-                                            <th>Status</th>
-                                            <th>Created</th>
-                                            <th>Actions</th>
-                                        </tr>
+                                        <tr><th>ID</th><th>Title</th><th>Agent</th><th>Status</th><th>Created</th><th>Actions</th></tr>
                                     </thead>
                                     <tbody>
                                         <template x-for="mission in missions" :key="mission.id">
                                             <tr>
-                                                <td x-text="mission.id"></td>
+                                                <td x-text="mission.mission_id_str.split('_')[1]"></td>
                                                 <td x-text="mission.title"></td>
                                                 <td x-text="mission.agent_type"></td>
-                                                <td>
-                                                    <span class="badge" :class="'badge-' + getStatusClass(mission.status)" x-text="mission.status"></span>
-                                                </td>
+                                                <td><span class="badge" :class="'bg-' + getStatusClass(mission.status)" x-text="mission.status"></span></td>
                                                 <td x-text="formatDate(mission.created_at)"></td>
-                                                <td>
-                                                                    <button class="btn btn-sm btn-outline-primary" @click="viewMission(mission)">
-                    <i class="bi bi-eye"></i> View Details
-                </button>
-                <button class="btn btn-sm btn-outline-secondary" @click="testModal()">
-                    <i class="bi bi-bug"></i> Test Modal
-                </button>
-                                                </td>
+                                                <td><button class="btn btn-sm btn-outline-primary" @click="viewMission(mission)"><i class="bi bi-eye"></i> View</button></td>
                                             </tr>
                                         </template>
                                     </tbody>
@@ -518,1067 +144,235 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- OBSERVABILITY & SETTINGS TABS -->
+                <div x-show="activeTab === 'observability'" class="fade-in text-center" style="width: 100%;">
+                    <h2 class="main__heading">Observability</h2>
+                    <p class="main__desc">Weave and WandB integration dashboards will be displayed here.</p>
+                </div>
+                 <div x-show="activeTab === 'settings'" class="fade-in text-center" style="width: 100%;">
+                    <h2 class="main__heading">Settings</h2>
+                    <p class="main__desc">System configuration and theme settings will be available here.</p>
+                </div>
 
-                <!-- Mission Details Modal -->
-                <div class="modal fade" id="missionDetailsModal" tabindex="-1" aria-labelledby="missionDetailsModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-xl">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="missionDetailsModalLabel">
-                                    <i class="bi bi-robot me-2"></i>
-                                    Mission Details
-                                </h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body" x-show="selectedMission">
-                                <!-- Mission Overview -->
-                                <div class="row mb-4">
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h6 class="card-title mb-0">Mission Overview</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="mb-3">
-                                                    <strong>Mission ID:</strong>
-                                                    <span x-text="selectedMission.mission_id_str || selectedMission.id"></span>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <strong>Title:</strong>
-                                                    <span x-text="selectedMission.title"></span>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <strong>Agent Type:</strong>
-                                                    <span class="badge bg-primary" x-text="selectedMission.agent_type"></span>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <strong>Status:</strong>
-                                                    <span class="badge" :class="'badge-' + getStatusClass(selectedMission.status)" x-text="selectedMission.status"></span>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <strong>Created:</strong>
-                                                    <span x-text="formatDate(selectedMission.created_at)"></span>
-                                                </div>
-                                                <div class="mb-3" x-show="selectedMission.completed_at">
-                                                    <strong>Completed:</strong>
-                                                    <span x-text="formatDate(selectedMission.completed_at)"></span>
-                                                </div>
-                                                <div class="mb-3" x-show="selectedMission.execution_time">
-                                                    <strong>Execution Time:</strong>
-                                                    <span x-text="selectedMission.execution_time + ' seconds'"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h6 class="card-title mb-0">Performance Metrics</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="mb-3" x-show="selectedMission.tokens_used">
-                                                    <strong>Tokens Used:</strong>
-                                                    <span x-text="selectedMission.tokens_used"></span>
-                                                </div>
-                                                <div class="mb-3" x-show="selectedMission.error_message">
-                                                    <strong>Error:</strong>
-                                                    <span class="text-danger" x-text="selectedMission.error_message"></span>
-                                                </div>
-                                                <div class="mb-3" x-show="selectedMission.plan">
-                                                    <strong>Plan Steps:</strong>
-                                                    <span x-text="selectedMission.plan && selectedMission.plan.steps ? selectedMission.plan.steps.length : 0"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+            </main>
+        </div>
+    </div>
 
-                                <!-- Original Prompt -->
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <h6 class="card-title mb-0">
-                                            <i class="bi bi-chat-quote me-2"></i>
-                                            Original Prompt
-                                        </h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="bg-light p-3 rounded">
-                                            <pre class="mb-0" x-text="selectedMission.prompt"></pre>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Execution Plan -->
-                                <div class="card mb-4" x-show="selectedMission.plan">
-                                    <div class="card-header">
-                                        <h6 class="card-title mb-0">
-                                            <i class="bi bi-diagram-3 me-2"></i>
-                                            AI Execution Plan
-                                        </h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="accordion" id="planAccordion">
-                                            <template x-for="(step, index) in selectedMission.plan.steps" :key="index">
-                                                <div class="accordion-item">
-                                                    <h2 class="accordion-header">
-                                                        <button class="accordion-button" :class="index === 0 ? '' : 'collapsed'" type="button" data-bs-toggle="collapse" :data-bs-target="'#planStep' + index">
-                                                            <strong x-text="'Step ' + (index + 1) + ': ' + (step.agent_role || 'Unknown Agent')"></strong>
-                                                        </button>
-                                                    </h2>
-                                                    <div :id="'planStep' + index" class="accordion-collapse collapse" :class="index === 0 ? 'show' : ''" data-bs-parent="#planAccordion">
-                                                        <div class="accordion-body">
-                                                            <div class="mb-3">
-                                                                <strong>Task Description:</strong>
-                                                                <p x-text="step.task_description"></p>
-                                                            </div>
-                                                            <div class="mb-3" x-show="step.expected_output">
-                                                                <strong>Expected Output:</strong>
-                                                                <p x-text="step.expected_output"></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </template>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- AI Agent Actions & Results -->
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <h6 class="card-title mb-0">
-                                            <i class="bi bi-gear me-2"></i>
-                                            AI Agent Actions & Results
-                                        </h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <div x-show="selectedMission.result">
-                                            <h6 class="mb-3">Final Result:</h6>
-                                            <div class="bg-light p-3 rounded mb-3">
-                                                <pre class="mb-0" x-text="selectedMission.result"></pre>
-                                            </div>
-                                        </div>
-                                        
-                                        <div x-show="!selectedMission.result && selectedMission.status === 'completed'">
-                                            <div class="alert alert-info">
-                                                <i class="bi bi-info-circle me-2"></i>
-                                                Mission completed but no detailed result available. Check the mission status for more information.
-                                            </div>
-                                        </div>
-                                        
-                                        <div x-show="selectedMission.status === 'executing'">
-                                            <div class="alert alert-warning">
-                                                <i class="bi bi-clock me-2"></i>
-                                                Mission is currently executing. Results will be available when complete.
-                                            </div>
-                                        </div>
-                                        
-                                        <div x-show="selectedMission.status === 'failed'">
-                                            <div class="alert alert-danger">
-                                                <i class="bi bi-exclamation-triangle me-2"></i>
-                                                Mission failed. Check the error message above for details.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- File Operations (if any) -->
-                                <div class="card mb-4" x-show="selectedMission.result && selectedMission.result.includes('File')">
-                                    <div class="card-header">
-                                        <h6 class="card-title mb-0">
-                                            <i class="bi bi-file-earmark me-2"></i>
-                                            File Operations
-                                        </h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="alert alert-info">
-                                            <i class="bi bi-info-circle me-2"></i>
-                                            Check your file system for any files created by this mission. Common locations:
-                                            <ul class="mb-0 mt-2">
-                                                <li>Current directory: <code>./</code></li>
-                                                <li>Desktop: <code>~/Desktop/</code></li>
-                                                <li>Documents: <code>~/Documents/</code></li>
-                                            </ul>
-                                        </div>
-                                    </div>
+    <!-- MODAL -->
+    <div class="modal fade" id="missionDetailsModal" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title ss-heading"><i class="bi bi-robot me-2"></i> Mission Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" x-show="selectedMission">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="card" style="border: 1px solid var(--sentinel-black-accent);">
+                                <div class="card-header"><h6 class="card-title mb-0">Overview</h6></div>
+                                <div class="card-body">
+                                    <p><strong>Mission ID:</strong> <span x-text="selectedMission.mission_id_str || selectedMission.id"></span></p>
+                                    <p><strong>Title:</strong> <span x-text="selectedMission.title"></span></p>
+                                    <p><strong>Agent Type:</strong> <span class="badge bg-primary" x-text="selectedMission.agent_type"></span></p>
+                                    <p><strong>Status:</strong> <span class="badge" :class="'bg-' + getStatusClass(selectedMission.status)" x-text="selectedMission.status"></span></p>
+                                    <p><strong>Created:</strong> <span x-text="formatDate(selectedMission.created_at)"></span></p>
+                                    <p x-show="selectedMission.execution_time"><strong>Execution Time:</strong> <span x-text="selectedMission.execution_time + ' seconds'"></span></p>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" @click="refreshMissionDetails()">
-                                    <i class="bi bi-arrow-clockwise me-2"></i>
-                                    Refresh
-                                </button>
+                        </div>
+                        <div class="col-md-6">
+                             <div class="card" style="border: 1px solid var(--sentinel-black-accent);">
+                                <div class="card-header"><h6 class="card-title mb-0">Prompt</h6></div>
+                                <div class="card-body" style="max-height: 200px; overflow-y: auto;">
+                                    <pre class="mb-0" style="white-space: pre-wrap; word-wrap: break-word;" x-text="selectedMission.prompt"></pre>
+                                </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="card" style="border: 1px solid var(--sentinel-black-accent);">
+                        <div class="card-header"><h6 class="card-title mb-0">Result & Live Feed</h6></div>
+                        <div class="card-body">
+                            <div x-show="selectedMission.result"><h6 class="mb-2 ss-heading">Final Result:</h6><div class="p-3 rounded mb-3 terminal" style="background: var(--sentinel-black-primary);"><pre class="mb-0" style="white-space: pre-wrap; word-wrap: break-word;" x-text="selectedMission.result"></pre></div></div>
+                            <div x-show="selectedMission.updates"><h6 class="mb-2 ss-heading">Updates:</h6><div class="p-3 rounded terminal" style="background: var(--sentinel-black-primary); max-height: 250px;"><template x-for="update in selectedMission.updates"><p class="mb-1 small"><span x-text="formatTime(update.timestamp) + ': '"></span><span x-text="update.message"></span></p></template></div></div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Agents Tab -->
-                <div x-show="activeTab === 'agents'" class="fade-in">
-                    <div class="row g-4">
-                        <div class="col-md-6 col-lg-4" x-for="agent in agents" :key="agent.type">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
-                                        <i class="bi bi-robot text-primary" style="font-size: 24px;"></i>
-                                    </div>
-                                    <h6 x-text="agent.name"></h6>
-                                    <p class="text-muted small mb-3" x-text="agent.description"></p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <span class="badge bg-success">Available</span>
-                                        <small class="text-muted" x-text="agent.missions + ' missions'"></small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Analytics Tab -->
-                <div x-show="activeTab === 'analytics'" class="fade-in">
-                    <div class="row g-4">
-                        <div class="col-lg-8">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0">Mission Analytics</h5>
-                                </div>
-                                <div class="card-body">
-                                    <canvas id="analyticsChart" height="300"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0">Performance Metrics</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="mb-3">
-                                        <div class="d-flex justify-content-between mb-1">
-                                            <span>Success Rate</span>
-                                            <span>94.2%</span>
-                                        </div>
-                                        <div class="progress" style="height: 8px;">
-                                            <div class="progress-bar bg-success" style="width: 94.2%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <div class="d-flex justify-content-between mb-1">
-                                            <span>Average Time</span>
-                                            <span>2.3m</span>
-                                        </div>
-                                        <div class="progress" style="height: 8px;">
-                                            <div class="progress-bar bg-info" style="width: 78.5%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <div class="d-flex justify-content-between mb-1">
-                                            <span>Agent Utilization</span>
-                                            <span>87.1%</span>
-                                        </div>
-                                        <div class="progress" style="height: 8px;">
-                                            <div class="progress-bar bg-warning" style="width: 87.1%"></div>
-                                        </div>
-                                    </div>
-                        </div>
-                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary header__pro" @click="refreshMissionDetails()"><i class="bi bi-arrow-clockwise me-2"></i> Refresh</button>
                 </div>
             </div>
         </div>
-
-                <!-- Observability Tab -->
-                <div x-show="activeTab === 'observability'" class="fade-in">
-                    <div class="row g-4">
-                        <!-- Weave Status Card -->
-                        <div class="col-lg-4">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h6 class="card-title mb-0">
-                                        <i class="bi bi-eye me-2"></i>
-                                        Weave Observability Status
-                                    </h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center mb-3">
-                                        <div class="status-indicator me-3" :class="'status-' + observabilityData.weave_status">
-                                            <span class="status-dot"></span>
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-1" x-text="observabilityData.weave_status.toUpperCase()"></h6>
-                                            <small class="text-muted">Observability System</small>
-                                        </div>
-                                    </div>
-                                    <div class="row text-center">
-                                        <div class="col-6">
-                                            <h5 class="mb-1" x-text="observabilityData.active_missions"></h5>
-                                            <small class="text-muted">Active Missions</small>
-                                        </div>
-                                        <div class="col-6">
-                                            <h5 class="mb-1" x-text="observabilityData.total_missions"></h5>
-                                            <small class="text-muted">Total Missions</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- System Performance Card -->
-                        <div class="col-lg-8">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h6 class="card-title mb-0">
-                                        <i class="bi bi-speedometer2 me-2"></i>
-                                        System Performance Metrics
-                                    </h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="metric-item">
-                                                <div class="metric-header">
-                                                    <span class="metric-label">Memory Usage</span>
-                                                    <span class="metric-value" x-text="observabilityData.system_metrics.memory_usage + '%'"></span>
-                                                </div>
-                                                <div class="progress" style="height: 6px;">
-                                                    <div class="progress-bar" :class="getResourceClass(observabilityData.system_metrics.memory_usage)" 
-                                                         :style="'width: ' + observabilityData.system_metrics.memory_usage + '%'"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="metric-item">
-                                                <div class="metric-header">
-                                                    <span class="metric-label">CPU Usage</span>
-                                                    <span class="metric-value" x-text="observabilityData.system_metrics.cpu_usage + '%'"></span>
-                                                </div>
-                                                <div class="progress" style="height: 6px;">
-                                                    <div class="progress-bar" :class="getResourceClass(observabilityData.system_metrics.cpu_usage)" 
-                                                         :style="'width: ' + observabilityData.system_metrics.cpu_usage + '%'"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="metric-item">
-                                                <div class="metric-header">
-                                                    <span class="metric-label">Disk Usage</span>
-                                                    <span class="metric-value" x-text="observabilityData.system_metrics.disk_usage + '%'"></span>
-                                                </div>
-                                                <div class="progress" style="height: 6px;">
-                                                    <div class="progress-bar" :class="getResourceClass(observabilityData.system_metrics.disk_usage)" 
-                                                         :style="'width: ' + observabilityData.system_metrics.disk_usage + '%'"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Agent Performance -->
-                        <div class="col-lg-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h6 class="card-title mb-0">
-                                        <i class="bi bi-robot me-2"></i>
-                                        Agent Performance Analytics
-                                    </h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Agent Name</th>
-                                                    <th>Grade</th>
-                                                    <th>Success Rate</th>
-                                                    <th>Avg Execution Time</th>
-                                                    <th>Total Executions</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <template x-for="(agent, name) in observabilityData.agent_performance" :key="name">
-                                                    <tr>
-                                                        <td x-text="name"></td>
-                                                        <td>
-                                                            <span class="badge" :class="'badge-' + getGradeClass(observabilityData.performance_grades[name])" 
-                                                                  x-text="observabilityData.performance_grades[name]"></span>
-                                                        </td>
-                                                        <td x-text="(agent.success_rate * 100).toFixed(1) + '%'"></td>
-                                                        <td x-text="agent.avg_execution_time.toFixed(2) + 's'"></td>
-                                                        <td x-text="agent.total_executions"></td>
-                                                        <td>
-                                                            <button class="btn btn-sm btn-outline-primary" @click="viewAgentDetails(name)">
-                                                                <i class="bi bi-eye"></i> Details
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                </template>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Recent Traces -->
-                        <div class="col-lg-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h6 class="card-title mb-0">
-                                        <i class="bi bi-diagram-3 me-2"></i>
-                                        Recent Mission Traces
-                                    </h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Trace ID</th>
-                                                    <th>Mission Name</th>
-                                                    <th>Duration</th>
-                                                    <th>Status</th>
-                                                    <th>Timestamp</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <template x-for="trace in observabilityData.recent_traces" :key="trace.trace_id">
-                                                    <tr>
-                                                        <td x-text="trace.trace_id"></td>
-                                                        <td x-text="trace.trace_name"></td>
-                                                        <td x-text="trace.duration + 's'"></td>
-                                                        <td>
-                                                            <span class="badge" :class="'badge-' + getStatusClass(trace.status)" 
-                                                                  x-text="trace.status"></span>
-                                                        </td>
-                                                        <td x-text="formatTime(trace.timestamp)"></td>
-                                                    </tr>
-                                                </template>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- WandB Runs -->
-                        <div class="col-lg-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h6 class="card-title mb-0">
-                                        <i class="bi bi-cloud me-2"></i>
-                                        WandB Experiment Runs
-                                    </h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Run ID</th>
-                                                    <th>Project</th>
-                                                    <th>Status</th>
-                                                    <th>Start Time</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <template x-for="run in observabilityData.wandb_runs" :key="run.run_id">
-                                                    <tr>
-                                                        <td x-text="run.run_id"></td>
-                                                        <td x-text="run.project"></td>
-                                                        <td>
-                                                            <span class="badge" :class="'badge-' + getStatusClass(run.status)" 
-                                                                  x-text="run.status"></span>
-                                                        </td>
-                                                        <td x-text="formatTime(run.start_time)"></td>
-                                                        <td>
-                                                            <a href="https://wandb.ai/elliotttmiller-north-hennepin-community-college/cognitive-forge-v5" 
-                                                               target="_blank" class="btn btn-sm btn-outline-primary">
-                                                                <i class="bi bi-box-arrow-up-right"></i> View
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                </template>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Settings Tab -->
-                <div x-show="activeTab === 'settings'" class="fade-in">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title mb-0">System Settings</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label class="form-label">Auto-refresh Interval</label>
-                                    <select class="form-select" x-model="settings.refreshInterval">
-                                        <option value="5000">5 seconds</option>
-                                        <option value="10000">10 seconds</option>
-                                        <option value="30000">30 seconds</option>
-                                        <option value="60000">1 minute</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Theme</label>
-                                    <select class="form-select" x-model="settings.theme">
-                                        <option value="dark">Dark</option>
-                                        <option value="light">Light</option>
-                                        <option value="auto">Auto</option>
-                                    </select>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary" @click="saveSettings()">
-                                        <i class="bi bi-check-circle me-2"></i>
-                                        Save Settings
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
     </div>
 
     <!-- Toast Container -->
-    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055;">
-        <div id="toast-container"></div>
-        </div>
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055;"><div id="toast-container"></div></div>
 
-    <!-- Bootstrap JS -->
+    <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-
     <script>
         function sentinelApp() {
             return {
                 activeTab: 'dashboard',
                 deploying: false,
                 liveFeed: 'System initialized. Ready for missions...',
-                stats: {
-                    activeMissions: 3,
-                    availableAgents: 6,
-                    completedToday: 24,
-                    systemLoad: 45
-                },
-                newMission: {
-                    title: '',
-                    agentType: 'researcher',
-                    objective: ''
-                },
+                newMission: { title: '', objective: '' },
                 missions: [],
                 selectedMission: null,
-                agents: [
-                    { type: 'researcher', name: 'Research Agent', description: 'Specializes in data analysis and research tasks', missions: 12 },
-                    { type: 'developer', name: 'Development Agent', description: 'Handles coding and development tasks', missions: 8 },
-                    { type: 'analyst', name: 'Analytics Agent', description: 'Focuses on business intelligence and analytics', missions: 15 },
-                    { type: 'qa', name: 'QA Agent', description: 'Quality assurance and testing specialist', missions: 6 },
-                    { type: 'debugger', name: 'Debug Agent', description: 'Troubleshooting and error resolution', missions: 4 },
-                    { type: 'documentation', name: 'Documentation Agent', description: 'Creates and maintains documentation', missions: 9 }
-                ],
-                settings: {
-                    refreshInterval: 10000,
-                    theme: 'dark'
-                },
-                observabilityData: {
-                    active_missions: 0,
-                    total_missions: 0,
-                    agent_performance: {},
-                    system_metrics: {
-                        memory_usage: 0,
-                        cpu_usage: 0,
-                        disk_usage: 0
-                    },
-                    recent_traces: [],
-                    performance_grades: {},
-                    weave_status: 'offline',
-                    wandb_runs: []
-                },
-                serviceStatus: {
-                    overall_status: 'loading',
-                    services: {
-                        desktop_app: {
-                            name: 'Desktop App',
-                            status: 'loading',
-                            port: 8001,
-                            response_time: 0,
-                            last_check: new Date().toISOString()
-                        },
-                        cognitive_engine: {
-                            name: 'Cognitive Engine',
-                            status: 'loading',
-                            port: 8002,
-                            response_time: 0,
-                            last_check: new Date().toISOString()
-                        }
-                    },
-                    railway: {
-                        available: false,
-                        url: null,
-                        status: 'unknown'
-                    },
-                    system: {
-                        memory_usage: 0,
-                        cpu_usage: 0,
-                        disk_usage: 0,
-                        memory_available: 0,
-                        disk_free: 0
-                    }
-                },
+                settings: { refreshInterval: 10000, theme: 'dark' },
+                serviceStatus: { overall_status: 'loading', services: {}, system: { memory_usage: 0, cpu_usage: 0, disk_usage: 0, memory_available: 0, disk_free: 0 } },
+                missionCheckInterval: null,
 
                 init() {
                     this.loadMissions();
-                    this.loadObservabilityData();
-                    this.initializeCharts();
+                    this.updateServiceStatus();
                     this.startPolling();
-                    this.startServiceStatusPolling();
-                    this.startObservabilityPolling();
                     this.hideLoadingScreen();
                 },
-
-                async startServiceStatusPolling() {
-                    // Initial load
-                    await this.updateServiceStatus();
-                    
-                    // Poll every 30 seconds
-                    setInterval(() => {
-                        this.updateServiceStatus();
-                    }, 30000);
-                },
-
-                async updateServiceStatus() {
-                    try {
-                        const response = await fetch('/service-status');
-                        if (response.ok) {
-                            const data = await response.json();
-                            this.serviceStatus = data;
-                        } else {
-                            console.error('Service status response not ok:', response.status);
-                        }
-                    } catch (error) {
-                        console.error('Error updating service status:', error);
-                        // Set error status
-                        this.serviceStatus.overall_status = 'error';
-                    }
-                },
-
-                async loadObservabilityData() {
-                    try {
-                        const response = await fetch('/observability/data');
-                        if (response.ok) {
-                            this.observabilityData = await response.json();
-                        } else {
-                            console.error('Observability data response not ok:', response.status);
-                        }
-                    } catch (error) {
-                        console.error('Error loading observability data:', error);
-                    }
-                },
-
-                async startObservabilityPolling() {
-                    // Poll every 10 seconds
-                    setInterval(() => {
-                        this.loadObservabilityData();
-                    }, 10000);
-                },
-
-                async viewAgentDetails(agentName) {
-                    try {
-                        const response = await fetch(`/observability/agents/${agentName}`);
-                        if (response.ok) {
-                            const agentData = await response.json();
-                            this.showToast(`Agent ${agentName}: ${(agentData.success_rate * 100).toFixed(1)}% success rate`, 'info');
-                        } else {
-                            this.showToast('Failed to load agent details', 'error');
-                        }
-                    } catch (error) {
-                        console.error('Error loading agent details:', error);
-                        this.showToast('Error loading agent details', 'error');
-                    }
-                },
-
-                getGradeClass(grade) {
-                    switch(grade) {
-                        case 'A+': return 'success';
-                        case 'A': return 'success';
-                        case 'B': return 'info';
-                        case 'C': return 'warning';
-                        case 'D': return 'danger';
-                        default: return 'secondary';
-                    }
-                },
-
-                setActiveTab(tab) {
-                    this.activeTab = tab;
-                },
-
-                getActiveTabTitle() {
-                    const titles = {
-                        dashboard: 'Dashboard',
-                        missions: 'Mission Control',
-                        agents: 'Agent Management',
-                        analytics: 'Analytics',
-                        settings: 'Settings'
-                    };
-                    return titles[this.activeTab] || 'Dashboard';
-                },
-
-                getActiveTabDescription() {
-                    const descriptions = {
-                        dashboard: 'Monitor system status and deploy new missions',
-                        missions: 'View and manage mission history',
-                        agents: 'Monitor agent performance and availability',
-                        analytics: 'Performance metrics and insights',
-                        settings: 'Configure system preferences'
-                    };
-                    return descriptions[this.activeTab] || '';
-                },
+                
+                setActiveTab(tab) { this.activeTab = tab; },
 
                 async deployMission() {
-                    if (!this.newMission.objective.trim()) {
-                        this.showToast('Please enter a mission objective', 'warning');
-                        return;
-                    }
-
+                    if (!this.newMission.objective.trim()) { this.showToast('Please enter a mission objective.', 'warning'); return; }
                     this.deploying = true;
-                    this.liveFeed = 'Initializing mission deployment...\nPreparing agent assignment...';
-
-            try {
-                const response = await fetch('/advanced-mission', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                                prompt: this.newMission.objective,
-                                title: this.newMission.title || this.newMission.objective.substring(0, 50),
-                                agent_type: this.newMission.agentType
-                            })
-                });
-
-                const data = await response.json();
+                    this.liveFeed = 'Initializing mission deployment...';
+                    try {
+                        const response = await fetch('/advanced-mission', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ prompt: this.newMission.objective, title: this.newMission.title || this.newMission.objective.substring(0, 50), agent_type: 'developer' })
+                        });
+                        const data = await response.json();
+                        if (!response.ok) { throw new Error(data.detail || 'Failed to deploy mission'); }
                         
-                        if (!response.ok) {
-                            throw new Error(data.detail || 'Failed to deploy mission');
-                        }
-
-                        this.liveFeed = `Mission ${data.mission_id} deployed successfully!\nAgent: ${this.newMission.agentType}\nStatus: Planning...`;
+                        this.liveFeed = `Mission ${data.mission_id} deployed successfully!\nStatus: PLANNING...`;
                         this.showToast('Mission deployed successfully!', 'success');
-                        
-                        // Reset form
-                        this.newMission = {
-                            title: '',
-                            agentType: 'researcher',
-                            objective: ''
-                        };
-
-                        // Refresh missions list
+                        this.newMission = { title: '', objective: '' };
                         this.loadMissions();
+
+                        // Start polling for this specific mission's status
+                        this.pollMissionStatus(data.mission_id);
 
                     } catch (error) {
                         this.liveFeed = `Mission deployment failed: ${error.message}`;
-                        this.showToast('Mission deployment failed', 'error');
+                        this.showToast(error.message, 'danger');
                     } finally {
                         this.deploying = false;
                     }
                 },
 
+                pollMissionStatus(missionId) {
+                    if (this.missionCheckInterval) clearInterval(this.missionCheckInterval);
+
+                    this.missionCheckInterval = setInterval(async () => {
+                        try {
+                            const response = await fetch(`/mission/${missionId}`);
+                            if (!response.ok) return;
+                            const data = await response.json();
+                            
+                            let feedContent = `Mission ${missionId} Status: ${data.status}\n\n`;
+                            data.updates.forEach(update => {
+                                feedContent += `${this.formatTime(update.timestamp)}: ${update.message}\n`;
+                            });
+                            this.liveFeed = feedContent;
+
+                            if (data.status === 'COMPLETED' || data.status === 'FAILED') {
+                                clearInterval(this.missionCheckInterval);
+                                this.loadMissions(); // Refresh the main list
+                            }
+                        } catch (error) {
+                            console.error('Error polling mission status:', error);
+                            clearInterval(this.missionCheckInterval);
+                        }
+                    }, 2000);
+                },
+
                 async loadMissions() {
                     try {
                         const response = await fetch('/missions');
-                        if (response.ok) {
-                            this.missions = await response.json();
-                        }
-            } catch (error) {
-                        console.error('Error loading missions:', error);
+                        if (response.ok) { this.missions = await response.json(); }
+                    } catch (error) { console.error('Error loading missions:', error); }
+                },
+                
+                async updateServiceStatus() {
+                    try {
+                        const response = await fetch('/service-status');
+                        if (response.ok) { this.serviceStatus = await response.json(); }
+                    } catch (error) {
+                        this.serviceStatus.overall_status = 'error';
+                        console.error('Error updating service status:', error);
                     }
                 },
 
-                formatDate(dateString) {
-                    return new Date(dateString).toLocaleString();
-                },
+                formatDate(dateString) { return new Date(dateString).toLocaleString(); },
+                formatTime(dateString) { return new Date(dateString).toLocaleTimeString(); },
 
                 getStatusClass(status) {
-                    switch(status) {
-                        case 'completed': return 'success';
-                        case 'running': return 'info';
-                        case 'failed': return 'danger';
-                        case 'pending': return 'warning';
-                        default: return 'secondary';
-                    }
+                    const s = status ? status.toLowerCase() : '';
+                    if (s === 'completed') return 'success';
+                    if (s === 'executing' || s === 'planning') return 'info';
+                    if (s === 'failed') return 'danger';
+                    if (s === 'pending') return 'warning';
+                    return 'secondary';
                 },
 
                 async viewMission(mission) {
                     try {
-                        console.log('Viewing mission:', mission);
-                        // Fetch detailed mission information
                         const missionId = mission.mission_id_str || mission.id;
-                        console.log('Mission ID:', missionId);
-                        
                         const response = await fetch(`/mission/${missionId}`);
-                        console.log('Response status:', response.status);
-                        
                         if (response.ok) {
                             this.selectedMission = await response.json();
-                            console.log('Selected mission data:', this.selectedMission);
-                            
-                            // Show the modal using Bootstrap
                             const modal = new bootstrap.Modal(document.getElementById('missionDetailsModal'));
                             modal.show();
                         } else {
-                            console.error('Failed to fetch mission details:', response.status);
-                            console.error('Response text:', await response.text());
-                            // Fallback to basic mission data
-                            this.selectedMission = mission;
-                            const modal = new bootstrap.Modal(document.getElementById('missionDetailsModal'));
-                            modal.show();
-                            this.showToast('Using basic mission data', 'warning');
+                           this.showToast('Failed to fetch mission details.', 'error');
                         }
                     } catch (error) {
                         console.error('Error fetching mission details:', error);
-                        this.showToast('Error loading mission details', 'error');
+                        this.showToast('Error fetching mission details.', 'error');
+                    }
+                },
+                
+                async refreshMissionDetails() {
+                    if (this.selectedMission) {
+                        await this.viewMission({ mission_id_str: this.selectedMission.mission_id });
+                        this.showToast('Mission details refreshed!', 'success');
                     }
                 },
 
-                clearMission() {
-                    this.newMission = {
-                        title: '',
-                        agentType: 'researcher',
-                        objective: ''
-                    };
-                    this.showToast('Mission form cleared', 'info');
-                },
-
-                saveSettings() {
-                    this.showToast('Settings saved successfully', 'success');
-                },
-
-                refreshData() {
-                    this.loadMissions();
-                    this.showToast('Data refreshed', 'info');
-                },
-
-                toggleSidebar() {
-                    const wrapper = document.getElementById('admin-wrapper');
-                    wrapper.classList.toggle('sidebar-collapsed');
-                },
-
-                startPolling() {
-                    setInterval(() => {
+                startPolling() { 
+                    setInterval(() => { 
                         this.loadMissions();
-                    }, this.settings.refreshInterval);
-                },
-
-                initializeCharts() {
-                    // Success Rate Chart
-                    const successCtx = document.getElementById('successRateChart');
-                    if (successCtx) {
-                        new Chart(successCtx, {
-                            type: 'doughnut',
-                            data: {
-                                labels: ['Completed', 'Failed', 'In Progress'],
-                                datasets: [{
-                                    data: [85, 10, 5],
-                                    backgroundColor: ['#22c55e', '#ef4444', '#f59e0b']
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                plugins: {
-                                    legend: {
-                                        position: 'bottom',
-                                        labels: { color: '#f8fafc' }
-                                    }
-                                }
-                            }
-                        });
-                    }
-
-                    // Agent Performance Chart
-                    const agentCtx = document.getElementById('agentPerformanceChart');
-                    if (agentCtx) {
-                        new Chart(agentCtx, {
-                            type: 'bar',
-                            data: {
-                                labels: ['Researcher', 'Developer', 'Analyst', 'QA', 'Debugger', 'Docs'],
-                                datasets: [{
-                                    label: 'Missions Completed',
-                                    data: [12, 8, 15, 6, 4, 9],
-                                    backgroundColor: '#6366f1'
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                plugins: {
-                                    legend: {
-                                        display: false
-                                    }
-                                },
-                                scales: {
-                                    y: {
-                                        beginAtZero: true,
-                                        ticks: { color: '#f8fafc' }
-                                    },
-                                    x: {
-                                        ticks: { color: '#f8fafc' }
-                                    }
-                                }
-                            }
-                        });
-                    }
-
-                    // Analytics Chart
-                    const analyticsCtx = document.getElementById('analyticsChart');
-                    if (analyticsCtx) {
-                        new Chart(analyticsCtx, {
-                            type: 'line',
-                            data: {
-                                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                                datasets: [{
-                                    label: 'Missions Completed',
-                                    data: [65, 78, 90, 85, 95, 88],
-                                    borderColor: '#6366f1',
-                                    backgroundColor: 'rgba(99, 102, 241, 0.1)',
-                                    tension: 0.4
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                plugins: {
-                                    legend: {
-                                        labels: { color: '#f8fafc' }
-                                    }
-                                },
-                                scales: {
-                                    y: {
-                                        beginAtZero: true,
-                                        ticks: { color: '#f8fafc' }
-                                    },
-                                    x: {
-                                        ticks: { color: '#f8fafc' }
-                                    }
-                                }
-                            }
-                        });
-                    }
+                        this.updateServiceStatus();
+                    }, this.settings.refreshInterval); 
                 },
 
                 showToast(message, type = 'info') {
                     const toastContainer = document.getElementById('toast-container');
                     const toast = document.createElement('div');
-                    toast.className = `toast show`;
-                    toast.innerHTML = `
-                        <div class="toast-header">
-                            <i class="bi bi-info-circle me-2"></i>
-                            <strong class="me-auto">Sentinel</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
-                        </div>
-                        <div class="toast-body">${message}</div>
-                    `;
+                    const bgClass = type === 'danger' ? 'bg-danger' : type === 'warning' ? 'bg-warning' : type === 'success' ? 'bg-success' : 'bg-info';
+                    toast.className = `toast show align-items-center text-white ${bgClass} border-0`;
+                    toast.innerHTML = `<div class="d-flex"><div class="toast-body">${message}</div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button></div>`;
                     toastContainer.appendChild(toast);
-                    
-                    setTimeout(() => {
-                        toast.remove();
-                    }, 3000);
+                    setTimeout(() => { toast.remove(); }, 5000);
                 },
 
                 hideLoadingScreen() {
                     setTimeout(() => {
-                        document.getElementById('loading-screen').classList.add('hidden');
-                    }, 1000);
+                        const screen = document.getElementById('loading-screen');
+                        if(screen) screen.classList.add('hidden');
+                    }, 500);
                 },
-                formatTime(timestamp) {
-                    if (!timestamp) return 'Unknown';
-                    const date = new Date(timestamp);
-                    return date.toLocaleTimeString();
+                
+                refreshAllData() { 
+                    this.loadMissions();
+                    this.updateServiceStatus();
+                    this.showToast('All data refreshed', 'success'); 
                 },
-                getServiceIcon(id) {
-                    const icons = {
-                        'desktop_app': 'bi-display',
-                        'cognitive_engine': 'bi-cpu',
-                        'railway': 'bi-cloud'
-                    };
-                    return icons[id] || 'bi-gear';
-                },
-                getResourceClass(value) {
-                    if (value < 70) return 'bg-success';
-                    if (value < 90) return 'bg-warning';
-                    return 'bg-danger';
-                },
-                async refreshMissionDetails() {
-                    if (this.selectedMission) {
-                        try {
-                            const response = await fetch(`/mission/${this.selectedMission.mission_id_str || this.selectedMission.id}`);
-                            if (response.ok) {
-                                this.selectedMission = await response.json();
-                                this.showToast('Mission details refreshed', 'success');
-                            } else {
-                                this.showToast('Failed to refresh mission details', 'error');
-                            }
-                        } catch (error) {
-                            console.error('Error refreshing mission details:', error);
-                            this.showToast('Error refreshing mission details', 'error');
-                        }
-                    }
-                },
-
-                testModal() {
-                    // Test the modal with sample data
-                    this.selectedMission = {
-                        mission_id_str: 'test_mission_123',
-                        title: 'Test Mission',
-                        agent_type: 'developer',
-                        status: 'completed',
-                        created_at: new Date().toISOString(),
-                        completed_at: new Date().toISOString(),
-                        execution_time: 45,
-                        tokens_used: 1500,
-                        prompt: 'This is a test prompt to verify the modal is working correctly.',
-                        result: 'Test mission completed successfully. Files created: test_file.py',
-                        plan: {
-                            steps: [
-                                {
-                                    agent_role: 'Senior Developer',
-                                    task_description: 'Create a test Python file',
-                                    expected_output: 'A working Python script'
-                                },
-                                {
-                                    agent_role: 'QA Tester',
-                                    task_description: 'Test the created file',
-                                    expected_output: 'Verification that the file works'
-                                }
-                            ]
-                        }
-                    };
-                    
-                    const modal = new bootstrap.Modal(document.getElementById('missionDetailsModal'));
-                    modal.show();
-                    this.showToast('Test modal opened with sample data', 'info');
-                }
             }
         }
-
-        // Initialize when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            // Any additional initialization can go here
-        });
     </script>
-    
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Custom JS -->
-    <script src="/static/js/main.js"></script>
-    <script src="/static/js/lucide.js"></script>
 </body>
 </html>

@@ -1,0 +1,1365 @@
+2025-07-31 17:45:47,551 INFO    MainThread:13844 [wandb_setup.py:_flush():80] Current SDK version is 0.21.0
+2025-07-31 17:45:47,551 INFO    MainThread:13844 [wandb_setup.py:_flush():80] Configure stats pid to 13844
+2025-07-31 17:45:47,551 INFO    MainThread:13844 [wandb_setup.py:_flush():80] Loading settings from C:\Users\AMD\.config\wandb\settings
+2025-07-31 17:45:47,551 INFO    MainThread:13844 [wandb_setup.py:_flush():80] Loading settings from C:\Users\AMD\sentinel\wandb\settings
+2025-07-31 17:45:47,551 INFO    MainThread:13844 [wandb_setup.py:_flush():80] Loading settings from environment variables
+2025-07-31 17:45:47,557 INFO    MainThread:13844 [wandb_init.py:setup_run_log_directory():703] Logging user logs to C:\Users\AMD\sentinel\wandb\run-20250731_174547-zve6uxjl\logs\debug.log
+2025-07-31 17:45:47,557 INFO    MainThread:13844 [wandb_init.py:setup_run_log_directory():704] Logging internal logs to C:\Users\AMD\sentinel\wandb\run-20250731_174547-zve6uxjl\logs\debug-internal.log
+2025-07-31 17:45:47,557 INFO    MainThread:13844 [wandb_init.py:init():830] calling init triggers
+2025-07-31 17:45:47,557 INFO    MainThread:13844 [wandb_init.py:init():835] wandb.init called with sweep_config: {}
+config: {'system_version': 'v5.0', 'observability_enabled': True, 'weave_integration': True, '_wandb': {}}
+2025-07-31 17:45:47,557 INFO    MainThread:13844 [wandb_init.py:init():871] starting backend
+2025-07-31 17:45:47,773 INFO    MainThread:13844 [wandb_init.py:init():874] sending inform_init request
+2025-07-31 17:45:47,784 INFO    MainThread:13844 [wandb_init.py:init():882] backend started and connected
+2025-07-31 17:45:47,785 INFO    MainThread:13844 [wandb_init.py:init():953] updated telemetry
+2025-07-31 17:45:47,827 INFO    MainThread:13844 [wandb_init.py:init():977] communicating run to backend with 90.0 second timeout
+2025-07-31 17:45:48,191 INFO    MainThread:13844 [wandb_init.py:init():1029] starting run threads in backend
+2025-07-31 17:45:48,628 INFO    MainThread:13844 [wandb_run.py:_console_start():2458] atexit reg
+2025-07-31 17:45:48,628 INFO    MainThread:13844 [wandb_run.py:_redirect():2306] redirect: wrap_raw
+2025-07-31 17:45:48,628 INFO    MainThread:13844 [wandb_run.py:_redirect():2375] Wrapping output streams.
+2025-07-31 17:45:48,628 INFO    MainThread:13844 [wandb_run.py:_redirect():2398] Redirects installed.
+2025-07-31 17:45:48,631 INFO    MainThread:13844 [wandb_init.py:init():1075] run started, returning control to user process
+2025-07-31 17:47:19,858 INFO    MsgRouterThr:13844 [mailbox.py:close():129] [no run ID] Closing mailbox, abandoning 1 handles.
+2025-07-31 17:47:20,963 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:21,057 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:21,148 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:21,239 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:21,330 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:21,411 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:21,506 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:21,601 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:21,691 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:21,774 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:21,885 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:21,975 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:22,066 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:22,157 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:22,255 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:22,343 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:22,434 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:22,525 ERROR   MainThread:13844 [redirect.py:_on_write():664] [all runs] error in stderr callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2385, in <lambda>
+    lambda data: self._console_raw_callback("stderr", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:22,554 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:22,595 ERROR   MainThread:13844 [redirect.py:_on_write():664] [all runs] error in stderr callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2385, in <lambda>
+    lambda data: self._console_raw_callback("stderr", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:22,640 ERROR   MainThread:13844 [redirect.py:_on_write():664] [all runs] error in stderr callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2385, in <lambda>
+    lambda data: self._console_raw_callback("stderr", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:22,680 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:22,797 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:22,911 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:23,010 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:23,110 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:23,219 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:23,317 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:23,426 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:23,807 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:23,907 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:24,005 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:24,103 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:24,206 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:24,308 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:24,402 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:24,492 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:24,587 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:24,692 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:24,802 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:24,899 ERROR   sentry-sdk.BackgroundWorker:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:24,980 ERROR   MainThread:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine
+2025-07-31 17:47:24,996 ERROR   MainThread:13844 [redirect.py:_on_write():664] [all runs] error in stdout callback
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\litellm\llms\custom_httpx\async_client_cleanup.py", line 66, in cleanup_wrapper
+    loop = asyncio.get_event_loop()
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\events.py", line 681, in get_event_loop
+    raise RuntimeError('There is no current event loop in thread %r.'
+RuntimeError: There is no current event loop in thread 'MainThread'.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 2379, in <lambda>
+    lambda data: self._console_raw_callback("stdout", data),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 398, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 456, in wrapper_fn
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\wandb_run.py", line 1566, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface.py", line 771, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_shared.py", line 38, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\interface\interface_sock.py", line 39, in _publish
+    self._sock_client.send_record_publish(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 170, in send_record_publish
+    self.send_server_request(server_req)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 150, in send_server_request
+    self._send_message(msg)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 147, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\wandb\sdk\lib\sock_client.py", line 126, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine

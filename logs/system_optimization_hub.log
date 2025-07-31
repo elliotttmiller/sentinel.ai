@@ -369,3 +369,662 @@ https://us-central1-aiplatform.googleapis.com/v1/projects/nexus-ai-466614/locati
 2025-07-31 12:55:05,981 - asyncio - DEBUG - Using proactor: IocpProactor
 2025-07-31 12:55:06,149 - httpcore.connection - DEBUG - close.started
 2025-07-31 12:55:06,149 - httpcore.connection - DEBUG - close.complete
+2025-07-31 17:20:13,740 - SystemOptimizationHub - INFO - [INFO] Weave observability initialized for system optimization hub
+2025-07-31 17:20:13,746 - SystemOptimizationHub - INFO - [START] STARTING TEST: System Initialization (system_initialization)
+2025-07-31 17:20:13,796 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): o4509683080822784.ingest.us.sentry.io:443
+2025-07-31 17:20:13,820 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: System Initialization - PASS
+2025-07-31 17:20:13,828 - SystemOptimizationHub - INFO - [START] STARTING TEST: Environment Validation (environment_validation)
+2025-07-31 17:20:13,835 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Environment Validation - PASS
+2025-07-31 17:20:13,841 - SystemOptimizationHub - INFO - [START] STARTING TEST: Database Connectivity (database_integration)
+2025-07-31 17:20:14,231 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Database Connectivity - PASS
+2025-07-31 17:20:14,234 - SystemOptimizationHub - INFO - [START] STARTING TEST: Agent Factory (agent_factory)
+2025-07-31 17:20:14,244 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Agent Factory - PASS
+2025-07-31 17:20:14,250 - SystemOptimizationHub - INFO - [START] STARTING TEST: Protocol Systems (protocol_systems)
+2025-07-31 17:20:14,257 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Protocol Systems - PASS
+2025-07-31 17:20:14,265 - SystemOptimizationHub - INFO - [START] STARTING TEST: Workflow Phases (workflow_phases)
+2025-07-31 17:20:14,340 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:14,411 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:14,482 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:14,557 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:14,621 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:14,697 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:16,420 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:16,488 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:16,574 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:16,649 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:18,416 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Workflow Phases - FAIL
+2025-07-31 17:20:18,423 - SystemOptimizationHub - INFO - [START] STARTING TEST: Performance Optimization (performance_optimization)
+2025-07-31 17:20:18,459 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:18,534 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:18,610 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:18,680 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:19,759 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Performance Optimization - PASS
+2025-07-31 17:20:19,771 - SystemOptimizationHub - INFO - [START] STARTING TEST: Error Handling (error_handling)
+2025-07-31 17:20:19,866 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:19,940 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:19,952 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Error Handling - FAIL
+2025-07-31 17:20:19,961 - SystemOptimizationHub - INFO - [START] STARTING TEST: Integration Tests (integration_tests)
+2025-07-31 17:20:19,966 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Integration Tests - PASS
+2025-07-31 17:20:19,974 - SystemOptimizationHub - INFO - [START] STARTING TEST: Fix-AI Integration (fix_ai_integration)
+2025-07-31 17:20:19,974 - SystemOptimizationHub - INFO - [START] STARTING TEST: Fix-AI Integration (fix_ai_integration)
+2025-07-31 17:20:19,985 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Fix-AI Integration - PASS
+2025-07-31 17:20:19,992 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Fix-AI Integration - PASS
+2025-07-31 17:20:19,998 - SystemOptimizationHub - INFO - [START] STARTING TEST: Automated Debugging System (automated_debugging)
+2025-07-31 17:20:20,000 - SystemOptimizationHub - INFO - [START] STARTING TEST: Automated Debugging System (automated_debugging)
+2025-07-31 17:20:20,008 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Automated Debugging System - PASS
+2025-07-31 17:20:20,009 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:20,014 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Automated Debugging System - PASS
+2025-07-31 17:20:20,025 - SystemOptimizationHub - INFO - [START] STARTING TEST: Sentry Integration (sentry_integration)
+2025-07-31 17:20:20,026 - SystemOptimizationHub - INFO - [START] STARTING TEST: Sentry Integration (sentry_integration)
+2025-07-31 17:20:20,066 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Sentry Integration - PASS
+2025-07-31 17:20:20,070 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Sentry Integration - PASS
+2025-07-31 17:20:20,079 - SystemOptimizationHub - INFO - [START] STARTING TEST: Self-Healing Capabilities (self_healing)
+2025-07-31 17:20:20,080 - SystemOptimizationHub - INFO - [START] STARTING TEST: Self-Healing Capabilities (self_healing)
+2025-07-31 17:20:20,082 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Self-Healing Capabilities - PASS
+2025-07-31 17:20:20,088 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Self-Healing Capabilities - PASS
+2025-07-31 17:20:20,095 - SystemOptimizationHub - INFO - [START] STARTING TEST: Stress Testing (stress_testing)
+2025-07-31 17:20:20,095 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:34,584 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Stress Testing - PASS
+2025-07-31 17:20:34,592 - SystemOptimizationHub - INFO - [START] STARTING TEST: Three-Pillar Architecture (three_pillar_architecture)
+2025-07-31 17:20:34,609 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Three-Pillar Architecture - FAIL
+2025-07-31 17:20:34,617 - SystemOptimizationHub - INFO - [START] STARTING TEST: Force Multiplier Pillar (force_multiplier)
+2025-07-31 17:20:34,634 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Force Multiplier Pillar - FAIL
+2025-07-31 17:20:34,641 - SystemOptimizationHub - INFO - [START] STARTING TEST: Efficiency Boost Pillar (efficiency_boost)
+2025-07-31 17:20:34,651 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Efficiency Boost Pillar - FAIL
+2025-07-31 17:20:34,659 - SystemOptimizationHub - INFO - [START] STARTING TEST: Future-Proofing Pillar (future_proofing)
+2025-07-31 17:20:34,666 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Future-Proofing Pillar - FAIL
+2025-07-31 17:20:35,326 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): o4509683080822784.ingest.us.sentry.io:443
+2025-07-31 17:20:35,844 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:35,945 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:36,035 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:36,130 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:36,236 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:36,327 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:36,421 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:36,506 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:36,588 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:36,691 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:36,778 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:36,875 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:36,969 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:37,057 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:37,157 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:37,234 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:37,327 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:37,430 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:37,536 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:37,620 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:37,700 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:37,780 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:37,881 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:37,972 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:38,063 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:38,157 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:38,231 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:38,333 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:38,419 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:38,506 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:38,597 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:38,688 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:38,784 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:38,877 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:38,972 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:39,057 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:39,137 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:39,237 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:39,343 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:39,456 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:39,539 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:20:39,591 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-07-31 17:24:42,211 - SystemOptimizationHub - INFO - [INFO] Weave observability initialized for system optimization hub
+2025-07-31 17:24:42,213 - SystemOptimizationHub - INFO - [START] STARTING TEST: System Initialization (system_initialization)
+2025-07-31 17:24:42,263 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): o4509683080822784.ingest.us.sentry.io:443
+2025-07-31 17:24:42,281 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: System Initialization - PASS
+2025-07-31 17:24:42,290 - SystemOptimizationHub - INFO - [START] STARTING TEST: Environment Validation (environment_validation)
+2025-07-31 17:24:42,295 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Environment Validation - PASS
+2025-07-31 17:24:42,303 - SystemOptimizationHub - INFO - [START] STARTING TEST: Database Connectivity (database_integration)
+2025-07-31 17:24:42,692 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Database Connectivity - PASS
+2025-07-31 17:24:42,709 - SystemOptimizationHub - INFO - [START] STARTING TEST: Agent Factory (agent_factory)
+2025-07-31 17:24:42,715 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Agent Factory - PASS
+2025-07-31 17:24:42,720 - SystemOptimizationHub - INFO - [START] STARTING TEST: Protocol Systems (protocol_systems)
+2025-07-31 17:24:42,728 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Protocol Systems - PASS
+2025-07-31 17:24:42,736 - SystemOptimizationHub - INFO - [START] STARTING TEST: Workflow Phases (workflow_phases)
+2025-07-31 17:24:42,824 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:24:42,893 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:24:42,963 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:24:43,033 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:24:43,112 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:24:43,181 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:24:44,878 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:24:44,957 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:24:45,038 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:24:45,107 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:24:46,889 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Workflow Phases - FAIL
+2025-07-31 17:24:46,898 - SystemOptimizationHub - INFO - [START] STARTING TEST: Performance Optimization (performance_optimization)
+2025-07-31 17:24:46,927 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:24:47,003 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:24:47,069 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:24:47,137 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:24:48,231 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Performance Optimization - PASS
+2025-07-31 17:24:48,241 - SystemOptimizationHub - INFO - [START] STARTING TEST: Error Handling (error_handling)
+2025-07-31 17:24:48,330 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:24:48,407 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:24:48,434 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Error Handling - FAIL
+2025-07-31 17:24:48,444 - SystemOptimizationHub - INFO - [START] STARTING TEST: Integration Tests (integration_tests)
+2025-07-31 17:24:48,451 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Integration Tests - PASS
+2025-07-31 17:24:48,459 - SystemOptimizationHub - INFO - [START] STARTING TEST: Fix-AI Integration (fix_ai_integration)
+2025-07-31 17:24:48,459 - SystemOptimizationHub - INFO - [START] STARTING TEST: Fix-AI Integration (fix_ai_integration)
+2025-07-31 17:24:48,471 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Fix-AI Integration - PASS
+2025-07-31 17:24:48,477 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Fix-AI Integration - PASS
+2025-07-31 17:24:48,485 - SystemOptimizationHub - INFO - [START] STARTING TEST: Automated Debugging System (automated_debugging)
+2025-07-31 17:24:48,485 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:24:48,486 - SystemOptimizationHub - INFO - [START] STARTING TEST: Automated Debugging System (automated_debugging)
+2025-07-31 17:24:48,492 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Automated Debugging System - PASS
+2025-07-31 17:24:48,496 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Automated Debugging System - PASS
+2025-07-31 17:24:48,503 - SystemOptimizationHub - INFO - [START] STARTING TEST: Sentry Integration (sentry_integration)
+2025-07-31 17:24:48,506 - SystemOptimizationHub - INFO - [START] STARTING TEST: Sentry Integration (sentry_integration)
+2025-07-31 17:24:48,542 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Sentry Integration - PASS
+2025-07-31 17:24:48,546 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Sentry Integration - PASS
+2025-07-31 17:24:48,555 - SystemOptimizationHub - INFO - [START] STARTING TEST: Self-Healing Capabilities (self_healing)
+2025-07-31 17:24:48,555 - SystemOptimizationHub - INFO - [START] STARTING TEST: Self-Healing Capabilities (self_healing)
+2025-07-31 17:24:48,558 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Self-Healing Capabilities - PASS
+2025-07-31 17:24:48,564 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Self-Healing Capabilities - PASS
+2025-07-31 17:24:48,565 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:24:48,573 - SystemOptimizationHub - INFO - [START] STARTING TEST: Stress Testing (stress_testing)
+2025-07-31 17:25:01,359 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Stress Testing - PASS
+2025-07-31 17:25:01,367 - SystemOptimizationHub - INFO - [START] STARTING TEST: Three-Pillar Architecture (three_pillar_architecture)
+2025-07-31 17:25:33,031 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): o4509683080822784.ingest.us.sentry.io:443
+2025-07-31 17:25:33,058 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Three-Pillar Architecture - FAIL
+2025-07-31 17:25:33,067 - SystemOptimizationHub - INFO - [START] STARTING TEST: Force Multiplier Pillar (force_multiplier)
+2025-07-31 17:25:33,602 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:25:33,678 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:26:05,460 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Force Multiplier Pillar - FAIL
+2025-07-31 17:26:05,466 - SystemOptimizationHub - INFO - [START] STARTING TEST: Efficiency Boost Pillar (efficiency_boost)
+2025-07-31 17:26:05,490 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Efficiency Boost Pillar - FAIL
+2025-07-31 17:26:05,500 - SystemOptimizationHub - INFO - [START] STARTING TEST: Future-Proofing Pillar (future_proofing)
+2025-07-31 17:26:05,523 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Future-Proofing Pillar - FAIL
+2025-07-31 17:26:05,578 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:26:05,657 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:26:07,083 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:26:07,184 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-07-31 17:30:11,904 - SystemOptimizationHub - INFO - [INFO] Weave observability initialized for system optimization hub
+2025-07-31 17:30:11,911 - SystemOptimizationHub - INFO - [START] STARTING TEST: System Initialization (system_initialization)
+2025-07-31 17:30:11,957 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): o4509683080822784.ingest.us.sentry.io:443
+2025-07-31 17:30:11,979 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: System Initialization - PASS
+2025-07-31 17:30:11,986 - SystemOptimizationHub - INFO - [START] STARTING TEST: Environment Validation (environment_validation)
+2025-07-31 17:30:11,992 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Environment Validation - PASS
+2025-07-31 17:30:11,996 - SystemOptimizationHub - INFO - [START] STARTING TEST: Database Connectivity (database_integration)
+2025-07-31 17:30:12,406 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Database Connectivity - PASS
+2025-07-31 17:30:12,421 - SystemOptimizationHub - INFO - [START] STARTING TEST: Agent Factory (agent_factory)
+2025-07-31 17:30:12,427 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Agent Factory - PASS
+2025-07-31 17:30:12,434 - SystemOptimizationHub - INFO - [START] STARTING TEST: Protocol Systems (protocol_systems)
+2025-07-31 17:30:12,439 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Protocol Systems - PASS
+2025-07-31 17:30:12,448 - SystemOptimizationHub - INFO - [START] STARTING TEST: Workflow Phases (workflow_phases)
+2025-07-31 17:30:12,518 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:30:12,595 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:30:12,681 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:30:12,776 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:30:12,859 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:30:12,936 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:30:14,602 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:30:14,684 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:30:14,768 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:30:14,857 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:30:16,601 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Workflow Phases - FAIL
+2025-07-31 17:30:16,610 - SystemOptimizationHub - INFO - [START] STARTING TEST: Performance Optimization (performance_optimization)
+2025-07-31 17:30:16,668 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:30:16,739 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:30:16,829 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:30:16,901 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:30:17,957 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Performance Optimization - PASS
+2025-07-31 17:30:17,965 - SystemOptimizationHub - INFO - [START] STARTING TEST: Error Handling (error_handling)
+2025-07-31 17:30:18,088 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:30:18,160 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Error Handling - FAIL
+2025-07-31 17:30:18,168 - SystemOptimizationHub - INFO - [START] STARTING TEST: Integration Tests (integration_tests)
+2025-07-31 17:30:18,174 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Integration Tests - PASS
+2025-07-31 17:30:18,182 - SystemOptimizationHub - INFO - [START] STARTING TEST: Fix-AI Integration (fix_ai_integration)
+2025-07-31 17:30:18,183 - SystemOptimizationHub - INFO - [START] STARTING TEST: Fix-AI Integration (fix_ai_integration)
+2025-07-31 17:30:18,194 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:30:18,194 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Fix-AI Integration - PASS
+2025-07-31 17:30:18,201 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Fix-AI Integration - PASS
+2025-07-31 17:30:18,210 - SystemOptimizationHub - INFO - [START] STARTING TEST: Automated Debugging System (automated_debugging)
+2025-07-31 17:30:18,211 - SystemOptimizationHub - INFO - [START] STARTING TEST: Automated Debugging System (automated_debugging)
+2025-07-31 17:30:18,215 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Automated Debugging System - PASS
+2025-07-31 17:30:18,222 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Automated Debugging System - PASS
+2025-07-31 17:30:18,232 - SystemOptimizationHub - INFO - [START] STARTING TEST: Sentry Integration (sentry_integration)
+2025-07-31 17:30:18,232 - SystemOptimizationHub - INFO - [START] STARTING TEST: Sentry Integration (sentry_integration)
+2025-07-31 17:30:18,272 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:30:18,277 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Sentry Integration - PASS
+2025-07-31 17:30:18,285 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Sentry Integration - PASS
+2025-07-31 17:30:18,299 - SystemOptimizationHub - INFO - [START] STARTING TEST: Self-Healing Capabilities (self_healing)
+2025-07-31 17:30:18,299 - SystemOptimizationHub - INFO - [START] STARTING TEST: Self-Healing Capabilities (self_healing)
+2025-07-31 17:30:18,303 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Self-Healing Capabilities - PASS
+2025-07-31 17:30:18,311 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Self-Healing Capabilities - PASS
+2025-07-31 17:30:18,318 - SystemOptimizationHub - INFO - [START] STARTING TEST: Stress Testing (stress_testing)
+2025-07-31 17:30:18,345 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:30:32,696 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Stress Testing - PASS
+2025-07-31 17:30:32,703 - SystemOptimizationHub - INFO - [START] STARTING TEST: Three-Pillar Architecture (three_pillar_architecture)
+2025-07-31 17:31:04,927 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): o4509683080822784.ingest.us.sentry.io:443
+2025-07-31 17:31:05,194 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Three-Pillar Architecture - FAIL
+2025-07-31 17:31:05,211 - SystemOptimizationHub - INFO - [START] STARTING TEST: Force Multiplier Pillar (force_multiplier)
+2025-07-31 17:31:05,573 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:31:05,646 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:31:05,727 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:31:38,195 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Force Multiplier Pillar - FAIL
+2025-07-31 17:31:38,210 - SystemOptimizationHub - INFO - [START] STARTING TEST: Efficiency Boost Pillar (efficiency_boost)
+2025-07-31 17:31:38,325 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Efficiency Boost Pillar - PASS
+2025-07-31 17:31:38,334 - SystemOptimizationHub - INFO - [START] STARTING TEST: Future-Proofing Pillar (future_proofing)
+2025-07-31 17:31:38,531 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:31:38,651 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:31:38,704 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Future-Proofing Pillar - FAIL
+2025-07-31 17:31:38,777 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:31:39,679 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:31:39,779 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-07-31 17:36:14,438 - SystemOptimizationHub - INFO - [INFO] Weave observability initialized for system optimization hub
+2025-07-31 17:36:14,446 - SystemOptimizationHub - INFO - [START] STARTING TEST: System Initialization (system_initialization)
+2025-07-31 17:36:14,494 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): o4509683080822784.ingest.us.sentry.io:443
+2025-07-31 17:36:14,517 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: System Initialization - PASS
+2025-07-31 17:36:14,521 - SystemOptimizationHub - INFO - [START] STARTING TEST: Environment Validation (environment_validation)
+2025-07-31 17:36:14,530 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Environment Validation - PASS
+2025-07-31 17:36:14,537 - SystemOptimizationHub - INFO - [START] STARTING TEST: Database Connectivity (database_integration)
+2025-07-31 17:36:14,937 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Database Connectivity - PASS
+2025-07-31 17:36:14,942 - SystemOptimizationHub - INFO - [START] STARTING TEST: Agent Factory (agent_factory)
+2025-07-31 17:36:14,953 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Agent Factory - PASS
+2025-07-31 17:36:14,962 - SystemOptimizationHub - INFO - [START] STARTING TEST: Protocol Systems (protocol_systems)
+2025-07-31 17:36:14,969 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Protocol Systems - PASS
+2025-07-31 17:36:14,977 - SystemOptimizationHub - INFO - [START] STARTING TEST: Workflow Phases (workflow_phases)
+2025-07-31 17:36:15,049 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:15,120 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:15,189 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:15,257 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:15,340 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:15,407 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:17,133 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:17,207 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:17,273 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:17,358 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:19,149 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Workflow Phases - FAIL
+2025-07-31 17:36:19,157 - SystemOptimizationHub - INFO - [START] STARTING TEST: Performance Optimization (performance_optimization)
+2025-07-31 17:36:19,190 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:19,259 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:19,325 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:19,391 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:20,497 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Performance Optimization - PASS
+2025-07-31 17:36:20,508 - SystemOptimizationHub - INFO - [START] STARTING TEST: Error Handling (error_handling)
+2025-07-31 17:36:20,618 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:20,691 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Error Handling - FAIL
+2025-07-31 17:36:20,699 - SystemOptimizationHub - INFO - [START] STARTING TEST: Integration Tests (integration_tests)
+2025-07-31 17:36:20,701 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:20,707 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Integration Tests - PASS
+2025-07-31 17:36:20,718 - SystemOptimizationHub - INFO - [START] STARTING TEST: Fix-AI Integration (fix_ai_integration)
+2025-07-31 17:36:20,720 - SystemOptimizationHub - INFO - [START] STARTING TEST: Fix-AI Integration (fix_ai_integration)
+2025-07-31 17:36:20,733 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Fix-AI Integration - PASS
+2025-07-31 17:36:20,742 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Fix-AI Integration - PASS
+2025-07-31 17:36:20,752 - SystemOptimizationHub - INFO - [START] STARTING TEST: Automated Debugging System (automated_debugging)
+2025-07-31 17:36:20,754 - SystemOptimizationHub - INFO - [START] STARTING TEST: Automated Debugging System (automated_debugging)
+2025-07-31 17:36:20,760 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Automated Debugging System - PASS
+2025-07-31 17:36:20,768 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Automated Debugging System - PASS
+2025-07-31 17:36:20,780 - SystemOptimizationHub - INFO - [START] STARTING TEST: Sentry Integration (sentry_integration)
+2025-07-31 17:36:20,781 - SystemOptimizationHub - INFO - [START] STARTING TEST: Sentry Integration (sentry_integration)
+2025-07-31 17:36:20,790 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:20,829 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Sentry Integration - PASS
+2025-07-31 17:36:20,836 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Sentry Integration - PASS
+2025-07-31 17:36:20,847 - SystemOptimizationHub - INFO - [START] STARTING TEST: Self-Healing Capabilities (self_healing)
+2025-07-31 17:36:20,848 - SystemOptimizationHub - INFO - [START] STARTING TEST: Self-Healing Capabilities (self_healing)
+2025-07-31 17:36:20,850 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Self-Healing Capabilities - PASS
+2025-07-31 17:36:20,858 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Self-Healing Capabilities - PASS
+2025-07-31 17:36:20,868 - SystemOptimizationHub - INFO - [START] STARTING TEST: Stress Testing (stress_testing)
+2025-07-31 17:36:20,868 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:36:34,476 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Stress Testing - PASS
+2025-07-31 17:36:34,484 - SystemOptimizationHub - INFO - [START] STARTING TEST: Three-Pillar Architecture (three_pillar_architecture)
+2025-07-31 17:37:10,748 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Three-Pillar Architecture - FAIL
+2025-07-31 17:37:10,754 - SystemOptimizationHub - INFO - [START] STARTING TEST: Force Multiplier Pillar (force_multiplier)
+2025-07-31 17:37:44,848 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Force Multiplier Pillar - FAIL
+2025-07-31 17:37:44,857 - SystemOptimizationHub - INFO - [START] STARTING TEST: Efficiency Boost Pillar (efficiency_boost)
+2025-07-31 17:37:44,975 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Efficiency Boost Pillar - PASS
+2025-07-31 17:37:44,984 - SystemOptimizationHub - INFO - [START] STARTING TEST: Future-Proofing Pillar (future_proofing)
+2025-07-31 17:37:46,328 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Future-Proofing Pillar - FAIL
+2025-07-31 17:37:47,203 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): o4509683080822784.ingest.us.sentry.io:443
+2025-07-31 17:37:47,757 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:47,855 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:47,960 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:48,052 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:48,394 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:48,485 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:48,589 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:48,677 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:48,775 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:48,866 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:48,953 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:49,043 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:49,140 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:49,239 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:49,339 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:49,454 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:49,554 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:49,660 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:49,756 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:49,852 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:49,948 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:50,043 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:50,132 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:50,230 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:50,331 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:50,425 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:50,523 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:50,629 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:50,726 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:50,816 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:50,906 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:51,000 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:51,092 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:51,185 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:51,274 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:51,374 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:51,467 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:51,558 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:37:51,617 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-07-31 17:45:48,635 - SystemOptimizationHub - INFO - [INFO] Weave observability initialized for system optimization hub
+2025-07-31 17:45:48,641 - SystemOptimizationHub - INFO - [START] STARTING TEST: System Initialization (system_initialization)
+2025-07-31 17:45:48,688 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): o4509683080822784.ingest.us.sentry.io:443
+2025-07-31 17:45:48,713 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: System Initialization - PASS
+2025-07-31 17:45:48,722 - SystemOptimizationHub - INFO - [START] STARTING TEST: Environment Validation (environment_validation)
+2025-07-31 17:45:48,730 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Environment Validation - PASS
+2025-07-31 17:45:48,738 - SystemOptimizationHub - INFO - [START] STARTING TEST: Database Connectivity (database_integration)
+2025-07-31 17:45:49,120 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Database Connectivity - PASS
+2025-07-31 17:45:49,128 - SystemOptimizationHub - INFO - [START] STARTING TEST: Agent Factory (agent_factory)
+2025-07-31 17:45:49,134 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Agent Factory - PASS
+2025-07-31 17:45:49,144 - SystemOptimizationHub - INFO - [START] STARTING TEST: Protocol Systems (protocol_systems)
+2025-07-31 17:45:49,151 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Protocol Systems - PASS
+2025-07-31 17:45:49,159 - SystemOptimizationHub - INFO - [START] STARTING TEST: Workflow Phases (workflow_phases)
+2025-07-31 17:45:49,260 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:45:49,330 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:45:49,392 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:45:49,474 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:45:49,544 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:45:49,622 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:45:51,320 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:45:51,390 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:45:51,457 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:45:51,537 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:45:53,326 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Workflow Phases - FAIL
+2025-07-31 17:45:53,334 - SystemOptimizationHub - INFO - [START] STARTING TEST: Performance Optimization (performance_optimization)
+2025-07-31 17:45:53,382 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:45:53,456 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:45:53,521 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:45:53,601 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:45:54,681 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Performance Optimization - PASS
+2025-07-31 17:45:54,690 - SystemOptimizationHub - INFO - [START] STARTING TEST: Error Handling (error_handling)
+2025-07-31 17:45:54,794 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:45:54,869 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:45:54,876 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Error Handling - FAIL
+2025-07-31 17:45:54,885 - SystemOptimizationHub - INFO - [START] STARTING TEST: Integration Tests (integration_tests)
+2025-07-31 17:45:54,892 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Integration Tests - PASS
+2025-07-31 17:45:54,900 - SystemOptimizationHub - INFO - [START] STARTING TEST: Fix-AI Integration (fix_ai_integration)
+2025-07-31 17:45:54,901 - SystemOptimizationHub - INFO - [START] STARTING TEST: Fix-AI Integration (fix_ai_integration)
+2025-07-31 17:45:54,912 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Fix-AI Integration - PASS
+2025-07-31 17:45:54,919 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Fix-AI Integration - PASS
+2025-07-31 17:45:54,926 - SystemOptimizationHub - INFO - [START] STARTING TEST: Automated Debugging System (automated_debugging)
+2025-07-31 17:45:54,927 - SystemOptimizationHub - INFO - [START] STARTING TEST: Automated Debugging System (automated_debugging)
+2025-07-31 17:45:54,930 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Automated Debugging System - PASS
+2025-07-31 17:45:54,937 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Automated Debugging System - PASS
+2025-07-31 17:45:54,944 - SystemOptimizationHub - INFO - [START] STARTING TEST: Sentry Integration (sentry_integration)
+2025-07-31 17:45:54,945 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:45:54,946 - SystemOptimizationHub - INFO - [START] STARTING TEST: Sentry Integration (sentry_integration)
+2025-07-31 17:45:54,992 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Sentry Integration - PASS
+2025-07-31 17:45:54,998 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Sentry Integration - PASS
+2025-07-31 17:45:55,005 - SystemOptimizationHub - INFO - [START] STARTING TEST: Self-Healing Capabilities (self_healing)
+2025-07-31 17:45:55,007 - SystemOptimizationHub - INFO - [START] STARTING TEST: Self-Healing Capabilities (self_healing)
+2025-07-31 17:45:55,009 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Self-Healing Capabilities - PASS
+2025-07-31 17:45:55,017 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Self-Healing Capabilities - PASS
+2025-07-31 17:45:55,018 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:45:55,028 - SystemOptimizationHub - INFO - [START] STARTING TEST: Stress Testing (stress_testing)
+2025-07-31 17:46:11,030 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Stress Testing - PASS
+2025-07-31 17:46:11,043 - SystemOptimizationHub - INFO - [START] STARTING TEST: Three-Pillar Architecture (three_pillar_architecture)
+2025-07-31 17:46:45,940 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Three-Pillar Architecture - PASS
+2025-07-31 17:46:45,950 - SystemOptimizationHub - INFO - [START] STARTING TEST: Force Multiplier Pillar (force_multiplier)
+2025-07-31 17:47:17,673 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Force Multiplier Pillar - PASS
+2025-07-31 17:47:17,679 - SystemOptimizationHub - INFO - [START] STARTING TEST: Efficiency Boost Pillar (efficiency_boost)
+2025-07-31 17:47:17,790 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Efficiency Boost Pillar - PASS
+2025-07-31 17:47:17,801 - SystemOptimizationHub - INFO - [START] STARTING TEST: Future-Proofing Pillar (future_proofing)
+2025-07-31 17:47:19,139 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Future-Proofing Pillar - PASS
+2025-07-31 17:47:20,402 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): o4509683080822784.ingest.us.sentry.io:443
+2025-07-31 17:47:20,963 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:21,057 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:21,148 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:21,239 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:21,314 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:21,411 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:21,506 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:21,601 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:21,691 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:21,774 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:21,885 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:21,975 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:22,066 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:22,157 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:22,254 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:22,343 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:22,434 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:22,532 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:22,679 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:22,796 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:22,911 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:23,010 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:23,109 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:23,219 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:23,316 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:23,426 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:23,807 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:23,907 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:24,004 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:24,103 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:24,206 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:24,307 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:24,401 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:24,492 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:24,587 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:24,692 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:24,802 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:24,899 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:47:24,996 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-07-31 17:54:37,216 - SystemOptimizationHub - INFO - [INFO] Weave observability initialized for system optimization hub
+2025-07-31 17:54:37,238 - SystemOptimizationHub - INFO - [START] STARTING TEST: System Initialization (system_initialization)
+2025-07-31 17:54:37,316 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): o4509683080822784.ingest.us.sentry.io:443
+2025-07-31 17:54:37,355 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: System Initialization - PASS
+2025-07-31 17:54:37,369 - SystemOptimizationHub - INFO - [START] STARTING TEST: Environment Validation (environment_validation)
+2025-07-31 17:54:37,381 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Environment Validation - PASS
+2025-07-31 17:54:37,393 - SystemOptimizationHub - INFO - [START] STARTING TEST: Database Connectivity (database_integration)
+2025-07-31 17:54:37,932 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:54:38,020 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:54:42,246 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Database Connectivity - PASS
+2025-07-31 17:54:42,260 - SystemOptimizationHub - INFO - [START] STARTING TEST: Agent Factory (agent_factory)
+2025-07-31 17:54:42,274 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Agent Factory - PASS
+2025-07-31 17:54:42,288 - SystemOptimizationHub - INFO - [START] STARTING TEST: Protocol Systems (protocol_systems)
+2025-07-31 17:54:42,298 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Protocol Systems - PASS
+2025-07-31 17:54:42,308 - SystemOptimizationHub - INFO - [START] STARTING TEST: Workflow Phases (workflow_phases)
+2025-07-31 17:54:42,421 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:54:42,493 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:54:42,564 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:54:42,638 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:54:42,709 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:54:44,482 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:54:44,560 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:54:44,640 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:54:44,723 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:54:44,798 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:54:46,537 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Workflow Phases - FAIL
+2025-07-31 17:54:46,547 - SystemOptimizationHub - INFO - [START] STARTING TEST: Performance Optimization (performance_optimization)
+2025-07-31 17:54:46,567 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:54:46,650 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:54:46,730 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:54:46,803 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:54:46,889 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:54:47,973 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Performance Optimization - PASS
+2025-07-31 17:54:47,982 - SystemOptimizationHub - INFO - [START] STARTING TEST: Error Handling (error_handling)
+2025-07-31 17:54:48,093 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:54:48,176 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:54:48,221 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Error Handling - FAIL
+2025-07-31 17:54:48,232 - SystemOptimizationHub - INFO - [START] STARTING TEST: Integration Tests (integration_tests)
+2025-07-31 17:54:48,241 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Integration Tests - PASS
+2025-07-31 17:54:48,253 - SystemOptimizationHub - INFO - [START] STARTING TEST: Fix-AI Integration (fix_ai_integration)
+2025-07-31 17:54:48,253 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:54:48,254 - SystemOptimizationHub - INFO - [START] STARTING TEST: Fix-AI Integration (fix_ai_integration)
+2025-07-31 17:54:48,281 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Fix-AI Integration - PASS
+2025-07-31 17:54:48,292 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Fix-AI Integration - PASS
+2025-07-31 17:54:48,303 - SystemOptimizationHub - INFO - [START] STARTING TEST: Automated Debugging System (automated_debugging)
+2025-07-31 17:54:48,304 - SystemOptimizationHub - INFO - [START] STARTING TEST: Automated Debugging System (automated_debugging)
+2025-07-31 17:54:48,310 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Automated Debugging System - PASS
+2025-07-31 17:54:48,319 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Automated Debugging System - PASS
+2025-07-31 17:54:48,332 - SystemOptimizationHub - INFO - [START] STARTING TEST: Sentry Integration (sentry_integration)
+2025-07-31 17:54:48,335 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:54:48,337 - SystemOptimizationHub - INFO - [START] STARTING TEST: Sentry Integration (sentry_integration)
+2025-07-31 17:54:48,407 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Sentry Integration - PASS
+2025-07-31 17:54:48,413 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Sentry Integration - PASS
+2025-07-31 17:54:48,423 - SystemOptimizationHub - INFO - [START] STARTING TEST: Self-Healing Capabilities (self_healing)
+2025-07-31 17:54:48,424 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:54:48,425 - SystemOptimizationHub - INFO - [START] STARTING TEST: Self-Healing Capabilities (self_healing)
+2025-07-31 17:54:48,429 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Self-Healing Capabilities - PASS
+2025-07-31 17:54:48,439 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Self-Healing Capabilities - PASS
+2025-07-31 17:54:48,448 - SystemOptimizationHub - INFO - [START] STARTING TEST: Stress Testing (stress_testing)
+2025-07-31 17:54:48,497 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:55:01,949 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Stress Testing - PASS
+2025-07-31 17:55:01,959 - SystemOptimizationHub - INFO - [START] STARTING TEST: Three-Pillar Architecture (three_pillar_architecture)
+2025-07-31 17:55:38,376 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Three-Pillar Architecture - PASS
+2025-07-31 17:55:38,389 - SystemOptimizationHub - INFO - [START] STARTING TEST: Force Multiplier Pillar (force_multiplier)
+2025-07-31 17:56:11,189 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Force Multiplier Pillar - PASS
+2025-07-31 17:56:11,201 - SystemOptimizationHub - INFO - [START] STARTING TEST: Efficiency Boost Pillar (efficiency_boost)
+2025-07-31 17:56:11,315 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Efficiency Boost Pillar - PASS
+2025-07-31 17:56:11,324 - SystemOptimizationHub - INFO - [START] STARTING TEST: Future-Proofing Pillar (future_proofing)
+2025-07-31 17:56:12,656 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Future-Proofing Pillar - PASS
+2025-07-31 17:56:14,017 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): o4509683080822784.ingest.us.sentry.io:443
+2025-07-31 17:56:14,613 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:14,718 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:14,809 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:14,907 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:15,010 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:15,110 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:15,232 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:15,337 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:15,450 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:15,537 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:15,638 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:15,731 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:15,822 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:15,917 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:16,007 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:16,091 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:16,197 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:16,289 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:16,381 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:16,479 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:16,580 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:16,682 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:16,772 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:16,863 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:16,959 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:17,057 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:17,167 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:17,258 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:17,349 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:17,438 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:17,550 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:17,640 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:17,746 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:17,834 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:17,932 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:18,033 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:18,118 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:18,219 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:18,322 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:18,422 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 17:56:18,530 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-07-31 17:58:31,031 - SystemOptimizationHub - INFO - [INFO] Weave observability initialized for system optimization hub
+2025-07-31 17:58:31,041 - SystemOptimizationHub - INFO - [START] STARTING TEST: System Initialization (system_initialization)
+2025-07-31 17:58:31,104 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): o4509683080822784.ingest.us.sentry.io:443
+2025-07-31 17:58:31,141 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: System Initialization - PASS
+2025-07-31 17:58:31,152 - SystemOptimizationHub - INFO - [START] STARTING TEST: Environment Validation (environment_validation)
+2025-07-31 17:58:31,161 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Environment Validation - PASS
+2025-07-31 17:58:31,173 - SystemOptimizationHub - INFO - [START] STARTING TEST: Database Connectivity (database_integration)
+2025-07-31 17:58:31,573 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Database Connectivity - PASS
+2025-07-31 17:58:31,582 - SystemOptimizationHub - INFO - [START] STARTING TEST: Agent Factory (agent_factory)
+2025-07-31 17:58:31,592 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Agent Factory - PASS
+2025-07-31 17:58:31,606 - SystemOptimizationHub - INFO - [START] STARTING TEST: Protocol Systems (protocol_systems)
+2025-07-31 17:58:31,615 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Protocol Systems - PASS
+2025-07-31 17:58:31,625 - SystemOptimizationHub - INFO - [START] STARTING TEST: Workflow Phases (workflow_phases)
+2025-07-31 17:58:31,788 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 429 0
+2025-07-31 17:58:39,579 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Workflow Phases - PASS
+2025-07-31 17:58:39,586 - SystemOptimizationHub - INFO - [START] STARTING TEST: Performance Optimization (performance_optimization)
+2025-07-31 17:58:40,989 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Performance Optimization - PASS
+2025-07-31 17:58:40,999 - SystemOptimizationHub - INFO - [START] STARTING TEST: Error Handling (error_handling)
+2025-07-31 17:58:47,404 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Error Handling - FAIL
+2025-07-31 17:58:47,417 - SystemOptimizationHub - INFO - [START] STARTING TEST: Integration Tests (integration_tests)
+2025-07-31 17:58:47,427 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Integration Tests - PASS
+2025-07-31 17:58:47,448 - SystemOptimizationHub - INFO - [START] STARTING TEST: Fix-AI Integration (fix_ai_integration)
+2025-07-31 17:58:47,450 - SystemOptimizationHub - INFO - [START] STARTING TEST: Fix-AI Integration (fix_ai_integration)
+2025-07-31 17:58:47,467 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Fix-AI Integration - PASS
+2025-07-31 17:58:47,484 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Fix-AI Integration - PASS
+2025-07-31 17:58:47,495 - SystemOptimizationHub - INFO - [START] STARTING TEST: Automated Debugging System (automated_debugging)
+2025-07-31 17:58:47,496 - SystemOptimizationHub - INFO - [START] STARTING TEST: Automated Debugging System (automated_debugging)
+2025-07-31 17:58:47,500 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Automated Debugging System - PASS
+2025-07-31 17:58:47,507 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Automated Debugging System - PASS
+2025-07-31 17:58:47,520 - SystemOptimizationHub - INFO - [START] STARTING TEST: Sentry Integration (sentry_integration)
+2025-07-31 17:58:47,521 - SystemOptimizationHub - INFO - [START] STARTING TEST: Sentry Integration (sentry_integration)
+2025-07-31 17:58:47,572 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Sentry Integration - PASS
+2025-07-31 17:58:47,579 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Sentry Integration - PASS
+2025-07-31 17:58:47,589 - SystemOptimizationHub - INFO - [START] STARTING TEST: Self-Healing Capabilities (self_healing)
+2025-07-31 17:58:47,590 - SystemOptimizationHub - INFO - [START] STARTING TEST: Self-Healing Capabilities (self_healing)
+2025-07-31 17:58:47,594 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Self-Healing Capabilities - PASS
+2025-07-31 17:58:47,602 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Self-Healing Capabilities - PASS
+2025-07-31 17:58:47,611 - SystemOptimizationHub - INFO - [START] STARTING TEST: Stress Testing (stress_testing)
+2025-07-31 17:59:00,424 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Stress Testing - PASS
+2025-07-31 17:59:00,434 - SystemOptimizationHub - INFO - [START] STARTING TEST: Three-Pillar Architecture (three_pillar_architecture)
+2025-07-31 17:59:39,619 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Three-Pillar Architecture - PASS
+2025-07-31 17:59:39,631 - SystemOptimizationHub - INFO - [START] STARTING TEST: Force Multiplier Pillar (force_multiplier)
+2025-07-31 18:00:17,001 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Force Multiplier Pillar - PASS
+2025-07-31 18:00:17,029 - SystemOptimizationHub - INFO - [START] STARTING TEST: Efficiency Boost Pillar (efficiency_boost)
+2025-07-31 18:00:17,185 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Efficiency Boost Pillar - PASS
+2025-07-31 18:00:17,203 - SystemOptimizationHub - INFO - [START] STARTING TEST: Future-Proofing Pillar (future_proofing)
+2025-07-31 18:00:18,550 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Future-Proofing Pillar - PASS
+2025-07-31 18:00:20,043 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): o4509683080822784.ingest.us.sentry.io:443
+2025-07-31 18:00:20,601 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:20,730 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:20,830 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:20,935 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:21,032 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:21,126 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:21,222 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:21,322 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:21,427 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:21,529 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:21,640 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:21,750 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:21,853 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:21,952 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:22,048 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:22,150 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:22,250 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:22,349 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:22,451 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:22,537 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:22,637 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:22,732 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:22,822 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:22,918 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:23,033 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:23,127 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:23,224 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:23,320 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:23,415 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:23,513 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:23,606 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:23,704 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:23,805 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:23,912 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:24,003 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:24,107 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:24,205 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:24,292 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:24,380 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:24,485 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:00:24,620 - asyncio - DEBUG - Using proactor: IocpProactor

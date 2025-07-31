@@ -245,6 +245,10 @@ class SecurityScannerTool:
             logger.error(f"Security scan failed: {e}")
             return {"error": str(e), "status": "failed"}
     
+    def scan_project(self, project_path: str) -> Dict[str, Any]:
+        """Alias for scan_for_vulnerabilities for compatibility"""
+        return self.scan_for_vulnerabilities(project_path)
+    
     def generate_security_report(self, scan_results: Dict[str, Any]) -> Dict[str, Any]:
         """Generate detailed security report with risk assessment"""
         logger.info("Generating comprehensive security report")
@@ -1155,6 +1159,10 @@ class DocumentationGeneratorTool:
         except Exception as e:
             logger.error(f"Code documentation generation failed: {e}")
             return {"error": str(e), "status": "failed"}
+    
+    def generate_documentation(self, project_path: str) -> Dict[str, Any]:
+        """Alias for generate_code_documentation for compatibility"""
+        return self.generate_code_documentation(project_path)
     
     def create_architecture_diagrams(self, project_path: str) -> List[Dict[str, Any]]:
         """Generate comprehensive architecture diagrams"""

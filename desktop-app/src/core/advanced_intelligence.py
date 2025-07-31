@@ -8,7 +8,7 @@ import json
 import time
 import psutil
 import threading
-from typing import Dict, Any, List, Optional, Callable
+from typing import Dict, Any, List, Optional, Callable, Union
 from datetime import datetime, timedelta
 from pathlib import Path
 from loguru import logger
@@ -303,15 +303,21 @@ class WorkflowOrchestrator:
         
         return {"completed": completed, "failed": failed}
     
-    async def _execute_single_task(self, task: Dict[str, Any]) -> Dict[str, Any]:
+    async def _execute_single_task(self, task: Union[str, Dict[str, Any]]) -> Dict[str, Any]:
         """Execute a single task"""
         # Simulate task execution
         await asyncio.sleep(0.1)  # Simulate work
         
+        # Handle both string and dictionary task formats
+        if isinstance(task, str):
+            task_id = task
+        else:
+            task_id = task.get('id', 'unknown')
+        
         return {
-            "task_id": task.get('id', 'unknown'),
+            "task_id": task_id,
             "status": "completed",
-            "result": f"Task {task.get('id', 'unknown')} completed"
+            "result": f"Task {task_id} completed"
         }
     
     def _estimate_execution_duration(self, execution_schedule: List[Dict[str, Any]]) -> float:
@@ -575,6 +581,41 @@ class SystemMonitor:
                 active_processes=0,
                 load_average=0.0
             )
+    
+    def monitor_system(self) -> Dict[str, Any]:
+        """Monitor system and return comprehensive status report"""
+        try:
+            # Get current metrics
+            current_metrics = self.get_current_metrics()
+            
+            # Detect anomalies
+            anomalies = self.detect_anomalies()
+            
+            # Generate performance report
+            performance_report = self.generate_performance_report()
+            
+            # Determine overall system status
+            status = "healthy"
+            if current_metrics.cpu_percentage > 90 or current_metrics.memory_percentage > 90:
+                status = "critical"
+            elif current_metrics.cpu_percentage > 70 or current_metrics.memory_percentage > 70:
+                status = "warning"
+            
+            return {
+                "status": status,
+                "metrics": asdict(current_metrics),
+                "anomalies": anomalies,
+                "performance_report": performance_report,
+                "timestamp": datetime.now().isoformat()
+            }
+            
+        except Exception as e:
+            logger.error(f"System monitoring failed: {e}")
+            return {
+                "status": "error",
+                "error": str(e),
+                "timestamp": datetime.now().isoformat()
+            }
     
     def detect_anomalies(self) -> List[Dict[str, Any]]:
         """Detect system anomalies and performance issues"""
