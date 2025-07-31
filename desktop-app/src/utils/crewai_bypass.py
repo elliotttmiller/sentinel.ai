@@ -36,8 +36,12 @@ TASK: {task_description}
 
 RESPONSE:"""
             
-            # Use our Google AI wrapper directly
-            response = self.llm.invoke(prompt)
+            # Convert to LangChain message format
+            from langchain_core.messages import HumanMessage
+            messages = [HumanMessage(content=prompt)]
+            
+            # Use our Google AI wrapper directly with proper message format
+            response = self.llm.invoke(messages)
             return response.content if hasattr(response, 'content') else str(response)
             
         except Exception as e:

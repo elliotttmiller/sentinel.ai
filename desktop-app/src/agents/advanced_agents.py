@@ -3,16 +3,17 @@ Advanced Agent Definitions for Cognitive Forge Engine v5.0
 Enhanced with specialized agents for sentient capabilities
 """
 
-from crewai import Agent
+from ..utils.crewai_bypass import DirectAIAgent
 from ..utils.google_ai_wrapper import create_google_ai_llm
 
 
 class PromptOptimizationAgents:
     """Specialized agents for prompt optimization and blueprint planning"""
 
-    def prompt_optimizer(self, llm) -> Agent:
+    def prompt_optimizer(self, llm) -> DirectAIAgent:
         """Advanced Prompt Optimization Agent - Phase 1 of Blueprint System"""
-        return Agent(
+        return DirectAIAgent(
+            llm=llm,
             role="Advanced Prompt Optimization Specialist",
             goal=(
                 "Transform raw user requests into perfectly optimized, structured prompts that are "
@@ -32,15 +33,13 @@ class PromptOptimizationAgents:
                 "\n- Adding specific success criteria and constraints"
                 "\n- Ensuring technical accuracy and completeness"
                 "\nYou are the first line of defense against mission failure due to poor communication."
-            ),
-            llm=llm,
-            verbose=True,
-            allow_delegation=False
+            )
         )
 
-    def blueprint_planner(self, llm) -> Agent:
+    def blueprint_planner(self, llm) -> DirectAIAgent:
         """Blueprint Planning Specialist - Phase 2 of Blueprint System"""
-        return Agent(
+        return DirectAIAgent(
+            llm=llm,
             role="Blueprint Planning Specialist & Strategic Architect",
             goal=(
                 "Create comprehensive, end-to-end execution blueprints that transform optimized prompts "
@@ -60,19 +59,17 @@ class PromptOptimizationAgents:
                 "\n- Performance metrics and success measurement"
                 "\nYour blueprints are the foundation upon which successful missions are built. "
                 "You understand that a well-crafted plan is the difference between success and failure."
-            ),
-            llm=llm,
-            verbose=True,
-            allow_delegation=True
+            )
         )
 
 
 class PlannerAgents:
     """Planner agents for mission planning and optimization"""
 
-    def lead_architect(self, llm) -> Agent:
+    def lead_architect(self, llm) -> DirectAIAgent:
         """Lead Architect for comprehensive system design"""
-        return Agent(
+        return DirectAIAgent(
+            llm=llm,
             role="Lead AI Architect & System Designer",
             goal="Design comprehensive, scalable, and efficient AI system architectures. Create detailed execution plans that optimize for performance, reliability, and maintainability.",
             backstory=(
@@ -81,15 +78,13 @@ class PlannerAgents:
                 "microservices architecture, and AI/ML pipeline design. Your expertise spans from "
                 "low-level system optimization to high-level architectural patterns. You excel at "
                 "creating plans that balance technical excellence with practical implementation."
-            ),
-            llm=llm,
-            verbose=True,
-            allow_delegation=True
+            )
         )
 
-    def plan_validator(self, llm) -> Agent:
+    def plan_validator(self, llm) -> DirectAIAgent:
         """Plan Validator for quality assurance"""
-        return Agent(
+        return DirectAIAgent(
+            llm=llm,
             role="Plan Validator & Quality Assurance Specialist",
             goal="Validate execution plans for feasibility, completeness, and optimal resource utilization. Ensure plans meet quality standards and identify potential issues before execution.",
             backstory=(
@@ -99,15 +94,13 @@ class PlannerAgents:
                 "proposed plans, identify potential issues, and suggest improvements to ensure "
                 "successful execution. You are known for your thorough analysis and ability to "
                 "spot problems before they occur."
-            ),
-            llm=llm,
-            verbose=True,
-            allow_delegation=False
+            )
         )
 
-    def prompt_alchemist(self, llm) -> Agent:
+    def prompt_alchemist(self, llm) -> DirectAIAgent:
         """Master Prompt Engineer & AI Alchemist"""
-        return Agent(
+        return DirectAIAgent(
+            llm=llm,
             role="Master Prompt Engineer & AI Alchemist",
             goal=(
                 "Transform a user's raw prompt into a masterpiece of clarity, context, and precision. "
@@ -121,19 +114,17 @@ class PlannerAgents:
                 "which all successful missions are built. You leave no room for ambiguity or misinterpretation. "
                 "You have mastered the art of prompt engineering through years of experimentation and refinement. "
                 "Your transformations consistently produce results that exceed expectations."
-            ),
-            llm=llm,
-            verbose=True,
-            allow_delegation=False
+            )
         )
 
 
 class WorkerAgents:
     """Worker agents for task execution"""
 
-    def senior_developer(self, llm) -> Agent:
+    def senior_developer(self, llm) -> DirectAIAgent:
         """Senior Developer for code generation and implementation"""
-        return Agent(
+        return DirectAIAgent(
+            llm=llm,
             role="Senior Software Developer & Code Architect",
             goal="Write high-quality, production-ready code that follows best practices. Implement complex features, handle edge cases, and ensure code is maintainable and well-documented.",
             backstory=(
@@ -142,15 +133,13 @@ class WorkerAgents:
                 "architecture, design patterns, and best practices. You excel at writing clean, "
                 "efficient code and can handle complex technical challenges. You are known for "
                 "your attention to detail and ability to create robust, scalable solutions."
-            ),
-            llm=llm,
-            verbose=True,
-            allow_delegation=True
+            )
         )
 
-    def code_analyzer(self, llm) -> Agent:
+    def code_analyzer(self, llm) -> DirectAIAgent:
         """Code Analyzer for code review and analysis"""
-        return Agent(
+        return DirectAIAgent(
+            llm=llm,
             role="Code Analyzer & Quality Assurance Specialist",
             goal="Analyze code for quality, security, performance, and adherence to best practices. Provide detailed feedback and suggestions for improvement.",
             backstory=(
@@ -158,15 +147,13 @@ class WorkerAgents:
                 "You have a deep understanding of programming best practices, security vulnerabilities, "
                 "and performance optimization techniques. You excel at identifying potential issues and "
                 "providing constructive feedback. Your analysis helps ensure code quality and maintainability."
-            ),
-            llm=llm,
-            verbose=True,
-            allow_delegation=False
+            )
         )
 
-    def qa_tester(self, llm) -> Agent:
+    def qa_tester(self, llm) -> DirectAIAgent:
         """QA Tester for comprehensive testing"""
-        return Agent(
+        return DirectAIAgent(
+            llm=llm,
             role="QA Tester & Quality Assurance Specialist",
             goal="Design and execute comprehensive test plans to ensure code quality, functionality, and reliability. Identify bugs, edge cases, and potential issues.",
             backstory=(
@@ -175,15 +162,13 @@ class WorkerAgents:
                 "and quality control processes. You excel at designing test cases, identifying bugs, "
                 "and ensuring software meets quality standards. Your testing helps ensure reliable, "
                 "bug-free software."
-            ),
-            llm=llm,
-            verbose=True,
-            allow_delegation=False
+            )
         )
 
-    def system_integrator(self, llm) -> Agent:
+    def system_integrator(self, llm) -> DirectAIAgent:
         """System Integrator for deployment and integration"""
-        return Agent(
+        return DirectAIAgent(
+            llm=llm,
             role="System Integrator & Deployment Specialist",
             goal="Integrate and deploy software systems, ensuring smooth deployment and optimal performance. Handle configuration, monitoring, and system optimization.",
             backstory=(
@@ -192,15 +177,13 @@ class WorkerAgents:
                 "configuration management, and system monitoring. You excel at ensuring smooth "
                 "deployments and optimal system performance. Your expertise helps ensure reliable, "
                 "scalable software systems."
-            ),
-            llm=llm,
-            verbose=True,
-            allow_delegation=True
+            )
         )
 
-    def debugger(self, llm) -> Agent:
+    def debugger(self, llm) -> DirectAIAgent:
         """Debugger for troubleshooting and problem resolution"""
-        return Agent(
+        return DirectAIAgent(
+            llm=llm,
             role="Debugger & Problem Resolution Specialist",
             goal="Identify, analyze, and resolve complex technical issues and bugs. Provide detailed analysis and implement effective solutions.",
             backstory=(
@@ -208,19 +191,17 @@ class WorkerAgents:
                 "You have a deep understanding of debugging techniques, error analysis, and "
                 "problem-solving methodologies. You excel at identifying root causes and implementing "
                 "effective solutions. Your expertise helps ensure reliable, bug-free software systems."
-            ),
-            llm=llm,
-            verbose=True,
-            allow_delegation=False
+            )
         )
 
 
 class MemoryAgents:
     """Memory agents for learning and synthesis"""
 
-    def memory_synthesizer(self, llm) -> Agent:
+    def memory_synthesizer(self, llm) -> DirectAIAgent:
         """Memory Synthesizer for learning and knowledge extraction"""
-        return Agent(
+        return DirectAIAgent(
+            llm=llm,
             role="Memory Synthesizer & Knowledge Extraction Specialist",
             goal="Extract valuable insights and learnings from mission outcomes. Synthesize knowledge for future missions and system improvement.",
             backstory=(
@@ -228,8 +209,5 @@ class MemoryAgents:
                 "mission outcomes. You excel at identifying patterns, learning from successes and "
                 "failures, and synthesizing knowledge for future missions. Your work helps improve "
                 "system performance and mission success rates."
-            ),
-            llm=llm,
-            verbose=True,
-            allow_delegation=False
+            )
         )

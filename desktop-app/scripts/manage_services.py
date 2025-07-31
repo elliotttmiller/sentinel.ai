@@ -1185,15 +1185,6 @@ class ServiceManager:
                     check_dependencies()
                     print_info("Ensuring ngrok is running...")
                     ngrok_data = self.get_ngrok_status()
-            elif choice == "10":
-                self.run_system_diagnostics()
-            elif choice == "11":
-                self.view_service_logs()
-            elif choice == "0":
-                print_success("Exiting. Services will continue running.")
-                break
-            else:
-                print_error("Invalid choice. Please select a valid option.")
                     if ngrok_data['status'] != 'online':
                         print_error("ngrok is not running. Please start ngrok and try again.")
                         print_info("Troubleshooting: Make sure ngrok is installed and running. Run 'ngrok start --all' or check your ngrok.yml.")
@@ -1264,6 +1255,10 @@ class ServiceManager:
                     print_error(f"Full Mobile App Startup failed: {e}")
                     print_info("Troubleshooting: Check all logs, ngrok status, and .env configuration. If the problem persists, restart your machine and try again.")
                     generate_diagnostic_report()
+            elif choice == "10":
+                self.run_system_diagnostics()
+            elif choice == "11":
+                self.view_service_logs()
             elif choice == "0":
                 print("Exiting without stopping services...")
                 print("Goodbye! All services continue running.")

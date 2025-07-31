@@ -26,6 +26,8 @@ class DesktopAppCleaner:
         self.removed_files = []
         self.removed_dirs = []
         self.errors = []
+        self.backup_created = False
+        self.backup_path = None
         
     def print_header(self, title: str):
         """Print formatted header"""
@@ -40,11 +42,43 @@ class DesktopAppCleaner:
         if details:
             print(f"   📝 {details}")
     
+    def create_backup(self):
+        """Create a backup of the desktop-app directory before any deletions"""
+        if self.backup_created:
+            return True
+            
+        try:
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S_%f')
+            backup_name = f"desktop_app_backup_{timestamp}"
+            self.backup_path = self.desktop_app_path.parent / backup_name
+            
+            self.print_header("CREATING SAFETY BACKUP")
+            print(f"📦 Creating backup at: {self.backup_path}")
+            
+            # Copy the entire desktop-app directory
+            shutil.copytree(self.desktop_app_path, self.backup_path, 
+                           ignore=shutil.ignore_patterns('__pycache__', '*.pyc', '*.pyo'))
+            
+            self.backup_created = True
+            self.print_result("Backup creation", "SUCCESS", f"Backup saved to: {self.backup_path}")
+            return True
+            
+        except Exception as e:
+            self.errors.append(f"Error creating backup: {str(e)}")
+            self.print_result("Backup creation", "ERROR", str(e))
+            return False
+    
     def remove_file(self, file_path: str, reason: str):
         """Remove a file and track the action"""
         try:
             full_path = self.desktop_app_path / file_path
             if full_path.exists():
+                # Ensure backup exists before deletion
+                if not self.backup_created:
+                    if not self.create_backup():
+                        self.print_result(f"File: {file_path}", "ERROR", "Cannot proceed without backup")
+                        return False
+                
                 full_path.unlink()
                 self.removed_files.append((str(full_path), reason))
                 self.print_result(f"File: {file_path}", "REMOVED", reason)
@@ -62,6 +96,12 @@ class DesktopAppCleaner:
         try:
             full_path = self.desktop_app_path / dir_path
             if full_path.exists():
+                # Ensure backup exists before deletion
+                if not self.backup_created:
+                    if not self.create_backup():
+                        self.print_result(f"Directory: {dir_path}", "ERROR", "Cannot proceed without backup")
+                        return False
+                
                 shutil.rmtree(full_path)
                 self.removed_dirs.append((str(full_path), reason))
                 self.print_result(f"Directory: {dir_path}", "REMOVED", reason)
@@ -221,6 +261,10 @@ class DesktopAppCleaner:
         total_removed = len(self.removed_files) + len(self.removed_dirs)
         print(f"\n🎉 Cleanup completed! Removed {total_removed} items.")
         
+        if self.backup_created:
+            print(f"📦 Safety backup created at: {self.backup_path}")
+            print("💡 If you need to restore any files, copy them from the backup directory.")
+        
         if not self.errors:
             print("✅ All cleanup operations completed successfully!")
         else:
@@ -238,6 +282,8 @@ class DesktopAppCleaner:
         print("   - Old WANDB run directories (keeping latest 3)")
         print("   - Python cache directories")
         print("   - Utility files no longer needed")
+        print("\n🛡️ SAFETY FEATURE: A complete backup will be created before any deletions.")
+        print("   If anything goes wrong, you can restore files from the backup directory.")
         
         # Ask for confirmation
         response = input("\n❓ Do you want to proceed with the cleanup? (y/N): ").strip().lower()

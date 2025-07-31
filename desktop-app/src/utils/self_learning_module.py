@@ -8,7 +8,8 @@ import time
 from datetime import datetime
 from typing import Dict, Any, List, Optional
 from loguru import logger
-from crewai import Task, Crew, Process, Agent
+from crewai import Task, Crew, Process
+from .crewai_bypass import DirectAIAgent, DirectAICrew
 
 
 class SelfLearningModule:
@@ -24,9 +25,10 @@ class SelfLearningModule:
         self.improvement_agent = self._create_improvement_agent()
         logger.info("Self-Learning Module initialized - Continuous improvement active")
 
-    def _create_learning_agent(self) -> Agent:
-        """Create the learning analysis agent"""
-        return Agent(
+    def _create_learning_agent(self) -> DirectAIAgent:
+        """Create the learning analysis agent using our bypass system"""
+        return DirectAIAgent(
+            llm=self.llm,
             role="Learning Analysis Specialist",
             goal=(
                 "Analyze mission outcomes, identify patterns, and extract valuable insights for system improvement. "
@@ -36,15 +38,13 @@ class SelfLearningModule:
                 "You are the Learning Specialist, responsible for extracting wisdom from every mission outcome. "
                 "You have deep expertise in data analysis, pattern recognition, and continuous improvement methodologies. "
                 "Your analysis helps the system evolve and adapt based on real-world performance data."
-            ),
-            llm=self.llm,
-            verbose=True,
-            allow_delegation=False
+            )
         )
 
-    def _create_improvement_agent(self) -> Agent:
-        """Create the improvement generation agent"""
-        return Agent(
+    def _create_improvement_agent(self) -> DirectAIAgent:
+        """Create the improvement generation agent using our bypass system"""
+        return DirectAIAgent(
+            llm=self.llm,
             role="Improvement Generation Specialist",
             goal=(
                 "Generate specific, actionable improvements for agents and system components based on analysis. "
@@ -54,10 +54,7 @@ class SelfLearningModule:
                 "You are the Improvement Specialist, responsible for translating analysis into actionable improvements. "
                 "You have extensive experience in optimization, performance tuning, and system enhancement. "
                 "Your improvements are always practical, measurable, and designed for real-world implementation."
-            ),
-            llm=self.llm,
-            verbose=True,
-            allow_delegation=False
+            )
         )
 
     async def analyze_mission_outcome(self, mission_id: str, success: bool) -> Dict[str, Any]:
@@ -80,9 +77,8 @@ class SelfLearningModule:
                 logger.warning(f"Mission {mission_id} not found in database")
                 return {"error": "Mission not found"}
             
-            # Create learning analysis task
-            analysis_task = Task(
-                description=f"""Analyze this mission outcome and extract learning insights:
+            # Create learning analysis task using our bypass system
+            task_description = f"""Analyze this mission outcome and extract learning insights:
 
 MISSION DATA:
 {json.dumps(mission_data, indent=2)}
@@ -125,20 +121,26 @@ Provide your response in this JSON format:
         "Insight 2"
     ],
     "overall_score": 0.88
-}}""",
-                expected_output="A structured JSON object with learning analysis and insights.",
-                agent=self.learning_agent
-            )
+}}"""
 
-            # Execute analysis
-            crew = Crew(
-                agents=[self.learning_agent],
-                tasks=[analysis_task],
-                process=Process.sequential,
-                verbose=True
-            )
+            expected_output = "A structured JSON object with learning analysis and insights."
 
-            analysis_result_str = crew.kickoff()
+            # Execute analysis using our bypass system
+            crew = DirectAICrew(self.llm)
+            agent = crew.add_agent(
+                role="Learning Analysis Specialist",
+                goal=(
+                    "Analyze mission outcomes, identify patterns, and extract valuable insights for system improvement. "
+                    "Focus on performance optimization, error reduction, and efficiency gains."
+                ),
+                backstory=(
+                    "You are the Learning Specialist, responsible for extracting wisdom from every mission outcome. "
+                    "You have deep expertise in data analysis, pattern recognition, and continuous improvement methodologies. "
+                    "Your analysis helps the system evolve and adapt based on real-world performance data."
+                )
+            )
+            crew.add_task(task_description, agent, expected_output)
+            analysis_result_str = crew.execute()
             
             try:
                 analysis_result = json.loads(analysis_result_str)
@@ -174,9 +176,8 @@ Provide your response in this JSON format:
         try:
             logger.info("Self-Learning Module: Generating agent improvements...")
             
-            # Create improvement generation task
-            improvement_task = Task(
-                description=f"""Generate specific agent improvements based on this analysis:
+            # Create improvement generation task using our bypass system
+            task_description = f"""Generate specific agent improvements based on this analysis:
 
 ANALYSIS RESULT:
 {json.dumps(analysis_result, indent=2)}
@@ -207,20 +208,26 @@ Provide your response as a JSON array of improvements:
         "priority": "high|medium|low",
         "estimated_effort": "time estimate"
     }}
-]""",
-                expected_output="A JSON array of specific agent improvements.",
-                agent=self.improvement_agent
-            )
+]"""
 
-            # Execute improvement generation
-            crew = Crew(
-                agents=[self.improvement_agent],
-                tasks=[improvement_task],
-                process=Process.sequential,
-                verbose=True
-            )
+            expected_output = "A JSON array of specific agent improvements."
 
-            improvements_str = crew.kickoff()
+            # Execute improvement generation using our bypass system
+            crew = DirectAICrew(self.llm)
+            agent = crew.add_agent(
+                role="Improvement Generation Specialist",
+                goal=(
+                    "Generate specific, actionable improvements for agents and system components based on analysis. "
+                    "Create detailed improvement plans with measurable outcomes and implementation strategies."
+                ),
+                backstory=(
+                    "You are the Improvement Specialist, responsible for translating analysis into actionable improvements. "
+                    "You have extensive experience in optimization, performance tuning, and system enhancement. "
+                    "Your improvements are always practical, measurable, and designed for real-world implementation."
+                )
+            )
+            crew.add_task(task_description, agent, expected_output)
+            improvements_str = crew.execute()
             
             try:
                 improvements = json.loads(improvements_str)

@@ -9,7 +9,8 @@ import subprocess
 from datetime import datetime
 from typing import Dict, Any, List, Optional
 from loguru import logger
-from crewai import Task, Crew, Process, Agent
+from crewai import Task, Crew, Process
+from .crewai_bypass import DirectAIAgent, DirectAICrew
 from pathlib import Path
 import sys
 import os
@@ -41,31 +42,28 @@ class GuardianProtocol:
             logger.warning(f"Fix-AI availability check failed: {e}")
             return False
 
-    def _create_quality_agent(self) -> Agent:
-        """Create the quality assurance agent"""
-        return Agent(
+    def _create_quality_agent(self) -> DirectAIAgent:
+        """Create the quality assurance agent using our bypass system"""
+        return DirectAIAgent(
+            llm=self.llm,
             role="Quality Assurance Specialist",
             goal="Analyze code quality, identify issues, and recommend improvements",
-            backstory="You are an expert in code quality and best practices. You can identify potential issues, performance problems, and architectural concerns.",
-            llm=self.llm,
-            verbose=True
+            backstory="You are an expert in code quality and best practices. You can identify potential issues, performance problems, and architectural concerns."
         )
 
-    def _create_test_agent(self) -> Agent:
-        """Create the testing agent"""
-        return Agent(
+    def _create_test_agent(self) -> DirectAIAgent:
+        """Create the testing agent using our bypass system"""
+        return DirectAIAgent(
+            llm=self.llm,
             role="Testing Specialist",
             goal="Create comprehensive tests and validate system functionality",
-            backstory="You are a testing expert who ensures code reliability and functionality through comprehensive testing strategies.",
-            llm=self.llm,
-            verbose=True
+            backstory="You are a testing expert who ensures code reliability and functionality through comprehensive testing strategies."
         )
 
     async def run_quality_assurance(self, code_content: str, context: str = "") -> Dict[str, Any]:
         """Run quality assurance analysis on code"""
         try:
-            quality_task = Task(
-                description=f"""
+            task_description = f"""
                 Analyze the following code for quality issues, potential problems, and improvement opportunities.
                 
                 CODE CONTEXT: {context}
@@ -83,13 +81,19 @@ class GuardianProtocol:
                 6. Overall score (1-10)
                 
                 Return your analysis in JSON format.
-                """,
-                expected_output="JSON analysis of code quality",
-                agent=self.quality_agent
-            )
+                """
+            
+            expected_output = "JSON analysis of code quality"
 
-            crew = Crew(agents=[self.quality_agent], tasks=[quality_task], process=Process.sequential)
-            result = crew.kickoff()
+            # Use our bypass system
+            crew = DirectAICrew(self.llm)
+            agent = crew.add_agent(
+                role="Quality Assurance Specialist",
+                goal="Analyze code quality, identify issues, and recommend improvements",
+                backstory="You are an expert in code quality and best practices. You can identify potential issues, performance problems, and architectural concerns."
+            )
+            crew.add_task(task_description, agent, expected_output)
+            result = crew.execute()
             
             try:
                 analysis = json.loads(result)

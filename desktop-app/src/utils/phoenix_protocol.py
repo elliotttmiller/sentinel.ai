@@ -8,7 +8,8 @@ import traceback
 from datetime import datetime
 from typing import Dict, Any, Optional
 from loguru import logger
-from crewai import Task, Crew, Process, Agent
+from crewai import Task, Crew, Process
+from .crewai_bypass import DirectAIAgent, DirectAICrew
 
 
 class PhoenixProtocol:
@@ -22,9 +23,10 @@ class PhoenixProtocol:
         self.debugger_agent = self._create_debugger_agent()
         logger.info("Phoenix Protocol initialized - Self-healing system active")
 
-    def _create_debugger_agent(self) -> Agent:
-        """Create the elite debugger agent"""
-        return Agent(
+    def _create_debugger_agent(self) -> DirectAIAgent:
+        """Create the elite debugger agent using our bypass system"""
+        return DirectAIAgent(
+            llm=self.llm,
             role="Elite Debugger & Problem Solver",
             goal=(
                 "Analyze a failed task, including the error message and context. Identify the root cause of the failure "
@@ -38,10 +40,7 @@ class PhoenixProtocol:
                 "You have solved countless complex problems and have a reputation for turning failures into "
                 "opportunities for system improvement. Your solutions are always precise, actionable, and "
                 "designed to prevent similar issues in the future."
-            ),
-            llm=self.llm,
-            verbose=True,
-            allow_delegation=False
+            )
         )
 
     async def analyze_and_resolve(self, failure_context: Dict[str, Any]) -> Optional[Dict[str, Any]]:
@@ -57,9 +56,8 @@ class PhoenixProtocol:
         try:
             logger.info("Phoenix Protocol: Analyzing failure and generating solution...")
             
-            # Create analysis task
-            analysis_task = Task(
-                description=f"""Analyze this failure and provide a precise solution:
+            # Create analysis task using our bypass system
+            task_description = f"""Analyze this failure and provide a precise solution:
 
 FAILURE CONTEXT:
 {json.dumps(failure_context, indent=2)}
@@ -79,14 +77,30 @@ Provide your response in this formal JSON format:
     "reasoning": "Detailed explanation of the root cause and solution approach",
     "prevention_strategy": "How to prevent this issue in the future",
     "estimated_fix_time": "time estimate"
-}}""",
-                expected_output="A structured JSON object with the solution analysis and fix using formal contract.",
-                agent=self.debugger_agent
-            )
+}}"""
 
-            # Execute analysis
-            crew = Crew(agents=[self.debugger_agent], tasks=[analysis_task], process=Process.sequential, verbose=True)
-            solution_str = crew.kickoff()
+            expected_output = "A structured JSON object with the solution analysis and fix using formal contract."
+
+            # Execute analysis using our bypass system
+            crew = DirectAICrew(self.llm)
+            agent = crew.add_agent(
+                role="Elite Debugger & Problem Solver",
+                goal=(
+                    "Analyze a failed task, including the error message and context. Identify the root cause of the failure "
+                    "and provide a precise, actionable solution to fix the problem. The solution should be a corrected piece "
+                    "of code, a new shell command, or a revised plan step."
+                ),
+                backstory=(
+                    "You are the 'Phoenix,' the ultimate troubleshooter. You are brought in when other agents fail. "
+                    "You have a deep understanding of code, logic, and system processes. You dissect errors with "
+                    "cold, analytical precision and provide solutions that are not just fixes, but improvements. "
+                    "You have solved countless complex problems and have a reputation for turning failures into "
+                    "opportunities for system improvement. Your solutions are always precise, actionable, and "
+                    "designed to prevent similar issues in the future."
+                )
+            )
+            crew.add_task(task_description, agent, expected_output)
+            solution_str = crew.execute()
             
             try:
                 solution = json.loads(solution_str)

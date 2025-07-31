@@ -18,6 +18,12 @@ from loguru import logger
 from dotenv import load_dotenv
 
 from ..agents.advanced_agents import PlannerAgents, WorkerAgents, MemoryAgents, PromptOptimizationAgents
+from ..agents.specialized_agents import (
+    AutonomousOrchestratorAgent, 
+    SelfOptimizationEngineerAgent, 
+    ContextSynthesisAgent,
+    SpecializedAgentFactory
+)
 from ..models.advanced_database import db_manager
 from ..utils.phoenix_protocol import PhoenixProtocol
 from ..utils.guardian_protocol import GuardianProtocol
@@ -92,6 +98,12 @@ class CognitiveForgeEngine:
         self.worker_agents = WorkerAgents()
         self.memory_agents = MemoryAgents()
         self.prompt_optimization_agents = PromptOptimizationAgents()
+        
+        # Initialize specialized agents for autonomous crew system
+        self.specialized_agent_factory = SpecializedAgentFactory(self.llm)
+        self.autonomous_orchestrator = self.specialized_agent_factory.create_autonomous_orchestrator()
+        self.self_optimization_engineer = self.specialized_agent_factory.create_self_optimization_engineer()
+        self.context_synthesis_agent = self.specialized_agent_factory.create_context_synthesis_agent()
 
         # Initialize database manager
         self.db_manager = db_manager
@@ -275,57 +287,62 @@ class CognitiveForgeEngine:
         update_callback: Callable[[str], None]
     ) -> Dict[str, Any]:
         """
-        Phase 1: Advanced Prompt Optimization using Prompt Optimization Agent
+        Phase 1: Advanced Prompt Optimization using Direct AI Agent
         """
         update_callback("  ⚗️ Agent [Prompt Optimization Specialist]: Transforming raw request into optimized directive...")
 
         try:
-            # Create Advanced Prompt Optimization Agent
-            prompt_optimizer = self.prompt_optimization_agents.prompt_optimizer(self.llm)
+            # Use DirectAICrew for prompt optimization
+            from ..utils.crewai_bypass import DirectAICrew
             
-            analysis_task = Task(
-                description=f"""Analyze and optimize the following user prompt: '{user_prompt}'.
-                
-                Your transformation process must include:
-                1. **Ambiguity Resolution**: Clarify any vague terms
-                2. **Contextual Enrichment**: Add implicit technical constraints or context
-                3. **Define Success Criteria**: Create a list of measurable outcomes
-                4. **Recommend Agent Roles**: Suggest the primary agent roles needed for the task
-                5. **Structure the Output**: Return a single, raw JSON object containing the 'optimized_prompt', 'success_criteria', and 'recommended_agents'
-                
-                Provide your response in the following JSON format:
-                {{
-                    "optimized_prompt": "The enhanced, detailed version of the user's request",
-                    "technical_context": {{
-                        "programming_languages": ["list", "of", "relevant", "languages"],
-                        "frameworks": ["list", "of", "relevant", "frameworks"],
-                        "tools_required": ["list", "of", "required", "tools"],
-                        "complexity_level": "low/medium/high",
-                        "estimated_duration": "time estimate"
-                    }},
-                    "success_criteria": [
-                        "Specific, measurable criteria 1",
-                        "Specific, measurable criteria 2"
-                    ],
-                    "recommended_agents": [
-                        "agent_role_1",
-                        "agent_role_2"
-                    ],
-                    "risk_factors": [
-                        "potential risk 1 with mitigation",
-                        "potential risk 2 with mitigation"
-                    ],
-                    "optimization_notes": [
-                        "optimization suggestion 1",
-                        "optimization suggestion 2"
-                    ]
-                }}""",
-                expected_output="A structured JSON object with the optimized mission parameters.",
-                agent=prompt_optimizer
+            crew = DirectAICrew(self.llm)
+            agent = crew.add_agent(
+                role="Prompt Optimization Specialist",
+                goal="Transform raw user prompts into optimized, detailed directives",
+                backstory="You are an expert at analyzing and optimizing user requests to make them more specific, actionable, and technically precise."
             )
-
-            # Use non-blocking crew execution
-            optimized_prompt_str = await self._run_crew(agents=[prompt_optimizer], tasks=[analysis_task])
+            
+            task_description = f"""Analyze and optimize the following user prompt: '{user_prompt}'.
+            
+            Your transformation process must include:
+            1. **Ambiguity Resolution**: Clarify any vague terms
+            2. **Contextual Enrichment**: Add implicit technical constraints or context
+            3. **Define Success Criteria**: Create a list of measurable outcomes
+            4. **Recommend Agent Roles**: Suggest the primary agent roles needed for the task
+            5. **Structure the Output**: Return a single, raw JSON object containing the 'optimized_prompt', 'success_criteria', and 'recommended_agents'
+            
+            Provide your response in the following JSON format:
+            {{
+                "optimized_prompt": "The enhanced, detailed version of the user's request",
+                "technical_context": {{
+                    "programming_languages": ["list", "of", "relevant", "languages"],
+                    "frameworks": ["list", "of", "relevant", "frameworks"],
+                    "tools_required": ["list", "of", "required", "tools"],
+                    "complexity_level": "low/medium/high",
+                    "estimated_duration": "time estimate"
+                }},
+                "success_criteria": [
+                    "Specific, measurable criteria 1",
+                    "Specific, measurable criteria 2"
+                ],
+                "recommended_agents": [
+                    "agent_role_1",
+                    "agent_role_2"
+                ],
+                "risk_factors": [
+                    "potential risk 1 with mitigation",
+                    "potential risk 2 with mitigation"
+                ],
+                "optimization_notes": [
+                    "optimization suggestion 1",
+                    "optimization suggestion 2"
+                ]
+            }}"""
+            
+            crew.add_task(task_description, agent, "A structured JSON object with the optimized mission parameters.")
+            
+            # Execute using DirectAICrew
+            optimized_prompt_str = crew.execute()
             
             try:
                 # Clean and parse the JSON response
@@ -561,7 +578,73 @@ class CognitiveForgeEngine:
         update_callback: Callable[[str], None]
     ) -> Dict[str, Any]:
         """
-        Phase 5: Performance-Optimized Execution with Guardian Protocol protection
+        Phase 5: Autonomous Execution with Orchestrator and Guardian Protocol protection
+        """
+        try:
+            update_callback("🚀 Autonomous Orchestrator: Taking control of mission execution...")
+            
+            # Create mission blueprint for the Autonomous Orchestrator
+            mission_blueprint = {
+                "execution_plan": execution_plan,
+                "agent_config": agent_config,
+                "mission_id": mission_id_str,
+                "constraints": {
+                    "agent_utilization_min": 0.92,
+                    "failure_recovery_time_max": "log(task_complexity)",
+                    "resource_balancing_variance_max": 0.15
+                }
+            }
+            
+            # Execute mission using Autonomous Orchestrator
+            orchestrator_result = self.autonomous_orchestrator.execute_mission(mission_blueprint)
+            
+            if orchestrator_result["status"] == "success":
+                update_callback("✅ Autonomous Orchestrator: Mission executed successfully")
+                
+                # Apply Guardian Protocol auto-fixing if needed
+                result = orchestrator_result["execution_plan"]
+                if result and "code" in result.lower():
+                    update_callback("🛡️ Guardian Protocol: Applying auto-fixes to generated code...")
+                    fixed_result = await self.guardian_protocol.run_code_autofix(result)
+                    if fixed_result != result:
+                        result = fixed_result
+                        update_callback("✅ Guardian Protocol: Code auto-fixes applied successfully")
+                
+                # Store execution result
+                self.db_manager.add_mission_update(
+                    mission_id_str,
+                    f"Autonomous Orchestrator executed mission successfully with optimized resource allocation",
+                    "info"
+                )
+                
+                return {
+                    "result": result,
+                    "needs_healing": False,
+                    "guardian_protection_applied": True,
+                    "orchestrator_used": True
+                }
+            else:
+                update_callback("⚠️ Autonomous Orchestrator: Falling back to traditional execution...")
+                
+                # Fallback to traditional execution
+                return await self._execute_traditional_crew(execution_plan, agent_config, mission_id_str, update_callback)
+            
+        except Exception as e:
+            logger.error(f"Autonomous execution failed: {e}")
+            update_callback("⚠️ Autonomous Orchestrator: Error occurred, using fallback...")
+            
+            # Fallback to traditional execution
+            return await self._execute_traditional_crew(execution_plan, agent_config, mission_id_str, update_callback)
+    
+    async def _execute_traditional_crew(
+        self, 
+        execution_plan: Dict[str, Any], 
+        agent_config: Dict[str, Any],
+        mission_id_str: str, 
+        update_callback: Callable[[str], None]
+    ) -> Dict[str, Any]:
+        """
+        Traditional crew execution as fallback
         """
         try:
             # Extract agent configuration
@@ -593,7 +676,7 @@ class CognitiveForgeEngine:
             process = Process.sequential if execution_mode == "sequential" else Process.hierarchical
             
             # Execute with Guardian Protocol protection using non-blocking crew execution
-            update_callback("🔄 Executing with Guardian Protocol protection...")
+            update_callback("🔄 Executing with traditional crew and Guardian Protocol protection...")
             result = await self._run_crew(agents=crew_agents, tasks=tasks, process=process)
             
             # Apply Guardian Protocol auto-fixing if needed
@@ -607,23 +690,25 @@ class CognitiveForgeEngine:
             # Store execution result
             self.db_manager.add_mission_update(
                 mission_id_str,
-                f"Optimized worker crew executed successfully with {len(crew_agents)} agents",
+                f"Traditional crew executed successfully with {len(crew_agents)} agents",
                 "info"
             )
             
             return {
                 "result": result,
                 "needs_healing": False,  # Will be set to True if errors occur
-                "guardian_protection_applied": True
+                "guardian_protection_applied": True,
+                "orchestrator_used": False
             }
             
         except Exception as e:
-            logger.error(f"Execution with Guardian protection failed: {e}")
+            logger.error(f"Traditional execution failed: {e}")
             return {
                 "result": f"Error: {str(e)}",
                 "needs_healing": True,
                 "error": str(e),
-                "guardian_protection_applied": False
+                "guardian_protection_applied": False,
+                "orchestrator_used": False
             }
 
     async def _execute_phoenix_protocol(
@@ -691,65 +776,62 @@ class CognitiveForgeEngine:
         success: bool
     ) -> Dict[str, Any]:
         """
-        Phase 7: Advanced Memory Synthesis & Learning
+        Phase 7: Context Synthesis and Knowledge Integration
         """
         try:
-            # Create memory synthesizer agent
-            memory_agent = self.memory_agents.memory_synthesizer(self.llm)
-            
-            # Enhanced synthesis prompt with optimization data
-            synthesis_prompt = f"""
-            Analyze the mission execution and optimization results to extract valuable insights:
-            
-            ORIGINAL PROMPT: {original_prompt}
-            EXECUTION RESULT: {json.dumps(execution_result)}
-            SUCCESS: {success}
-            
-            Provide a comprehensive synthesis including:
-            1. Key learnings from the mission
-            2. Optimization effectiveness analysis
-            3. Performance insights
-            4. Recommendations for future improvements
-            5. Agent optimization opportunities
-            6. System evolution suggestions
-            """
-            
-            # Create synthesis task
-            synthesis_task = Task(
-                description=synthesis_prompt,
-                expected_output="Comprehensive memory synthesis with optimization insights",
-                agent=memory_agent
-            )
-            
-            # Use non-blocking crew execution
-            synthesis_result = await self._run_crew(agents=[memory_agent], tasks=[synthesis_task])
-            
-            # Store synthesis in database
-            self.db_manager.add_mission_update(
-                mission_id_str,
-                f"Advanced memory synthesis completed with optimization insights",
-                "info"
-            )
-            
-            # Store detailed synthesis
-            self.db_manager.add_mission_update(
-                mission_id_str,
-                synthesis_result,
-                "synthesis"
-            )
-            
-            return {
-                "synthesis_result": synthesis_result,
+            # Create mission data for Context Synthesis Agent
+            mission_data = {
+                "mission_id": mission_id_str,
+                "original_prompt": original_prompt,
+                "execution_result": execution_result,
                 "success": success,
-                "timestamp": datetime.utcnow().isoformat()
+                "timestamp": datetime.utcnow().isoformat(),
+                "system_state": self._capture_system_state(),
+                "orchestrator_used": execution_result.get("orchestrator_used", False)
             }
             
+            # Use Context Synthesis Agent for advanced knowledge processing
+            synthesis_result = self.context_synthesis_agent.synthesize_context(mission_data)
+            
+            if synthesis_result["status"] == "success":
+                logger.info(f"Context synthesis completed for mission {mission_id_str}")
+                
+                # Store synthesis in database
+                self.db_manager.add_mission_update(
+                    mission_id_str,
+                    f"Context synthesis completed: Knowledge graph updated with mission insights",
+                    "info"
+                )
+                
+                # Store detailed synthesis
+                self.db_manager.add_mission_update(
+                    mission_id_str,
+                    synthesis_result["synthesized_context"],
+                    "synthesis"
+                )
+                
+                return {
+                    "synthesis_result": synthesis_result["synthesized_context"],
+                    "success": success,
+                    "timestamp": datetime.utcnow().isoformat(),
+                    "context_synthesis_used": True
+                }
+            else:
+                logger.error(f"Context synthesis failed: {synthesis_result.get('error', 'Unknown error')}")
+                return {
+                    "synthesis_result": f"Context synthesis failed: {synthesis_result.get('error', 'Unknown error')}",
+                    "success": False,
+                    "error": synthesis_result.get("error", "Context synthesis failed"),
+                    "context_synthesis_used": False
+                }
+            
         except Exception as e:
-            logger.error(f"Memory synthesis failed: {e}")
+            logger.error(f"Context synthesis failed: {e}")
             return {
-                "synthesis_result": f"Memory synthesis failed: {str(e)}",
+                "synthesis_result": f"Context synthesis failed: {str(e)}",
                 "success": False,
-                "error": str(e)
+                "error": str(e),
+                "context_synthesis_used": False
             }
 
     async def _execute_system_evolution(
@@ -759,41 +841,65 @@ class CognitiveForgeEngine:
         memory_synthesis: Dict[str, Any]
     ) -> Dict[str, Any]:
         """
-        Phase 8: System Evolution & Adaptation
+        Phase 8: System Evolution & Self-Optimization
         """
         try:
-            # Trigger self-learning module
-            learning_result = await self.self_learning_module.analyze_mission_outcome(
-                mission_id_str, 
-                success=execution_result.get("needs_healing", False) == False
-            )
-            
-            # Apply Guardian Protocol validation if improvements are suggested
-            if learning_result.get("improvements"):
-                validation_result = await self.guardian_protocol.run_agent_validation_suite(
-                    learning_result.get("improvements")
-                )
-                
-                if validation_result.get("validation_passed", False):
-                    # Mark improvements as active
-                    await self.self_learning_module.mark_improvements_active(
-                        mission_id_str, 
-                        learning_result.get("improvements")
-                    )
-            
-            return {
-                "learning_result": learning_result,
-                "validation_result": validation_result if learning_result.get("improvements") else None,
-                "evolution_applied": True
+            # Create agent performance data for Self-Optimization Engineer
+            agent_outputs = {
+                "mission_id": mission_id_str,
+                "execution_result": execution_result,
+                "memory_synthesis": memory_synthesis,
+                "success": execution_result.get("needs_healing", False) == False,
+                "orchestrator_used": execution_result.get("orchestrator_used", False),
+                "context_synthesis_used": memory_synthesis.get("context_synthesis_used", False),
+                "timestamp": datetime.utcnow().isoformat()
             }
+            
+            # Use Self-Optimization Engineer for continuous improvement
+            optimization_result = self.self_optimization_engineer.optimize_agent_performance(agent_outputs)
+            
+            if optimization_result["status"] == "success":
+                logger.info(f"Self-Optimization Engineer completed performance analysis for mission {mission_id_str}")
+                
+                # Apply Guardian Protocol validation if improvements are suggested
+                optimization_plan = optimization_result.get("optimization_plan", {})
+                if optimization_plan and "recommendations" in optimization_plan:
+                    validation_result = await self.guardian_protocol.run_agent_validation_suite(
+                        optimization_plan.get("recommendations", [])
+                    )
+                    
+                    if validation_result.get("validation_passed", False):
+                        # Mark optimizations as active
+                        self.db_manager.add_mission_update(
+                            mission_id_str,
+                            f"Self-Optimization improvements validated and applied",
+                            "optimization"
+                        )
+                
+                return {
+                    "optimization_result": optimization_result,
+                    "validation_result": validation_result if optimization_plan.get("recommendations") else None,
+                    "evolution_applied": True,
+                    "self_optimization_used": True
+                }
+            else:
+                logger.error(f"Self-Optimization Engineer failed: {optimization_result.get('error', 'Unknown error')}")
+                return {
+                    "optimization_result": None,
+                    "validation_result": None,
+                    "evolution_applied": False,
+                    "error": optimization_result.get("error", "Self-optimization failed"),
+                    "self_optimization_used": False
+                }
             
         except Exception as e:
             logger.error(f"System evolution failed: {e}")
             return {
-                "learning_result": None,
+                "optimization_result": None,
                 "validation_result": None,
                 "evolution_applied": False,
-                "error": str(e)
+                "error": str(e),
+                "self_optimization_used": False
             }
 
     def _create_agent_from_factory(self, agent_role: str, config: Dict[str, Any]) -> Any:
@@ -1134,14 +1240,18 @@ class CognitiveForgeEngine:
 
     def get_system_info(self) -> Dict[str, Any]:
         """
-        Get comprehensive system information including all protocols
+        Get comprehensive system information including all protocols and specialized agents
         """
         return {
-            "system_name": "Cognitive Forge Engine v5.0",
-            "version": "5.0.0",
-            "architecture": "Sentient Operating System",
+            "system_name": "Cognitive Forge Engine v5.1",
+            "version": "5.1.0",
+            "architecture": "Sentient Operating System with Hierarchical Specialized Agents",
+            "model": "gemini-1.5-pro",
             "features": [
                 "8-phase mission workflow",
+                "Autonomous Orchestrator Agent",
+                "Self-Optimization Engineer Agent",
+                "Context Synthesis Agent",
                 "Phoenix Protocol (Self-Healing)",
                 "Guardian Protocol (Quality Assurance)",
                 "Synapse Logging System",
@@ -1152,8 +1262,15 @@ class CognitiveForgeEngine:
                 "Adaptive execution strategies",
                 "Advanced memory synthesis",
                 "Non-blocking async execution",
-                "Formal solution contracts"
+                "Formal solution contracts",
+                "CrewAI Bypass System",
+                "Direct Google AI API Integration"
             ],
+            "specialized_agents": {
+                "autonomous_orchestrator": "Parallel Execution Conductor - Central nervous system of every mission",
+                "self_optimization_engineer": "Evolutionary Prompt Engineer - Continuously improves agent performance",
+                "context_synthesis_agent": "Persistent Knowledge Architect - Maintains mission context across executions"
+            },
             "protocols": {
                 "phoenix_protocol": "Self-healing debug and resolve system",
                 "guardian_protocol": "Proactive quality assurance and auto-fixing",
@@ -1166,9 +1283,15 @@ class CognitiveForgeEngine:
                 "Comprehensive agent testing",
                 "Performance-driven refinement",
                 "Adaptive learning",
-                "Context-aware optimization"
+                "Context-aware optimization",
+                "Autonomous resource allocation",
+                "Continuous performance optimization",
+                "Knowledge graph synthesis"
             ],
             "integrated_services": [
+                "Autonomous Orchestrator Agent",
+                "Self-Optimization Engineer Agent",
+                "Context Synthesis Agent",
                 "Planner Agents",
                 "Worker Agents", 
                 "Memory Agents",
@@ -1176,10 +1299,12 @@ class CognitiveForgeEngine:
                 "Guardian Protocol",
                 "Synapse Logging System",
                 "Self-Learning Module",
-                "Advanced Database Manager"
+                "Advanced Database Manager",
+                "Specialized Tools Suite"
             ],
             "mission_states": [state.value for state in MissionState],
-            "status": "operational"
+            "status": "operational",
+            "upgrade_status": "v5.1_complete"
         }
 
     async def run_optimization_analysis(self, mission_id: str) -> Dict[str, Any]:

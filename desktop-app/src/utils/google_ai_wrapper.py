@@ -36,36 +36,21 @@ class GoogleGenerativeAIWrapper(BaseChatModel):
         super().__init__(**kwargs)
         
         try:
+            # Load environment variables from .env file
+            from dotenv import load_dotenv
+            import os
+            
+            # Load .env file from the desktop-app directory
+            env_path = os.path.join(os.path.dirname(__file__), '..', '..', '.env')
+            load_dotenv(env_path)
+            
             # Configure Google Generative AI
             api_key = os.getenv("GOOGLE_API_KEY")
             if not api_key:
                 raise ValueError("GOOGLE_API_KEY environment variable is required")
             
             genai.configure(api_key=api_key)
-            
-            # Initialize the model - use direct API model name
-            generation_config = genai.types.GenerationConfig(
-                temperature=self.temperature,
-                top_p=self.top_p,
-                top_k=self.top_k,
-                max_output_tokens=self.max_tokens,
-            )
-            
-            # Ensure we're using the direct Google AI API model name
-            model_name = self.model_name
-            if model_name.startswith("gemini-"):
-                # This is already a direct API model name
-                pass
-            else:
-                # Fallback to default
-                model_name = "gemini-1.5-pro"
-            
-            self._model = genai.GenerativeModel(
-                model_name=model_name,
-                generation_config=generation_config
-            )
-            
-            logger.success(f"Google Generative AI wrapper initialized successfully with model: {model_name}")
+            logger.success(f"Google Generative AI wrapper initialized successfully")
 
         except Exception as e:
             logger.critical(f"Fatal error initializing Google Generative AI Wrapper: {e}")
@@ -74,6 +59,71 @@ class GoogleGenerativeAIWrapper(BaseChatModel):
     @property
     def _llm_type(self) -> str:
         return "google_generative_ai_custom_wrapper"
+    
+    def supports_stop_words(self) -> bool:
+        """CrewAI compatibility method"""
+        return True
+    
+    @property
+    def llm_type(self) -> str:
+        """CrewAI compatibility property"""
+        return self._llm_type
+    
+    @property
+    def model(self):
+        """Lazy-load the Google Generative AI model with correct configuration values"""
+        if not hasattr(self, '_model') or self._model is None:
+            try:
+                # Extract actual values from Pydantic fields (guaranteed to be set by now)
+                temperature_val = float(self.temperature) if self.temperature is not None else 0.7
+                top_p_val = float(self.top_p) if self.top_p is not None else 1.0
+                top_k_val = int(self.top_k) if self.top_k is not None else 40
+                max_tokens_val = int(self.max_tokens) if self.max_tokens is not None else None
+                
+                generation_config = genai.types.GenerationConfig(
+                    temperature=temperature_val,
+                    top_p=top_p_val,
+                    top_k=top_k_val,
+                    max_output_tokens=max_tokens_val,
+                )
+                
+                # Ensure we're using the direct Google AI API model name
+                model_name = self.model_name
+                if not model_name.startswith("gemini-"):
+                    # Fallback to default
+                    model_name = "gemini-1.5-pro"
+                
+                # Create the model instance
+                model_instance = genai.GenerativeModel(
+                    model_name=model_name,
+                    generation_config=generation_config
+                )
+                
+                # Use object.__setattr__ to bypass Pydantic's attribute management
+                object.__setattr__(self, '_model', model_instance)
+                
+                logger.debug(f"Google Generative AI model created with: {model_name}, temp={temperature_val}")
+                
+            except Exception as e:
+                logger.error(f"Error creating Google Generative AI model: {e}")
+                raise
+        
+        # Ensure we return the actual model instance, not a ModelPrivateAttr
+        model_instance = getattr(self, '_model', None)
+        if model_instance is None or hasattr(model_instance, '_model'):  # Check if it's a ModelPrivateAttr
+            # Force re-initialization
+            if hasattr(self, '_model'):
+                object.__delattr__(self, '_model')
+            return self.model  # Recursive call to re-initialize
+        
+        # Additional check to ensure we have a valid model instance
+        if not hasattr(model_instance, 'generate_content'):
+            # Force re-initialization if model is invalid
+            if hasattr(self, '_model'):
+                object.__delattr__(self, '_model')
+            return self.model  # Recursive call to re-initialize
+        
+        return model_instance
 
     def _convert_messages_to_prompt(self, messages: List[BaseMessage]) -> str:
         """Convert LangChain messages to a single prompt string."""
@@ -107,7 +157,7 @@ class GoogleGenerativeAIWrapper(BaseChatModel):
                 'HARM_CATEGORY_DANGEROUS_CONTENT': 'BLOCK_NONE',
             }
 
-            response = self._model.generate_content(prompt, safety_settings=safety_settings)
+            response = self.model.generate_content(prompt, safety_settings=safety_settings)
             
             content = response.text
             ai_message = AIMessage(content=content)
@@ -137,7 +187,7 @@ class GoogleGenerativeAIWrapper(BaseChatModel):
                 'HARM_CATEGORY_DANGEROUS_CONTENT': 'BLOCK_NONE',
             }
 
-            response = await self._model.generate_content_async(prompt, safety_settings=safety_settings)
+            response = await self.model.generate_content_async(prompt, safety_settings=safety_settings)
             
             content = response.text
             ai_message = AIMessage(content=content)
@@ -167,7 +217,7 @@ class GoogleGenerativeAIWrapper(BaseChatModel):
                 'HARM_CATEGORY_DANGEROUS_CONTENT': 'BLOCK_NONE',
             }
 
-            stream = self._model.generate_content(prompt, stream=True, safety_settings=safety_settings)
+            stream = self.model.generate_content(prompt, stream=True, safety_settings=safety_settings)
             
             for chunk in stream:
                 if chunk.text:
