@@ -1,0 +1,78 @@
+mindmap
+  root((🚀 Sentient Supercharged Phoenix))
+    ::icon(fas fa-rocket)
+    📄 **Core Project Files**
+      - pyproject.toml
+      - setup.cfg
+      - requirements.txt
+    
+    🚀 **Startup Scripts**
+      - start_sentinel.py
+      - start_sentinel.bat
+      - start_sentinel.ps1
+
+    📚 **Documentation**
+      ::icon(fas fa-book-open)
+      - README.md
+      - DEPLOYMENT_GUIDE.md
+      - STARTUP_GUIDE.md
+      - UPGRADE_SUMMARY.md
+      - OPTIMIZATION_SYSTEM_OVERVIEW.md
+
+    ⚙️ **src (The Sentient Core)**
+      ::icon(fas fa-cogs)
+      - **main.py** (API Entry Point)
+      - **cognitive_engine_service.py** (Service Layer)
+      
+      🧠 **core (The Brain)**
+        ::icon(fas fa-brain)
+        - **cognitive_forge_engine.py (v5.0)**
+          - Orchestrates 8-Phase Workflow
+          - Manages All Protocols
+          - The Single Source of Truth
+
+      🤖 **agents (The Minds)**
+        ::icon(fas fa-user-astronaut)
+        - **advanced_agents.py**
+          - PromptAlchemistAgent
+          - LeadArchitectAgent
+          - SeniorDeveloperAgent
+          - DebuggerAgent (Phoenix)
+          - MemorySynthesizerAgent
+          - ...and all other personas
+
+      🛠️ **tools (The Hands)**
+        ::icon(fas fa-tools)
+        - **advanced_tools.py**
+          - File I/O Tools
+          - Shell Execution Tools
+          - Code Analysis Tools
+          - System Info Tools
+
+      📦 **models (Persistence)**
+        ::icon(fas fa-database)
+        - **advanced_database.py**
+          - SQLite Mission Tracking
+          - ChromaDB Vector Memory
+
+      🛡️ **utils (The Protocols)**
+        ::icon(fas fa-shield-alt)
+        - **phoenix_protocol.py** (Self-Healing)
+        - **guardian_protocol.py** (Quality Assurance)
+        - **synapse_logging.py** (Consciousness)
+        - **self_learning_module.py** (Evolution)
+        - **manage_services.py**
+
+    🧪 **tests**
+      ::icon(fas fa-vial)
+      - Unit Tests
+      - Integration Tests
+      - Protocol Validation Suites
+
+    🗂️ **Supporting Directories**
+      - **config/** (Environment Config)
+      - **db/** (Database Files)
+      - **logs/** (Synapse & System Logs)
+      - **static/** (UI Assets)
+      - **templates/** (HTML Templates)
+      - **backups/**

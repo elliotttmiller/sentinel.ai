@@ -22,7 +22,7 @@ from crewai import Agent, Task, Crew, Process
 PROJECT_ROOT = Path(__file__).parent
 SRC_DIRECTORY = PROJECT_ROOT / "src"
 REPORTS_DIRECTORY = PROJECT_ROOT / "logs" / "fix_ai_reports"
-BACKUP_DIRECTORY = PROJECT_ROOT / "backups" / f"fix_ai_backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+BACKUP_DIRECTORY = PROJECT_ROOT / "backups" / f"fix_ai_backup_{datetime.now().strftime('%Y%m%d_%H%M%S_%f')}"
 MAX_FIX_RETRIES = 3  # The number of times the self-healing loop will re-attempt a fix
 
 # --- SENTRY INTEGRATION ---
@@ -58,6 +58,11 @@ try:
     import os
     os.environ["LITELLM_MODEL"] = "gemini-1.5-pro"
     os.environ["LITELLM_PROVIDER"] = "google"
+    
+    # Import direct AI bypass to eliminate LiteLLM dependency
+    from src.utils.crewai_bypass import create_direct_ai_crew, configure_direct_ai_environment
+    configure_direct_ai_environment()
+    DIRECT_AI_CREW = create_direct_ai_crew(LLM)
     
 except ImportError:
     print("Warning: dotenv is not installed. Make sure your environment variables are set.")
@@ -256,16 +261,15 @@ class CodebaseHealer:
             logger.error("LLM not initialized. Cannot proceed with AI-driven planning.")
             return
 
-        architect = Agent(
+        # Create architect agent using direct AI bypass
+        architect = DIRECT_AI_CREW.add_agent(
             role="Lead Software Architect & Codebase Strategist",
             goal="Analyze a list of diagnosed codebase issues (including Sentry errors). Prioritize them by severity and create a logical, step-by-step JSON healing plan to resolve them.",
-            backstory="You are a master architect who specializes in refactoring and healing complex codebases. You can instantly see the connections between disparate errors and devise the most efficient plan to restore a system to perfect health.",
-            llm=LLM, 
-            verbose=True,
-            allow_delegation=False
+            backstory="You are a master architect who specializes in refactoring and healing complex codebases. You can instantly see the connections between disparate errors and devise the most efficient plan to restore a system to perfect health."
         )
 
-        planning_task = Task(
+        # Add planning task
+        DIRECT_AI_CREW.add_task(
             description=f"""Analyze the following list of diagnosed codebase issues (including Sentry errors). Create a prioritized, step-by-step healing plan in a raw JSON format.
             
             ISSUES:
@@ -279,13 +283,8 @@ class CodebaseHealer:
             agent=architect
         )
 
-        crew = Crew(
-            agents=[architect], 
-            tasks=[planning_task], 
-            process=Process.sequential,
-            verbose=True
-        )
-        plan_str = crew.kickoff()
+        # Execute using direct AI (no LiteLLM)
+        plan_str = DIRECT_AI_CREW.execute()
 
         try:
             self.healing_plan = json.loads(plan_str)
@@ -302,13 +301,11 @@ class CodebaseHealer:
         """Phase 3: Execute the healing plan with the self-healing iterative loop."""
         self._log_phase("EXECUTION & SELF-HEALING")
 
-        fixer_agent = Agent(
+        # Create fixer agent using direct AI bypass
+        fixer_agent = DIRECT_AI_CREW.add_agent(
             role="Expert Python Debugger & Code Fixer",
             goal="Given a specific file, line number, error, and code context, provide the corrected block of code to resolve the issue. Your output must be ONLY the raw, corrected code block.",
-            backstory="You are a surgical code fixer. You can instantly understand the context of an error and provide the minimal, correct change to fix it without introducing new problems.",
-            llm=LLM, 
-            verbose=True,
-            allow_delegation=False
+            backstory="You are a surgical code fixer. You can instantly understand the context of an error and provide the minimal, correct change to fix it without introducing new problems."
         )
 
         for i, step in enumerate(self.healing_plan):
@@ -333,7 +330,9 @@ class CodebaseHealer:
                         # Apply the suggested fix logic here
                         pass
 
-                    fix_task = Task(
+                    # Clear previous tasks and add new fix task
+                    DIRECT_AI_CREW.tasks = []
+                    DIRECT_AI_CREW.add_task(
                         description=f"""Your previous attempt to fix this issue failed with a new error, or this is the first attempt.
                         Re-evaluate and provide a new, corrected code block.
                         
@@ -350,13 +349,7 @@ class CodebaseHealer:
                         agent=fixer_agent
                     )
                     
-                    crew = Crew(
-                        agents=[fixer_agent], 
-                        tasks=[fix_task], 
-                        process=Process.sequential,
-                        verbose=True
-                    )
-                    corrected_code = crew.kickoff()
+                    corrected_code = DIRECT_AI_CREW.execute()
                     
                     # Apply the fix (this is a simple line replacement, could be more sophisticated)
                     lines[step['line'] - 1] = corrected_code + '\n'
