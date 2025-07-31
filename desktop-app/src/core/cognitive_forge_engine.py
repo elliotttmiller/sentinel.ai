@@ -27,6 +27,9 @@ from ..utils.self_learning_module import SelfLearningModule
 # Load environment variables
 load_dotenv(os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
 
+# Initialize Sentry integration
+from ..utils.sentry_integration import initialize_sentry, get_sentry, capture_error, start_transaction, track_async_errors
+
 
 class MissionState(Enum):
     """Formal mission state machine for surgical precision"""
@@ -50,6 +53,9 @@ class CognitiveForgeEngine:
     """
 
     def __init__(self):
+        # Initialize Sentry for enhanced monitoring
+        self.sentry = initialize_sentry(environment="production")
+        
         # LLM Configuration
         LLM_MODEL = os.getenv("LLM_MODEL", "gemini-1.5-pro")  # Use direct Google AI model name
         LLM_TEMPERATURE = float(os.getenv("LLM_TEMPERATURE", "0.7"))
@@ -61,8 +67,24 @@ class CognitiveForgeEngine:
                 temperature=LLM_TEMPERATURE
             )
             logger.info(f"Google Generative AI initialized with model: {LLM_MODEL}")
+            
+            # Track successful LLM initialization
+            if self.sentry:
+                self.sentry.capture_message(
+                    "LLM initialized successfully",
+                    level="info",
+                    context={"model": LLM_MODEL, "temperature": LLM_TEMPERATURE}
+                )
+                
         except Exception as e:
             logger.error(f"Failed to initialize Google Generative AI: {e}")
+            # Capture error in Sentry
+            if self.sentry:
+                self.sentry.capture_error(e, {
+                    "component": "llm_initialization",
+                    "model": LLM_MODEL,
+                    "temperature": LLM_TEMPERATURE
+                })
             raise ValueError(f"Google Generative AI initialization failed: {e}")
 
         # Initialize agent factories
@@ -86,6 +108,18 @@ class CognitiveForgeEngine:
 
         logger.info(f"Cognitive Forge Engine v5.0 initialized with model: {LLM_MODEL}")
         logger.info("Sentient Operating System: Phoenix Protocol, Guardian Protocol, and Synapse Logging active")
+        
+        # Track successful engine initialization
+        if self.sentry:
+            self.sentry.capture_message(
+                "Cognitive Forge Engine initialized successfully",
+                level="info",
+                context={
+                    "version": "5.0",
+                    "model": LLM_MODEL,
+                    "protocols": ["phoenix", "guardian", "synapse", "self_learning"]
+                }
+            )
 
     async def _run_crew(self, agents: list, tasks: list, process: Process = Process.sequential) -> str:
         """
@@ -104,6 +138,7 @@ class CognitiveForgeEngine:
         result = await asyncio.to_thread(crew.kickoff)
         return result
 
+    @track_async_errors
     async def run_mission(
         self,
         user_prompt: str,
@@ -112,121 +147,125 @@ class CognitiveForgeEngine:
         update_callback: Callable[[str], None],
     ) -> Dict[str, Any]:
         """
-        The 8-phase mission execution with sentient capabilities
+        Execute a complete mission with the 8-phase workflow
         """
-        start_time = time.time()
-        current_state = MissionState.PENDING
-
+        # Start Sentry transaction for mission tracking
+        transaction = start_transaction(f"mission_execution_{mission_id_str}", "mission")
+        
         try:
-            # Update mission status to pending
-            self.db_manager.update_mission_status(mission_id_str, "pending")
-            self.synapse_logging.log_mission_start(mission_id_str, user_prompt)
+            # Set mission context in Sentry
+            if self.sentry:
+                self.sentry.set_performance_data({
+                    "mission_id": mission_id_str,
+                    "agent_type": agent_type,
+                    "prompt_length": len(user_prompt)
+                })
             
-            # Phase 1: Prompt Alchemy & Optimization
-            current_state = MissionState.PROMPT_ALCHEMY
-            update_callback("⚗️ Phase 1: Prompt Alchemy & Optimization")
-            optimized_prompt = await self._execute_prompt_alchemy(user_prompt, mission_id_str, update_callback)
+            logger.info(f"Starting mission {mission_id_str} with agent type: {agent_type}")
             
-            # Phase 2: Intelligent Agent Selection & Configuration
-            current_state = MissionState.AGENT_SELECTION
-            update_callback("🎯 Phase 2: Intelligent Agent Selection & Configuration")
-            agent_config = await self._execute_agent_selection(optimized_prompt, mission_id_str)
-            
-            # Phase 3: Comprehensive Agent Testing & Fine-tuning
-            current_state = MissionState.TESTING_AND_TUNING
-            update_callback("🧪 Phase 3: Comprehensive Agent Testing & Fine-tuning")
-            test_results = await self._execute_agent_testing(agent_config, mission_id_str)
-            
-            # Phase 4: Advanced Execution Planning
-            current_state = MissionState.PLANNING
-            update_callback("⚡ Phase 4: Advanced Execution Planning")
-            execution_plan = await self._execute_advanced_planning(optimized_prompt, agent_config, mission_id_str)
-            
-            # Phase 5: Performance-Optimized Execution with Guardian Protection
-            current_state = MissionState.EXECUTING
-            update_callback("🚀 Phase 5: Performance-Optimized Execution with Guardian Protection")
-            execution_result = await self._execute_with_guardian_protection(
-                execution_plan, agent_config, mission_id_str, update_callback
-            )
-            
-            # Phase 6: Phoenix Protocol Self-Healing (if needed)
-            if execution_result.get("needs_healing", False):
-                current_state = MissionState.AWAITING_HEALING
-                update_callback("🛡️ Phase 6: Phoenix Protocol Self-Healing")
-                execution_result = await self._execute_phoenix_protocol(
-                    execution_result, mission_id_str, update_callback
+            # Track mission start
+            if self.sentry:
+                self.sentry.capture_message(
+                    f"Mission started: {mission_id_str}",
+                    level="info",
+                    context={
+                        "mission_id": mission_id_str,
+                        "agent_type": agent_type,
+                        "prompt_length": len(user_prompt)
+                    }
                 )
             
-            # Phase 7: Advanced Memory Synthesis & Learning
-            current_state = MissionState.SYNTHESIZING_MEMORY
-            update_callback("🧠 Phase 7: Advanced Memory Synthesis & Learning")
-            memory_synthesis = await self._execute_memory_synthesis(
-                mission_id_str, user_prompt, execution_result, True
+            # Phase 1: Prompt Alchemy
+            update_callback("Phase 1: Optimizing prompt with AI...")
+            optimized_prompt = await self._execute_prompt_alchemy(user_prompt, mission_id_str, update_callback)
+            
+            # Phase 2: Agent Selection
+            update_callback("Phase 2: Selecting optimal agents...")
+            agent_config = await self._execute_agent_selection(optimized_prompt, mission_id_str)
+            
+            # Phase 3: Testing & Tuning
+            update_callback("Phase 3: Testing and tuning agents...")
+            tested_agents = await self._execute_agent_testing(agent_config, mission_id_str)
+            
+            # Phase 4: Advanced Planning
+            update_callback("Phase 4: Creating execution plan...")
+            execution_plan = await self._execute_advanced_planning(optimized_prompt, tested_agents, mission_id_str)
+            
+            # Phase 5: Execution with Guardian Protection
+            update_callback("Phase 5: Executing with quality assurance...")
+            execution_result = await self._execute_with_guardian_protection(
+                execution_plan, tested_agents, mission_id_str, update_callback
             )
             
-            # Phase 8: System Evolution & Adaptation
-            current_state = MissionState.EVOLVING
-            update_callback("🔄 Phase 8: System Evolution & Adaptation")
+            # Phase 6: Phoenix Protocol (Self-Healing)
+            update_callback("Phase 6: Running self-healing protocols...")
+            healed_result = await self._execute_phoenix_protocol(execution_result, mission_id_str, update_callback)
+            
+            # Phase 7: Memory Synthesis
+            update_callback("Phase 7: Synthesizing mission memory...")
+            memory_synthesis = await self._execute_memory_synthesis(
+                mission_id_str, user_prompt, healed_result, True
+            )
+            
+            # Phase 8: System Evolution
+            update_callback("Phase 8: Evolving system capabilities...")
             evolution_result = await self._execute_system_evolution(
-                mission_id_str, execution_result, memory_synthesis
+                mission_id_str, healed_result, memory_synthesis
             )
             
             # Mission completed successfully
-            current_state = MissionState.COMPLETED
-            execution_time = round(time.time() - start_time, 2)
-            
-            # Final result with comprehensive data
-            final_output = {
+            final_result = {
                 "mission_id": mission_id_str,
                 "status": "completed",
-                "execution_time": execution_time,
-                "final_state": current_state.value,
-                "result": execution_result,
+                "original_prompt": user_prompt,
                 "optimized_prompt": optimized_prompt,
-                "agent_config": agent_config,
-                "test_results": test_results,
-                "execution_plan": execution_plan,
+                "agent_config": tested_agents,
+                "execution_result": healed_result,
                 "memory_synthesis": memory_synthesis,
                 "evolution_result": evolution_result,
-                "phases_completed": 8,
-                "optimization_metrics": self._calculate_optimization_metrics(start_time, execution_time)
+                "timestamp": datetime.now().isoformat()
             }
-
-            # Update database with final result
-            self.db_manager.update_mission_status(
-                mission_id_str,
-                "completed",
-                result=str(execution_result),
-                execution_time=execution_time,
-            )
             
-            self.synapse_logging.log_mission_completion(mission_id_str, final_output)
-            update_callback(f"✅ Mission completed successfully in {execution_time}s with sentient optimization!")
-            return final_output
-
+            # Track successful mission completion
+            if self.sentry:
+                self.sentry.capture_message(
+                    f"Mission completed successfully: {mission_id_str}",
+                    level="info",
+                    context={
+                        "mission_id": mission_id_str,
+                        "agent_type": agent_type,
+                        "status": "completed"
+                    }
+                )
+            
+            update_callback("Mission completed successfully!")
+            return final_result
+            
         except Exception as e:
-            current_state = MissionState.FAILED
-            execution_time = round(time.time() - start_time, 2)
-            logger.error(f"Mission failed at state {current_state.value}: {e}")
+            # Capture mission failure in Sentry
+            if self.sentry:
+                self.sentry.capture_error(e, {
+                    "mission_id": mission_id_str,
+                    "agent_type": agent_type,
+                    "component": "mission_execution",
+                    "phase": "unknown"
+                })
             
-            # Log failure and trigger self-learning
-            self.synapse_logging.log_mission_failure(mission_id_str, str(e), current_state.value)
-            await self.self_learning_module.analyze_mission_outcome(mission_id_str, success=False)
+            logger.error(f"Mission {mission_id_str} failed: {e}")
+            update_callback(f"Mission failed: {str(e)}")
             
-            # Update database with failure
-            self.db_manager.update_mission_status(
-                mission_id_str, "failed", error=str(e)
-            )
-
+            # Return error result
             return {
                 "mission_id": mission_id_str,
                 "status": "failed",
                 "error": str(e),
-                "execution_time": execution_time,
-                "final_state": current_state.value,
-                "failed_at_phase": current_state.value
+                "timestamp": datetime.now().isoformat()
             }
-
+        
+        finally:
+            # Finish Sentry transaction
+            if transaction:
+                transaction.finish()
 
 
     async def _execute_prompt_alchemy(

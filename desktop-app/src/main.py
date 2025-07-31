@@ -13,6 +13,23 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from loguru import logger
 from sqlalchemy.orm import Session
+import os
+
+# Initialize Sentry before FastAPI
+import sentry_sdk
+from sentry_sdk.integrations.fastapi import FastApiIntegration
+
+# Initialize Sentry with your DSN
+sentry_sdk.init(
+    dsn=os.getenv("SENTRY_DSN"),
+    environment=os.getenv("ENVIRONMENT", "development"),
+    send_default_pii=True,
+    traces_sample_rate=1.0,
+    profiles_sample_rate=1.0,
+    integrations=[
+        FastApiIntegration(),
+    ],
+)
 
 from .core.cognitive_forge_engine import cognitive_forge_engine
 from .models.advanced_database import db_manager, Mission
@@ -161,7 +178,29 @@ def serve_web_ui():
 @app.get("/health")
 def health_check():
     """Health check endpoint"""
-    return {"status": "healthy", "timestamp": datetime.utcnow().isoformat(), "version": "3.0.0"}
+    return {"status": "healthy", "timestamp": datetime.now().isoformat()}
+
+
+@app.get("/sentry-debug")
+async def trigger_error():
+    """Sentry debug endpoint to test error tracking"""
+    division_by_zero = 1 / 0
+    return {"message": "This should never be reached"}
+
+
+@app.get("/sentry-test")
+async def test_sentry():
+    """Safer Sentry test endpoint"""
+    import sentry_sdk
+    
+    # Capture a test message
+    sentry_sdk.capture_message("Sentry integration test message", level="info")
+    
+    return {
+        "message": "Sentry test completed",
+        "status": "success",
+        "timestamp": datetime.now().isoformat()
+    }
 
 
 @app.post("/advanced-mission")
