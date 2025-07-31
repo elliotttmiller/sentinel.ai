@@ -245,9 +245,29 @@ class ComprehensiveSystemTest:
                 self.print_result("Desktop App Startup", "FAIL", start_result.get("error", "Unknown error"))
                 return {"status": "FAIL", "error": "Failed to start desktop app service"}
             
-            # Wait for service to be ready
-            print("⏳ Waiting for service to be ready...")
-            await asyncio.sleep(5)
+            # Wait for service to be ready with intelligent polling
+            print("⏳ Waiting for service to be ready (max 30 seconds)...")
+            start_wait_time = time.time()
+            service_ready = False
+            
+            while time.time() - start_wait_time < 30:
+                try:
+                    response = requests.get(f"{self.base_url}/health", timeout=2)
+                    if response.status_code == 200:
+                        print("✅ Service is ready!")
+                        service_ready = True
+                        break
+                except requests.ConnectionError:
+                    # Service is not yet accepting connections, wait and retry
+                    await asyncio.sleep(1)
+                except Exception as e:
+                    # Handle other potential errors during startup check
+                    print(f"   - Waiting... (health check error: {e})")
+                    await asyncio.sleep(1)
+            
+            if not service_ready:
+                self.print_result("Service Startup", "FAIL", "Service did not become healthy within the 30-second timeout.")
+                return {"status": "FAIL", "error": "Service startup timeout"}
             
             # Test health check
             try:

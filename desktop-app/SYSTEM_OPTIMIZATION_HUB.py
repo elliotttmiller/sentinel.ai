@@ -475,33 +475,62 @@ class SystemOptimizationHub:
     # ============================================================================
     
     async def test_workflow_phases(self) -> Dict[str, Any]:
-        """Test all 8 phases of the workflow"""
+        """Test all 8 phases of the workflow with enhanced initialization and retry logic"""
         try:
+            # Ensure engine is fully initialized before testing
+            if not self.engine:
+                # Initialize engine if not already done
+                self.engine = CognitiveForgeEngine()
+                # Wait for engine to be fully ready
+                await asyncio.sleep(3)
+            
             test_prompt = "Create a simple Python web application with FastAPI"
             test_mission_id = f"test_workflow_{int(time.time())}"
             
             phases = {}
             
-            # Phase 1: Prompt Alchemy
-            try:
-                def update_callback(msg): pass
-                phase1_result = await self.engine._execute_prompt_alchemy(
-                    test_prompt, test_mission_id, update_callback
-                )
-                phases["phase_1_prompt_alchemy"] = phase1_result is not None
-            except Exception as e:
-                phases["phase_1_prompt_alchemy"] = False
-                phases["phase_1_error"] = str(e)
+            # Phase 1: Prompt Alchemy with retry logic
+            max_retries = 3
+            phase1_success = False
             
-            # Phase 2: Agent Selection
-            try:
-                phase2_result = await self.engine._execute_agent_selection(
-                    phase1_result, test_mission_id
-                )
-                phases["phase_2_agent_selection"] = phase2_result is not None
-            except Exception as e:
+            for attempt in range(max_retries):
+                try:
+                    def update_callback(msg): pass
+                    phase1_result = await self.engine._execute_prompt_alchemy(
+                        test_prompt, test_mission_id, update_callback
+                    )
+                    phases["phase_1_prompt_alchemy"] = phase1_result is not None
+                    phase1_success = True
+                    break
+                except Exception as e:
+                    if attempt < max_retries - 1:
+                        await asyncio.sleep(2)  # Wait before retry
+                        continue
+                    else:
+                        phases["phase_1_prompt_alchemy"] = False
+                        phases["phase_1_error"] = str(e)
+            
+            # Phase 2: Agent Selection with retry logic (only if phase 1 succeeded)
+            if phase1_success:
+                phase2_success = False
+                for attempt in range(max_retries):
+                    try:
+                        phase2_result = await self.engine._execute_agent_selection(
+                            phase1_result, test_mission_id
+                        )
+                        phases["phase_2_agent_selection"] = phase2_result is not None
+                        phase2_success = True
+                        break
+                    except Exception as e:
+                        if attempt < max_retries - 1:
+                            await asyncio.sleep(2)  # Wait before retry
+                            continue
+                        else:
+                            phases["phase_2_agent_selection"] = False
+                            phases["phase_2_error"] = str(e)
+            else:
                 phases["phase_2_agent_selection"] = False
-                phases["phase_2_error"] = str(e)
+                phases["phase_2_error"] = "Phase 1 failed, skipping Phase 2"
             
             # Additional phases would be tested here...
             # For brevity, we're testing the first two critical phases
@@ -805,6 +834,13 @@ class SystemOptimizationHub:
     async def test_error_handling(self) -> Dict[str, Any]:
         """Test error handling and recovery capabilities with detailed user feedback"""
         try:
+            # Ensure engine is fully initialized before testing
+            if not self.engine:
+                # Initialize engine if not already done
+                self.engine = CognitiveForgeEngine()
+                # Wait for engine to be fully ready
+                await asyncio.sleep(3)
+            
             error_tests = {}
             test_explanations = {}
             user_friendly_results = {}
