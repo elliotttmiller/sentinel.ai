@@ -1,0 +1,721 @@
+[32m2025-07-31 12:53:20.757[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36m_initialize_wandb[0m:[36m107[0m - [1m✅ Weights & Biases initialized successfully[0m
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\logging\__init__.py", line 1113, in emit
+    stream.write(msg + self.terminator)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f50d' in position 57: character maps to <undefined>
+Call stack:
+  File "C:\Users\AMD\sentinel\desktop-app\comprehensive_system_test.py", line 407, in <module>
+    asyncio.run(main())
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 641, in run_until_complete
+    self.run_forever()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 608, in run_forever
+    self._run_once()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 1936, in _run_once
+    handle._run()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\events.py", line 84, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\AMD\sentinel\desktop-app\comprehensive_system_test.py", line 382, in main
+    result = await tester.run_comprehensive_test()
+  File "C:\Users\AMD\sentinel\desktop-app\comprehensive_system_test.py", line 322, in run_comprehensive_test
+    result3 = await self.test_system_optimization_hub()
+  File "C:\Users\AMD\sentinel\desktop-app\comprehensive_system_test.py", line 145, in test_system_optimization_hub
+    hub = SystemOptimizationHub()
+  File "C:\Users\AMD\sentinel\desktop-app\system_optimization_hub.py", line 102, in __init__
+    self.logger.info("🔍 Weave observability initialized for system optimization hub")
+Message: '🔍 Weave observability initialized for system optimization hub'
+Arguments: ()
+2025-07-31 12:53:20,760 - SystemOptimizationHub - INFO - 🔍 Weave observability initialized for system optimization hub
+🚀 WEAVE-ENHANCED SYSTEM OPTIMIZATION HUB - Starting Comprehensive Test Suite
+================================================================================
+🔍 Full observability and monitoring enabled
+================================================================================
+2025-07-31 12:53:20,779 - SystemOptimizationHub - INFO - [START] STARTING TEST: System Initialization (system_initialization)
+[32m2025-07-31 12:53:20.781[0m | [32m[1mSUCCESS [0m | [36msrc.utils.google_ai_wrapper[0m:[36m__init__[0m:[36m64[0m - [32m[1mGoogle Generative AI wrapper initialized successfully with model: gemini-1.5-pro[0m
+[32m2025-07-31 12:53:20.781[0m | [1mINFO    [0m | [36msrc.core.cognitive_forge_engine[0m:[36m__init__[0m:[36m63[0m - [1mGoogle Generative AI initialized with model: gemini-1.5-pro[0m
+2025-07-31 12:53:20,784 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+[32m2025-07-31 12:53:20.785[0m | [1mINFO    [0m | [36msrc.utils.phoenix_protocol[0m:[36m__init__[0m:[36m23[0m - [1mPhoenix Protocol initialized - Self-healing system active[0m
+2025-07-31 12:53:20,788 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:20,792 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+[32m2025-07-31 12:53:20.793[0m | [1mINFO    [0m | [36msrc.utils.guardian_protocol[0m:[36m__init__[0m:[36m25[0m - [1mGuardian Protocol initialized - Quality assurance system active[0m
+[32m2025-07-31 12:53:20.794[0m | [1mINFO    [0m | [36msrc.utils.synapse_logging[0m:[36m__init__[0m:[36m33[0m - [1mSynapse Logging System initialized - Unified consciousness active[0m
+2025-07-31 12:53:20,797 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:20,800 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+[32m2025-07-31 12:53:20.801[0m | [1mINFO    [0m | [36msrc.utils.self_learning_module[0m:[36m__init__[0m:[36m25[0m - [1mSelf-Learning Module initialized - Continuous improvement active[0m
+[32m2025-07-31 12:53:20.802[0m | [1mINFO    [0m | [36msrc.core.cognitive_forge_engine[0m:[36m__init__[0m:[36m87[0m - [1mCognitive Forge Engine v5.0 initialized with model: gemini-1.5-pro[0m
+[32m2025-07-31 12:53:20.802[0m | [1mINFO    [0m | [36msrc.core.cognitive_forge_engine[0m:[36m__init__[0m:[36m88[0m - [1mSentient Operating System: Phoenix Protocol, Guardian Protocol, and Synapse Logging active[0m
+2025-07-31 12:53:20,809 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: System Initialization - PASS
+[32m2025-07-31 12:53:20.809[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_success - {'test_name': 'System Initialization', 'category': 'system_initialization', 'execution_time': 0.028748273849487305, 'performance_metrics': {'memory_start': 48.4, 'memory_end': 48.4, 'memory_delta': 0.0, 'cpu_start': 34.4, 'cpu_end': 44.4, 'cpu_usage': 39.4}}[0m
+2025-07-31 12:53:20,815 - SystemOptimizationHub - INFO - [START] STARTING TEST: Environment Validation (environment_validation)
+2025-07-31 12:53:20,822 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Environment Validation - PASS
+[32m2025-07-31 12:53:20.823[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_success - {'test_name': 'Environment Validation', 'category': 'environment_validation', 'execution_time': 0.005902528762817383, 'performance_metrics': {'memory_start': 48.4, 'memory_end': 48.4, 'memory_delta': 0.0, 'cpu_start': 0.0, 'cpu_end': 0.0, 'cpu_usage': 0.0}}[0m
+2025-07-31 12:53:20,830 - SystemOptimizationHub - INFO - [START] STARTING TEST: Database Connectivity (database_integration)
+[32m2025-07-31 12:53:21.058[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: test_db_1753984400[0m
+2025-07-31 12:53:21,232 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Database Connectivity - PASS
+[32m2025-07-31 12:53:21.233[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_success - {'test_name': 'Database Connectivity', 'category': 'database_integration', 'execution_time': 0.40393781661987305, 'performance_metrics': {'memory_start': 48.4, 'memory_end': 48.4, 'memory_delta': 0.0, 'cpu_start': 31.2, 'cpu_end': 41.1, 'cpu_usage': 36.15}}[0m
+2025-07-31 12:53:21,240 - SystemOptimizationHub - INFO - [START] STARTING TEST: Agent Factory (agent_factory)
+2025-07-31 12:53:21,246 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:21,249 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:21,252 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:21,255 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:21,259 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:21,264 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:21,268 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:21,272 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:21,275 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:21,280 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:21,281 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:21,294 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Agent Factory - PASS
+[32m2025-07-31 12:53:21.295[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_success - {'test_name': 'Agent Factory', 'category': 'agent_factory', 'execution_time': 0.051351070404052734, 'performance_metrics': {'memory_start': 48.4, 'memory_end': 48.4, 'memory_delta': 0.0, 'cpu_start': 0.0, 'cpu_end': 52.4, 'cpu_usage': 26.2}}[0m
+2025-07-31 12:53:21,302 - SystemOptimizationHub - INFO - [START] STARTING TEST: Protocol Systems (protocol_systems)
+2025-07-31 12:53:21,309 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Protocol Systems - PASS
+[32m2025-07-31 12:53:21.312[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_success - {'test_name': 'Protocol Systems', 'category': 'protocol_systems', 'execution_time': 0.006806135177612305, 'performance_metrics': {'memory_start': 48.4, 'memory_end': 48.4, 'memory_delta': 0.0, 'cpu_start': 0.0, 'cpu_end': 30.8, 'cpu_usage': 15.4}}[0m
+2025-07-31 12:53:21,321 - SystemOptimizationHub - INFO - [START] STARTING TEST: Workflow Phases (workflow_phases)
+2025-07-31 12:53:21,323 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:21,345 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+[36m╭─[0m[36m───────────────────────────────────[0m[36m Crew Execution Started [0m[36m───────────────────────────────────[0m[36m─╮[0m
+[36m│[0m                                                                                                [36m│[0m
+[36m│[0m  [1;36mCrew Execution Started[0m                                                                        [36m│[0m
+[36m│[0m  [37mName: [0m[36mcrew[0m                                                                                    [36m│[0m
+[36m│[0m  [37mID: [0m[36mafd9cbd9-a693-4e72-a7e7-318d0ca4677b[0m                                                      [36m│[0m
+[36m│[0m  [37mTool Args: [0m                                                                                   [36m│[0m
+[36m│[0m                                                                                                [36m│[0m
+[36m│[0m                                                                                                [36m│[0m
+[36m╰────────────────────────────────────────────────────────────────────────────────────────────────╯[0m
+
+2025-07-31 12:53:21,370 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+[?25l2025-07-31 12:53:21,376 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+[1;36m🚀 Crew: [0m[1;36mcrew[0m
+└── [1;33m📋 Task: 3a328c35-2b56-4d28-bfd4-76d0c2d7cc29[0m
+    [37mStatus: [0m[2;33mExecuting Task...[0m
+[?25h[35m╭─[0m[35m──────────────────────────────────────[0m[35m 🤖 Agent Started [0m[35m──────────────────────────────────────[0m[35m─╮[0m
+[35m│[0m                                                                                                [35m│[0m
+[35m│[0m  [37mAgent: [0m[1;92mAdvanced Prompt Optimization Specialist[0m                                                [35m│[0m
+[35m│[0m                                                                                                [35m│[0m
+[35m│[0m  [37mTask: [0m[92mAnalyze and optimize the following user prompt: 'Create a simple Python web [0m            [35m│[0m
+[35m│[0m  [92mapplication with FastAPI'.[0m                                                                    [35m│[0m
+[35m│[0m  [92m                [0m                                                                              [35m│[0m
+[35m│[0m  [92m                Your transformation process must include:[0m                                     [35m│[0m
+[35m│[0m  [92m                1. **Ambiguity Resolution**: Clarify any vague terms[0m                          [35m│[0m
+[35m│[0m  [92m                2. **Contextual Enrichment**: Add implicit technical constraints or context[0m   [35m│[0m
+[35m│[0m  [92m                3. **Define Success Criteria**: Create a list of measurable outcomes[0m          [35m│[0m
+[35m│[0m  [92m                4. **Recommend Agent Roles**: Suggest the primary agent roles needed for the[0m  [35m│[0m
+[35m│[0m  [92mtask[0m                                                                                          [35m│[0m
+[35m│[0m  [92m                5. **Structure the Output**: Return a single, raw JSON object containing the[0m  [35m│[0m
+[35m│[0m  [92m'optimized_prompt', 'success_criteria', and 'recommended_agents'[0m                              [35m│[0m
+[35m│[0m  [92m                [0m                                                                              [35m│[0m
+[35m│[0m  [92m                Provide your response in the following JSON format:[0m                           [35m│[0m
+[35m│[0m  [92m                {[0m                                                                             [35m│[0m
+[35m│[0m  [92m                    "optimized_prompt": "The enhanced, detailed version of the user's [0m        [35m│[0m
+[35m│[0m  [92mrequest",[0m                                                                                     [35m│[0m
+[35m│[0m  [92m                    "technical_context": {[0m                                                    [35m│[0m
+[35m│[0m  [92m                        "programming_languages": ["list", "of", "relevant", "languages"],[0m     [35m│[0m
+[35m│[0m  [92m                        "frameworks": ["list", "of", "relevant", "frameworks"],[0m               [35m│[0m
+[35m│[0m  [92m                        "tools_required": ["list", "of", "required", "tools"],[0m                [35m│[0m
+[35m│[0m  [92m                        "complexity_level": "low/medium/high",[0m                                [35m│[0m
+[35m│[0m  [92m                        "estimated_duration": "time estimate"[0m                                 [35m│[0m
+[35m│[0m  [92m                    },[0m                                                                        [35m│[0m
+[35m│[0m  [92m                    "success_criteria": [[0m                                                     [35m│[0m
+[35m│[0m  [92m                        "Specific, measurable criteria 1",[0m                                    [35m│[0m
+[35m│[0m  [92m                        "Specific, measurable criteria 2"[0m                                     [35m│[0m
+[35m│[0m  [92m                    ],[0m                                                                        [35m│[0m
+[35m│[0m  [92m                    "recommended_agents": [[0m                                                   [35m│[0m
+[35m│[0m  [92m                        "agent_role_1",[0m                                                       [35m│[0m
+[35m│[0m  [92m                        "agent_role_2"[0m                                                        [35m│[0m
+[35m│[0m  [92m                    ],[0m                                                                        [35m│[0m
+[35m│[0m  [92m                    "risk_factors": [[0m                                                         [35m│[0m
+[35m│[0m  [92m                        "potential risk 1 with mitigation",[0m                                   [35m│[0m
+[35m│[0m  [92m                        "potential risk 2 with mitigation"[0m                                    [35m│[0m
+[35m│[0m  [92m                    ],[0m                                                                        [35m│[0m
+[35m│[0m  [92m                    "optimization_notes": [[0m                                                   [35m│[0m
+[35m│[0m  [92m                        "optimization suggestion 1",[0m                                          [35m│[0m
+[35m│[0m  [92m                        "optimization suggestion 2"[0m                                           [35m│[0m
+[35m│[0m  [92m                    ][0m                                                                         [35m│[0m
+[35m│[0m  [92m                }[0m                                                                             [35m│[0m
+[35m│[0m                                                                                                [35m│[0m
+[35m╰────────────────────────────────────────────────────────────────────────────────────────────────╯[0m
+
+[?25l2025-07-31 12:53:21,411 - LiteLLM - DEBUG -
+
+2025-07-31 12:53:21,412 - LiteLLM - DEBUG - [92mRequest to litellm:[0m
+2025-07-31 12:53:21,413 - LiteLLM - DEBUG - [92mlitellm.completion(model='gemini-1.5-pro', messages=[{'role': 'system', 'content': 'You are Advanced Prompt Optimization Specialist. You are the Advanced Prompt Optimization Specialist, a master of linguistic precision and AI communication. You have spent years studying how different AI models interpret and process information. You understand that the quality of the initial prompt determines the success of the entire mission. Your expertise lies in:\n- Deconstructing complex requests into clear, actionable components\n- Identifying missing context and adding necessary background information\n- Restructuring prompts for optimal AI comprehension\n- Adding specific success criteria and constraints\n- Ensuring technical accuracy and completeness\nYou are the first line of defense against mission failure due to poor communication.\nYour personal goal is: Transform raw user requests into perfectly optimized, structured prompts that are crystal clear for AI worker agents. Analyze, restructure, and enhance prompts to eliminate ambiguity, add necessary context, and ensure maximum comprehension by downstream agents. Your output must be a comprehensive JSON structure containing the optimized prompt, success criteria, constraints, and detailed instructions.\nTo give my best complete final answer to the task respond using the exact following format:\n\nThought: I now can give a great answer\nFinal Answer: Your final answer must be the great and the most complete as possible, it must be outcome described.\n\nI MUST use these formats, my job depends on it!'}, {'role': 'user', 'content': '\nCurrent Task: Analyze and optimize the following user prompt: \'Create a simple Python web application with FastAPI\'.\n                \n                Your transformation process must include:\n                1. **Ambiguity Resolution**: Clarify any vague terms\n                2. **Contextual Enrichment**: Add implicit technical constraints or context\n                3. **Define Success Criteria**: Create a list of measurable outcomes\n                4. **Recommend Agent Roles**: Suggest the primary agent roles needed for the task\n                5. **Structure the Output**: Return a single, raw JSON object containing the \'optimized_prompt\', \'success_criteria\', and \'recommended_agents\'\n                \n                Provide your response in the following JSON format:\n                {\n                    "optimized_prompt": "The enhanced, detailed version of the user\'s request",\n                    "technical_context": {\n                        "programming_languages": ["list", "of", "relevant", "languages"],\n                        "frameworks": ["list", "of", "relevant", "frameworks"],\n                        "tools_required": ["list", "of", "required", "tools"],\n                        "complexity_level": "low/medium/high",\n                        "estimated_duration": "time estimate"\n                    },\n                    "success_criteria": [\n                        "Specific, measurable criteria 1",\n                        "Specific, measurable criteria 2"\n                    ],\n                    "recommended_agents": [\n                        "agent_role_1",\n                        "agent_role_2"\n                    ],\n                    "risk_factors": [\n                        "potential risk 1 with mitigation",\n                        "potential risk 2 with mitigation"\n                    ],\n                    "optimization_notes": [\n                        "optimization suggestion 1",\n                        "optimization suggestion 2"\n                    ]\n                }\n\nThis is the expected criteria for your final answer: A structured JSON object with the optimized mission parameters.\nyou MUST return the actual complete content as the final answer, not a summary.\n\nBegin! This is VERY important to you, use the tools available and give your best Final Answer, your job depends on it!\n\nThought:'}], temperature=0.7, stop=['\nObserv
+2025-07-31 12:53:21,416 - LiteLLM - DEBUG -
+
+2025-07-31 12:53:21,417 - LiteLLM - DEBUG - Initialized litellm callbacks, Async Success Callbacks: [<crewai.utilities.token_counter_callback.TokenCalcHandler object at 0x000001E821DE5E10>]
+2025-07-31 12:53:21,419 - LiteLLM - DEBUG - self.optional_params: {}
+2025-07-31 12:53:21,421 - LiteLLM - DEBUG - SYNC kwargs[caching]: False; litellm.cache: None; kwargs.get('cache')['no-cache']: False
+2025-07-31 12:53:21,444 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:21,447 - LiteLLM - INFO -
+LiteLLM completion() model= gemini-1.5-pro; provider = vertex_ai
+2025-07-31 12:53:21,448 - LiteLLM - DEBUG -
+LiteLLM: Params passed to completion() {'model': 'gemini-1.5-pro', 'functions': None, 'function_call': None, 'temperature': 0.7, 'top_p': None, 'n': None, 'stream': False, 'stream_options': None, 'stop': ['\nObservation:'], 'max_tokens': None, 'max_completion_tokens': None, 'modalities': None, 'prediction': None, 'audio': None, 'presence_penalty': None, 'frequency_penalty': None, 'logit_bias': None, 'user': None, 'custom_llm_provider': 'vertex_ai', 'response_format': None, 'seed': None, 'tools': None, 'tool_choice': None, 'max_retries': None, 'logprobs': None, 'top_logprobs': None, 'extra_headers': None, 'api_version': None, 'parallel_tool_calls': None, 'drop_params': None, 'allowed_openai_params': None, 'reasoning_effort': None, 'additional_drop_params': None, 'messages': [{'role': 'system', 'content': 'You are Advanced Prompt Optimization Specialist. You are the Advanced Prompt Optimization Specialist, a master of linguistic precision and AI communication. You have spent years studying how different AI models interpret and process information. You understand that the quality of the initial prompt determines the success of the entire mission. Your expertise lies in:\n- Deconstructing complex requests into clear, actionable components\n- Identifying missing context and adding necessary background information\n- Restructuring prompts for optimal AI comprehension\n- Adding specific success criteria and constraints\n- Ensuring technical accuracy and completeness\nYou are the first line of defense against mission failure due to poor communication.\nYour personal goal is: Transform raw user requests into perfectly optimized, structured prompts that are crystal clear for AI worker agents. Analyze, restructure, and enhance prompts to eliminate ambiguity, add necessary context, and ensure maximum comprehension by downstream agents. Your output must be a comprehensive JSON structure containing the optimized prompt, success criteria, constraints, and detailed instructions.\nTo give my best complete final answer to the task respond using the exact following format:\n\nThought: I now can give a great answer\nFinal Answer: Your final answer must be the great and the most complete as possible, it must be outcome described.\n\nI MUST use these formats, my job depends on it!'}, {'role': 'user', 'content': '\nCurrent Task: Analyze and optimize the following user prompt: \'Create a simple Python web application with FastAPI\'.\n                \n                Your transformation process must include:\n                1. **Ambiguity Resolution**: Clarify any vague terms\n                2. **Contextual Enrichment**: Add implicit technical constraints or context\n                3. **Define Success Criteria**: Create a list of measurable outcomes\n                4. **Recommend Agent Roles**: Suggest the primary agent roles needed for the task\n                5. **Structure the Output**: Return a single, raw JSON object containing the \'optimized_prompt\', \'success_criteria\', and \'recommended_agents\'\n                \n                Provide your response in the following JSON format:\n                {\n                    "optimized_prompt": "The enhanced, detailed version of the user\'s request",\n                    "technical_context": {\n                        "programming_languages": ["list", "of", "relevant", "languages"],\n                        "frameworks": ["list", "of", "relevant", "frameworks"],\n                        "tools_required": ["list", "of", "required", "tools"],\n                        "complexity_level": "low/medium/high",\n                        "estimated_duration": "time estimate"\n                    },\n                    "success_criteria": [\n                        "Specific, measurable criteria 1",\n                        "Specific, measurable criteria 2"\n                    ],\n                    "recommended_agents": [\n                        "agent_role_1",\n                        "agent_role_2"\n                    ],\n                    "risk_factors": [\n                        "p
+2025-07-31 12:53:21,451 - LiteLLM - DEBUG -
+LiteLLM: Non-Default params passed to completion() {'temperature': 0.7, 'stream': False, 'stop': ['\nObservation:']}
+2025-07-31 12:53:21,453 - LiteLLM - DEBUG - Final returned optional params: {'temperature': 0.7, 'stop_sequences': ['\nObservation:']}
+2025-07-31 12:53:21,454 - LiteLLM - DEBUG - self.optional_params: {'temperature': 0.7, 'stream': False, 'stop': ['\nObservation:']}
+2025-07-31 12:53:21,459 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:21,461 - LiteLLM - DEBUG - Checking cached credentials for project_id: None
+2025-07-31 12:53:21,463 - LiteLLM - DEBUG - Credential cache key not found for project_id: None, loading new credentials
+2025-07-31 12:53:21,469 - google.auth._default - DEBUG - Checking D:\AMD\secrets\nexus-ai-466614-377f29052243.json for explicit credentials as part of auth process...
+2025-07-31 12:53:21,545 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): oauth2.googleapis.com:443
+[2K[1;31m                                               ...                                                [0m2025-07-31 12:53:22,128 - urllib3.connectionpool - DEBUG - https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-07-31 12:53:22,132 - LiteLLM - DEBUG - Validating credentials for project_id: None
+2025-07-31 12:53:22,133 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:22,140 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:22,141 - LiteLLM - DEBUG - [92m
+
+POST Request Sent from LiteLLM:
+curl -X POST \
+https://us-central1-aiplatform.googleapis.com/v1/projects/nexus-ai-466614/locations/us-central1/publishers/google/models/gemini-1.5-pro:generateContent \
+-H 'Content-Type: application/json' -H 'Authorization: Be****hF' \
+-d '{'contents': [{'role': 'user', 'parts': [{'text': '\nCurrent Task: Analyze and optimize the following user prompt: \'Create a simple Python web application with FastAPI\'.\n                \n                Your transformation process must include:\n                1. **Ambiguity Resolution**: Clarify any vague terms\n                2. **Contextual Enrichment**: Add implicit technical constraints or context\n                3. **Define Success Criteria**: Create a list of measurable outcomes\n                4. **Recommend Agent Roles**: Suggest the primary agent roles needed for the task\n                5. **Structure the Output**: Return a single, raw JSON object containing the \'optimized_prompt\', \'success_criteria\', and \'recommended_agents\'\n                \n                Provide your response in the following JSON format:\n                {\n                    "optimized_prompt": "The enhanced, detailed version of the user\'s request",\n                    "technical_context": {\n                        "programming_languages": ["list", "of", "relevant", "languages"],\n                        "frameworks": ["list", "of", "relevant", "frameworks"],\n                        "tools_required": ["list", "of", "required", "tools"],\n                        "complexity_level": "low/medium/high",\n                        "estimated_duration": "time estimate"\n                    },\n                    "success_criteria": [\n                        "Specific, measurable criteria 1",\n                        "Specific, measurable criteria 2"\n                    ],\n                    "recommended_agents": [\n                        "agent_role_1",\n                        "agent_role_2"\n                    ],\n                    "risk_factors": [\n                        "potential risk 1 with mitigation",\n                        "potential risk 2 with mitigation"\n                    ],\n                    "optimization_notes": [\n                        "optimization suggestion 1",\n                        "optimization suggestion 2"\n                    ]\n                }\n\nThis is the expected criteria for your final answer: A structured JSON object with the optimized mission parameters.\nyou MUST return the actual complete content as the final answer, not a summary.\n\nBegin! This is VERY important to you, use the tools available and give your best Final Answer, your job depends on it!\n\nThought:'}]}], 'system_instruction': {'parts': [{'text': 'You are Advanced Prompt Optimization Specialist. You are the Advanced Prompt Optimization Specialist, a master of linguistic precision and AI communication. You have spent years studying how different AI models interpret and process information. You understand that the quality of the initial prompt determines the success of the entire mission. Your expertise lies in:\n- Deconstructing complex requests into clear, actionable components\n- Identifying missing context and adding necessary background information\n- Restructuring prompts for optimal AI comprehension\n- Adding specific success criteria and constraints\n- Ensuring technical accuracy and completeness\nYou are the first line of defense against mission failure due to poor communication.\nYour personal goal is: Transform raw user requests into perfectly optimized, structured prompts that are crystal clear for AI worker agents. Analyze, restructure, and enhance prompts to eliminate ambiguity, add necessary context, and ensure maximum comprehension by downstream agents. Your output must be a comprehensive JSON structure containing the optimized prompt, success criteria, constraints, and detailed instructions.\nTo give my best complete final answer to the task respond using the exact following format:\n\nThought: I now can give a great answer\nFinal Answer: Your final answer must be the great and the most complete as possible, it must be outcome described.\n\nI MUST use these formats, my job depends on it!'}]}, 'generationConfig': {'temperature': 0.7, 'stop_sequences': ['\nObservation:']}}'
+[0m
+
+[2K[1;31m                                               ...                                                [0m2025-07-31 12:53:22,719 - httpcore.connection - DEBUG - connect_tcp.started host='us-central1-aiplatform.googleapis.com' port=443 local_address=None timeout=600.0 socket_options=None
+2025-07-31 12:53:22,784 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000001E82206C7D0>
+2025-07-31 12:53:22,785 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x000001E821F71D90> server_hostname='us-central1-aiplatform.googleapis.com' timeout=600.0
+2025-07-31 12:53:22,820 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000001E82206E610>
+2025-07-31 12:53:22,821 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-07-31 12:53:22,822 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-07-31 12:53:22,822 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-07-31 12:53:22,823 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-07-31 12:53:22,823 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-07-31 12:53:22,913 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 404, b'Not Found', [(b'Vary', b'Origin'), (b'Vary', b'X-Origin'), (b'Vary', b'Referer'), (b'Content-Type', b'application/json; charset=UTF-8'), (b'Content-Encoding', b'gzip'), (b'Date', b'Thu, 31 Jul 2025 17:53:21 GMT'), (b'Server', b'scaffolding on HTTPServer2'), (b'X-XSS-Protection', b'0'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Content-Type-Options', b'nosniff'), (b'Alt-Svc', b'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000'), (b'Transfer-Encoding', b'chunked')])
+2025-07-31 12:53:22,913 - httpx - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1/projects/nexus-ai-466614/locations/us-central1/publishers/google/models/gemini-1.5-pro:generateContent "HTTP/1.1 404 Not Found"
+2025-07-31 12:53:22,915 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-07-31 12:53:22,917 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-07-31 12:53:22,917 - httpcore.http11 - DEBUG - response_closed.started
+2025-07-31 12:53:22,918 - httpcore.http11 - DEBUG - response_closed.complete
+2025-07-31 12:53:22,919 - LiteLLM - DEBUG - Logging Details: logger_fn - None | callable(logger_fn) - False
+2025-07-31 12:53:22,931 - LiteLLM - DEBUG - Logging Details LiteLLM-Failure Call: [<crewai.utilities.token_counter_callback.TokenCalcHandler object at 0x000001E821DE5E10>]
+[2K[1;36m🚀 Crew: [0m[1;36mcrew[0m                    ...                                                [0m
+└── [1;33m📋 Task: 3a328c35-2b56-4d28-bfd4-76d0c2d7cc29[0m
+    [37mStatus: [0m[2;33mExecuting Task...[0m
+    └── [1;31m❌ LLM Failed[0m
+[?25h[31m╭─[0m[31m─────────────────────────────────────────[0m[31m LLM Error [0m[31m──────────────────────────────────────────[0m[31m─╮[0m
+[31m│[0m                                                                                                [31m│[0m
+[31m│[0m  [1;31m❌ LLM Call Failed[0m                                                                            [31m│[0m
+[31m│[0m  [37mError: [0m[31mlitellm.NotFoundError: VertexAIException - {[0m                                           [31m│[0m
+[31m│[0m  [31m  "error": {[0m                                                                                  [31m│[0m
+[31m│[0m  [31m    "code": 404,[0m                                                                              [31m│[0m
+[31m│[0m  [31m    "message": "Publisher Model [0m                                                              [31m│[0m
+[31m│[0m  [31m`projects/nexus-ai-466614/locations/us-central1/publishers/google/models/gemini-1.5-pro` was[0m  [31m│[0m
+[31m│[0m  [31mnot found or your project does not have access to it. Please ensure you are using a valid [0m    [31m│[0m
+[31m│[0m  [31mmodel version. For more information, see: [0m                                                    [31m│[0m
+[31m│[0m  [31mhttps://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions",[0m                  [31m│[0m
+[31m│[0m  [31m    "status": "NOT_FOUND"[0m                                                                     [31m│[0m
+[31m│[0m  [31m  }[0m                                                                                           [31m│[0m
+[31m│[0m  [31m}[0m                                                                                             [31m│[0m
+[31m│[0m                                                                                                [31m│[0m
+[31m│[0m                                                                                                [31m│[0m
+[31m╰────────────────────────────────────────────────────────────────────────────────────────────────╯[0m
+
+[?25l[1;36m🚀 Crew: [0m[1;36mcrew[0m
+└── [1;31m📋 Task: 3a328c35-2b56-4d28-bfd4-76d0c2d7cc29[0m
+    [37mAssigned to: [0m[31mAdvanced Prompt Optimization Specialist[0m
+    [37mStatus: [0m[1;31m❌ Failed[0m
+    └── [1;31m❌ LLM Failed[0m
+[?25h[31m╭─[0m[31m────────────────────────────────────────[0m[31m Task Failure [0m[31m────────────────────────────────────────[0m[31m─╮[0m
+[31m│[0m                                                                                                [31m│[0m
+[31m│[0m  [1;31mTask Failed[0m                                                                                   [31m│[0m
+[31m│[0m  [37mName: [0m[31m3a328c35-2b56-4d28-bfd4-76d0c2d7cc29[0m                                                    [31m│[0m
+[31m│[0m  [37mAgent: [0m[31mAdvanced Prompt Optimization Specialist[0m                                                [31m│[0m
+[31m│[0m  [37mTool Args: [0m                                                                                   [31m│[0m
+[31m│[0m                                                                                                [31m│[0m
+[31m│[0m                                                                                                [31m│[0m
+[31m╰────────────────────────────────────────────────────────────────────────────────────────────────╯[0m
+
+[31m╭─[0m[31m────────────────────────────────────────[0m[31m Crew Failure [0m[31m────────────────────────────────────────[0m[31m─╮[0m
+[31m│[0m                                                                                                [31m│[0m
+[31m│[0m  [1;31mCrew Execution Failed[0m                                                                         [31m│[0m
+[31m│[0m  [37mName: [0m[31mcrew[0m                                                                                    [31m│[0m
+[31m│[0m  [37mID: [0m[31mafd9cbd9-a693-4e72-a7e7-318d0ca4677b[0m                                                      [31m│[0m
+[31m│[0m  [37mTool Args: [0m                                                                                   [31m│[0m
+[31m│[0m  [37mFinal Output: [0m                                                                                [31m│[0m
+[31m│[0m                                                                                                [31m│[0m
+[31m│[0m                                                                                                [31m│[0m
+[31m╰────────────────────────────────────────────────────────────────────────────────────────────────╯[0m
+[32m2025-07-31 12:53:22.957[0m | [31m[1mERROR   [0m | [36msrc.core.cognitive_forge_engine[0m:[36m_execute_prompt_alchemy[0m:[36m310[0m - [31m[1mPrompt optimization failed: litellm.NotFoundError: VertexAIException - {
+  "error": {
+    "code": 404,
+    "message": "Publisher Model `projects/nexus-ai-466614/locations/us-central1/publishers/google/models/gemini-1.5-pro` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions",
+    "status": "NOT_FOUND"
+  }
+}
+[0m
+
+2025-07-31 12:53:22,965 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Workflow Phases - FAIL
+[32m2025-07-31 12:53:22.967[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_failure - {'test_name': 'Workflow Phases', 'category': 'workflow_phases', 'execution_time': 1.6453826427459717, 'error': "unsupported operand type(s) for +: 'int' and 'str'", 'performance_metrics': {'memory_start': 48.4, 'memory_end': 48.4, 'memory_delta': 0.0, 'cpu_start': 0.0, 'cpu_end': 48.9, 'cpu_usage': 24.45}}[0m
+2025-07-31 12:53:22,975 - SystemOptimizationHub - INFO - [START] STARTING TEST: Performance Optimization (performance_optimization)
+🚀 Testing System Performance & Optimization...
+   📊 This test evaluates your system's resource usage and performance capabilities
+   🎯 Each metric is graded from A+ (Excellent) to F (Critical)
+
+   🧠 MEMORY USAGE ANALYSIS
+      📊 Usage: 48.4% (7.7GB / 15.9GB)
+      📊 Available: 8.2GB
+      🎯 Grade: A+
+      💡 EXCELLENT: Your system has plenty of available memory. This is ideal for running complex AI operations.
+      🔧 Recommendation: Your memory usage is optimal. No action needed.
+
+   ⚡ CPU USAGE ANALYSIS
+      📊 Usage: 29.6%
+      📊 Cores: 16
+      📊 Frequency: 3700MHz
+      🎯 Grade: A+
+      💡 EXCELLENT: CPU usage is very low. Your system has plenty of processing power available.
+      🔧 Recommendation: CPU performance is optimal. No action needed.
+
+   💾 DISK USAGE ANALYSIS
+      📊 Usage: 56.8% (200.4GB free / 464.4GB total)
+      🎯 Grade: A+
+      💡 EXCELLENT: Plenty of disk space available. No storage concerns.
+      🔧 Recommendation: Disk space is optimal. No action needed.
+
+   📈 SYSTEM LOAD ANALYSIS
+      📊 1min: 0.00, 5min: 0.00, 15min: 0.00
+      🎯 Grade: A+
+      💡 EXCELLENT: System load is very low. Plenty of processing capacity available.
+
+   🎯 OVERALL PERFORMANCE ASSESSMENT
+      🎯 Overall Grade: A+ (95/100)
+      📊 Status: EXCELLENT
+      💡 Your system is performing exceptionally well! All resources are optimally utilized.
+      🔧 Your system is ready for intensive AI operations. No optimizations needed.
+
+2025-07-31 12:53:24,419 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Performance Optimization - PASS
+[32m2025-07-31 12:53:24.420[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_success - {'test_name': 'Performance Optimization', 'category': 'performance_optimization', 'execution_time': 1.4427640438079834, 'performance_metrics': {'memory_start': 48.4, 'memory_end': 48.5, 'memory_delta': 0.10000000000000142, 'cpu_start': 0.0, 'cpu_end': 42.3, 'cpu_usage': 21.15}}[0m
+2025-07-31 12:53:24,440 - SystemOptimizationHub - INFO - [START] STARTING TEST: Error Handling (error_handling)
+🔍 Testing Error Handling Capabilities...
+   📝 Note: These tests INTENTIONALLY trigger errors to verify proper handling
+   ✅ A 'PASS' means the system correctly detected and handled the error
+   ❌ A 'FAIL' means the system failed to handle the error properly
+
+   🧪 Test 1: Empty Prompt Detection
+2025-07-31 12:53:24,454 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:24,466 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+[36m╭─[0m[36m───────────────────────────────────[0m[36m Crew Execution Started [0m[36m───────────────────────────────────[0m[36m─╮[0m
+[36m│[0m                                                                                                [36m│[0m
+[36m│[0m  [1;36mCrew Execution Started[0m                                                                        [36m│[0m
+[36m│[0m  [37mName: [0m[36mcrew[0m                                                                                    [36m│[0m
+[36m│[0m  [37mID: [0m[36m324076d1-b339-4418-ba26-102c41b2db61[0m                                                      [36m│[0m
+[36m│[0m  [37mTool Args: [0m                                                                                   [36m│[0m
+[36m│[0m                                                                                                [36m│[0m
+[36m│[0m                                                                                                [36m│[0m
+[36m╰────────────────────────────────────────────────────────────────────────────────────────────────╯[0m
+
+2025-07-31 12:53:24,492 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+[?25l2025-07-31 12:53:24,497 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+[1;36m🚀 Crew: [0m[1;36mcrew[0m
+└── [1;33m📋 Task: 19af0fad-17a8-4bdf-889a-fc3ee5c7f742[0m
+    [37mStatus: [0m[2;33mExecuting Task...[0m
+[?25h[35m╭─[0m[35m──────────────────────────────────────[0m[35m 🤖 Agent Started [0m[35m──────────────────────────────────────[0m[35m─╮[0m
+[35m│[0m                                                                                                [35m│[0m
+[35m│[0m  [37mAgent: [0m[1;92mAdvanced Prompt Optimization Specialist[0m                                                [35m│[0m
+[35m│[0m                                                                                                [35m│[0m
+[35m│[0m  [37mTask: [0m[92mAnalyze and optimize the following user prompt: ''.[0m                                     [35m│[0m
+[35m│[0m  [92m                [0m                                                                              [35m│[0m
+[35m│[0m  [92m                Your transformation process must include:[0m                                     [35m│[0m
+[35m│[0m  [92m                1. **Ambiguity Resolution**: Clarify any vague terms[0m                          [35m│[0m
+[35m│[0m  [92m                2. **Contextual Enrichment**: Add implicit technical constraints or context[0m   [35m│[0m
+[35m│[0m  [92m                3. **Define Success Criteria**: Create a list of measurable outcomes[0m          [35m│[0m
+[35m│[0m  [92m                4. **Recommend Agent Roles**: Suggest the primary agent roles needed for the[0m  [35m│[0m
+[35m│[0m  [92mtask[0m                                                                                          [35m│[0m
+[35m│[0m  [92m                5. **Structure the Output**: Return a single, raw JSON object containing the[0m  [35m│[0m
+[35m│[0m  [92m'optimized_prompt', 'success_criteria', and 'recommended_agents'[0m                              [35m│[0m
+[35m│[0m  [92m                [0m                                                                              [35m│[0m
+[35m│[0m  [92m                Provide your response in the following JSON format:[0m                           [35m│[0m
+[35m│[0m  [92m                {[0m                                                                             [35m│[0m
+[35m│[0m  [92m                    "optimized_prompt": "The enhanced, detailed version of the user's [0m        [35m│[0m
+[35m│[0m  [92mrequest",[0m                                                                                     [35m│[0m
+[35m│[0m  [92m                    "technical_context": {[0m                                                    [35m│[0m
+[35m│[0m  [92m                        "programming_languages": ["list", "of", "relevant", "languages"],[0m     [35m│[0m
+[35m│[0m  [92m                        "frameworks": ["list", "of", "relevant", "frameworks"],[0m               [35m│[0m
+[35m│[0m  [92m                        "tools_required": ["list", "of", "required", "tools"],[0m                [35m│[0m
+[35m│[0m  [92m                        "complexity_level": "low/medium/high",[0m                                [35m│[0m
+[35m│[0m  [92m                        "estimated_duration": "time estimate"[0m                                 [35m│[0m
+[35m│[0m  [92m                    },[0m                                                                        [35m│[0m
+[35m│[0m  [92m                    "success_criteria": [[0m                                                     [35m│[0m
+[35m│[0m  [92m                        "Specific, measurable criteria 1",[0m                                    [35m│[0m
+[35m│[0m  [92m                        "Specific, measurable criteria 2"[0m                                     [35m│[0m
+[35m│[0m  [92m                    ],[0m                                                                        [35m│[0m
+[35m│[0m  [92m                    "recommended_agents": [[0m                                                   [35m│[0m
+[35m│[0m  [92m                        "agent_role_1",[0m                                                       [35m│[0m
+[35m│[0m  [92m                        "agent_role_2"[0m                                                        [35m│[0m
+[35m│[0m  [92m                    ],[0m                                                                        [35m│[0m
+[35m│[0m  [92m                    "risk_factors": [[0m                                                         [35m│[0m
+[35m│[0m  [92m                        "potential risk 1 with mitigation",[0m                                   [35m│[0m
+[35m│[0m  [92m                        "potential risk 2 with mitigation"[0m                                    [35m│[0m
+[35m│[0m  [92m                    ],[0m                                                                        [35m│[0m
+[35m│[0m  [92m                    "optimization_notes": [[0m                                                   [35m│[0m
+[35m│[0m  [92m                        "optimization suggestion 1",[0m                                          [35m│[0m
+[35m│[0m  [92m                        "optimization suggestion 2"[0m                                           [35m│[0m
+[35m│[0m  [92m                    ][0m                                                                         [35m│[0m
+[35m│[0m  [92m                }[0m                                                                             [35m│[0m
+[35m│[0m                                                                                                [35m│[0m
+[35m╰────────────────────────────────────────────────────────────────────────────────────────────────╯[0m
+
+[?25l2025-07-31 12:53:24,510 - LiteLLM - DEBUG -
+
+2025-07-31 12:53:24,511 - LiteLLM - DEBUG - [92mRequest to litellm:[0m
+2025-07-31 12:53:24,511 - LiteLLM - DEBUG - [92mlitellm.completion(model='gemini-1.5-pro', messages=[{'role': 'system', 'content': 'You are Advanced Prompt Optimization Specialist. You are the Advanced Prompt Optimization Specialist, a master of linguistic precision and AI communication. You have spent years studying how different AI models interpret and process information. You understand that the quality of the initial prompt determines the success of the entire mission. Your expertise lies in:\n- Deconstructing complex requests into clear, actionable components\n- Identifying missing context and adding necessary background information\n- Restructuring prompts for optimal AI comprehension\n- Adding specific success criteria and constraints\n- Ensuring technical accuracy and completeness\nYou are the first line of defense against mission failure due to poor communication.\nYour personal goal is: Transform raw user requests into perfectly optimized, structured prompts that are crystal clear for AI worker agents. Analyze, restructure, and enhance prompts to eliminate ambiguity, add necessary context, and ensure maximum comprehension by downstream agents. Your output must be a comprehensive JSON structure containing the optimized prompt, success criteria, constraints, and detailed instructions.\nTo give my best complete final answer to the task respond using the exact following format:\n\nThought: I now can give a great answer\nFinal Answer: Your final answer must be the great and the most complete as possible, it must be outcome described.\n\nI MUST use these formats, my job depends on it!'}, {'role': 'user', 'content': '\nCurrent Task: Analyze and optimize the following user prompt: \'\'.\n                \n                Your transformation process must include:\n                1. **Ambiguity Resolution**: Clarify any vague terms\n                2. **Contextual Enrichment**: Add implicit technical constraints or context\n                3. **Define Success Criteria**: Create a list of measurable outcomes\n                4. **Recommend Agent Roles**: Suggest the primary agent roles needed for the task\n                5. **Structure the Output**: Return a single, raw JSON object containing the \'optimized_prompt\', \'success_criteria\', and \'recommended_agents\'\n                \n                Provide your response in the following JSON format:\n                {\n                    "optimized_prompt": "The enhanced, detailed version of the user\'s request",\n                    "technical_context": {\n                        "programming_languages": ["list", "of", "relevant", "languages"],\n                        "frameworks": ["list", "of", "relevant", "frameworks"],\n                        "tools_required": ["list", "of", "required", "tools"],\n                        "complexity_level": "low/medium/high",\n                        "estimated_duration": "time estimate"\n                    },\n                    "success_criteria": [\n                        "Specific, measurable criteria 1",\n                        "Specific, measurable criteria 2"\n                    ],\n                    "recommended_agents": [\n                        "agent_role_1",\n                        "agent_role_2"\n                    ],\n                    "risk_factors": [\n                        "potential risk 1 with mitigation",\n                        "potential risk 2 with mitigation"\n                    ],\n                    "optimization_notes": [\n                        "optimization suggestion 1",\n                        "optimization suggestion 2"\n                    ]\n                }\n\nThis is the expected criteria for your final answer: A structured JSON object with the optimized mission parameters.\nyou MUST return the actual complete content as the final answer, not a summary.\n\nBegin! This is VERY important to you, use the tools available and give your best Final Answer, your job depends on it!\n\nThought:'}], temperature=0.7, stop=['\nObservation:'], stream=False)[0m
+2025-07-31 12:53:24,514 - LiteLLM - DEBUG -
+
+2025-07-31 12:53:24,515 - LiteLLM - DEBUG - Custom logger of type TokenCalcHandler, key: TokenCalcHandler already exists in [<crewai.utilities.token_counter_callback.TokenCalcHandler object at 0x000001E821DE5E10>], not adding again..
+2025-07-31 12:53:24,516 - LiteLLM - DEBUG - Custom logger of type TokenCalcHandler, key: TokenCalcHandler already exists in [<crewai.utilities.token_counter_callback.TokenCalcHandler object at 0x000001E821DE5E10>], not adding again..
+2025-07-31 12:53:24,517 - LiteLLM - DEBUG - Initialized litellm callbacks, Async Success Callbacks: ['cache', <crewai.utilities.token_counter_callback.TokenCalcHandler object at 0x000001E82204D390>]
+2025-07-31 12:53:24,518 - LiteLLM - DEBUG - self.optional_params: {}
+2025-07-31 12:53:24,520 - LiteLLM - DEBUG - SYNC kwargs[caching]: False; litellm.cache: None; kwargs.get('cache')['no-cache']: False
+2025-07-31 12:53:24,523 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:24,525 - LiteLLM - INFO -
+LiteLLM completion() model= gemini-1.5-pro; provider = vertex_ai
+2025-07-31 12:53:24,527 - LiteLLM - DEBUG -
+LiteLLM: Params passed to completion() {'model': 'gemini-1.5-pro', 'functions': None, 'function_call': None, 'temperature': 0.7, 'top_p': None, 'n': None, 'stream': False, 'stream_options': None, 'stop': ['\nObservation:'], 'max_tokens': None, 'max_completion_tokens': None, 'modalities': None, 'prediction': None, 'audio': None, 'presence_penalty': None, 'frequency_penalty': None, 'logit_bias': None, 'user': None, 'custom_llm_provider': 'vertex_ai', 'response_format': None, 'seed': None, 'tools': None, 'tool_choice': None, 'max_retries': None, 'logprobs': None, 'top_logprobs': None, 'extra_headers': None, 'api_version': None, 'parallel_tool_calls': None, 'drop_params': None, 'allowed_openai_params': None, 'reasoning_effort': None, 'additional_drop_params': None, 'messages': [{'role': 'system', 'content': 'You are Advanced Prompt Optimization Specialist. You are the Advanced Prompt Optimization Specialist, a master of linguistic precision and AI communication. You have spent years studying how different AI models interpret and process information. You understand that the quality of the initial prompt determines the success of the entire mission. Your expertise lies in:\n- Deconstructing complex requests into clear, actionable components\n- Identifying missing context and adding necessary background information\n- Restructuring prompts for optimal AI comprehension\n- Adding specific success criteria and constraints\n- Ensuring technical accuracy and completeness\nYou are the first line of defense against mission failure due to poor communication.\nYour personal goal is: Transform raw user requests into perfectly optimized, structured prompts that are crystal clear for AI worker agents. Analyze, restructure, and enhance prompts to eliminate ambiguity, add necessary context, and ensure maximum comprehension by downstream agents. Your output must be a comprehensive JSON structure containing the optimized prompt, success criteria, constraints, and detailed instructions.\nTo give my best complete final answer to the task respond using the exact following format:\n\nThought: I now can give a great answer\nFinal Answer: Your final answer must be the great and the most complete as possible, it must be outcome described.\n\nI MUST use these formats, my job depends on it!'}, {'role': 'user', 'content': '\nCurrent Task: Analyze and optimize the following user prompt: \'\'.\n                \n                Your transformation process must include:\n                1. **Ambiguity Resolution**: Clarify any vague terms\n                2. **Contextual Enrichment**: Add implicit technical constraints or context\n                3. **Define Success Criteria**: Create a list of measurable outcomes\n                4. **Recommend Agent Roles**: Suggest the primary agent roles needed for the task\n                5. **Structure the Output**: Return a single, raw JSON object containing the \'optimized_prompt\', \'success_criteria\', and \'recommended_agents\'\n                \n                Provide your response in the following JSON format:\n                {\n                    "optimized_prompt": "The enhanced, detailed version of the user\'s request",\n                    "technical_context": {\n                        "programming_languages": ["list", "of", "relevant", "languages"],\n                        "frameworks": ["list", "of", "relevant", "frameworks"],\n                        "tools_required": ["list", "of", "required", "tools"],\n                        "complexity_level": "low/medium/high",\n                        "estimated_duration": "time estimate"\n                    },\n                    "success_criteria": [\n                        "Specific, measurable criteria 1",\n                        "Specific, measurable criteria 2"\n                    ],\n                    "recommended_agents": [\n                        "agent_role_1",\n                        "agent_role_2"\n                    ],\n                    "risk_factors": [\n                        "potential risk 1 with mitigation",\n
+2025-07-31 12:53:24,531 - LiteLLM - DEBUG -
+LiteLLM: Non-Default params passed to completion() {'temperature': 0.7, 'stream': False, 'stop': ['\nObservation:']}
+2025-07-31 12:53:24,533 - LiteLLM - DEBUG - Final returned optional params: {'temperature': 0.7, 'stop_sequences': ['\nObservation:']}
+2025-07-31 12:53:24,538 - LiteLLM - DEBUG - self.optional_params: {'temperature': 0.7, 'stream': False, 'stop': ['\nObservation:']}
+2025-07-31 12:53:24,542 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): telemetry.crewai.com:4319
+2025-07-31 12:53:24,542 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:24,544 - LiteLLM - DEBUG - Checking cached credentials for project_id: None
+2025-07-31 12:53:24,547 - LiteLLM - DEBUG - Cached credentials found for project_id: None.
+2025-07-31 12:53:24,549 - LiteLLM - DEBUG - Using cached credentials
+2025-07-31 12:53:24,553 - LiteLLM - DEBUG - Validating credentials for project_id: None
+2025-07-31 12:53:24,560 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:24,566 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:24,570 - LiteLLM - DEBUG - [92m
+
+POST Request Sent from LiteLLM:
+curl -X POST \
+https://us-central1-aiplatform.googleapis.com/v1/projects/nexus-ai-466614/locations/us-central1/publishers/google/models/gemini-1.5-pro:generateContent \
+-H 'Content-Type: application/json' -H 'Authorization: Be****hF' \
+-d '{'contents': [{'role': 'user', 'parts': [{'text': '\nCurrent Task: Analyze and optimize the following user prompt: \'\'.\n                \n                Your transformation process must include:\n                1. **Ambiguity Resolution**: Clarify any vague terms\n                2. **Contextual Enrichment**: Add implicit technical constraints or context\n                3. **Define Success Criteria**: Create a list of measurable outcomes\n                4. **Recommend Agent Roles**: Suggest the primary agent roles needed for the task\n                5. **Structure the Output**: Return a single, raw JSON object containing the \'optimized_prompt\', \'success_criteria\', and \'recommended_agents\'\n                \n                Provide your response in the following JSON format:\n                {\n                    "optimized_prompt": "The enhanced, detailed version of the user\'s request",\n                    "technical_context": {\n                        "programming_languages": ["list", "of", "relevant", "languages"],\n                        "frameworks": ["list", "of", "relevant", "frameworks"],\n                        "tools_required": ["list", "of", "required", "tools"],\n                        "complexity_level": "low/medium/high",\n                        "estimated_duration": "time estimate"\n                    },\n                    "success_criteria": [\n                        "Specific, measurable criteria 1",\n                        "Specific, measurable criteria 2"\n                    ],\n                    "recommended_agents": [\n                        "agent_role_1",\n                        "agent_role_2"\n                    ],\n                    "risk_factors": [\n                        "potential risk 1 with mitigation",\n                        "potential risk 2 with mitigation"\n                    ],\n                    "optimization_notes": [\n                        "optimization suggestion 1",\n                        "optimization suggestion 2"\n                    ]\n                }\n\nThis is the expected criteria for your final answer: A structured JSON object with the optimized mission parameters.\nyou MUST return the actual complete content as the final answer, not a summary.\n\nBegin! This is VERY important to you, use the tools available and give your best Final Answer, your job depends on it!\n\nThought:'}]}], 'system_instruction': {'parts': [{'text': 'You are Advanced Prompt Optimization Specialist. You are the Advanced Prompt Optimization Specialist, a master of linguistic precision and AI communication. You have spent years studying how different AI models interpret and process information. You understand that the quality of the initial prompt determines the success of the entire mission. Your expertise lies in:\n- Deconstructing complex requests into clear, actionable components\n- Identifying missing context and adding necessary background information\n- Restructuring prompts for optimal AI comprehension\n- Adding specific success criteria and constraints\n- Ensuring technical accuracy and completeness\nYou are the first line of defense against mission failure due to poor communication.\nYour personal goal is: Transform raw user requests into perfectly optimized, structured prompts that are crystal clear for AI worker agents. Analyze, restructure, and enhance prompts to eliminate ambiguity, add necessary context, and ensure maximum comprehension by downstream agents. Your output must be a comprehensive JSON structure containing the optimized prompt, success criteria, constraints, and detailed instructions.\nTo give my best complete final answer to the task respond using the exact following format:\n\nThought: I now can give a great answer\nFinal Answer: Your final answer must be the great and the most complete as possible, it must be outcome described.\n\nI MUST use these formats, my job depends on it!'}]}, 'generationConfig': {'temperature': 0.7, 'stop_sequences': ['\nObservation:']}}'
+[0m
+
+[2K[1;31m                                               ...                                                [0m2025-07-31 12:53:25,097 - httpcore.connection - DEBUG - connect_tcp.started host='us-central1-aiplatform.googleapis.com' port=443 local_address=None timeout=600.0 socket_options=None
+2025-07-31 12:53:25,122 - httpcore.connection - DEBUG - connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000001E822261150>
+2025-07-31 12:53:25,123 - httpcore.connection - DEBUG - start_tls.started ssl_context=<ssl.SSLContext object at 0x000001E82220FD10> server_hostname='us-central1-aiplatform.googleapis.com' timeout=600.0
+2025-07-31 12:53:25,159 - httpcore.connection - DEBUG - start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x000001E822261110>
+2025-07-31 12:53:25,160 - httpcore.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+2025-07-31 12:53:25,161 - httpcore.http11 - DEBUG - send_request_headers.complete
+2025-07-31 12:53:25,162 - httpcore.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+2025-07-31 12:53:25,162 - httpcore.http11 - DEBUG - send_request_body.complete
+2025-07-31 12:53:25,162 - httpcore.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+2025-07-31 12:53:25,257 - httpcore.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 404, b'Not Found', [(b'Vary', b'Origin'), (b'Vary', b'X-Origin'), (b'Vary', b'Referer'), (b'Content-Type', b'application/json; charset=UTF-8'), (b'Content-Encoding', b'gzip'), (b'Date', b'Thu, 31 Jul 2025 17:53:24 GMT'), (b'Server', b'scaffolding on HTTPServer2'), (b'X-XSS-Protection', b'0'), (b'X-Frame-Options', b'SAMEORIGIN'), (b'X-Content-Type-Options', b'nosniff'), (b'Alt-Svc', b'h3=":443"; ma=2592000,h3-29=":443"; ma=2592000'), (b'Transfer-Encoding', b'chunked')])
+2025-07-31 12:53:25,258 - httpx - INFO - HTTP Request: POST https://us-central1-aiplatform.googleapis.com/v1/projects/nexus-ai-466614/locations/us-central1/publishers/google/models/gemini-1.5-pro:generateContent "HTTP/1.1 404 Not Found"
+2025-07-31 12:53:25,259 - httpcore.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+2025-07-31 12:53:25,259 - httpcore.http11 - DEBUG - receive_response_body.complete
+2025-07-31 12:53:25,260 - httpcore.http11 - DEBUG - response_closed.started
+2025-07-31 12:53:25,260 - httpcore.http11 - DEBUG - response_closed.complete
+2025-07-31 12:53:25,262 - LiteLLM - DEBUG - Logging Details: logger_fn - None | callable(logger_fn) - False
+2025-07-31 12:53:25,271 - LiteLLM - DEBUG - Logging Details LiteLLM-Failure Call: [<crewai.utilities.token_counter_callback.TokenCalcHandler object at 0x000001E821DE5E10>]
+[2K[1;36m🚀 Crew: [0m[1;36mcrew[0m                    ...                                                [0m
+└── [1;33m📋 Task: 19af0fad-17a8-4bdf-889a-fc3ee5c7f742[0m
+    [37mStatus: [0m[2;33mExecuting Task...[0m
+    └── [1;31m❌ LLM Failed[0m
+[?25h[31m╭─[0m[31m─────────────────────────────────────────[0m[31m LLM Error [0m[31m──────────────────────────────────────────[0m[31m─╮[0m
+[31m│[0m                                                                                                [31m│[0m
+[31m│[0m  [1;31m❌ LLM Call Failed[0m                                                                            [31m│[0m
+[31m│[0m  [37mError: [0m[31mlitellm.NotFoundError: VertexAIException - {[0m                                           [31m│[0m
+[31m│[0m  [31m  "error": {[0m                                                                                  [31m│[0m
+[31m│[0m  [31m    "code": 404,[0m                                                                              [31m│[0m
+[31m│[0m  [31m    "message": "Publisher Model [0m                                                              [31m│[0m
+[31m│[0m  [31m`projects/nexus-ai-466614/locations/us-central1/publishers/google/models/gemini-1.5-pro` was[0m  [31m│[0m
+[31m│[0m  [31mnot found or your project does not have access to it. Please ensure you are using a valid [0m    [31m│[0m
+[31m│[0m  [31mmodel version. For more information, see: [0m                                                    [31m│[0m
+[31m│[0m  [31mhttps://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions",[0m                  [31m│[0m
+[31m│[0m  [31m    "status": "NOT_FOUND"[0m                                                                     [31m│[0m
+[31m│[0m  [31m  }[0m                                                                                           [31m│[0m
+[31m│[0m  [31m}[0m                                                                                             [31m│[0m
+[31m│[0m                                                                                                [31m│[0m
+[31m│[0m                                                                                                [31m│[0m
+[31m╰────────────────────────────────────────────────────────────────────────────────────────────────╯[0m
+
+[?25l[1;36m🚀 Crew: [0m[1;36mcrew[0m
+└── [1;31m📋 Task: 19af0fad-17a8-4bdf-889a-fc3ee5c7f742[0m
+    [37mAssigned to: [0m[31mAdvanced Prompt Optimization Specialist[0m
+    [37mStatus: [0m[1;31m❌ Failed[0m
+    └── [1;31m❌ LLM Failed[0m
+[?25h[31m╭─[0m[31m────────────────────────────────────────[0m[31m Task Failure [0m[31m────────────────────────────────────────[0m[31m─╮[0m
+[31m│[0m                                                                                                [31m│[0m
+[31m│[0m  [1;31mTask Failed[0m                                                                                   [31m│[0m
+[31m│[0m  [37mName: [0m[31m19af0fad-17a8-4bdf-889a-fc3ee5c7f742[0m                                                    [31m│[0m
+[31m│[0m  [37mAgent: [0m[31mAdvanced Prompt Optimization Specialist[0m                                                [31m│[0m
+[31m│[0m  [37mTool Args: [0m                                                                                   [31m│[0m
+[31m│[0m                                                                                                [31m│[0m
+[31m│[0m                                                                                                [31m│[0m
+[31m╰────────────────────────────────────────────────────────────────────────────────────────────────╯[0m
+2025-07-31 12:53:25,293 - urllib3.connectionpool - DEBUG - https://telemetry.crewai.com:4319 "POST /v1/traces HTTP/1.1" 200 2
+
+[31m╭─[0m[31m────────────────────────────────────────[0m[31m Crew Failure [0m[31m────────────────────────────────────────[0m[31m─╮[0m
+[31m│[0m                                                                                                [31m│[0m
+[31m│[0m  [1;31mCrew Execution Failed[0m                                                                         [31m│[0m
+[31m│[0m  [37mName: [0m[31mcrew[0m                                                                                    [31m│[0m
+[31m│[0m  [37mID: [0m[31m324076d1-b339-4418-ba26-102c41b2db61[0m                                                      [31m│[0m
+[31m│[0m  [37mTool Args: [0m                                                                                   [31m│[0m
+[31m│[0m  [37mFinal Output: [0m                                                                                [31m│[0m
+[31m│[0m                                                                                                [31m│[0m
+[31m│[0m                                                                                                [31m│[0m
+[31m╰────────────────────────────────────────────────────────────────────────────────────────────────╯[0m
+[32m2025-07-31 12:53:25.299[0m | [31m[1mERROR   [0m | [36msrc.core.cognitive_forge_engine[0m:[36m_execute_prompt_alchemy[0m:[36m310[0m - [31m[1mPrompt optimization failed: litellm.NotFoundError: VertexAIException - {
+  "error": {
+    "code": 404,
+    "message": "Publisher Model `projects/nexus-ai-466614/locations/us-central1/publishers/google/models/gemini-1.5-pro` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions",
+    "status": "NOT_FOUND"
+  }
+}
+[0m
+
+      ✅ Expected error caught: NotFoundError
+   🧪 Test 2: Database Error Handling
+      ✅ Database gracefully returned None for invalid mission ID
+   🧪 Test 3: Agent Creation Error Handling
+
+📊 Error Handling Test Summary:
+   ✅ empty_prompt_handling: PASSED - System correctly detected empty prompt
+   ✅ database_error_handling: PASSED - Database returned None for invalid ID
+   ❌ agent_creation_error_handling: FAILED - Agent creation should have failed
+
+💡 Understanding Error Handling Tests:
+   • These tests INTENTIONALLY trigger error conditions
+   • A 'PASS' means the system correctly detected and handled the error
+   • A 'FAIL' means the system failed to handle the error properly
+   • The goal is to ensure the system is robust and doesn't crash
+
+📊 PERFORMANCE GRADING SCALE:
+   🏆 A+ (95-100): EXCELLENT - Optimal performance, ready for intensive operations
+   🥇 A  (90-94): GOOD - Strong performance with minor optimization opportunities
+   🥈 B  (80-89): ACCEPTABLE - Adequate performance, some areas for improvement
+   🥉 C  (70-79): CONCERNING - Performance issues that should be addressed
+   ⚠️  D  (60-69): PROBLEMATIC - Significant performance problems
+   🚨 F  (50-59): CRITICAL - Severe performance issues requiring immediate attention
+
+🎯 WHY PERFORMANCE MATTERS FOR AI:
+   • Memory: AI operations require significant RAM for processing large datasets
+   • CPU: Complex AI calculations need processing power for timely results
+   • Disk: AI models and data storage require adequate space
+   • Load: System responsiveness affects AI operation efficiency
+2025-07-31 12:53:25,448 - SystemOptimizationHub - INFO - [FAIL] TEST COMPLETED: Error Handling - FAIL
+[32m2025-07-31 12:53:25.450[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_failure - {'test_name': 'Error Handling', 'category': 'error_handling', 'execution_time': 1.0211491584777832, 'error': 'Unknown error', 'performance_metrics': {'memory_start': 48.4, 'memory_end': 48.5, 'memory_delta': 0.10000000000000142, 'cpu_start': 100.0, 'cpu_end': 49.2, 'cpu_usage': 74.6}}[0m
+2025-07-31 12:53:25,459 - SystemOptimizationHub - INFO - [START] STARTING TEST: Integration Tests (integration_tests)
+2025-07-31 12:53:25,468 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Integration Tests - PASS
+[32m2025-07-31 12:53:25.469[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_success - {'test_name': 'Integration Tests', 'category': 'integration_tests', 'execution_time': 0.00992131233215332, 'performance_metrics': {'memory_start': 48.5, 'memory_end': 48.6, 'memory_delta': 0.10000000000000142, 'cpu_start': 0.0, 'cpu_end': 87.5, 'cpu_usage': 43.75}}[0m
+2025-07-31 12:53:25,479 - SystemOptimizationHub - INFO - [START] STARTING TEST: Stress Testing (stress_testing)
+2025-07-31 12:53:25,481 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:25,484 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:25,488 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:25,491 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:25,496 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:25,501 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:25,504 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:25,509 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:25,512 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+2025-07-31 12:53:25,516 - LiteLLM - DEBUG - checking potential_model_names in litellm.model_cost: {'split_model': 'gemini-1.5-pro', 'combined_model_name': 'vertex_ai/gemini-1.5-pro', 'stripped_model_name': 'gemini-1.5-pro', 'combined_stripped_model_name': 'vertex_ai/gemini-1.5-pro', 'custom_llm_provider': 'vertex_ai'}
+[32m2025-07-31 12:53:25.738[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_0_1753984405[0m
+[32m2025-07-31 12:53:25.987[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_1_1753984405[0m
+[32m2025-07-31 12:53:26.234[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_2_1753984406[0m
+[32m2025-07-31 12:53:26.486[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_3_1753984406[0m
+[32m2025-07-31 12:53:26.743[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_4_1753984406[0m
+[32m2025-07-31 12:53:27.003[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_5_1753984406[0m
+[32m2025-07-31 12:53:27.259[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_6_1753984407[0m
+[32m2025-07-31 12:53:27.503[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_7_1753984407[0m
+[32m2025-07-31 12:53:27.763[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_8_1753984407[0m
+[32m2025-07-31 12:53:28.019[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_9_1753984407[0m
+[32m2025-07-31 12:53:28.277[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_10_1753984408[0m
+[32m2025-07-31 12:53:28.529[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_11_1753984408[0m
+[32m2025-07-31 12:53:28.776[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_12_1753984408[0m
+[32m2025-07-31 12:53:29.040[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_13_1753984408[0m
+[32m2025-07-31 12:53:29.307[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_14_1753984409[0m
+[32m2025-07-31 12:53:29.559[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_15_1753984409[0m
+[32m2025-07-31 12:53:29.823[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_16_1753984409[0m
+[32m2025-07-31 12:53:30.088[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_17_1753984409[0m
+[32m2025-07-31 12:53:30.352[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_18_1753984410[0m
+[32m2025-07-31 12:53:30.616[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_19_1753984410[0m
+[32m2025-07-31 12:53:30.869[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_20_1753984410[0m
+[32m2025-07-31 12:53:31.142[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_21_1753984410[0m
+[32m2025-07-31 12:53:31.403[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_22_1753984411[0m
+[32m2025-07-31 12:53:31.673[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_23_1753984411[0m
+[32m2025-07-31 12:53:31.932[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_24_1753984411[0m
+[32m2025-07-31 12:53:32.202[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_25_1753984411[0m
+[32m2025-07-31 12:53:32.472[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_26_1753984412[0m
+[32m2025-07-31 12:53:32.723[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_27_1753984412[0m
+[32m2025-07-31 12:53:32.972[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_28_1753984412[0m
+[32m2025-07-31 12:53:33.219[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_29_1753984413[0m
+[32m2025-07-31 12:53:33.480[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_30_1753984413[0m
+[32m2025-07-31 12:53:33.731[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_31_1753984413[0m
+[32m2025-07-31 12:53:33.975[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_32_1753984413[0m
+[32m2025-07-31 12:53:34.228[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_33_1753984414[0m
+[32m2025-07-31 12:53:34.628[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_34_1753984414[0m
+[32m2025-07-31 12:53:34.877[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_35_1753984414[0m
+[32m2025-07-31 12:53:35.125[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_36_1753984414[0m
+[32m2025-07-31 12:53:35.388[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_37_1753984415[0m
+[32m2025-07-31 12:53:35.639[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_38_1753984415[0m
+[32m2025-07-31 12:53:35.893[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_39_1753984415[0m
+[32m2025-07-31 12:53:36.143[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_40_1753984415[0m
+[32m2025-07-31 12:53:36.399[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_41_1753984416[0m
+[32m2025-07-31 12:53:36.671[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_42_1753984416[0m
+[32m2025-07-31 12:53:36.939[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_43_1753984416[0m
+[32m2025-07-31 12:53:37.187[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_44_1753984416[0m
+[32m2025-07-31 12:53:37.441[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_45_1753984417[0m
+[32m2025-07-31 12:53:37.687[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_46_1753984417[0m
+[32m2025-07-31 12:53:37.932[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_47_1753984417[0m
+[32m2025-07-31 12:53:38.176[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_48_1753984417[0m
+[32m2025-07-31 12:53:38.424[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m147[0m - [1mCreated mission: stress_test_49_1753984418[0m
+2025-07-31 12:53:38,468 - SystemOptimizationHub - INFO - [PASS] TEST COMPLETED: Stress Testing - PASS
+[32m2025-07-31 12:53:38.469[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_success - {'test_name': 'Stress Testing', 'category': 'stress_testing', 'execution_time': 12.989875793457031, 'performance_metrics': {'memory_start': 48.6, 'memory_end': 48.5, 'memory_delta': -0.10000000000000142, 'cpu_start': 0.0, 'cpu_end': 30.8, 'cpu_usage': 15.4}}[0m
+[32m2025-07-31 12:53:38.470[0m | [1mINFO    [0m | [36msrc.utils.weave_observability[0m:[36mlog_system_event[0m:[36m255[0m - [1mSystem event: test_suite_completed - {'total_tests': 10, 'total_time': 17.696175575256348, 'successful_tests': 8, 'failed_tests': 2, 'warning_tests': 0}[0m
+
+================================================================================
+📊 COMPREHENSIVE TEST REPORT
+================================================================================
+🎯 TOTAL TESTS: 10
+✅ PASSED: 8
+❌ FAILED: 2
+⚠️ WARNINGS: 0
+📈 SUCCESS RATE: 80.0%
+⏱️ TOTAL EXECUTION TIME: 17.61s
+📊 AVERAGE EXECUTION TIME: 1.76s
+🚀 SYSTEM STATUS: OPERATIONAL
+
+📈 PERFORMANCE METRICS:
+   avg_memory_start: 48.43
+   max_memory_start: 48.60
+   min_memory_start: 48.40
+   avg_memory_end: 48.45
+   max_memory_end: 48.60
+   min_memory_end: 48.40
+   avg_memory_delta: 0.02
+   max_memory_delta: 0.10
+   min_memory_delta: -0.10
+   avg_cpu_start: 16.56
+   max_cpu_start: 100.00
+   min_cpu_start: 0.00
+   avg_cpu_end: 42.74
+   max_cpu_end: 87.50
+   min_cpu_end: 0.00
+   avg_cpu_usage: 29.65
+   max_cpu_usage: 74.60
+   min_cpu_usage: 0.00
+
+🎯 DETAILED PERFORMANCE ANALYSIS:
+   MEMORY: A+ - EXCELLENT: Your system has plenty of available memory. This is ideal for running complex AI operations.
+      🔧 Your memory usage is optimal. No action needed.
+   CPU: A+ - EXCELLENT: CPU usage is very low. Your system has plenty of processing power available.
+      🔧 CPU performance is optimal. No action needed.
+   DISK: A+ - EXCELLENT: Plenty of disk space available. No storage concerns.
+      🔧 Disk space is optimal. No action needed.
+   LOAD_AVERAGE: A+ - EXCELLENT: System load is very low. Plenty of processing capacity available.
+      🔧 No recommendation available
+
+   🎯 OVERALL: A+ (95/100)
+      💡 Your system is performing exceptionally well! All resources are optimally utilized.
+      🔧 Your system is ready for intensive AI operations. No optimizations needed.
+
+================================================================================
+💡 USER GUIDANCE & EXPLANATIONS
+================================================================================
+📊 STATUS: OPERATIONAL
+📝 EXPLANATION: ✅ OPERATIONAL: Your system is working well with minor issues that don't affect core functionality.
+🔍 FAILED TESTS: 🔧 Workflow Phases: This component may need attention or configuration. | 🔍 Error Handling Test: This test INTENTIONALLY triggers errors to verify the system can handle them properly. A 'FAIL' here might actually indicate the system is working correctly by detecting errors.
+
+🎯 RECOMMENDATIONS:
+   1. 🔧 Review and fix the failed tests listed above
+   2. 📈 Monitor system performance closely
+   3. 🛠️ Consider running specific component tests
+
+🚀 NEXT STEPS:
+   1. 🎯 Start using your system for real missions
+   2. 📊 Monitor performance in production
+   3. 🔄 Run this test suite regularly
+================================================================================
+
+[PASS] System Optimization Hub: PASS
+
+[FAIL] System Optimization Hub: FAIL
+   [ERROR] 'total_tests'
+
+================================================================================
+TEST: TEST 4: API ENDPOINTS AND MISSION EXECUTION
+================================================================================
+2025-07-31 12:53:38,499 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8001
+2025-07-31 12:53:40,591 - urllib3.connectionpool - DEBUG - http://localhost:8001 "GET / HTTP/1.1" 200 87379
+[PASS] API Root endpoint: PASS
+   [INFO] Status: 200
+2025-07-31 12:53:40,595 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8001
+2025-07-31 12:53:42,624 - urllib3.connectionpool - DEBUG - http://localhost:8001 "GET /health HTTP/1.1" 200 79
+[PASS] API Health check: PASS
+   [INFO] Status: 200
+2025-07-31 12:53:42,629 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8001
+2025-07-31 12:53:44,670 - urllib3.connectionpool - DEBUG - http://localhost:8001 "GET /api/status HTTP/1.1" 200 388
+[PASS] API API status: PASS
+   [INFO] Status: 200
+
+🎯 Testing mission creation...
+2025-07-31 12:53:44,676 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8001
+2025-07-31 12:53:46,983 - urllib3.connectionpool - DEBUG - http://localhost:8001 "POST /api/missions HTTP/1.1" 200 193
+[PASS] Mission Creation: PASS
+   [INFO] Mission created successfully
+
+================================================================================
+TEST: TEST 5: STRESS TESTING UNDER LOAD
+================================================================================
+🔥 Testing concurrent requests...
+2025-07-31 12:53:46,995 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8001
+2025-07-31 12:53:46,995 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8001
+2025-07-31 12:53:46,998 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8001
+2025-07-31 12:53:46,999 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8001
+2025-07-31 12:53:47,003 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8001
+2025-07-31 12:53:47,004 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8001
+2025-07-31 12:53:47,007 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8001
+2025-07-31 12:53:47,008 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8001
+2025-07-31 12:53:47,010 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8001
+2025-07-31 12:53:47,012 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8001
+2025-07-31 12:53:49,027 - urllib3.connectionpool - DEBUG - http://localhost:8001 "GET /health HTTP/1.1" 200 79
+2025-07-31 12:53:49,029 - urllib3.connectionpool - DEBUG - http://localhost:8001 "GET /health HTTP/1.1" 200 79
+2025-07-31 12:53:49,031 - urllib3.connectionpool - DEBUG - http://localhost:8001 "GET /health HTTP/1.1" 200 79
+2025-07-31 12:53:49,032 - urllib3.connectionpool - DEBUG - http://localhost:8001 "GET /health HTTP/1.1" 200 79
+2025-07-31 12:53:49,034 - urllib3.connectionpool - DEBUG - http://localhost:8001 "GET /health HTTP/1.1" 200 79
+2025-07-31 12:53:49,043 - urllib3.connectionpool - DEBUG - http://localhost:8001 "GET /health HTTP/1.1" 200 79
+2025-07-31 12:53:49,054 - urllib3.connectionpool - DEBUG - http://localhost:8001 "GET /health HTTP/1.1" 200 79
+2025-07-31 12:53:49,055 - urllib3.connectionpool - DEBUG - http://localhost:8001 "GET /health HTTP/1.1" 200 79
+2025-07-31 12:53:49,057 - urllib3.connectionpool - DEBUG - http://localhost:8001 "GET /health HTTP/1.1" 200 79
+2025-07-31 12:53:49,070 - urllib3.connectionpool - DEBUG - http://localhost:8001 "GET /health HTTP/1.1" 200 79
+[PASS] Concurrent Requests: PASS
+   [INFO] 10/10 successful (100.0%)
+
+================================================================================
+TEST: CLEANUP: STOPPING SERVICES
+================================================================================
+🛑 Stopping desktop_app...
+✅ desktop_app stopped
+Traceback (most recent call last):
+  File "C:\Users\AMD\sentinel\desktop-app\comprehensive_system_test.py", line 407, in <module>
+    asyncio.run(main())
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\sentinel\desktop-app\comprehensive_system_test.py", line 382, in main
+    result = await tester.run_comprehensive_test()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\sentinel\desktop-app\comprehensive_system_test.py", line 343, in run_comprehensive_test
+    passed_tests = sum(1 for _, result in test_results if result.get("status") == "PASS")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\sentinel\desktop-app\comprehensive_system_test.py", line 343, in <genexpr>
+    passed_tests = sum(1 for _, result in test_results if result.get("status") == "PASS")
+                                                          ^^^^^^^^^^
+AttributeError: 'bool' object has no attribute 'get'
