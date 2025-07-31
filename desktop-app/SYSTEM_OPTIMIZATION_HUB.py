@@ -114,35 +114,24 @@ class SystemOptimizationHub:
         self.logger = logging.getLogger('SystemOptimizationHub')
     
     def log_test_start(self, test_name: str, category: TestCategory):
-        """Log test start with detailed information"""
-        self.logger.info(f"🚀 STARTING TEST: {test_name} ({category.value})")
-        if self.verbose_output:
-            print(f"\n{'='*80}")
-            print(f"🧪 TEST: {test_name}")
-            print(f"📂 CATEGORY: {category.value}")
-            print(f"⏰ START TIME: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-            print(f"{'='*80}")
+        """Log the start of a test with proper encoding handling."""
+        try:
+            # Use text equivalents instead of emoji for Windows compatibility
+            self.logger.info(f"[START] STARTING TEST: {test_name} ({category.value})")
+        except UnicodeEncodeError:
+            # Fallback to ASCII-only logging
+            self.logger.info(f"[START] STARTING TEST: {test_name} ({category.value})")
     
     def log_test_result(self, result: TestResult):
-        """Log test result with detailed metrics"""
-        status_emoji = "✅" if result.status == "PASS" else "❌" if result.status == "FAIL" else "⚠️"
-        
-        self.logger.info(f"{status_emoji} TEST COMPLETED: {result.test_name} - {result.status}")
-        
-        if self.verbose_output:
-            print(f"\n{status_emoji} RESULT: {result.test_name}")
-            print(f"📊 STATUS: {result.status}")
-            print(f"⏱️ EXECUTION TIME: {result.execution_time:.2f}s")
-            
-            if result.performance_metrics:
-                print(f"📈 PERFORMANCE METRICS:")
-                for metric, value in result.performance_metrics.items():
-                    print(f"   {metric}: {value}")
-            
-            if result.error_message:
-                print(f"❌ ERROR: {result.error_message}")
-            
-            print(f"{'='*80}")
+        """Log test results with proper encoding handling."""
+        try:
+            # Use text equivalents instead of emoji for Windows compatibility
+            status_emoji = "[PASS]" if result.status == "PASS" else "[FAIL]" if result.status == "FAIL" else "[WARN]"
+            self.logger.info(f"{status_emoji} TEST COMPLETED: {result.test_name} - {result.status}")
+        except UnicodeEncodeError:
+            # Fallback to ASCII-only logging
+            status_text = "PASS" if result.status == "PASS" else "FAIL" if result.status == "FAIL" else "WARN"
+            self.logger.info(f"[{status_text}] TEST COMPLETED: {result.test_name} - {result.status}")
     
     async def run_test(self, test_func: Callable, test_name: str, category: TestCategory) -> TestResult:
         """Execute a test with comprehensive monitoring and Weave observability"""

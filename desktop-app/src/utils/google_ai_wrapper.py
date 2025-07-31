@@ -39,7 +39,7 @@ class GoogleGenerativeAIWrapper(BaseChatModel):
             
             genai.configure(api_key=api_key)
             
-            # Initialize the model
+            # Initialize the model - use direct API model name
             generation_config = genai.types.GenerationConfig(
                 temperature=self.temperature,
                 top_p=self.top_p,
@@ -47,12 +47,21 @@ class GoogleGenerativeAIWrapper(BaseChatModel):
                 max_output_tokens=self.max_tokens,
             )
             
+            # Ensure we're using the direct Google AI API model name
+            model_name = self.model_name
+            if model_name.startswith("gemini-"):
+                # This is already a direct API model name
+                pass
+            else:
+                # Fallback to default
+                model_name = "gemini-1.5-pro"
+            
             self._model = genai.GenerativeModel(
-                model_name=self.model_name,
+                model_name=model_name,
                 generation_config=generation_config
             )
             
-            logger.success(f"Google Generative AI wrapper initialized successfully with model: {self.model_name}")
+            logger.success(f"Google Generative AI wrapper initialized successfully with model: {model_name}")
 
         except Exception as e:
             logger.critical(f"Fatal error initializing Google Generative AI Wrapper: {e}")

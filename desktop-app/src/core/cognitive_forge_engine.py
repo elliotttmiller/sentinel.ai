@@ -50,17 +50,17 @@ class CognitiveForgeEngine:
     """
 
     def __init__(self):
-        # Initialize LLM with environment configuration
-        model_name = os.getenv("LLM_MODEL", "gemini-1.5-pro")
-        temperature = float(os.getenv("LLM_TEMPERATURE", "0.7"))
+        # LLM Configuration
+        LLM_MODEL = os.getenv("LLM_MODEL", "gemini-1.5-pro")  # Use direct Google AI model name
+        LLM_TEMPERATURE = float(os.getenv("LLM_TEMPERATURE", "0.7"))
 
         # Use our custom Google Generative AI wrapper
         try:
             self.llm = create_google_ai_llm(
-                model_name=model_name,
-                temperature=temperature
+                model_name=LLM_MODEL,
+                temperature=LLM_TEMPERATURE
             )
-            logger.info(f"Google Generative AI initialized with model: {model_name}")
+            logger.info(f"Google Generative AI initialized with model: {LLM_MODEL}")
         except Exception as e:
             logger.error(f"Failed to initialize Google Generative AI: {e}")
             raise ValueError(f"Google Generative AI initialization failed: {e}")
@@ -84,7 +84,7 @@ class CognitiveForgeEngine:
         self.optimization_history = []
         self.performance_baselines = {}
 
-        logger.info(f"Cognitive Forge Engine v5.0 initialized with model: {model_name}")
+        logger.info(f"Cognitive Forge Engine v5.0 initialized with model: {LLM_MODEL}")
         logger.info("Sentient Operating System: Phoenix Protocol, Guardian Protocol, and Synapse Logging active")
 
     async def _run_crew(self, agents: list, tasks: list, process: Process = Process.sequential) -> str:
