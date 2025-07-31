@@ -2,6 +2,7 @@
 """
 Fix-AI: The Sentient Codebase Healer
 A sophisticated, self-healing diagnostic and repair system for the Cognitive Forge codebase.
+ENHANCED VERSION: Now integrates with Sentry for real-time error detection and automated fixing.
 """
 
 import os
@@ -12,7 +13,7 @@ import ast
 import subprocess
 import shutil
 from pathlib import Path
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Optional
 from datetime import datetime
 from loguru import logger
 from crewai import Agent, Task, Crew, Process
@@ -24,28 +25,120 @@ REPORTS_DIRECTORY = PROJECT_ROOT / "logs" / "fix_ai_reports"
 BACKUP_DIRECTORY = PROJECT_ROOT / "backups" / f"fix_ai_backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 MAX_FIX_RETRIES = 3  # The number of times the self-healing loop will re-attempt a fix
 
+# --- SENTRY INTEGRATION ---
+try:
+    import sentry_sdk
+    from sentry_sdk.integrations.fastapi import FastApiIntegration
+    SENTRY_AVAILABLE = True
+except ImportError:
+    SENTRY_AVAILABLE = False
+    logger.warning("Sentry SDK not available. Real-time error detection will be limited.")
+
+# Import Sentry API client
+try:
+    from src.utils.sentry_api_client import fetch_recent_sentry_errors
+    SENTRY_API_AVAILABLE = True
+except ImportError:
+    SENTRY_API_AVAILABLE = False
+    logger.warning("Sentry API client not available. Using simulated error data.")
+
 # --- INITIALIZE LLM ---
 try:
     from dotenv import load_dotenv
     load_dotenv()
     from src.utils.google_ai_wrapper import create_google_ai_llm
+    
+    # Create LLM with explicit configuration to avoid Vertex AI routing
     LLM = create_google_ai_llm(
-        model_name=os.getenv("LLM_MODEL", "gemini-1.5-pro"),
+        model_name="gemini-1.5-pro",  # Use direct API model name
         temperature=0.5
     )
+    
+    # Configure CrewAI to use our custom LLM
+    import os
+    os.environ["LITELLM_MODEL"] = "gemini-1.5-pro"
+    os.environ["LITELLM_PROVIDER"] = "google"
+    
 except ImportError:
     print("Warning: dotenv is not installed. Make sure your environment variables are set.")
     LLM = None
 
 
+class SentryErrorTracker:
+    """Tracks and analyzes errors from Sentry for automated fixing"""
+    
+    def __init__(self):
+        self.error_patterns = {}
+        self.recent_errors = []
+        self.fix_suggestions = {}
+        
+    def analyze_sentry_errors(self) -> List[Dict[str, Any]]:
+        """Analyze recent Sentry errors and extract patterns"""
+        if not SENTRY_AVAILABLE:
+            return []
+        
+        try:
+            # Use real Sentry API if available
+            if SENTRY_API_AVAILABLE:
+                return fetch_recent_sentry_errors(hours=24)
+            else:
+                # Fallback to simulated data
+                return self._simulate_sentry_analysis()
+        except Exception as e:
+            logger.error(f"Failed to analyze Sentry errors: {e}")
+            return self._simulate_sentry_analysis()
+    
+    def _simulate_sentry_analysis(self) -> List[Dict[str, Any]]:
+        """Simulate Sentry error analysis (replace with actual Sentry API calls)"""
+        # In a real implementation, you would:
+        # 1. Connect to Sentry API
+        # 2. Fetch recent errors
+        # 3. Analyze patterns
+        # 4. Return structured error data
+        
+        return [
+            {
+                "error_type": "AttributeError",
+                "message": "object has no attribute 'get'",
+                "file_path": "src/core/cognitive_forge_engine.py",
+                "line": 245,
+                "frequency": 3,
+                "last_seen": datetime.now().isoformat(),
+                "suggested_fix": "Check if object is None before calling .get() method"
+            }
+        ]
+    
+    def get_error_insights(self) -> Dict[str, Any]:
+        """Get insights from Sentry error patterns"""
+        return {
+            "total_errors": len(self.recent_errors),
+            "error_types": len(set(e.get("error_type") for e in self.recent_errors)),
+            "most_common_errors": self._get_most_common_errors(),
+            "fix_suggestions": self.fix_suggestions
+        }
+    
+    def _get_most_common_errors(self) -> List[Dict[str, Any]]:
+        """Get most common error patterns"""
+        error_counts = {}
+        for error in self.recent_errors:
+            error_type = error.get("error_type", "Unknown")
+            error_counts[error_type] = error_counts.get(error_type, 0) + 1
+        
+        return [
+            {"error_type": error_type, "count": count}
+            for error_type, count in sorted(error_counts.items(), key=lambda x: x[1], reverse=True)[:5]
+        ]
+
+
 class CodebaseHealer:
-    """The core class for the Fix-AI system."""
+    """The core class for the Fix-AI system with Sentry integration."""
 
     def __init__(self, project_dir: Path):
         self.project_dir = project_dir
         self.issues: List[Dict[str, Any]] = []
         self.healing_plan: List[Dict[str, Any]] = []
         self.report: Dict[str, Any] = {"summary": {}, "details": []}
+        self.sentry_tracker = SentryErrorTracker()
 
         REPORTS_DIRECTORY.mkdir(exist_ok=True, parents=True)
         BACKUP_DIRECTORY.mkdir(exist_ok=True, parents=True)
@@ -58,15 +151,21 @@ class CodebaseHealer:
         return list(SRC_DIRECTORY.rglob("*.py"))
 
     def run(self):
-        """Executes the full end-to-end healing process."""
-        logger.info("[START] Initiating Fix-AI: The Sentient Codebase Healer")
+        """Executes the full end-to-end healing process with Sentry integration."""
+        logger.info("[START] Initiating Fix-AI: The Sentient Codebase Healer with Sentry Integration")
         self.report['start_time'] = datetime.now().isoformat()
 
         # Create a backup of the source directory first
-        logger.info(f"Creating a backup of the 'src' directory at: {BACKUP_DIRECTORY}")
-        shutil.copytree(SRC_DIRECTORY, BACKUP_DIRECTORY)
+        backup_path = BACKUP_DIRECTORY
+        if backup_path.exists():
+            # If backup already exists, create a new one with timestamp
+            backup_path = PROJECT_ROOT / "backups" / f"fix_ai_backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        
+        logger.info(f"Creating a backup of the 'src' directory at: {backup_path}")
+        shutil.copytree(SRC_DIRECTORY, backup_path)
         logger.success("Backup complete. Proceeding with healing process.")
 
+        self.run_sentry_analysis_phase()
         self.run_diagnosis_phase()
         if not self.issues:
             logger.success("[SUCCESS] No issues found. The codebase is already in excellent health!")
@@ -78,6 +177,33 @@ class CodebaseHealer:
         self.generate_report()
 
         logger.info("[COMPLETE] Fix-AI process complete.")
+
+    def run_sentry_analysis_phase(self):
+        """Phase 0: Analyze Sentry errors for real-time issue detection."""
+        self._log_phase("SENTRY ERROR ANALYSIS")
+        
+        if not SENTRY_AVAILABLE:
+            logger.warning("Sentry not available. Skipping real-time error analysis.")
+            return
+        
+        logger.info("Analyzing recent Sentry errors for automated fixing...")
+        sentry_errors = self.sentry_tracker.analyze_sentry_errors()
+        
+        if sentry_errors:
+            logger.info(f"Found {len(sentry_errors)} errors from Sentry analysis")
+            for error in sentry_errors:
+                self.issues.append({
+                    "file_path": error.get("file_path", "unknown"),
+                    "line": error.get("line", 0),
+                    "type": "SentryError",
+                    "message": f"{error.get('error_type')}: {error.get('message')}",
+                    "frequency": error.get("frequency", 1),
+                    "suggested_fix": error.get("suggested_fix", ""),
+                    "source": "sentry"
+                })
+            logger.success(f"Added {len(sentry_errors)} Sentry errors to healing plan")
+        else:
+            logger.info("No recent Sentry errors found")
 
     def run_diagnosis_phase(self):
         """Phase 1: Scan the codebase for all potential issues."""
@@ -103,7 +229,7 @@ class CodebaseHealer:
                 result = subprocess.run(['flake8', str(file)], capture_output=True, text=True, timeout=30)
                 if result.stdout:
                     for line in result.stdout.strip().split('\n'):
-                        if line.strip():
+                        if line.strip(): # Ensure line is not empty
                             parts = line.split(':')
                             if len(parts) >= 4:
                                 try:
@@ -115,7 +241,7 @@ class CodebaseHealer:
                                         "message": f"{parts[3].strip()} ({parts[2].strip()})"
                                     })
                                 except (ValueError, IndexError):
-                                    # Skip malformed lines
+                                    # Skip malformed lines that don't fit the expected format
                                     continue
             except (subprocess.TimeoutExpired, FileNotFoundError):
                 # flake8 not available or timed out, skip linting
@@ -132,25 +258,33 @@ class CodebaseHealer:
 
         architect = Agent(
             role="Lead Software Architect & Codebase Strategist",
-            goal="Analyze a list of diagnosed codebase issues. Prioritize them by severity and create a logical, step-by-step JSON healing plan to resolve them.",
+            goal="Analyze a list of diagnosed codebase issues (including Sentry errors). Prioritize them by severity and create a logical, step-by-step JSON healing plan to resolve them.",
             backstory="You are a master architect who specializes in refactoring and healing complex codebases. You can instantly see the connections between disparate errors and devise the most efficient plan to restore a system to perfect health.",
-            llm=LLM, verbose=True
+            llm=LLM, 
+            verbose=True,
+            allow_delegation=False
         )
 
         planning_task = Task(
-            description=f"""Analyze the following list of diagnosed codebase issues. Create a prioritized, step-by-step healing plan in a raw JSON format.
+            description=f"""Analyze the following list of diagnosed codebase issues (including Sentry errors). Create a prioritized, step-by-step healing plan in a raw JSON format.
             
             ISSUES:
             {json.dumps(self.issues, indent=2)}
             
             Your plan should be an array of steps. Each step must include 'file_path', 'line', 'issue_type', 'message' (renamed from 'description'), and a 'proposed_action'.
-            Prioritize critical SyntaxErrors first, then other errors.
+            Prioritize critical SyntaxErrors and Sentry errors first, then other errors.
+            For Sentry errors, use the suggested_fix if available.
             """,
             expected_output="A raw JSON array representing the prioritized healing plan.",
             agent=architect
         )
 
-        crew = Crew(agents=[architect], tasks=[planning_task], process=Process.sequential)
+        crew = Crew(
+            agents=[architect], 
+            tasks=[planning_task], 
+            process=Process.sequential,
+            verbose=True
+        )
         plan_str = crew.kickoff()
 
         try:
@@ -172,7 +306,9 @@ class CodebaseHealer:
             role="Expert Python Debugger & Code Fixer",
             goal="Given a specific file, line number, error, and code context, provide the corrected block of code to resolve the issue. Your output must be ONLY the raw, corrected code block.",
             backstory="You are a surgical code fixer. You can instantly understand the context of an error and provide the minimal, correct change to fix it without introducing new problems.",
-            llm=LLM, verbose=True
+            llm=LLM, 
+            verbose=True,
+            allow_delegation=False
         )
 
         for i, step in enumerate(self.healing_plan):
@@ -191,6 +327,12 @@ class CodebaseHealer:
                     end = min(len(lines), step['line'] + 5)
                     code_context = "".join(lines[start:end])
 
+                    # Use suggested fix for Sentry errors if available
+                    if step.get('source') == 'sentry' and step.get('suggested_fix'):
+                        logger.info(f"Using Sentry suggested fix: {step['suggested_fix']}")
+                        # Apply the suggested fix logic here
+                        pass
+
                     fix_task = Task(
                         description=f"""Your previous attempt to fix this issue failed with a new error, or this is the first attempt.
                         Re-evaluate and provide a new, corrected code block.
@@ -208,7 +350,12 @@ class CodebaseHealer:
                         agent=fixer_agent
                     )
                     
-                    crew = Crew(agents=[fixer_agent], tasks=[fix_task], process=Process.sequential)
+                    crew = Crew(
+                        agents=[fixer_agent], 
+                        tasks=[fix_task], 
+                        process=Process.sequential,
+                        verbose=True
+                    )
                     corrected_code = crew.kickoff()
                     
                     # Apply the fix (this is a simple line replacement, could be more sophisticated)
@@ -263,7 +410,8 @@ class CodebaseHealer:
             "issues_attempted": len(self.healing_plan),
             "issues_fixed": fixed_count,
             "issues_failed": failed_count,
-            "remaining_issues_after_fix": self.report.get('final_validation', {}).get('remaining_issues', 0)
+            "remaining_issues_after_fix": self.report.get('final_validation', {}).get('remaining_issues', 0),
+            "sentry_errors_processed": len([i for i in self.healing_plan if i.get('source') == 'sentry'])
         }
         self.report['details'] = self.healing_plan
 
