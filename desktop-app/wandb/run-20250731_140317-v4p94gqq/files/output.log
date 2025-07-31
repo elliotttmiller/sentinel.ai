@@ -1,0 +1,90 @@
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\logging\__init__.py", line 1113, in emit
+    stream.write(msg + self.terminator)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f50d' in position 57: character maps to <undefined>
+Call stack:
+  File "C:\Users\AMD\sentinel\desktop-app\comprehensive_system_test.py", line 557, in <module>
+    asyncio.run(main())
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 641, in run_until_complete
+    self.run_forever()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 608, in run_forever
+    self._run_once()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 1936, in _run_once
+    handle._run()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\events.py", line 84, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\AMD\sentinel\desktop-app\comprehensive_system_test.py", line 545, in main
+    result = await tester.run_comprehensive_test()
+  File "C:\Users\AMD\sentinel\desktop-app\comprehensive_system_test.py", line 501, in run_comprehensive_test
+    result = await test_func()
+  File "C:\Users\AMD\sentinel\desktop-app\comprehensive_system_test.py", line 336, in test_system_optimization_hub
+    hub = SystemOptimizationHub()
+  File "C:\Users\AMD\sentinel\desktop-app\system_optimization_hub.py", line 113, in __init__
+    self.logger.info("🔍 Weave observability initialized for system optimization hub")
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\logging\__init__.py", line 1489, in info
+    self._log(INFO, msg, args, **kwargs)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\logging\__init__.py", line 1634, in _log
+    self.handle(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\logging\__init__.py", line 1644, in handle
+    self.callHandlers(record)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\sentry_sdk\integrations\logging.py", line 127, in sentry_patched_callhandlers
+    return old_callhandlers(self, record)
+Message: '🔍 Weave observability initialized for system optimization hub'
+Arguments: ()
+2025-07-31 14:03:18,681 - SystemOptimizationHub - INFO - 🔍 Weave observability initialized for system optimization hub
+[PASS] Hub Import: PASS
+   [INFO] System Optimization Hub imported successfully
+[PASS] Hub Initialization: PASS
+   [INFO] Hub initialized in test mode
+[PASS] Hub Configuration: PASS
+   [INFO] Hub configuration available
+
+================================================================================
+TEST: TEST 8: STRESS TESTING
+================================================================================
+⚡ Running stress tests...
+2025-07-31 14:03:18,721 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8000
+2025-07-31 14:03:22,808 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8000
+2025-07-31 14:03:26,870 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8000
+2025-07-31 14:03:30,898 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8000
+2025-07-31 14:03:34,937 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8000
+2025-07-31 14:03:38,997 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8000
+2025-07-31 14:03:43,031 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8000
+2025-07-31 14:03:47,076 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8000
+2025-07-31 14:03:51,142 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8000
+2025-07-31 14:03:55,204 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8000
+[PASS] Concurrent Requests: PASS
+   [INFO] 0/10 successful
+[PASS] Debugger Status Under Load: PASS
+   [INFO] Status retrieved successfully
+
+================================================================================
+TEST: TEST 9: SELF-HEALING CAPABILITIES
+================================================================================
+🛡️ Testing self-healing capabilities...
+[PASS] Guardian Protocol: PASS
+   [INFO] Guardian Protocol available
+[PASS] Phoenix Protocol: PASS
+   [INFO] Phoenix Protocol available
+[WARN] Self-Learning Module: WARN
+   [INFO] Import warning: SelfLearningModule.__init__() missing 1 required positional argument: 'db_manager'
+
+🧹 Cleaning up services...
+
+================================================================================
+COMPREHENSIVE SYSTEM TEST RESULTS - v5.0
+================================================================================
+⏱️  Total Execution Time: 81.57 seconds
+✅ Tests Passed: 8/9
+📊 Success Rate: 88.9%
+✅ MOST TESTS PASSED! System is operational with minor issues.

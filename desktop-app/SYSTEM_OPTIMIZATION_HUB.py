@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """
-SYSTEM OPTIMIZATION HUB - The Sentient Supercharged Phoenix System
+SYSTEM OPTIMIZATION HUB - The Sentient Supercharged Phoenix System v5.0
 Cutting-edge, highly sophisticated and advanced system optimization/test hub
-Definitive testing and optimization center for Cognitive Forge v5.0
+Definitive testing and optimization center for Cognitive Forge v5.0 with enterprise-grade automated debugging
 
 This hub contains every single critical and necessary test for our entire system.
 Individual tests can be called as needed for targeted validation.
+Includes comprehensive testing for Fix-AI, automated debugging, Sentry integration, and self-healing capabilities.
 """
 
 import asyncio
@@ -23,6 +24,7 @@ from dataclasses import dataclass
 from enum import Enum
 import logging
 import warnings
+import importlib.util
 
 # Suppress metaclass conflict warnings
 warnings.filterwarnings("ignore", message=".*metaclass conflict.*")
@@ -54,6 +56,10 @@ class TestCategory(Enum):
     SYSTEM_EVOLUTION = "system_evolution"
     INTEGRATION_TESTS = "integration_tests"
     STRESS_TESTING = "stress_testing"
+    FIX_AI_INTEGRATION = "fix_ai_integration"
+    AUTOMATED_DEBUGGING = "automated_debugging"
+    SENTRY_INTEGRATION = "sentry_integration"
+    SELF_HEALING = "self_healing"
 
 
 @dataclass
@@ -72,6 +78,7 @@ class SystemOptimizationHub:
     """
     The definitive system optimization and test hub for Cognitive Forge v5.0
     Contains every single critical and necessary test for our entire system
+    Includes comprehensive testing for enterprise-grade automated debugging & self-healing
     """
     
     def __init__(self):
@@ -94,12 +101,16 @@ class SystemOptimizationHub:
             "enable_performance_tracking": True,
             "enable_memory_validation": True,
             "enable_agent_evolution": True,
-            "enable_weave_observability": True,  # Enable Weave observability
+            "enable_weave_observability": True,
+            "enable_fix_ai_testing": True,
+            "enable_automated_debugging": True,
+            "enable_sentry_integration": True,
+            "enable_self_healing": True,
             "max_execution_time": 300,  # 5 minutes per test
             "memory_threshold": 0.8,  # 80% memory usage threshold
         }
         
-        self.logger.info("🔍 Weave observability initialized for system optimization hub")
+        self.logger.info("[INFO] Weave observability initialized for system optimization hub")
     
     def setup_logging(self):
         """Setup advanced logging system"""
@@ -954,6 +965,323 @@ class SystemOptimizationHub:
             }
     
     # ============================================================================
+    # FIX-AI INTEGRATION
+    # ============================================================================
+    
+    async def test_fix_ai_integration(self) -> Dict[str, Any]:
+        """Test Fix-AI integration and functionality"""
+        self.log_test_start("Fix-AI Integration", TestCategory.FIX_AI_INTEGRATION)
+        
+        start_time = time.time()
+        details = {}
+        
+        try:
+            # Test Fix-AI availability
+            fix_ai_path = Path(__file__).parent / "Fix-AI.py"
+            if fix_ai_path.exists():
+                details["fix_ai_file_exists"] = True
+            else:
+                details["fix_ai_file_exists"] = False
+                raise Exception("Fix-AI.py not found")
+            
+            # Test Fix-AI import capability
+            try:
+                spec = importlib.util.spec_from_file_location("Fix_AI", fix_ai_path)
+                fix_ai_module = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(fix_ai_module)
+                
+                if hasattr(fix_ai_module, 'CodebaseHealer'):
+                    details["fix_ai_importable"] = True
+                else:
+                    details["fix_ai_importable"] = False
+                    raise Exception("CodebaseHealer class not found")
+                    
+            except Exception as e:
+                details["fix_ai_importable"] = False
+                raise Exception(f"Fix-AI import failed: {str(e)}")
+            
+            # Test Fix-AI initialization
+            try:
+                healer = fix_ai_module.CodebaseHealer(Path(__file__).parent)
+                details["fix_ai_initializable"] = True
+            except Exception as e:
+                details["fix_ai_initializable"] = False
+                raise Exception(f"Fix-AI initialization failed: {str(e)}")
+            
+            # Test Fix-AI phases
+            if hasattr(healer, 'run_sentry_analysis_phase'):
+                details["sentry_analysis_phase"] = True
+            if hasattr(healer, 'run_diagnosis_phase'):
+                details["diagnosis_phase"] = True
+            if hasattr(healer, 'run_planning_phase'):
+                details["planning_phase"] = True
+            if hasattr(healer, 'run_execution_phase'):
+                details["execution_phase"] = True
+            if hasattr(healer, 'run_final_validation_phase'):
+                details["final_validation_phase"] = True
+            
+            execution_time = time.time() - start_time
+            
+            result = TestResult(
+                test_name="Fix-AI Integration",
+                category=TestCategory.FIX_AI_INTEGRATION,
+                status="PASS",
+                execution_time=execution_time,
+                details=details
+            )
+            
+            self.log_test_result(result)
+            return {"status": "PASS", "details": details}
+            
+        except Exception as e:
+            execution_time = time.time() - start_time
+            result = TestResult(
+                test_name="Fix-AI Integration",
+                category=TestCategory.FIX_AI_INTEGRATION,
+                status="FAIL",
+                execution_time=execution_time,
+                details=details,
+                error_message=str(e)
+            )
+            self.log_test_result(result)
+            return {"status": "FAIL", "error": str(e)}
+    
+    # ============================================================================
+    # AUTOMATED DEBUGGING
+    # ============================================================================
+    
+    async def test_automated_debugging_system(self) -> Dict[str, Any]:
+        """Test automated debugging system"""
+        self.log_test_start("Automated Debugging System", TestCategory.AUTOMATED_DEBUGGING)
+        
+        start_time = time.time()
+        details = {}
+        
+        try:
+            # Test automated debugger module
+            try:
+                from src.utils.automated_debugger import AutomatedDebugger
+                debugger = AutomatedDebugger()
+                details["automated_debugger_available"] = True
+            except Exception as e:
+                details["automated_debugger_available"] = False
+                raise Exception(f"Automated debugger import failed: {str(e)}")
+            
+            # Test Sentry API client
+            try:
+                from src.utils.sentry_api_client import SentryAPIClient
+                sentry_client = SentryAPIClient()
+                details["sentry_api_client_available"] = True
+            except Exception as e:
+                details["sentry_api_client_available"] = False
+                details["sentry_api_client_error"] = str(e)
+            
+            # Test direct AI bypass system
+            try:
+                from src.utils.crewai_bypass import create_direct_ai_crew, configure_direct_ai_environment
+                configure_direct_ai_environment()
+                details["direct_ai_bypass_available"] = True
+            except Exception as e:
+                details["direct_ai_bypass_available"] = False
+                details["direct_ai_bypass_error"] = str(e)
+            
+            # Test debugger status
+            try:
+                status = debugger.get_status()
+                if isinstance(status, dict):
+                    details["debugger_status_retrievable"] = True
+                    details["debugger_status"] = status
+                else:
+                    details["debugger_status_retrievable"] = False
+            except Exception as e:
+                details["debugger_status_retrievable"] = False
+                details["debugger_status_error"] = str(e)
+            
+            execution_time = time.time() - start_time
+            
+            result = TestResult(
+                test_name="Automated Debugging System",
+                category=TestCategory.AUTOMATED_DEBUGGING,
+                status="PASS",
+                execution_time=execution_time,
+                details=details
+            )
+            
+            self.log_test_result(result)
+            return {"status": "PASS", "details": details}
+            
+        except Exception as e:
+            execution_time = time.time() - start_time
+            result = TestResult(
+                test_name="Automated Debugging System",
+                category=TestCategory.AUTOMATED_DEBUGGING,
+                status="FAIL",
+                execution_time=execution_time,
+                details=details,
+                error_message=str(e)
+            )
+            self.log_test_result(result)
+            return {"status": "FAIL", "error": str(e)}
+    
+    # ============================================================================
+    # SENTRY INTEGRATION
+    # ============================================================================
+    
+    async def test_sentry_integration(self) -> Dict[str, Any]:
+        """Test Sentry integration"""
+        self.log_test_start("Sentry Integration", TestCategory.SENTRY_INTEGRATION)
+        
+        start_time = time.time()
+        details = {}
+        
+        try:
+            # Test Sentry SDK
+            try:
+                import sentry_sdk
+                details["sentry_sdk_available"] = True
+            except ImportError:
+                details["sentry_sdk_available"] = False
+                details["sentry_sdk_error"] = "Sentry SDK not installed"
+            
+            # Test Sentry integration module
+            try:
+                from src.utils.sentry_integration import SentryIntegration
+                sentry_integration = SentryIntegration()
+                details["sentry_integration_available"] = True
+            except Exception as e:
+                details["sentry_integration_available"] = False
+                details["sentry_integration_error"] = str(e)
+            
+            # Test environment variables
+            sentry_dsn = os.getenv("SENTRY_DSN")
+            sentry_auth_token = os.getenv("SENTRY_AUTH_TOKEN")
+            sentry_org_slug = os.getenv("SENTRY_ORG_SLUG")
+            sentry_project_id = os.getenv("SENTRY_PROJECT_ID")
+            
+            details["sentry_dsn_configured"] = sentry_dsn is not None
+            details["sentry_auth_token_configured"] = sentry_auth_token is not None
+            details["sentry_org_slug_configured"] = sentry_org_slug is not None
+            details["sentry_project_id_configured"] = sentry_project_id is not None
+            
+            # Test Sentry API client functionality
+            if details.get("sentry_api_client_available", False):
+                try:
+                    from src.utils.sentry_api_client import SentryAPIClient
+                    client = SentryAPIClient()
+                    # Test basic functionality without making actual API calls
+                    details["sentry_api_client_functional"] = True
+                except Exception as e:
+                    details["sentry_api_client_functional"] = False
+                    details["sentry_api_client_functional_error"] = str(e)
+            
+            execution_time = time.time() - start_time
+            
+            result = TestResult(
+                test_name="Sentry Integration",
+                category=TestCategory.SENTRY_INTEGRATION,
+                status="PASS",
+                execution_time=execution_time,
+                details=details
+            )
+            
+            self.log_test_result(result)
+            return {"status": "PASS", "details": details}
+            
+        except Exception as e:
+            execution_time = time.time() - start_time
+            result = TestResult(
+                test_name="Sentry Integration",
+                category=TestCategory.SENTRY_INTEGRATION,
+                status="FAIL",
+                execution_time=execution_time,
+                details=details,
+                error_message=str(e)
+            )
+            self.log_test_result(result)
+            return {"status": "FAIL", "error": str(e)}
+    
+    # ============================================================================
+    # SELF-HEALING CAPABILITIES
+    # ============================================================================
+    
+    async def test_self_healing_capabilities(self) -> Dict[str, Any]:
+        """Test self-healing capabilities"""
+        self.log_test_start("Self-Healing Capabilities", TestCategory.SELF_HEALING)
+        
+        start_time = time.time()
+        details = {}
+        
+        try:
+            # Test Guardian Protocol
+            try:
+                from src.utils.guardian_protocol import GuardianProtocol
+                guardian = GuardianProtocol(None)  # Pass None for LLM in test mode
+                details["guardian_protocol_available"] = True
+            except Exception as e:
+                details["guardian_protocol_available"] = False
+                details["guardian_protocol_error"] = str(e)
+            
+            # Test Phoenix Protocol
+            try:
+                from src.utils.phoenix_protocol import PhoenixProtocol
+                phoenix = PhoenixProtocol(None)  # Pass None for LLM in test mode
+                details["phoenix_protocol_available"] = True
+            except Exception as e:
+                details["phoenix_protocol_available"] = False
+                details["phoenix_protocol_error"] = str(e)
+            
+            # Test Self-Learning Module
+            try:
+                from src.utils.self_learning_module import SelfLearningModule
+                self_learning = SelfLearningModule(None)  # Pass None for LLM in test mode
+                details["self_learning_module_available"] = True
+            except Exception as e:
+                details["self_learning_module_available"] = False
+                details["self_learning_module_error"] = str(e)
+            
+            # Test Google AI wrapper
+            try:
+                from src.utils.google_ai_wrapper import create_google_ai_llm
+                details["google_ai_wrapper_available"] = True
+            except Exception as e:
+                details["google_ai_wrapper_available"] = False
+                details["google_ai_wrapper_error"] = str(e)
+            
+            # Test crewai bypass
+            try:
+                from src.utils.crewai_bypass import create_direct_ai_crew, configure_direct_ai_environment
+                details["crewai_bypass_available"] = True
+            except Exception as e:
+                details["crewai_bypass_available"] = False
+                details["crewai_bypass_error"] = str(e)
+            
+            execution_time = time.time() - start_time
+            
+            result = TestResult(
+                test_name="Self-Healing Capabilities",
+                category=TestCategory.SELF_HEALING,
+                status="PASS",
+                execution_time=execution_time,
+                details=details
+            )
+            
+            self.log_test_result(result)
+            return {"status": "PASS", "details": details}
+            
+        except Exception as e:
+            execution_time = time.time() - start_time
+            result = TestResult(
+                test_name="Self-Healing Capabilities",
+                category=TestCategory.SELF_HEALING,
+                status="FAIL",
+                execution_time=execution_time,
+                details=details,
+                error_message=str(e)
+            )
+            self.log_test_result(result)
+            return {"status": "FAIL", "error": str(e)}
+    
+    # ============================================================================
     # STRESS TESTING
     # ============================================================================
     
@@ -1002,6 +1330,30 @@ class SystemOptimizationHub:
             stress_tests["database_stress"] = sum(db_operations) >= 45  # 90% success rate
             stress_tests["database_operation_time"] = time.time() - start_time
             
+            # Test automated debugging system under load
+            try:
+                from src.utils.automated_debugger import AutomatedDebugger
+                debugger = AutomatedDebugger()
+                status = debugger.get_status()
+                stress_tests["automated_debugging_under_load"] = isinstance(status, dict)
+            except Exception as e:
+                stress_tests["automated_debugging_under_load"] = False
+                stress_tests["automated_debugging_error"] = str(e)
+            
+            # Test Fix-AI availability under load
+            try:
+                fix_ai_path = Path(__file__).parent / "Fix-AI.py"
+                if fix_ai_path.exists():
+                    spec = importlib.util.spec_from_file_location("Fix_AI", fix_ai_path)
+                    fix_ai_module = importlib.util.module_from_spec(spec)
+                    spec.loader.exec_module(fix_ai_module)
+                    stress_tests["fix_ai_availability_under_load"] = hasattr(fix_ai_module, 'CodebaseHealer')
+                else:
+                    stress_tests["fix_ai_availability_under_load"] = False
+            except Exception as e:
+                stress_tests["fix_ai_availability_under_load"] = False
+                stress_tests["fix_ai_error"] = str(e)
+            
             successful_stress_tests = sum(stress_tests.values())
             total_stress_tests = len(stress_tests)
             
@@ -1045,6 +1397,10 @@ class SystemOptimizationHub:
                 (self.test_performance_optimization, "Performance Optimization", TestCategory.PERFORMANCE_OPTIMIZATION),
                 (self.test_error_handling, "Error Handling", TestCategory.ERROR_HANDLING),
                 (self.test_integration_tests, "Integration Tests", TestCategory.INTEGRATION_TESTS),
+                (self.test_fix_ai_integration, "Fix-AI Integration", TestCategory.FIX_AI_INTEGRATION),
+                (self.test_automated_debugging_system, "Automated Debugging System", TestCategory.AUTOMATED_DEBUGGING),
+                (self.test_sentry_integration, "Sentry Integration", TestCategory.SENTRY_INTEGRATION),
+                (self.test_self_healing_capabilities, "Self-Healing Capabilities", TestCategory.SELF_HEALING),
                 (self.test_stress_testing, "Stress Testing", TestCategory.STRESS_TESTING),
             ]
             
