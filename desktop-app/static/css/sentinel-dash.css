@@ -1598,6 +1598,7 @@ body .wrapper .main-panel .content {
     padding: 24px 32px !important;
     margin: 0 !important;
     min-height: calc(100vh - 80px);
+    margin-top: 80px !important;
 }
 
 /* Navbar Optimization */
@@ -2478,6 +2479,8 @@ body .wrapper .main-panel .content .system-resources-modal {
     margin-top: 60px;
     position: relative;
     z-index: 1020;
+    display: flex;
+    flex-direction: column;
 }
 
 body .wrapper .main-panel .content .system-resources-modal .card-header {
@@ -2504,6 +2507,7 @@ body .wrapper .main-panel .content .system-resources-modal .card-body {
     flex: 1;
     display: flex;
     align-items: center;
+    min-height: 140px;
 }
 
 body .wrapper .main-panel .content .resource-metrics-compact {
@@ -2511,6 +2515,8 @@ body .wrapper .main-panel .content .resource-metrics-compact {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    justify-content: space-between;
+    height: 100%;
 }
 
 body .wrapper .main-panel .content .resource-item-compact {
@@ -2564,45 +2570,304 @@ body .wrapper .main-panel .content .resource-value-compact {
     text-align: right;
 }
 
-/* Responsive adjustments for compact resources */
+/* Top Row Layout Optimization */
+body .wrapper .main-panel .content .row.mb-4:first-child {
+    margin-top: 0 !important;
+}
+
+body .wrapper .main-panel .content .col-lg-6.col-md-12.mb-4 {
+    margin-bottom: 0 !important;
+}
+
+/* Agent Activity Modal Positioning */
+body .wrapper .main-panel .content .agent-activity-modal {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+body .wrapper .main-panel .content .agent-activity-modal .card-header {
+    padding: 16px 20px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px 12px 0 0;
+    flex-shrink: 0;
+}
+
+body .wrapper .main-panel .content .agent-activity-modal .card-body {
+    padding: 16px 20px !important;
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+}
+
+body .wrapper .main-panel .content .agent-activity-modal .activity-list {
+    width: 100%;
+    max-height: none;
+    overflow-y: auto;
+    padding: 0;
+    margin: 0;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Consistent Spacing Throughout */
+body .wrapper .main-panel .content .row {
+    margin: 0 -12px !important;
+}
+
+body .wrapper .main-panel .content .row > [class*="col-"] {
+    padding: 0 12px !important;
+}
+
+body .wrapper .main-panel .content .row.mb-4 {
+    margin-bottom: 24px !important;
+}
+
+/* Responsive adjustments for compact components */
 @media (max-width: 768px) {
-    body .wrapper .main-panel .content .system-resources-modal {
-        margin-top: 50px;
-        max-height: 180px;
+    body .wrapper .main-panel .content {
+        margin-top: 70px !important;
     }
     
-    body .wrapper .main-panel .content .resource-label-compact {
-        font-size: 10px;
-        min-width: 45px;
+    body .wrapper .main-panel .content .status-indicators-compact,
+    body .wrapper .main-panel .content .performance-metrics-compact {
+        min-height: 120px;
     }
     
-    body .wrapper .main-panel .content .resource-bar-compact {
-        margin: 0 8px;
+    body .wrapper .main-panel .content .status-label,
+    body .wrapper .main-panel .content .metric-label-compact {
+        font-size: 11px;
     }
     
-    body .wrapper .main-panel .content .resource-value-compact {
+    body .wrapper .main-panel .content .status-badge-compact {
+        padding: 3px 6px;
         font-size: 9px;
-        min-width: 20px;
+    }
+    
+    body .wrapper .main-panel .content .metric-value-compact {
+        font-size: 11px;
+    }
+    
+    body .wrapper .main-panel .content .status-indicators-compact,
+    body .wrapper .main-panel .content .performance-metrics-compact {
+        gap: 10px;
+    }
+    
+    body .wrapper .main-panel .content .status-indicator-compact,
+    body .wrapper .main-panel .content .metric-item-compact {
+        padding: 6px 0;
     }
 }
 
 @media (max-width: 576px) {
-    body .wrapper .main-panel .content .system-resources-modal {
-        margin-top: 45px;
-        max-height: 160px;
+    body .wrapper .main-panel .content {
+        margin-top: 60px !important;
     }
     
-    body .wrapper .main-panel .content .resource-label-compact {
-        font-size: 9px;
-        min-width: 40px;
+    body .wrapper .main-panel .content .status-indicators-compact,
+    body .wrapper .main-panel .content .performance-metrics-compact {
+        min-height: 100px;
     }
     
-    body .wrapper .main-panel .content .resource-bar-compact {
-        margin: 0 6px;
+    body .wrapper .main-panel .content .status-label,
+    body .wrapper .main-panel .content .metric-label-compact {
+        font-size: 10px;
     }
     
-    body .wrapper .main-panel .content .resource-value-compact {
+    body .wrapper .main-panel .content .status-badge-compact {
+        padding: 2px 5px;
         font-size: 8px;
-        min-width: 18px;
+    }
+    
+    body .wrapper .main-panel .content .metric-value-compact {
+        font-size: 10px;
+    }
+    
+    body .wrapper .main-panel .content .status-indicators-compact,
+    body .wrapper .main-panel .content .performance-metrics-compact {
+        gap: 8px;
+    }
+    
+    body .wrapper .main-panel .content .status-indicator-compact,
+    body .wrapper .main-panel .content .metric-item-compact {
+        padding: 5px 0;
+    }
+}
+
+/* Active Missions Header Optimization */
+body .wrapper .main-panel .content .card .card-header .d-flex {
+    width: 100%;
+}
+
+body .wrapper .main-panel .content .card .card-header .card-title {
+    margin-bottom: 4px !important;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+body .wrapper .main-panel .content .card .card-header .card-category {
+    margin-bottom: 0 !important;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+body .wrapper .main-panel .content .card .card-header .dropdown {
+    margin-left: 16px;
+}
+
+body .wrapper .main-panel .content .card .card-header .btn-icon {
+    padding: 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
+}
+
+body .wrapper .main-panel .content .card .card-header .btn-icon:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+body .wrapper .main-panel .content .card .card-header .btn-icon i {
+    font-size: 14px;
+}
+
+/* Responsive adjustments for header */
+@media (max-width: 768px) {
+    body .wrapper .main-panel .content .card .card-header .card-title {
+        font-size: 15px;
+    }
+    
+    body .wrapper .main-panel .content .card .card-header .card-category {
+        font-size: 11px;
+    }
+    
+    body .wrapper .main-panel .content .card .card-header .btn-icon {
+        padding: 6px;
+    }
+    
+    body .wrapper .main-panel .content .card .card-header .btn-icon i {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 576px) {
+    body .wrapper .main-panel .content .card .card-header .card-title {
+        font-size: 14px;
+    }
+    
+    body .wrapper .main-panel .content .card .card-header .card-category {
+        font-size: 10px;
+    }
+    
+    body .wrapper .main-panel .content .card .card-header .btn-icon {
+        padding: 5px;
+    }
+    
+    body .wrapper .main-panel .content .card .card-header .btn-icon i {
+        font-size: 12px;
+    }
+}
+
+/* Active Missions Container Stretching */
+body .wrapper .main-panel .content .active-missions-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+body .wrapper .main-panel .content .active-missions-container .card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 24px !important;
+}
+
+body .wrapper .main-panel .content .active-missions-container .table-responsive {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+body .wrapper .main-panel .content .active-missions-container .table {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+body .wrapper .main-panel .content .active-missions-container .table tbody {
+    flex: 1;
+}
+
+/* No Missions Message Styling */
+body .wrapper .main-panel .content .no-missions-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    min-height: 200px;
+}
+
+body .wrapper .main-panel .content .no-missions-message i {
+    color: rgba(255, 255, 255, 0.4) !important;
+    margin-bottom: 16px;
+}
+
+body .wrapper .main-panel .content .no-missions-message p {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.6) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+/* Responsive adjustments for Active Missions container */
+@media (max-width: 768px) {
+    body .wrapper .main-panel .content .active-missions-container .card-body {
+        padding: 16px 20px !important;
+    }
+    
+    body .wrapper .main-panel .content .no-missions-message {
+        padding: 30px 16px;
+        min-height: 150px;
+    }
+    
+    body .wrapper .main-panel .content .no-missions-message i {
+        font-size: 1.5rem !important;
+        margin-bottom: 12px;
+    }
+    
+    body .wrapper .main-panel .content .no-missions-message p {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 576px) {
+    body .wrapper .main-panel .content .active-missions-container .card-body {
+        padding: 12px 16px !important;
+    }
+    
+    body .wrapper .main-panel .content .no-missions-message {
+        padding: 24px 12px;
+        min-height: 120px;
+    }
+    
+    body .wrapper .main-panel .content .no-missions-message i {
+        font-size: 1.25rem !important;
+        margin-bottom: 10px;
+    }
+    
+    body .wrapper .main-panel .content .no-missions-message p {
+        font-size: 12px;
     }
 }

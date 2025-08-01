@@ -107,124 +107,31 @@
 
             <!-- Content -->
             <div class="content" x-data="sentinelApp()">
-                <!-- Top Row: System Status & System Resources -->
-                <div class="row mb-4">
-                    <div class="col-lg-9 col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">System Status Overview</h4>
-                                <p class="card-category">Real-time service health monitoring</p>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-3 col-sm-6 mb-3">
-                                        <div class="status-card">
-                                            <div class="status-icon">
-                                                <i class="fas fa-server"></i>
-                                            </div>
-                                            <div class="status-info">
-                                                <h5>API Server</h5>
-                                                <span class="status-badge online">Online</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-6 mb-3">
-                                        <div class="status-card">
-                                            <div class="status-icon">
-                                                <i class="fas fa-brain"></i>
-                                            </div>
-                                            <div class="status-info">
-                                                <h5>Cognitive Engine</h5>
-                                                <span class="status-badge online">Active</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-6 mb-3">
-                                        <div class="status-card">
-                                            <div class="status-icon">
-                                                <i class="fas fa-database"></i>
-                                            </div>
-                                            <div class="status-info">
-                                                <h5>Database</h5>
-                                                <span class="status-badge online">Connected</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-6 mb-3">
-                                        <div class="status-card">
-                                            <div class="status-icon">
-                                                <i class="fas fa-robot"></i>
-                                            </div>
-                                            <div class="status-info">
-                                                <h5>AI Models</h5>
-                                                <span class="status-badge online">Ready</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-12">
-                        <div class="card system-resources-modal">
-                            <div class="card-header">
-                                <h4 class="card-title">System Resources</h4>
-                                <p class="card-category">Real-time monitoring</p>
-                            </div>
-                            <div class="card-body">
-                                <div class="resource-metrics-compact">
-                                    <div class="resource-item-compact">
-                                        <div class="resource-label-compact">CPU</div>
-                                        <div class="resource-bar-compact">
-                                            <div class="resource-fill cpu" style="width: 45%"></div>
-                                        </div>
-                                        <div class="resource-value-compact">45%</div>
-                                    </div>
-                                    <div class="resource-item-compact">
-                                        <div class="resource-label-compact">Memory</div>
-                                        <div class="resource-bar-compact">
-                                            <div class="resource-fill memory" style="width: 62%"></div>
-                                        </div>
-                                        <div class="resource-value-compact">62%</div>
-                                    </div>
-                                    <div class="resource-item-compact">
-                                        <div class="resource-label-compact">Network</div>
-                                        <div class="resource-bar-compact">
-                                            <div class="resource-fill network" style="width: 28%"></div>
-                                        </div>
-                                        <div class="resource-value-compact">28%</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Middle Row: Performance Metrics -->
+                <!-- Top Row: Compact System Overview -->
                 <div class="row mb-4">
                     <div class="col-lg-6 col-md-12 mb-4">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">AI Service Performance</h4>
-                                <p class="card-category">Response times & throughput</p>
+                                <h4 class="card-title">System Status</h4>
+                                <p class="card-category">Service health</p>
                             </div>
                             <div class="card-body">
-                                <div class="service-metrics">
-                                    <div class="metric-item">
-                                        <div class="metric-label">Avg Response Time</div>
-                                        <div class="metric-value" x-text="getAverageResponseTime() + 's'">0s</div>
+                                <div class="status-indicators-compact">
+                                    <div class="status-indicator-compact">
+                                        <span class="status-label">API Server</span>
+                                        <span class="status-badge-compact online">Online</span>
                                     </div>
-                                    <div class="metric-item">
-                                        <div class="metric-label">Success Rate</div>
-                                        <div class="metric-value" x-text="getSuccessRate().toFixed(2) + '%'">0.00%</div>
+                                    <div class="status-indicator-compact">
+                                        <span class="status-label">Cognitive Engine</span>
+                                        <span class="status-badge-compact online">Active</span>
                                     </div>
-                                    <div class="metric-item">
-                                        <div class="metric-label">Active Agents</div>
-                                        <div class="metric-value" x-text="getActiveAgentCount()">0</div>
+                                    <div class="status-indicator-compact">
+                                        <span class="status-label">Database</span>
+                                        <span class="status-badge-compact online">Connected</span>
                                     </div>
-                                    <div class="metric-item">
-                                        <div class="metric-label">Total Missions</div>
-                                        <div class="metric-value" x-text="missions.length">0</div>
+                                    <div class="status-indicator-compact">
+                                        <span class="status-label">AI Models</span>
+                                        <span class="status-badge-compact online">Ready</span>
                                     </div>
                                 </div>
                             </div>
@@ -233,44 +140,53 @@
                     <div class="col-lg-6 col-md-12 mb-4">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Agent Activity</h4>
-                                <p class="card-category">Live Updates</p>
+                                <h4 class="card-title">AI Performance</h4>
+                                <p class="card-category">Service metrics</p>
                             </div>
                             <div class="card-body">
-                                <div class="activity-list">
-                                    <template x-for="activity in recentActivity" :key="activity.id">
-                                        <div class="activity-item">
-                                            <div class="activity-icon">
-                                                <i class="fas" x-bind:class="activity.icon"></i>
-                                            </div>
-                                            <div class="activity-content">
-                                                <span x-text="activity.message"></span>
-                                                <small x-text="activity.time"></small>
-                                            </div>
-                                        </div>
-                                    </template>
+                                <div class="performance-metrics-compact">
+                                    <div class="metric-item-compact">
+                                        <span class="metric-label-compact">Response Time</span>
+                                        <span class="metric-value-compact" x-text="getAverageResponseTime() + 's'">0s</span>
+                                    </div>
+                                    <div class="metric-item-compact">
+                                        <span class="metric-label-compact">Success Rate</span>
+                                        <span class="metric-value-compact" x-text="getSuccessRate().toFixed(2) + '%'">0.00%</span>
+                                    </div>
+                                    <div class="metric-item-compact">
+                                        <span class="metric-label-compact">Active Agents</span>
+                                        <span class="metric-value-compact" x-text="getActiveAgentCount()">0</span>
+                                    </div>
+                                    <div class="metric-item-compact">
+                                        <span class="metric-label-compact">Total Missions</span>
+                                        <span class="metric-value-compact" x-text="missions.length">0</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Bottom Row: Missions & Activity -->
-                <div class="row">
+                <!-- Middle Row: Missions & Activity -->
+                <div class="row mb-4">
                     <div class="col-lg-8 col-md-12 mb-4">
-                        <div class="card">
+                        <div class="card active-missions-container">
                             <div class="card-header">
-                                <h4 class="card-title">Active Missions</h4>
-                                <p class="card-category">Real-time mission queue</p>
-                                <div class="dropdown">
-                                    <button type="button" class="btn btn-link dropdown-toggle btn-icon" data-toggle="dropdown">
-                                        <i class="fas fa-cog"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-navbar">
-                                        <a class="dropdown-item" href="javascript:void(0)">Refresh</a>
-                                        <a class="dropdown-item" href="javascript:void(0)">Settings</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="javascript:void(0)">Clear All</a>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h4 class="card-title mb-1">Active Missions</h4>
+                                        <p class="card-category mb-0">Real-time mission queue</p>
+                                    </div>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn btn-link dropdown-toggle btn-icon" data-toggle="dropdown">
+                                            <i class="fas fa-cog"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-navbar">
+                                            <a class="dropdown-item" href="javascript:void(0)">Refresh</a>
+                                            <a class="dropdown-item" href="javascript:void(0)">Settings</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="javascript:void(0)">Clear All</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -287,6 +203,16 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <template x-if="missions.length === 0">
+                                                <tr>
+                                                    <td colspan="5" class="text-center py-4">
+                                                        <div class="no-missions-message">
+                                                            <i class="fas fa-inbox fa-2x mb-3 text-muted"></i>
+                                                            <p class="text-muted mb-0">No Active Missions</p>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </template>
                                             <template x-for="mission in missions" :key="mission.id">
                                                 <tr>
                                                     <td>
@@ -331,16 +257,24 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12 mb-4">
-                        <div class="card">
+                        <div class="card agent-activity-modal">
                             <div class="card-header">
-                                <h4 class="card-title">System Logs</h4>
-                                <p class="card-category">Real-time monitoring</p>
+                                <h4 class="card-title">Agent Activity</h4>
+                                <p class="card-category">Live Updates</p>
                             </div>
                             <div class="card-body">
-                                <div class="log-container">
-                                    <div id="live-logs">
-                                        <!-- Live logs will be populated here -->
-                                    </div>
+                                <div class="activity-list">
+                                    <template x-for="activity in recentActivity" :key="activity.id">
+                                        <div class="activity-item">
+                                            <div class="activity-icon">
+                                                <i class="fas" x-bind:class="activity.icon"></i>
+                                            </div>
+                                            <div class="activity-content">
+                                                <span x-text="activity.message"></span>
+                                                <small x-text="activity.time"></small>
+                                            </div>
+                                        </div>
+                                    </template>
                                 </div>
                             </div>
                         </div>
