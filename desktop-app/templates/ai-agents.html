@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>AI Agents | Sentinel Command Center</title>
+    
+    <!-- Fonts and icons -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- CSS Files -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/css/sentinel-dash.css" rel="stylesheet" />
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Skinny Sidebar -->
+        <div class="sidebar sidebar-mini" data-color="blue">
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="javascript:void(0)" class="simple-text logo-mini">
+                        SC
+                    </a>
+                </div>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/" title="Dashboard">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/missions" title="Missions">
+                            <i class="fas fa-rocket"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/ai-agents" title="AI Agents">
+                            <span class="ai-icon">AI</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/settings" title="Settings">
+                            <i class="fas fa-cog"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Panel -->
+        <div class="main-panel">
+            <!-- Navigation -->
+            <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
+                <div class="container-fluid">
+                    <div class="navbar-wrapper">
+                        <div class="navbar-toggle d-inline">
+                            <button type="button" class="navbar-toggler">
+                                <span class="navbar-toggler-bar bar1"></span>
+                                <span class="navbar-toggler-bar bar2"></span>
+                                <span class="navbar-toggler-bar bar3"></span>
+                            </button>
+                        </div>
+                        <a class="navbar-brand" href="javascript:void(0)">AI Agent Management</a>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navigation">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="search-bar input-group">
+                                <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal">
+                                    <i class="fas fa-search"></i>
+                                    <span class="d-lg-none d-md-block">Search</span>
+                                </button>
+                            </li>
+                            <li class="dropdown nav-item">
+                                <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                    <div class="notification d-none d-lg-block d-xl-block"></div>
+                                    <i class="fas fa-bell"></i>
+                                    <p class="d-lg-none">Notifications</p>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
+                                    <li class="nav-link"><a href="#" class="nav-item dropdown-item">Agent status updated</a></li>
+                                    <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">New agent deployed</a></li>
+                                    <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Agent optimization complete</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown nav-item">
+                                <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                    <div class="photo">
+                                        <img src="https://via.placeholder.com/40x40/4A90E2/ffffff?text=SC" alt="Profile Photo">
+                                    </div>
+                                    <b class="caret d-none d-lg-block d-xl-block"></b>
+                                    <p class="d-lg-none">User</p>
+                                </a>
+                                <ul class="dropdown-menu dropdown-navbar">
+                                    <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Profile</a></li>
+                                    <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Settings</a></li>
+                                    <li class="dropdown-divider"></li>
+                                    <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Log out</a></li>
+                                </ul>
+                            </li>
+                            <li class="separator d-lg-none"></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Content -->
+            <div class="content" x-data="aiAgentsApp()">
+                <!-- AI Agent Status Overview -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">AI Agent Status Overview</h4>
+                                <p class="card-category">Real-time agent health monitoring</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="status-card">
+                                            <div class="status-icon">
+                                                <i class="fas fa-brain"></i>
+                                            </div>
+                                            <div class="status-info">
+                                                <h5>Planning Agent</h5>
+                                                <span class="status-badge online">Active</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="status-card">
+                                            <div class="status-icon">
+                                                <i class="fas fa-cogs"></i>
+                                            </div>
+                                            <div class="status-info">
+                                                <h5>Execution Agent</h5>
+                                                <span class="status-badge online">Running</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="status-card">
+                                            <div class="status-icon">
+                                                <i class="fas fa-check-circle"></i>
+                                            </div>
+                                            <div class="status-info">
+                                                <h5>Review Agent</h5>
+                                                <span class="status-badge online">Ready</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-6">
+                                        <div class="status-card">
+                                            <div class="status-icon">
+                                                <i class="fas fa-lightbulb"></i>
+                                            </div>
+                                            <div class="status-info">
+                                                <h5>Debug Agent</h5>
+                                                <span class="status-badge online">Idle</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agent Performance and Activity -->
+                <div class="row">
+                    <div class="col-lg-8 col-md-12">
+                        <div class="card card-tasks">
+                            <div class="card-header">
+                                <h6 class="title d-inline">Agent Performance</h6>
+                                <p class="card-category d-inline">real-time metrics</p>
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-link dropdown-toggle btn-icon" data-toggle="dropdown">
+                                        <i class="fas fa-cog"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-navbar">
+                                        <a class="dropdown-item" href="javascript:void(0)">Refresh</a>
+                                        <a class="dropdown-item" href="javascript:void(0)">Settings</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="javascript:void(0)">Export Data</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-full-width table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="checkbox" checked>
+                                                            <span class="form-check-sign">
+                                                                <span class="check"></span>
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <p class="title">Planning Agent</p>
+                                                    <p class="text-muted">Mission analysis and strategy</p>
+                                                </td>
+                                                <td class="td-actions text-right">
+                                                    <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="View Details">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="checkbox" checked>
+                                                            <span class="form-check-sign">
+                                                                <span class="check"></span>
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <p class="title">Execution Agent</p>
+                                                    <p class="text-muted">Task execution and implementation</p>
+                                                </td>
+                                                <td class="td-actions text-right">
+                                                    <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="View Details">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="checkbox">
+                                                            <span class="form-check-sign">
+                                                                <span class="check"></span>
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <p class="title">Review Agent</p>
+                                                    <p class="text-muted">Quality assurance and validation</p>
+                                                </td>
+                                                <td class="td-actions text-right">
+                                                    <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="View Details">
+                                                        <i class="fas fa-eye"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Agent Activity</h4>
+                                <p class="card-category">Live Updates</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="activity-list">
+                                    <div class="activity-item">
+                                        <div class="activity-icon">
+                                            <i class="fas fa-brain"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <span>Planning Agent analyzing mission requirements</span>
+                                            <small>2 minutes ago</small>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon">
+                                            <i class="fas fa-cogs"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <span>Execution Agent completed task #156</span>
+                                            <small>5 minutes ago</small>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon">
+                                            <i class="fas fa-check-circle"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <span>Review Agent validated mission results</span>
+                                            <small>8 minutes ago</small>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon">
+                                            <i class="fas fa-lightbulb"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <span>Debug Agent identified optimization opportunity</span>
+                                            <small>12 minutes ago</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Service Monitoring -->
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Agent Performance Metrics</h4>
+                                <p class="card-category">Response times & throughput</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="service-metrics">
+                                    <div class="metric-item">
+                                        <div class="metric-label">Avg Response Time</div>
+                                        <div class="metric-value">1.2s</div>
+                                    </div>
+                                    <div class="metric-item">
+                                        <div class="metric-label">Success Rate</div>
+                                        <div class="metric-value">94.5%</div>
+                                    </div>
+                                    <div class="metric-item">
+                                        <div class="metric-label">Active Agents</div>
+                                        <div class="metric-value">4</div>
+                                    </div>
+                                    <div class="metric-item">
+                                        <div class="metric-label">Total Tasks</div>
+                                        <div class="metric-value">156</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Agent Resources</h4>
+                                <p class="card-category">Memory & Processing</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="resource-metrics">
+                                    <div class="resource-item">
+                                        <div class="resource-label">Memory Usage</div>
+                                        <div class="resource-bar">
+                                            <div class="resource-fill" style="width: 45%"></div>
+                                        </div>
+                                        <div class="resource-value">45%</div>
+                                    </div>
+                                    <div class="resource-item">
+                                        <div class="resource-label">CPU Usage</div>
+                                        <div class="resource-bar">
+                                            <div class="resource-fill" style="width: 62%"></div>
+                                        </div>
+                                        <div class="resource-value">62%</div>
+                                    </div>
+                                    <div class="resource-item">
+                                        <div class="resource-label">Network I/O</div>
+                                        <div class="resource-bar">
+                                            <div class="resource-fill" style="width: 28%"></div>
+                                        </div>
+                                        <div class="resource-value">28%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agent Logs and Controls -->
+                <div class="row">
+                    <div class="col-lg-8 col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Agent Logs</h4>
+                                <p class="card-category">Real-time monitoring</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="log-container" style="height: 300px; overflow-y: auto; background: #1e1e2f; color: #fff; padding: 15px; border-radius: 5px; font-family: monospace; font-size: 12px;">
+                                    <div id="agent-logs">
+                                        <!-- Agent logs will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Agent Controls</h4>
+                                <p class="card-category">Management actions</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="quick-actions">
+                                    <button class="btn btn-primary btn-block mb-3">
+                                        <i class="fas fa-play"></i>
+                                        Deploy New Agent
+                                    </button>
+                                    <button class="btn btn-info btn-block mb-3">
+                                        <i class="fas fa-sync"></i>
+                                        Restart All Agents
+                                    </button>
+                                    <button class="btn btn-success btn-block mb-3">
+                                        <i class="fas fa-download"></i>
+                                        Update Agents
+                                    </button>
+                                    <button class="btn btn-warning btn-block">
+                                        <i class="fas fa-cog"></i>
+                                        Configure Agents
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="copyright">
+                        © 2024 Sentinel Command Center. All rights reserved.
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Search Modal -->
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="searchModalLabel">Search</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control" placeholder="Search agents, logs, or configurations...">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/ai-agents.js"></script>
+</body>
+</html> 

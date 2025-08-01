@@ -195,3 +195,416 @@
 [32m2025-08-01 14:14:07.854[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
 [32m2025-08-01 14:14:07.893[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /api/events/stream | Client: 127.0.0.1[0m
 [32m2025-08-01 14:14:07.896[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /api/events/stream | Time: 0.003s[0m
+[32m2025-08-01 15:04:26.542[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET / | Client: 127.0.0.1[0m
+[32m2025-08-01 15:04:26.552[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET / | Time: 0.009s[0m
+[32m2025-08-01 15:04:26.680[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /static/css/sentinel-dash.css | Client: 127.0.0.1[0m
+[32m2025-08-01 15:04:26.684[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /static/css/sentinel-dash.css | Time: 0.003s[0m
+[32m2025-08-01 15:04:27.177[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:04:27.189[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.012s[0m
+[32m2025-08-01 15:04:32.178[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:04:32.184[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:04:37.178[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:04:37.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:04:42.492[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:04:42.495[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:04:47.178[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:04:47.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:04:52.180[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:04:52.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.002s[0m
+[32m2025-08-01 15:04:57.179[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:04:57.188[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.009s[0m
+[32m2025-08-01 15:05:02.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:05:02.188[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.007s[0m
+[32m2025-08-01 15:05:07.176[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:05:07.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:05:12.177[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:05:12.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:05:17.177[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:05:17.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:05:22.190[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:05:22.194[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:05:27.180[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:05:27.186[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:05:32.180[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:05:32.187[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:05:37.180[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:05:37.184[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:05:43.426[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:05:43.432[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:05:47.179[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:05:47.183[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:05:52.176[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:05:52.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:05:57.180[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:05:57.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:06:02.187[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:06:02.190[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:06:07.496[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:06:07.501[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.002s[0m
+[32m2025-08-01 15:06:12.186[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:06:12.190[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:06:17.189[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:06:17.195[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:06:22.178[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:06:22.183[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:06:27.498[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:06:27.503[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:06:32.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:06:32.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:06:37.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:06:37.186[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:06:42.183[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:06:42.187[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:06:47.175[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:06:47.179[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:06:52.179[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:06:52.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:06:57.504[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:06:57.507[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.002s[0m
+[32m2025-08-01 15:07:02.189[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:07:02.194[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:07:07.179[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:07:07.183[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:07:12.184[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:07:12.189[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:07:17.496[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:07:17.501[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:07:22.187[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:07:22.190[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:07:27.187[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:07:27.191[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:07:32.505[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:07:32.508[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:07:37.183[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:07:37.187[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:07:42.176[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:07:42.180[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:07:47.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:07:47.192[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:07:52.496[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:07:52.501[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:07:57.177[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:07:57.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:08:02.178[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:08:02.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.007s[0m
+[32m2025-08-01 15:08:07.187[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:08:07.190[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:08:12.176[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:08:12.180[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:08:17.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:08:17.190[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:08:22.180[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:08:22.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.002s[0m
+[32m2025-08-01 15:08:27.489[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:08:27.492[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:08:32.178[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:08:32.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:08:37.177[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:08:37.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:08:42.184[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:08:42.188[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:08:47.498[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:08:47.501[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:08:52.178[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:08:52.183[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:08:57.190[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:08:57.195[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:09:02.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:09:02.188[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:09:07.178[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:09:07.188[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.010s[0m
+[32m2025-08-01 15:09:13.408[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:09:13.414[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:09:18.101[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:09:18.105[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:09:23.100[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:09:23.104[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:09:27.178[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:09:27.184[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:09:32.187[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:09:32.192[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:09:37.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:09:37.183[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.002s[0m
+[32m2025-08-01 15:09:42.492[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:09:42.497[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:09:47.188[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:09:47.193[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:09:52.191[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:09:52.195[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:09:57.184[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:09:57.186[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.002s[0m
+[32m2025-08-01 15:10:02.189[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:10:02.196[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.007s[0m
+[32m2025-08-01 15:10:07.190[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:10:07.195[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:10:12.178[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:10:12.184[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:10:17.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:10:17.186[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:10:22.504[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:10:22.506[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.002s[0m
+[32m2025-08-01 15:10:27.180[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:10:27.183[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:10:32.188[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:10:32.192[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:10:37.177[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:10:37.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:10:42.488[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:10:42.492[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:10:47.184[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:10:47.184[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.000s[0m
+[32m2025-08-01 15:10:53.107[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:10:53.110[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:10:58.102[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:10:58.108[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:11:03.104[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:11:03.110[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:11:07.183[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:11:07.187[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:11:12.179[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:11:12.183[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:11:17.183[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:11:17.188[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:11:22.495[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:11:22.497[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.002s[0m
+[32m2025-08-01 15:11:27.180[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:11:27.184[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:11:32.180[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:11:32.184[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:11:37.190[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:11:37.195[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:11:42.180[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:11:42.184[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:11:47.502[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:11:47.504[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.002s[0m
+[32m2025-08-01 15:11:52.178[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:11:52.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:11:57.190[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:11:57.194[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:12:02.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:12:02.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:12:07.490[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:12:07.496[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:12:12.194[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:12:12.198[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:12:17.183[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:12:17.188[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:12:22.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:12:22.187[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:12:27.187[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:12:27.192[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:12:32.495[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:12:32.501[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:12:37.183[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:12:37.192[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.009s[0m
+[32m2025-08-01 15:12:42.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:12:42.189[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.008s[0m
+[32m2025-08-01 15:12:47.179[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:12:47.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:12:52.178[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:12:52.183[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:12:57.184[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:12:57.188[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:13:02.189[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:13:02.196[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.007s[0m
+[32m2025-08-01 15:13:07.183[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:13:07.190[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.008s[0m
+[32m2025-08-01 15:13:12.184[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:13:12.202[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.018s[0m
+[32m2025-08-01 15:13:17.192[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:13:17.199[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.007s[0m
+[32m2025-08-01 15:13:22.178[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:13:22.184[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:13:27.184[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:13:27.190[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:13:32.180[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:13:32.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:13:37.491[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:13:37.495[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:13:42.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:13:42.186[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:13:47.180[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:13:47.186[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.007s[0m
+[32m2025-08-01 15:13:52.178[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:13:52.183[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:13:57.184[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:13:57.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.002s[0m
+[32m2025-08-01 15:14:02.180[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:14:02.186[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:14:07.503[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:14:07.507[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:14:12.186[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:14:12.190[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:14:17.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:14:17.188[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:14:22.179[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:14:22.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:14:27.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:14:27.184[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.002s[0m
+[32m2025-08-01 15:14:32.192[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:14:32.197[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:14:37.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:14:37.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:14:42.180[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:14:42.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:14:47.176[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:14:47.180[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:14:52.189[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:14:52.193[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:14:57.495[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:14:57.500[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:15:02.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:15:02.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:15:07.191[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:15:07.198[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.007s[0m
+[32m2025-08-01 15:15:12.191[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:15:12.193[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:15:17.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:15:17.190[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:15:22.184[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:15:22.188[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:15:27.190[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:15:27.195[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:15:32.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:15:32.191[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:15:37.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:15:37.187[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:15:42.188[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:15:42.194[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.007s[0m
+[32m2025-08-01 15:15:47.184[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:15:47.189[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:15:52.189[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:15:52.193[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:15:57.180[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:15:57.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:16:02.177[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:16:02.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:16:07.490[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:16:07.497[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.008s[0m
+[32m2025-08-01 15:16:12.187[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:16:12.193[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:16:17.179[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:16:17.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:16:22.178[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:16:22.184[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:16:27.180[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:16:27.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:16:32.191[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:16:32.196[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:16:37.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:16:37.189[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:16:42.177[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:16:42.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:16:47.177[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:16:47.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:16:52.177[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:16:52.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:16:57.180[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:16:57.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.002s[0m
+[32m2025-08-01 15:17:02.190[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:17:02.194[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:17:07.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:17:07.187[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:17:12.178[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:17:12.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:17:17.179[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:17:17.184[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:17:22.179[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:17:22.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:17:27.178[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:17:27.183[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:17:32.178[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:17:32.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:17:37.490[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:17:37.495[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:17:42.187[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:17:42.189[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:17:47.190[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:17:47.194[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:17:52.178[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:17:52.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:17:57.502[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:17:57.505[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:18:02.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:18:02.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:18:07.192[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:18:07.196[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:18:12.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:18:12.192[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.007s[0m
+[32m2025-08-01 15:18:17.177[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:18:17.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:18:22.179[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:18:22.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:18:27.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:18:27.191[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:18:32.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:18:32.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:18:37.188[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:18:37.193[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:18:42.492[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:18:42.497[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:18:47.189[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:18:47.189[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.000s[0m
+[32m2025-08-01 15:18:52.177[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:18:52.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:18:57.177[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:18:57.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:19:02.183[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:19:02.187[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:19:07.190[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:19:07.196[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:19:12.178[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:19:12.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.007s[0m
+[32m2025-08-01 15:19:17.175[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:19:17.180[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:19:22.505[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:19:22.509[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:19:27.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:19:27.186[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:19:32.179[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:19:32.183[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:19:37.176[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:19:37.183[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:19:42.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:19:42.186[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:19:47.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:19:47.188[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:19:52.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:19:52.186[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:19:57.186[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:19:57.188[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.002s[0m
+[32m2025-08-01 15:20:02.176[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:20:02.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:20:07.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:20:07.190[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:20:12.180[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:20:12.186[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:20:17.186[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:20:17.191[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:20:22.193[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:20:22.197[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:20:27.187[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:20:27.191[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:20:32.490[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:20:32.495[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:20:37.192[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:20:37.194[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.002s[0m
+[32m2025-08-01 15:20:42.178[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:20:42.183[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:20:47.181[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:20:47.185[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.004s[0m
+[32m2025-08-01 15:20:52.186[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:20:52.193[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.006s[0m
+[32m2025-08-01 15:20:57.180[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:20:57.184[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:21:02.189[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:21:02.193[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:21:07.190[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:21:07.193[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:21:12.190[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:21:12.195[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.005s[0m
+[32m2025-08-01 15:21:17.179[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 15:21:17.182[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /missions | Time: 0.003s[0m
+[32m2025-08-01 15:21:21.164[0m | [1mINFO    [0m | [36msrc.main[0m:[36mshutdown_event[0m:[36m984[0m - [1m🛑 Shutting down Sentinel Cognitive Forge v5.0[0m
+[32m2025-08-01 15:21:21.165[0m | [1mINFO    [0m | [36msrc.main[0m:[36mshutdown_event[0m:[36m985[0m - [1m💾 Saving final state...[0m
+[32m2025-08-01 15:21:21.165[0m | [1mINFO    [0m | [36msrc.main[0m:[36mshutdown_event[0m:[36m986[0m - [1m✅ Shutdown complete[0m

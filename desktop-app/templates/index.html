@@ -1,801 +1,326 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sentinel Command Center</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700;800&family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="/static/css/sentinel-dash.css" rel="stylesheet">
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Sentinel Command Center | AI Agent Tracking & Mission Control</title>
+    
+    <!-- Fonts and icons -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- CSS Files -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/css/sentinel-dash.css" rel="stylesheet" />
+    
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
-<body x-data="sentinelApp()">
-    <div class="dash">
-        <!-- HEADER -->
-        <header class="header">
-            <h1 class="header__heading"><a href="#" rel="noreferrer noopener">SENTINEL</a></h1>
-            <div class="header__options">
-                <div class="sidebar-status me-3">
-                    <div class="status-indicator">
-                        <div class="status-dot" :class="serviceStatus.overall_status === 'healthy' ? 'bg-success' : 'bg-danger'"></div>
-                        <span class="status-text small ms-2" x-text="serviceStatus.overall_status.toUpperCase()">OPERATIONAL</span>
-                    </div>
+<body>
+    <div class="wrapper">
+        <!-- Skinny Sidebar -->
+        <div class="sidebar sidebar-mini" data-color="blue">
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="javascript:void(0)" class="simple-text logo-mini">
+                        SC
+                    </a>
                 </div>
-                <div class="sidebar-status me-3">
-                    <div class="status-indicator">
-                        <div class="status-dot bg-success"></div>
-                        <span class="status-text small ms-2">SERVER 8001</span>
-                    </div>
-                </div>
-                <div class="sidebar-status me-5">
-                    <div class="status-indicator">
-                        <div class="status-dot bg-success"></div>
-                        <span class="status-text small ms-2">SERVER 8002</span>
-                    </div>
-                </div>
-                <button class="header__pro" @click="refreshAllData()"><i class="bi bi-arrow-clockwise"></i> REFRESH</button>
+                <ul class="nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/" title="Dashboard">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/missions" title="Missions">
+                            <i class="fas fa-rocket"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/ai-agents" title="AI Agents">
+                            <span class="ai-icon">AI</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/settings" title="Settings">
+                            <i class="fas fa-cog"></i>
+                        </a>
+                    </li>
+                </ul>
             </div>
-        </header>
-      
-        <!-- BODY -->
-        <div class="body">
-            <!-- SIDEBAR -->
-            <div class="sidebar">
-                <div class="sidebar__icon" :class="{ 'active': activeTab === 'dashboard' }" @click="setActiveTab('dashboard')" title="Dashboard"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg></div>
-                <div class="sidebar__icon" :class="{ 'active': activeTab === 'missions' }" @click="setActiveTab('missions')" title="Missions"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg></div>
-            </div>
-      
-            <!-- MAIN CONTENT AREA -->
-            <main class="main">
-                <!-- DASHBOARD TAB (STRATEGIC COMMAND CENTER) -->
-                <div x-show="activeTab === 'dashboard'" class="fade-in" style="width: 100%;">
-                    <div class="row g-4">
-                        <!-- Active Missions -->
-                        <div class="col-lg-4">
-                            <div class="main__cards-container h-100">
-                                <h2 class="ss-heading">Active Missions</h2>
-                                <div style="height: 350px; overflow-y: auto;">
-                                    <template x-for="mission in activeMissions" :key="mission.id">
-                                        <div class="card mb-2" style="background: hsl(270, 50%, 8%);">
-                                            <div class="card-body p-3">
-                                                <h6 class="mb-1" x-text="mission.title"></h6>
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <small class="text-muted" x-text="mission.mission_id_str"></small>
-                                                    <span class="badge" :class="getStatusClass(mission.status)" x-text="mission.status"></span>
-                            </div>
-                        </div>
-                                        </div>
-                                    </template>
-                                    <div x-show="activeMissions.length === 0" class="text-center text-muted pt-5"><i class="bi bi-inbox fs-1"></i><p>No active missions.</p></div>
-                                </div>
-                                </div>
-                            </div>
-                            
-                                                <!-- Advanced AI Agent Tracking Hub -->
-                        <div class="col-lg-8">
-                            <div class="main__cards-container h-100">
-                                <h2 class="ss-heading">AI Agent Tracking Hub</h2>
-                                <div class="btn-group w-100 mb-3" role="group">
-                                    <button class="btn btn-sm" :class="agentTrackingView === 'overview' ? 'btn-primary header__pro' : 'btn-outline-secondary'" @click="agentTrackingView = 'overview'">Overview</button>
-                                    <button class="btn btn-sm" :class="agentTrackingView === 'performance' ? 'btn-primary header__pro' : 'btn-outline-secondary'" @click="agentTrackingView = 'performance'">Performance</button>
-                                    <button class="btn btn-sm" :class="agentTrackingView === 'analytics' ? 'btn-primary header__pro' : 'btn-outline-secondary'" @click="agentTrackingView = 'analytics'">Analytics</button>
-                                    <button class="btn btn-sm" :class="agentTrackingView === 'sessions' ? 'btn-primary header__pro' : 'btn-outline-secondary'" @click="agentTrackingView = 'sessions'">Sessions</button>
-                                </div>
-                                <div style="height: 350px; overflow-y: auto;">
-                                    <!-- Real-Time Agent Status Stream -->
-                                    <div x-show="agentTrackingView === 'overview'" class="p-3">
-                                        <div class="card" style="background: var(--sentinel-black-primary); border: 1px solid hsl(270, 50%, 15%);">
-                                            <div class="card-header" style="background: hsl(270, 50%, 12%); border-bottom: 1px solid hsl(270, 50%, 15%); color: #f8f9fa;">
-                                                <h6 class="card-title mb-0"><i class="bi bi-activity me-2"></i>Real-Time Agent Status Stream</h6>
-                                            </div>
-                                            <div class="card-body" style="color: #f8f9fa;">
-                                                <div class="row g-3">
-                                                    <template x-for="agent in getAllAgentStatuses()" :key="agent.id">
-                                                        <div class="col-md-6">
-                                                            <div class="card" style="background: hsl(270, 50%, 8%); border: 1px solid hsl(270, 50%, 15%); cursor: pointer;" @click="viewAgentDetails(agent)">
-                                                                <div class="card-body p-3">
-                                                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                                                        <div class="d-flex align-items-center">
-                                                                            <i :class="getAgentIcon(agent.type)" class="me-2"></i>
-                                                                            <span class="main__card-heading-sub" style="color: var(--sentinel-text-secondary); font-weight: 600;" x-text="agent.name"></span>
-                                                                        </div>
-                                                                        <span class="badge" :class="getAgentStatusClass(agent.status)" x-text="agent.status"></span>
-                                                                    </div>
-                                                                    <div class="row g-2">
-                                                                        <div class="col-6">
-                                                                            <small style="color: var(--sentinel-text-secondary);">Success Rate</small>
-                                                                            <div class="main__card-heading" :class="getSuccessRateClass(agent.successRate)" :style="agent.successRate < 50 ? 'color: #dc3545;' : 'color: var(--sentinel-text-secondary);'" x-text="agent.successRate.toFixed(2) + '%'"></div>
-                                                                        </div>
-                                                                        <div class="col-6">
-                                                                            <small style="color: var(--sentinel-text-secondary);">Avg Time</small>
-                                                                            <div class="main__card-heading" style="color: var(--sentinel-text-secondary);" x-text="agent.avgTime + 's'"></div>
-                                                                        </div>
-                                                                        <div class="col-6">
-                                                                            <small style="color: var(--sentinel-text-secondary);">Tasks Completed</small>
-                                                                            <div class="main__card-heading" style="color: var(--sentinel-text-secondary);" x-text="agent.tasksCompleted"></div>
-                                                                        </div>
-                                                                        <div class="col-6">
-                                                                            <small style="color: var(--sentinel-text-secondary);">Current Mission</small>
-                                                                            <div class="main__card-heading" style="color: var(--sentinel-text-secondary);" x-text="agent.currentMission || 'Idle'"></div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="mt-2">
-                                                                        <small style="color: var(--sentinel-text-secondary);" x-text="agent.description"></small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </template>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Enhanced Performance Metrics -->
-                                    <div x-show="agentTrackingView === 'performance'" class="p-3">
-                                        <div class="row g-3">
-                                            <!-- Core Performance Metrics -->
-                                            <div class="col-12">
-                                                <div class="card" style="background: var(--sentinel-black-primary); border: 1px solid hsl(270, 50%, 15%);">
-                                                    <div class="card-header" style="background: hsl(270, 50%, 12%); border-bottom: 1px solid hsl(270, 50%, 15%); color: #f8f9fa;">
-                                                        <h6 class="card-title mb-0"><i class="bi bi-speedometer2 me-2"></i>Core Performance Metrics</h6>
-                                                    </div>
-                                                    <div class="card-body" style="color: #f8f9fa;">
-                                                        <div class="row g-3">
-                                                            <div class="col-md-3 text-center">
-                                                                <div class="main__cards-container">
-                                                                    <h6 class="ss-heading">Active Agents</h6>
-                                                                    <div class="main__card-heading" x-text="getActiveAgentCount()"></div>
-                                                                    <small class="text-muted">Currently Executing</small>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3 text-center">
-                                                                <div class="main__cards-container">
-                                                                    <h6 class="ss-heading">Success Rate</h6>
-                                                                    <div class="main__card-heading" :class="getSuccessRateClass()" x-text="getSuccessRate() + '%'"></div>
-                                                                    <small class="text-muted">Mission Completion</small>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3 text-center">
-                                                                <div class="main__cards-container">
-                                                                    <h6 class="ss-heading">Avg Response</h6>
-                                                                    <div class="main__card-heading" x-text="getAverageResponseTime() + 's'"></div>
-                                                                    <small class="text-muted">Per Mission</small>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3 text-center">
-                                                                <div class="main__cards-container">
-                                                                    <h6 class="ss-heading">Efficiency Score</h6>
-                                                                    <div class="main__card-heading" :class="getEfficiencyClass()" x-text="getEfficiencyScore() + '%'"></div>
-                                                                    <small class="text-muted">System Efficiency</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Agent-Specific Performance -->
-                                            <div class="col-12">
-                                                <div class="card" style="background: var(--sentinel-black-primary); border: 1px solid hsl(270, 50%, 15%);">
-                                                    <div class="card-header" style="background: hsl(270, 50%, 12%); border-bottom: 1px solid hsl(270, 50%, 15%); color: #f8f9fa;">
-                                                        <h6 class="card-title mb-0"><i class="bi bi-cpu me-2"></i>Agent-Specific Performance</h6>
-                                                    </div>
-                                                    <div class="card-body" style="color: #f8f9fa;">
-                                                        <div class="row g-3">
-                                                            <div class="col-md-3 text-center">
-                                                                <div class="main__cards-container">
-                                                                    <h6 class="ss-heading">Planning Agent</h6>
-                                                                    <div class="main__card-heading" x-text="getAgentSuccessRate('planning') + '%'"></div>
-                                                                    <small class="text-muted">Success Rate</small>
-                                                                    <div class="mt-1">
-                                                                        <small class="text-info" x-text="getAgentAvgTime('planning') + 's avg'"></small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3 text-center">
-                                                                <div class="main__cards-container">
-                                                                    <h6 class="ss-heading">Execution Agent</h6>
-                                                                    <div class="main__card-heading" x-text="getAgentSuccessRate('execution') + '%'"></div>
-                                                                    <small class="text-muted">Success Rate</small>
-                                                                    <div class="mt-1">
-                                                                        <small class="text-info" x-text="getAgentAvgTime('execution') + 's avg'"></small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3 text-center">
-                                                                <div class="main__cards-container">
-                                                                    <h6 class="ss-heading">Review Agent</h6>
-                                                                    <div class="main__card-heading" x-text="getAgentSuccessRate('review') + '%'"></div>
-                                                                    <small class="text-muted">Success Rate</small>
-                                                                    <div class="mt-1">
-                                                                        <small class="text-info" x-text="getAgentAvgTime('review') + 's avg'"></small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3 text-center">
-                                                                <div class="main__cards-container">
-                                                                    <h6 class="ss-heading">Debug Agent</h6>
-                                                                    <div class="main__card-heading" x-text="getAgentSuccessRate('debug') + '%'"></div>
-                                                                    <small class="text-muted">Success Rate</small>
-                                                                    <div class="mt-1">
-                                                                        <small class="text-info" x-text="getAgentAvgTime('debug') + 's avg'"></small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Performance Insights -->
-                                            <div class="col-12">
-                                                <div class="card" style="background: var(--sentinel-black-primary); border: 1px solid hsl(270, 50%, 15%);">
-                                                    <div class="card-header" style="background: hsl(270, 50%, 12%); border-bottom: 1px solid hsl(270, 50%, 15%); color: #f8f9fa;">
-                                                        <h6 class="card-title mb-0"><i class="bi bi-lightbulb me-2"></i>Performance Insights</h6>
-                                                    </div>
-                                                    <div class="card-body" style="color: #f8f9fa;">
-                                                        <div class="row g-3">
-                                                            <div class="col-md-4 text-center">
-                                                                <div class="main__cards-container">
-                                                                    <h6 class="ss-heading">Peak Performance</h6>
-                                                                    <div class="main__card-heading" x-text="getPeakPerformanceTime()"></div>
-                                                                    <small class="text-muted">Best Time Window</small>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 text-center">
-                                                                <div class="main__cards-container">
-                                                                    <h6 class="ss-heading">Mission Complexity</h6>
-                                                                    <div class="main__card-heading" :class="getComplexityClass()" x-text="getAverageComplexity()"></div>
-                                                                    <small class="text-muted">Avg Complexity Score</small>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 text-center">
-                                                                <div class="main__cards-container">
-                                                                    <h6 class="ss-heading">Learning Rate</h6>
-                                                                    <div class="main__card-heading" :class="getLearningRateClass()" x-text="getLearningRate() + '%'"></div>
-                                                                    <small class="text-muted">Improvement Rate</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Enhanced Analytics Dashboard -->
-                                    <div x-show="agentTrackingView === 'analytics'" class="p-3">
-                                        <div class="row g-3">
-                                            <!-- System Analytics -->
-                                            <div class="col-12">
-                                                <div class="card" style="background: var(--sentinel-black-primary); border: 1px solid hsl(270, 50%, 15%);">
-                                                    <div class="card-header" style="background: hsl(270, 50%, 12%); border-bottom: 1px solid hsl(270, 50%, 15%); color: #f8f9fa;">
-                                                        <h6 class="card-title mb-0"><i class="bi bi-bar-chart me-2"></i>System Analytics</h6>
-                                                    </div>
-                                                    <div class="card-body" style="color: #f8f9fa;">
-                                                        <div class="row g-3">
-                                                            <div class="col-md-3 text-center">
-                                                                <div class="main__cards-container">
-                                                                    <h6 class="ss-heading">Error Rate</h6>
-                                                                    <div class="main__card-heading" :class="getErrorRateClass()" x-text="getErrorRate() + '%'"></div>
-                                                                    <small class="text-muted">System Errors</small>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3 text-center">
-                                                                <div class="main__cards-container">
-                                                                    <h6 class="ss-heading">Uptime</h6>
-                                                                    <div class="main__card-heading text-success" x-text="getSystemUptime() + '%'"></div>
-                                                                    <small class="text-muted">System Availability</small>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3 text-center">
-                                                                <div class="main__cards-container">
-                                                                    <h6 class="ss-heading">Memory Usage</h6>
-                                                                    <div class="main__card-heading" :class="getMemoryUsageClass()" x-text="getMemoryUsage() + '%'"></div>
-                                                                    <small class="text-muted">RAM Utilization</small>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3 text-center">
-                                                                <div class="main__cards-container">
-                                                                    <h6 class="ss-heading">CPU Load</h6>
-                                                                    <div class="main__card-heading" :class="getCPULoadClass()" x-text="getCPULoad() + '%'"></div>
-                                                                    <small class="text-muted">Processor Load</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Mission Analytics -->
-                                            <div class="col-12">
-                                                <div class="card" style="background: var(--sentinel-black-primary); border: 1px solid hsl(270, 50%, 15%);">
-                                                    <div class="card-header" style="background: hsl(270, 50%, 12%); border-bottom: 1px solid hsl(270, 50%, 15%); color: #f8f9fa;">
-                                                        <h6 class="card-title mb-0"><i class="bi bi-graph-up me-2"></i>Mission Analytics</h6>
-                                                    </div>
-                                                    <div class="card-body" style="color: #f8f9fa;">
-                                                        <div class="row g-3">
-                                                            <div class="col-md-3 text-center">
-                                                                <div class="main__cards-container">
-                                                                    <h6 class="ss-heading">Total Missions</h6>
-                                                                    <div class="main__card-heading" x-text="getTotalMissions()"></div>
-                                                                    <small class="text-muted">All Time</small>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3 text-center">
-                                                                <div class="main__cards-container">
-                                                                    <h6 class="ss-heading">Success Streak</h6>
-                                                                    <div class="main__card-heading text-success" x-text="getSuccessStreak()"></div>
-                                                                    <small class="text-muted">Consecutive Wins</small>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3 text-center">
-                                                                <div class="main__cards-container">
-                                                                    <h6 class="ss-heading">Avg Complexity</h6>
-                                                                    <div class="main__card-heading" :class="getComplexityClass()" x-text="getAverageComplexity()"></div>
-                                                                    <small class="text-muted">Mission Difficulty</small>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3 text-center">
-                                                                <div class="main__cards-container">
-                                                                    <h6 class="ss-heading">Execution Path</h6>
-                                                                    <div class="main__card-heading" x-text="getPreferredExecutionPath()"></div>
-                                                                    <small class="text-muted">Most Used Path</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Advanced Insights -->
-                                            <div class="col-12">
-                                                <div class="card" style="background: var(--sentinel-black-primary); border: 1px solid hsl(270, 50%, 15%);">
-                                                    <div class="card-header" style="background: hsl(270, 50%, 12%); border-bottom: 1px solid hsl(270, 50%, 15%); color: #f8f9fa;">
-                                                        <h6 class="card-title mb-0"><i class="bi bi-lightbulb me-2"></i>Advanced Insights</h6>
-                                                    </div>
-                                                    <div class="card-body" style="color: #f8f9fa;">
-                                                        <div class="row g-3">
-                                                            <div class="col-md-4 text-center">
-                                                                <div class="main__cards-container">
-                                                                    <h6 class="ss-heading">Learning Rate</h6>
-                                                                    <div class="main__card-heading" :class="getLearningRateClass()" x-text="getLearningRate() + '%'"></div>
-                                                                    <small class="text-muted">Improvement Rate</small>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 text-center">
-                                                                <div class="main__cards-container">
-                                                                    <h6 class="ss-heading">Adaptation Score</h6>
-                                                                    <div class="main__card-heading" :class="getAdaptationClass()" x-text="getAdaptationScore() + '%'"></div>
-                                                                    <small class="text-muted">System Adaptation</small>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 text-center">
-                                                                <div class="main__cards-container">
-                                                                    <h6 class="ss-heading">Predictive Accuracy</h6>
-                                                                    <div class="main__card-heading" :class="getPredictionClass()" x-text="getPredictionAccuracy() + '%'"></div>
-                                                                    <small class="text-muted">Path Prediction</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Live Sessions -->
-                                    <div x-show="agentTrackingView === 'sessions'" class="p-3">
-                                        <div class="row g-3">
-                                            <div class="col-12">
-                                                <div class="card" style="background: var(--sentinel-black-primary); border: 1px solid hsl(270, 50%, 15%);">
-                                                    <div class="card-header" style="background: hsl(270, 50%, 12%); border-bottom: 1px solid hsl(270, 50%, 15%); color: #f8f9fa;">
-                                                        <h6 class="card-title mb-0"><i class="bi bi-activity me-2"></i>Live Agent Sessions</h6>
-                                                    </div>
-                                                    <div class="card-body" style="color: #f8f9fa;">
-                                                        <div x-show="getActiveSessions().length === 0" class="text-center text-muted p-4">
-                                                            <i class="bi bi-cpu fs-1"></i>
-                                                            <p class="mt-2">No active agent sessions</p>
-                                                        </div>
-                                                        <div x-show="getActiveSessions().length > 0">
-                                                            <template x-for="session in getActiveSessions()" :key="session.id">
-                                                                <div class="card mb-2" style="background: hsl(270, 50%, 8%); border: 1px solid hsl(270, 50%, 15%);">
-                                                                    <div class="card-body p-3">
-                                                                        <div class="d-flex justify-content-between align-items-center">
-                                                                            <div class="d-flex align-items-center">
-                                                                                <i class="bi bi-cpu me-2"></i>
-                                                                                <span class="main__card-heading-sub" x-text="session.agent_name"></span>
-                                                                            </div>
-                                                                            <div class="d-flex align-items-center gap-2">
-                                                                                <span class="badge bg-warning">ACTIVE</span>
-                                                                                <small class="text-muted" x-text="session.duration + 's'"></small>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mt-2">
-                                                                            <small class="text-muted" x-text="session.mission_id"></small>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </template>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Live Event Feed -->
-                        <div class="col-lg-12">
-                            <div class="main__cards-container">
-                                <h2 class="ss-heading">Live Event Feed</h2>
-                                <div class="btn-group w-100 mb-3" role="group">
-                                    <button class="btn btn-sm" :class="liveFeedView === 'overview' ? 'btn-primary header__pro' : 'btn-outline-secondary'" @click="liveFeedView = 'overview'">Overview</button>
-                                    <button class="btn btn-sm" :class="liveFeedView === 'server_8001' ? 'btn-primary header__pro' : 'btn-outline-secondary'" @click="liveFeedView = 'server_8001'">Server 8001</button>
-                                    <button class="btn btn-sm" :class="liveFeedView === 'server_8002' ? 'btn-primary header__pro' : 'btn-outline-secondary'" @click="liveFeedView = 'server_8002'">Server 8002</button>
-                                    <button class="btn btn-sm" :class="liveFeedView === 'system' ? 'btn-primary header__pro' : 'btn-outline-secondary'" @click="liveFeedView = 'system'">System</button>
-
-                                </div>
-                                
-                                <!-- Overview Tab -->
-                                <div x-show="liveFeedView === 'overview'" class="terminal" style="height: 300px;">
-                                    <div class="row mb-3">
-                                        <div class="col-md-3 text-center">
-                                            <div class="card bg-dark border-secondary">
-                                                <div class="card-body p-2">
-                                                    <h6 class="text-primary mb-1">Server 8001</h6>
-                                                    <small class="text-muted" x-text="liveLogs.server_8001.length + ' logs'"></small>
-                                                    <div class="mt-1">
-                                                        <span class="badge bg-danger me-1" x-text="liveLogs.server_8001.filter(l => l.level === 'ERROR').length + ' errors'"></span>
-                                                        <span class="badge bg-warning" x-text="liveLogs.server_8001.filter(l => l.level === 'WARNING').length + ' warnings'"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 text-center">
-                                            <div class="card bg-dark border-secondary">
-                                                <div class="card-body p-2">
-                                                    <h6 class="text-info mb-1">Server 8002</h6>
-                                                    <small class="text-muted" x-text="liveLogs.server_8002.length + ' logs'"></small>
-                                                    <div class="mt-1">
-                                                        <span class="badge bg-danger me-1" x-text="liveLogs.server_8002.filter(l => l.level === 'ERROR').length + ' errors'"></span>
-                                                        <span class="badge bg-warning" x-text="liveLogs.server_8002.filter(l => l.level === 'WARNING').length + ' warnings'"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 text-center">
-                                            <div class="card bg-dark border-secondary">
-                                                <div class="card-body p-2">
-                                                    <h6 class="text-success mb-1">System</h6>
-                                                    <small class="text-muted" x-text="liveLogs.system.length + ' logs'"></small>
-                                                    <div class="mt-1">
-                                                        <span class="badge bg-danger me-1" x-text="liveLogs.system.filter(l => l.level === 'ERROR').length + ' errors'"></span>
-                                                        <span class="badge bg-warning" x-text="liveLogs.system.filter(l => l.level === 'WARNING').length + ' warnings'"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 text-center">
-                                            <div class="card bg-dark border-secondary">
-                                                <div class="card-body p-2">
-                                                    <h6 class="text-warning mb-1">Total</h6>
-                                                    <small class="text-muted" x-text="liveLogs.all.length + ' logs'"></small>
-                                                    <div class="mt-1">
-                                                        <small class="text-muted" x-text="'Live streaming active'"></small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div style="height: 200px; overflow-y: auto;">
-                                        <!-- Server 8001 Logs -->
-                                        <div class="mb-3">
-                                            <h6 class="text-primary mb-2"><i class="bi bi-server me-2"></i>Server 8001</h6>
-                                            <template x-for="log in liveLogs.server_8001">
-                                                <p class="mb-1 small">
-                                                    <span x-text="formatTime(log.timestamp) + ' '"></span>
-                                                    <span :class="getEventClass(log.level)" x-text="'[' + (log.level || 'INFO') + '] '"></span>
-                                                    <span x-text="log.message || log.msg || 'No message'"></span>
-                                                </p>
-                                            </template>
-                                        </div>
-                                        
-                                        <!-- Server 8002 Logs -->
-                                        <div class="mb-3">
-                                            <h6 class="text-info mb-2"><i class="bi bi-server me-2"></i>Server 8002</h6>
-                                            <template x-for="log in liveLogs.server_8002">
-                                                <p class="mb-1 small">
-                                                    <span x-text="formatTime(log.timestamp) + ' '"></span>
-                                                    <span :class="getEventClass(log.level)" x-text="'[' + (log.level || 'INFO') + '] '"></span>
-                                                    <span x-text="log.message || log.msg || 'No message'"></span>
-                                                </p>
-                                            </template>
-                                        </div>
-                                        
-                                        <!-- System Logs -->
-                                        <div class="mb-3">
-                                            <h6 class="text-success mb-2"><i class="bi bi-gear me-2"></i>System</h6>
-                                            <template x-for="log in liveLogs.system">
-                                                <p class="mb-1 small">
-                                                    <span x-text="formatTime(log.timestamp) + ' '"></span>
-                                                    <span :class="getEventClass(log.level)" x-text="'[' + (log.level || 'INFO') + '] '"></span>
-                                                    <span x-text="log.message || log.msg || 'No message'"></span>
-                                                </p>
-                                            </template>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Server 8001 Tab -->
-                                <div x-show="liveFeedView === 'server_8001'" class="terminal" style="height: 300px;">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h6 class="text-primary mb-0"><i class="bi bi-server me-2"></i>Server 8001 Logs</h6>
-                                        <div>
-                                            <span class="badge bg-success me-2">active</span>
-                                            <small class="text-muted" x-text="liveLogs.server_8001.length + ' total logs'"></small>
-                                        </div>
-                                    </div>
-                                    <div style="height: 240px; overflow-y: auto;">
-                                        <template x-for="log in liveLogs.server_8001">
-                                            <p class="mb-1 small">
-                                                <span x-text="formatTime(log.timestamp) + ' '"></span>
-                                                <span :class="getEventClass(log.level)" x-text="'[' + (log.level || 'INFO') + '] '"></span>
-                                                <span x-text="log.message || log.msg || 'No message'"></span>
-                                            </p>
-                                        </template>
-                                        <div x-show="!liveLogs.server_8001.length" class="text-center text-muted pt-5">
-                                            <i class="bi bi-inbox fs-1"></i>
-                                            <p>No logs available for Server 8001</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Server 8002 Tab -->
-                                <div x-show="liveFeedView === 'server_8002'" class="terminal" style="height: 300px;">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h6 class="text-info mb-0"><i class="bi bi-server me-2"></i>Server 8002 Logs</h6>
-                                        <div>
-                                            <span class="badge bg-success me-2">active</span>
-                                            <small class="text-muted" x-text="liveLogs.server_8002.length + ' total logs'"></small>
-                                        </div>
-                                    </div>
-                                    <div style="height: 240px; overflow-y: auto;">
-                                        <template x-for="log in liveLogs.server_8002">
-                                            <p class="mb-1 small">
-                                                <span x-text="formatTime(log.timestamp) + ' '"></span>
-                                                <span :class="getEventClass(log.level)" x-text="'[' + (log.level || 'INFO') + '] '"></span>
-                                                <span x-text="log.message || log.msg || 'No message'"></span>
-                                            </p>
-                                        </template>
-                                        <div x-show="!liveLogs.server_8002.length" class="text-center text-muted pt-5">
-                                            <i class="bi bi-inbox fs-1"></i>
-                                            <p>No logs available for Server 8002</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- System Tab -->
-                                <div x-show="liveFeedView === 'system'" class="terminal" style="height: 300px;">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h6 class="text-success mb-0"><i class="bi bi-gear me-2"></i>System Logs</h6>
-                                        <div>
-                                            <small class="text-muted" x-text="liveLogs.system.length + ' total logs'"></small>
-                                        </div>
-                                    </div>
-                                    <div style="height: 240px; overflow-y: auto;">
-                                        <template x-for="log in liveLogs.system">
-                                        <p class="mb-1 small">
-                                                <span x-text="formatTime(log.timestamp) + ' '"></span>
-                                                <span :class="getEventClass(log.level)" x-text="'[' + (log.level || 'INFO') + '] '"></span>
-                                                <span x-text="log.message || log.msg || 'No message'"></span>
-                                        </p>
-                                    </template>
-                                        <div x-show="!liveLogs.system.length" class="text-center text-muted pt-5">
-                                            <i class="bi bi-inbox fs-1"></i>
-                                            <p>No system logs available</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- MISSIONS TAB (OPERATIONS DECK) -->
-                <div x-show="activeTab === 'missions'" class="fade-in" style="width: 100%;">
-                    <div class="row g-4">
-                        <!-- Deploy Mission -->
-                        <div class="col-lg-6">
-                            <div class="main__cards-container h-100">
-                                <div class="d-flex align-items-center mb-4">
-                                    <div class="me-3"><div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;"><i class="bi bi-rocket-takeoff text-white fs-5"></i></div></div>
-                                    <div><h2 class="ss-heading mb-1">Deploy New Mission</h2><p class="text-muted small mb-0">Create and launch new AI missions</p></div>
-                                </div>
-                                <div>
-                                    <label class="form-label text-light small mb-2">Mission Title</label>
-                                    <input type="text" class="form-control mb-3" x-model="newMission.title" placeholder="Enter mission title (optional)">
-                                    <label class="form-label text-light small mb-2">Mission Objective</label>
-                                    <textarea class="form-control" rows="6" x-model="newMission.objective" placeholder="Describe your mission objective in detail..."></textarea>
-                                    <button class="btn w-100 mt-3 header__pro" @click="deployMission()" :disabled="deploying" style="height: 56px; font-size: 1.1rem;"><i class="bi bi-rocket-takeoff me-2"></i><span x-text="deploying ? 'DEPLOYING...' : 'DEPLOY MISSION'"></span></button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Active Missions -->
-                        <div class="col-lg-6">
-                            <div class="main__cards-container h-100">
-                                <h2 class="ss-heading">Active Missions</h2>
-                                <div style="height: 300px; overflow-y: auto;">
-                                    <template x-for="mission in activeMissions" :key="mission.id">
-                                        <div class="card mb-2" style="background: hsl(270, 50%, 8%);">
-                                            <div class="card-body p-3">
-                                                <h6 class="mb-1" x-text="mission.title"></h6>
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <small class="text-muted" x-text="mission.mission_id_str"></small>
-                                                    <span class="badge" :class="getStatusClass(mission.status)" x-text="mission.status"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </template>
-                                    <div x-show="activeMissions.length === 0" class="text-center text-muted pt-5"><i class="bi bi-inbox fs-1"></i><p>No active missions.</p></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Mission History -->
-                        <div class="col-lg-12">
-                            <div class="main__cards-container">
-                                <h2 class="ss-heading">Mission History</h2>
-                                <div class="table-responsive" style="max-height: 400px;">
-                                    <table style="background: hsl(270, 50%, 8%); color: #f8f9fa; border-collapse: collapse; width: 100%;">
-                                    <thead>
-                                            <tr style="background: hsl(270, 50%, 12%);">
-                                                <th style="color: #f8f9fa; border: 1px solid hsl(270, 50%, 15%); padding: 12px; text-align: left;">ID</th>
-                                                <th style="color: #f8f9fa; border: 1px solid hsl(270, 50%, 15%); padding: 12px; text-align: left;">Title</th>
-                                                <th style="color: #f8f9fa; border: 1px solid hsl(270, 50%, 15%); padding: 12px; text-align: left;">Status</th>
-                                                <th style="color: #f8f9fa; border: 1px solid hsl(270, 50%, 15%); padding: 12px; text-align: left;">Actions</th>
-                                            </tr>
-                                    </thead>
-                                    <tbody>
-                                        <template x-for="mission in missions" :key="mission.id">
-                                                <tr style="background: hsl(270, 50%, 8%); border: 1px solid hsl(270, 50%, 15%);">
-                                                    <td style="border: 1px solid hsl(270, 50%, 15%); padding: 12px;"><code class="text-primary" x-text="mission.mission_id_str.split('_')[1]"></code></td>
-                                                    <td style="border: 1px solid hsl(270, 50%, 15%); padding: 12px;"><div class="fw-semibold" x-text="mission.title"></div><small class="text-muted" x-text="mission.prompt?.substring(0, 50) + '...'"></small></td>
-                                                    <td style="border: 1px solid hsl(270, 50%, 15%); padding: 12px;"><span class="badge" :class="getStatusClass(mission.status)" x-text="mission.status"></span></td>
-                                                    <td style="border: 1px solid hsl(270, 50%, 15%); padding: 12px;"><button class="btn btn-sm btn-outline-primary" @click="viewMission(mission)" title="View Details"><i class="bi bi-eye"></i></button></td>
-                                            </tr>
-                                        </template>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </main>
         </div>
-    </div>
 
-    <!-- MODAL -->
-    <div class="modal fade" id="missionDetailsModal" tabindex="-1">
-        <div class="modal-dialog modal-xl modal-dialog-centered">
-            <div class="modal-content" style="background: hsl(270, 50%, 8%); border: 1px solid hsl(270, 50%, 15%);">
-                <div class="modal-header" style="background: hsl(270, 50%, 12%); border-bottom: 1px solid hsl(270, 50%, 15%);">
-                    <h5 class="modal-title ss-heading" style="color: #f8f9fa;"><i class="bi bi-robot me-2"></i> Mission Details</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        <!-- Main Panel -->
+        <div class="main-panel">
+            <!-- Navigation -->
+            <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
+                <div class="container-fluid">
+                    <div class="navbar-wrapper">
+                        <div class="navbar-toggle d-inline">
+                            <button type="button" class="navbar-toggler">
+                                <span class="navbar-toggler-bar bar1"></span>
+                                <span class="navbar-toggler-bar bar2"></span>
+                                <span class="navbar-toggler-bar bar3"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navigation">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <div class="search-container">
+                                    <div class="search-wrapper">
+                                        <input type="text" class="form-control search-input" placeholder="Search missions, agents, or logs...">
+                                        <i class="fas fa-search search-icon"></i>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <div class="notification-container">
+                                    <a href="javascript:void(0)" class="dropdown-toggle nav-link notification-link" data-toggle="dropdown">
+                                        <div class="notification d-none d-lg-block d-xl-block"></div>
+                                        <i class="fas fa-bell"></i>
+                                        <p class="d-lg-none">Notifications</p>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
+                                        <li class="nav-link"><a href="#" class="nav-item dropdown-item">Settings updated</a></li>
+                                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">System optimized</a></li>
+                                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Backup completed</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="modal-body" x-show="selectedMission" style="color: #f8f9fa;">
-                    <div class="row mb-4">
-                        <div class="col-md-6">
-                            <div class="card" style="background: hsl(270, 50%, 8%); border: 1px solid hsl(270, 50%, 15%);">
-                                <div class="card-header" style="background: hsl(270, 50%, 12%); border-bottom: 1px solid hsl(270, 50%, 15%); color: #f8f9fa;"><h6 class="card-title mb-0">Overview</h6></div>
-                                <div class="card-body" style="color: #f8f9fa;">
-                                    <p><strong>Mission ID:</strong> <span x-text="selectedMission?.mission_id_str || selectedMission?.id || 'N/A'"></span></p>
-                                    <p><strong>Title:</strong> <span x-text="selectedMission?.title || 'N/A'"></span></p>
-                                    <p><strong>Agent Type:</strong> <span class="badge bg-primary" x-text="selectedMission?.agent_type || 'N/A'"></span></p>
-                                    <p><strong>Status:</strong> <span class="badge" :class="'bg-' + getStatusClass(selectedMission?.status || '')" x-text="selectedMission?.status || 'N/A'"></span></p>
-                                    <p><strong>Created:</strong> <span x-text="formatDate(selectedMission?.created_at)"></span></p>
-                                    <p x-show="selectedMission?.execution_time"><strong>Execution Time:</strong> <span x-text="(selectedMission?.execution_time || 0) + ' seconds'"></span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                             <div class="card" style="background: hsl(270, 50%, 8%); border: 1px solid hsl(270, 50%, 15%);">
-                                <div class="card-header" style="background: hsl(270, 50%, 12%); border-bottom: 1px solid hsl(270, 50%, 15%); color: #f8f9fa;"><h6 class="card-title mb-0">Prompt</h6></div>
-                                <div class="card-body" style="max-height: 200px; overflow-y: auto; color: #f8f9fa;">
-                                    <pre class="mb-0" style="white-space: pre-wrap; word-wrap: break-word; color: #f8f9fa;" x-text="selectedMission?.prompt || 'No prompt available'"></pre>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card" style="background: hsl(270, 50%, 8%); border: 1px solid hsl(270, 50%, 15%);">
-                        <div class="card-header" style="background: hsl(270, 50%, 12%); border-bottom: 1px solid hsl(270, 50%, 15%); color: #f8f9fa;"><h6 class="card-title mb-0">Result & Live Feed</h6></div>
-                        <div class="card-body" style="color: #f8f9fa;">
-                            <div x-show="selectedMission?.result"><h6 class="mb-2 ss-heading">Final Result:</h6><div class="p-3 rounded mb-3 terminal" style="background: var(--sentinel-black-primary);"><pre class="mb-0" style="white-space: pre-wrap; word-wrap: break-word; color: #f8f9fa;" x-text="JSON.stringify(selectedMission?.result || {}, null, 2)"></pre></div></div>
-                            <div x-show="selectedMission?.updates"><h6 class="mb-2 ss-heading">Updates:</h6><div class="p-3 rounded terminal" style="background: var(--sentinel-black-primary); max-height: 250px; color: #f8f9fa;"><template x-for="update in selectedMission?.updates || []"><p class="mb-1 small"><span x-text="formatTime(update.timestamp) + ': '"></span><span x-text="update.message"></span></p></template></div></div>
-                        </div>
-                    </div>
+            </nav>
 
-                    <!-- Agent Sessions Observability -->
-                    <div class="card mt-3" style="background: hsl(270, 50%, 8%); border: 1px solid hsl(270, 50%, 15%);">
-                        <div class="card-header" style="background: hsl(270, 50%, 12%); border-bottom: 1px solid hsl(270, 50%, 15%); color: #f8f9fa;">
-                            <h6 class="card-title mb-0"><i class="bi bi-cpu me-2"></i>Agent Sessions & Observability</h6>
-                        </div>
-                        <div class="card-body" style="color: #f8f9fa;">
-                            <div x-show="!selectedMissionObservability?.agent_sessions || Object.keys(selectedMissionObservability?.agent_sessions || {}).length === 0" class="text-center text-muted p-3">
-                                <p>No detailed agent sessions found for this mission.</p>
-                                <button class="btn btn-sm btn-outline-primary" @click="loadMissionObservability(selectedMission.mission_id_str)">
-                                    <i class="bi bi-arrow-clockwise me-1"></i>Load Observability Data
-                                </button>
+            <!-- Content -->
+            <div class="content" x-data="sentinelApp()">
+                <!-- Top Row: System Status & System Resources -->
+                <div class="row mb-4">
+                    <div class="col-lg-9 col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">System Status Overview</h4>
+                                <p class="card-category">Real-time service health monitoring</p>
                             </div>
-                            <div x-show="selectedMissionObservability?.agent_sessions && Object.keys(selectedMissionObservability.agent_sessions).length > 0">
-                                <div class="row g-3 mb-3">
-                                    <div class="col-md-3">
-                                        <div class="main__cards-container text-center">
-                                            <h6 class="ss-heading">Duration</h6>
-                                            <div class="main__card-heading" x-text="selectedMissionObservability.total_duration_ms ? (selectedMissionObservability.total_duration_ms / 1000).toFixed(2) + 's' : '-'"></div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-6 mb-3">
+                                        <div class="status-card">
+                                            <div class="status-icon">
+                                                <i class="fas fa-server"></i>
+                                            </div>
+                                            <div class="status-info">
+                                                <h5>API Server</h5>
+                                                <span class="status-badge online">Online</span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="main__cards-container text-center">
-                                            <h6 class="ss-heading">Tokens</h6>
-                                            <div class="main__card-heading" x-text="selectedMissionObservability.total_tokens || 0"></div>
+                                    <div class="col-md-3 col-sm-6 mb-3">
+                                        <div class="status-card">
+                                            <div class="status-icon">
+                                                <i class="fas fa-brain"></i>
+                                            </div>
+                                            <div class="status-info">
+                                                <h5>Cognitive Engine</h5>
+                                                <span class="status-badge online">Active</span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="main__cards-container text-center">
-                                            <h6 class="ss-heading">Cost</h6>
-                                            <div class="main__card-heading" x-text="'$' + (selectedMissionObservability.total_cost || 0).toFixed(4)"></div>
+                                    <div class="col-md-3 col-sm-6 mb-3">
+                                        <div class="status-card">
+                                            <div class="status-icon">
+                                                <i class="fas fa-database"></i>
+                                            </div>
+                                            <div class="status-info">
+                                                <h5>Database</h5>
+                                                <span class="status-badge online">Connected</span>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="main__cards-container text-center">
-                                            <h6 class="ss-heading">Sessions</h6>
-                                            <div class="main__card-heading" x-text="Object.keys(selectedMissionObservability.agent_sessions || {}).length"></div>
+                                    <div class="col-md-3 col-sm-6 mb-3">
+                                        <div class="status-card">
+                                            <div class="status-icon">
+                                                <i class="fas fa-robot"></i>
+                                            </div>
+                                            <div class="status-info">
+                                                <h5>AI Models</h5>
+                                                <span class="status-badge online">Ready</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="card system-resources-modal">
+                            <div class="card-header">
+                                <h4 class="card-title">System Resources</h4>
+                                <p class="card-category">Real-time monitoring</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="resource-metrics-compact">
+                                    <div class="resource-item-compact">
+                                        <div class="resource-label-compact">CPU</div>
+                                        <div class="resource-bar-compact">
+                                            <div class="resource-fill cpu" style="width: 45%"></div>
+                                        </div>
+                                        <div class="resource-value-compact">45%</div>
+                                    </div>
+                                    <div class="resource-item-compact">
+                                        <div class="resource-label-compact">Memory</div>
+                                        <div class="resource-bar-compact">
+                                            <div class="resource-fill memory" style="width: 62%"></div>
+                                        </div>
+                                        <div class="resource-value-compact">62%</div>
+                                    </div>
+                                    <div class="resource-item-compact">
+                                        <div class="resource-label-compact">Network</div>
+                                        <div class="resource-bar-compact">
+                                            <div class="resource-fill network" style="width: 28%"></div>
+                                        </div>
+                                        <div class="resource-value-compact">28%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Middle Row: Performance Metrics -->
+                <div class="row mb-4">
+                    <div class="col-lg-6 col-md-12 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">AI Service Performance</h4>
+                                <p class="card-category">Response times & throughput</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="service-metrics">
+                                    <div class="metric-item">
+                                        <div class="metric-label">Avg Response Time</div>
+                                        <div class="metric-value" x-text="getAverageResponseTime() + 's'">0s</div>
+                                    </div>
+                                    <div class="metric-item">
+                                        <div class="metric-label">Success Rate</div>
+                                        <div class="metric-value" x-text="getSuccessRate().toFixed(2) + '%'">0.00%</div>
+                                    </div>
+                                    <div class="metric-item">
+                                        <div class="metric-label">Active Agents</div>
+                                        <div class="metric-value" x-text="getActiveAgentCount()">0</div>
+                                    </div>
+                                    <div class="metric-item">
+                                        <div class="metric-label">Total Missions</div>
+                                        <div class="metric-value" x-text="missions.length">0</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Agent Activity</h4>
+                                <p class="card-category">Live Updates</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="activity-list">
+                                    <template x-for="activity in recentActivity" :key="activity.id">
+                                        <div class="activity-item">
+                                            <div class="activity-icon">
+                                                <i class="fas" x-bind:class="activity.icon"></i>
+                                            </div>
+                                            <div class="activity-content">
+                                                <span x-text="activity.message"></span>
+                                                <small x-text="activity.time"></small>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Row: Missions & Activity -->
+                <div class="row">
+                    <div class="col-lg-8 col-md-12 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Active Missions</h4>
+                                <p class="card-category">Real-time mission queue</p>
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-link dropdown-toggle btn-icon" data-toggle="dropdown">
+                                        <i class="fas fa-cog"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-navbar">
+                                        <a class="dropdown-item" href="javascript:void(0)">Refresh</a>
+                                        <a class="dropdown-item" href="javascript:void(0)">Settings</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="javascript:void(0)">Clear All</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-dark table-hover">
+                                    <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>Agent Name</th>
-                                                <th>Duration</th>
                                                 <th>Status</th>
+                                                <th>Mission</th>
+                                                <th>Agent</th>
+                                                <th>Progress</th>
                                                 <th>Actions</th>
-                                                <th>Tokens</th>
-                                                <th>Cost</th>
-                                                <th>Details</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <template x-for="session in Object.values(selectedMissionObservability.agent_sessions || {})" :key="session.session_id">
+                                            <template x-for="mission in missions" :key="mission.id">
                                                 <tr>
                                                     <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <i class="bi bi-cpu me-2"></i>
-                                                            <span x-text="session.agent_name"></span>
+                                                        <span class="status-badge" x-bind:class="mission.status === 'completed' ? 'online' : mission.status === 'running' ? 'warning' : 'offline'">
+                                                            <span x-text="mission.status"></span>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="mission-info">
+                                                            <p class="mission-title" x-text="mission.prompt"></p>
+                                                            <small class="text-muted" x-text="'Created: ' + mission.created_at"></small>
                                                         </div>
                                                     </td>
-                                                    <td x-text="(session.total_duration_ms / 1000).toFixed(2) + 's'"></td>
                                                     <td>
-                                                        <span class="badge" :class="session.success ? 'bg-success' : 'bg-danger'" x-text="session.success ? 'Success' : 'Failed'"></span>
+                                                        <span class="agent-type" x-text="mission.agent_type || 'General'"></span>
                                                     </td>
-                                                    <td x-text="session.actions.length"></td>
-                                                    <td x-text="session.total_tokens"></td>
-                                                    <td x-text="'$' + session.total_cost.toFixed(4)"></td>
                                                     <td>
-                                                        <button class="btn btn-sm btn-outline-primary" @click="viewAgentSession(session.session_id)">
-                                                            <i class="bi bi-search"></i> Analyze
-                                                        </button>
+                                                        <div class="progress">
+                                                            <div class="progress-bar" x-bind:style="'width: ' + (mission.progress || 0) + '%'"></div>
+                                                        </div>
+                                                        <small x-text="(mission.progress || 0) + '%'"></small>
+                                                    </td>
+                                                    <td>
+                                                        <div class="btn-group" role="group">
+                                                            <button type="button" class="btn btn-sm btn-outline-primary">
+                                                                <i class="fas fa-eye"></i>
+                                                            </button>
+                                                            <button type="button" class="btn btn-sm btn-outline-warning">
+                                                                <i class="fas fa-pause"></i>
+                                                            </button>
+                                                            <button type="button" class="btn btn-sm btn-outline-danger">
+                                                                <i class="fas fa-stop"></i>
+                                                            </button>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             </template>
@@ -805,1000 +330,57 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer" style="background: hsl(270, 50%, 12%); border-top: 1px solid hsl(270, 50%, 15%);">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary header__pro" @click="refreshMissionDetails()"><i class="bi bi-arrow-clockwise me-2"></i> Refresh</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Toast Container -->
-    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055;"><div id="toast-container"></div></div>
-
-    <!-- SCRIPTS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function sentinelApp() {
-            return {
-                activeTab: 'dashboard',
-                deploying: false,
-                newMission: { title: '', objective: '' },
-                missions: [],
-                activeMissions: [],
-                selectedMission: null,
-                selectedMissionObservability: null,
-                selectedIndividualAgent: null,
-                individualAgentModal: null,
-                serviceStatus: { overall_status: 'loading' },
-                liveEvents: [],
-                observabilityView: 'overview',
-                observability: {
-                    weave: { status: 'loading', active_traces: 0, success_rate: 0, avg_response_ms: 0 },
-                    wandb: { status: 'loading', active_runs: 0, best_accuracy: 0, avg_loss: 0 },
-                    sentry: { status: 'loading', active_issues: 0, error_rate_percent: 0, uptime_percent: 0 }
-                },
-                liveFeedView: 'overview', // Added for live event feed tabs
-                agentTrackingView: 'overview', // Added for agent tracking hub tabs
-                liveLogs: {
-                    all: [],
-                    server_8001: [],
-                    server_8002: [],
-                    system: []
-                },
-
-                init() {
-                    this.hideLoadingScreen();
-                    this.loadInitialData();
-                    this.startLogStreaming();
-                },
-                
-                async loadInitialData() {
-                    // Load historical missions once on startup
-                    try {
-                        const response = await fetch('/missions');
-                        if (response.ok) {
-                            this.missions = await response.json();
-                        }
-                    } catch (error) {
-                        console.error('Error loading initial missions:', error);
-                    }
-                },
-                
-                setActiveTab(tab) { this.activeTab = tab; },
-
-                async deployMission() {
-                    if (!this.newMission.objective.trim()) { 
-                        this.showToast('Please enter a mission objective', 'warning');
-                        return; 
-                    }
-                    
-                    this.deploying = true;
-                    try {
-                        const response = await fetch('/api/missions', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ 
-                                prompt: this.newMission.objective, 
-                                title: this.newMission.title || 'New Mission',
-                                agent_type: 'developer'
-                            })
-                        });
-                        
-                        if (response.ok) {
-                            const result = await response.json();
-                        this.showToast('Mission deployed successfully!', 'success');
-                            this.newMission = { title: '', objective: '' };
-                        this.loadMissions();
-                        } else {
-                            this.showToast('Failed to deploy mission', 'error');
-                        }
-                    } catch (error) {
-                        console.error('Error deploying mission:', error);
-                        this.showToast('Error deploying mission', 'error');
-                    } finally {
-                        this.deploying = false;
-                    }
-                },
-
-                async loadMissions() {
-                    try {
-                        const response = await fetch('/missions');
-                        if (response.ok) { 
-                            this.missions = await response.json();
-                            this.activeMissions = this.missions.filter(m => ['PLANNING', 'EXECUTING'].includes(m.status.toUpperCase()));
-                        }
-                    } catch (error) { console.error('Error loading missions:', error); }
-                },
-                
-                async updateServiceStatus() {
-                    try {
-                        const response = await fetch('/service-status');
-                        if (response.ok) {
-                            this.serviceStatus = await response.json();
-                        }
-                    } catch (error) { console.error('Error updating service status:', error); }
-                },
-
-                async updateObservabilityOverview() {
-                    try {
-                        const response = await fetch('/api/observability/overview');
-                        if (response.ok) { 
-                            const data = await response.json();
-                            this.observability = data;
-                        } else {
-                            this.observability.weave.status = "Error";
-                            this.observability.wandb.status = "Error";
-                            this.observability.sentry.status = "Error";
-                        }
-                    } catch(e) { 
-                        console.error('Failed to load observability overview:', e);
-                        this.observability.weave.status = "Error";
-                        this.observability.wandb.status = "Error";
-                        this.observability.sentry.status = "Error";
-                    }
-                },
-                
-                async updateLiveEvents() {
-                    try {
-                        const response = await fetch('/api/events/live');
-                        if (response.ok) { this.liveEvents = await response.json(); }
-                    } catch(e) { console.error('Failed to load live events'); }
-                },
-
-
-
-                formatTime(dateString) { 
-                    if (!dateString) return 'N/A';
-                    try {
-                        const date = new Date(dateString);
-                        if (isNaN(date.getTime())) return 'Invalid Date';
-                        return date.toLocaleTimeString();
-                    } catch (e) {
-                        return 'Invalid Date';
-                    }
-                },
-
-                formatDate(dateString) {
-                    if (!dateString) return 'N/A';
-                    try {
-                        const date = new Date(dateString);
-                        if (isNaN(date.getTime())) return 'Invalid Date';
-                        return date.toLocaleString();
-                    } catch (e) {
-                        return 'Invalid Date';
-                    }
-                },
-
-                getStatusClass(status) {
-                    const statusLower = status.toLowerCase();
-                    if (statusLower === 'completed') return 'bg-success';
-                    if (statusLower === 'executing') return 'bg-warning';
-                    if (statusLower === 'failed') return 'bg-danger';
-                    if (statusLower === 'planning') return 'bg-info';
-                    return 'bg-secondary';
-                },
-                
-                getEventClass(level) {
-                    if (!level) return 'text-info';
-                    const levelUpper = level.toUpperCase();
-                    if (levelUpper === 'ERROR') return 'text-danger';
-                    if (levelUpper === 'WARNING') return 'text-warning';
-                    return 'text-info';
-                },
-
-                async viewMission(mission) {
-                    this.selectedMission = mission;
-                    this.selectedMissionObservability = null;
-                    const modal = new bootstrap.Modal(document.getElementById('missionDetailsModal'));
-                    modal.show();
-                    await this.loadMissionObservability(mission.mission_id_str);
-                },
-
-                async loadMissionObservability(missionId) {
-                    try {
-                        const response = await fetch(`/api/observability/mission/${missionId}`);
-                        if (response.ok) {
-                            this.selectedMissionObservability = await response.json();
-                        } else {
-                            console.error('Failed to load mission observability data');
-                        }
-                    } catch (error) {
-                        console.error('Error fetching mission observability:', error);
-                    }
-                },
-
-                hideLoadingScreen() {
-                    setTimeout(() => {
-                        const screen = document.getElementById('loading-screen');
-                        if(screen) {
-                           screen.style.opacity = '0';
-                           setTimeout(() => screen.style.display = 'none', 500);
-                        }
-                    }, 500);
-                },
-
-                showToast(message, type = 'info') {
-                    const toastContainer = document.getElementById('toast-container');
-                    const toast = document.createElement('div');
-                    toast.className = `toast align-items-center text-white bg-${type === 'error' ? 'danger' : type} border-0`;
-                    toast.setAttribute('role', 'alert');
-                    toast.innerHTML = `
-                        <div class="d-flex">
-                            <div class="toast-body">${message}</div>
-                            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-                        </div>
-                    `;
-                    toastContainer.appendChild(toast);
-                    const bsToast = new bootstrap.Toast(toast);
-                    bsToast.show();
-                    setTimeout(() => {
-                        toast.remove();
-                    }, 5000);
-                },
-
-                refreshAllData() {
-                    this.fetchAllData();
-                    this.showToast('Data refreshed', 'info');
-                },
-
-                startLogStreaming() {
-                    console.log("Connecting to real-time log stream...");
-                    const eventSource = new EventSource('/api/events/stream');
-
-                    eventSource.onmessage = (event) => {
-                        try {
-                            const logEntry = JSON.parse(event.data);
-                            if (logEntry.type === 'keepalive') return;
-
-                            // Add to the 'all' logs buffer
-                            this.liveLogs.all.unshift(logEntry);
-                            if (this.liveLogs.all.length > 200) this.liveLogs.all.pop();
-                            
-                            // Categorize by server port
-                            const serverPort = logEntry.server_port || '8001';
-                            if (serverPort === '8001') {
-                                this.liveLogs.server_8001.unshift(logEntry);
-                                if (this.liveLogs.server_8001.length > 50) this.liveLogs.server_8001.pop();
-                            } else if (serverPort === '8002') {
-                                this.liveLogs.server_8002.unshift(logEntry);
-                                if (this.liveLogs.server_8002.length > 50) this.liveLogs.server_8002.pop();
-                            } else {
-                                this.liveLogs.system.unshift(logEntry);
-                                if (this.liveLogs.system.length > 50) this.liveLogs.system.pop();
-                            }
-
-                            // Force Alpine.js to update the UI
-                            this.$nextTick(() => {
-                                // Trigger reactivity update
-                                this.liveLogs = { ...this.liveLogs };
-                            });
-
-                        } catch (e) {
-                            console.error('Error parsing log stream:', e);
-                        }
-                    };
-
-                    eventSource.onerror = (error) => {
-                        console.error('Log streaming connection error. Reconnecting in 5s...', error);
-                        eventSource.close();
-                        setTimeout(() => this.startLogStreaming(), 5000);
-                    };
-
-                    // Store the event source for cleanup
-                    this.eventSource = eventSource;
-                },
-
-                // Agent Observability Functions
-                async viewAgentSession(sessionId) {
-                    try {
-                        const response = await fetch(`/api/observability/session/${sessionId}`);
-                        if (response.ok) {
-                            this.selectedAgentSession = await response.json();
-                            const modal = new bootstrap.Modal(document.getElementById('agentAnalysisModal'));
-                            modal.show();
-                        } else {
-                            this.showToast('Failed to load agent session data', 'error');
-                        }
-                    } catch (error) {
-                        this.showToast('Error loading agent session', 'error');
-                        console.error(error);
-                    }
-                },
-
-                getAgentActionIcon(actionType) {
-                    const icons = {
-                        thinking: 'bi bi-lightbulb',
-                        tool_call: 'bi bi-tools',
-                        decision: 'bi bi-signpost-split',
-                        response: 'bi bi-file-earmark-text',
-                        error: 'bi bi-exclamation-triangle-fill'
-                    };
-                    return icons[actionType.toLowerCase()] || 'bi bi-question-circle';
-                },
-
-                formatTime(timestamp) {
-                    return new Date(timestamp).toLocaleTimeString();
-                },
-
-                getStatusClass(status) {
-                    if (status === 'completed') return 'bg-success';
-                    if (status === 'failed') return 'bg-danger';
-                    if (status === 'executing') return 'bg-warning';
-                    return 'bg-secondary';
-                },
-
-                // Observability Status Functions
-                getTotalAgentSessions() {
-                    // Calculate total agent sessions from completed missions
-                    return this.missions.filter(m => m.status === 'completed').length * 3; // Estimate 3 sessions per mission
-                },
-
-                getSuccessRate() {
-                    const completed = this.missions.filter(m => m.status === 'completed').length;
-                    const total = this.missions.length;
-                    return total > 0 ? ((completed / total) * 100).toFixed(2) : 0;
-                },
-
-                getSuccessRateClass() {
-                    const rate = this.getSuccessRate();
-                    if (rate >= 80) return 'text-success';
-                    if (rate >= 60) return 'text-warning';
-                    return 'text-danger';
-                },
-
-                getObservabilityStatus() {
-                    // Check if observability services are available
-                    const weaveActive = this.observability.weave.status === 'ACTIVE';
-                    const wandbActive = this.observability.wandb.status === 'ACTIVE';
-                    if (weaveActive && wandbActive) return 'OPERATIONAL';
-                    if (weaveActive || wandbActive) return 'PARTIAL';
-                    return 'OFFLINE';
-                },
-
-                getObservabilityStatusClass() {
-                    const status = this.getObservabilityStatus();
-                    if (status === 'OPERATIONAL') return 'text-success';
-                    if (status === 'PARTIAL') return 'text-warning';
-                    return 'text-danger';
-                },
-
-                async refreshObservabilityData() {
-                    try {
-                        // Refresh observability data
-                        const response = await fetch('/api/observability/report');
-                        if (response.ok) {
-                            const data = await response.json();
-                            // Update observability data
-                            this.showToast('Observability data refreshed', 'success');
-                        }
-                    } catch (error) {
-                        this.showToast('Failed to refresh observability data', 'error');
-                        console.error('Error refreshing observability:', error);
-                    }
-                },
-
-                // Agent Tracking Hub Functions
-                getActiveAgentCount() {
-                    return this.activeMissions.length * 3; // Estimate 3 agents per active mission
-                },
-
-                getAverageResponseTime() {
-                    const completedMissions = this.missions.filter(m => m.status === 'completed' && m.execution_time);
-                    if (completedMissions.length === 0) return '0.0';
-                    const totalTime = completedMissions.reduce((sum, m) => sum + (m.execution_time || 0), 0);
-                    return (totalTime / completedMissions.length).toFixed(2);
-                },
-
-                getTotalCost() {
-                    // Calculate total cost from completed missions
-                    const completedMissions = this.missions.filter(m => m.status === 'completed');
-                    return completedMissions.length * 0.05; // Estimate $0.05 per mission
-                },
-
-                getAgentSuccessRate(agentType) {
-                    // Calculate success rate for specific agent types
-                    const completedMissions = this.missions.filter(m => m.status === 'completed');
-                    const totalMissions = this.missions.length;
-                    if (totalMissions === 0) return 0;
-                    
-                    // Simulate different success rates for different agent types
-                    const baseRate = (completedMissions.length / totalMissions) * 100;
-                    const agentMultipliers = {
-                        'planning': 1.1,
-                        'execution': 0.95,
-                        'review': 1.05,
-                        'debug': 0.9
-                    };
-                    return (baseRate * (agentMultipliers[agentType] || 1)).toFixed(2);
-                },
-
-                getTotalTokens() {
-                    // Calculate total tokens used
-                    const completedMissions = this.missions.filter(m => m.status === 'completed');
-                    return completedMissions.length * 1500; // Estimate 1500 tokens per mission
-                },
-
-                getErrorRate() {
-                    const failedMissions = this.missions.filter(m => m.status === 'failed');
-                    const totalMissions = this.missions.length;
-                    return totalMissions > 0 ? ((failedMissions.length / totalMissions) * 100).toFixed(2) : 0;
-                },
-
-                getErrorRateClass() {
-                    const rate = this.getErrorRate();
-                    if (rate <= 10) return 'text-success';
-                    if (rate <= 25) return 'text-warning';
-                    return 'text-danger';
-                },
-
-                getEfficiencyScore() {
-                    // Calculate efficiency based on success rate and response time
-                    const successRate = parseFloat(this.getSuccessRate());
-                    const avgResponseTime = parseFloat(this.getAverageResponseTime());
-                    const efficiency = Math.min(100, (successRate * 0.7) + (Math.max(0, 30 - avgResponseTime) * 0.3));
-                    return efficiency.toFixed(2);
-                },
-
-                getEfficiencyClass() {
-                    const score = this.getEfficiencyScore();
-                    if (score >= 80) return 'text-success';
-                    if (score >= 60) return 'text-warning';
-                    return 'text-danger';
-                },
-
-                getActiveSessions() {
-                    // Return active agent sessions
-                    return this.activeMissions.map(mission => ({
-                        id: mission.id,
-                        agent_name: 'Planning Agent',
-                        mission_id: mission.mission_id_str,
-                        duration: Math.floor(Math.random() * 30) + 10 // Random duration for demo
-                    }));
-                },
-
-                // Enhanced Agent Status Functions
-                getAllAgentStatuses() {
-                    return [
-                        {
-                            id: 1,
-                            type: 'planning',
-                            name: 'Planning Agent',
-                            status: this.getRandomStatus(),
-                            successRate: this.getAgentSuccessRate('planning'),
-                            avgTime: this.getAgentAvgTime('planning'),
-                            tasksCompleted: this.getAgentTasksCompleted('planning'),
-                            currentMission: this.getCurrentMission('planning'),
-                            description: 'Strategic mission planning and task breakdown'
-                        },
-                        {
-                            id: 2,
-                            type: 'execution',
-                            name: 'Execution Agent',
-                            status: this.getRandomStatus(),
-                            successRate: this.getAgentSuccessRate('execution'),
-                            avgTime: this.getAgentAvgTime('execution'),
-                            tasksCompleted: this.getAgentTasksCompleted('execution'),
-                            currentMission: this.getCurrentMission('execution'),
-                            description: 'Code execution and implementation tasks'
-                        },
-                        {
-                            id: 3,
-                            type: 'review',
-                            name: 'Review Agent',
-                            status: this.getRandomStatus(),
-                            successRate: this.getAgentSuccessRate('review'),
-                            avgTime: this.getAgentAvgTime('review'),
-                            tasksCompleted: this.getAgentTasksCompleted('review'),
-                            currentMission: this.getCurrentMission('review'),
-                            description: 'Code review and quality assurance'
-                        },
-                        {
-                            id: 4,
-                            type: 'debug',
-                            name: 'Debug Agent',
-                            status: this.getRandomStatus(),
-                            successRate: this.getAgentSuccessRate('debug'),
-                            avgTime: this.getAgentAvgTime('debug'),
-                            tasksCompleted: this.getAgentTasksCompleted('debug'),
-                            currentMission: this.getCurrentMission('debug'),
-                            description: 'Error detection and resolution'
-                        },
-                        {
-                            id: 5,
-                            type: 'analysis',
-                            name: 'Analysis Agent',
-                            status: this.getRandomStatus(),
-                            successRate: this.getAgentSuccessRate('analysis'),
-                            avgTime: this.getAgentAvgTime('analysis'),
-                            tasksCompleted: this.getAgentTasksCompleted('analysis'),
-                            currentMission: this.getCurrentMission('analysis'),
-                            description: 'Data analysis and insights generation'
-                        },
-                        {
-                            id: 6,
-                            type: 'optimization',
-                            name: 'Optimization Agent',
-                            status: this.getRandomStatus(),
-                            successRate: this.getAgentSuccessRate('optimization'),
-                            avgTime: this.getAgentAvgTime('optimization'),
-                            tasksCompleted: this.getAgentTasksCompleted('optimization'),
-                            currentMission: this.getCurrentMission('optimization'),
-                            description: 'Performance optimization and tuning'
-                        }
-                    ];
-                },
-
-                getAgentIcon(agentType) {
-                    const icons = {
-                        'planning': 'bi bi-lightbulb',
-                        'execution': 'bi bi-play-circle',
-                        'review': 'bi bi-search',
-                        'debug': 'bi bi-bug',
-                        'analysis': 'bi bi-bar-chart',
-                        'optimization': 'bi bi-speedometer2'
-                    };
-                    return icons[agentType] || 'bi bi-cpu';
-                },
-
-                getAgentStatusClass(status) {
-                    if (status === 'ACTIVE') return 'bg-success';
-                    if (status === 'IDLE') return 'bg-secondary';
-                    if (status === 'ERROR') return 'bg-danger';
-                    return 'bg-warning';
-                },
-
-                getRandomStatus() {
-                    const statuses = ['ACTIVE', 'IDLE', 'ACTIVE', 'IDLE'];
-                    return statuses[Math.floor(Math.random() * statuses.length)];
-                },
-
-                getAgentAvgTime(agentType) {
-                    const baseTimes = {
-                        'planning': 8.5,
-                        'execution': 12.3,
-                        'review': 6.7,
-                        'debug': 15.2,
-                        'analysis': 9.8,
-                        'optimization': 11.4
-                    };
-                    return baseTimes[agentType] || 10.0;
-                },
-
-                getAgentTasksCompleted(agentType) {
-                    const completedMissions = this.missions.filter(m => m.status === 'completed');
-                    const baseCount = completedMissions.length;
-                    const multipliers = {
-                        'planning': 1.0,
-                        'execution': 0.8,
-                        'review': 0.9,
-                        'debug': 0.3,
-                        'analysis': 0.7,
-                        'optimization': 0.5
-                    };
-                    return Math.round(baseCount * (multipliers[agentType] || 1));
-                },
-
-                getCurrentMission(agentType) {
-                    if (this.activeMissions.length === 0) return null;
-                    const mission = this.activeMissions[0];
-                    return mission.mission_id_str.substring(0, 8) + '...';
-                },
-
-                // Enhanced Analytics Functions
-                getSystemUptime() {
-                    return 99.8; // Simulated uptime
-                },
-
-                getMemoryUsage() {
-                    return Math.floor(Math.random() * 30) + 40; // 40-70%
-                },
-
-                getMemoryUsageClass() {
-                    const usage = this.getMemoryUsage();
-                    if (usage < 50) return 'text-success';
-                    if (usage < 70) return 'text-warning';
-                    return 'text-danger';
-                },
-
-                getCPULoad() {
-                    return Math.floor(Math.random() * 40) + 20; // 20-60%
-                },
-
-                getCPULoadClass() {
-                    const load = this.getCPULoad();
-                    if (load < 40) return 'text-success';
-                    if (load < 60) return 'text-warning';
-                    return 'text-danger';
-                },
-
-                getTotalMissions() {
-                    return this.missions.length;
-                },
-
-                getSuccessStreak() {
-                    const completedMissions = this.missions.filter(m => m.status === 'completed');
-                    return Math.min(completedMissions.length, 15); // Cap at 15 for demo
-                },
-
-                getAverageComplexity() {
-                    const completedMissions = this.missions.filter(m => m.complexity_score);
-                    if (completedMissions.length === 0) return 'MEDIUM';
-                    const avgComplexity = completedMissions.reduce((sum, m) => sum + (m.complexity_score || 0.5), 0) / completedMissions.length;
-                    if (avgComplexity < 0.3) return 'LOW';
-                    if (avgComplexity < 0.7) return 'MEDIUM';
-                    return 'HIGH';
-                },
-
-                getComplexityClass() {
-                    const complexity = this.getAverageComplexity();
-                    if (complexity === 'LOW') return 'text-success';
-                    if (complexity === 'MEDIUM') return 'text-warning';
-                    return 'text-danger';
-                },
-
-                getPreferredExecutionPath() {
-                    const completedMissions = this.missions.filter(m => m.execution_path);
-                    if (completedMissions.length === 0) return 'FULL_WORKFLOW';
-                    const paths = completedMissions.map(m => m.execution_path);
-                    const pathCounts = {};
-                    paths.forEach(path => {
-                        pathCounts[path] = (pathCounts[path] || 0) + 1;
-                    });
-                    return Object.keys(pathCounts).reduce((a, b) => pathCounts[a] > pathCounts[b] ? a : b, 'FULL_WORKFLOW');
-                },
-
-                getPeakPerformanceTime() {
-                    const times = ['09:00-11:00', '14:00-16:00', '19:00-21:00'];
-                    return times[Math.floor(Math.random() * times.length)];
-                },
-
-                getLearningRate() {
-                    const completedMissions = this.missions.filter(m => m.status === 'completed');
-                    const recentMissions = completedMissions.slice(-5);
-                    if (recentMissions.length < 3) return 0;
-                    const recentSuccess = recentMissions.filter(m => m.status === 'completed').length;
-                    return ((recentSuccess / recentMissions.length) * 100).toFixed(2);
-                },
-
-                getLearningRateClass() {
-                    const rate = this.getLearningRate();
-                    if (rate >= 80) return 'text-success';
-                    if (rate >= 60) return 'text-warning';
-                    return 'text-danger';
-                },
-
-                getAdaptationScore() {
-                    const completedMissions = this.missions.filter(m => m.status === 'completed');
-                    const totalMissions = this.missions.length;
-                    if (totalMissions === 0) return 0;
-                    const adaptationRate = (completedMissions.length / totalMissions) * 100;
-                    return (adaptationRate + (Math.random() * 10)).toFixed(2);
-                },
-
-                getAdaptationClass() {
-                    const score = this.getAdaptationScore();
-                    if (score >= 85) return 'text-success';
-                    if (score >= 70) return 'text-warning';
-                    return 'text-danger';
-                },
-
-                getPredictionAccuracy() {
-                    const completedMissions = this.missions.filter(m => m.status === 'completed');
-                    const totalMissions = this.missions.length;
-                    if (totalMissions === 0) return 0;
-                    const accuracy = (completedMissions.length / totalMissions) * 100;
-                    return (accuracy + (Math.random() * 5)).toFixed(2);
-                },
-
-                getPredictionClass() {
-                    const accuracy = this.getPredictionAccuracy();
-                    if (accuracy >= 90) return 'text-success';
-                    if (accuracy >= 75) return 'text-warning';
-                    return 'text-danger';
-                },
-
-                // Individual Agent Modal Functions
-                viewAgentDetails(agent) {
-                    this.selectedIndividualAgent = agent;
-                    this.individualAgentModal = new bootstrap.Modal(document.getElementById('individualAgentModal'));
-                    this.individualAgentModal.show();
-                    this.startAgentLiveStream(agent);
-                },
-
-                startAgentLiveStream(agent) {
-                    // Simulate real-time data updates
-                    this.agentLiveStreamInterval = setInterval(() => {
-                        this.updateAgentLiveData(agent);
-                    }, 2000); // Update every 2 seconds
-                },
-
-                updateAgentLiveData(agent) {
-                    // Update agent status and activities in real-time
-                    if (this.selectedIndividualAgent && this.selectedIndividualAgent.id === agent.id) {
-                        this.selectedIndividualAgent.status = this.getRandomStatus();
-                        this.selectedIndividualAgent.successRate = Math.max(0, Math.min(100, this.selectedIndividualAgent.successRate + (Math.random() - 0.5) * 2));
-                        this.selectedIndividualAgent.tasksCompleted = Math.floor(this.selectedIndividualAgent.tasksCompleted + Math.random() * 0.5);
-                    }
-                },
-
-                getLiveAgentActivities() {
-                    if (!this.selectedIndividualAgent) return [];
-                    
-                    const activities = [
-                        {
-                            id: 1,
-                            type: 'thinking',
-                            message: 'Analyzing mission requirements...',
-                            timestamp: new Date().toLocaleTimeString()
-                        },
-                        {
-                            id: 2,
-                            type: 'execution',
-                            message: 'Executing task: Code review',
-                            timestamp: new Date().toLocaleTimeString()
-                        },
-                        {
-                            id: 3,
-                            type: 'decision',
-                            message: 'Decision: Proceed with optimization',
-                            timestamp: new Date().toLocaleTimeString()
-                        },
-                        {
-                            id: 4,
-                            type: 'tool_call',
-                            message: 'Calling tool: File analyzer',
-                            timestamp: new Date().toLocaleTimeString()
-                        },
-                        {
-                            id: 5,
-                            type: 'response',
-                            message: 'Generated response: Code improvements',
-                            timestamp: new Date().toLocaleTimeString()
-                        }
-                    ];
-                    
-                    return activities.slice(0, 3 + Math.floor(Math.random() * 3)); // Random number of activities
-                },
-
-                getActivityIcon(activityType) {
-                    const icons = {
-                        'thinking': 'bi bi-lightbulb',
-                        'execution': 'bi bi-play-circle',
-                        'decision': 'bi bi-signpost-split',
-                        'tool_call': 'bi bi-tools',
-                        'response': 'bi bi-file-earmark-text',
-                        'error': 'bi bi-exclamation-triangle'
-                    };
-                    return icons[activityType] || 'bi bi-activity';
-                },
-
-                getAgentEfficiency(agentType) {
-                    const baseEfficiency = 85;
-                    const variations = {
-                        'planning': 5,
-                        'execution': -3,
-                        'review': 2,
-                        'debug': -5,
-                        'analysis': 3,
-                        'optimization': 4
-                    };
-                    return (Math.max(0, Math.min(100, baseEfficiency + (variations[agentType] || 0) + (Math.random() - 0.5) * 10))).toFixed(2);
-                },
-
-                refreshAgentData() {
-                    if (this.selectedIndividualAgent) {
-                        this.updateAgentLiveData(this.selectedIndividualAgent);
-                        this.showToast('Agent data refreshed', 'success');
-                    }
-                },
-
-                // Cleanup function for modal
-                cleanupAgentModal() {
-                    if (this.agentLiveStreamInterval) {
-                        clearInterval(this.agentLiveStreamInterval);
-                        this.agentLiveStreamInterval = null;
-                    }
-                },
-
-            }
-        }
-    </script>
-
-    <!-- Agent Analysis Modal -->
-    <div class="modal fade" id="agentAnalysisModal" tabindex="-1">
-        <div class="modal-dialog modal-xl modal-dialog-centered">
-            <div class="modal-content" style="background: var(--sentinel-black-secondary); border: 1px solid hsl(270, 50%, 15%);">
-                <div class="modal-header" style="background: var(--sentinel-black-primary); border-bottom: 1px solid hsl(270, 50%, 15%);">
-                    <h5 class="modal-title ss-heading" style="color: var(--sentinel-white-primary);">
-                        <i class="bi bi-cpu-fill me-2"></i>Agent Session Analysis
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body" x-show="selectedAgentSession" style="color: var(--sentinel-text-primary);">
-                    <!-- Agent Summary -->
-                    <div class="row g-4 mb-4">
-                        <div class="col-md-3">
-                            <div class="main__cards-container text-center">
-                                <h6 class="ss-heading">Duration</h6>
-                                <div class="main__card-heading" x-text="(selectedAgentSession.total_duration_ms / 1000).toFixed(2) + 's'"></div>
+                    <div class="col-lg-4 col-md-12 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">System Logs</h4>
+                                <p class="card-category">Real-time monitoring</p>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="main__cards-container text-center">
-                                <h6 class="ss-heading">Status</h6>
-                                <div class="main__card-heading" :class="selectedAgentSession.success ? 'text-success' : 'text-danger'" x-text="selectedAgentSession.success ? 'SUCCESS' : 'FAILED'"></div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="main__cards-container text-center">
-                                <h6 class="ss-heading">Actions</h6>
-                                <div class="main__card-heading" x-text="selectedAgentSession.actions.length"></div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="main__cards-container text-center">
-                                <h6 class="ss-heading">Cost</h6>
-                                <div class="main__card-heading" x-text="'$' + selectedAgentSession.total_cost.toFixed(4)"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Action Timeline -->
-                    <div class="main__cards-container">
-                        <h6 class="ss-heading">Action Timeline</h6>
-                        <div style="max-height: 400px; overflow-y: auto;">
-                            <template x-for="action in selectedAgentSession.actions" :key="action.action_id">
-                                <div class="card mb-2" style="background: var(--sentinel-black-primary); border: 1px solid hsl(270, 50%, 15%);">
-                                    <div class="card-body p-3">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex align-items-center">
-                                                <i :class="getAgentActionIcon(action.action_type)" class="me-2"></i>
-                                                <span class="main__card-heading-sub" x-text="action.action_type.toUpperCase()"></span>
-                                            </div>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <small class="text-muted" x-text="formatTime(action.timestamp)"></small>
-                                                <span class="badge" :class="action.success ? 'bg-success' : 'bg-danger'" x-text="action.success ? 'OK' : 'FAIL'"></span>
-                                            </div>
-                                        </div>
-                                        <div x-show="action.reasoning" class="mt-2">
-                                            <small class="text-muted" x-text="action.reasoning"></small>
-                                        </div>
-                                        <details class="mt-2">
-                                            <summary class="small" style="cursor: pointer; color: var(--sentinel-blue-primary);">View Details</summary>
-                                            <pre class="terminal mt-2" x-text="JSON.stringify({ input: action.input_data, output: action.output_data }, null, 2)"></pre>
-                                        </details>
-                                    </div>
-                                </div>
-                            </template>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer" style="background: var(--sentinel-black-primary); border-top: 1px solid hsl(270, 50%, 15%);">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Individual Agent Details Modal -->
-    <div class="modal fade" id="individualAgentModal" tabindex="-1">
-        <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content" style="background: var(--sentinel-black-secondary); border: 1px solid hsl(270, 50%, 15%);">
-                <div class="modal-header" style="background: var(--sentinel-black-primary); border-bottom: 1px solid hsl(270, 50%, 15%);">
-                    <h5 class="modal-title ss-heading" style="color: var(--sentinel-white-primary);">
-                        <i :class="getAgentIcon(selectedIndividualAgent?.type)" class="me-2"></i>
-                        <span x-text="selectedIndividualAgent?.name"></span> - Live Agent View
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body" x-show="selectedIndividualAgent" style="color: var(--sentinel-text-primary);">
-                    <div class="row g-4">
-                        <!-- Real-Time Live Stream -->
-                        <div class="col-lg-8">
-                            <div class="card" style="background: var(--sentinel-black-primary); border: 1px solid hsl(270, 50%, 15%);">
-                                <div class="card-header" style="background: hsl(270, 50%, 12%); border-bottom: 1px solid hsl(270, 50%, 15%); color: #f8f9fa;">
-                                    <h6 class="card-title mb-0"><i class="bi bi-camera-video me-2"></i>Live Agent Stream</h6>
-                                </div>
-                                <div class="card-body" style="color: #f8f9fa;">
-                                    <div class="live-stream-container" style="background: hsl(270, 50%, 8%); border: 1px solid hsl(270, 50%, 15%); border-radius: 8px; padding: 20px; min-height: 400px;">
-                                        <div class="text-center mb-3">
-                                            <i :class="getAgentIcon(selectedIndividualAgent?.type)" style="font-size: 3rem; color: var(--sentinel-blue-primary);"></i>
-                                            <h5 class="mt-2" x-text="selectedIndividualAgent?.name"></h5>
-                                            <span class="badge" :class="getAgentStatusClass(selectedIndividualAgent?.status)" x-text="selectedIndividualAgent?.status"></span>
-                                        </div>
-                                        
-                                        <!-- Live Activity Feed -->
-                                        <div class="live-activity-feed" style="max-height: 300px; overflow-y: auto;">
-                                            <h6 class="ss-heading mb-3">Live Activity Feed</h6>
-                                            <template x-for="activity in getLiveAgentActivities()" :key="activity.id">
-                                                <div class="card mb-2" style="background: hsl(270, 50%, 8%); border: 1px solid hsl(270, 50%, 15%);">
-                                                    <div class="card-body p-2">
-                                                        <div class="d-flex justify-content-between align-items-center">
-                                                            <div class="d-flex align-items-center">
-                                                                <i :class="getActivityIcon(activity.type)" class="me-2"></i>
-                                                                <span class="main__card-heading-sub" x-text="activity.message"></span>
-                                                            </div>
-                                                            <small class="text-muted" x-text="activity.timestamp"></small>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </template>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Agent Analytics -->
-                        <div class="col-lg-4">
-                            <div class="card" style="background: var(--sentinel-black-primary); border: 1px solid hsl(270, 50%, 15%);">
-                                <div class="card-header" style="background: hsl(270, 50%, 12%); border-bottom: 1px solid hsl(270, 50%, 15%); color: #f8f9fa;">
-                                    <h6 class="card-title mb-0"><i class="bi bi-graph-up me-2"></i>Agent Analytics</h6>
-                                </div>
-                                <div class="card-body" style="color: #f8f9fa;">
-                                    <div class="row g-3">
-                                        <div class="col-6 text-center">
-                                            <div class="main__cards-container">
-                                                <h6 class="ss-heading">Success Rate</h6>
-                                                <div class="main__card-heading" :class="getSuccessRateClass(selectedIndividualAgent?.successRate)" x-text="selectedIndividualAgent?.successRate + '%'"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 text-center">
-                                            <div class="main__cards-container">
-                                                <h6 class="ss-heading">Avg Time</h6>
-                                                <div class="main__card-heading" x-text="selectedIndividualAgent?.avgTime + 's'"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 text-center">
-                                            <div class="main__cards-container">
-                                                <h6 class="ss-heading">Tasks Done</h6>
-                                                <div class="main__card-heading" x-text="selectedIndividualAgent?.tasksCompleted"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 text-center">
-                                            <div class="main__cards-container">
-                                                <h6 class="ss-heading">Efficiency</h6>
-                                                <div class="main__card-heading" :class="getEfficiencyClass()" x-text="getAgentEfficiency(selectedIndividualAgent?.type) + '%'"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Agent Performance Chart -->
-                                    <div class="mt-4">
-                                        <h6 class="ss-heading">Performance Trend</h6>
-                                        <div class="performance-chart" style="height: 200px; background: hsl(270, 50%, 8%); border: 1px solid hsl(270, 50%, 15%); border-radius: 4px; padding: 15px;">
-                                            <canvas id="agentPerformanceChart"></canvas>
-                                        </div>
-                                    </div>
-
-                                    <!-- Current Mission -->
-                                    <div class="mt-4">
-                                        <h6 class="ss-heading">Current Mission</h6>
-                                        <div class="card" style="background: hsl(270, 50%, 8%); border: 1px solid hsl(270, 50%, 15%);">
-                                            <div class="card-body p-3">
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <i class="bi bi-flag me-2"></i>
-                                                    <span class="main__card-heading-sub" x-text="selectedIndividualAgent?.currentMission || 'Idle'"></span>
-                                                </div>
-                                                <small class="text-muted" x-text="selectedIndividualAgent?.description"></small>
-                                            </div>
-                                        </div>
+                            <div class="card-body">
+                                <div class="log-container">
+                                    <div id="live-logs">
+                                        <!-- Live logs will be populated here -->
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer" style="background: var(--sentinel-black-primary); border-top: 1px solid hsl(270, 50%, 15%);">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" @click="refreshAgentData()">
-                        <i class="bi bi-arrow-clockwise me-1"></i>Refresh
-                    </button>
+
+                <!-- System Logs Row -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">System Logs</h4>
+                                <p class="card-category">Real-time monitoring</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="log-container">
+                                    <div id="live-logs">
+                                        <!-- Live logs will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="copyright">
+                        © 2024 Sentinel Command Center. All rights reserved.
+                    </div>
+                </div>
+            </footer>
         </div>
     </div>
 
+    <!-- JavaScript Files -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/main.js"></script>
 </body>
 </html>

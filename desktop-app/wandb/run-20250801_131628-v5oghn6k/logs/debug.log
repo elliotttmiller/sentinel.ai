@@ -3,3 +3,4 @@
 2025-08-01 13:16:28,838 INFO    MainThread:4868 [wandb_init.py:init():830] calling init triggers
 2025-08-01 13:16:28,839 INFO    MainThread:4868 [wandb_init.py:init():835] wandb.init called with sweep_config: {}
 config: {'system_version': 'v5.1', '_wandb': {}}
+2025-08-01 15:21:22,152 INFO    MsgRouterThr:4868 [mailbox.py:close():129] [no run ID] Closing mailbox, abandoning 1 handles.

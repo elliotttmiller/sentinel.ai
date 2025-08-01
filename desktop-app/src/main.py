@@ -37,9 +37,12 @@ except ImportError as e:
     # Fallback for direct execution
     logger.warning(f"Some imports failed: {e}")
     cognitive_forge_engine = None
+    hybrid_decision_engine = None
     db_manager = None
     Mission = None
     initialize_sentry = lambda: None
+    observability_manager = None
+    agent_observability = None
 
 # --- Real-Time Logging & Streaming Setup ---
 log_buffer = []
@@ -102,10 +105,10 @@ class LogInterceptor:
             source = "hybrid_engine"
         elif "Database" in message:
             source = "database"
-        
+            
         return {
-            "timestamp": timestamp,
-            "level": level,
+            "timestamp": timestamp, 
+            "level": level, 
             "source": source,
             "server_port": server_port,
             "message": clean_message
@@ -643,6 +646,21 @@ def serve_web_ui():
     """Serve the main web interface"""
     return FileResponse("templates/index.html")
 
+@app.get("/missions", response_class=FileResponse)
+def serve_missions():
+    """Serve the missions page"""
+    return FileResponse("templates/missions.html")
+
+@app.get("/ai-agents", response_class=FileResponse)
+def serve_ai_agents():
+    """Serve the AI agents page"""
+    return FileResponse("templates/ai-agents.html")
+
+@app.get("/settings", response_class=FileResponse)
+def serve_settings():
+    """Serve the settings page"""
+    return FileResponse("templates/settings.html")
+
 @app.get("/static/{path:path}")
 def serve_static(path: str):
     """Serve static files"""
@@ -676,7 +694,7 @@ async def stream_events() -> StreamingResponse:
             except asyncio.TimeoutError:
                 # Send keepalive
                 yield f"data: {json.dumps({'type': 'keepalive', 'timestamp': datetime.utcnow().isoformat()})}\n\n"
-    
+
     return StreamingResponse(
         event_generator(), 
         media_type="text/event-stream",
@@ -904,6 +922,9 @@ async def get_system_stats():
 @app.get("/api/observability/agent-analytics")
 async def get_agent_analytics():
     """Get comprehensive agent analytics and performance metrics."""
+    if agent_observability is None:
+        raise HTTPException(status_code=503, detail="Agent observability service not available")
+    
     try:
         analytics = agent_observability.get_agent_analytics()
         return {
@@ -918,6 +939,9 @@ async def get_agent_analytics():
 @app.get("/api/observability/mission/{mission_id}")
 async def get_mission_observability(mission_id: str):
     """Get detailed observability data for a specific mission."""
+    if agent_observability is None:
+        raise HTTPException(status_code=503, detail="Agent observability service not available")
+    
     try:
         mission_data = agent_observability.get_mission_details(mission_id)
         if not mission_data:
@@ -935,6 +959,9 @@ async def get_mission_observability(mission_id: str):
 @app.get("/api/observability/session/{session_id}")
 async def get_session_observability(session_id: str):
     """Get detailed observability data for a specific agent session."""
+    if agent_observability is None:
+        raise HTTPException(status_code=503, detail="Agent observability service not available")
+    
     try:
         session_data = agent_observability.get_agent_session_details(session_id)
         if not session_data:
@@ -952,6 +979,9 @@ async def get_session_observability(session_id: str):
 @app.get("/api/observability/report")
 async def get_observability_report():
     """Get comprehensive observability report."""
+    if agent_observability is None:
+        raise HTTPException(status_code=503, detail="Agent observability service not available")
+    
     try:
         report = agent_observability.generate_observability_report()
         return {
