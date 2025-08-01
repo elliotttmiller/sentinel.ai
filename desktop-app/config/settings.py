@@ -16,6 +16,41 @@ load_dotenv()
 class Settings(BaseSettings):
     """Main settings class for the Cognitive Forge application"""
 
+    # --- Golden Path Feature Flags ---
+    # When True, missions use the full 8-phase AI workflow
+    # When False, they use the simple, direct-to-LLM golden path
+    ENABLE_FULL_WORKFLOW: bool = False
+    
+    # When True, enables minimal mode for faster testing
+    MINIMAL_MODE: bool = True
+    
+    # When True, enables detailed logging for golden path operations
+    GOLDEN_PATH_LOGGING: bool = True
+    
+    # --- Existing Settings ---
+    GOOGLE_API_KEY: Optional[str] = None
+    LLM_MODEL: str = "gemini-1.5-flash"
+    DATABASE_URL: str = "sqlite:///db/sentinel_missions.db"
+    LOG_LEVEL: str = "INFO"
+    
+    # --- Server Configuration ---
+    SERVER_8001_PORT: int = 8001
+    SERVER_8002_PORT: int = 8002
+    SERVER_HOST: str = "0.0.0.0"
+    
+    # --- Database Configuration ---
+    POSTGRES_URL: Optional[str] = None
+    CHROMA_PERSIST_DIRECTORY: str = "db/chroma_memory"
+    
+    # --- Logging Configuration ---
+    LOG_BUFFER_SIZE: int = 200
+    LOG_FORWARDING_INTERVAL: int = 2
+    SSE_KEEPALIVE_INTERVAL: int = 25
+    
+    # --- Mission Configuration ---
+    STUCK_MISSION_TIMEOUT: int = 300  # 5 minutes
+    BACKGROUND_TASK_TIMEOUT: int = 3   # 3 seconds per step
+
     # Application Settings
     app_name: str = "Sentinel Cognitive Forge"
     app_version: str = "3.0.0"

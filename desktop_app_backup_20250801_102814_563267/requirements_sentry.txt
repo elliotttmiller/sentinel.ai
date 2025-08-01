@@ -1,0 +1,11 @@
+# Sentry Integration Requirements
+sentry-sdk>=1.40.0
+
+# Enhanced monitoring and observability
+prometheus-client>=0.17.0
+psutil>=5.9.0
+
+# Optional: Advanced monitoring stack
+# grafana-api>=1.0.3
+# elasticsearch>=8.0.0
+# kibana>=8.0.0 

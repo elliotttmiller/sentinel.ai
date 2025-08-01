@@ -1,0 +1,900 @@
+{
+  "cleanup_timestamp": "2025-08-01T10:28:15.621847",
+  "dry_run": false,
+  "backup_created": true,
+  "backup_path": "c:\\Users\\AMD\\sentinel\\desktop_app_backup_20250801_102814_563267",
+  "removed_files": [
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\test_fix_ai_comprehensive.py",
+      "reason": "Redundant with comprehensive_system_test.py"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\test_agent_execution_simple.py",
+      "reason": "Redundant with test_real_agent_execution.py"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\test_background_task_simple.py",
+      "reason": "Redundant with test_background_task.py"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\test_date_fixes.py",
+      "reason": "Temporary fix file, no longer needed"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\test_enhanced_dashboard.py",
+      "reason": "Functionality covered in main application"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\test_log_streaming.py",
+      "reason": "Redundant with live streaming tests"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\test_parallel_execution.py",
+      "reason": "Redundant with comprehensive tests"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\test_real_time_data.py",
+      "reason": "Functionality covered in main application"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\test_system_upgrade.py",
+      "reason": "Redundant with comprehensive system tests"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\test_three_pillar_upgrade.py",
+      "reason": "Redundant with comprehensive system tests"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\test_first_agent_deployment.py",
+      "reason": "Redundant with test_real_agent_execution.py"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\debug_agent_execution.py",
+      "reason": "Debug file, no longer needed"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\simple_agent_test.py",
+      "reason": "Redundant with comprehensive agent tests"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\quick_fix_ai_test.py",
+      "reason": "Temporary fix file, no longer needed"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\MANUAL_TESTING_GUIDE.md",
+      "reason": "Redundant with comprehensive overview"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\REAL_TIME_OBSERVABILITY_GUIDE.md",
+      "reason": "Redundant with comprehensive overview"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\SYSTEM_UPGRADE_REPORT.md",
+      "reason": "Redundant with comprehensive overview"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\COMPREHENSIVE_SYSTEM_ENHANCEMENT_PLAN.txt",
+      "reason": "Redundant with comprehensive overview"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\add_complexity_level_column.py",
+      "reason": "Database schema update completed"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\check_logs.py",
+      "reason": "Functionality covered in main application"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\cleanup_redundant_files.py",
+      "reason": "Self-cleanup after execution"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\cognitive_engine_server.py",
+      "reason": "Redundant with src/cognitive_engine_service.py"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\comprehensive_mission_test.py",
+      "reason": "Redundant with test_mission_integration.py"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\comprehensive_system_test.py",
+      "reason": "Redundant with main application tests"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\Fix-AI.py",
+      "reason": "Temporary fix utility, no longer needed"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\observability_config.py",
+      "reason": "Configuration moved to main application"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\system_optimization_hub.py",
+      "reason": "Functionality integrated into main application"
+    }
+  ],
+  "removed_directories": [
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\backups\\fix_ai_backup_20250731_180642_872729",
+      "reason": "Old backup directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\backups\\fix_ai_backup_20250731_180618_875879",
+      "reason": "Old backup directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\backups\\fix_ai_backup_20250731_180441_829285",
+      "reason": "Old backup directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\backups\\fix_ai_backup_20250731_175847_453593",
+      "reason": "Old backup directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\backups\\fix_ai_backup_20250731_175448_259357",
+      "reason": "Old backup directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\backups\\fix_ai_backup_20250731_174554_902473",
+      "reason": "Old backup directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\backups\\fix_ai_backup_20250731_173620_722458",
+      "reason": "Old backup directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\backups\\fix_ai_backup_20250731_173018_184069",
+      "reason": "Old backup directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\backups\\fix_ai_backup_20250731_172448_461841",
+      "reason": "Old backup directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\backups\\fix_ai_backup_20250731_172019_975744",
+      "reason": "Old backup directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\backups\\fix_ai_backup_20250731_154756_599867",
+      "reason": "Old backup directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\backups\\fix_ai_backup_20250731_143224_726121",
+      "reason": "Old backup directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\backups\\fix_ai_backup_20250731_143005_830071",
+      "reason": "Old backup directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\backups\\fix_ai_backup_20250731_142758_865288",
+      "reason": "Old backup directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\backups\\fix_ai_backup_20250731_180642",
+      "reason": "Old backup directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\backups\\fix_ai_backup_20250731_181010",
+      "reason": "Old backup directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\backups\\fix_ai_backup_20250731_183559",
+      "reason": "Old backup directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\backups\\fix_ai_backup_20250731_141556_445809",
+      "reason": "Old backup directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\backups\\fix_ai_backup_20250731_140536_865177",
+      "reason": "Old backup directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\backups\\fix_ai_backup_20250731_140244_707216",
+      "reason": "Old backup directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\wandb\\run-20250801_031847-theetzhm",
+      "reason": "Old WANDB run directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\wandb\\run-20250801_031602-ewqchxgu",
+      "reason": "Old WANDB run directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\wandb\\run-20250801_031422-ftjemz5q",
+      "reason": "Old WANDB run directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\wandb\\run-20250801_031027-a3dmle7f",
+      "reason": "Old WANDB run directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\wandb\\run-20250801_030137-jnav3y61",
+      "reason": "Old WANDB run directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\wandb\\run-20250801_025449-mf9mxz6w",
+      "reason": "Old WANDB run directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\wandb\\run-20250731_185541-b22b1ngw",
+      "reason": "Old WANDB run directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\wandb\\run-20250731_173025-9hkveet9",
+      "reason": "Old WANDB run directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\wandb\\run-20250731_171758-3mtr02kf",
+      "reason": "Old WANDB run directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\wandb\\run-20250731_140531-4sm6p2i0",
+      "reason": "Old WANDB run directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\wandb\\run-20250731_140317-v4p94gqq",
+      "reason": "Old WANDB run directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\wandb\\run-20250731_125319-4t6rpnfm",
+      "reason": "Old WANDB run directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\__pycache__",
+      "reason": "Python cache directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\src\\__pycache__",
+      "reason": "Python cache directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\src\\agents\\__pycache__",
+      "reason": "Python cache directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\src\\core\\__pycache__",
+      "reason": "Python cache directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\src\\models\\__pycache__",
+      "reason": "Python cache directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\src\\tools\\__pycache__",
+      "reason": "Python cache directory"
+    },
+    {
+      "path": "c:\\Users\\AMD\\sentinel\\desktop-app\\src\\utils\\__pycache__",
+      "reason": "Python cache directory"
+    }
+  ],
+  "errors": [],
+  "cleanup_log": [
+    {
+      "timestamp": "2025-08-01T10:28:15.446928",
+      "action": "remove_file",
+      "target": "test_fix_ai_comprehensive.py",
+      "status": "REMOVED",
+      "details": "Redundant with comprehensive_system_test.py"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.446928",
+      "action": "remove_file",
+      "target": "test_automated_debugging.py",
+      "status": "SKIPPED",
+      "details": "File not found"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.446928",
+      "action": "remove_file",
+      "target": "test_sentry_integration.py",
+      "status": "SKIPPED",
+      "details": "File not found"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.446928",
+      "action": "remove_file",
+      "target": "test_weave_integration.py",
+      "status": "SKIPPED",
+      "details": "File not found"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.446928",
+      "action": "remove_file",
+      "target": "test_performance_demo.py",
+      "status": "SKIPPED",
+      "details": "File not found"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.446928",
+      "action": "remove_file",
+      "target": "test_prompt_optimization.py",
+      "status": "SKIPPED",
+      "details": "File not found"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.446928",
+      "action": "remove_file",
+      "target": "test_agent_execution_simple.py",
+      "status": "REMOVED",
+      "details": "Redundant with test_real_agent_execution.py"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.446928",
+      "action": "remove_file",
+      "target": "test_background_task_simple.py",
+      "status": "REMOVED",
+      "details": "Redundant with test_background_task.py"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.446928",
+      "action": "remove_file",
+      "target": "test_date_fixes.py",
+      "status": "REMOVED",
+      "details": "Temporary fix file, no longer needed"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.446928",
+      "action": "remove_file",
+      "target": "test_enhanced_dashboard.py",
+      "status": "REMOVED",
+      "details": "Functionality covered in main application"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.446928",
+      "action": "remove_file",
+      "target": "test_log_streaming.py",
+      "status": "REMOVED",
+      "details": "Redundant with live streaming tests"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.446928",
+      "action": "remove_file",
+      "target": "test_parallel_execution.py",
+      "status": "REMOVED",
+      "details": "Redundant with comprehensive tests"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.450939",
+      "action": "remove_file",
+      "target": "test_real_time_data.py",
+      "status": "REMOVED",
+      "details": "Functionality covered in main application"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.450939",
+      "action": "remove_file",
+      "target": "test_system_upgrade.py",
+      "status": "REMOVED",
+      "details": "Redundant with comprehensive system tests"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.450939",
+      "action": "remove_file",
+      "target": "test_three_pillar_upgrade.py",
+      "status": "REMOVED",
+      "details": "Redundant with comprehensive system tests"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.451967",
+      "action": "remove_file",
+      "target": "test_first_agent_deployment.py",
+      "status": "REMOVED",
+      "details": "Redundant with test_real_agent_execution.py"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.451967",
+      "action": "remove_file",
+      "target": "debug_agent_execution.py",
+      "status": "REMOVED",
+      "details": "Debug file, no longer needed"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.453214",
+      "action": "remove_file",
+      "target": "simple_agent_test.py",
+      "status": "REMOVED",
+      "details": "Redundant with comprehensive agent tests"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.453214",
+      "action": "remove_file",
+      "target": "quick_fix_ai_test.py",
+      "status": "REMOVED",
+      "details": "Temporary fix file, no longer needed"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.454216",
+      "action": "remove_file",
+      "target": "WEAVE_INTEGRATION_SUMMARY.md",
+      "status": "SKIPPED",
+      "details": "File not found"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.454216",
+      "action": "remove_file",
+      "target": "WEAVE_INTEGRATION_DOCUMENTATION.md",
+      "status": "SKIPPED",
+      "details": "File not found"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.454216",
+      "action": "remove_file",
+      "target": "SYSTEM_OPTIMIZATION_HUB_GUIDE.md",
+      "status": "SKIPPED",
+      "details": "File not found"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.454216",
+      "action": "remove_file",
+      "target": "CURRENT_VERSION_SUMMARY.md",
+      "status": "SKIPPED",
+      "details": "File not found"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.455215",
+      "action": "remove_file",
+      "target": "COGNITIVE_FORGE_V5_OPERATIONAL_PROCESS_MAP.md",
+      "status": "SKIPPED",
+      "details": "File not found"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.455215",
+      "action": "remove_file",
+      "target": "PROMPT_OPTIMIZATION_AGENT_SUMMARY.md",
+      "status": "SKIPPED",
+      "details": "File not found"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.455215",
+      "action": "remove_file",
+      "target": "DATABASE_CONFIGURATION.md",
+      "status": "SKIPPED",
+      "details": "File not found"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.455215",
+      "action": "remove_file",
+      "target": "ARCHITECTURAL_PURITY_ACHIEVED.md",
+      "status": "SKIPPED",
+      "details": "File not found"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.455215",
+      "action": "remove_file",
+      "target": "SYSTEM_STATUS.md",
+      "status": "SKIPPED",
+      "details": "File not found"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.455215",
+      "action": "remove_file",
+      "target": "OPTIMIZATION_SYSTEM_OVERVIEW.md",
+      "status": "SKIPPED",
+      "details": "File not found"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.455215",
+      "action": "remove_file",
+      "target": "STARTUP_GUIDE.md",
+      "status": "SKIPPED",
+      "details": "File not found"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.456218",
+      "action": "remove_file",
+      "target": "DEPLOYMENT_GUIDE.md",
+      "status": "SKIPPED",
+      "details": "File not found"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.456218",
+      "action": "remove_file",
+      "target": "PERFORMANCE_METRICS_GUIDE.md",
+      "status": "SKIPPED",
+      "details": "File not found"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.456218",
+      "action": "remove_file",
+      "target": "MANUAL_TESTING_GUIDE.md",
+      "status": "REMOVED",
+      "details": "Redundant with comprehensive overview"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.457215",
+      "action": "remove_file",
+      "target": "REAL_TIME_OBSERVABILITY_GUIDE.md",
+      "status": "REMOVED",
+      "details": "Redundant with comprehensive overview"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.457215",
+      "action": "remove_file",
+      "target": "SYSTEM_UPGRADE_REPORT.md",
+      "status": "REMOVED",
+      "details": "Redundant with comprehensive overview"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.458214",
+      "action": "remove_file",
+      "target": "COMPREHENSIVE_SYSTEM_ENHANCEMENT_PLAN.txt",
+      "status": "REMOVED",
+      "details": "Redundant with comprehensive overview"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.458214",
+      "action": "remove_file",
+      "target": "start_servers.ps1",
+      "status": "PROTECTED",
+      "details": "Essential file"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.458214",
+      "action": "remove_file",
+      "target": "start_servers.bat",
+      "status": "SKIPPED",
+      "details": "File not found"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.458214",
+      "action": "remove_file",
+      "target": "wandb_login.py",
+      "status": "SKIPPED",
+      "details": "File not found"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.459214",
+      "action": "remove_file",
+      "target": "run_optimization_tests.py",
+      "status": "SKIPPED",
+      "details": "File not found"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.459214",
+      "action": "remove_file",
+      "target": "init_db_simple.py",
+      "status": "SKIPPED",
+      "details": "File not found"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.460216",
+      "action": "remove_file",
+      "target": "add_complexity_level_column.py",
+      "status": "REMOVED",
+      "details": "Database schema update completed"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.460216",
+      "action": "remove_file",
+      "target": "check_logs.py",
+      "status": "REMOVED",
+      "details": "Functionality covered in main application"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.461216",
+      "action": "remove_file",
+      "target": "cleanup_redundant_files.py",
+      "status": "REMOVED",
+      "details": "Self-cleanup after execution"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.461216",
+      "action": "remove_file",
+      "target": "cognitive_engine_server.py",
+      "status": "REMOVED",
+      "details": "Redundant with src/cognitive_engine_service.py"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.462403",
+      "action": "remove_file",
+      "target": "comprehensive_mission_test.py",
+      "status": "REMOVED",
+      "details": "Redundant with test_mission_integration.py"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.462403",
+      "action": "remove_file",
+      "target": "comprehensive_system_test.py",
+      "status": "REMOVED",
+      "details": "Redundant with main application tests"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.462403",
+      "action": "remove_file",
+      "target": "Fix-AI.py",
+      "status": "REMOVED",
+      "details": "Temporary fix utility, no longer needed"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.463410",
+      "action": "remove_file",
+      "target": "observability_config.py",
+      "status": "REMOVED",
+      "details": "Configuration moved to main application"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.464130",
+      "action": "remove_file",
+      "target": "system_optimization_hub.py",
+      "status": "REMOVED",
+      "details": "Functionality integrated into main application"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.467888",
+      "action": "remove_directory",
+      "target": "backups/fix_ai_backup_20250731_180642_872729",
+      "status": "REMOVED",
+      "details": "Old backup directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.468654",
+      "action": "remove_directory",
+      "target": "backups/fix_ai_backup_20250731_180618_875879",
+      "status": "REMOVED",
+      "details": "Old backup directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.468654",
+      "action": "remove_directory",
+      "target": "backups/fix_ai_backup_20250731_180441_829285",
+      "status": "REMOVED",
+      "details": "Old backup directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.468654",
+      "action": "remove_directory",
+      "target": "backups/fix_ai_backup_20250731_175847_453593",
+      "status": "REMOVED",
+      "details": "Old backup directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.468654",
+      "action": "remove_directory",
+      "target": "backups/fix_ai_backup_20250731_175448_259357",
+      "status": "REMOVED",
+      "details": "Old backup directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.468654",
+      "action": "remove_directory",
+      "target": "backups/fix_ai_backup_20250731_174554_902473",
+      "status": "REMOVED",
+      "details": "Old backup directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.468654",
+      "action": "remove_directory",
+      "target": "backups/fix_ai_backup_20250731_173620_722458",
+      "status": "REMOVED",
+      "details": "Old backup directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.468654",
+      "action": "remove_directory",
+      "target": "backups/fix_ai_backup_20250731_173018_184069",
+      "status": "REMOVED",
+      "details": "Old backup directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.472651",
+      "action": "remove_directory",
+      "target": "backups/fix_ai_backup_20250731_172448_461841",
+      "status": "REMOVED",
+      "details": "Old backup directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.472651",
+      "action": "remove_directory",
+      "target": "backups/fix_ai_backup_20250731_172019_975744",
+      "status": "REMOVED",
+      "details": "Old backup directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.472651",
+      "action": "remove_directory",
+      "target": "backups/fix_ai_backup_20250731_154756_599867",
+      "status": "REMOVED",
+      "details": "Old backup directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.473966",
+      "action": "remove_directory",
+      "target": "backups/fix_ai_backup_20250731_143224_726121",
+      "status": "REMOVED",
+      "details": "Old backup directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.473966",
+      "action": "remove_directory",
+      "target": "backups/fix_ai_backup_20250731_143005_830071",
+      "status": "REMOVED",
+      "details": "Old backup directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.473966",
+      "action": "remove_directory",
+      "target": "backups/fix_ai_backup_20250731_142758_865288",
+      "status": "REMOVED",
+      "details": "Old backup directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.494789",
+      "action": "remove_directory",
+      "target": "backups/fix_ai_backup_20250731_180642",
+      "status": "REMOVED",
+      "details": "Old backup directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.513486",
+      "action": "remove_directory",
+      "target": "backups/fix_ai_backup_20250731_181010",
+      "status": "REMOVED",
+      "details": "Old backup directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.537649",
+      "action": "remove_directory",
+      "target": "backups/fix_ai_backup_20250731_183559",
+      "status": "REMOVED",
+      "details": "Old backup directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.537649",
+      "action": "remove_directory",
+      "target": "backups/fix_ai_backup_20250731_141556_445809",
+      "status": "REMOVED",
+      "details": "Old backup directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.537649",
+      "action": "remove_directory",
+      "target": "backups/fix_ai_backup_20250731_140536_865177",
+      "status": "REMOVED",
+      "details": "Old backup directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.537649",
+      "action": "remove_directory",
+      "target": "backups/fix_ai_backup_20250731_140244_707216",
+      "status": "REMOVED",
+      "details": "Old backup directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.544338",
+      "action": "remove_directory",
+      "target": "wandb/run-20250801_031847-theetzhm",
+      "status": "REMOVED",
+      "details": "Old WANDB run directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.549670",
+      "action": "remove_directory",
+      "target": "wandb/run-20250801_031602-ewqchxgu",
+      "status": "REMOVED",
+      "details": "Old WANDB run directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.551702",
+      "action": "remove_directory",
+      "target": "wandb/run-20250801_031422-ftjemz5q",
+      "status": "REMOVED",
+      "details": "Old WANDB run directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.558177",
+      "action": "remove_directory",
+      "target": "wandb/run-20250801_031027-a3dmle7f",
+      "status": "REMOVED",
+      "details": "Old WANDB run directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.561704",
+      "action": "remove_directory",
+      "target": "wandb/run-20250801_030137-jnav3y61",
+      "status": "REMOVED",
+      "details": "Old WANDB run directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.565704",
+      "action": "remove_directory",
+      "target": "wandb/run-20250801_025449-mf9mxz6w",
+      "status": "REMOVED",
+      "details": "Old WANDB run directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.565704",
+      "action": "remove_directory",
+      "target": "wandb/run-20250731_185541-b22b1ngw",
+      "status": "REMOVED",
+      "details": "Old WANDB run directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.573131",
+      "action": "remove_directory",
+      "target": "wandb/run-20250731_173025-9hkveet9",
+      "status": "REMOVED",
+      "details": "Old WANDB run directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.576399",
+      "action": "remove_directory",
+      "target": "wandb/run-20250731_171758-3mtr02kf",
+      "status": "REMOVED",
+      "details": "Old WANDB run directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.579693",
+      "action": "remove_directory",
+      "target": "wandb/run-20250731_140531-4sm6p2i0",
+      "status": "REMOVED",
+      "details": "Old WANDB run directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.585471",
+      "action": "remove_directory",
+      "target": "wandb/run-20250731_140317-v4p94gqq",
+      "status": "REMOVED",
+      "details": "Old WANDB run directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.589478",
+      "action": "remove_directory",
+      "target": "wandb/run-20250731_125319-4t6rpnfm",
+      "status": "REMOVED",
+      "details": "Old WANDB run directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.595788",
+      "action": "remove_directory",
+      "target": "__pycache__",
+      "status": "REMOVED",
+      "details": "Python cache directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.600898",
+      "action": "remove_directory",
+      "target": "src\\__pycache__",
+      "status": "REMOVED",
+      "details": "Python cache directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.602284",
+      "action": "remove_directory",
+      "target": "src\\agents\\__pycache__",
+      "status": "REMOVED",
+      "details": "Python cache directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.602284",
+      "action": "remove_directory",
+      "target": "src\\core\\__pycache__",
+      "status": "REMOVED",
+      "details": "Python cache directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.607394",
+      "action": "remove_directory",
+      "target": "src\\models\\__pycache__",
+      "status": "REMOVED",
+      "details": "Python cache directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.607394",
+      "action": "remove_directory",
+      "target": "src\\tools\\__pycache__",
+      "status": "REMOVED",
+      "details": "Python cache directory"
+    },
+    {
+      "timestamp": "2025-08-01T10:28:15.613805",
+      "action": "remove_directory",
+      "target": "src\\utils\\__pycache__",
+      "status": "REMOVED",
+      "details": "Python cache directory"
+    }
+  ]
+}

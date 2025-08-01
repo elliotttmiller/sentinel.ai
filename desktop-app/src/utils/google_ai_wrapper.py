@@ -7,7 +7,7 @@ This version resolves metaclass conflicts and Pydantic v1/v2 issues.
 
 import os
 import asyncio
-from typing import Any, List, Optional, Iterator
+from typing import Any, List, Optional, Iterator, Dict, Any
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.messages import BaseMessage, HumanMessage, AIMessage, SystemMessage
 from langchain_core.outputs import ChatResult, ChatGeneration
@@ -18,7 +18,13 @@ from langchain_core.outputs import ChatResult, ChatGeneration
 from langchain_core.pydantic_v1 import Field, PrivateAttr  # CRITICAL: Use langchain's pydantic_v1
 import google.generativeai as genai
 from loguru import logger
+import logging
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from config.settings import settings
 
+logger = logging.getLogger(__name__)
 
 class GoogleGenerativeAIWrapper(BaseChatModel):
     """
@@ -54,7 +60,7 @@ class GoogleGenerativeAIWrapper(BaseChatModel):
             # Initialize the model attribute
             self._model = None
             
-            logger.success(f"Google Generative AI wrapper initialized successfully")
+            logger.info(f"Google Generative AI wrapper initialized successfully")
 
         except Exception as e:
             logger.critical(f"Fatal error initializing Google Generative AI Wrapper: {e}")
@@ -221,3 +227,94 @@ def create_google_ai_llm(
         temperature=temperature,
         max_tokens=max_tokens
     ) 
+
+class GoogleAIWrapper:
+    """Wrapper for Google AI operations with Golden Path support"""
+    
+    def __init__(self, api_key: Optional[str] = None):
+        self.api_key = api_key or settings.GOOGLE_API_KEY
+        if self.api_key:
+            genai.configure(api_key=self.api_key)
+        self.model = None
+        self._initialize_model()
+    
+    def _initialize_model(self):
+        """Initialize the LLM model"""
+        try:
+            self.model = genai.GenerativeModel(settings.LLM_MODEL)
+            logger.info(f"✅ Google AI model initialized: {settings.LLM_MODEL}")
+        except Exception as e:
+            logger.error(f"❌ Failed to initialize Google AI model: {e}")
+            self.model = None
+    
+    async def direct_inference(self, prompt: str, system_context: str = "") -> str:
+        """
+        Direct LLM inference for Golden Path - simple, fast execution
+        Bypasses complex multi-agent workflows for rapid testing and simple tasks
+        """
+        if not self.model:
+            raise Exception("Google AI model not initialized")
+        
+        try:
+            if settings.GOLDEN_PATH_LOGGING:
+                logger.info(f"🟡 Golden Path: Direct inference for prompt: {prompt[:100]}...")
+            
+            # Prepare the full prompt with system context
+            full_prompt = f"{system_context}\n\nUser: {prompt}\n\nAssistant:"
+            
+            # Execute direct inference
+            response = await self.model.generate_content_async(full_prompt)
+            
+            if settings.GOLDEN_PATH_LOGGING:
+                logger.info(f"✅ Golden Path: Direct inference completed successfully")
+            
+            return response.text
+            
+        except Exception as e:
+            logger.error(f"❌ Golden Path: Direct inference failed: {e}")
+            raise
+    
+    async def structured_inference(self, prompt: str, system_context: str = "", 
+                                 temperature: float = 0.7) -> Dict[str, Any]:
+        """
+        Structured inference with temperature control for more complex tasks
+        """
+        if not self.model:
+            raise Exception("Google AI model not initialized")
+        
+        try:
+            # Configure generation parameters
+            generation_config = genai.types.GenerationConfig(
+                temperature=temperature,
+                top_p=0.8,
+                top_k=40,
+                max_output_tokens=2048,
+            )
+            
+            full_prompt = f"{system_context}\n\nUser: {prompt}\n\nAssistant:"
+            response = await self.model.generate_content_async(
+                full_prompt,
+                generation_config=generation_config
+            )
+            
+            return {
+                "content": response.text,
+                "temperature": temperature,
+                "model": settings.LLM_MODEL
+            }
+            
+        except Exception as e:
+            logger.error(f"❌ Structured inference failed: {e}")
+            raise
+    
+    def is_available(self) -> bool:
+        """Check if Google AI is properly configured"""
+        return self.model is not None and self.api_key is not None
+
+# Global instance for easy access
+google_ai_wrapper = GoogleAIWrapper()
+
+# Convenience function for direct inference
+async def direct_inference(prompt: str, system_context: str = "") -> str:
+    """Convenience function for direct inference"""
+    return await google_ai_wrapper.direct_inference(prompt, system_context) 

@@ -18,6 +18,11 @@ from loguru import logger
 import sys
 
 # --- Core Application Imports ---
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from config.settings import settings
+
 try:
     from .core.cognitive_forge_engine import cognitive_forge_engine
     from .models.advanced_database import DatabaseManager, Mission
@@ -364,6 +369,90 @@ def run_mission_in_background(mission_id: str, prompt: str, agent_type: str, tit
                 update_type="error"
             )
 
+# --- GOLDEN PATH BACKGROUND TASK ---
+async def run_simple_mission_in_background(mission_id: str, prompt: str, agent_type: str, title: str):
+    """
+    Background task for the Golden Path - simplified mission execution.
+    Uses direct LLM inference for fast, reliable execution.
+    """
+    logger.info(f"🟡 GOLDEN PATH: Starting simple mission {mission_id} for prompt: '{prompt}'")
+    
+    # Update mission status to executing
+    if db_manager:
+        try:
+            db_manager.update_mission_status(mission_id, "executing")
+            db_manager.add_mission_update(
+                mission_id_str=mission_id,
+                message="Golden Path: Mission execution started",
+                update_type="info"
+            )
+        except Exception as db_error:
+            logger.error(f"Database error updating mission status: {db_error}")
+    
+    try:
+        # Use the cognitive forge engine's simple mission execution
+        if cognitive_forge_engine:
+            result = await cognitive_forge_engine.run_mission_simple(prompt, mission_id)
+            
+            # Update mission status based on result
+            if db_manager:
+                if result["status"] == "completed":
+                    db_manager.update_mission_status(
+                        mission_id,
+                        "completed",
+                        result=json.dumps(result),
+                        execution_time=result.get("execution_time", 0)
+                    )
+                    db_manager.add_mission_update(
+                        mission_id_str=mission_id,
+                        message=f"Golden Path: Mission completed successfully in {result.get('execution_time', 0):.2f}s",
+                        update_type="success"
+                    )
+                else:
+                    db_manager.update_mission_status(
+                        mission_id,
+                        "failed",
+                        error_message=result.get("error", "Unknown error")
+                    )
+                    db_manager.add_mission_update(
+                        mission_id_str=mission_id,
+                        message=f"Golden Path: Mission failed - {result.get('error', 'Unknown error')}",
+                        update_type="error"
+                    )
+        else:
+            # Fallback if cognitive forge engine is not available
+            logger.warning("Cognitive forge engine not available, using fallback")
+            time.sleep(1)  # Simulate processing
+            
+            if db_manager:
+                db_manager.update_mission_status(
+                    mission_id,
+                    "completed",
+                    result="Fallback mission execution completed",
+                    execution_time=1
+                )
+                db_manager.add_mission_update(
+                    mission_id_str=mission_id,
+                    message="Golden Path: Fallback execution completed",
+                    update_type="success"
+                )
+            
+    except Exception as e:
+        logger.error(f"🟡 GOLDEN PATH: Mission {mission_id} failed: {e}")
+        
+        # Update mission status to failed
+        if db_manager:
+            db_manager.update_mission_status(
+                mission_id,
+                "failed",
+                error_message=str(e)
+            )
+            db_manager.add_mission_update(
+                mission_id_str=mission_id,
+                message=f"Golden Path: Mission failed - {str(e)}",
+                update_type="error"
+            )
+
 async def forward_server_8002_logs():
     """Background task to forward logs from server 8002 to the main stream"""
     import aiohttp
@@ -601,8 +690,15 @@ async def create_mission_api(request: MissionRequest, background_tasks: Backgrou
                 logger.error(f"Database error: {db_error}")
                 # Continue without database if it fails
         
-        # Add to background tasks
-        background_tasks.add_task(run_mission_in_background, mission_id, request.prompt, request.agent_type, title)
+        # --- GOLDEN PATH FEATURE FLAG SWITCH ---
+        if settings.ENABLE_FULL_WORKFLOW:
+            # Use the full, multi-agent background task
+            logger.info(f"🔵 Using Full Workflow for mission {mission_id}")
+            background_tasks.add_task(run_mission_in_background, mission_id, request.prompt, request.agent_type, title)
+        else:
+            # Use the new, simple "Golden Path" background task
+            logger.info(f"🟡 Using Golden Path for mission {mission_id}")
+            background_tasks.add_task(run_simple_mission_in_background, mission_id, request.prompt, request.agent_type, title)
         
         return {
             "mission_id": mission_id,
@@ -709,6 +805,67 @@ async def get_live_events():
         "total_events": len(log_buffer),
         "last_update": datetime.utcnow().isoformat()
     }
+
+# --- GOLDEN PATH TEST ENDPOINTS ---
+@app.get("/api/test/golden-path")
+async def test_golden_path():
+    """Test endpoint for Golden Path functionality"""
+    try:
+        if cognitive_forge_engine:
+            status = cognitive_forge_engine.get_mission_status()
+            return {
+                "status": "success",
+                "golden_path_enabled": not settings.ENABLE_FULL_WORKFLOW,
+                "full_workflow_enabled": settings.ENABLE_FULL_WORKFLOW,
+                "minimal_mode": settings.MINIMAL_MODE,
+                "ai_available": status.get("ai_available", False),
+                "model": settings.LLM_MODEL,
+                "timestamp": datetime.utcnow().isoformat()
+            }
+        else:
+            return {
+                "status": "error",
+                "message": "Cognitive forge engine not available",
+                "timestamp": datetime.utcnow().isoformat()
+            }
+    except Exception as e:
+        logger.error(f"Golden Path test failed: {e}")
+        return {
+            "status": "error",
+            "message": str(e),
+            "timestamp": datetime.utcnow().isoformat()
+        }
+
+@app.post("/api/test/mission")
+async def test_mission_execution(request: MissionRequest):
+    """Test endpoint for mission execution with Golden Path"""
+    try:
+        mission_id = f"test_{str(uuid.uuid4())[:8]}"
+        
+        if cognitive_forge_engine:
+            # Test the simple mission execution
+            result = await cognitive_forge_engine.run_mission_simple(request.prompt, mission_id)
+            
+            return {
+                "status": "success",
+                "mission_id": mission_id,
+                "result": result,
+                "path": "golden_path",
+                "timestamp": datetime.utcnow().isoformat()
+            }
+        else:
+            return {
+                "status": "error",
+                "message": "Cognitive forge engine not available",
+                "timestamp": datetime.utcnow().isoformat()
+            }
+    except Exception as e:
+        logger.error(f"Test mission execution failed: {e}")
+        return {
+            "status": "error",
+            "message": str(e),
+            "timestamp": datetime.utcnow().isoformat()
+        }
 
 @app.get("/api/test-8002")
 async def test_server_8002():

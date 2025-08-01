@@ -1,0 +1,8 @@
+{"time":"2025-07-31T18:55:41.7868746-05:00","level":"INFO","msg":"main: starting server","port-filename":"C:\\Users\\AMD\\AppData\\Local\\Temp\\tmpb78uzgd_\\port-9748.txt","pid":9748,"log-level":0,"disable-analytics":false,"shutdown-on-parent-exit":false,"enable-dcgm-profiling":false}
+{"time":"2025-07-31T18:55:41.7916811-05:00","level":"INFO","msg":"server: will exit if parent process dies","ppid":9748}
+{"time":"2025-07-31T18:55:41.7916811-05:00","level":"INFO","msg":"server: accepting connections","addr":{"IP":"127.0.0.1","Port":54507,"Zone":""}}
+{"time":"2025-07-31T18:55:41.7916811-05:00","level":"INFO","msg":"server: accepting connections","addr":{"Name":"C:\\Users\\AMD\\AppData\\Local\\Temp\\wandb-9748-10104-859368801\\socket","Net":"unix"}}
+{"time":"2025-07-31T18:55:41.9483003-05:00","level":"INFO","msg":"connection: ManageConnectionData: new connection created","id":"1(127.0.0.1:54508)"}
+{"time":"2025-07-31T18:55:41.9636261-05:00","level":"INFO","msg":"handleInformInit: received","streamId":"b22b1ngw","id":"1(127.0.0.1:54508)"}
+{"time":"2025-07-31T18:55:42.2257371-05:00","level":"INFO","msg":"handleInformInit: stream started","streamId":"b22b1ngw","id":"1(127.0.0.1:54508)"}
+{"time":"2025-07-31T19:02:24.8474374-05:00","level":"INFO","msg":"main: received shutdown signal","signal":15}
