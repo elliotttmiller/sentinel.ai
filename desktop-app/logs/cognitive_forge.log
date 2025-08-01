@@ -4929,3 +4929,86 @@ CONTEXT:  JSON data, line 1: Mission...
 2025-08-01 10:55:00.884 | INFO     | src.main:startup_event:904 - 📡 Real-time log streaming initialized
 2025-08-01 10:55:00.887 | INFO     | src.main:startup_event:908 - 🔗 SSE endpoint available at /api/events/stream
 2025-08-01 10:55:00.896 | INFO     | src.main:shutdown_event:913 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 10:59:59.619 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 10:59:59.631 | INFO     | src.main:startup_event:907 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 10:59:59.632 | INFO     | src.main:startup_event:908 - 📡 Real-time log streaming initialized
+2025-08-01 10:59:59.632 | INFO     | src.main:startup_event:912 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 10:59:59.894 | INFO     | src.main:forward_server_8002_logs:495 - Forwarded 64 new logs from server 8002
+2025-08-01 11:00:01.465 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1548 - 🟡 Golden Path: Starting simple mission test_1dcee9ea
+2025-08-01 11:00:01.465 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1549 - 🟡 Golden Path: Prompt: Write a hello world function...
+2025-08-01 11:00:02.688 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1570 - ✅ Golden Path: Mission test_1dcee9ea completed in 1.22s
+2025-08-01 11:00:02.959 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1548 - 🟡 Golden Path: Starting simple mission test_6560cb9f
+2025-08-01 11:00:02.959 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1549 - 🟡 Golden Path: Prompt: Create a Python class for data processing...
+2025-08-01 11:00:06.661 | INFO     | src.main:forward_server_8002_logs:495 - Forwarded 1 new logs from server 8002
+2025-08-01 11:00:08.531 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1548 - 🟡 Golden Path: Starting simple mission test_f38ce44e
+2025-08-01 11:00:08.531 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1549 - 🟡 Golden Path: Prompt: Write a hello world function...
+2025-08-01 11:00:09.660 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1570 - ✅ Golden Path: Mission test_f38ce44e completed in 1.13s
+2025-08-01 11:00:09.933 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1548 - 🟡 Golden Path: Starting simple mission test_c9740b1a
+2025-08-01 11:00:09.933 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1549 - 🟡 Golden Path: Prompt: Create a Python class for data processing...
+2025-08-01 11:00:16.954 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1570 - ✅ Golden Path: Mission test_6560cb9f completed in 13.99s
+2025-08-01 11:00:17.215 | INFO     | src.main:create_mission_api:669 - API MISSION CREATED: 1cf89da6-b878-471d-844a-36eb9ed5484e - Test Mission
+2025-08-01 11:00:17.215 | INFO     | src.models.advanced_database:create_mission:137 - 🆕 Creating mission: 1cf89da6-b878-471d-844a-36eb9ed5484e
+2025-08-01 11:00:17.435 | INFO     | src.models.advanced_database:create_mission:159 - ✅ Mission created successfully: 1cf89da6-b878-471d-844a-36eb9ed5484e
+2025-08-01 11:00:18.012 | INFO     | src.main:create_mission_api:681 - Mission stored in database: 1cf89da6-b878-471d-844a-36eb9ed5484e
+2025-08-01 11:00:18.145 | INFO     | src.main:create_mission_api:700 - 🟡 Using Golden Path for mission 1cf89da6-b878-471d-844a-36eb9ed5484e
+2025-08-01 11:00:18.148 | INFO     | src.main:run_simple_mission_in_background:378 - 🟡 GOLDEN PATH: Starting simple mission 1cf89da6-b878-471d-844a-36eb9ed5484e for prompt: 'Write a function to calculate fibonacci numbers'
+2025-08-01 11:00:18.148 | INFO     | src.models.advanced_database:update_mission_status:195 - 🔄 Updating mission status: 1cf89da6-b878-471d-844a-36eb9ed5484e -> executing
+2025-08-01 11:00:18.317 | INFO     | src.models.advanced_database:update_mission_status:225 - ✅ Successfully updated mission 1cf89da6-b878-471d-844a-36eb9ed5484e status: pending -> executing
+2025-08-01 11:00:18.584 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1548 - 🟡 Golden Path: Starting simple mission 1cf89da6-b878-471d-844a-36eb9ed5484e
+2025-08-01 11:00:18.584 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1549 - 🟡 Golden Path: Prompt: Write a function to calculate fibonacci numbers...
+2025-08-01 11:00:22.201 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1570 - ✅ Golden Path: Mission 1cf89da6-b878-471d-844a-36eb9ed5484e completed in 3.62s
+2025-08-01 11:00:22.201 | INFO     | src.models.advanced_database:update_mission_status:195 - 🔄 Updating mission status: 1cf89da6-b878-471d-844a-36eb9ed5484e -> completed
+2025-08-01 11:00:22.294 | DEBUG    | src.models.advanced_database:update_mission_status:209 - 📝 Updated mission result for 1cf89da6-b878-471d-844a-36eb9ed5484e
+2025-08-01 11:00:22.297 | DEBUG    | src.models.advanced_database:update_mission_status:215 - ⏱️ Updated execution time for 1cf89da6-b878-471d-844a-36eb9ed5484e: 3.617055s
+2025-08-01 11:00:22.297 | INFO     | src.models.advanced_database:update_mission_status:222 - 🏁 Mission 1cf89da6-b878-471d-844a-36eb9ed5484e marked as completed at 2025-08-01 16:00:22.297775
+2025-08-01 11:00:22.389 | INFO     | src.models.advanced_database:update_mission_status:225 - ✅ Successfully updated mission 1cf89da6-b878-471d-844a-36eb9ed5484e status: executing -> completed
+2025-08-01 11:00:25.319 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1570 - ✅ Golden Path: Mission test_c9740b1a completed in 15.39s
+2025-08-01 11:00:25.583 | INFO     | src.main:create_mission_api:669 - API MISSION CREATED: 88b9138f-6b44-46df-8063-1e945c3eedfe - Test Mission
+2025-08-01 11:00:25.583 | INFO     | src.models.advanced_database:create_mission:137 - 🆕 Creating mission: 88b9138f-6b44-46df-8063-1e945c3eedfe
+2025-08-01 11:00:25.801 | INFO     | src.models.advanced_database:create_mission:159 - ✅ Mission created successfully: 88b9138f-6b44-46df-8063-1e945c3eedfe
+2025-08-01 11:00:25.980 | INFO     | src.main:create_mission_api:681 - Mission stored in database: 88b9138f-6b44-46df-8063-1e945c3eedfe
+2025-08-01 11:00:26.112 | INFO     | src.main:create_mission_api:700 - 🟡 Using Golden Path for mission 88b9138f-6b44-46df-8063-1e945c3eedfe
+2025-08-01 11:00:26.115 | INFO     | src.main:run_simple_mission_in_background:378 - 🟡 GOLDEN PATH: Starting simple mission 88b9138f-6b44-46df-8063-1e945c3eedfe for prompt: 'Write a function to calculate fibonacci numbers'
+2025-08-01 11:00:26.116 | INFO     | src.models.advanced_database:update_mission_status:195 - 🔄 Updating mission status: 88b9138f-6b44-46df-8063-1e945c3eedfe -> executing
+2025-08-01 11:00:26.288 | INFO     | src.models.advanced_database:update_mission_status:225 - ✅ Successfully updated mission 88b9138f-6b44-46df-8063-1e945c3eedfe status: pending -> executing
+2025-08-01 11:00:26.567 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1548 - 🟡 Golden Path: Starting simple mission 88b9138f-6b44-46df-8063-1e945c3eedfe
+2025-08-01 11:00:26.567 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1549 - 🟡 Golden Path: Prompt: Write a function to calculate fibonacci numbers...
+2025-08-01 11:00:30.267 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1570 - ✅ Golden Path: Mission 88b9138f-6b44-46df-8063-1e945c3eedfe completed in 3.70s
+2025-08-01 11:00:30.267 | INFO     | src.models.advanced_database:update_mission_status:195 - 🔄 Updating mission status: 88b9138f-6b44-46df-8063-1e945c3eedfe -> completed
+2025-08-01 11:00:30.351 | DEBUG    | src.models.advanced_database:update_mission_status:209 - 📝 Updated mission result for 88b9138f-6b44-46df-8063-1e945c3eedfe
+2025-08-01 11:00:30.351 | DEBUG    | src.models.advanced_database:update_mission_status:215 - ⏱️ Updated execution time for 88b9138f-6b44-46df-8063-1e945c3eedfe: 3.699524s
+2025-08-01 11:00:30.351 | INFO     | src.models.advanced_database:update_mission_status:222 - 🏁 Mission 88b9138f-6b44-46df-8063-1e945c3eedfe marked as completed at 2025-08-01 16:00:30.351021
+2025-08-01 11:00:30.438 | INFO     | src.models.advanced_database:update_mission_status:225 - ✅ Successfully updated mission 88b9138f-6b44-46df-8063-1e945c3eedfe status: executing -> completed
+2025-08-01 11:04:47.535 | INFO     | src.main:shutdown_event:917 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 11:05:06.813 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 11:05:06.828 | INFO     | src.main:startup_event:907 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 11:05:06.830 | INFO     | src.main:startup_event:908 - 📡 Real-time log streaming initialized
+2025-08-01 11:05:06.830 | INFO     | src.main:startup_event:912 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 11:05:07.087 | INFO     | src.main:forward_server_8002_logs:495 - Forwarded 55 new logs from server 8002
+2025-08-01 11:06:10.703 | INFO     | src.main:shutdown_event:917 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 11:06:27.140 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 11:06:27.154 | INFO     | src.main:startup_event:907 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 11:06:27.154 | INFO     | src.main:startup_event:908 - 📡 Real-time log streaming initialized
+2025-08-01 11:06:27.155 | INFO     | src.main:startup_event:912 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 11:06:27.157 | INFO     | src.main:shutdown_event:917 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 11:06:44.186 | INFO     | src.main:startup_event:908 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 11:06:44.187 | INFO     | src.main:startup_event:909 - 📡 Real-time log streaming initialized
+2025-08-01 11:06:44.187 | INFO     | src.main:startup_event:913 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 11:06:44.193 | INFO     | src.main:shutdown_event:918 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 11:07:03.376 | INFO     | src.main:startup_event:912 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 11:07:03.376 | INFO     | src.main:startup_event:913 - 📡 Real-time log streaming initialized
+2025-08-01 11:07:03.376 | INFO     | src.main:startup_event:917 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 11:07:03.379 | INFO     | src.main:shutdown_event:922 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 11:07:22.300 | INFO     | src.main:startup_event:1047 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 11:07:22.300 | INFO     | src.main:startup_event:1048 - 📡 Real-time log streaming initialized
+2025-08-01 11:07:22.300 | INFO     | src.main:startup_event:1052 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 11:07:22.301 | INFO     | src.main:shutdown_event:1057 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 11:07:39.042 | INFO     | src.main:startup_event:1047 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 11:07:39.042 | INFO     | src.main:startup_event:1048 - 📡 Real-time log streaming initialized
+2025-08-01 11:07:39.042 | INFO     | src.main:startup_event:1052 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 11:07:39.045 | INFO     | src.main:shutdown_event:1057 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 11:07:55.329 | INFO     | src.main:startup_event:1158 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 11:07:55.329 | INFO     | src.main:startup_event:1159 - 📡 Real-time log streaming initialized
+2025-08-01 11:07:55.329 | INFO     | src.main:startup_event:1163 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 11:07:55.587 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 57 new logs from server 8002
+2025-08-01 11:08:06.898 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 1 new logs from server 8002

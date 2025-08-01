@@ -4,7 +4,7 @@ Centralized configuration management with environment variable support
 """
 
 import os
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 from pydantic_settings import BaseSettings
 from pydantic import Field
 from dotenv import load_dotenv
@@ -14,8 +14,6 @@ load_dotenv()
 
 
 class Settings(BaseSettings):
-    """Main settings class for the Cognitive Forge application"""
-
     # --- Golden Path Feature Flags ---
     # When True, missions use the full 8-phase AI workflow
     # When False, they use the simple, direct-to-LLM golden path
@@ -26,6 +24,52 @@ class Settings(BaseSettings):
     
     # When True, enables detailed logging for golden path operations
     GOLDEN_PATH_LOGGING: bool = True
+    
+    # --- HYBRID SYSTEM CONFIGURATION ---
+    # Enable intelligent hybrid routing
+    ENABLE_HYBRID_MODE: bool = True
+    AUTO_SWITCHING: bool = True
+    
+    # Complexity analysis thresholds
+    SIMPLE_TASK_KEYWORDS: List[str] = [
+        "hello", "simple", "basic", "quick", "function", "print", 
+        "calculate", "add", "multiply", "convert", "format", "sort"
+    ]
+    COMPLEX_TASK_KEYWORDS: List[str] = [
+        "design", "architecture", "system", "complex", "advanced",
+        "algorithm", "optimization", "machine learning", "neural network",
+        "database", "api", "framework", "microservice", "distributed"
+    ]
+    
+    # Performance thresholds (seconds)
+    GOLDEN_PATH_TIME_LIMIT: float = 5.0
+    FULL_WORKFLOW_TIME_LIMIT: float = 60.0
+    HYBRID_SWITCH_THRESHOLD: float = 0.6
+    
+    # Decision weights (0.0 to 1.0)
+    USER_PREFERENCE_WEIGHT: float = 0.3
+    PERFORMANCE_WEIGHT: float = 0.4
+    COMPLEXITY_WEIGHT: float = 0.3
+    
+    # Machine learning configuration
+    ENABLE_ML_PREDICTION: bool = True
+    ML_MODEL_UPDATE_INTERVAL: int = 3600  # 1 hour
+    MIN_TRAINING_SAMPLES: int = 50
+    
+    # Predictive caching
+    ENABLE_PREDICTIVE_CACHING: bool = True
+    CACHE_SIZE_LIMIT: int = 1000
+    CACHE_TTL: int = 3600  # 1 hour
+    
+    # Advanced analytics
+    ENABLE_ADVANCED_ANALYTICS: bool = True
+    ANALYTICS_SAMPLE_RATE: float = 0.1  # 10% of requests
+    PERFORMANCE_METRICS_RETENTION: int = 86400  # 24 hours
+    
+    # Dynamic threshold adjustment
+    ENABLE_DYNAMIC_THRESHOLDS: bool = True
+    THRESHOLD_UPDATE_INTERVAL: int = 1800  # 30 minutes
+    THRESHOLD_LEARNING_RATE: float = 0.1
     
     # --- Existing Settings ---
     GOOGLE_API_KEY: Optional[str] = None
@@ -50,7 +94,7 @@ class Settings(BaseSettings):
     # --- Mission Configuration ---
     STUCK_MISSION_TIMEOUT: int = 300  # 5 minutes
     BACKGROUND_TASK_TIMEOUT: int = 3   # 3 seconds per step
-
+    
     # Application Settings
     app_name: str = "Sentinel Cognitive Forge"
     app_version: str = "3.0.0"

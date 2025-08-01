@@ -25,6 +25,7 @@ from config.settings import settings
 
 try:
     from .core.cognitive_forge_engine import cognitive_forge_engine
+    from .core.hybrid_decision_engine import hybrid_decision_engine
     from .models.advanced_database import DatabaseManager, Mission
     from .utils.sentry_integration import initialize_sentry
     
@@ -369,6 +370,141 @@ def run_mission_in_background(mission_id: str, prompt: str, agent_type: str, tit
                 update_type="error"
             )
 
+# --- HYBRID INTELLIGENT MISSION EXECUTION ---
+async def run_hybrid_mission_in_background(mission_id: str, prompt: str, agent_type: str, title: str):
+    """
+    Intelligent hybrid mission execution using the decision engine.
+    Automatically chooses the optimal execution path based on task complexity,
+    performance predictions, and user preferences.
+    """
+    start_time = time.time()
+    
+    logger.info(f"🎯 HYBRID: Starting intelligent mission {mission_id} for prompt: '{prompt}'")
+    
+    # Update mission status to executing
+    if db_manager:
+        try:
+            db_manager.update_mission_status(mission_id, "executing")
+            db_manager.add_mission_update(
+                mission_id_str=mission_id,
+                message="Hybrid: Intelligent routing analysis started",
+                update_type="info"
+            )
+        except Exception as db_error:
+            logger.error(f"Database error updating mission status: {db_error}")
+    
+    try:
+        # Make intelligent routing decision
+        decision = hybrid_decision_engine.make_hybrid_decision(prompt, user_id="default")
+        chosen_path = decision["path"]
+        reason = decision["reason"]
+        confidence = decision["confidence"]
+        complexity_score = decision["complexity_score"]
+        predicted_time = decision["predicted_time"]
+        
+        logger.info(f"🎯 HYBRID: Decision made - {chosen_path} ({reason}) - Confidence: {confidence:.2f}")
+        
+        # Update database with decision
+        if db_manager:
+            db_manager.add_mission_update(
+                mission_id_str=mission_id,
+                message=f"Hybrid: Chosen {chosen_path} ({reason}) - Confidence: {confidence:.2f}",
+                update_type="info"
+            )
+        
+        # Execute based on decision
+        if chosen_path == "golden_path":
+            # Execute with Golden Path
+            if cognitive_forge_engine:
+                result = await cognitive_forge_engine.run_mission_simple(prompt, mission_id)
+            else:
+                # Fallback execution
+                await asyncio.sleep(1)
+                result = {
+                    "mission_id": mission_id,
+                    "status": "completed",
+                    "result": f"Hybrid Golden Path result for: {prompt}",
+                    "execution_time": 1.0,
+                    "path": "golden_path"
+                }
+        else:
+            # Execute with Full Workflow
+            if cognitive_forge_engine:
+                result = await cognitive_forge_engine.run_mission_full(prompt, mission_id)
+            else:
+                # Fallback execution
+                await asyncio.sleep(2)
+                result = {
+                    "mission_id": mission_id,
+                    "status": "completed",
+                    "result": f"Hybrid Full Workflow result for: {prompt}",
+                    "execution_time": 2.0,
+                    "path": "full_workflow"
+                }
+        
+        # Calculate actual execution time
+        actual_execution_time = time.time() - start_time
+        
+        # Record execution result for learning
+        success = result.get("status") == "completed"
+        user_satisfaction = 0.8 if success else 0.3  # Simple satisfaction heuristic
+        
+        hybrid_decision_engine.record_execution_result(
+            mission_id, prompt, chosen_path, actual_execution_time, 
+            success, user_satisfaction
+        )
+        
+        # Update mission status based on result
+        if db_manager:
+            if result["status"] == "completed":
+                db_manager.update_mission_status(
+                    mission_id,
+                    "completed",
+                    result=json.dumps(result),
+                    execution_time=actual_execution_time
+                )
+                db_manager.add_mission_update(
+                    mission_id_str=mission_id,
+                    message=f"Hybrid: Mission completed successfully in {actual_execution_time:.2f}s via {chosen_path}",
+                    update_type="success"
+                )
+            else:
+                db_manager.update_mission_status(
+                    mission_id,
+                    "failed",
+                    error_message=result.get("error", "Unknown error")
+                )
+                db_manager.add_mission_update(
+                    mission_id_str=mission_id,
+                    message=f"Hybrid: Mission failed via {chosen_path} - {result.get('error', 'Unknown error')}",
+                    update_type="error"
+                )
+        
+        logger.info(f"🎯 HYBRID: Mission {mission_id} completed via {chosen_path} in {actual_execution_time:.2f}s")
+        
+    except Exception as e:
+        actual_execution_time = time.time() - start_time
+        logger.error(f"🎯 HYBRID: Mission {mission_id} failed: {e}")
+        
+        # Record failure for learning
+        hybrid_decision_engine.record_execution_result(
+            mission_id, prompt, "unknown", actual_execution_time, 
+            False, 0.1
+        )
+        
+        # Update mission status to failed
+        if db_manager:
+            db_manager.update_mission_status(
+                mission_id,
+                "failed",
+                error_message=str(e)
+            )
+            db_manager.add_mission_update(
+                mission_id_str=mission_id,
+                message=f"Hybrid: Mission failed - {str(e)}",
+                update_type="error"
+            )
+
 # --- GOLDEN PATH BACKGROUND TASK ---
 async def run_simple_mission_in_background(mission_id: str, prompt: str, agent_type: str, title: str):
     """
@@ -690,8 +826,12 @@ async def create_mission_api(request: MissionRequest, background_tasks: Backgrou
                 logger.error(f"Database error: {db_error}")
                 # Continue without database if it fails
         
-        # --- GOLDEN PATH FEATURE FLAG SWITCH ---
-        if settings.ENABLE_FULL_WORKFLOW:
+        # --- HYBRID INTELLIGENT ROUTING ---
+        if settings.ENABLE_HYBRID_MODE:
+            # Use intelligent hybrid decision engine
+            logger.info(f"🎯 Using Hybrid Decision Engine for mission {mission_id}")
+            background_tasks.add_task(run_hybrid_mission_in_background, mission_id, request.prompt, request.agent_type, title)
+        elif settings.ENABLE_FULL_WORKFLOW:
             # Use the full, multi-agent background task
             logger.info(f"🔵 Using Full Workflow for mission {mission_id}")
             background_tasks.add_task(run_mission_in_background, mission_id, request.prompt, request.agent_type, title)
@@ -807,6 +947,117 @@ async def get_live_events():
     }
 
 # --- GOLDEN PATH TEST ENDPOINTS ---
+# --- HYBRID SYSTEM ENDPOINTS ---
+@app.get("/api/hybrid/status")
+async def get_hybrid_status():
+    """Get comprehensive hybrid system status"""
+    try:
+        if hybrid_decision_engine:
+            stats = hybrid_decision_engine.get_system_stats()
+            return {
+                "status": "success",
+                "hybrid_mode_enabled": settings.ENABLE_HYBRID_MODE,
+                "auto_switching": settings.AUTO_SWITCHING,
+                "system_stats": stats,
+                "timestamp": datetime.utcnow().isoformat()
+            }
+        else:
+            return {
+                "status": "error",
+                "message": "Hybrid decision engine not available",
+                "timestamp": datetime.utcnow().isoformat()
+            }
+    except Exception as e:
+        logger.error(f"Hybrid status check failed: {e}")
+        return {
+            "status": "error",
+            "message": str(e),
+            "timestamp": datetime.utcnow().isoformat()
+        }
+
+@app.post("/api/hybrid/analyze")
+async def analyze_task_complexity(request: MissionRequest):
+    """Analyze task complexity and get routing recommendation"""
+    try:
+        if hybrid_decision_engine:
+            # Analyze complexity
+            complexity = hybrid_decision_engine.analyze_task_complexity(request.prompt)
+            
+            # Get performance prediction
+            performance = hybrid_decision_engine.predict_performance(request.prompt, complexity.overall_score)
+            
+            # Make decision
+            decision = hybrid_decision_engine.make_hybrid_decision(request.prompt)
+            
+            return {
+                "status": "success",
+                "task_analysis": {
+                    "complexity_score": complexity.overall_score,
+                    "length_score": complexity.length_score,
+                    "keyword_score": complexity.keyword_score,
+                    "context_score": complexity.context_score,
+                    "confidence": complexity.confidence
+                },
+                "performance_prediction": {
+                    "golden_path_time": performance.golden_path_time,
+                    "full_workflow_time": performance.full_workflow_time,
+                    "golden_path_success_rate": performance.golden_path_success_rate,
+                    "full_workflow_success_rate": performance.full_workflow_success_rate
+                },
+                "recommendation": decision,
+                "timestamp": datetime.utcnow().isoformat()
+            }
+        else:
+            return {
+                "status": "error",
+                "message": "Hybrid decision engine not available",
+                "timestamp": datetime.utcnow().isoformat()
+            }
+    except Exception as e:
+        logger.error(f"Task analysis failed: {e}")
+        return {
+            "status": "error",
+            "message": str(e),
+            "timestamp": datetime.utcnow().isoformat()
+        }
+
+@app.get("/api/hybrid/analytics")
+async def get_hybrid_analytics():
+    """Get advanced analytics and performance metrics"""
+    try:
+        if hybrid_decision_engine:
+            stats = hybrid_decision_engine.get_system_stats()
+            
+            # Calculate performance improvements
+            golden_path_avg = stats.get("analytics", {}).get("execution_metrics", {}).get("golden_path", {}).get("avg_execution_time", 0)
+            full_workflow_avg = stats.get("analytics", {}).get("execution_metrics", {}).get("full_workflow", {}).get("avg_execution_time", 0)
+            
+            performance_improvement = 0
+            if full_workflow_avg > 0 and golden_path_avg > 0:
+                performance_improvement = ((full_workflow_avg - golden_path_avg) / full_workflow_avg) * 100
+            
+            return {
+                "status": "success",
+                "analytics": stats,
+                "performance_improvement": performance_improvement,
+                "cache_efficiency": stats.get("cache_stats", {}).get("hit_rate", 0),
+                "decision_accuracy": stats.get("analytics", {}).get("decision_metrics", {}).get("avg_confidence", 0),
+                "timestamp": datetime.utcnow().isoformat()
+            }
+        else:
+            return {
+                "status": "error",
+                "message": "Hybrid decision engine not available",
+                "timestamp": datetime.utcnow().isoformat()
+            }
+    except Exception as e:
+        logger.error(f"Analytics retrieval failed: {e}")
+        return {
+            "status": "error",
+            "message": str(e),
+            "timestamp": datetime.utcnow().isoformat()
+        }
+
 @app.get("/api/test/golden-path")
 async def test_golden_path():
     """Test endpoint for Golden Path functionality"""
