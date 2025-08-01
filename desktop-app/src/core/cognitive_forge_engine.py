@@ -1595,23 +1595,247 @@ class CognitiveForgeEngine:
             if settings.GOLDEN_PATH_LOGGING:
                 logger.info(f"🔵 Full Workflow: Starting complex mission {mission_id}")
             
-            # This would contain your existing 8-phase workflow
-            # For now, we'll simulate it with a delay
-            await asyncio.sleep(2)  # Simulate complex processing
+            # Phase 1: Planning & Analysis
+            logger.info(f"📋 Phase 1: Planning & Analysis for mission {mission_id}")
+            planning_prompt = f"""
+            Analyze this complex request and create a comprehensive plan:
             
-            # Placeholder for full workflow result
+            {user_prompt}
+            
+            Provide a structured plan with:
+            1. Problem analysis and requirements
+            2. Technical approach and methodology
+            3. Resource requirements and constraints
+            4. Risk assessment and mitigation strategies
+            5. Success criteria and validation methods
+            """
+            
+            planning_result = await direct_inference(
+                prompt=planning_prompt,
+                system_context="You are an expert systems analyst and project planner."
+            )
+            
+            # Phase 2: Research & Information Gathering
+            logger.info(f"🔍 Phase 2: Research & Information Gathering for mission {mission_id}")
+            research_prompt = f"""
+            Based on the planning analysis, conduct comprehensive research:
+            
+            Planning Analysis:
+            {planning_result}
+            
+            Research Requirements:
+            {user_prompt}
+            
+            Provide detailed research on:
+            1. Current best practices and standards
+            2. Relevant technologies and tools
+            3. Similar implementations and case studies
+            4. Performance considerations and benchmarks
+            5. Security and compliance requirements
+            """
+            
+            research_result = await direct_inference(
+                prompt=research_prompt,
+                system_context="You are an expert technology researcher and analyst."
+            )
+            
+            # Phase 3: Design & Architecture
+            logger.info(f"🏗️ Phase 3: Design & Architecture for mission {mission_id}")
+            design_prompt = f"""
+            Create a comprehensive design based on research:
+            
+            Research Findings:
+            {research_result}
+            
+            Original Request:
+            {user_prompt}
+            
+            Design Requirements:
+            1. System architecture and components
+            2. Data models and relationships
+            3. API design and interfaces
+            4. Security architecture
+            5. Scalability and performance design
+            6. Deployment architecture
+            """
+            
+            design_result = await direct_inference(
+                prompt=design_prompt,
+                system_context="You are an expert software architect and system designer."
+            )
+            
+            # Phase 4: Implementation & Development
+            logger.info(f"⚙️ Phase 4: Implementation & Development for mission {mission_id}")
+            implementation_prompt = f"""
+            Provide detailed implementation based on the design:
+            
+            Design Specification:
+            {design_result}
+            
+            Implementation Requirements:
+            {user_prompt}
+            
+            Provide:
+            1. Detailed code implementation
+            2. Configuration files and setup
+            3. Database schemas and migrations
+            4. API endpoints and documentation
+            5. Testing strategies and test cases
+            6. Deployment scripts and procedures
+            """
+            
+            implementation_result = await direct_inference(
+                prompt=implementation_prompt,
+                system_context="You are an expert software developer and implementation specialist."
+            )
+            
+            # Phase 5: Testing & Validation
+            logger.info(f"🧪 Phase 5: Testing & Validation for mission {mission_id}")
+            testing_prompt = f"""
+            Create comprehensive testing strategy:
+            
+            Implementation:
+            {implementation_result}
+            
+            Testing Requirements:
+            1. Unit testing strategy and test cases
+            2. Integration testing approach
+            3. Performance testing methodology
+            4. Security testing procedures
+            5. User acceptance testing criteria
+            6. Automated testing implementation
+            """
+            
+            testing_result = await direct_inference(
+                prompt=testing_prompt,
+                system_context="You are an expert QA engineer and testing specialist."
+            )
+            
+            # Phase 6: Optimization & Refinement
+            logger.info(f"🚀 Phase 6: Optimization & Refinement for mission {mission_id}")
+            optimization_prompt = f"""
+            Optimize the solution for performance and quality:
+            
+            Current Implementation:
+            {implementation_result}
+            
+            Testing Results:
+            {testing_result}
+            
+            Optimization Areas:
+            1. Performance optimization strategies
+            2. Code quality improvements
+            3. Security enhancements
+            4. Scalability optimizations
+            5. Monitoring and observability
+            6. Cost optimization recommendations
+            """
+            
+            optimization_result = await direct_inference(
+                prompt=optimization_prompt,
+                system_context="You are an expert performance engineer and optimization specialist."
+            )
+            
+            # Phase 7: Documentation & Knowledge Synthesis
+            logger.info(f"📚 Phase 7: Documentation & Knowledge Synthesis for mission {mission_id}")
+            documentation_prompt = f"""
+            Create comprehensive documentation:
+            
+            Final Solution:
+            {optimization_result}
+            
+            Documentation Requirements:
+            1. Technical documentation and API docs
+            2. User guides and tutorials
+            3. Deployment and operations guides
+            4. Troubleshooting and FAQ
+            5. Maintenance and support procedures
+            6. Knowledge base and best practices
+            """
+            
+            documentation_result = await direct_inference(
+                prompt=documentation_prompt,
+                system_context="You are an expert technical writer and documentation specialist."
+            )
+            
+            # Phase 8: Deployment & Integration
+            logger.info(f"🚀 Phase 8: Deployment & Integration for mission {mission_id}")
+            deployment_prompt = f"""
+            Provide deployment and integration guidance:
+            
+            Complete Solution:
+            {optimization_result}
+            
+            Documentation:
+            {documentation_result}
+            
+            Deployment Requirements:
+            1. Environment setup and configuration
+            2. CI/CD pipeline implementation
+            3. Monitoring and alerting setup
+            4. Backup and disaster recovery
+            5. Security hardening procedures
+            6. Integration with existing systems
+            """
+            
+            deployment_result = await direct_inference(
+                prompt=deployment_prompt,
+                system_context="You are an expert DevOps engineer and deployment specialist."
+            )
+            
+            # Compile comprehensive result
+            comprehensive_result = f"""
+# COMPREHENSIVE SOLUTION
+
+## Original Request
+{user_prompt}
+
+## Phase 1: Planning & Analysis
+{planning_result}
+
+## Phase 2: Research & Information Gathering
+{research_result}
+
+## Phase 3: Design & Architecture
+{design_result}
+
+## Phase 4: Implementation & Development
+{implementation_result}
+
+## Phase 5: Testing & Validation
+{testing_result}
+
+## Phase 6: Optimization & Refinement
+{optimization_result}
+
+## Phase 7: Documentation & Knowledge Synthesis
+{documentation_result}
+
+## Phase 8: Deployment & Integration
+{deployment_result}
+
+---
+*Generated by Cognitive Forge Engine v5.1 - Full Workflow*
+            """
+            
+            execution_time = (datetime.now() - start_time).total_seconds()
+            
             result = {
                 "mission_id": mission_id,
                 "status": "completed",
-                "result": f"Full workflow result for: {user_prompt}",
-                "execution_time": (datetime.now() - start_time).total_seconds(),
+                "result": comprehensive_result,
+                "execution_time": execution_time,
                 "path": "full_workflow",
                 "timestamp": datetime.now().isoformat(),
-                "phases_completed": 8
+                "phases_completed": 8,
+                "workflow_phases": [
+                    "planning", "research", "design", "implementation", 
+                    "testing", "optimization", "documentation", "deployment"
+                ]
             }
             
             if settings.GOLDEN_PATH_LOGGING:
-                logger.info(f"✅ Full Workflow: Mission {mission_id} completed")
+                logger.info(f"✅ Full Workflow: Mission {mission_id} completed in {execution_time:.2f}s")
             
             return result
             

@@ -142,7 +142,8 @@ class DatabaseManager:
     
     def update_mission_status(self, mission_id_str: str, status: str, 
                             result: str = None, error_message: str = None,
-                            execution_time: float = None, user_satisfaction: float = None):
+                            execution_time: float = None, user_satisfaction: float = None,
+                            execution_path: str = None, complexity_score: float = None):
         """Update mission status with comprehensive tracking"""
         db = SessionLocal()
         try:
@@ -159,6 +160,12 @@ class DatabaseManager:
                     mission.execution_time = execution_time
                 if user_satisfaction is not None:
                     mission.user_satisfaction = user_satisfaction
+                
+                if execution_path is not None:
+                    mission.execution_path = execution_path
+                
+                if complexity_score is not None:
+                    mission.complexity_score = complexity_score
                 
                 if status in ["completed", "failed"]:
                     mission.completed_at = datetime.utcnow()

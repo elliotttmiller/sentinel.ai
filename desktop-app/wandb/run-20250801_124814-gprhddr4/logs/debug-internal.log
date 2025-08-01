@@ -1,0 +1,12 @@
+{"time":"2025-08-01T12:48:15.0473807-05:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-08-01T12:48:15.4038679-05:00","level":"INFO","msg":"stream: created new stream","id":"gprhddr4"}
+{"time":"2025-08-01T12:48:15.4038679-05:00","level":"INFO","msg":"stream: started","id":"gprhddr4"}
+{"time":"2025-08-01T12:48:15.4038679-05:00","level":"INFO","msg":"sender: started","stream_id":"gprhddr4"}
+{"time":"2025-08-01T12:48:15.4038679-05:00","level":"INFO","msg":"writer: Do: started","stream_id":"gprhddr4"}
+{"time":"2025-08-01T12:48:15.4038679-05:00","level":"INFO","msg":"handler: started","stream_id":"gprhddr4"}
+{"time":"2025-08-01T12:48:17.2649206-05:00","level":"INFO","msg":"stream: closing","id":"gprhddr4"}
+{"time":"2025-08-01T12:48:17.6671757-05:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-08-01T12:48:17.8847311-05:00","level":"INFO","msg":"sender: closed","stream_id":"gprhddr4"}
+{"time":"2025-08-01T12:48:17.8847311-05:00","level":"INFO","msg":"handler: closed","stream_id":"gprhddr4"}
+{"time":"2025-08-01T12:48:17.8847311-05:00","level":"INFO","msg":"writer: Close: closed","stream_id":"gprhddr4"}
+{"time":"2025-08-01T12:48:17.8852627-05:00","level":"INFO","msg":"stream: closed","id":"gprhddr4"}

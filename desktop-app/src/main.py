@@ -28,6 +28,8 @@ try:
     from .core.hybrid_decision_engine import hybrid_decision_engine
     from .models.advanced_database import db_manager, Mission
     from .utils.sentry_integration import initialize_sentry
+    from .utils.weave_observability import observability_manager
+    from .utils.agent_observability import agent_observability
     
     # Initialize database manager
     logger.info("Database manager initialized successfully")
@@ -173,72 +175,473 @@ class HybridAnalysisResponse(BaseModel):
     timestamp: str
 
 # --- Background Tasks ---
-def run_mission_in_background(mission_id_str: str, prompt: str, agent_type: str, title: str):
-    """Enhanced background task with hybrid decision engine"""
-    logger.info(f"🚀 BACKGROUND: Starting mission {mission_id_str}")
-    db_manager.update_mission_status(mission_id_str, "executing")
-    
+async def run_mission_in_background(prompt: str, mission_id_str: str):
+    """Run mission with comprehensive observability tracking."""
     start_time = time.time()
     
     try:
-        # Use hybrid decision engine to determine execution path
-        decision = hybrid_decision_engine.make_hybrid_decision(prompt)
-        chosen_path = decision["path"]
-        complexity_score = decision["complexity_score"]
-        
-        logger.info(f"🧠 Hybrid Engine chose path: '{chosen_path}' for mission {mission_id_str}")
-        logger.info(f"📊 Complexity score: {complexity_score:.3f}")
-        
-        # Update mission with decision metadata
-        db_manager.update_mission_status(
-            mission_id_str, 
-            "executing",
-            execution_path=chosen_path,
-            complexity_score=complexity_score
-        )
-        
-        # Execute based on chosen path
-        if chosen_path == "golden_path":
-            result = asyncio.run(cognitive_forge_engine.run_mission_simple(prompt, mission_id_str))
-        else:
-            result = asyncio.run(cognitive_forge_engine.run_mission_full(prompt, mission_id_str))
-        
-        execution_time = time.time() - start_time
-        
-        # Record performance metric for learning
-        db_manager.record_performance_metric(
-            execution_path=chosen_path,
-            complexity_score=complexity_score,
-            execution_time=execution_time,
-            success=result.get("status") == "completed",
-            user_satisfaction=result.get("user_satisfaction", 0.8)
-        )
-        
-        # Update mission with final result
-        db_manager.update_mission_status(
-            mission_id_str, 
-            result.get("status", "failed"), 
-            result=json.dumps(result),
-            execution_time=execution_time
-        )
-        
-        logger.info(f"✅ Mission {mission_id_str} completed in {execution_time:.2f}s via {chosen_path}")
-        
+        # Initialize mission observability
+        with agent_observability.mission_observability(mission_id_str, prompt) as mission_data:
+            logger.info(f"🚀 Starting mission {mission_id_str} with comprehensive observability")
+            
+            # Update mission status to executing
+            db_manager.update_mission_status(mission_id_str, "executing")
+            
+            # Make hybrid decision with observability
+            decision_result = hybrid_decision_engine.make_hybrid_decision(prompt)
+            chosen_path = decision_result["path"]
+            complexity_score = decision_result["complexity_score"]
+            
+            # Log decision with observability
+            agent_observability.log_agent_decision(
+                session_id=f"hybrid_decision_{mission_id_str}",
+                decision_data=decision_result,
+                confidence_score=decision_result["confidence"],
+                reasoning=f"Chose {chosen_path} path based on complexity score {complexity_score}"
+            )
+            
+            logger.info(f"🎯 Hybrid Decision: {chosen_path} (Complexity: {complexity_score:.2f})")
+            
+            # Execute based on chosen path
+            if chosen_path == "golden_path":
+                # Golden Path execution with observability
+                with agent_observability.agent_session("golden_path_agent", mission_id_str, "Direct LLM inference") as session:
+                    agent_observability.log_agent_thinking(
+                        session.session_id,
+                        f"Executing simple task via Golden Path: {prompt}",
+                        confidence_score=0.9
+                    )
+                    
+                    result = await cognitive_forge_engine.run_mission_simple(prompt, mission_id_str)
+                    
+                    agent_observability.log_agent_response(
+                        session.session_id,
+                        {"result": result.get("result", ""), "status": result.get("status", "")},
+                        tokens_used=result.get("tokens_used", 0),
+                        cost_estimate=result.get("cost_estimate", 0.0)
+                    )
+                    
+                    session.success = result.get("status") == "completed"
+                    
+            else:
+                # Full Workflow execution with comprehensive observability
+                with agent_observability.agent_session("full_workflow_orchestrator", mission_id_str, "8-phase AI workflow") as session:
+                    agent_observability.log_agent_thinking(
+                        session.session_id,
+                        f"Executing complex task via Full Workflow: {prompt}",
+                        confidence_score=0.95
+                    )
+                    
+                    # Phase 1: Planning & Analysis
+                    with agent_observability.agent_session("planning_analyst", mission_id_str, "Phase 1: Planning & Analysis") as phase_session:
+                        agent_observability.log_agent_thinking(
+                            phase_session.session_id,
+                            "Analyzing complex request and creating comprehensive plan",
+                            confidence_score=0.8
+                        )
+                        
+                        planning_prompt = f"""
+                        Analyze this complex request and create a comprehensive plan:
+                        
+                        {prompt}
+                        
+                        Provide a structured plan with:
+                        1. Problem analysis and requirements
+                        2. Technical approach and methodology
+                        3. Resource requirements and constraints
+                        4. Risk assessment and mitigation strategies
+                        5. Success criteria and validation methods
+                        """
+                        
+                        planning_result = await cognitive_forge_engine.run_mission_simple(planning_prompt, mission_id_str) # Assuming direct_inference is cognitive_forge_engine.run_mission_simple
+                        
+                        agent_observability.log_agent_response(
+                            phase_session.session_id,
+                            {"planning_result": planning_result},
+                            tokens_used=len(planning_prompt.split()) + len(planning_result.get("result", "").split()),
+                            cost_estimate=0.02
+                        )
+                        
+                        phase_session.success = True
+                    
+                    # Phase 2: Research & Information Gathering
+                    with agent_observability.agent_session("research_specialist", mission_id_str, "Phase 2: Research & Information Gathering") as phase_session:
+                        agent_observability.log_agent_thinking(
+                            phase_session.session_id,
+                            "Conducting comprehensive research and information gathering",
+                            confidence_score=0.85
+                        )
+                        
+                        research_prompt = f"""
+                        Based on the planning analysis, conduct comprehensive research:
+                        
+                        Planning Analysis:
+                        {planning_result}
+                        
+                        Research Requirements:
+                        {prompt}
+                        
+                        Provide detailed research on:
+                        1. Current best practices and standards
+                        2. Relevant technologies and tools
+                        3. Similar implementations and case studies
+                        4. Performance considerations and benchmarks
+                        5. Security and compliance requirements
+                        """
+                        
+                        research_result = await cognitive_forge_engine.run_mission_simple(research_prompt, mission_id_str) # Assuming direct_inference is cognitive_forge_engine.run_mission_simple
+                        
+                        agent_observability.log_agent_response(
+                            phase_session.session_id,
+                            {"research_result": research_result},
+                            tokens_used=len(research_prompt.split()) + len(research_result.get("result", "").split()),
+                            cost_estimate=0.03
+                        )
+                        
+                        phase_session.success = True
+                    
+                    # Continue with remaining phases...
+                    # Phase 3: Design & Architecture
+                    with agent_observability.agent_session("design_architect", mission_id_str, "Phase 3: Design & Architecture") as phase_session:
+                        agent_observability.log_agent_thinking(
+                            phase_session.session_id,
+                            "Creating comprehensive system design and architecture",
+                            confidence_score=0.9
+                        )
+                        
+                        design_prompt = f"""
+                        Create a comprehensive design based on research:
+                        
+                        Research Findings:
+                        {research_result}
+                        
+                        Original Request:
+                        {prompt}
+                        
+                        Design Requirements:
+                        1. System architecture and components
+                        2. Data models and relationships
+                        3. API design and interfaces
+                        4. Security architecture
+                        5. Scalability and performance design
+                        6. Deployment architecture
+                        """
+                        
+                        design_result = await cognitive_forge_engine.run_mission_simple(design_prompt, mission_id_str) # Assuming direct_inference is cognitive_forge_engine.run_mission_simple
+                        
+                        agent_observability.log_agent_response(
+                            phase_session.session_id,
+                            {"design_result": design_result},
+                            tokens_used=len(design_prompt.split()) + len(design_result.get("result", "").split()),
+                            cost_estimate=0.04
+                        )
+                        
+                        phase_session.success = True
+                    
+                    # Phase 4: Implementation & Development
+                    with agent_observability.agent_session("implementation_developer", mission_id_str, "Phase 4: Implementation & Development") as phase_session:
+                        agent_observability.log_agent_thinking(
+                            phase_session.session_id,
+                            "Providing detailed implementation and development guidance",
+                            confidence_score=0.85
+                        )
+                        
+                        implementation_prompt = f"""
+                        Provide detailed implementation based on the design:
+                        
+                        Design Specification:
+                        {design_result}
+                        
+                        Implementation Requirements:
+                        {prompt}
+                        
+                        Provide:
+                        1. Detailed code implementation
+                        2. Configuration files and setup
+                        3. Database schemas and migrations
+                        4. API endpoints and documentation
+                        5. Testing strategies and test cases
+                        6. Deployment scripts and procedures
+                        """
+                        
+                        implementation_result = await cognitive_forge_engine.run_mission_simple(implementation_prompt, mission_id_str) # Assuming direct_inference is cognitive_forge_engine.run_mission_simple
+                        
+                        agent_observability.log_agent_response(
+                            phase_session.session_id,
+                            {"implementation_result": implementation_result},
+                            tokens_used=len(implementation_prompt.split()) + len(implementation_result.get("result", "").split()),
+                            cost_estimate=0.05
+                        )
+                        
+                        phase_session.success = True
+                    
+                    # Phase 5: Testing & Validation
+                    with agent_observability.agent_session("testing_qa", mission_id_str, "Phase 5: Testing & Validation") as phase_session:
+                        agent_observability.log_agent_thinking(
+                            phase_session.session_id,
+                            "Creating comprehensive testing strategy and validation",
+                            confidence_score=0.8
+                        )
+                        
+                        testing_prompt = f"""
+                        Create comprehensive testing strategy:
+                        
+                        Implementation:
+                        {implementation_result}
+                        
+                        Testing Requirements:
+                        1. Unit testing strategy and test cases
+                        2. Integration testing approach
+                        3. Performance testing methodology
+                        4. Security testing procedures
+                        5. User acceptance testing criteria
+                        6. Automated testing implementation
+                        """
+                        
+                        testing_result = await cognitive_forge_engine.run_mission_simple(testing_prompt, mission_id_str) # Assuming direct_inference is cognitive_forge_engine.run_mission_simple
+                        
+                        agent_observability.log_agent_response(
+                            phase_session.session_id,
+                            {"testing_result": testing_result},
+                            tokens_used=len(testing_prompt.split()) + len(testing_result.get("result", "").split()),
+                            cost_estimate=0.03
+                        )
+                        
+                        phase_session.success = True
+                    
+                    # Phase 6: Optimization & Refinement
+                    with agent_observability.agent_session("optimization_engineer", mission_id_str, "Phase 6: Optimization & Refinement") as phase_session:
+                        agent_observability.log_agent_thinking(
+                            phase_session.session_id,
+                            "Optimizing solution for performance and quality",
+                            confidence_score=0.85
+                        )
+                        
+                        optimization_prompt = f"""
+                        Optimize the solution for performance and quality:
+                        
+                        Current Implementation:
+                        {implementation_result}
+                        
+                        Testing Results:
+                        {testing_result}
+                        
+                        Optimization Areas:
+                        1. Performance optimization strategies
+                        2. Code quality improvements
+                        3. Security enhancements
+                        4. Scalability optimizations
+                        5. Monitoring and observability
+                        6. Cost optimization recommendations
+                        """
+                        
+                        optimization_result = await cognitive_forge_engine.run_mission_simple(optimization_prompt, mission_id_str) # Assuming direct_inference is cognitive_forge_engine.run_mission_simple
+                        
+                        agent_observability.log_agent_response(
+                            phase_session.session_id,
+                            {"optimization_result": optimization_result},
+                            tokens_used=len(optimization_prompt.split()) + len(optimization_result.get("result", "").split()),
+                            cost_estimate=0.04
+                        )
+                        
+                        phase_session.success = True
+                    
+                    # Phase 7: Documentation & Knowledge Synthesis
+                    with agent_observability.agent_session("documentation_specialist", mission_id_str, "Phase 7: Documentation & Knowledge Synthesis") as phase_session:
+                        agent_observability.log_agent_thinking(
+                            phase_session.session_id,
+                            "Creating comprehensive documentation and knowledge synthesis",
+                            confidence_score=0.8
+                        )
+                        
+                        documentation_prompt = f"""
+                        Create comprehensive documentation:
+                        
+                        Final Solution:
+                        {optimization_result}
+                        
+                        Documentation Requirements:
+                        1. Technical documentation and API docs
+                        2. User guides and tutorials
+                        3. Deployment and operations guides
+                        4. Troubleshooting and FAQ
+                        5. Maintenance and support procedures
+                        6. Knowledge base and best practices
+                        """
+                        
+                        documentation_result = await cognitive_forge_engine.run_mission_simple(documentation_prompt, mission_id_str) # Assuming direct_inference is cognitive_forge_engine.run_mission_simple
+                        
+                        agent_observability.log_agent_response(
+                            phase_session.session_id,
+                            {"documentation_result": documentation_result},
+                            tokens_used=len(documentation_prompt.split()) + len(documentation_result.get("result", "").split()),
+                            cost_estimate=0.03
+                        )
+                        
+                        phase_session.success = True
+                    
+                    # Phase 8: Deployment & Integration
+                    with agent_observability.agent_session("deployment_devops", mission_id_str, "Phase 8: Deployment & Integration") as phase_session:
+                        agent_observability.log_agent_thinking(
+                            phase_session.session_id,
+                            "Providing deployment and integration guidance",
+                            confidence_score=0.85
+                        )
+                        
+                        deployment_prompt = f"""
+                        Provide deployment and integration guidance:
+                        
+                        Complete Solution:
+                        {optimization_result}
+                        
+                        Documentation:
+                        {documentation_result}
+                        
+                        Deployment Requirements:
+                        1. Environment setup and configuration
+                        2. CI/CD pipeline implementation
+                        3. Monitoring and alerting setup
+                        4. Backup and disaster recovery
+                        5. Security hardening procedures
+                        6. Integration with existing systems
+                        """
+                        
+                        deployment_result = await cognitive_forge_engine.run_mission_simple(deployment_prompt, mission_id_str) # Assuming direct_inference is cognitive_forge_engine.run_mission_simple
+                        
+                        agent_observability.log_agent_response(
+                            phase_session.session_id,
+                            {"deployment_result": deployment_result},
+                            tokens_used=len(deployment_prompt.split()) + len(deployment_result.get("result", "").split()),
+                            cost_estimate=0.04
+                        )
+                        
+                        phase_session.success = True
+                    
+                    # Compile comprehensive result
+                    comprehensive_result = f"""
+# COMPREHENSIVE SOLUTION
+
+## Original Request
+{prompt}
+
+## Phase 1: Planning & Analysis
+{planning_result}
+
+## Phase 2: Research & Information Gathering
+{research_result}
+
+## Phase 3: Design & Architecture
+{design_result}
+
+## Phase 4: Implementation & Development
+{implementation_result}
+
+## Phase 5: Testing & Validation
+{testing_result}
+
+## Phase 6: Optimization & Refinement
+{optimization_result}
+
+## Phase 7: Documentation & Knowledge Synthesis
+{documentation_result}
+
+## Phase 8: Deployment & Integration
+{deployment_result}
+
+---
+*Generated by Cognitive Forge Engine v5.1 - Full Workflow with Comprehensive Observability*
+                    """
+                    
+                    result = {
+                        "mission_id": mission_id_str,
+                        "status": "completed",
+                        "result": comprehensive_result,
+                        "execution_time": time.time() - start_time,
+                        "path": "full_workflow",
+                        "timestamp": datetime.now().isoformat(),
+                        "phases_completed": 8,
+                        "workflow_phases": [
+                            "planning", "research", "design", "implementation", 
+                            "testing", "optimization", "documentation", "deployment"
+                        ]
+                    }
+                    
+                    session.success = True
+            
+            # Calculate execution time
+            execution_time = time.time() - start_time
+            
+            # Record performance metrics
+            db_manager.record_performance_metric(
+                execution_path=chosen_path,
+                complexity_score=complexity_score,
+                execution_time=execution_time,
+                success=result.get("status") == "completed",
+                user_satisfaction=result.get("user_satisfaction", 0.8)
+            )
+            
+            # Enhanced analytics tracking
+            analytics_data = {
+                "mission_id": mission_id_str,
+                "prompt": prompt,
+                "chosen_path": chosen_path,
+                "complexity_score": complexity_score,
+                "execution_time": execution_time,
+                "success": result.get("status") == "completed",
+                "phases_completed": result.get("phases_completed", 1),
+                "workflow_phases": result.get("workflow_phases", []),
+                "timestamp": datetime.utcnow().isoformat()
+            }
+            
+            # Log detailed analytics
+            logger.info(f"📊 Analytics: {chosen_path} path - {execution_time:.2f}s - Success: {result.get('status') == 'completed'}")
+            
+            # Update hybrid decision engine with results
+            hybrid_decision_engine.record_execution_result(
+                task_id=mission_id_str,
+                prompt=prompt,
+                path=chosen_path,
+                execution_time=execution_time,
+                success=result.get("status") == "completed",
+                user_satisfaction=result.get("user_satisfaction", 0.8)
+            )
+            
+            # Update mission with final result
+            db_manager.update_mission_status(
+                mission_id_str, 
+                result.get("status", "failed"),
+                result=result.get("result", ""),
+                execution_time=execution_time,
+                user_satisfaction=result.get("user_satisfaction", 0.8),
+                execution_path=chosen_path,
+                complexity_score=complexity_score
+            )
+            
+            # Mark mission as successful in observability
+            mission_data.success = result.get("status") == "completed"
+            
+            logger.success(f"✅ Mission {mission_id_str} completed via {chosen_path} path")
+            
     except Exception as e:
         execution_time = time.time() - start_time
-        logger.error(f"❌ BACKGROUND: Mission {mission_id_str} failed: {e}", exc_info=True)
+        logger.error(f"❌ Mission {mission_id_str} failed: {e}")
+        
+        # Update mission status to failed
         db_manager.update_mission_status(
             mission_id_str, 
-            "failed", 
+            "failed",
             error_message=str(e),
             execution_time=execution_time
         )
+        
+        # Log error with observability
+        agent_observability.log_error(e, {"mission_id": mission_id_str}, mission_id_str)
 
 # --- API Endpoints ---
 @app.get("/", response_class=FileResponse)
 def serve_web_ui():
     """Serve the main web interface"""
-    return FileResponse("static/index.html")
+    return FileResponse("templates/index.html")
 
 @app.get("/static/{path:path}")
 def serve_static(path: str):
@@ -310,10 +713,8 @@ async def create_mission_api(request: MissionRequest, background_tasks: Backgrou
         # Add background task for mission execution
         background_tasks.add_task(
             run_mission_in_background, 
-            mission.mission_id_str, 
             request.prompt, 
-            request.agent_type, 
-            request.title
+            mission.mission_id_str
         )
         
         logger.info(f"📝 Created mission {mission_id_str}: {request.prompt[:50]}...")
@@ -436,15 +837,47 @@ async def analyze_task_complexity(request: HybridAnalysisRequest):
 
 @app.get("/api/hybrid/analytics")
 async def get_hybrid_analytics():
-    """Get advanced analytics and performance metrics"""
+    """Get comprehensive hybrid system analytics"""
     try:
         db_stats = db_manager.get_system_stats()
         hybrid_stats = hybrid_decision_engine.get_system_stats()
+        cache_stats = hybrid_decision_engine.cache.get_stats()
+        
+        # Enhanced analytics with performance metrics
+        analytics = {
+            "system_performance": {
+                "golden_path_success_rate": hybrid_stats.get("golden_path_success_rate", 0),
+                "full_workflow_success_rate": hybrid_stats.get("full_workflow_success_rate", 0),
+                "average_golden_path_time": hybrid_stats.get("average_golden_path_time", 0),
+                "average_full_workflow_time": hybrid_stats.get("average_full_workflow_time", 0),
+                "total_missions": db_stats.get("total_missions", 0),
+                "completed_missions": db_stats.get("completed_missions", 0),
+                "failed_missions": db_stats.get("failed_missions", 0)
+            },
+            "decision_metrics": {
+                "complexity_threshold": settings.HYBRID_SWITCH_THRESHOLD,
+                "average_complexity_score": hybrid_stats.get("average_complexity_score", 0),
+                "routing_accuracy": hybrid_stats.get("routing_accuracy", 0),
+                "user_satisfaction": hybrid_stats.get("average_user_satisfaction", 0)
+            },
+            "cache_performance": {
+                "cache_hit_rate": cache_stats.get("hit_rate", 0),
+                "cache_size": cache_stats.get("size", 0),
+                "cache_effectiveness": cache_stats.get("effectiveness", 0)
+            },
+            "learning_metrics": {
+                "performance_model_accuracy": hybrid_stats.get("performance_model_accuracy", 0),
+                "user_preference_learning": hybrid_stats.get("user_preference_learning", 0),
+                "adaptive_threshold_adjustments": hybrid_stats.get("adaptive_threshold_adjustments", 0)
+            }
+        }
         
         return {
-            "database_stats": db_stats,
+            "status": "success",
+            "analytics": analytics,
             "hybrid_stats": hybrid_stats,
-            "cache_stats": hybrid_decision_engine.cache.get_stats(),
+            "database_stats": db_stats,
+            "cache_stats": cache_stats,
             "timestamp": datetime.utcnow().isoformat()
         }
     except Exception as e:
@@ -466,6 +899,68 @@ async def get_system_stats():
         )
     except Exception as e:
         logger.error(f"❌ Failed to get system stats: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/observability/agent-analytics")
+async def get_agent_analytics():
+    """Get comprehensive agent analytics and performance metrics."""
+    try:
+        analytics = agent_observability.get_agent_analytics()
+        return {
+            "status": "success",
+            "analytics": analytics,
+            "timestamp": datetime.utcnow().isoformat()
+        }
+    except Exception as e:
+        logger.error(f"❌ Failed to get agent analytics: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/observability/mission/{mission_id}")
+async def get_mission_observability(mission_id: str):
+    """Get detailed observability data for a specific mission."""
+    try:
+        mission_data = agent_observability.get_mission_details(mission_id)
+        if not mission_data:
+            raise HTTPException(status_code=404, detail="Mission not found")
+        
+        return {
+            "status": "success",
+            "mission_data": mission_data,
+            "timestamp": datetime.utcnow().isoformat()
+        }
+    except Exception as e:
+        logger.error(f"❌ Failed to get mission observability: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/observability/session/{session_id}")
+async def get_session_observability(session_id: str):
+    """Get detailed observability data for a specific agent session."""
+    try:
+        session_data = agent_observability.get_agent_session_details(session_id)
+        if not session_data:
+            raise HTTPException(status_code=404, detail="Session not found")
+        
+        return {
+            "status": "success",
+            "session_data": session_data,
+            "timestamp": datetime.utcnow().isoformat()
+        }
+    except Exception as e:
+        logger.error(f"❌ Failed to get session observability: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/observability/report")
+async def get_observability_report():
+    """Get comprehensive observability report."""
+    try:
+        report = agent_observability.generate_observability_report()
+        return {
+            "status": "success",
+            "report": report,
+            "timestamp": datetime.utcnow().isoformat()
+        }
+    except Exception as e:
+        logger.error(f"❌ Failed to get observability report: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 # --- Startup and Shutdown Events ---

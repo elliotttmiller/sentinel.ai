@@ -47,7 +47,7 @@ class Settings(BaseSettings):
     # Performance thresholds (seconds)
     GOLDEN_PATH_TIME_LIMIT: float = 5.0
     FULL_WORKFLOW_TIME_LIMIT: float = 60.0
-    HYBRID_SWITCH_THRESHOLD: float = 0.6
+    HYBRID_SWITCH_THRESHOLD: float = 0.4
     
     # Decision weights (0.0 to 1.0)
     USER_PREFERENCE_WEIGHT: float = 0.3

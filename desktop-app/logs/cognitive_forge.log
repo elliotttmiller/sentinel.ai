@@ -5118,3 +5118,855 @@ CONTEXT:  JSON data, line 1: Mission...
 2025-08-01 11:35:21.646 | INFO     | src.main:startup_event:479 - 💾 Database system ready
 2025-08-01 11:35:21.650 | ERROR    | src.utils.sentry_integration:_initialize_sentry:81 - Failed to initialize Sentry: Missing public key
 2025-08-01 11:35:21.650 | SUCCESS  | src.main:startup_event:484 - ✅ Sentry integration initialized
+2025-08-01 11:38:51.826 | INFO     | src.main:log_requests:500 - 🌐 POST /api/hybrid/analyze | Client: 127.0.0.1
+2025-08-01 11:38:51.826 | INFO     | src.core.hybrid_decision_engine:set:101 - 💾 Cache SET for decision: f096fe32...
+2025-08-01 11:38:51.826 | INFO     | src.core.hybrid_decision_engine:make_hybrid_decision:366 - 🎯 Hybrid Decision: golden_path (simple_task) - Confidence: 0.11
+2025-08-01 11:38:51.826 | INFO     | src.main:log_requests:506 - 📊 Response 200 for POST /api/hybrid/analyze | Time: 0.000s
+2025-08-01 11:39:02.439 | INFO     | src.main:log_requests:500 - 🌐 POST /api/missions | Client: 127.0.0.1
+2025-08-01 11:39:02.462 | INFO     | src.models.advanced_database:create_mission:134 - 📝 Created mission: mission_707d221e
+2025-08-01 11:39:02.463 | INFO     | src.main:create_mission_api:319 - 📝 Created mission mission_707d221e: Hello, how are you? This is a simple test....
+2025-08-01 11:39:02.464 | INFO     | src.main:log_requests:506 - 📊 Response 200 for POST /api/missions | Time: 0.026s
+2025-08-01 11:39:02.465 | INFO     | src.main:run_mission_in_background:178 - 🚀 BACKGROUND: Starting mission mission_707d221e
+2025-08-01 11:39:02.483 | INFO     | src.models.advanced_database:update_mission_status:167 - 📊 Updated mission mission_707d221e: executing
+2025-08-01 11:39:02.484 | INFO     | src.core.hybrid_decision_engine:set:101 - 💾 Cache SET for decision: 67e47d8f...
+2025-08-01 11:39:02.484 | INFO     | src.core.hybrid_decision_engine:make_hybrid_decision:366 - 🎯 Hybrid Decision: golden_path (simple_task) - Confidence: 0.32
+2025-08-01 11:39:02.484 | INFO     | src.main:run_mission_in_background:189 - 🧠 Hybrid Engine chose path: 'golden_path' for mission mission_707d221e
+2025-08-01 11:39:02.485 | INFO     | src.main:run_mission_in_background:190 - 📊 Complexity score: 0.063
+2025-08-01 11:39:02.485 | ERROR    | src.main:run_mission_in_background:229 - ❌ BACKGROUND: Mission mission_707d221e failed: DatabaseManager.update_mission_status() got an unexpected keyword argument 'execution_path'
+2025-08-01 11:39:02.494 | INFO     | src.models.advanced_database:update_mission_status:167 - 📊 Updated mission mission_707d221e: failed
+2025-08-01 11:39:32.831 | INFO     | src.main:shutdown_event:489 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 11:39:32.831 | INFO     | src.main:shutdown_event:489 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 11:39:32.832 | INFO     | src.main:shutdown_event:490 - 💾 Saving final state...
+2025-08-01 11:39:32.832 | INFO     | src.main:shutdown_event:490 - 💾 Saving final state...
+2025-08-01 11:39:32.832 | INFO     | src.main:shutdown_event:491 - ✅ Shutdown complete
+2025-08-01 11:39:32.832 | INFO     | src.main:shutdown_event:491 - ✅ Shutdown complete
+2025-08-01 11:39:45.593 | INFO     | src.main:startup_event:475 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 11:39:45.593 | INFO     | src.main:startup_event:476 - 📡 Real-time log streaming initialized
+2025-08-01 11:39:45.593 | INFO     | src.main:startup_event:477 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 11:39:45.593 | INFO     | src.main:startup_event:478 - 🧠 Hybrid Decision Engine active
+2025-08-01 11:39:45.593 | INFO     | src.main:startup_event:479 - 💾 Database system ready
+2025-08-01 11:39:45.596 | ERROR    | src.utils.sentry_integration:_initialize_sentry:81 - Failed to initialize Sentry: Missing public key
+2025-08-01 11:39:45.596 | SUCCESS  | src.main:startup_event:484 - ✅ Sentry integration initialized
+2025-08-01 11:39:45.596 | INFO     | src.main:shutdown_event:489 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 11:39:45.596 | INFO     | src.main:shutdown_event:490 - 💾 Saving final state...
+2025-08-01 11:39:45.596 | INFO     | src.main:shutdown_event:491 - ✅ Shutdown complete
+2025-08-01 11:39:58.847 | INFO     | src.main:startup_event:475 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 11:39:58.848 | INFO     | src.main:startup_event:476 - 📡 Real-time log streaming initialized
+2025-08-01 11:39:58.848 | INFO     | src.main:startup_event:477 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 11:39:58.848 | INFO     | src.main:startup_event:478 - 🧠 Hybrid Decision Engine active
+2025-08-01 11:39:58.848 | INFO     | src.main:startup_event:479 - 💾 Database system ready
+2025-08-01 11:39:58.849 | ERROR    | src.utils.sentry_integration:_initialize_sentry:81 - Failed to initialize Sentry: Missing public key
+2025-08-01 11:39:58.850 | SUCCESS  | src.main:startup_event:484 - ✅ Sentry integration initialized
+2025-08-01 11:40:05.617 | INFO     | src.main:log_requests:500 - 🌐 POST /api/missions | Client: 127.0.0.1
+2025-08-01 11:40:05.637 | INFO     | src.models.advanced_database:create_mission:134 - 📝 Created mission: mission_3b10e198
+2025-08-01 11:40:05.638 | INFO     | src.main:create_mission_api:319 - 📝 Created mission mission_3b10e198: Hello, how are you? This is a simple test....
+2025-08-01 11:40:05.639 | INFO     | src.main:log_requests:506 - 📊 Response 200 for POST /api/missions | Time: 0.022s
+2025-08-01 11:40:05.643 | INFO     | src.main:run_mission_in_background:178 - 🚀 BACKGROUND: Starting mission mission_3b10e198
+2025-08-01 11:40:05.658 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_3b10e198: executing
+2025-08-01 11:40:05.659 | INFO     | src.core.hybrid_decision_engine:set:101 - 💾 Cache SET for decision: 67e47d8f...
+2025-08-01 11:40:05.659 | INFO     | src.core.hybrid_decision_engine:make_hybrid_decision:366 - 🎯 Hybrid Decision: golden_path (simple_task) - Confidence: 0.32
+2025-08-01 11:40:05.660 | INFO     | src.main:run_mission_in_background:189 - 🧠 Hybrid Engine chose path: 'golden_path' for mission mission_3b10e198
+2025-08-01 11:40:05.660 | INFO     | src.main:run_mission_in_background:190 - 📊 Complexity score: 0.063
+2025-08-01 11:40:05.671 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_3b10e198: executing
+2025-08-01 11:40:05.673 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1548 - 🟡 Golden Path: Starting simple mission mission_3b10e198
+2025-08-01 11:40:05.674 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1549 - 🟡 Golden Path: Prompt: Hello, how are you? This is a simple test....
+2025-08-01 11:40:05.898 | ERROR    | src.main:run_mission_in_background:229 - ❌ BACKGROUND: Mission mission_3b10e198 failed: '\n  key'
+2025-08-01 11:40:06.054 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_3b10e198: failed
+2025-08-01 11:43:48.265 | INFO     | src.main:log_requests:500 - 🌐 POST /api/hybrid/analyze | Client: 127.0.0.1
+2025-08-01 11:43:48.265 | INFO     | src.core.hybrid_decision_engine:set:101 - 💾 Cache SET for decision: 99cbdd26...
+2025-08-01 11:43:48.265 | INFO     | src.core.hybrid_decision_engine:make_hybrid_decision:366 - 🎯 Hybrid Decision: golden_path (simple_task) - Confidence: 0.33
+2025-08-01 11:43:48.265 | INFO     | src.main:log_requests:506 - 📊 Response 200 for POST /api/hybrid/analyze | Time: 0.000s
+2025-08-01 11:43:56.871 | INFO     | src.main:log_requests:500 - 🌐 POST /api/missions | Client: 127.0.0.1
+2025-08-01 11:43:56.878 | INFO     | src.models.advanced_database:create_mission:134 - 📝 Created mission: mission_83abc187
+2025-08-01 11:43:56.879 | INFO     | src.main:create_mission_api:319 - 📝 Created mission mission_83abc187: Hello, how are you? This is a simple greeting test...
+2025-08-01 11:43:56.879 | INFO     | src.main:log_requests:506 - 📊 Response 200 for POST /api/missions | Time: 0.009s
+2025-08-01 11:43:56.880 | INFO     | src.main:run_mission_in_background:178 - 🚀 BACKGROUND: Starting mission mission_83abc187
+2025-08-01 11:43:56.888 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_83abc187: executing
+2025-08-01 11:43:56.888 | INFO     | src.core.hybrid_decision_engine:get:81 - 🔄 Cache HIT for decision: 99cbdd26...
+2025-08-01 11:43:56.888 | INFO     | src.main:run_mission_in_background:189 - 🧠 Hybrid Engine chose path: 'golden_path' for mission mission_83abc187
+2025-08-01 11:43:56.888 | INFO     | src.main:run_mission_in_background:190 - 📊 Complexity score: 0.065
+2025-08-01 11:43:56.897 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_83abc187: executing
+2025-08-01 11:43:56.899 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1548 - 🟡 Golden Path: Starting simple mission mission_83abc187
+2025-08-01 11:43:56.899 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1549 - 🟡 Golden Path: Prompt: Hello, how are you? This is a simple greeting test....
+2025-08-01 11:43:56.901 | ERROR    | src.core.cognitive_forge_engine:run_mission_simple:1576 - ❌ Golden Path: Mission mission_83abc187 failed: Event loop is closed
+2025-08-01 11:43:56.940 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_83abc187: failed
+2025-08-01 11:43:56.940 | INFO     | src.main:run_mission_in_background:225 - ✅ Mission mission_83abc187 completed in 0.01s via golden_path
+2025-08-01 11:44:12.429 | INFO     | src.main:log_requests:500 - 🌐 POST /api/hybrid/analyze | Client: 127.0.0.1
+2025-08-01 11:44:12.431 | INFO     | src.core.hybrid_decision_engine:set:101 - 💾 Cache SET for decision: c72b95ff...
+2025-08-01 11:44:12.431 | INFO     | src.core.hybrid_decision_engine:make_hybrid_decision:366 - 🎯 Hybrid Decision: golden_path (user_preference) - Confidence: 0.60
+2025-08-01 11:44:12.432 | INFO     | src.main:log_requests:506 - 📊 Response 200 for POST /api/hybrid/analyze | Time: 0.003s
+2025-08-01 11:44:41.055 | INFO     | src.main:log_requests:500 - 🌐 POST /api/missions | Client: 127.0.0.1
+2025-08-01 11:44:41.063 | INFO     | src.models.advanced_database:create_mission:134 - 📝 Created mission: mission_9161d66f
+2025-08-01 11:44:41.065 | INFO     | src.main:create_mission_api:319 - 📝 Created mission mission_9161d66f: Design a microservice architecture for a real-time...
+2025-08-01 11:44:41.065 | INFO     | src.main:log_requests:506 - 📊 Response 200 for POST /api/missions | Time: 0.010s
+2025-08-01 11:44:41.065 | INFO     | src.main:run_mission_in_background:178 - 🚀 BACKGROUND: Starting mission mission_9161d66f
+2025-08-01 11:44:41.073 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_9161d66f: executing
+2025-08-01 11:44:41.073 | INFO     | src.core.hybrid_decision_engine:get:81 - 🔄 Cache HIT for decision: c72b95ff...
+2025-08-01 11:44:41.073 | INFO     | src.main:run_mission_in_background:189 - 🧠 Hybrid Engine chose path: 'golden_path' for mission mission_9161d66f
+2025-08-01 11:44:41.075 | INFO     | src.main:run_mission_in_background:190 - 📊 Complexity score: 0.594
+2025-08-01 11:44:41.081 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_9161d66f: executing
+2025-08-01 11:44:41.083 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1548 - 🟡 Golden Path: Starting simple mission mission_9161d66f
+2025-08-01 11:44:41.083 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1549 - 🟡 Golden Path: Prompt: Design a microservice architecture for a real-time chat application with user authentication, messag...
+2025-08-01 11:44:41.084 | ERROR    | src.core.cognitive_forge_engine:run_mission_simple:1576 - ❌ Golden Path: Mission mission_9161d66f failed: Event loop is closed
+2025-08-01 11:44:41.097 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_9161d66f: failed
+2025-08-01 11:44:41.098 | INFO     | src.main:run_mission_in_background:225 - ✅ Mission mission_9161d66f completed in 0.01s via golden_path
+2025-08-01 11:44:51.075 | INFO     | src.main:log_requests:500 - 🌐 GET /api/hybrid/analytics | Client: 127.0.0.1
+2025-08-01 11:44:51.108 | INFO     | src.main:log_requests:506 - 📊 Response 200 for GET /api/hybrid/analytics | Time: 0.033s
+2025-08-01 11:44:59.455 | INFO     | src.main:log_requests:500 - 🌐 GET /api/system/stats | Client: 127.0.0.1
+2025-08-01 11:44:59.460 | INFO     | src.main:log_requests:506 - 📊 Response 200 for GET /api/system/stats | Time: 0.005s
+2025-08-01 11:45:09.295 | INFO     | src.main:log_requests:500 - 🌐 GET /api/missions | Client: 127.0.0.1
+2025-08-01 11:45:09.296 | INFO     | src.main:log_requests:506 - 📊 Response 405 for GET /api/missions | Time: 0.001s
+2025-08-01 11:45:16.883 | INFO     | src.main:log_requests:500 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 11:45:16.887 | INFO     | src.main:log_requests:506 - 📊 Response 200 for GET /missions | Time: 0.004s
+2025-08-01 11:46:26.218 | INFO     | src.main:shutdown_event:489 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 11:46:26.218 | INFO     | src.main:shutdown_event:490 - 💾 Saving final state...
+2025-08-01 11:46:26.218 | INFO     | src.main:shutdown_event:491 - ✅ Shutdown complete
+2025-08-01 11:56:04.635 | INFO     | src.main:startup_event:475 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 11:56:04.636 | INFO     | src.main:startup_event:476 - 📡 Real-time log streaming initialized
+2025-08-01 11:56:04.636 | INFO     | src.main:startup_event:477 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 11:56:04.637 | INFO     | src.main:startup_event:478 - 🧠 Hybrid Decision Engine active
+2025-08-01 11:56:04.637 | INFO     | src.main:startup_event:479 - 💾 Database system ready
+2025-08-01 11:56:04.678 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 11:56:04.679 | SUCCESS  | src.main:startup_event:484 - ✅ Sentry integration initialized
+2025-08-01 11:56:04.680 | INFO     | src.main:shutdown_event:489 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 11:56:04.681 | INFO     | src.main:shutdown_event:490 - 💾 Saving final state...
+2025-08-01 11:56:04.681 | INFO     | src.main:shutdown_event:491 - ✅ Shutdown complete
+2025-08-01 11:56:21.011 | INFO     | src.main:startup_event:475 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 11:56:21.011 | INFO     | src.main:startup_event:476 - 📡 Real-time log streaming initialized
+2025-08-01 11:56:21.011 | INFO     | src.main:startup_event:477 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 11:56:21.012 | INFO     | src.main:startup_event:478 - 🧠 Hybrid Decision Engine active
+2025-08-01 11:56:21.012 | INFO     | src.main:startup_event:479 - 💾 Database system ready
+2025-08-01 11:56:21.049 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 11:56:21.050 | SUCCESS  | src.main:startup_event:484 - ✅ Sentry integration initialized
+2025-08-01 11:57:01.213 | INFO     | src.main:log_requests:500 - 🌐 POST /api/missions | Client: 127.0.0.1
+2025-08-01 11:57:01.232 | INFO     | src.models.advanced_database:create_mission:134 - 📝 Created mission: mission_90a42ceb
+2025-08-01 11:57:01.232 | INFO     | src.main:create_mission_api:319 - 📝 Created mission mission_90a42ceb: Hello, how are you?...
+2025-08-01 11:57:01.233 | INFO     | src.main:log_requests:506 - 📊 Response 200 for POST /api/missions | Time: 0.021s
+2025-08-01 11:57:01.234 | INFO     | src.main:run_mission_in_background:178 - 🚀 BACKGROUND: Starting mission mission_90a42ceb
+2025-08-01 11:57:01.246 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_90a42ceb: executing
+2025-08-01 11:57:01.246 | INFO     | src.core.hybrid_decision_engine:set:101 - 💾 Cache SET for decision: f096fe32...
+2025-08-01 11:57:01.247 | INFO     | src.core.hybrid_decision_engine:make_hybrid_decision:366 - 🎯 Hybrid Decision: golden_path (simple_task) - Confidence: 0.11
+2025-08-01 11:57:01.247 | INFO     | src.main:run_mission_in_background:189 - 🧠 Hybrid Engine chose path: 'golden_path' for mission mission_90a42ceb
+2025-08-01 11:57:01.247 | INFO     | src.main:run_mission_in_background:190 - 📊 Complexity score: 0.056
+2025-08-01 11:57:01.255 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_90a42ceb: executing
+2025-08-01 11:57:01.258 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1548 - 🟡 Golden Path: Starting simple mission mission_90a42ceb
+2025-08-01 11:57:01.258 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1549 - 🟡 Golden Path: Prompt: Hello, how are you?...
+2025-08-01 11:57:02.342 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1570 - ✅ Golden Path: Mission mission_90a42ceb completed in 1.08s
+2025-08-01 11:57:02.358 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_90a42ceb: completed
+2025-08-01 11:57:02.359 | INFO     | src.main:run_mission_in_background:225 - ✅ Mission mission_90a42ceb completed in 1.10s via golden_path
+2025-08-01 11:57:09.786 | INFO     | src.main:log_requests:500 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 11:57:09.794 | INFO     | src.main:log_requests:506 - 📊 Response 200 for GET /missions | Time: 0.008s
+2025-08-01 11:57:21.819 | INFO     | src.main:log_requests:500 - 🌐 POST /api/missions | Client: 127.0.0.1
+2025-08-01 11:57:21.828 | INFO     | src.models.advanced_database:create_mission:134 - 📝 Created mission: mission_781f816b
+2025-08-01 11:57:21.828 | INFO     | src.main:create_mission_api:319 - 📝 Created mission mission_781f816b: Design a microservice architecture for a real-time...
+2025-08-01 11:57:21.829 | INFO     | src.main:log_requests:506 - 📊 Response 200 for POST /api/missions | Time: 0.010s
+2025-08-01 11:57:21.829 | INFO     | src.main:run_mission_in_background:178 - 🚀 BACKGROUND: Starting mission mission_781f816b
+2025-08-01 11:57:21.840 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_781f816b: executing
+2025-08-01 11:57:21.840 | INFO     | src.core.hybrid_decision_engine:set:101 - 💾 Cache SET for decision: c72b95ff...
+2025-08-01 11:57:21.841 | INFO     | src.core.hybrid_decision_engine:make_hybrid_decision:366 - 🎯 Hybrid Decision: golden_path (user_preference) - Confidence: 0.60
+2025-08-01 11:57:21.841 | INFO     | src.main:run_mission_in_background:189 - 🧠 Hybrid Engine chose path: 'golden_path' for mission mission_781f816b
+2025-08-01 11:57:21.841 | INFO     | src.main:run_mission_in_background:190 - 📊 Complexity score: 0.594
+2025-08-01 11:57:21.848 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_781f816b: executing
+2025-08-01 11:57:21.848 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1548 - 🟡 Golden Path: Starting simple mission mission_781f816b
+2025-08-01 11:57:21.848 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1549 - 🟡 Golden Path: Prompt: Design a microservice architecture for a real-time chat application with user authentication, messag...
+2025-08-01 11:57:21.855 | ERROR    | src.core.cognitive_forge_engine:run_mission_simple:1576 - ❌ Golden Path: Mission mission_781f816b failed: Event loop is closed
+2025-08-01 11:57:21.870 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_781f816b: failed
+2025-08-01 11:57:21.871 | INFO     | src.main:run_mission_in_background:225 - ✅ Mission mission_781f816b completed in 0.02s via golden_path
+2025-08-01 11:57:32.035 | INFO     | src.main:log_requests:500 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 11:57:32.038 | INFO     | src.main:log_requests:506 - 📊 Response 200 for GET /missions | Time: 0.003s
+2025-08-01 12:03:34.208 | INFO     | src.main:shutdown_event:489 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 12:03:34.208 | INFO     | src.main:shutdown_event:490 - 💾 Saving final state...
+2025-08-01 12:03:34.209 | INFO     | src.main:shutdown_event:491 - ✅ Shutdown complete
+2025-08-01 12:03:51.193 | INFO     | src.main:startup_event:475 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 12:03:51.194 | INFO     | src.main:startup_event:476 - 📡 Real-time log streaming initialized
+2025-08-01 12:03:51.194 | INFO     | src.main:startup_event:477 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 12:03:51.194 | INFO     | src.main:startup_event:478 - 🧠 Hybrid Decision Engine active
+2025-08-01 12:03:51.194 | INFO     | src.main:startup_event:479 - 💾 Database system ready
+2025-08-01 12:03:51.234 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 12:03:51.234 | SUCCESS  | src.main:startup_event:484 - ✅ Sentry integration initialized
+2025-08-01 12:04:05.159 | INFO     | src.main:shutdown_event:489 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 12:04:05.159 | INFO     | src.main:shutdown_event:490 - 💾 Saving final state...
+2025-08-01 12:04:05.160 | INFO     | src.main:shutdown_event:491 - ✅ Shutdown complete
+2025-08-01 12:04:22.775 | INFO     | src.main:startup_event:475 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 12:04:22.776 | INFO     | src.main:startup_event:476 - 📡 Real-time log streaming initialized
+2025-08-01 12:04:22.776 | INFO     | src.main:startup_event:477 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 12:04:22.776 | INFO     | src.main:startup_event:478 - 🧠 Hybrid Decision Engine active
+2025-08-01 12:04:22.776 | INFO     | src.main:startup_event:479 - 💾 Database system ready
+2025-08-01 12:04:22.824 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 12:04:22.824 | SUCCESS  | src.main:startup_event:484 - ✅ Sentry integration initialized
+2025-08-01 12:05:45.250 | INFO     | src.main:shutdown_event:489 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 12:05:45.251 | INFO     | src.main:shutdown_event:490 - 💾 Saving final state...
+2025-08-01 12:05:45.251 | INFO     | src.main:shutdown_event:491 - ✅ Shutdown complete
+2025-08-01 12:06:02.772 | INFO     | src.main:startup_event:475 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 12:06:02.773 | INFO     | src.main:startup_event:476 - 📡 Real-time log streaming initialized
+2025-08-01 12:06:02.774 | INFO     | src.main:startup_event:477 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 12:06:02.775 | INFO     | src.main:startup_event:478 - 🧠 Hybrid Decision Engine active
+2025-08-01 12:06:02.775 | INFO     | src.main:startup_event:479 - 💾 Database system ready
+2025-08-01 12:06:02.828 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 12:06:02.829 | SUCCESS  | src.main:startup_event:484 - ✅ Sentry integration initialized
+2025-08-01 12:06:02.831 | INFO     | src.main:shutdown_event:489 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 12:06:02.832 | INFO     | src.main:shutdown_event:490 - 💾 Saving final state...
+2025-08-01 12:06:02.833 | INFO     | src.main:shutdown_event:491 - ✅ Shutdown complete
+2025-08-01 12:06:23.201 | INFO     | src.main:startup_event:501 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 12:06:23.201 | INFO     | src.main:startup_event:502 - 📡 Real-time log streaming initialized
+2025-08-01 12:06:23.201 | INFO     | src.main:startup_event:503 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 12:06:23.201 | INFO     | src.main:startup_event:504 - 🧠 Hybrid Decision Engine active
+2025-08-01 12:06:23.201 | INFO     | src.main:startup_event:505 - 💾 Database system ready
+2025-08-01 12:06:23.257 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 12:06:23.257 | SUCCESS  | src.main:startup_event:510 - ✅ Sentry integration initialized
+2025-08-01 12:06:33.760 | INFO     | src.main:shutdown_event:515 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 12:06:33.760 | INFO     | src.main:shutdown_event:516 - 💾 Saving final state...
+2025-08-01 12:06:33.761 | INFO     | src.main:shutdown_event:517 - ✅ Shutdown complete
+2025-08-01 12:06:51.075 | INFO     | src.main:startup_event:533 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 12:06:51.076 | INFO     | src.main:startup_event:534 - 📡 Real-time log streaming initialized
+2025-08-01 12:06:51.076 | INFO     | src.main:startup_event:535 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 12:06:51.077 | INFO     | src.main:startup_event:536 - 🧠 Hybrid Decision Engine active
+2025-08-01 12:06:51.077 | INFO     | src.main:startup_event:537 - 💾 Database system ready
+2025-08-01 12:06:51.127 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 12:06:51.127 | SUCCESS  | src.main:startup_event:542 - ✅ Sentry integration initialized
+2025-08-01 12:07:01.610 | INFO     | src.main:log_requests:558 - 🌐 POST /api/hybrid/analyze | Client: 127.0.0.1
+2025-08-01 12:07:01.612 | INFO     | src.core.hybrid_decision_engine:set:101 - 💾 Cache SET for decision: f096fe32...
+2025-08-01 12:07:01.612 | INFO     | src.core.hybrid_decision_engine:make_hybrid_decision:383 - 🎯 Hybrid Decision: golden_path (user_preference) - Confidence: 0.11
+2025-08-01 12:07:01.613 | INFO     | src.main:log_requests:564 - 📊 Response 200 for POST /api/hybrid/analyze | Time: 0.003s
+2025-08-01 12:07:11.673 | INFO     | src.main:log_requests:558 - 🌐 POST /api/hybrid/analyze | Client: 127.0.0.1
+2025-08-01 12:07:11.675 | INFO     | src.core.hybrid_decision_engine:set:101 - 💾 Cache SET for decision: c72b95ff...
+2025-08-01 12:07:11.676 | INFO     | src.core.hybrid_decision_engine:make_hybrid_decision:383 - 🎯 Hybrid Decision: golden_path (user_preference) - Confidence: 0.60
+2025-08-01 12:07:11.676 | INFO     | src.main:log_requests:564 - 📊 Response 200 for POST /api/hybrid/analyze | Time: 0.004s
+2025-08-01 12:07:32.438 | INFO     | src.main:log_requests:558 - 🌐 POST /api/missions | Client: 127.0.0.1
+2025-08-01 12:07:32.457 | INFO     | src.models.advanced_database:create_mission:134 - 📝 Created mission: mission_21895b15
+2025-08-01 12:07:32.457 | INFO     | src.main:create_mission_api:345 - 📝 Created mission mission_21895b15: Design a microservice architecture for a real-time...
+2025-08-01 12:07:32.459 | INFO     | src.main:log_requests:564 - 📊 Response 200 for POST /api/missions | Time: 0.021s
+2025-08-01 12:07:32.461 | INFO     | src.main:run_mission_in_background:178 - 🚀 BACKGROUND: Starting mission mission_21895b15
+2025-08-01 12:07:32.471 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_21895b15: executing
+2025-08-01 12:07:32.471 | INFO     | src.core.hybrid_decision_engine:set:101 - 💾 Cache SET for decision: 7e95f9f4...
+2025-08-01 12:07:32.471 | INFO     | src.core.hybrid_decision_engine:make_hybrid_decision:383 - 🎯 Hybrid Decision: golden_path (user_preference) - Confidence: 0.33
+2025-08-01 12:07:32.471 | INFO     | src.main:run_mission_in_background:189 - 🧠 Hybrid Engine chose path: 'golden_path' for mission mission_21895b15
+2025-08-01 12:07:32.471 | INFO     | src.main:run_mission_in_background:190 - 📊 Complexity score: 0.503
+2025-08-01 12:07:32.480 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_21895b15: executing
+2025-08-01 12:07:32.480 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1548 - 🟡 Golden Path: Starting simple mission mission_21895b15
+2025-08-01 12:07:32.480 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1549 - 🟡 Golden Path: Prompt: Design a microservice architecture for a real-time chat application...
+2025-08-01 12:07:46.676 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1570 - ✅ Golden Path: Mission mission_21895b15 completed in 14.20s
+2025-08-01 12:07:46.684 | INFO     | src.main:run_mission_in_background:231 - 📊 Analytics: golden_path path - 14.21s - Success: True
+2025-08-01 12:07:46.693 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_21895b15: completed
+2025-08-01 12:07:46.693 | INFO     | src.main:run_mission_in_background:251 - ✅ Mission mission_21895b15 completed in 14.21s via golden_path
+2025-08-01 12:07:46.694 | INFO     | src.main:log_requests:558 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 12:07:46.718 | INFO     | src.main:log_requests:564 - 📊 Response 200 for GET /missions | Time: 0.024s
+2025-08-01 12:07:54.128 | INFO     | src.main:log_requests:558 - 🌐 GET /api/hybrid/analytics | Client: 127.0.0.1
+2025-08-01 12:07:54.143 | INFO     | src.main:log_requests:564 - 📊 Response 200 for GET /api/hybrid/analytics | Time: 0.015s
+2025-08-01 12:15:42.704 | INFO     | src.main:shutdown_event:547 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 12:15:42.705 | INFO     | src.main:shutdown_event:548 - 💾 Saving final state...
+2025-08-01 12:15:42.705 | INFO     | src.main:shutdown_event:549 - ✅ Shutdown complete
+2025-08-01 12:16:03.563 | INFO     | src.main:startup_event:533 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 12:16:03.564 | INFO     | src.main:startup_event:534 - 📡 Real-time log streaming initialized
+2025-08-01 12:16:03.564 | INFO     | src.main:startup_event:535 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 12:16:03.564 | INFO     | src.main:startup_event:536 - 🧠 Hybrid Decision Engine active
+2025-08-01 12:16:03.566 | INFO     | src.main:startup_event:537 - 💾 Database system ready
+2025-08-01 12:16:03.644 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 12:16:03.645 | SUCCESS  | src.main:startup_event:542 - ✅ Sentry integration initialized
+2025-08-01 12:16:48.346 | INFO     | src.main:shutdown_event:547 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 12:16:48.346 | INFO     | src.main:shutdown_event:548 - 💾 Saving final state...
+2025-08-01 12:16:48.346 | INFO     | src.main:shutdown_event:549 - ✅ Shutdown complete
+2025-08-01 12:17:18.839 | INFO     | src.main:startup_event:971 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 12:17:18.841 | INFO     | src.main:startup_event:972 - 📡 Real-time log streaming initialized
+2025-08-01 12:17:18.842 | INFO     | src.main:startup_event:973 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 12:17:18.843 | INFO     | src.main:startup_event:974 - 🧠 Hybrid Decision Engine active
+2025-08-01 12:17:18.844 | INFO     | src.main:startup_event:975 - 💾 Database system ready
+2025-08-01 12:17:18.905 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 12:17:18.906 | SUCCESS  | src.main:startup_event:980 - ✅ Sentry integration initialized
+2025-08-01 12:17:36.924 | INFO     | src.main:shutdown_event:985 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 12:17:36.926 | INFO     | src.main:shutdown_event:986 - 💾 Saving final state...
+2025-08-01 12:17:36.926 | INFO     | src.main:shutdown_event:987 - ✅ Shutdown complete
+2025-08-01 12:18:06.336 | INFO     | src.main:startup_event:971 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 12:18:06.338 | INFO     | src.main:startup_event:972 - 📡 Real-time log streaming initialized
+2025-08-01 12:18:06.339 | INFO     | src.main:startup_event:973 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 12:18:06.340 | INFO     | src.main:startup_event:974 - 🧠 Hybrid Decision Engine active
+2025-08-01 12:18:06.340 | INFO     | src.main:startup_event:975 - 💾 Database system ready
+2025-08-01 12:18:06.401 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 12:18:06.402 | SUCCESS  | src.main:startup_event:980 - ✅ Sentry integration initialized
+2025-08-01 12:18:30.455 | INFO     | src.main:log_requests:996 - 🌐 POST /api/missions | Client: 127.0.0.1
+2025-08-01 12:18:30.487 | INFO     | src.models.advanced_database:create_mission:134 - 📝 Created mission: mission_368bcd48
+2025-08-01 12:18:30.489 | INFO     | src.main:create_mission_api:721 - 📝 Created mission mission_368bcd48: Calculate the tax for a $50,000 annual income with...
+2025-08-01 12:18:30.491 | INFO     | src.main:log_requests:1002 - 📊 Response 200 for POST /api/missions | Time: 0.036s
+2025-08-01 12:18:30.494 | INFO     | src.main:run_mission_in_background:185 - 🚀 Starting mission mission_368bcd48 with comprehensive observability
+2025-08-01 12:18:30.513 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_368bcd48: executing
+2025-08-01 12:18:30.514 | INFO     | src.core.hybrid_decision_engine:set:101 - 💾 Cache SET for decision: 4081106b...
+2025-08-01 12:18:30.516 | INFO     | src.core.hybrid_decision_engine:make_hybrid_decision:383 - 🎯 Hybrid Decision: golden_path (user_preference) - Confidence: 0.14
+2025-08-01 12:18:30.517 | WARNING  | src.utils.agent_observability:record_agent_action:293 - Session hybrid_decision_mission_368bcd48 not found for action recording
+2025-08-01 12:18:30.519 | INFO     | src.main:run_mission_in_background:203 - 🎯 Hybrid Decision: golden_path (Complexity: 0.07)
+2025-08-01 12:18:30.532 | INFO     | src.utils.agent_observability:record_agent_action:330 - 📊 Agent Action: golden_path_agent - thinking - Success: True
+2025-08-01 12:18:30.532 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1548 - 🟡 Golden Path: Starting simple mission mission_368bcd48
+2025-08-01 12:18:30.533 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1549 - 🟡 Golden Path: Prompt: Calculate the tax for a $50,000 annual income with standard deductions for 2024...
+2025-08-01 12:18:32.524 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:18:32.526 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s
+2025-08-01 12:18:36.552 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:18:36.554 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.001s
+2025-08-01 12:18:40.102 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1570 - ✅ Golden Path: Mission mission_368bcd48 completed in 9.57s
+2025-08-01 12:18:40.110 | INFO     | src.utils.agent_observability:record_agent_action:330 - 📊 Agent Action: golden_path_agent - response - Success: True
+2025-08-01 12:18:40.112 | ERROR    | src.utils.agent_observability:mission_observability:202 - Mission observability failed: DatabaseManager.record_performance_metric() got an unexpected keyword argument 'task_id'
+2025-08-01 12:18:40.114 | ERROR    | src.main:run_mission_in_background:628 - ❌ Mission mission_368bcd48 failed: generator didn't stop after throw()
+2025-08-01 12:18:40.126 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_368bcd48: failed
+2025-08-01 12:18:40.589 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:18:40.590 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.001s
+2025-08-01 12:18:44.622 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:18:44.624 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s
+2025-08-01 12:18:48.653 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:18:48.655 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:18:52.693 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:18:52.695 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s
+2025-08-01 12:18:56.726 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:18:56.729 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.004s
+2025-08-01 12:19:00.754 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:19:00.756 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s
+2025-08-01 12:19:04.803 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:19:04.806 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:19:08.836 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:19:08.839 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:19:12.857 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:19:12.860 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:19:16.878 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:19:16.881 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:19:20.909 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:19:20.910 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.001s
+2025-08-01 12:19:24.957 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:19:24.960 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:19:29.004 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:19:29.007 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:19:33.045 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:19:33.048 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:19:37.080 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:19:37.083 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:19:41.114 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:19:41.117 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:19:45.152 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:19:45.155 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s
+2025-08-01 12:19:49.176 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:19:49.178 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s
+2025-08-01 12:19:53.206 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:19:53.209 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:19:57.229 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:19:57.232 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:20:01.271 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:20:01.273 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s
+2025-08-01 12:20:05.299 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:20:05.302 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:20:09.355 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:20:09.356 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.001s
+2025-08-01 12:20:13.381 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:20:13.384 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:20:17.403 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:20:17.406 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:20:21.440 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:20:21.442 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s
+2025-08-01 12:20:25.472 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:20:25.475 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:20:29.517 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:20:29.520 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:20:33.563 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:20:33.565 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:20:37.611 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:20:37.613 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:20:41.640 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:20:41.641 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.001s
+2025-08-01 12:20:45.688 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:20:45.690 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s
+2025-08-01 12:20:49.710 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:20:49.712 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s
+2025-08-01 12:20:53.730 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:20:53.733 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:20:57.758 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:20:57.760 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:21:01.787 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:21:01.790 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s
+2025-08-01 12:21:05.819 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:21:05.823 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:21:09.858 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:21:09.860 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s
+2025-08-01 12:21:13.883 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:21:13.886 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:21:17.917 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:21:17.920 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:21:21.961 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:21:21.961 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.000s
+2025-08-01 12:21:26.010 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:21:26.017 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.007s
+2025-08-01 12:21:30.053 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:21:30.056 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:21:34.095 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:21:34.097 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s
+2025-08-01 12:21:38.127 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:21:38.129 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s
+2025-08-01 12:21:42.162 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:21:42.164 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s
+2025-08-01 12:21:46.192 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:21:46.194 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s
+2025-08-01 12:21:50.231 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:21:50.234 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:21:54.279 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:21:54.283 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.004s
+2025-08-01 12:21:58.321 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:21:58.324 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:22:02.344 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:22:02.346 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.001s
+2025-08-01 12:22:06.381 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:22:06.383 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:22:10.414 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:22:10.415 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s
+2025-08-01 12:22:14.457 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:22:14.459 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.001s
+2025-08-01 12:22:18.483 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:22:18.486 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.004s
+2025-08-01 12:22:22.510 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:22:22.512 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s
+2025-08-01 12:22:26.542 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:22:26.544 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s
+2025-08-01 12:22:30.568 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:22:30.571 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s
+2025-08-01 12:22:34.615 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:22:34.618 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s
+2025-08-01 12:22:38.652 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:22:38.653 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.001s
+2025-08-01 12:22:42.693 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1
+2025-08-01 12:22:42.695 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s
+2025-08-01 12:22:57.660 | INFO     | src.main:log_requests:996 - 🌐 GET /api/hybrid/status | Client: 127.0.0.1
+2025-08-01 12:22:57.662 | INFO     | src.main:log_requests:1002 - 📊 Response 200 for GET /api/hybrid/status | Time: 0.002s
+2025-08-01 12:23:07.865 | INFO     | src.main:log_requests:996 - 🌐 POST /api/missions | Client: 127.0.0.1
+2025-08-01 12:23:07.877 | INFO     | src.models.advanced_database:create_mission:134 - 📝 Created mission: mission_579ed990
+2025-08-01 12:23:07.878 | INFO     | src.main:create_mission_api:721 - 📝 Created mission mission_579ed990: Calculate the tax for a $50,000 annual income with...
+2025-08-01 12:23:07.879 | INFO     | src.main:log_requests:1002 - 📊 Response 200 for POST /api/missions | Time: 0.014s
+2025-08-01 12:23:07.883 | INFO     | src.main:run_mission_in_background:185 - 🚀 Starting mission mission_579ed990 with comprehensive observability
+2025-08-01 12:23:07.896 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_579ed990: executing
+2025-08-01 12:23:07.897 | INFO     | src.core.hybrid_decision_engine:get:81 - 🔄 Cache HIT for decision: 4081106b...
+2025-08-01 12:23:07.899 | WARNING  | src.utils.agent_observability:record_agent_action:293 - Session hybrid_decision_mission_579ed990 not found for action recording
+2025-08-01 12:23:07.900 | INFO     | src.main:run_mission_in_background:203 - 🎯 Hybrid Decision: golden_path (Complexity: 0.07)
+2025-08-01 12:23:07.917 | INFO     | src.utils.agent_observability:record_agent_action:330 - 📊 Agent Action: golden_path_agent - thinking - Success: True
+2025-08-01 12:23:07.925 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1548 - 🟡 Golden Path: Starting simple mission mission_579ed990
+2025-08-01 12:23:07.931 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1549 - 🟡 Golden Path: Prompt: Calculate the tax for a $50,000 annual income with standard deductions for 2024...
+2025-08-01 12:23:15.314 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1570 - ✅ Golden Path: Mission mission_579ed990 completed in 7.39s
+2025-08-01 12:23:15.333 | INFO     | src.utils.agent_observability:record_agent_action:330 - 📊 Agent Action: golden_path_agent - response - Success: True
+2025-08-01 12:23:15.335 | ERROR    | src.utils.agent_observability:mission_observability:202 - Mission observability failed: DatabaseManager.record_performance_metric() got an unexpected keyword argument 'task_id'
+2025-08-01 12:23:15.337 | ERROR    | src.main:run_mission_in_background:628 - ❌ Mission mission_579ed990 failed: generator didn't stop after throw()
+2025-08-01 12:23:15.356 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_579ed990: failed
+2025-08-01 12:23:16.610 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions/mission_579ed990 | Client: 127.0.0.1
+2025-08-01 12:23:16.612 | INFO     | src.main:log_requests:1002 - 📊 Response 404 for GET /api/missions/mission_579ed990 | Time: 0.002s
+2025-08-01 12:23:42.834 | INFO     | src.main:log_requests:996 - 🌐 GET /api/missions | Client: 127.0.0.1
+2025-08-01 12:23:42.837 | INFO     | src.main:log_requests:1002 - 📊 Response 405 for GET /api/missions | Time: 0.003s
+2025-08-01 12:23:59.002 | INFO     | src.main:log_requests:996 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 12:23:59.010 | INFO     | src.main:log_requests:1002 - 📊 Response 200 for GET /missions | Time: 0.007s
+2025-08-01 12:24:08.478 | INFO     | src.main:log_requests:996 - 🌐 GET /api/observability/agent-analytics | Client: 127.0.0.1
+2025-08-01 12:24:08.480 | INFO     | src.main:log_requests:1002 - 📊 Response 200 for GET /api/observability/agent-analytics | Time: 0.002s
+2025-08-01 12:24:15.016 | INFO     | src.main:log_requests:996 - 🌐 GET /api/hybrid/analytics | Client: 127.0.0.1
+2025-08-01 12:24:15.031 | INFO     | src.main:log_requests:1002 - 📊 Response 200 for GET /api/hybrid/analytics | Time: 0.015s
+2025-08-01 12:27:45.996 | INFO     | src.main:shutdown_event:985 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 12:27:45.997 | INFO     | src.main:shutdown_event:986 - 💾 Saving final state...
+2025-08-01 12:27:45.998 | INFO     | src.main:shutdown_event:987 - ✅ Shutdown complete
+2025-08-01 12:28:10.756 | INFO     | src.main:startup_event:971 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 12:28:10.757 | INFO     | src.main:startup_event:972 - 📡 Real-time log streaming initialized
+2025-08-01 12:28:10.758 | INFO     | src.main:startup_event:973 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 12:28:10.759 | INFO     | src.main:startup_event:974 - 🧠 Hybrid Decision Engine active
+2025-08-01 12:28:10.759 | INFO     | src.main:startup_event:975 - 💾 Database system ready
+2025-08-01 12:28:10.807 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 12:28:10.808 | SUCCESS  | src.main:startup_event:980 - ✅ Sentry integration initialized
+2025-08-01 12:28:10.809 | INFO     | src.main:shutdown_event:985 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 12:28:10.810 | INFO     | src.main:shutdown_event:986 - 💾 Saving final state...
+2025-08-01 12:28:10.811 | INFO     | src.main:shutdown_event:987 - ✅ Shutdown complete
+2025-08-01 12:28:33.658 | INFO     | src.main:startup_event:970 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 12:28:33.659 | INFO     | src.main:startup_event:971 - 📡 Real-time log streaming initialized
+2025-08-01 12:28:33.661 | INFO     | src.main:startup_event:972 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 12:28:33.663 | INFO     | src.main:startup_event:973 - 🧠 Hybrid Decision Engine active
+2025-08-01 12:28:33.664 | INFO     | src.main:startup_event:974 - 💾 Database system ready
+2025-08-01 12:28:33.818 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 12:28:33.822 | SUCCESS  | src.main:startup_event:979 - ✅ Sentry integration initialized
+2025-08-01 12:44:09.542 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/agent-analytics | Client: 127.0.0.1
+2025-08-01 12:44:09.547 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/agent-analytics | Time: 0.004s
+2025-08-01 12:44:18.287 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 12:44:18.288 | ERROR    | src.main:get_observability_report:963 - ❌ Failed to get observability report: 'system_health'
+2025-08-01 12:44:18.338 | INFO     | src.main:log_requests:1001 - 📊 Response 500 for GET /api/observability/report | Time: 0.051s
+2025-08-01 12:45:03.568 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/agent-analytics | Client: 127.0.0.1
+2025-08-01 12:45:03.570 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/agent-analytics | Time: 0.002s
+2025-08-01 12:47:50.054 | INFO     | src.main:shutdown_event:984 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 12:47:50.054 | INFO     | src.main:shutdown_event:985 - 💾 Saving final state...
+2025-08-01 12:47:50.055 | INFO     | src.main:shutdown_event:986 - ✅ Shutdown complete
+2025-08-01 12:48:16.650 | INFO     | src.main:startup_event:970 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 12:48:16.651 | INFO     | src.main:startup_event:971 - 📡 Real-time log streaming initialized
+2025-08-01 12:48:16.652 | INFO     | src.main:startup_event:972 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 12:48:16.653 | INFO     | src.main:startup_event:973 - 🧠 Hybrid Decision Engine active
+2025-08-01 12:48:16.653 | INFO     | src.main:startup_event:974 - 💾 Database system ready
+2025-08-01 12:48:16.702 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 12:48:16.703 | SUCCESS  | src.main:startup_event:979 - ✅ Sentry integration initialized
+2025-08-01 12:48:16.706 | INFO     | src.main:shutdown_event:984 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 12:48:16.706 | INFO     | src.main:shutdown_event:985 - 💾 Saving final state...
+2025-08-01 12:48:16.707 | INFO     | src.main:shutdown_event:986 - ✅ Shutdown complete
+2025-08-01 12:48:37.806 | INFO     | src.main:startup_event:970 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 12:48:37.813 | INFO     | src.main:startup_event:971 - 📡 Real-time log streaming initialized
+2025-08-01 12:48:37.813 | INFO     | src.main:startup_event:972 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 12:48:37.813 | INFO     | src.main:startup_event:973 - 🧠 Hybrid Decision Engine active
+2025-08-01 12:48:37.814 | INFO     | src.main:startup_event:974 - 💾 Database system ready
+2025-08-01 12:48:37.863 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 12:48:37.864 | SUCCESS  | src.main:startup_event:979 - ✅ Sentry integration initialized
+2025-08-01 12:51:01.894 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 12:51:01.898 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.003s
+2025-08-01 12:51:12.672 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/agent-analytics | Client: 127.0.0.1
+2025-08-01 12:51:12.674 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/agent-analytics | Time: 0.003s
+2025-08-01 12:51:20.781 | INFO     | src.main:log_requests:995 - 🌐 POST /api/missions | Client: 127.0.0.1
+2025-08-01 12:51:20.811 | INFO     | src.models.advanced_database:create_mission:134 - 📝 Created mission: mission_c890bab4
+2025-08-01 12:51:20.812 | INFO     | src.main:create_mission_api:720 - 📝 Created mission mission_c890bab4: Calculate the tax for a $50,000 annual income with...
+2025-08-01 12:51:20.813 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for POST /api/missions | Time: 0.033s
+2025-08-01 12:51:20.815 | ERROR    | src.utils.agent_observability:log_error:239 - Error in mission mission_c890bab4: module 'weave' has no attribute 'span' | Context: {'context': 'mission_execution'}
+2025-08-01 12:51:23.728 | ERROR    | src.main:run_mission_in_background:627 - ❌ Mission mission_c890bab4 failed: module 'weave' has no attribute 'span'
+2025-08-01 12:51:23.742 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_c890bab4: failed
+2025-08-01 12:51:23.743 | ERROR    | src.utils.agent_observability:log_error:239 - Error in mission mission_c890bab4: module 'weave' has no attribute 'span' | Context: {'mission_id': 'mission_c890bab4'}
+2025-08-01 12:51:40.006 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/agent-analytics | Client: 127.0.0.1
+2025-08-01 12:51:40.009 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/agent-analytics | Time: 0.002s
+2025-08-01 12:51:48.897 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 12:51:48.907 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.010s
+2025-08-01 12:51:57.134 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/mission/mission_781f816b | Client: 127.0.0.1
+2025-08-01 12:51:57.136 | ERROR    | src.main:get_mission_observability:932 - ❌ Failed to get mission observability: 
+2025-08-01 12:51:57.166 | INFO     | src.main:log_requests:1001 - 📊 Response 500 for GET /api/observability/mission/mission_781f816b | Time: 0.033s
+2025-08-01 12:52:49.291 | INFO     | src.main:shutdown_event:984 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 12:52:49.292 | INFO     | src.main:shutdown_event:985 - 💾 Saving final state...
+2025-08-01 12:52:49.293 | INFO     | src.main:shutdown_event:986 - ✅ Shutdown complete
+2025-08-01 12:53:16.074 | INFO     | src.main:startup_event:970 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 12:53:16.076 | INFO     | src.main:startup_event:971 - 📡 Real-time log streaming initialized
+2025-08-01 12:53:16.077 | INFO     | src.main:startup_event:972 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 12:53:16.078 | INFO     | src.main:startup_event:973 - 🧠 Hybrid Decision Engine active
+2025-08-01 12:53:16.079 | INFO     | src.main:startup_event:974 - 💾 Database system ready
+2025-08-01 12:53:16.127 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 12:53:16.128 | SUCCESS  | src.main:startup_event:979 - ✅ Sentry integration initialized
+2025-08-01 12:53:16.130 | INFO     | src.main:shutdown_event:984 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 12:53:16.131 | INFO     | src.main:shutdown_event:985 - 💾 Saving final state...
+2025-08-01 12:53:16.132 | INFO     | src.main:shutdown_event:986 - ✅ Shutdown complete
+2025-08-01 12:53:40.892 | INFO     | src.main:startup_event:970 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 12:53:40.893 | INFO     | src.main:startup_event:971 - 📡 Real-time log streaming initialized
+2025-08-01 12:53:40.894 | INFO     | src.main:startup_event:972 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 12:53:40.894 | INFO     | src.main:startup_event:973 - 🧠 Hybrid Decision Engine active
+2025-08-01 12:53:40.894 | INFO     | src.main:startup_event:974 - 💾 Database system ready
+2025-08-01 12:53:40.941 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 12:53:40.942 | SUCCESS  | src.main:startup_event:979 - ✅ Sentry integration initialized
+2025-08-01 12:54:00.617 | INFO     | src.main:log_requests:995 - 🌐 POST /api/missions | Client: 127.0.0.1
+2025-08-01 12:54:00.645 | INFO     | src.models.advanced_database:create_mission:134 - 📝 Created mission: mission_b2f4853d
+2025-08-01 12:54:00.646 | INFO     | src.main:create_mission_api:720 - 📝 Created mission mission_b2f4853d: Hello, how are you?...
+2025-08-01 12:54:00.650 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for POST /api/missions | Time: 0.033s
+2025-08-01 12:54:00.652 | ERROR    | src.utils.agent_observability:log_error:252 - Error in mission mission_b2f4853d: 'module' object is not callable | Context: {'context': 'mission_execution'}
+2025-08-01 12:54:01.484 | ERROR    | src.main:run_mission_in_background:627 - ❌ Mission mission_b2f4853d failed: 'module' object is not callable
+2025-08-01 12:54:01.504 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_b2f4853d: failed
+2025-08-01 12:54:01.505 | ERROR    | src.utils.agent_observability:log_error:252 - Error in mission mission_b2f4853d: 'module' object is not callable | Context: {'mission_id': 'mission_b2f4853d'}
+2025-08-01 12:55:04.902 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/agent-analytics | Client: 127.0.0.1
+2025-08-01 12:55:04.904 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/agent-analytics | Time: 0.002s
+2025-08-01 12:55:14.175 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 12:55:14.184 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.009s
+2025-08-01 12:57:02.447 | INFO     | src.main:shutdown_event:984 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 12:57:02.448 | INFO     | src.main:shutdown_event:985 - 💾 Saving final state...
+2025-08-01 12:57:02.448 | INFO     | src.main:shutdown_event:986 - ✅ Shutdown complete
+2025-08-01 12:57:29.373 | INFO     | src.main:startup_event:970 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 12:57:29.375 | INFO     | src.main:startup_event:971 - 📡 Real-time log streaming initialized
+2025-08-01 12:57:29.376 | INFO     | src.main:startup_event:972 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 12:57:29.376 | INFO     | src.main:startup_event:973 - 🧠 Hybrid Decision Engine active
+2025-08-01 12:57:29.378 | INFO     | src.main:startup_event:974 - 💾 Database system ready
+2025-08-01 12:57:29.448 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 12:57:29.450 | SUCCESS  | src.main:startup_event:979 - ✅ Sentry integration initialized
+2025-08-01 12:57:29.452 | INFO     | src.main:shutdown_event:984 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 12:57:29.453 | INFO     | src.main:shutdown_event:985 - 💾 Saving final state...
+2025-08-01 12:57:29.454 | INFO     | src.main:shutdown_event:986 - ✅ Shutdown complete
+2025-08-01 12:58:00.718 | INFO     | src.main:startup_event:970 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 12:58:00.720 | INFO     | src.main:startup_event:971 - 📡 Real-time log streaming initialized
+2025-08-01 12:58:00.721 | INFO     | src.main:startup_event:972 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 12:58:00.721 | INFO     | src.main:startup_event:973 - 🧠 Hybrid Decision Engine active
+2025-08-01 12:58:00.722 | INFO     | src.main:startup_event:974 - 💾 Database system ready
+2025-08-01 12:58:00.787 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 12:58:00.790 | SUCCESS  | src.main:startup_event:979 - ✅ Sentry integration initialized
+2025-08-01 12:58:00.792 | INFO     | src.main:shutdown_event:984 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 12:58:00.794 | INFO     | src.main:shutdown_event:985 - 💾 Saving final state...
+2025-08-01 12:58:00.794 | INFO     | src.main:shutdown_event:986 - ✅ Shutdown complete
+2025-08-01 12:58:27.270 | INFO     | src.main:startup_event:970 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 12:58:27.271 | INFO     | src.main:startup_event:971 - 📡 Real-time log streaming initialized
+2025-08-01 12:58:27.272 | INFO     | src.main:startup_event:972 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 12:58:27.273 | INFO     | src.main:startup_event:973 - 🧠 Hybrid Decision Engine active
+2025-08-01 12:58:27.273 | INFO     | src.main:startup_event:974 - 💾 Database system ready
+2025-08-01 12:58:27.327 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 12:58:27.328 | SUCCESS  | src.main:startup_event:979 - ✅ Sentry integration initialized
+2025-08-01 12:58:28.335 | INFO     | src.main:log_requests:995 - 🌐 POST /api/missions | Client: 127.0.0.1
+2025-08-01 12:58:28.358 | INFO     | src.models.advanced_database:create_mission:134 - 📝 Created mission: mission_bfa5812b
+2025-08-01 12:58:28.359 | INFO     | src.main:create_mission_api:720 - 📝 Created mission mission_bfa5812b: Hello, how are you?...
+2025-08-01 12:58:28.360 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for POST /api/missions | Time: 0.025s
+2025-08-01 12:58:29.133 | WARNING  | src.utils.agent_observability:mission_observability:125 - Weave tracing not available: Project Mismatch: weave and wandb must be initialized using the same project. Found wandb.init targeting project "elliotttmiller-north-hennepin-community-college/cognitive-forge-v5" and weave.init targeting project "elliotttmiller-north-hennepin-community-college/mission_mission_bfa5812b". To fix, please use the same project for both library initializations., using basic logging
+2025-08-01 12:58:29.133 | INFO     | src.main:run_mission_in_background:185 - 🚀 Starting mission mission_bfa5812b with comprehensive observability
+2025-08-01 12:58:29.156 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_bfa5812b: executing
+2025-08-01 12:58:29.159 | INFO     | src.core.hybrid_decision_engine:set:101 - 💾 Cache SET for decision: f096fe32...
+2025-08-01 12:58:29.160 | INFO     | src.core.hybrid_decision_engine:make_hybrid_decision:383 - 🎯 Hybrid Decision: golden_path (user_preference) - Confidence: 0.11
+2025-08-01 12:58:29.161 | ERROR    | src.utils.agent_observability:log_error:253 - Error in mission mission_bfa5812b: AgentObservabilityManager.log_agent_decision() got an unexpected keyword argument 'confidence_score' | Context: {'context': 'mission_execution'}
+2025-08-01 12:58:29.786 | ERROR    | src.main:run_mission_in_background:627 - ❌ Mission mission_bfa5812b failed: AgentObservabilityManager.log_agent_decision() got an unexpected keyword argument 'confidence_score'
+2025-08-01 12:58:29.802 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_bfa5812b: failed
+2025-08-01 12:58:29.805 | ERROR    | src.utils.agent_observability:log_error:253 - Error in mission mission_bfa5812b: AgentObservabilityManager.log_agent_decision() got an unexpected keyword argument 'confidence_score' | Context: {'mission_id': 'mission_bfa5812b'}
+2025-08-01 12:59:44.278 | INFO     | src.main:shutdown_event:984 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 12:59:44.280 | INFO     | src.main:shutdown_event:985 - 💾 Saving final state...
+2025-08-01 12:59:44.281 | INFO     | src.main:shutdown_event:986 - ✅ Shutdown complete
+2025-08-01 13:00:10.343 | INFO     | src.main:startup_event:970 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 13:00:10.346 | INFO     | src.main:startup_event:971 - 📡 Real-time log streaming initialized
+2025-08-01 13:00:10.346 | INFO     | src.main:startup_event:972 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 13:00:10.347 | INFO     | src.main:startup_event:973 - 🧠 Hybrid Decision Engine active
+2025-08-01 13:00:10.348 | INFO     | src.main:startup_event:974 - 💾 Database system ready
+2025-08-01 13:00:10.396 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 13:00:10.397 | SUCCESS  | src.main:startup_event:979 - ✅ Sentry integration initialized
+2025-08-01 13:00:10.399 | INFO     | src.main:shutdown_event:984 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 13:00:10.401 | INFO     | src.main:shutdown_event:985 - 💾 Saving final state...
+2025-08-01 13:00:10.401 | INFO     | src.main:shutdown_event:986 - ✅ Shutdown complete
+2025-08-01 13:00:34.581 | INFO     | src.main:startup_event:970 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 13:00:34.582 | INFO     | src.main:startup_event:971 - 📡 Real-time log streaming initialized
+2025-08-01 13:00:34.583 | INFO     | src.main:startup_event:972 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 13:00:34.584 | INFO     | src.main:startup_event:973 - 🧠 Hybrid Decision Engine active
+2025-08-01 13:00:34.584 | INFO     | src.main:startup_event:974 - 💾 Database system ready
+2025-08-01 13:00:34.636 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 13:00:34.637 | SUCCESS  | src.main:startup_event:979 - ✅ Sentry integration initialized
+2025-08-01 13:00:40.500 | INFO     | src.main:log_requests:995 - 🌐 POST /api/missions | Client: 127.0.0.1
+2025-08-01 13:00:40.524 | INFO     | src.models.advanced_database:create_mission:134 - 📝 Created mission: mission_a3baa7f7
+2025-08-01 13:00:40.525 | INFO     | src.main:create_mission_api:720 - 📝 Created mission mission_a3baa7f7: Hello, how are you?...
+2025-08-01 13:00:40.526 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for POST /api/missions | Time: 0.026s
+2025-08-01 13:00:41.074 | WARNING  | src.utils.agent_observability:mission_observability:125 - Weave tracing not available: Project Mismatch: weave and wandb must be initialized using the same project. Found wandb.init targeting project "elliotttmiller-north-hennepin-community-college/cognitive-forge-v5" and weave.init targeting project "elliotttmiller-north-hennepin-community-college/mission_mission_a3baa7f7". To fix, please use the same project for both library initializations., using basic logging
+2025-08-01 13:00:41.076 | INFO     | src.main:run_mission_in_background:185 - 🚀 Starting mission mission_a3baa7f7 with comprehensive observability
+2025-08-01 13:00:41.086 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_a3baa7f7: executing
+2025-08-01 13:00:41.087 | INFO     | src.core.hybrid_decision_engine:set:101 - 💾 Cache SET for decision: f096fe32...
+2025-08-01 13:00:41.088 | INFO     | src.core.hybrid_decision_engine:make_hybrid_decision:383 - 🎯 Hybrid Decision: golden_path (user_preference) - Confidence: 0.11
+2025-08-01 13:00:41.088 | WARNING  | src.utils.agent_observability:_find_mission_for_session:263 - Could not find active mission for session_id: hybrid_decision_mission_a3baa7f7
+2025-08-01 13:00:41.089 | INFO     | src.main:run_mission_in_background:203 - 🎯 Hybrid Decision: golden_path (Complexity: 0.06)
+2025-08-01 13:00:41.602 | WARNING  | src.utils.agent_observability:agent_session:182 - Weave tracing not available: Project Mismatch: weave and wandb must be initialized using the same project. Found wandb.init targeting project "elliotttmiller-north-hennepin-community-college/cognitive-forge-v5" and weave.init targeting project "elliotttmiller-north-hennepin-community-college/agent_session_golden_path_agent". To fix, please use the same project for both library initializations., using basic logging
+2025-08-01 13:00:41.603 | WARNING  | src.utils.agent_observability:_log_action:207 - Weave logging not available: module 'weave' has no attribute 'log', using basic logging
+2025-08-01 13:00:42.025 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1548 - 🟡 Golden Path: Starting simple mission mission_a3baa7f7
+2025-08-01 13:00:42.026 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1549 - 🟡 Golden Path: Prompt: Hello, how are you?...
+2025-08-01 13:00:42.943 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1570 - ✅ Golden Path: Mission mission_a3baa7f7 completed in 0.92s
+2025-08-01 13:00:42.944 | ERROR    | src.utils.agent_observability:log_error:253 - Error in mission mission_a3baa7f7: AgentObservabilityManager.log_agent_response() got an unexpected keyword argument 'cost_estimate' | Context: {'context': 'mission_execution'}
+2025-08-01 13:00:42.945 | ERROR    | src.main:run_mission_in_background:627 - ❌ Mission mission_a3baa7f7 failed: AgentObservabilityManager.log_agent_response() got an unexpected keyword argument 'cost_estimate'
+2025-08-01 13:00:42.955 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_a3baa7f7: failed
+2025-08-01 13:00:42.956 | ERROR    | src.utils.agent_observability:log_error:253 - Error in mission mission_a3baa7f7: AgentObservabilityManager.log_agent_response() got an unexpected keyword argument 'cost_estimate' | Context: {'mission_id': 'mission_a3baa7f7'}
+2025-08-01 13:01:25.934 | INFO     | src.main:shutdown_event:984 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 13:01:25.935 | INFO     | src.main:shutdown_event:985 - 💾 Saving final state...
+2025-08-01 13:01:25.936 | INFO     | src.main:shutdown_event:986 - ✅ Shutdown complete
+2025-08-01 13:01:53.195 | INFO     | src.main:startup_event:970 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 13:01:53.197 | INFO     | src.main:startup_event:971 - 📡 Real-time log streaming initialized
+2025-08-01 13:01:53.197 | INFO     | src.main:startup_event:972 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 13:01:53.198 | INFO     | src.main:startup_event:973 - 🧠 Hybrid Decision Engine active
+2025-08-01 13:01:53.200 | INFO     | src.main:startup_event:974 - 💾 Database system ready
+2025-08-01 13:01:53.274 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 13:01:53.276 | SUCCESS  | src.main:startup_event:979 - ✅ Sentry integration initialized
+2025-08-01 13:01:56.447 | INFO     | src.main:log_requests:995 - 🌐 POST /api/missions | Client: 127.0.0.1
+2025-08-01 13:01:56.474 | INFO     | src.models.advanced_database:create_mission:134 - 📝 Created mission: mission_83db7e43
+2025-08-01 13:01:56.476 | INFO     | src.main:create_mission_api:720 - 📝 Created mission mission_83db7e43: Hello, how are you?...
+2025-08-01 13:01:56.479 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for POST /api/missions | Time: 0.032s
+2025-08-01 13:01:57.115 | WARNING  | src.utils.agent_observability:mission_observability:125 - Weave tracing not available: Project Mismatch: weave and wandb must be initialized using the same project. Found wandb.init targeting project "elliotttmiller-north-hennepin-community-college/cognitive-forge-v5" and weave.init targeting project "elliotttmiller-north-hennepin-community-college/mission_mission_83db7e43". To fix, please use the same project for both library initializations., using basic logging
+2025-08-01 13:01:57.119 | INFO     | src.main:run_mission_in_background:185 - 🚀 Starting mission mission_83db7e43 with comprehensive observability
+2025-08-01 13:01:57.143 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_83db7e43: executing
+2025-08-01 13:01:57.149 | INFO     | src.core.hybrid_decision_engine:set:101 - 💾 Cache SET for decision: f096fe32...
+2025-08-01 13:01:57.153 | INFO     | src.core.hybrid_decision_engine:make_hybrid_decision:383 - 🎯 Hybrid Decision: golden_path (user_preference) - Confidence: 0.11
+2025-08-01 13:01:57.158 | WARNING  | src.utils.agent_observability:_find_mission_for_session:263 - Could not find active mission for session_id: hybrid_decision_mission_83db7e43
+2025-08-01 13:01:57.164 | INFO     | src.main:run_mission_in_background:203 - 🎯 Hybrid Decision: golden_path (Complexity: 0.06)
+2025-08-01 13:01:57.930 | WARNING  | src.utils.agent_observability:agent_session:182 - Weave tracing not available: Project Mismatch: weave and wandb must be initialized using the same project. Found wandb.init targeting project "elliotttmiller-north-hennepin-community-college/cognitive-forge-v5" and weave.init targeting project "elliotttmiller-north-hennepin-community-college/agent_session_golden_path_agent". To fix, please use the same project for both library initializations., using basic logging
+2025-08-01 13:01:57.936 | WARNING  | src.utils.agent_observability:_log_action:207 - Weave logging not available: module 'weave' has no attribute 'log', using basic logging
+2025-08-01 13:01:58.754 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1548 - 🟡 Golden Path: Starting simple mission mission_83db7e43
+2025-08-01 13:01:58.756 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1549 - 🟡 Golden Path: Prompt: Hello, how are you?...
+2025-08-01 13:02:00.776 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1570 - ✅ Golden Path: Mission mission_83db7e43 completed in 2.02s
+2025-08-01 13:02:00.778 | WARNING  | src.utils.agent_observability:_log_action:207 - Weave logging not available: module 'weave' has no attribute 'log', using basic logging
+2025-08-01 13:02:00.789 | INFO     | src.main:run_mission_in_background:597 - 📊 Analytics: golden_path path - 4.30s - Success: True
+2025-08-01 13:02:00.802 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_83db7e43: completed
+2025-08-01 13:02:00.803 | SUCCESS  | src.main:run_mission_in_background:623 - ✅ Mission mission_83db7e43 completed via golden_path path
+2025-08-01 13:02:17.217 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/agent-analytics | Client: 127.0.0.1
+2025-08-01 13:02:17.220 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/agent-analytics | Time: 0.003s
+2025-08-01 13:02:23.953 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:02:23.963 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.010s
+2025-08-01 13:02:33.804 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/mission/mission_83db7e43 | Client: 127.0.0.1
+2025-08-01 13:02:33.807 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/mission/mission_83db7e43 | Time: 0.003s
+2025-08-01 13:02:48.024 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/agent-analytics | Client: 127.0.0.1
+2025-08-01 13:02:48.026 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/agent-analytics | Time: 0.002s
+2025-08-01 13:03:02.611 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:03:02.613 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.002s
+2025-08-01 13:03:42.910 | INFO     | src.main:shutdown_event:984 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 13:03:42.910 | INFO     | src.main:shutdown_event:985 - 💾 Saving final state...
+2025-08-01 13:03:42.912 | INFO     | src.main:shutdown_event:986 - ✅ Shutdown complete
+2025-08-01 13:04:17.443 | INFO     | src.main:startup_event:970 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 13:04:17.445 | INFO     | src.main:startup_event:971 - 📡 Real-time log streaming initialized
+2025-08-01 13:04:17.445 | INFO     | src.main:startup_event:972 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 13:04:17.445 | INFO     | src.main:startup_event:973 - 🧠 Hybrid Decision Engine active
+2025-08-01 13:04:17.446 | INFO     | src.main:startup_event:974 - 💾 Database system ready
+2025-08-01 13:04:17.496 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 13:04:17.497 | SUCCESS  | src.main:startup_event:979 - ✅ Sentry integration initialized
+2025-08-01 13:04:17.498 | INFO     | src.main:shutdown_event:984 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 13:04:17.498 | INFO     | src.main:shutdown_event:985 - 💾 Saving final state...
+2025-08-01 13:04:17.498 | INFO     | src.main:shutdown_event:986 - ✅ Shutdown complete
+2025-08-01 13:04:48.917 | INFO     | src.main:startup_event:970 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 13:04:48.918 | INFO     | src.main:startup_event:971 - 📡 Real-time log streaming initialized
+2025-08-01 13:04:48.919 | INFO     | src.main:startup_event:972 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 13:04:48.920 | INFO     | src.main:startup_event:973 - 🧠 Hybrid Decision Engine active
+2025-08-01 13:04:48.921 | INFO     | src.main:startup_event:974 - 💾 Database system ready
+2025-08-01 13:04:48.982 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 13:04:48.982 | SUCCESS  | src.main:startup_event:979 - ✅ Sentry integration initialized
+2025-08-01 13:05:25.267 | INFO     | src.main:log_requests:995 - 🌐 POST /api/missions | Client: 127.0.0.1
+2025-08-01 13:05:25.297 | INFO     | src.models.advanced_database:create_mission:134 - 📝 Created mission: mission_4db97b08
+2025-08-01 13:05:25.298 | INFO     | src.main:create_mission_api:720 - 📝 Created mission mission_4db97b08: Hello, how are you?...
+2025-08-01 13:05:25.299 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for POST /api/missions | Time: 0.032s
+2025-08-01 13:05:25.301 | WARNING  | src.utils.agent_observability:mission_observability:127 - Weave tracing not available: module 'weave' has no attribute 'ops', using basic logging
+2025-08-01 13:05:25.301 | INFO     | src.main:run_mission_in_background:185 - 🚀 Starting mission mission_4db97b08 with comprehensive observability
+2025-08-01 13:05:25.316 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_4db97b08: executing
+2025-08-01 13:05:25.317 | INFO     | src.core.hybrid_decision_engine:set:101 - 💾 Cache SET for decision: f096fe32...
+2025-08-01 13:05:25.319 | INFO     | src.core.hybrid_decision_engine:make_hybrid_decision:383 - 🎯 Hybrid Decision: golden_path (user_preference) - Confidence: 0.11
+2025-08-01 13:05:25.320 | WARNING  | src.utils.agent_observability:_find_mission_for_session:266 - Could not find active mission for session_id: hybrid_decision_mission_4db97b08
+2025-08-01 13:05:25.320 | INFO     | src.main:run_mission_in_background:203 - 🎯 Hybrid Decision: golden_path (Complexity: 0.06)
+2025-08-01 13:05:25.321 | WARNING  | src.utils.agent_observability:agent_session:185 - Weave tracing not available: module 'weave' has no attribute 'ops', using basic logging
+2025-08-01 13:05:25.321 | WARNING  | src.utils.agent_observability:_log_action:210 - Weave logging not available: module 'weave' has no attribute 'ops', using basic logging
+2025-08-01 13:05:26.295 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1548 - 🟡 Golden Path: Starting simple mission mission_4db97b08
+2025-08-01 13:05:26.297 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1549 - 🟡 Golden Path: Prompt: Hello, how are you?...
+2025-08-01 13:05:27.308 | INFO     | src.core.cognitive_forge_engine:run_mission_simple:1570 - ✅ Golden Path: Mission mission_4db97b08 completed in 1.01s
+2025-08-01 13:05:27.309 | WARNING  | src.utils.agent_observability:_log_action:210 - Weave logging not available: module 'weave' has no attribute 'ops', using basic logging
+2025-08-01 13:05:27.321 | INFO     | src.main:run_mission_in_background:597 - 📊 Analytics: golden_path path - 2.01s - Success: True
+2025-08-01 13:05:27.331 | INFO     | src.models.advanced_database:update_mission_status:174 - 📊 Updated mission mission_4db97b08: completed
+2025-08-01 13:05:27.333 | SUCCESS  | src.main:run_mission_in_background:623 - ✅ Mission mission_4db97b08 completed via golden_path path
+2025-08-01 13:06:04.091 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/agent-analytics | Client: 127.0.0.1
+2025-08-01 13:06:04.095 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/agent-analytics | Time: 0.004s
+2025-08-01 13:06:14.067 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:06:14.074 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.006s
+2025-08-01 13:06:23.999 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/mission/mission_4db97b08 | Client: 127.0.0.1
+2025-08-01 13:06:24.001 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/mission/mission_4db97b08 | Time: 0.002s
+2025-08-01 13:06:31.841 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:06:31.843 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.002s
+2025-08-01 13:14:28.513 | INFO     | src.main:log_requests:995 - 🌐 GET / | Client: 127.0.0.1
+2025-08-01 13:15:33.158 | INFO     | src.main:shutdown_event:984 - 🛑 Shutting down Sentinel Cognitive Forge v5.0
+2025-08-01 13:15:33.159 | INFO     | src.main:shutdown_event:985 - 💾 Saving final state...
+2025-08-01 13:15:33.160 | INFO     | src.main:shutdown_event:986 - ✅ Shutdown complete
+2025-08-01 13:16:28.853 | INFO     | src.main:startup_event:970 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 13:16:28.854 | INFO     | src.main:startup_event:971 - 📡 Real-time log streaming initialized
+2025-08-01 13:16:28.855 | INFO     | src.main:startup_event:972 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 13:16:28.856 | INFO     | src.main:startup_event:973 - 🧠 Hybrid Decision Engine active
+2025-08-01 13:16:28.856 | INFO     | src.main:startup_event:974 - 💾 Database system ready
+2025-08-01 13:16:28.903 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 13:16:28.907 | SUCCESS  | src.main:startup_event:979 - ✅ Sentry integration initialized
+2025-08-01 13:16:38.660 | INFO     | src.main:log_requests:995 - 🌐 GET / | Client: 127.0.0.1
+2025-08-01 13:16:38.666 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET / | Time: 0.005s
+2025-08-01 13:16:38.755 | INFO     | src.main:log_requests:995 - 🌐 GET /static/sentinel-dash.css | Client: 127.0.0.1
+2025-08-01 13:16:39.161 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:16:39.169 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:16:39.176 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.016s
+2025-08-01 13:16:39.213 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/agent-analytics | Client: 127.0.0.1
+2025-08-01 13:16:39.222 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/agent-analytics | Time: 0.009s
+2025-08-01 13:16:39.227 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.059s
+2025-08-01 13:17:09.177 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:17:09.179 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.002s
+2025-08-01 13:17:09.182 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:17:09.185 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.003s
+2025-08-01 13:17:39.173 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:17:39.178 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.005s
+2025-08-01 13:17:39.183 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:17:39.185 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.002s
+2025-08-01 13:18:09.173 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:18:09.603 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:18:09.606 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.003s
+2025-08-01 13:18:09.608 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.435s
+2025-08-01 13:18:39.480 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:18:39.481 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:18:39.484 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.004s
+2025-08-01 13:18:39.490 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.008s
+2025-08-01 13:19:09.169 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:19:09.173 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.004s
+2025-08-01 13:19:09.180 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:19:09.184 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.003s
+2025-08-01 13:19:39.166 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:19:39.174 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.007s
+2025-08-01 13:19:39.182 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:19:39.184 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.002s
+2025-08-01 13:20:09.169 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:20:09.181 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.011s
+2025-08-01 13:20:09.194 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:20:09.198 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.005s
+2025-08-01 13:20:24.201 | INFO     | src.main:log_requests:995 - 🌐 GET / | Client: 127.0.0.1
+2025-08-01 13:20:24.207 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET / | Time: 0.006s
+2025-08-01 13:20:24.272 | INFO     | src.main:log_requests:995 - 🌐 GET /static/sentinel-dash.css | Client: 127.0.0.1
+2025-08-01 13:20:24.589 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:20:24.597 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.007s
+2025-08-01 13:20:24.612 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:20:24.616 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.004s
+2025-08-01 13:20:29.892 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:20:29.902 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.012s
+2025-08-01 13:20:54.901 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:20:54.904 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:20:54.905 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.001s
+2025-08-01 13:20:54.907 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.006s
+2025-08-01 13:21:24.582 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:21:24.589 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.007s
+2025-08-01 13:21:24.593 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:21:24.595 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.002s
+2025-08-01 13:21:54.598 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:21:54.604 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.006s
+2025-08-01 13:21:54.613 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:21:54.615 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.003s
+2025-08-01 13:22:24.584 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:22:24.586 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.002s
+2025-08-01 13:22:24.597 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:22:24.600 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.003s
+2025-08-01 13:22:54.598 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:22:54.602 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.004s
+2025-08-01 13:22:54.608 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:22:54.611 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.003s
+2025-08-01 13:23:25.104 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:23:25.123 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.019s
+2025-08-01 13:23:25.141 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:23:25.153 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.012s
+2025-08-01 13:23:55.108 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:23:55.112 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.004s
+2025-08-01 13:23:55.115 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:23:55.119 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.003s
+2025-08-01 13:24:04.023 | INFO     | src.main:log_requests:995 - 🌐 GET / | Client: 127.0.0.1
+2025-08-01 13:24:04.029 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET / | Time: 0.006s
+2025-08-01 13:24:04.103 | INFO     | src.main:log_requests:995 - 🌐 GET /static/sentinel-dash.css | Client: 127.0.0.1
+2025-08-01 13:24:04.382 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:24:04.390 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.008s
+2025-08-01 13:24:04.400 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:24:04.405 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.005s
+2025-08-01 13:24:06.655 | INFO     | src.main:log_requests:995 - 🌐 GET / | Client: 127.0.0.1
+2025-08-01 13:24:06.662 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET / | Time: 0.007s
+2025-08-01 13:24:06.742 | INFO     | src.main:log_requests:995 - 🌐 GET /static/sentinel-dash.css | Client: 127.0.0.1
+2025-08-01 13:24:07.021 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:24:07.029 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.008s
+2025-08-01 13:24:07.055 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:24:07.061 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.006s
+2025-08-01 13:24:07.791 | INFO     | src.main:log_requests:995 - 🌐 GET / | Client: 127.0.0.1
+2025-08-01 13:24:07.795 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET / | Time: 0.004s
+2025-08-01 13:24:07.868 | INFO     | src.main:log_requests:995 - 🌐 GET /static/sentinel-dash.css | Client: 127.0.0.1
+2025-08-01 13:24:08.129 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:24:08.139 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.009s
+2025-08-01 13:24:08.149 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:24:08.152 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.003s
+2025-08-01 13:24:09.733 | INFO     | src.main:log_requests:995 - 🌐 GET / | Client: 127.0.0.1
+2025-08-01 13:24:09.741 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET / | Time: 0.008s
+2025-08-01 13:24:09.812 | INFO     | src.main:log_requests:995 - 🌐 GET /static/sentinel-dash.css | Client: 127.0.0.1
+2025-08-01 13:24:10.070 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:24:10.082 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.012s
+2025-08-01 13:24:10.097 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:24:10.101 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.003s
+2025-08-01 13:24:40.071 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:24:40.071 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.000s
+2025-08-01 13:24:40.082 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:24:40.085 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.003s
+2025-08-01 13:25:10.081 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:25:10.084 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.003s
+2025-08-01 13:25:10.092 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:25:10.097 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.005s
+2025-08-01 13:25:40.108 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:25:40.116 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.008s
+2025-08-01 13:25:40.133 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:25:40.138 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.005s
+2025-08-01 13:26:10.113 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:26:10.119 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.006s
+2025-08-01 13:26:10.129 | INFO     | src.main:log_requests:995 - 🌐 GET /api/observability/report | Client: 127.0.0.1
+2025-08-01 13:26:10.134 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/observability/report | Time: 0.005s
+2025-08-01 13:26:28.857 | INFO     | src.main:log_requests:995 - 🌐 GET / | Client: 127.0.0.1
+2025-08-01 13:26:28.863 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET / | Time: 0.006s
+2025-08-01 13:26:28.936 | INFO     | src.main:log_requests:995 - 🌐 GET /static/css/sentinel-dash.css | Client: 127.0.0.1
+2025-08-01 13:26:28.947 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /static/css/sentinel-dash.css | Time: 0.011s
+2025-08-01 13:26:29.352 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:26:29.365 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.013s
+2025-08-01 13:26:29.445 | INFO     | src.main:log_requests:995 - 🌐 GET /api/events/stream | Client: 127.0.0.1
+2025-08-01 13:26:29.451 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/events/stream | Time: 0.006s
+2025-08-01 13:34:42.823 | INFO     | src.main:log_requests:995 - 🌐 GET / | Client: 127.0.0.1
+2025-08-01 13:34:42.825 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET / | Time: 0.002s
+2025-08-01 13:34:42.888 | INFO     | src.main:log_requests:995 - 🌐 GET /static/css/sentinel-dash.css | Client: 127.0.0.1
+2025-08-01 13:34:42.893 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /static/css/sentinel-dash.css | Time: 0.006s
+2025-08-01 13:34:43.215 | INFO     | src.main:log_requests:995 - 🌐 GET /missions | Client: 127.0.0.1
+2025-08-01 13:34:43.220 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /missions | Time: 0.006s
+2025-08-01 13:34:43.256 | INFO     | src.main:log_requests:995 - 🌐 GET /api/events/stream | Client: 127.0.0.1
+2025-08-01 13:34:43.262 | INFO     | src.main:log_requests:1001 - 📊 Response 200 for GET /api/events/stream | Time: 0.006s

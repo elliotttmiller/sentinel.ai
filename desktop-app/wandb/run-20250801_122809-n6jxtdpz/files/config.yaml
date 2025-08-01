@@ -1,0 +1,75 @@
+_wandb:
+    value:
+        cli_version: 0.21.0
+        e:
+            ih7n79ormert37fz9a4ofxp7la4b65l8:
+                args:
+                    - src.main:app
+                    - --host
+                    - 0.0.0.0
+                    - --port
+                    - "8001"
+                    - --reload
+                cpu_count: 8
+                cpu_count_logical: 16
+                cudaVersion: "12.9"
+                disk:
+                    /:
+                        total: "498684919808"
+                        used: "285762781184"
+                email: elliotttmiller@hotmail.com
+                executable: C:\Users\AMD\AppData\Local\Programs\Python\Python311\python.exe
+                git:
+                    commit: ed6f6b1f6bba737f8860f58407754c636bdd519e
+                    remote: https://github.com/elliotttmiller/sentinel.ai.git
+                gpu: NVIDIA GeForce GTX 1070
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Pascal
+                      cudaCores: 1920
+                      memoryTotal: "8589934592"
+                      name: NVIDIA GeForce GTX 1070
+                      uuid: GPU-ceb7970b-f836-81d2-c126-25b8b7e0da61
+                host: DESKTOP-7CFR9JU
+                memory:
+                    total: "17101807616"
+                os: Windows-10-10.0.26100-SP0
+                program: <python with no main file>
+                python: CPython 3.11.9
+                root: C:\Users\AMD\sentinel\desktop-app
+                startedAt: "2025-08-01T17:28:09.586947Z"
+                writerId: ih7n79ormert37fz9a4ofxp7la4b65l8
+        m: []
+        python_version: 3.11.9
+        t:
+            "1":
+                - 49
+                - 86
+                - 92
+                - 95
+                - 96
+                - 97
+                - 105
+            "2":
+                - 49
+                - 86
+                - 92
+                - 95
+                - 96
+                - 97
+                - 105
+            "3":
+                - 16
+                - 24
+            "4": 3.11.9
+            "5": 0.21.0
+            "8":
+                - 3
+            "12": 0.21.0
+            "13": windows-amd64
+observability_enabled:
+    value: true
+system_version:
+    value: v5.0
+weave_integration:
+    value: true

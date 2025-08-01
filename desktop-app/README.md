@@ -1,16 +1,17 @@
-# 🚀 Sentinel Cognitive Forge v5.0
+# 🚀 Sentinel Cognitive Forge v5.1
 
-**State-of-the-art AI-powered mission execution system with hybrid decision engine and real-time observability**
+**State-of-the-art AI-powered mission execution system with enhanced observability, hybrid decision engine, and comprehensive agent tracking**
 
 ## 🎯 Overview
 
-Cognitive Forge v5.0 is a complete system upgrade that transforms your AI application into a production-ready, intelligent platform with:
+Cognitive Forge v5.1 is a complete system upgrade that transforms your AI application into a production-ready, intelligent platform with unprecedented observability:
 
 - **🧠 Hybrid Decision Engine** - Intelligent routing between fast Golden Path and comprehensive Full Workflow
-- **📊 Real-Time Analytics** - Advanced performance tracking and user preference learning
+- **📊 Enhanced Observability** - Real-time agent tracking with detailed action monitoring
 - **🔮 Predictive Caching** - Intelligent result caching for improved performance
 - **📈 Machine Learning Integration** - Self-improving system that learns from execution patterns
 - **🌐 Real-Time Observability** - Live log streaming and comprehensive system monitoring
+- **🤖 Multi-Agent Tracking** - Detailed monitoring of every AI agent action and decision
 
 ## ✨ Key Features
 
@@ -20,11 +21,12 @@ Cognitive Forge v5.0 is a complete system upgrade that transforms your AI applic
 - **User Preference Learning** - Adaptive system behavior based on user satisfaction
 - **Automatic Path Selection** - Intelligent routing between Golden Path and Full Workflow
 
-### 📊 Advanced Analytics
-- **Real-Time Performance Tracking** - Monitor execution times and success rates
-- **Decision Accuracy Metrics** - Track hybrid engine decision quality
-- **Cache Efficiency Monitoring** - Optimize predictive caching performance
-- **User Satisfaction Tracking** - Learn from user feedback
+### 📊 Enhanced Observability
+- **Real-Time Agent Tracking** - Monitor every AI agent action in detail
+- **Action-Level Monitoring** - Track thinking, tool calls, decisions, and responses
+- **Performance Metrics** - CPU, memory, execution time, and token usage
+- **Decision Analytics** - Complete visibility into routing decisions
+- **Error Tracking** - Comprehensive error monitoring with Sentry integration
 
 ### 🔮 Predictive Caching
 - **Intelligent Result Caching** - Cache frequently requested results
@@ -35,13 +37,15 @@ Cognitive Forge v5.0 is a complete system upgrade that transforms your AI applic
 - **Live Log Streaming** - Server-Sent Events (SSE) for real-time updates
 - **Unified Log Interception** - Capture logs from all system components
 - **Comprehensive System Monitoring** - Health checks and performance metrics
+- **Weave Integration** - Distributed tracing and monitoring
+- **Weights & Biases** - Experiment tracking and analytics
 
 ## 🏗️ Architecture
 
 ### Core Components
 
 ```
-Cognitive Forge v5.0
+Cognitive Forge v5.1
 ├── 🧠 Hybrid Decision Engine
 │   ├── Task Complexity Analyzer
 │   ├── Performance Learning System
@@ -49,8 +53,13 @@ Cognitive Forge v5.0
 │   └── Advanced Analytics
 ├── 🔧 Cognitive Forge Engine
 │   ├── Golden Path (Fast Execution)
-│   ├── Full Workflow (Comprehensive)
+│   ├── Full Workflow (8-Phase Comprehensive)
 │   └── Mission Orchestration
+├── 📊 Enhanced Observability
+│   ├── Agent Action Tracking
+│   ├── Performance Monitoring
+│   ├── Weave Integration
+│   └── Weights & Biases
 ├── 💾 Advanced Database
 │   ├── SQLite (Relational Data)
 │   ├── ChromaDB (Vector Memory)
@@ -68,12 +77,25 @@ Cognitive Forge v5.0
 - **Execution**: Direct LLM inference
 - **Typical Time**: 0.5-5 seconds
 - **Examples**: "Hello world", "Calculate 2+2", "Print hello"
+- **Observability**: Real-time action tracking
 
 #### 🔵 Full Workflow (Comprehensive)
 - **Use Case**: Complex tasks, detailed analysis
 - **Execution**: 8-phase AI workflow with multiple agents
 - **Typical Time**: 10-60 seconds
 - **Examples**: "Design a microservice architecture", "Create a machine learning system"
+- **Observability**: Detailed phase-by-phase tracking
+
+### 8-Phase AI Workflow
+
+1. **Planning & Analysis** - Problem analysis and requirements gathering
+2. **Research & Information Gathering** - Comprehensive research and data collection
+3. **Design & Architecture** - System design and architecture planning
+4. **Implementation & Development** - Detailed code and configuration
+5. **Testing & Validation** - Comprehensive testing strategies
+6. **Optimization & Refinement** - Performance and quality improvements
+7. **Documentation & Knowledge Synthesis** - Complete documentation
+8. **Deployment & Integration** - Deployment and integration guidance
 
 ## 🚀 Quick Start
 
@@ -99,6 +121,7 @@ Create a `.env` file with your configuration:
 # Hybrid System Configuration
 ENABLE_HYBRID_MODE=true
 AUTO_SWITCHING=true
+HYBRID_SWITCH_THRESHOLD=0.4
 
 # Golden Path Feature Flags
 ENABLE_FULL_WORKFLOW=false
@@ -117,10 +140,15 @@ PORT=8001
 # Database Configuration
 DATABASE_URL=sqlite:///db/sentinel_missions.db
 
-# Advanced Features
+# Enhanced Observability
 ENABLE_ML_PREDICTION=true
 ENABLE_PREDICTIVE_CACHING=true
 ENABLE_ADVANCED_ANALYTICS=true
+ENABLE_DYNAMIC_THRESHOLDS=true
+
+# Weave & W&B Integration
+WEAVE_PROJECT_NAME=cognitive-forge-v5
+WANDB_PROJECT_NAME=cognitive-forge-v5
 ```
 
 ### 3. Launch System
@@ -138,6 +166,7 @@ uvicorn src.main:app --host 0.0.0.0 --port 8001 --reload
 - **Web Interface**: http://localhost:8001
 - **API Documentation**: http://localhost:8001/docs
 - **Health Check**: http://localhost:8001/health
+- **Observability Dashboard**: http://localhost:8001/api/observability/agent-analytics
 
 ## 📊 API Endpoints
 
@@ -145,6 +174,12 @@ uvicorn src.main:app --host 0.0.0.0 --port 8001 --reload
 - `POST /api/missions` - Create new mission with hybrid routing
 - `GET /missions` - List all missions with metadata
 - `GET /api/missions/{id}/updates` - Get real-time mission updates
+
+### Enhanced Observability
+- `GET /api/observability/agent-analytics` - Comprehensive agent performance metrics
+- `GET /api/observability/mission/{mission_id}` - Detailed mission observability
+- `GET /api/observability/session/{session_id}` - Agent session details
+- `GET /api/observability/report` - Complete observability report
 
 ### Hybrid System
 - `GET /api/hybrid/status` - Get hybrid system status
@@ -176,8 +211,8 @@ overall_score = (
 
 ### Decision Threshold
 
-- **Score < 0.6** → Golden Path (fast, simple)
-- **Score ≥ 0.6** → Full Workflow (comprehensive, detailed)
+- **Score < 0.4** → Golden Path (fast, simple)
+- **Score ≥ 0.4** → Full Workflow (comprehensive, detailed)
 
 ### Example Analysis
 
@@ -206,6 +241,39 @@ Response:
 }
 ```
 
+## 📊 Enhanced Observability
+
+### Agent Action Tracking
+
+The system tracks every AI agent action with detailed metrics:
+
+- **Thinking**: Agent reasoning and thought processes
+- **Tool Calls**: External tool usage and results
+- **Decisions**: Routing and decision-making processes
+- **Responses**: Output generation and token usage
+- **Errors**: Error handling and recovery
+
+### Performance Metrics
+
+- **Execution Time**: Detailed timing for each phase
+- **Token Usage**: Input/output token tracking
+- **Cost Estimation**: API cost tracking
+- **Memory Usage**: System resource monitoring
+- **CPU Usage**: Performance monitoring
+
+### Real-Time Monitoring
+
+```bash
+# Get agent analytics
+curl http://localhost:8001/api/observability/agent-analytics
+
+# Get mission observability
+curl http://localhost:8001/api/observability/mission/mission_123
+
+# Get session details
+curl http://localhost:8001/api/observability/session/session_456
+```
+
 ## 📈 Performance Metrics
 
 ### Expected Improvements
@@ -214,6 +282,7 @@ Response:
 - **95%+ user satisfaction** through intelligent routing
 - **Zero database errors** with proper schema
 - **Real-time observability** for debugging
+- **Complete agent visibility** for optimization
 
 ### Monitoring
 
@@ -225,6 +294,9 @@ curl http://localhost:8001/api/hybrid/analytics
 
 # Get system statistics
 curl http://localhost:8001/api/system/stats
+
+# Get observability report
+curl http://localhost:8001/api/observability/report
 ```
 
 ## 🔧 Configuration
@@ -234,11 +306,13 @@ curl http://localhost:8001/api/system/stats
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `ENABLE_HYBRID_MODE` | Enable hybrid decision engine | `true` |
-| `HYBRID_SWITCH_THRESHOLD` | Complexity threshold for path selection | `0.6` |
+| `HYBRID_SWITCH_THRESHOLD` | Complexity threshold for path selection | `0.4` |
 | `ENABLE_ML_PREDICTION` | Enable ML-based performance prediction | `true` |
 | `ENABLE_PREDICTIVE_CACHING` | Enable intelligent result caching | `true` |
 | `CACHE_SIZE_LIMIT` | Maximum cache entries | `1000` |
 | `CACHE_TTL` | Cache time-to-live (seconds) | `3600` |
+| `ENABLE_ADVANCED_ANALYTICS` | Enable enhanced analytics | `true` |
+| `ENABLE_DYNAMIC_THRESHOLDS` | Enable dynamic threshold adjustment | `true` |
 
 ### Advanced Settings
 
@@ -257,6 +331,11 @@ PERFORMANCE_METRICS_RETENTION=86400
 ENABLE_DYNAMIC_THRESHOLDS=true
 THRESHOLD_UPDATE_INTERVAL=1800
 THRESHOLD_LEARNING_RATE=0.1
+
+# Observability Configuration
+WEAVE_PROJECT_NAME=cognitive-forge-v5
+WANDB_PROJECT_NAME=cognitive-forge-v5
+SENTRY_DSN=your_sentry_dsn_here
 ```
 
 ## 🛠️ Development
@@ -272,6 +351,8 @@ desktop-app/
 │   ├── models/
 │   │   └── advanced_database.py
 │   ├── utils/
+│   │   ├── weave_observability.py
+│   │   ├── agent_observability.py
 │   │   └── google_ai_wrapper.py
 │   └── main.py
 ├── config/
@@ -298,6 +379,9 @@ print(f'Decision: {result}')
 curl -X POST http://localhost:8001/api/missions \
   -H "Content-Type: application/json" \
   -d '{"prompt": "Hello world", "title": "Test"}'
+
+# Test observability
+curl http://localhost:8001/api/observability/agent-analytics
 ```
 
 ## 🔍 Troubleshooting
@@ -332,11 +416,20 @@ curl -X POST http://localhost:8001/api/missions \
      -d '{"prompt": "test", "title": "Test"}'
    ```
 
+4. **Observability Issues**
+   ```bash
+   # Check observability endpoints
+   curl http://localhost:8001/api/observability/agent-analytics
+   curl http://localhost:8001/api/observability/report
+   ```
+
 ### Logs
 
 - **Application Logs**: `logs/cognitive_forge.log`
+- **Engine Logs**: `logs/cognitive_engine.log`
 - **Real-Time Logs**: http://localhost:8001/api/logs/live
 - **Streaming Logs**: http://localhost:8001/api/events/stream
+- **Observability Logs**: `logs/desktop_app.log`
 
 ## 🚀 Production Deployment
 
@@ -365,6 +458,7 @@ ENABLE_HYBRID_MODE=true
 ENABLE_ML_PREDICTION=true
 ENABLE_PREDICTIVE_CACHING=true
 ENABLE_ADVANCED_ANALYTICS=true
+ENABLE_DYNAMIC_THRESHOLDS=true
 
 # Security
 ALLOWED_FILE_EXTENSIONS=.py,.js,.html,.css,.json,.txt,.md
@@ -374,6 +468,11 @@ ALLOWED_SHELL_COMMANDS=ls,dir,pwd,echo,cat,head,tail,grep,find
 CACHE_SIZE_LIMIT=1000
 CACHE_TTL=3600
 LOG_BUFFER_SIZE=200
+
+# Observability
+WEAVE_PROJECT_NAME=cognitive-forge-v5-prod
+WANDB_PROJECT_NAME=cognitive-forge-v5-prod
+SENTRY_DSN=your_production_sentry_dsn
 ```
 
 ## 📚 Documentation
@@ -381,6 +480,8 @@ LOG_BUFFER_SIZE=200
 - **API Documentation**: http://localhost:8001/docs
 - **System Status**: http://localhost:8001/health
 - **Hybrid Analytics**: http://localhost:8001/api/hybrid/analytics
+- **Agent Analytics**: http://localhost:8001/api/observability/agent-analytics
+- **Observability Report**: http://localhost:8001/api/observability/report
 
 ## 🤝 Contributing
 
@@ -402,7 +503,8 @@ For support and questions:
 2. Review the logs at `logs/cognitive_forge.log`
 3. Test the system health at http://localhost:8001/health
 4. Check hybrid system status at http://localhost:8001/api/hybrid/status
+5. Review observability data at http://localhost:8001/api/observability/agent-analytics
 
 ---
 
-**🚀 Cognitive Forge v5.0 - The Future of AI Mission Execution** 
+**🚀 Cognitive Forge v5.1 - The Future of AI Mission Execution with Enhanced Observability** 

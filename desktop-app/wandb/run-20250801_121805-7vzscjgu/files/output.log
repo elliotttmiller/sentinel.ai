@@ -1,0 +1,184 @@
+[34m[1mwandb[0m: wandb.init() called while a run is active and reinit is set to 'default', so returning the previous run.
+[32m2025-08-01 12:18:06.336[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m971[0m - [1m🚀 Sentinel Cognitive Forge v5.0 starting up...[0m
+[32m2025-08-01 12:18:06.338[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m972[0m - [1m📡 Real-time log streaming initialized[0m
+[32m2025-08-01 12:18:06.339[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m973[0m - [1m🔗 SSE endpoint available at /api/events/stream[0m
+[32m2025-08-01 12:18:06.340[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m974[0m - [1m🧠 Hybrid Decision Engine active[0m
+[32m2025-08-01 12:18:06.340[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m975[0m - [1m💾 Database system ready[0m
+[32m2025-08-01 12:18:06.401[0m | [32m[1mSUCCESS [0m | [36msrc.utils.sentry_integration[0m:[36m_initialize_sentry[0m:[36m78[0m - [32m[1mSentry integration initialized successfully[0m
+[32m2025-08-01 12:18:06.402[0m | [32m[1mSUCCESS [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m980[0m - [32m[1m✅ Sentry integration initialized[0m
+[32m2025-08-01 12:18:30.455[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 POST /api/missions | Client: 127.0.0.1[0m
+[32m2025-08-01 12:18:30.487[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m134[0m - [1m📝 Created mission: mission_368bcd48[0m
+[32m2025-08-01 12:18:30.489[0m | [1mINFO    [0m | [36msrc.main[0m:[36mcreate_mission_api[0m:[36m721[0m - [1m📝 Created mission mission_368bcd48: Calculate the tax for a $50,000 annual income with...[0m
+[32m2025-08-01 12:18:30.491[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 200 for POST /api/missions | Time: 0.036s[0m
+[32m2025-08-01 12:18:30.494[0m | [1mINFO    [0m | [36msrc.main[0m:[36mrun_mission_in_background[0m:[36m185[0m - [1m🚀 Starting mission mission_368bcd48 with comprehensive observability[0m
+[32m2025-08-01 12:18:30.513[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mupdate_mission_status[0m:[36m174[0m - [1m📊 Updated mission mission_368bcd48: executing[0m
+[32m2025-08-01 12:18:30.514[0m | [1mINFO    [0m | [36msrc.core.hybrid_decision_engine[0m:[36mset[0m:[36m101[0m - [1m💾 Cache SET for decision: 4081106b...[0m
+[32m2025-08-01 12:18:30.516[0m | [1mINFO    [0m | [36msrc.core.hybrid_decision_engine[0m:[36mmake_hybrid_decision[0m:[36m383[0m - [1m🎯 Hybrid Decision: golden_path (user_preference) - Confidence: 0.14[0m
+[32m2025-08-01 12:18:30.517[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36mrecord_agent_action[0m:[36m293[0m - [33m[1mSession hybrid_decision_mission_368bcd48 not found for action recording[0m
+[32m2025-08-01 12:18:30.519[0m | [1mINFO    [0m | [36msrc.main[0m:[36mrun_mission_in_background[0m:[36m203[0m - [1m🎯 Hybrid Decision: golden_path (Complexity: 0.07)[0m
+[32m2025-08-01 12:18:30.532[0m | [1mINFO    [0m | [36msrc.utils.agent_observability[0m:[36mrecord_agent_action[0m:[36m330[0m - [1m📊 Agent Action: golden_path_agent - thinking - Success: True[0m
+[32m2025-08-01 12:18:30.532[0m | [1mINFO    [0m | [36msrc.core.cognitive_forge_engine[0m:[36mrun_mission_simple[0m:[36m1548[0m - [1m🟡 Golden Path: Starting simple mission mission_368bcd48[0m
+[32m2025-08-01 12:18:30.533[0m | [1mINFO    [0m | [36msrc.core.cognitive_forge_engine[0m:[36mrun_mission_simple[0m:[36m1549[0m - [1m🟡 Golden Path: Prompt: Calculate the tax for a $50,000 annual income with standard deductions for 2024...[0m
+[32m2025-08-01 12:18:32.524[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:18:32.526[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s[0m
+[32m2025-08-01 12:18:36.552[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:18:36.554[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.001s[0m
+[32m2025-08-01 12:18:40.102[0m | [1mINFO    [0m | [36msrc.core.cognitive_forge_engine[0m:[36mrun_mission_simple[0m:[36m1570[0m - [1m✅ Golden Path: Mission mission_368bcd48 completed in 9.57s[0m
+[32m2025-08-01 12:18:40.110[0m | [1mINFO    [0m | [36msrc.utils.agent_observability[0m:[36mrecord_agent_action[0m:[36m330[0m - [1m📊 Agent Action: golden_path_agent - response - Success: True[0m
+[32m2025-08-01 12:18:40.112[0m | [31m[1mERROR   [0m | [36msrc.utils.agent_observability[0m:[36mmission_observability[0m:[36m202[0m - [31m[1mMission observability failed: DatabaseManager.record_performance_metric() got an unexpected keyword argument 'task_id'[0m
+[32m2025-08-01 12:18:40.114[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mrun_mission_in_background[0m:[36m628[0m - [31m[1m❌ Mission mission_368bcd48 failed: generator didn't stop after throw()[0m
+[32m2025-08-01 12:18:40.126[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mupdate_mission_status[0m:[36m174[0m - [1m📊 Updated mission mission_368bcd48: failed[0m
+[32m2025-08-01 12:18:40.589[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:18:40.590[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.001s[0m
+[32m2025-08-01 12:18:44.622[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:18:44.624[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s[0m
+[32m2025-08-01 12:18:48.653[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:18:48.655[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:18:52.693[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:18:52.695[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s[0m
+[32m2025-08-01 12:18:56.726[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:18:56.729[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.004s[0m
+[32m2025-08-01 12:19:00.754[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:19:00.756[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s[0m
+[32m2025-08-01 12:19:04.803[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:19:04.806[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:19:08.836[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:19:08.839[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:19:12.857[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:19:12.860[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:19:16.878[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:19:16.881[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:19:20.909[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:19:20.910[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.001s[0m
+[32m2025-08-01 12:19:24.957[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:19:24.960[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:19:29.004[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:19:29.007[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:19:33.045[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:19:33.048[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:19:37.080[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:19:37.083[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:19:41.114[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:19:41.117[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:19:45.152[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:19:45.155[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s[0m
+[32m2025-08-01 12:19:49.176[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:19:49.178[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s[0m
+[32m2025-08-01 12:19:53.206[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:19:53.209[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:19:57.229[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:19:57.232[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:20:01.271[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:20:01.273[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s[0m
+[32m2025-08-01 12:20:05.299[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:20:05.302[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:20:09.355[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:20:09.356[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.001s[0m
+[32m2025-08-01 12:20:13.381[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:20:13.384[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:20:17.403[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:20:17.406[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:20:21.440[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:20:21.442[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s[0m
+[32m2025-08-01 12:20:25.472[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:20:25.475[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:20:29.517[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:20:29.520[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:20:33.563[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:20:33.565[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:20:37.611[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:20:37.613[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:20:41.640[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:20:41.641[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.001s[0m
+[32m2025-08-01 12:20:45.688[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:20:45.690[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s[0m
+[32m2025-08-01 12:20:49.710[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:20:49.712[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s[0m
+[32m2025-08-01 12:20:53.730[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:20:53.733[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:20:57.758[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:20:57.760[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:21:01.787[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:21:01.790[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s[0m
+[32m2025-08-01 12:21:05.819[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:21:05.823[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:21:09.858[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:21:09.860[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s[0m
+[32m2025-08-01 12:21:13.883[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:21:13.886[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:21:17.917[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:21:17.920[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:21:21.961[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:21:21.961[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.000s[0m
+[32m2025-08-01 12:21:26.010[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:21:26.017[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.007s[0m
+[32m2025-08-01 12:21:30.053[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:21:30.056[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:21:34.095[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:21:34.097[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s[0m
+[32m2025-08-01 12:21:38.127[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:21:38.129[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s[0m
+[32m2025-08-01 12:21:42.162[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:21:42.164[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s[0m
+[32m2025-08-01 12:21:46.192[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:21:46.194[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s[0m
+[32m2025-08-01 12:21:50.231[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:21:50.234[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:21:54.279[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:21:54.283[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.004s[0m
+[32m2025-08-01 12:21:58.321[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:21:58.324[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:22:02.344[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:22:02.346[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.001s[0m
+[32m2025-08-01 12:22:06.381[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:22:06.383[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:22:10.414[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:22:10.415[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s[0m
+[32m2025-08-01 12:22:14.457[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:22:14.459[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.001s[0m
+[32m2025-08-01 12:22:18.483[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:22:18.486[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.004s[0m
+[32m2025-08-01 12:22:22.510[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:22:22.512[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s[0m
+[32m2025-08-01 12:22:26.542[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:22:26.544[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s[0m
+[32m2025-08-01 12:22:30.568[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:22:30.571[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s[0m
+[32m2025-08-01 12:22:34.615[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:22:34.618[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.003s[0m
+[32m2025-08-01 12:22:38.652[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:22:38.653[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.001s[0m
+[32m2025-08-01 12:22:42.693[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_368bcd48 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:22:42.695[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_368bcd48 | Time: 0.002s[0m
+[32m2025-08-01 12:22:57.660[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/hybrid/status | Client: 127.0.0.1[0m
+[32m2025-08-01 12:22:57.662[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 200 for GET /api/hybrid/status | Time: 0.002s[0m
+[32m2025-08-01 12:23:07.865[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 POST /api/missions | Client: 127.0.0.1[0m
+[32m2025-08-01 12:23:07.877[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mcreate_mission[0m:[36m134[0m - [1m📝 Created mission: mission_579ed990[0m
+[32m2025-08-01 12:23:07.878[0m | [1mINFO    [0m | [36msrc.main[0m:[36mcreate_mission_api[0m:[36m721[0m - [1m📝 Created mission mission_579ed990: Calculate the tax for a $50,000 annual income with...[0m
+[32m2025-08-01 12:23:07.879[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 200 for POST /api/missions | Time: 0.014s[0m
+[32m2025-08-01 12:23:07.883[0m | [1mINFO    [0m | [36msrc.main[0m:[36mrun_mission_in_background[0m:[36m185[0m - [1m🚀 Starting mission mission_579ed990 with comprehensive observability[0m
+[32m2025-08-01 12:23:07.896[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mupdate_mission_status[0m:[36m174[0m - [1m📊 Updated mission mission_579ed990: executing[0m
+[32m2025-08-01 12:23:07.897[0m | [1mINFO    [0m | [36msrc.core.hybrid_decision_engine[0m:[36mget[0m:[36m81[0m - [1m🔄 Cache HIT for decision: 4081106b...[0m
+[32m2025-08-01 12:23:07.899[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36mrecord_agent_action[0m:[36m293[0m - [33m[1mSession hybrid_decision_mission_579ed990 not found for action recording[0m
+[32m2025-08-01 12:23:07.900[0m | [1mINFO    [0m | [36msrc.main[0m:[36mrun_mission_in_background[0m:[36m203[0m - [1m🎯 Hybrid Decision: golden_path (Complexity: 0.07)[0m
+[32m2025-08-01 12:23:07.917[0m | [1mINFO    [0m | [36msrc.utils.agent_observability[0m:[36mrecord_agent_action[0m:[36m330[0m - [1m📊 Agent Action: golden_path_agent - thinking - Success: True[0m
+[32m2025-08-01 12:23:07.925[0m | [1mINFO    [0m | [36msrc.core.cognitive_forge_engine[0m:[36mrun_mission_simple[0m:[36m1548[0m - [1m🟡 Golden Path: Starting simple mission mission_579ed990[0m
+[32m2025-08-01 12:23:07.931[0m | [1mINFO    [0m | [36msrc.core.cognitive_forge_engine[0m:[36mrun_mission_simple[0m:[36m1549[0m - [1m🟡 Golden Path: Prompt: Calculate the tax for a $50,000 annual income with standard deductions for 2024...[0m
+[32m2025-08-01 12:23:15.314[0m | [1mINFO    [0m | [36msrc.core.cognitive_forge_engine[0m:[36mrun_mission_simple[0m:[36m1570[0m - [1m✅ Golden Path: Mission mission_579ed990 completed in 7.39s[0m
+[32m2025-08-01 12:23:15.333[0m | [1mINFO    [0m | [36msrc.utils.agent_observability[0m:[36mrecord_agent_action[0m:[36m330[0m - [1m📊 Agent Action: golden_path_agent - response - Success: True[0m
+[32m2025-08-01 12:23:15.335[0m | [31m[1mERROR   [0m | [36msrc.utils.agent_observability[0m:[36mmission_observability[0m:[36m202[0m - [31m[1mMission observability failed: DatabaseManager.record_performance_metric() got an unexpected keyword argument 'task_id'[0m
+[32m2025-08-01 12:23:15.337[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mrun_mission_in_background[0m:[36m628[0m - [31m[1m❌ Mission mission_579ed990 failed: generator didn't stop after throw()[0m
+[32m2025-08-01 12:23:15.356[0m | [1mINFO    [0m | [36msrc.models.advanced_database[0m:[36mupdate_mission_status[0m:[36m174[0m - [1m📊 Updated mission mission_579ed990: failed[0m
+[32m2025-08-01 12:23:16.610[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions/mission_579ed990 | Client: 127.0.0.1[0m
+[32m2025-08-01 12:23:16.612[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 404 for GET /api/missions/mission_579ed990 | Time: 0.002s[0m
+[32m2025-08-01 12:23:42.834[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/missions | Client: 127.0.0.1[0m
+[32m2025-08-01 12:23:42.837[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 405 for GET /api/missions | Time: 0.003s[0m
+[32m2025-08-01 12:23:59.002[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 12:23:59.010[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 200 for GET /missions | Time: 0.007s[0m
+[32m2025-08-01 12:24:08.478[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/observability/agent-analytics | Client: 127.0.0.1[0m
+[32m2025-08-01 12:24:08.480[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 200 for GET /api/observability/agent-analytics | Time: 0.002s[0m
+[32m2025-08-01 12:24:15.016[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m996[0m - [1m🌐 GET /api/hybrid/analytics | Client: 127.0.0.1[0m
+[32m2025-08-01 12:24:15.031[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1002[0m - [1m📊 Response 200 for GET /api/hybrid/analytics | Time: 0.015s[0m
+[32m2025-08-01 12:27:45.996[0m | [1mINFO    [0m | [36msrc.main[0m:[36mshutdown_event[0m:[36m985[0m - [1m🛑 Shutting down Sentinel Cognitive Forge v5.0[0m
+[32m2025-08-01 12:27:45.997[0m | [1mINFO    [0m | [36msrc.main[0m:[36mshutdown_event[0m:[36m986[0m - [1m💾 Saving final state...[0m
+[32m2025-08-01 12:27:45.998[0m | [1mINFO    [0m | [36msrc.main[0m:[36mshutdown_event[0m:[36m987[0m - [1m✅ Shutdown complete[0m

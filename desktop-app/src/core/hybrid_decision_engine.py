@@ -322,13 +322,30 @@ class HybridDecisionEngine:
             complexity, performance, user_prefs
         )
         
-        # Make decision
+        # Enhanced decision logic with multiple criteria
+        chosen_path = "golden_path"  # Default
+        reason = "simple_task"
+        
+        # Primary decision based on complexity threshold
         if decision_score > settings.HYBRID_SWITCH_THRESHOLD:
             chosen_path = "full_workflow"
             reason = "complex_task"
-        else:
-            chosen_path = "golden_path"
-            reason = "simple_task"
+        
+        # Secondary criteria: keyword analysis
+        prompt_lower = prompt.lower()
+        complex_keywords = ["design", "architecture", "system", "complex", "advanced", 
+                          "algorithm", "optimization", "machine learning", "neural network",
+                          "database", "api", "framework", "microservice", "distributed"]
+        
+        if any(keyword in prompt_lower for keyword in complex_keywords):
+            if complexity.overall_score > 0.3:  # Lower threshold for keyword detection
+                chosen_path = "full_workflow"
+                reason = "complex_keywords"
+        
+        # Tertiary criteria: length analysis
+        if len(prompt.split()) > 20 and complexity.overall_score > 0.2:
+            chosen_path = "full_workflow"
+            reason = "long_complex_task"
         
         # Consider user preferences
         if user_prefs.preferred_path != chosen_path:

@@ -1,0 +1,18 @@
+[34m[1mwandb[0m: wandb.init() called while a run is active and reinit is set to 'default', so returning the previous run.
+[32m2025-08-01 12:28:33.658[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m970[0m - [1m🚀 Sentinel Cognitive Forge v5.0 starting up...[0m
+[32m2025-08-01 12:28:33.659[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m971[0m - [1m📡 Real-time log streaming initialized[0m
+[32m2025-08-01 12:28:33.661[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m972[0m - [1m🔗 SSE endpoint available at /api/events/stream[0m
+[32m2025-08-01 12:28:33.663[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m973[0m - [1m🧠 Hybrid Decision Engine active[0m
+[32m2025-08-01 12:28:33.664[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m974[0m - [1m💾 Database system ready[0m
+[32m2025-08-01 12:28:33.818[0m | [32m[1mSUCCESS [0m | [36msrc.utils.sentry_integration[0m:[36m_initialize_sentry[0m:[36m78[0m - [32m[1mSentry integration initialized successfully[0m
+[32m2025-08-01 12:28:33.822[0m | [32m[1mSUCCESS [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m979[0m - [32m[1m✅ Sentry integration initialized[0m
+[32m2025-08-01 12:44:09.542[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /api/observability/agent-analytics | Client: 127.0.0.1[0m
+[32m2025-08-01 12:44:09.547[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /api/observability/agent-analytics | Time: 0.004s[0m
+[32m2025-08-01 12:44:18.287[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /api/observability/report | Client: 127.0.0.1[0m
+[32m2025-08-01 12:44:18.288[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mget_observability_report[0m:[36m963[0m - [31m[1m❌ Failed to get observability report: 'system_health'[0m
+[32m2025-08-01 12:44:18.338[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 500 for GET /api/observability/report | Time: 0.051s[0m
+[32m2025-08-01 12:45:03.568[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m995[0m - [1m🌐 GET /api/observability/agent-analytics | Client: 127.0.0.1[0m
+[32m2025-08-01 12:45:03.570[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1001[0m - [1m📊 Response 200 for GET /api/observability/agent-analytics | Time: 0.002s[0m
+[32m2025-08-01 12:47:50.054[0m | [1mINFO    [0m | [36msrc.main[0m:[36mshutdown_event[0m:[36m984[0m - [1m🛑 Shutting down Sentinel Cognitive Forge v5.0[0m
+[32m2025-08-01 12:47:50.054[0m | [1mINFO    [0m | [36msrc.main[0m:[36mshutdown_event[0m:[36m985[0m - [1m💾 Saving final state...[0m
+[32m2025-08-01 12:47:50.055[0m | [1mINFO    [0m | [36msrc.main[0m:[36mshutdown_event[0m:[36m986[0m - [1m✅ Shutdown complete[0m

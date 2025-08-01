@@ -48,14 +48,20 @@ class GoogleGenerativeAIWrapper(BaseChatModel):
             
             # Load .env file from the desktop-app directory
             env_path = os.path.join(os.path.dirname(__file__), '..', '..', '.env')
+            if not os.path.exists(env_path):
+                # Try alternative path
+                env_path = os.path.join(os.path.dirname(__file__), '..', '.env')
             load_dotenv(env_path)
             
             # Configure Google Generative AI
             api_key = os.getenv("GOOGLE_API_KEY")
+            logger.info(f"API Key found: {api_key[:10]}..." if api_key else "No API key found")
+            
             if not api_key:
                 raise ValueError("GOOGLE_API_KEY environment variable is required")
             
             genai.configure(api_key=api_key)
+            logger.info("Google AI configured successfully")
             
             # Initialize the model attribute
             self._model = None
