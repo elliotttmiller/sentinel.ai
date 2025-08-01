@@ -354,12 +354,12 @@
                                     </div>
                                     <div style="height: 240px; overflow-y: auto;">
                                         <template x-for="log in liveLogs.system">
-                                            <p class="mb-1 small">
+                                        <p class="mb-1 small">
                                                 <span x-text="formatTime(log.timestamp) + ' '"></span>
                                                 <span :class="getEventClass(log.level)" x-text="'[' + (log.level || 'INFO') + '] '"></span>
                                                 <span x-text="log.message || log.msg || 'No message'"></span>
-                                            </p>
-                                        </template>
+                                        </p>
+                                    </template>
                                         <div x-show="!liveLogs.system.length" class="text-center text-muted pt-5">
                                             <i class="bi bi-inbox fs-1"></i>
                                             <p>No system logs available</p>
@@ -727,6 +727,12 @@
                                 if (this.liveLogs.system.length > 50) this.liveLogs.system.pop();
                             }
 
+                            // Force Alpine.js to update the UI
+                            this.$nextTick(() => {
+                                // Trigger reactivity update
+                                this.liveLogs = { ...this.liveLogs };
+                            });
+
                         } catch (e) {
                             console.error('Error parsing log stream:', e);
                         }
@@ -737,6 +743,9 @@
                         eventSource.close();
                         setTimeout(() => this.startLogStreaming(), 5000);
                     };
+
+                    // Store the event source for cleanup
+                    this.eventSource = eventSource;
                 },
 
 

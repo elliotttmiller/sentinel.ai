@@ -4420,3 +4420,373 @@ DETAIL:  Failing row contains (1238, Test Advanced Mission, null, pending, 2025-
 2025-08-01 08:11:13.168 | INFO     | src.main:startup_event:492 - 🚀 Cognitive Forge Desktop App starting up...
 2025-08-01 08:11:13.174 | INFO     | src.main:startup_event:493 - 📡 Real-time log streaming initialized
 2025-08-01 08:11:13.174 | INFO     | src.main:startup_event:494 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 08:21:29.691 | INFO     | src.main:create_mission_api:424 - API MISSION CREATED: e0e9535d-459f-497e-8edb-0b7780957a01 - Simple Test Mission
+2025-08-01 08:21:29.694 | INFO     | src.main:run_mission_in_background:250 - BACKGROUND TASK: Starting mission e0e9535d-459f-497e-8edb-0b7780957a01 for prompt: 'Create a simple Python function that prints 'Hello World''
+2025-08-01 08:21:31.696 | INFO     | src.main:run_mission_in_background:254 - BACKGROUND TASK: Mission e0e9535d-459f-497e-8edb-0b7780957a01 completed successfully
+2025-08-01 08:21:48.384 | INFO     | src.main:create_mission_api:424 - API MISSION CREATED: 7dd9f370-1778-417a-8dc1-f90175439bc3 - Background Task Test
+2025-08-01 08:21:48.384 | INFO     | src.main:run_mission_in_background:250 - BACKGROUND TASK: Starting mission 7dd9f370-1778-417a-8dc1-f90175439bc3 for prompt: 'Create a simple Python function that prints 'Hello World''
+2025-08-01 08:21:50.389 | INFO     | src.main:run_mission_in_background:254 - BACKGROUND TASK: Mission 7dd9f370-1778-417a-8dc1-f90175439bc3 completed successfully
+2025-08-01 08:23:18.638 | INFO     | src.main:shutdown_event:499 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 08:23:35.838 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 08:23:35.858 | INFO     | src.main:startup_event:511 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 08:23:35.858 | INFO     | src.main:startup_event:512 - 📡 Real-time log streaming initialized
+2025-08-01 08:23:35.858 | INFO     | src.main:startup_event:513 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 08:23:49.318 | INFO     | src.main:shutdown_event:518 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 08:24:04.560 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 08:24:04.573 | INFO     | src.main:startup_event:517 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 08:24:04.573 | INFO     | src.main:startup_event:518 - 📡 Real-time log streaming initialized
+2025-08-01 08:24:04.573 | INFO     | src.main:startup_event:519 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 08:24:35.516 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 08:24:35.516 | INFO     | src.main:startup_event:517 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 08:24:35.516 | INFO     | src.main:startup_event:518 - 📡 Real-time log streaming initialized
+2025-08-01 08:24:35.516 | INFO     | src.main:startup_event:519 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 08:25:43.647 | INFO     | src.main:create_mission_api:443 - API MISSION CREATED: f319f5a2-bd55-48c3-b525-f567ce8c5927 - Debug Test Mission
+2025-08-01 08:25:43.650 | INFO     | src.main:run_mission_in_background:269 - BACKGROUND TASK: Starting mission f319f5a2-bd55-48c3-b525-f567ce8c5927 for prompt: 'Create a simple Python function that prints 'Hello World''
+2025-08-01 08:25:45.652 | INFO     | src.main:run_mission_in_background:273 - BACKGROUND TASK: Mission f319f5a2-bd55-48c3-b525-f567ce8c5927 completed successfully
+2025-08-01 08:27:03.838 | INFO     | src.main:shutdown_event:524 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 08:27:19.003 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 08:27:19.014 | INFO     | src.main:startup_event:563 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 08:27:19.014 | INFO     | src.main:startup_event:564 - 📡 Real-time log streaming initialized
+2025-08-01 08:27:19.014 | INFO     | src.main:startup_event:565 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 08:27:21.883 | INFO     | src.main:shutdown_event:570 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 08:28:15.983 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 08:28:15.994 | INFO     | src.main:startup_event:517 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 08:28:15.995 | INFO     | src.main:startup_event:518 - 📡 Real-time log streaming initialized
+2025-08-01 08:28:15.995 | INFO     | src.main:startup_event:519 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 08:29:16.649 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 08:29:16.659 | INFO     | src.main:startup_event:517 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 08:29:16.659 | INFO     | src.main:startup_event:518 - 📡 Real-time log streaming initialized
+2025-08-01 08:29:16.659 | INFO     | src.main:startup_event:519 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 08:29:16.659 | INFO     | src.main:shutdown_event:524 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 08:30:06.303 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 08:30:06.313 | INFO     | src.main:startup_event:517 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 08:30:06.313 | INFO     | src.main:startup_event:518 - 📡 Real-time log streaming initialized
+2025-08-01 08:30:06.313 | INFO     | src.main:startup_event:519 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 08:31:47.596 | INFO     | src.main:shutdown_event:524 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 08:32:02.522 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 08:32:02.534 | INFO     | src.main:startup_event:517 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 08:32:02.534 | INFO     | src.main:startup_event:518 - 📡 Real-time log streaming initialized
+2025-08-01 08:32:02.534 | INFO     | src.main:startup_event:519 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 08:32:02.534 | INFO     | src.main:shutdown_event:524 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 08:32:19.832 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 08:32:19.846 | INFO     | src.main:startup_event:529 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 08:32:19.846 | INFO     | src.main:startup_event:530 - 📡 Real-time log streaming initialized
+2025-08-01 08:32:19.846 | INFO     | src.main:startup_event:531 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 08:32:19.849 | INFO     | src.main:shutdown_event:536 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 08:32:39.501 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 08:32:39.521 | INFO     | src.main:startup_event:529 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 08:32:39.522 | INFO     | src.main:startup_event:530 - 📡 Real-time log streaming initialized
+2025-08-01 08:32:39.522 | INFO     | src.main:startup_event:531 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 08:32:43.649 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 08:32:43.662 | INFO     | src.main:startup_event:529 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 08:32:43.662 | INFO     | src.main:startup_event:530 - 📡 Real-time log streaming initialized
+2025-08-01 08:32:43.662 | INFO     | src.main:startup_event:531 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 08:32:56.496 | INFO     | src.main:shutdown_event:536 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 08:33:13.705 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 08:33:13.716 | INFO     | src.main:startup_event:529 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 08:33:13.717 | INFO     | src.main:startup_event:530 - 📡 Real-time log streaming initialized
+2025-08-01 08:33:13.717 | INFO     | src.main:startup_event:531 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 08:33:13.718 | INFO     | src.main:shutdown_event:536 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 08:33:29.409 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 08:33:29.419 | INFO     | src.main:startup_event:529 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 08:33:29.419 | INFO     | src.main:startup_event:530 - 📡 Real-time log streaming initialized
+2025-08-01 08:33:29.419 | INFO     | src.main:startup_event:531 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 08:33:52.359 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 08:33:52.370 | INFO     | src.main:startup_event:529 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 08:33:52.371 | INFO     | src.main:startup_event:530 - 📡 Real-time log streaming initialized
+2025-08-01 08:33:52.371 | INFO     | src.main:startup_event:531 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 08:34:27.095 | INFO     | src.main:shutdown_event:536 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 08:34:42.418 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 08:34:42.435 | INFO     | src.main:startup_event:529 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 08:34:42.435 | INFO     | src.main:startup_event:530 - 📡 Real-time log streaming initialized
+2025-08-01 08:34:42.436 | INFO     | src.main:startup_event:531 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 08:34:42.436 | INFO     | src.main:shutdown_event:536 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 08:34:57.685 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 08:34:57.695 | INFO     | src.main:startup_event:529 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 08:34:57.695 | INFO     | src.main:startup_event:530 - 📡 Real-time log streaming initialized
+2025-08-01 08:34:57.695 | INFO     | src.main:startup_event:531 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 08:34:57.698 | INFO     | src.main:shutdown_event:536 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 08:35:11.885 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 08:35:11.889 | INFO     | src.main:startup_event:529 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 08:35:11.889 | INFO     | src.main:startup_event:530 - 📡 Real-time log streaming initialized
+2025-08-01 08:35:11.889 | INFO     | src.main:startup_event:531 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 08:35:11.889 | INFO     | src.main:shutdown_event:536 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 08:35:26.144 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 08:35:26.156 | INFO     | src.main:startup_event:529 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 08:35:26.156 | INFO     | src.main:startup_event:530 - 📡 Real-time log streaming initialized
+2025-08-01 08:35:26.157 | INFO     | src.main:startup_event:531 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:06:36.817 | INFO     | src.main:shutdown_event:536 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 09:06:53.651 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:06:53.662 | INFO     | src.main:startup_event:529 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:06:53.662 | INFO     | src.main:startup_event:530 - 📡 Real-time log streaming initialized
+2025-08-01 09:06:53.662 | INFO     | src.main:startup_event:531 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:06:53.663 | INFO     | src.main:shutdown_event:536 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 09:07:09.619 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:07:09.631 | INFO     | src.main:startup_event:552 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:07:09.632 | INFO     | src.main:startup_event:553 - 📡 Real-time log streaming initialized
+2025-08-01 09:07:09.632 | INFO     | src.main:startup_event:554 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:07:09.632 | INFO     | src.main:shutdown_event:559 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 09:07:28.022 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:07:28.034 | INFO     | src.main:startup_event:552 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:07:28.034 | INFO     | src.main:startup_event:553 - 📡 Real-time log streaming initialized
+2025-08-01 09:07:28.035 | INFO     | src.main:startup_event:557 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:07:46.563 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:07:46.580 | INFO     | src.main:startup_event:552 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:07:46.581 | INFO     | src.main:startup_event:553 - 📡 Real-time log streaming initialized
+2025-08-01 09:07:46.581 | INFO     | src.main:startup_event:557 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:09:14.806 | ERROR    | src.main:forward_server_8002_logs:309 - Error forwarding server 8002 logs: Response payload is not completed: <TransferEncodingError: 400, message='Not enough data to satisfy transfer length header.'>. ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None)
+2025-08-01 09:12:46.020 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:12:46.035 | INFO     | src.main:startup_event:552 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:12:46.035 | INFO     | src.main:startup_event:553 - 📡 Real-time log streaming initialized
+2025-08-01 09:12:46.035 | INFO     | src.main:startup_event:557 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:12:46.495 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:12:46.506 | INFO     | src.main:startup_event:552 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:12:46.506 | INFO     | src.main:startup_event:553 - 📡 Real-time log streaming initialized
+2025-08-01 09:12:46.506 | INFO     | src.main:startup_event:557 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:17:34.046 | INFO     | src.main:shutdown_event:562 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 09:18:25.978 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:18:25.984 | INFO     | src.main:startup_event:585 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:18:25.984 | INFO     | src.main:startup_event:586 - 📡 Real-time log streaming initialized
+2025-08-01 09:18:25.984 | INFO     | src.main:startup_event:590 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:19:35.766 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:19:35.789 | INFO     | src.main:startup_event:585 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:19:35.791 | INFO     | src.main:startup_event:586 - 📡 Real-time log streaming initialized
+2025-08-01 09:19:35.791 | INFO     | src.main:startup_event:590 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:19:38.103 | ERROR    | src.main:forward_server_8002_logs:315 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:19:45.396 | ERROR    | src.main:forward_server_8002_logs:315 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:19:51.167 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:19:51.181 | INFO     | src.main:startup_event:585 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:19:51.181 | INFO     | src.main:startup_event:586 - 📡 Real-time log streaming initialized
+2025-08-01 09:19:51.181 | INFO     | src.main:startup_event:590 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:23:08.126 | INFO     | src.main:create_mission_api:484 - API MISSION CREATED: b525e5e7-1243-4439-ae50-4ed05a17bf80 - Real-Time Streaming Integration Test
+2025-08-01 09:23:08.126 | INFO     | src.main:run_mission_in_background:281 - BACKGROUND TASK: Starting mission b525e5e7-1243-4439-ae50-4ed05a17bf80 for prompt: 'Create a comprehensive test that validates the real-time log streaming integration between Server 8001 (Main API) and Server 8002 (Cognitive Engine). The mission should generate HTTP requests, cognitive processing activities, background tasks, and demonstrate cross-server communication while monitoring the live event feed for proper log categorization and real-time updates.'
+2025-08-01 09:23:10.132 | INFO     | src.main:run_mission_in_background:285 - BACKGROUND TASK: Mission b525e5e7-1243-4439-ae50-4ed05a17bf80 completed successfully
+2025-08-01 09:24:51.139 | ERROR    | src.main:forward_server_8002_logs:315 - Error forwarding server 8002 logs: 
+2025-08-01 09:24:52.117 | ERROR    | src.main:forward_server_8002_logs:315 - Error forwarding server 8002 logs: 
+2025-08-01 09:24:52.203 | INFO     | src.main:shutdown_event:595 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 09:25:49.575 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:25:49.586 | INFO     | src.main:startup_event:732 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:25:49.586 | INFO     | src.main:startup_event:733 - 📡 Real-time log streaming initialized
+2025-08-01 09:25:49.586 | INFO     | src.main:startup_event:737 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:26:19.917 | INFO     | src.main:shutdown_event:595 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 09:26:25.979 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 09:26:37.091 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:26:37.101 | INFO     | src.main:startup_event:732 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:26:37.101 | INFO     | src.main:startup_event:733 - 📡 Real-time log streaming initialized
+2025-08-01 09:26:37.105 | INFO     | src.main:startup_event:737 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:26:37.107 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 09:26:43.641 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:26:43.654 | INFO     | src.main:startup_event:732 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:26:43.654 | INFO     | src.main:startup_event:733 - 📡 Real-time log streaming initialized
+2025-08-01 09:26:43.654 | INFO     | src.main:startup_event:737 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:26:43.654 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 09:26:54.203 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:26:54.214 | INFO     | src.main:startup_event:732 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:26:54.214 | INFO     | src.main:startup_event:733 - 📡 Real-time log streaming initialized
+2025-08-01 09:26:54.214 | INFO     | src.main:startup_event:737 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:27:01.370 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:27:01.385 | INFO     | src.main:startup_event:732 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:27:01.385 | INFO     | src.main:startup_event:733 - 📡 Real-time log streaming initialized
+2025-08-01 09:27:01.385 | INFO     | src.main:startup_event:737 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:27:23.607 | INFO     | src.main:create_mission_api:562 - API MISSION CREATED: 5120f9e7-6ad9-42c9-9a9a-e9cccbb11c1c - Real-Time Streaming Integration Test
+2025-08-01 09:27:23.607 | INFO     | src.models.advanced_database:create_mission:137 - 🆕 Creating mission: 5120f9e7-6ad9-42c9-9a9a-e9cccbb11c1c
+2025-08-01 09:27:23.833 | INFO     | src.models.advanced_database:create_mission:159 - ✅ Mission created successfully: 5120f9e7-6ad9-42c9-9a9a-e9cccbb11c1c
+2025-08-01 09:27:24.507 | INFO     | src.main:create_mission_api:574 - Mission stored in database: 5120f9e7-6ad9-42c9-9a9a-e9cccbb11c1c
+2025-08-01 09:27:24.644 | INFO     | src.main:run_mission_in_background:286 - BACKGROUND TASK: Starting mission 5120f9e7-6ad9-42c9-9a9a-e9cccbb11c1c for prompt: 'Create a comprehensive test that validates the real-time log streaming integration between Server 8001 (Main API) and Server 8002 (Cognitive Engine). The mission should generate HTTP requests, cognitive processing activities, background tasks, and demonstrate cross-server communication while monitoring the live event feed for proper log categorization and real-time updates.'
+2025-08-01 09:27:24.645 | INFO     | src.models.advanced_database:update_mission_status:195 - 🔄 Updating mission status: 5120f9e7-6ad9-42c9-9a9a-e9cccbb11c1c -> executing
+2025-08-01 09:27:24.876 | INFO     | src.models.advanced_database:update_mission_status:225 - ✅ Successfully updated mission 5120f9e7-6ad9-42c9-9a9a-e9cccbb11c1c status: pending -> executing
+2025-08-01 09:27:25.142 | INFO     | src.main:run_mission_in_background:302 - BACKGROUND TASK: Mission 5120f9e7-6ad9-42c9-9a9a-e9cccbb11c1c - Step 1: Initializing agents
+2025-08-01 09:27:26.284 | INFO     | src.main:run_mission_in_background:313 - BACKGROUND TASK: Mission 5120f9e7-6ad9-42c9-9a9a-e9cccbb11c1c - Step 2: Processing prompt
+2025-08-01 09:27:27.414 | INFO     | src.main:run_mission_in_background:324 - BACKGROUND TASK: Mission 5120f9e7-6ad9-42c9-9a9a-e9cccbb11c1c - Step 3: Executing cognitive tasks
+2025-08-01 09:27:28.532 | INFO     | src.main:run_mission_in_background:335 - BACKGROUND TASK: Mission 5120f9e7-6ad9-42c9-9a9a-e9cccbb11c1c completed successfully
+2025-08-01 09:27:28.532 | INFO     | src.models.advanced_database:update_mission_status:195 - 🔄 Updating mission status: 5120f9e7-6ad9-42c9-9a9a-e9cccbb11c1c -> completed
+2025-08-01 09:27:28.620 | DEBUG    | src.models.advanced_database:update_mission_status:209 - 📝 Updated mission result for 5120f9e7-6ad9-42c9-9a9a-e9cccbb11c1c
+2025-08-01 09:27:28.620 | DEBUG    | src.models.advanced_database:update_mission_status:215 - ⏱️ Updated execution time for 5120f9e7-6ad9-42c9-9a9a-e9cccbb11c1c: 3s
+2025-08-01 09:27:28.620 | INFO     | src.models.advanced_database:update_mission_status:222 - 🏁 Mission 5120f9e7-6ad9-42c9-9a9a-e9cccbb11c1c marked as completed at 2025-08-01 14:27:28.620818
+2025-08-01 09:27:28.700 | ERROR    | src.models.advanced_database:update_mission_status:238 - ❌ Database error updating mission 5120f9e7-6ad9-42c9-9a9a-e9cccbb11c1c: (psycopg2.errors.InvalidTextRepresentation) invalid input syntax for type json
+LINE 1: UPDATE missions SET status='completed', result='Mission exec...
+                                                       ^
+DETAIL:  Token "Mission" is invalid.
+CONTEXT:  JSON data, line 1: Mission...
+
+[SQL: UPDATE missions SET status=%(status)s, result=%(result)s, execution_time=%(execution_time)s, updated_at=%(updated_at)s, completed_at=%(completed_at)s WHERE missions.id = %(missions_id)s]
+[parameters: {'status': 'completed', 'result': 'Mission executed successfully with real-time streaming integration', 'execution_time': 3, 'updated_at': datetime.datetime(2025, 8, 1, 14, 27, 28, 620818), 'completed_at': datetime.datetime(2025, 8, 1, 14, 27, 28, 620818), 'missions_id': '1243'}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2025-08-01 09:31:55.124 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: 
+2025-08-01 09:32:02.118 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: 
+2025-08-01 09:34:49.814 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:34:49.824 | INFO     | src.main:startup_event:732 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:34:49.824 | INFO     | src.main:startup_event:733 - 📡 Real-time log streaming initialized
+2025-08-01 09:34:49.824 | INFO     | src.main:startup_event:737 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:34:52.111 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:34:59.380 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:35:04.179 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:35:04.185 | INFO     | src.main:startup_event:732 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:35:04.193 | INFO     | src.main:startup_event:733 - 📡 Real-time log streaming initialized
+2025-08-01 09:35:04.193 | INFO     | src.main:startup_event:737 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:36:13.143 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Response payload is not completed: <TransferEncodingError: 400, message='Not enough data to satisfy transfer length header.'>. ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None)
+2025-08-01 09:36:20.385 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:36:27.661 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:36:34.914 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:36:42.178 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:36:49.437 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:36:56.709 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:37:03.997 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:37:11.264 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:37:18.558 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:37:49.251 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:37:49.262 | INFO     | src.main:startup_event:732 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:37:49.262 | INFO     | src.main:startup_event:733 - 📡 Real-time log streaming initialized
+2025-08-01 09:37:49.262 | INFO     | src.main:startup_event:737 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:37:51.530 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:37:58.782 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:38:06.061 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:38:34.780 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:38:42.047 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:38:49.318 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:38:56.562 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:40:21.373 | INFO     | src.main:create_mission_api:562 - API MISSION CREATED: e65debe0-f688-41cc-988a-9cf8feec66e3 - Real-Time Streaming Integration Test
+2025-08-01 09:40:21.373 | INFO     | src.models.advanced_database:create_mission:137 - 🆕 Creating mission: e65debe0-f688-41cc-988a-9cf8feec66e3
+2025-08-01 09:40:21.577 | INFO     | src.models.advanced_database:create_mission:159 - ✅ Mission created successfully: e65debe0-f688-41cc-988a-9cf8feec66e3
+2025-08-01 09:40:22.153 | INFO     | src.main:create_mission_api:574 - Mission stored in database: e65debe0-f688-41cc-988a-9cf8feec66e3
+2025-08-01 09:40:22.301 | INFO     | src.main:run_mission_in_background:286 - BACKGROUND TASK: Starting mission e65debe0-f688-41cc-988a-9cf8feec66e3 for prompt: 'Create a comprehensive test that validates the real-time log streaming integration between Server 8001 (Main API) and Server 8002 (Cognitive Engine). The mission should generate HTTP requests, cognitive processing activities, background tasks, and demonstrate cross-server communication while monitoring the live event feed for proper log categorization and real-time updates.'
+2025-08-01 09:40:22.301 | INFO     | src.models.advanced_database:update_mission_status:195 - 🔄 Updating mission status: e65debe0-f688-41cc-988a-9cf8feec66e3 -> executing
+2025-08-01 09:40:22.460 | INFO     | src.models.advanced_database:update_mission_status:225 - ✅ Successfully updated mission e65debe0-f688-41cc-988a-9cf8feec66e3 status: pending -> executing
+2025-08-01 09:40:22.699 | INFO     | src.main:run_mission_in_background:302 - BACKGROUND TASK: Mission e65debe0-f688-41cc-988a-9cf8feec66e3 - Step 1: Initializing agents
+2025-08-01 09:40:23.829 | INFO     | src.main:run_mission_in_background:313 - BACKGROUND TASK: Mission e65debe0-f688-41cc-988a-9cf8feec66e3 - Step 2: Processing prompt
+2025-08-01 09:40:24.962 | INFO     | src.main:run_mission_in_background:324 - BACKGROUND TASK: Mission e65debe0-f688-41cc-988a-9cf8feec66e3 - Step 3: Executing cognitive tasks
+2025-08-01 09:40:26.086 | INFO     | src.main:run_mission_in_background:335 - BACKGROUND TASK: Mission e65debe0-f688-41cc-988a-9cf8feec66e3 completed successfully
+2025-08-01 09:40:26.086 | INFO     | src.models.advanced_database:update_mission_status:195 - 🔄 Updating mission status: e65debe0-f688-41cc-988a-9cf8feec66e3 -> completed
+2025-08-01 09:40:26.192 | DEBUG    | src.models.advanced_database:update_mission_status:209 - 📝 Updated mission result for e65debe0-f688-41cc-988a-9cf8feec66e3
+2025-08-01 09:40:26.192 | DEBUG    | src.models.advanced_database:update_mission_status:215 - ⏱️ Updated execution time for e65debe0-f688-41cc-988a-9cf8feec66e3: 3s
+2025-08-01 09:40:26.192 | INFO     | src.models.advanced_database:update_mission_status:222 - 🏁 Mission e65debe0-f688-41cc-988a-9cf8feec66e3 marked as completed at 2025-08-01 14:40:26.192244
+2025-08-01 09:40:26.273 | ERROR    | src.models.advanced_database:update_mission_status:238 - ❌ Database error updating mission e65debe0-f688-41cc-988a-9cf8feec66e3: (psycopg2.errors.InvalidTextRepresentation) invalid input syntax for type json
+LINE 1: UPDATE missions SET status='completed', result='Mission exec...
+                                                       ^
+DETAIL:  Token "Mission" is invalid.
+CONTEXT:  JSON data, line 1: Mission...
+
+[SQL: UPDATE missions SET status=%(status)s, result=%(result)s, execution_time=%(execution_time)s, updated_at=%(updated_at)s, completed_at=%(completed_at)s WHERE missions.id = %(missions_id)s]
+[parameters: {'status': 'completed', 'result': 'Mission executed successfully with real-time streaming integration', 'execution_time': 3, 'updated_at': datetime.datetime(2025, 8, 1, 14, 40, 26, 192244), 'completed_at': datetime.datetime(2025, 8, 1, 14, 40, 26, 192244), 'missions_id': '1244'}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2025-08-01 09:42:39.871 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:42:39.883 | INFO     | src.main:startup_event:732 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:42:39.883 | INFO     | src.main:startup_event:733 - 📡 Real-time log streaming initialized
+2025-08-01 09:42:39.883 | INFO     | src.main:startup_event:737 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:46:39.526 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:46:39.537 | INFO     | src.main:startup_event:732 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:46:39.537 | INFO     | src.main:startup_event:733 - 📡 Real-time log streaming initialized
+2025-08-01 09:46:39.537 | INFO     | src.main:startup_event:737 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:46:41.821 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:46:49.100 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:46:56.370 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:47:53.994 | INFO     | src.main:create_mission_api:562 - API MISSION CREATED: cffe48ce-d0d1-451a-bb43-a7a020962bb2 - Real-Time Streaming Integration Test
+2025-08-01 09:47:53.994 | INFO     | src.models.advanced_database:create_mission:137 - 🆕 Creating mission: cffe48ce-d0d1-451a-bb43-a7a020962bb2
+2025-08-01 09:47:54.212 | INFO     | src.models.advanced_database:create_mission:159 - ✅ Mission created successfully: cffe48ce-d0d1-451a-bb43-a7a020962bb2
+2025-08-01 09:47:54.765 | INFO     | src.main:create_mission_api:574 - Mission stored in database: cffe48ce-d0d1-451a-bb43-a7a020962bb2
+2025-08-01 09:47:54.903 | INFO     | src.main:run_mission_in_background:286 - BACKGROUND TASK: Starting mission cffe48ce-d0d1-451a-bb43-a7a020962bb2 for prompt: 'Create a comprehensive test that validates the real-time log streaming integration between Server 8001 (Main API) and Server 8002 (Cognitive Engine). The mission should generate HTTP requests, cognitive processing activities, background tasks, and demonstrate cross-server communication while monitoring the live event feed for proper log categorization and real-time updates.'
+2025-08-01 09:47:54.903 | INFO     | src.models.advanced_database:update_mission_status:195 - 🔄 Updating mission status: cffe48ce-d0d1-451a-bb43-a7a020962bb2 -> executing
+2025-08-01 09:47:55.068 | INFO     | src.models.advanced_database:update_mission_status:225 - ✅ Successfully updated mission cffe48ce-d0d1-451a-bb43-a7a020962bb2 status: pending -> executing
+2025-08-01 09:47:55.306 | INFO     | src.main:run_mission_in_background:302 - BACKGROUND TASK: Mission cffe48ce-d0d1-451a-bb43-a7a020962bb2 - Step 1: Initializing agents
+2025-08-01 09:47:56.428 | INFO     | src.main:run_mission_in_background:313 - BACKGROUND TASK: Mission cffe48ce-d0d1-451a-bb43-a7a020962bb2 - Step 2: Processing prompt
+2025-08-01 09:47:57.560 | INFO     | src.main:run_mission_in_background:324 - BACKGROUND TASK: Mission cffe48ce-d0d1-451a-bb43-a7a020962bb2 - Step 3: Executing cognitive tasks
+2025-08-01 09:47:58.682 | INFO     | src.main:run_mission_in_background:335 - BACKGROUND TASK: Mission cffe48ce-d0d1-451a-bb43-a7a020962bb2 completed successfully
+2025-08-01 09:47:58.682 | INFO     | src.models.advanced_database:update_mission_status:195 - 🔄 Updating mission status: cffe48ce-d0d1-451a-bb43-a7a020962bb2 -> completed
+2025-08-01 09:47:58.767 | DEBUG    | src.models.advanced_database:update_mission_status:209 - 📝 Updated mission result for cffe48ce-d0d1-451a-bb43-a7a020962bb2
+2025-08-01 09:47:58.767 | DEBUG    | src.models.advanced_database:update_mission_status:215 - ⏱️ Updated execution time for cffe48ce-d0d1-451a-bb43-a7a020962bb2: 3s
+2025-08-01 09:47:58.767 | INFO     | src.models.advanced_database:update_mission_status:222 - 🏁 Mission cffe48ce-d0d1-451a-bb43-a7a020962bb2 marked as completed at 2025-08-01 14:47:58.767283
+2025-08-01 09:47:58.845 | ERROR    | src.models.advanced_database:update_mission_status:238 - ❌ Database error updating mission cffe48ce-d0d1-451a-bb43-a7a020962bb2: (psycopg2.errors.InvalidTextRepresentation) invalid input syntax for type json
+LINE 1: UPDATE missions SET status='completed', result='Mission exec...
+                                                       ^
+DETAIL:  Token "Mission" is invalid.
+CONTEXT:  JSON data, line 1: Mission...
+
+[SQL: UPDATE missions SET status=%(status)s, result=%(result)s, execution_time=%(execution_time)s, updated_at=%(updated_at)s, completed_at=%(completed_at)s WHERE missions.id = %(missions_id)s]
+[parameters: {'status': 'completed', 'result': 'Mission executed successfully with real-time streaming integration', 'execution_time': 3, 'updated_at': datetime.datetime(2025, 8, 1, 14, 47, 58, 767283), 'completed_at': datetime.datetime(2025, 8, 1, 14, 47, 58, 767283), 'missions_id': '1245'}]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2025-08-01 09:50:40.393 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:50:47.657 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:50:54.944 | ERROR    | src.main:forward_server_8002_logs:393 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 09:51:18.550 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:51:18.564 | INFO     | src.main:startup_event:750 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:51:18.564 | INFO     | src.main:startup_event:751 - 📡 Real-time log streaming initialized
+2025-08-01 09:51:18.564 | INFO     | src.main:startup_event:755 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:51:18.824 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 1 new logs from server 8002
+2025-08-01 09:51:21.087 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:51:23.365 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:51:23.411 | INFO     | src.main:test_server_8002:732 - API TEST-8002: Successfully called / on server 8002
+2025-08-01 09:51:23.421 | INFO     | src.main:test_server_8002:732 - API TEST-8002: Successfully called /health on server 8002
+2025-08-01 09:51:23.675 | INFO     | src.main:test_server_8002:732 - API TEST-8002: Successfully called /api/cognitive/status on server 8002
+2025-08-01 09:51:23.685 | INFO     | src.main:test_server_8002:732 - API TEST-8002: Successfully called /api/cognitive/process on server 8002
+2025-08-01 09:51:25.626 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 10 new logs from server 8002
+2025-08-01 09:51:27.884 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:51:30.152 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 3 new logs from server 8002
+2025-08-01 09:51:32.424 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:51:34.673 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:51:36.934 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:51:39.222 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:51:41.497 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:51:43.771 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:51:46.024 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:51:48.303 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:51:50.579 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:51:52.833 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:51:55.099 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:51:57.341 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:51:59.620 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 3 new logs from server 8002
+2025-08-01 09:52:01.876 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:52:04.152 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:52:06.406 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 1 new logs from server 8002
+2025-08-01 09:52:29.051 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 1 new logs from server 8002
+2025-08-01 09:53:00.707 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 1 new logs from server 8002
+2025-08-01 09:54:33.374 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:54:33.380 | INFO     | src.main:startup_event:750 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:54:33.387 | INFO     | src.main:startup_event:751 - 📡 Real-time log streaming initialized
+2025-08-01 09:54:33.387 | INFO     | src.main:startup_event:755 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:54:33.659 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 1 new logs from server 8002
+2025-08-01 09:54:35.920 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:54:38.160 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:54:40.427 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:54:42.704 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:54:44.979 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:54:47.239 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:54:49.487 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:54:51.753 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:54:54.004 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:54:56.267 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:54:58.521 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 3 new logs from server 8002
+2025-08-01 09:55:00.767 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:55:03.019 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:56:05.962 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:56:08.205 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:56:10.459 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:56:12.708 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:56:14.962 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:56:17.240 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:56:19.504 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:56:21.760 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:56:24.038 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:56:26.287 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:56:28.535 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 2 new logs from server 8002
+2025-08-01 09:56:30.796 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 1 new logs from server 8002
+2025-08-01 09:56:32.982 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:56:32.994 | INFO     | src.main:startup_event:750 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:56:32.995 | INFO     | src.main:startup_event:751 - 📡 Real-time log streaming initialized
+2025-08-01 09:56:32.995 | INFO     | src.main:startup_event:755 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:56:33.252 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 51 new logs from server 8002
+2025-08-01 09:56:35.310 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 1 new logs from server 8002
+2025-08-01 09:56:35.520 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 1 new logs from server 8002
+2025-08-01 09:57:04.692 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 1 new logs from server 8002
+2025-08-01 09:57:05.034 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 1 new logs from server 8002
+2025-08-01 09:57:41.865 | INFO     | src.main:shutdown_event:760 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 09:58:59.642 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:58:59.658 | INFO     | src.main:startup_event:750 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:58:59.658 | INFO     | src.main:startup_event:751 - 📡 Real-time log streaming initialized
+2025-08-01 09:58:59.658 | INFO     | src.main:startup_event:755 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:58:59.917 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 53 new logs from server 8002
+2025-08-01 09:59:04.459 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 1 new logs from server 8002
+2025-08-01 09:59:50.954 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 09:59:50.964 | INFO     | src.main:startup_event:750 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 09:59:50.964 | INFO     | src.main:startup_event:751 - 📡 Real-time log streaming initialized
+2025-08-01 09:59:50.964 | INFO     | src.main:startup_event:755 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 09:59:51.233 | INFO     | src.main:forward_server_8002_logs:406 - Forwarded 55 new logs from server 8002

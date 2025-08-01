@@ -20,10 +20,15 @@ import sys
 # --- Core Application Imports ---
 try:
     from .core.cognitive_forge_engine import cognitive_forge_engine
-    from .models.advanced_database import db_manager, Mission
+    from .models.advanced_database import DatabaseManager, Mission
     from .utils.sentry_integration import initialize_sentry
-except ImportError:
+    
+    # Initialize database manager
+    db_manager = DatabaseManager()
+    logger.info("Database manager initialized successfully")
+except ImportError as e:
     # Fallback for direct execution
+    logger.warning(f"Some imports failed: {e}")
     cognitive_forge_engine = None
     db_manager = None
     Mission = None
@@ -140,18 +145,42 @@ async def capture_http_requests(request, call_next):
     import time
     start_time = time.time()
     
+    # Determine server port based on request path, headers, or target
+    server_port = "8001"  # Default to main server
+    
+    # Check if this is a request to cognitive engine endpoints
+    if any(keyword in request.url.path.lower() for keyword in ["cognitive", "8002", "engine"]):
+        server_port = "8002"
+    
+    # Check if request is coming from or going to port 8002
+    if request.client and hasattr(request.client, 'port'):
+        if request.client.port == 8002:
+            server_port = "8002"
+    
+    # Check User-Agent or other headers for cognitive engine
+    user_agent = request.headers.get("user-agent", "").lower()
+    if "cognitive" in user_agent or "8002" in user_agent:
+        server_port = "8002"
+    
     # Log the incoming request
     log_entry = {
         "timestamp": datetime.utcnow().isoformat(),
         "level": "INFO",
         "message": f'INFO: {request.client.host}:{request.client.port} - "{request.method} {request.url.path} HTTP/{request.scope["http_version"]}"',
         "source": "http_request",
-        "server_port": "8001"
+        "server_port": server_port
     }
     
     log_buffer.append(log_entry)
     if len(log_buffer) > 200:
         log_buffer.pop(0)
+    
+    # Also add to queue for real-time streaming
+    try:
+        loop = asyncio.get_event_loop()
+        asyncio.run_coroutine_threadsafe(log_queue.put(log_entry), loop)
+    except RuntimeError:
+        pass
     
     # Process the request
     response = await call_next(request)
@@ -163,12 +192,19 @@ async def capture_http_requests(request, call_next):
         "level": "INFO",
         "message": f'INFO: {request.client.host}:{request.client.port} - "{request.method} {request.url.path} HTTP/{request.scope["http_version"]}" {response.status_code} OK',
         "source": "http_request",
-        "server_port": "8001"
+        "server_port": server_port
     }
     
     log_buffer.append(log_entry)
     if len(log_buffer) > 200:
         log_buffer.pop(0)
+    
+    # Also add to queue for real-time streaming
+    try:
+        loop = asyncio.get_event_loop()
+        asyncio.run_coroutine_threadsafe(log_queue.put(log_entry), loop)
+    except RuntimeError:
+        pass
     
     return response
 
@@ -248,12 +284,132 @@ class ParallelMissionResponse(BaseModel):
 # --- Background Task ---
 def run_mission_in_background(mission_id: str, prompt: str, agent_type: str, title: str):
     logger.info(f"BACKGROUND TASK: Starting mission {mission_id} for prompt: '{prompt}'")
+    
+    # Update mission status to executing
+    if db_manager:
+        try:
+            db_manager.update_mission_status(mission_id, "executing")
+            db_manager.add_mission_update(
+                mission_id_str=mission_id,
+                message="Mission execution started",
+                update_type="info"
+            )
+        except Exception as db_error:
+            logger.error(f"Database error updating mission status: {db_error}")
+    
     try:
-        # Simulate mission execution
-        time.sleep(2)
+        # Simulate mission execution with multiple steps
+        logger.info(f"BACKGROUND TASK: Mission {mission_id} - Step 1: Initializing agents")
+        time.sleep(1)
+        
+        if db_manager:
+            db_manager.add_mission_update(
+                mission_id_str=mission_id,
+                message="Step 1: Agents initialized successfully",
+                update_type="info",
+                step_number=1
+            )
+        
+        logger.info(f"BACKGROUND TASK: Mission {mission_id} - Step 2: Processing prompt")
+        time.sleep(1)
+        
+        if db_manager:
+            db_manager.add_mission_update(
+                mission_id_str=mission_id,
+                message="Step 2: Prompt processed and analyzed",
+                update_type="info",
+                step_number=2
+            )
+        
+        logger.info(f"BACKGROUND TASK: Mission {mission_id} - Step 3: Executing cognitive tasks")
+        time.sleep(1)
+        
+        if db_manager:
+            db_manager.add_mission_update(
+                mission_id_str=mission_id,
+                message="Step 3: Cognitive tasks completed",
+                update_type="success",
+                step_number=3
+            )
+        
         logger.info(f"BACKGROUND TASK: Mission {mission_id} completed successfully")
+        
+        # Update mission status to completed
+        if db_manager:
+            db_manager.update_mission_status(
+                mission_id, 
+                "completed", 
+                result="Mission executed successfully with real-time streaming integration",
+                execution_time=3
+            )
+            db_manager.add_mission_update(
+                mission_id_str=mission_id,
+                message="Mission completed successfully!",
+                update_type="success"
+            )
+            
     except Exception as e:
         logger.error(f"BACKGROUND TASK: Mission {mission_id} failed: {e}")
+        
+        # Update mission status to failed
+        if db_manager:
+            db_manager.update_mission_status(
+                mission_id, 
+                "failed", 
+                error_message=str(e)
+            )
+            db_manager.add_mission_update(
+                mission_id_str=mission_id,
+                message=f"Mission failed: {str(e)}",
+                update_type="error"
+            )
+
+async def forward_server_8002_logs():
+    """Background task to forward logs from server 8002 to the main stream"""
+    import aiohttp
+    import json
+    
+    # Keep track of the last log we've seen to avoid duplicates
+    last_log_count = 0
+    
+    while True:
+        try:
+            async with aiohttp.ClientSession() as session:
+                # Get logs from 8002's live logs endpoint
+                async with session.get('http://localhost:8002/api/logs/live') as response:
+                    if response.status == 200:
+                        data = await response.json()
+                        
+                        # Extract all logs from the response
+                        all_logs = []
+                        if 'logs' in data:
+                            for category in data['logs'].values():
+                                if isinstance(category, dict) and 'logs' in category:
+                                    all_logs.extend(category['logs'])
+                        
+                        # Only forward new logs
+                        if len(all_logs) > last_log_count:
+                            new_logs = all_logs[last_log_count:]
+                            last_log_count = len(all_logs)
+                            
+                            for log_entry in new_logs:
+                                # Ensure the log entry has the correct server_port
+                                if isinstance(log_entry, dict):
+                                    log_entry['server_port'] = '8002'
+                                    # Add to our main buffer and queue
+                                    log_buffer.append(log_entry)
+                                    if len(log_buffer) > 200:
+                                        log_buffer.pop(0)
+                                    await log_queue.put(log_entry)
+                                    
+                            if new_logs:
+                                logger.info(f"Forwarded {len(new_logs)} new logs from server 8002")
+                
+        except Exception as e:
+            logger.error(f"Error forwarding server 8002 logs: {e}")
+        
+        # Wait before checking again
+        await asyncio.sleep(2)  # Check every 2 seconds
 
 # --- API Endpoints ---
 @app.get("/", response_class=FileResponse)
@@ -423,6 +579,28 @@ async def create_mission_api(request: MissionRequest, background_tasks: Backgrou
         
         logger.info(f"API MISSION CREATED: {mission_id} - {title}")
         
+        # Store mission in database
+        if db_manager:
+            try:
+                mission = db_manager.create_mission(
+                    mission_id_str=mission_id,
+                    title=title,
+                    prompt=request.prompt,
+                    agent_type=request.agent_type,
+                    description=request.title
+                )
+                logger.info(f"Mission stored in database: {mission_id}")
+                
+                # Add mission update
+                db_manager.add_mission_update(
+                    mission_id_str=mission_id,
+                    message="Mission created and queued for execution",
+                    update_type="info"
+                )
+            except Exception as db_error:
+                logger.error(f"Database error: {db_error}")
+                # Continue without database if it fails
+        
         # Add to background tasks
         background_tasks.add_task(run_mission_in_background, mission_id, request.prompt, request.agent_type, title)
         
@@ -436,22 +614,69 @@ async def create_mission_api(request: MissionRequest, background_tasks: Backgrou
         logger.error(f"Error creating mission: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.get("/api/missions/{mission_id}/updates")
+async def get_mission_updates(mission_id: str, limit: int = 50):
+    """Get real-time updates for a specific mission"""
+    try:
+        if db_manager:
+            updates = db_manager.get_mission_updates(mission_id, limit=limit)
+            return [
+                {
+                    "id": update.id,
+                    "message": update.update_message,
+                    "type": update.update_type,
+                    "timestamp": update.timestamp.isoformat() if update.timestamp else datetime.utcnow().isoformat(),
+                    "agent_role": update.agent_role,
+                    "step_number": update.step_number
+                }
+                for update in updates
+            ]
+        else:
+            return []
+    except Exception as e:
+        logger.error(f"Error getting mission updates: {e}")
+        return []
+
 @app.get("/missions")
 def list_missions(limit: int = 50):
     """List recent missions"""
-    return [
-        {
-            "id": i,
-            "mission_id_str": f"mission_{i}",
-            "title": f"Sample Mission {i}",
-            "prompt": f"Sample prompt {i}",
-            "agent_type": "developer",
-            "status": "completed",
-            "execution_time": 120,
-            "created_at": datetime.utcnow().isoformat()
-        }
-        for i in range(1, min(limit + 1, 11))
-    ]
+    try:
+        if db_manager:
+            # Get missions from database
+            missions = db_manager.list_missions(limit=limit)
+            return [
+                {
+                    "id": mission.id,
+                    "mission_id_str": mission.mission_id_str,
+                    "title": mission.title,
+                    "prompt": mission.prompt,
+                    "agent_type": mission.agent_type,
+                    "status": mission.status,
+                    "execution_time": mission.execution_time,
+                    "created_at": mission.created_at.isoformat() if mission.created_at else datetime.utcnow().isoformat(),
+                    "complexity_level": mission.complexity_level
+                }
+                for mission in missions
+            ]
+        else:
+            # Fallback to sample data if database is not available
+            logger.warning("Database not available, returning sample missions")
+            return [
+                {
+                    "id": i,
+                    "mission_id_str": f"mission_{i}",
+                    "title": f"Sample Mission {i}",
+                    "prompt": f"Sample prompt {i}",
+                    "agent_type": "developer",
+                    "status": "completed",
+                    "execution_time": 120,
+                    "created_at": datetime.utcnow().isoformat()
+                }
+                for i in range(1, min(limit + 1, 11))
+            ]
+    except Exception as e:
+        logger.error(f"Error listing missions: {e}")
+        return []
 
 @app.get("/service-status")
 async def get_service_status():
@@ -485,12 +710,48 @@ async def get_live_events():
         "last_update": datetime.utcnow().isoformat()
     }
 
+@app.get("/api/test-8002")
+async def test_server_8002():
+    """Test endpoint to generate server 8002 logs"""
+    import aiohttp
+    
+    try:
+        # Make a request to the 8002 server to generate activity
+        async with aiohttp.ClientSession() as session:
+            # Test multiple endpoints on 8002
+            endpoints = [
+                '/',
+                '/health',
+                '/api/cognitive/status',
+                '/api/cognitive/process'
+            ]
+            
+            for endpoint in endpoints:
+                try:
+                    async with session.get(f'http://localhost:8002{endpoint}') as response:
+                        logger.info(f"API TEST-8002: Successfully called {endpoint} on server 8002")
+                except Exception as e:
+                    logger.error(f"API TEST-8002: Failed to call {endpoint} on server 8002: {e}")
+        
+        return {
+            "message": "Server 8002 test completed", 
+            "server": "8002",
+            "endpoints_tested": len(endpoints),
+            "timestamp": datetime.utcnow().isoformat()
+        }
+    except Exception as e:
+        logger.error(f"Error testing server 8002: {e}")
+        return {"error": str(e), "server": "8002"}
+
 # --- Startup and Shutdown Events ---
 @app.on_event("startup")
 async def startup_event():
     """Initialize the application on startup"""
     logger.info("🚀 Cognitive Forge Desktop App starting up...")
     logger.info("📡 Real-time log streaming initialized")
+    
+    # Start the background task to forward server 8002 logs
+    asyncio.create_task(forward_server_8002_logs())
     logger.info("🔗 SSE endpoint available at /api/events/stream")
 
 @app.on_event("shutdown")
