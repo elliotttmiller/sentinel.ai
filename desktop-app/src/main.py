@@ -112,57 +112,392 @@ class AgentMetricsResponse(BaseModel):
     recent_errors: List[str]
 
 
+# Add new Pydantic models for parallel execution
+class ParallelMissionRequest(BaseModel):
+    prompt: str
+    title: Optional[str] = None
+    agent_type: str = "developer"
+    complexity_level: str = "standard"  # standard, complex, advanced
+
+
+class ParallelMissionResponse(BaseModel):
+    id: int
+    mission_id_str: str
+    title: Optional[str]
+    prompt: str
+    agent_type: str
+    complexity_level: str
+    status: str
+    execution_time: Optional[int]
+    created_at: datetime
+    parallel_execution: Optional[Dict[str, Any]] = None
+
+    class Config:
+        from_attributes = True
+
+
 # Background Task Functions
 def run_mission_in_background(mission_id_str: str, prompt: str, agent_type: str):
     """
-    Background task to run a complete mission with real-time updates
+    Background task to run a complete mission with real-time updates and parallel execution
     """
-    logger.info(f"BACKGROUND TASK: Starting mission {mission_id_str}")
+    import asyncio
+    
+    async def _run_mission_async():
+        logger.info(f"BACKGROUND TASK: Starting mission {mission_id_str}")
 
-    def update_callback(update_message: str):
-        """Callback function for real-time mission updates"""
-        if mission_id_str in mission_status_db:
-            mission_status_db[mission_id_str]["updates"].append(
-                {"timestamp": datetime.utcnow().isoformat(), "message": update_message}
+        def update_callback(update_message: str):
+            """Enhanced callback function for real-time mission updates with detailed logging"""
+            timestamp = datetime.utcnow().isoformat()
+            
+            # Log to console for debugging
+            logger.info(f"🔄 Mission Update [{mission_id_str}]: {update_message}")
+            
+            if mission_id_str in mission_status_db:
+                mission_status_db[mission_id_str]["updates"].append(
+                    {"timestamp": timestamp, "message": update_message}
+                )
+                mission_status_db[mission_id_str]["last_update"] = timestamp
+
+                # Log to database with enhanced metadata
+                db_manager.add_mission_update(
+                    mission_id_str=mission_id_str, 
+                    message=update_message, 
+                    update_type="info"
+                )
+                
+                # Log system event for observability
+                db_manager.log_system_event(
+                    level="INFO",
+                    message=f"Mission update: {update_message}",
+                    component="mission_execution",
+                    metadata={
+                        "mission_id": mission_id_str,
+                        "update_message": update_message,
+                        "timestamp": timestamp
+                    }
+                )
+
+        # Initialize mission status
+        mission_status_db[mission_id_str] = {
+            "status": "PLANNING",
+            "updates": [
+                {
+                    "timestamp": datetime.utcnow().isoformat(),
+                    "message": "🚀 Mission accepted. Initializing Cognitive Forge Engine...",
+                }
+            ],
+            "result": None,
+            "last_update": datetime.utcnow().isoformat(),
+        }
+
+        try:
+            # Run the mission using the Cognitive Forge Engine
+            final_result = await cognitive_forge_engine.run_mission(
+                prompt, mission_id_str, agent_type, update_callback
             )
+
+            # Determine mission status based on result
+            mission_status = "COMPLETED"
+            if final_result.get("needs_healing", False):
+                mission_status = "COMPLETED_WITH_HEALING"
+            elif final_result.get("error"):
+                mission_status = "FAILED"
+            
+            # Update in-memory status
+            mission_status_db[mission_id_str]["status"] = mission_status
+            mission_status_db[mission_id_str]["result"] = final_result
             mission_status_db[mission_id_str]["last_update"] = datetime.utcnow().isoformat()
 
-            # Also log to database
-            db_manager.add_mission_update(mission_id_str, update_message, "info")
+            # Calculate execution time
+            start_time = datetime.fromisoformat(mission_status_db[mission_id_str]["updates"][0]["timestamp"])
+            execution_time = int((datetime.utcnow() - start_time).total_seconds())
 
-    # Initialize mission status
+            # Create structured JSON result for database storage
+            structured_result = {
+                "summary": final_result.get("result", "Mission completed successfully"),
+                "status": mission_status,
+                "execution_time": execution_time,
+                "final_output": final_result.get("output", ""),
+                "metadata": final_result.get("metadata", {}),
+                "needs_healing": final_result.get("needs_healing", False),
+                "error": final_result.get("error", None),
+                "timestamp": datetime.utcnow().isoformat()
+            }
+
+            # Update database status with proper JSON formatting
+            db_status = "completed" if mission_status in ["COMPLETED", "COMPLETED_WITH_HEALING"] else "failed"
+            success = db_manager.update_mission_status(
+                mission_id_str=mission_id_str,
+                status=db_status,
+                result=json.dumps(structured_result),  # Convert to JSON string
+                execution_time=execution_time
+            )
+            
+            if success:
+                logger.info(f"BACKGROUND TASK: Mission {mission_id_str} completed successfully and database updated")
+                update_callback(f"✅ Mission completed successfully! Status: {mission_status}")
+            else:
+                logger.warning(f"BACKGROUND TASK: Mission {mission_id_str} completed but database update failed")
+
+        except Exception as e:
+            logger.error(f"BACKGROUND TASK: Mission {mission_id_str} failed. Error: {e}", exc_info=True)
+            mission_status_db[mission_id_str]["status"] = "FAILED"
+            mission_status_db[mission_id_str]["result"] = {"error": str(e)}
+            mission_status_db[mission_id_str]["last_update"] = datetime.utcnow().isoformat()
+            
+            # Create structured error result for database
+            error_result = {
+                "error": str(e),
+                "status": "FAILED",
+                "timestamp": datetime.utcnow().isoformat(),
+                "error_type": type(e).__name__
+            }
+            
+            # Update database with failure using proper JSON
+            db_manager.update_mission_status(
+                mission_id_str=mission_id_str,
+                status="failed",
+                result=json.dumps(error_result),  # Convert to JSON string
+                error_message=str(e)
+            )
+            update_callback(f"❌ Mission failed: {str(e)}")
+    
+    # Run the async function in the event loop
+    try:
+        loop = asyncio.get_event_loop()
+        if loop.is_running():
+            # If we're already in an event loop, create a task
+            asyncio.create_task(_run_mission_async())
+        else:
+            # If no event loop is running, run it
+            loop.run_until_complete(_run_mission_async())
+    except RuntimeError:
+        # If no event loop exists, create one
+        asyncio.run(_run_mission_async())
+
+
+# Parallel Execution for Complex Missions
+async def run_parallel_mission(mission_id_str: str, prompt: str, agent_type: str, complexity_level: str = "standard"):
+    """
+    Execute complex missions with parallel processing capabilities
+    
+    Args:
+        mission_id_str: Unique mission identifier
+        prompt: User's mission prompt
+        agent_type: Type of agent to use
+        complexity_level: Mission complexity (standard, complex, advanced)
+    """
+    logger.info(f"PARALLEL EXECUTION: Starting complex mission {mission_id_str} with level {complexity_level}")
+    
+    def parallel_update_callback(update_message: str, phase: str = "general"):
+        """Enhanced callback for parallel execution updates"""
+        timestamp = datetime.utcnow().isoformat()
+        logger.info(f"🔄 Parallel Mission Update [{mission_id_str}][{phase}]: {update_message}")
+        
+        if mission_id_str in mission_status_db:
+            mission_status_db[mission_id_str]["updates"].append(
+                {"timestamp": timestamp, "message": f"[{phase.upper()}] {update_message}", "phase": phase}
+            )
+            mission_status_db[mission_id_str]["last_update"] = timestamp
+
+    # Initialize parallel mission status
     mission_status_db[mission_id_str] = {
-        "status": "PLANNING",
+        "status": "PARALLEL_PLANNING",
         "updates": [
             {
                 "timestamp": datetime.utcnow().isoformat(),
-                "message": "🚀 Mission accepted. Initializing Cognitive Forge Engine...",
+                "message": "🚀 Complex mission accepted. Initializing parallel execution...",
+                "phase": "initialization"
             }
         ],
         "result": None,
         "last_update": datetime.utcnow().isoformat(),
+        "parallel_phases": [],
+        "complexity_level": complexity_level
     }
 
     try:
-        # Run the mission using the Cognitive Forge Engine
-        final_result = cognitive_forge_engine.run_mission(
-            prompt, mission_id_str, agent_type, update_callback
-        )
+        # Phase 1: Parallel Planning
+        parallel_update_callback("Starting parallel planning phase", "planning")
+        
+        # Create parallel execution tasks based on complexity
+        parallel_tasks = []
+        
+        if complexity_level == "complex":
+            # Split mission into parallel sub-tasks
+            planning_task = asyncio.create_task(
+                cognitive_forge_engine.run_mission_phase(prompt, mission_id_str, "planning", parallel_update_callback)
+            )
+            analysis_task = asyncio.create_task(
+                cognitive_forge_engine.run_mission_phase(prompt, mission_id_str, "analysis", parallel_update_callback)
+            )
+            parallel_tasks = [planning_task, analysis_task]
+            
+        elif complexity_level == "advanced":
+            # Advanced parallel execution with multiple specialized agents
+            planning_task = asyncio.create_task(
+                cognitive_forge_engine.run_mission_phase(prompt, mission_id_str, "planning", parallel_update_callback)
+            )
+            analysis_task = asyncio.create_task(
+                cognitive_forge_engine.run_mission_phase(prompt, mission_id_str, "analysis", parallel_update_callback)
+            )
+            research_task = asyncio.create_task(
+                cognitive_forge_engine.run_mission_phase(prompt, mission_id_str, "research", parallel_update_callback)
+            )
+            parallel_tasks = [planning_task, analysis_task, research_task]
+        
+        else:
+            # Standard execution
+            parallel_update_callback("Using standard execution mode", "execution")
+            final_result = await cognitive_forge_engine.run_mission(
+                prompt, mission_id_str, agent_type, parallel_update_callback
+            )
+            return final_result
 
-        # Update final status
-        mission_status_db[mission_id_str]["status"] = final_result.get(
-            "status", "completed"
-        ).upper()
+        # Execute parallel tasks
+        parallel_update_callback(f"Executing {len(parallel_tasks)} parallel tasks", "execution")
+        parallel_results = await asyncio.gather(*parallel_tasks, return_exceptions=True)
+        
+        # Phase 2: Synthesize parallel results
+        parallel_update_callback("Synthesizing parallel execution results", "synthesis")
+        
+        # Process results and handle exceptions
+        successful_results = []
+        failed_results = []
+        
+        for i, result in enumerate(parallel_results):
+            if isinstance(result, Exception):
+                failed_results.append({"task_index": i, "error": str(result)})
+                parallel_update_callback(f"Parallel task {i} failed: {str(result)}", "error")
+            else:
+                successful_results.append(result)
+                parallel_update_callback(f"Parallel task {i} completed successfully", "success")
+        
+        # Phase 3: Final synthesis and execution
+        if successful_results:
+            parallel_update_callback("Synthesizing successful parallel results", "synthesis")
+            
+            # Combine successful results and execute final mission
+            combined_prompt = f"Original: {prompt}\n\nParallel Results:\n"
+            for i, result in enumerate(successful_results):
+                combined_prompt += f"Task {i}: {result.get('output', '')}\n"
+            
+            final_result = await cognitive_forge_engine.run_mission(
+                combined_prompt, mission_id_str, agent_type, parallel_update_callback
+            )
+            
+            # Add parallel execution metadata
+            final_result["parallel_execution"] = {
+                "complexity_level": complexity_level,
+                "total_tasks": len(parallel_tasks),
+                "successful_tasks": len(successful_results),
+                "failed_tasks": len(failed_results),
+                "parallel_results": successful_results,
+                "failed_results": failed_results
+            }
+            
+        else:
+            # All parallel tasks failed
+            final_result = {
+                "error": "All parallel tasks failed",
+                "parallel_execution": {
+                    "complexity_level": complexity_level,
+                    "total_tasks": len(parallel_tasks),
+                    "successful_tasks": 0,
+                    "failed_tasks": len(failed_results),
+                    "failed_results": failed_results
+                }
+            }
+        
+        # Update mission status
+        mission_status = "COMPLETED" if not final_result.get("error") else "FAILED"
+        mission_status_db[mission_id_str]["status"] = mission_status
         mission_status_db[mission_id_str]["result"] = final_result
         mission_status_db[mission_id_str]["last_update"] = datetime.utcnow().isoformat()
 
-        logger.info(f"BACKGROUND TASK: Mission {mission_id_str} completed successfully")
+        # Calculate execution time
+        start_time = datetime.fromisoformat(mission_status_db[mission_id_str]["updates"][0]["timestamp"])
+        execution_time = int((datetime.utcnow() - start_time).total_seconds())
+
+        # Create structured JSON result for database storage
+        structured_result = {
+            "summary": final_result.get("result", "Parallel mission completed successfully"),
+            "status": mission_status,
+            "execution_time": execution_time,
+            "final_output": final_result.get("output", ""),
+            "metadata": final_result.get("metadata", {}),
+            "parallel_execution": final_result.get("parallel_execution", {}),
+            "error": final_result.get("error", None),
+            "timestamp": datetime.utcnow().isoformat()
+        }
+
+        # Update database with proper JSON formatting
+        db_status = "completed" if mission_status == "COMPLETED" else "failed"
+        success = db_manager.update_mission_status(
+            mission_id_str=mission_id_str,
+            status=db_status,
+            result=json.dumps(structured_result),  # Convert to JSON string
+            execution_time=execution_time
+        )
+        
+        if success:
+            logger.info(f"PARALLEL EXECUTION: Mission {mission_id_str} completed successfully")
+            parallel_update_callback(f"✅ Parallel mission completed successfully! Status: {mission_status}", "completion")
+        else:
+            logger.warning(f"PARALLEL EXECUTION: Mission {mission_id_str} completed but database update failed")
+        
+        return final_result
 
     except Exception as e:
-        logger.error(f"BACKGROUND TASK: Mission {mission_id_str} failed. Error: {e}", exc_info=True)
+        logger.error(f"PARALLEL EXECUTION: Mission {mission_id_str} failed. Error: {e}", exc_info=True)
         mission_status_db[mission_id_str]["status"] = "FAILED"
         mission_status_db[mission_id_str]["result"] = {"error": str(e)}
         mission_status_db[mission_id_str]["last_update"] = datetime.utcnow().isoformat()
+        
+        # Create structured error result for database
+        error_result = {
+            "error": str(e),
+            "status": "FAILED",
+            "timestamp": datetime.utcnow().isoformat(),
+            "error_type": type(e).__name__,
+            "parallel_execution": {
+                "complexity_level": complexity_level,
+                "error": "Parallel execution failed"
+            }
+        }
+        
+        # Update database with failure using proper JSON
+        db_manager.update_mission_status(
+            mission_id_str=mission_id_str,
+            status="failed",
+            result=json.dumps(error_result),  # Convert to JSON string
+            error_message=str(e)
+        )
+        parallel_update_callback(f"❌ Parallel mission failed: {str(e)}", "error")
+        
+        return {"error": str(e)}
+
+
+def run_parallel_mission_in_background(mission_id_str: str, prompt: str, agent_type: str, complexity_level: str = "standard"):
+    """
+    Background task wrapper for parallel mission execution
+    """
+    async def _run_parallel_mission_async():
+        return await run_parallel_mission(mission_id_str, prompt, agent_type, complexity_level)
+    
+    # Run the async function in the event loop
+    try:
+        loop = asyncio.get_event_loop()
+        if loop.is_running():
+            # If we're already in an event loop, create a task
+            asyncio.create_task(_run_parallel_mission_async())
+        else:
+            # If no event loop is running, run it
+            loop.run_until_complete(_run_parallel_mission_async())
+    except RuntimeError:
+        # If no event loop exists, create one
+        asyncio.run(_run_parallel_mission_async())
 
 
 # API Endpoints
@@ -279,6 +614,7 @@ async def create_advanced_mission(request: MissionRequest, background_tasks: Bac
             title=request.title or request.prompt[:50],
             prompt=request.prompt,
             agent_type=request.agent_type,
+            complexity_level="standard"
         )
 
         # Add background task
@@ -410,20 +746,12 @@ async def create_mission_api(request: MissionRequest, background_tasks: Backgrou
         mission_id_str = f"mission_{int(time.time())}_{uuid.uuid4().hex[:8]}"
         
         # Create mission in database
-        mission = Mission(
-            mission_id_str=mission_id_str,
-            title=request.title or f"Mission: {request.prompt[:50]}...",
-            prompt=request.prompt,
-            agent_type=request.agent_type,
-            status="pending"
-        )
-        
-        # Save to database using the create_mission method
         mission = db_manager.create_mission(
             mission_id_str=mission_id_str,
             title=request.title or f"Mission: {request.prompt[:50]}...",
             prompt=request.prompt,
-            agent_type=request.agent_type
+            agent_type=request.agent_type,
+            complexity_level="standard"
         )
         
         # Initialize status tracking
@@ -472,6 +800,282 @@ def delete_mission(mission_id: str):
     except Exception as e:
         logger.error(f"Error archiving mission: {e}")
         raise HTTPException(status_code=500, detail="Failed to archive mission")
+
+
+@app.post("/parallel-mission")
+async def create_parallel_mission(request: ParallelMissionRequest, background_tasks: BackgroundTasks):
+    """
+    Create and execute a complex mission with parallel processing capabilities
+    """
+    try:
+        # Generate unique mission ID
+        mission_id_str = f"mission_{int(time.time())}_{uuid.uuid4().hex[:8]}"
+        
+        # Create mission in database
+        mission = db_manager.create_mission(
+            mission_id_str=mission_id_str,
+            title=request.title or f"Parallel Mission - {request.complexity_level.title()}",
+            prompt=request.prompt,
+            agent_type=request.agent_type,
+            complexity_level=request.complexity_level
+        )
+        
+        # Add complexity level to mission metadata
+        mission.complexity_level = request.complexity_level
+        db_manager.update_mission_status(
+            mission_id_str=mission_id_str,
+            status="parallel_planning",
+            plan={"complexity_level": request.complexity_level}
+        )
+        
+        # Start parallel execution in background
+        background_tasks.add_task(
+            run_parallel_mission_in_background,
+            mission_id_str,
+            request.prompt,
+            request.agent_type,
+            request.complexity_level
+        )
+        
+        logger.info(f"PARALLEL MISSION: Created mission {mission_id_str} with complexity {request.complexity_level}")
+        
+        return {
+            "mission_id": mission_id_str,
+            "status": "parallel_planning",
+            "complexity_level": request.complexity_level,
+            "message": f"Parallel mission created with {request.complexity_level} complexity level"
+        }
+        
+    except Exception as e:
+        logger.error(f"Error creating parallel mission: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to create parallel mission: {str(e)}")
+
+
+@app.post("/api/parallel-missions")
+async def create_parallel_mission_api(request: ParallelMissionRequest, background_tasks: BackgroundTasks):
+    """
+    API endpoint for creating parallel missions with advanced complexity levels
+    """
+    try:
+        # Generate unique mission ID
+        mission_id_str = f"mission_{int(time.time())}_{uuid.uuid4().hex[:8]}"
+        
+        # Create mission in database
+        mission = db_manager.create_mission(
+            mission_id_str=mission_id_str,
+            title=request.title or f"Parallel Mission - {request.complexity_level.title()}",
+            prompt=request.prompt,
+            agent_type=request.agent_type
+        )
+        
+        # Add complexity level to mission metadata
+        mission.complexity_level = request.complexity_level
+        db_manager.update_mission_status(
+            mission_id_str=mission_id_str,
+            status="parallel_planning",
+            plan={"complexity_level": request.complexity_level}
+        )
+        
+        # Start parallel execution in background
+        background_tasks.add_task(
+            run_parallel_mission_in_background,
+            mission_id_str,
+            request.prompt,
+            request.agent_type,
+            request.complexity_level
+        )
+        
+        logger.info(f"PARALLEL MISSION API: Created mission {mission_id_str} with complexity {request.complexity_level}")
+        
+        return {
+            "mission_id": mission_id_str,
+            "status": "parallel_planning",
+            "complexity_level": request.complexity_level,
+            "message": f"Parallel mission created with {request.complexity_level} complexity level",
+            "estimated_duration": {
+                "standard": "2-5 minutes",
+                "complex": "5-10 minutes", 
+                "advanced": "10-20 minutes"
+            }.get(request.complexity_level, "Unknown")
+        }
+        
+    except Exception as e:
+        logger.error(f"Error creating parallel mission via API: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to create parallel mission: {str(e)}")
+
+
+@app.get("/parallel-missions", response_model=List[ParallelMissionResponse])
+def list_parallel_missions(limit: int = 50, complexity_level: Optional[str] = None):
+    """
+    List parallel missions with optional complexity filtering
+    """
+    try:
+        missions = db_manager.list_missions(limit=limit, include_archived=False)
+        
+        # Filter by complexity level if specified
+        if complexity_level:
+            missions = [m for m in missions if hasattr(m, 'complexity_level') and m.complexity_level == complexity_level]
+        
+        # Convert to response model
+        parallel_missions = []
+        for mission in missions:
+            if hasattr(mission, 'complexity_level') and mission.complexity_level:
+                parallel_missions.append(ParallelMissionResponse(
+                    id=mission.id,
+                    mission_id_str=mission.mission_id_str,
+                    title=mission.title,
+                    prompt=mission.prompt,
+                    agent_type=mission.agent_type,
+                    complexity_level=mission.complexity_level,
+                    status=mission.status,
+                    execution_time=mission.execution_time,
+                    created_at=mission.created_at,
+                    parallel_execution=mission.result.get("parallel_execution") if mission.result else None
+                ))
+        
+        return parallel_missions
+        
+    except Exception as e:
+        logger.error(f"Error listing parallel missions: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to list parallel missions: {str(e)}")
+
+
+@app.get("/api/parallel-missions", response_model=List[ParallelMissionResponse])
+def list_parallel_missions_api(limit: int = 50, complexity_level: Optional[str] = None):
+    """
+    API endpoint for listing parallel missions
+    """
+    return list_parallel_missions(limit=limit, complexity_level=complexity_level)
+
+
+@app.get("/parallel-mission/{mission_id}")
+def get_parallel_mission_status(mission_id: str):
+    """
+    Get detailed status of a parallel mission including parallel execution metadata
+    """
+    try:
+        # Get mission from database
+        mission = db_manager.get_mission(mission_id)
+        if not mission:
+            raise HTTPException(status_code=404, detail="Parallel mission not found")
+        
+        # Get real-time status from memory
+        real_time_status = mission_status_db.get(mission_id, {})
+        
+        # Parse result JSON if available
+        parallel_execution_data = None
+        if mission.result:
+            try:
+                result_data = json.loads(mission.result) if isinstance(mission.result, str) else mission.result
+                parallel_execution_data = result_data.get("parallel_execution")
+            except (json.JSONDecodeError, AttributeError):
+                pass
+        
+        return {
+            "mission_id": mission_id,
+            "status": real_time_status.get("status", mission.status),
+            "complexity_level": getattr(mission, 'complexity_level', 'standard'),
+            "execution_time": mission.execution_time,
+            "created_at": mission.created_at,
+            "updated_at": mission.updated_at,
+            "completed_at": mission.completed_at,
+            "real_time_updates": real_time_status.get("updates", []),
+            "parallel_execution": parallel_execution_data,
+            "result": mission.result
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error getting parallel mission status: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to get parallel mission status: {str(e)}")
+
+
+@app.get("/api/parallel-mission/{mission_id}")
+def get_parallel_mission_status_api(mission_id: str):
+    """
+    API endpoint for getting parallel mission status
+    """
+    return get_parallel_mission_status(mission_id)
+
+
+@app.get("/parallel-execution/stats")
+def get_parallel_execution_stats():
+    """
+    Get statistics about parallel execution performance
+    """
+    try:
+        # Get all missions with complexity levels
+        missions = db_manager.list_missions(limit=1000, include_archived=False)
+        
+        # Filter parallel missions
+        parallel_missions = [m for m in missions if hasattr(m, 'complexity_level') and m.complexity_level]
+        
+        # Calculate statistics
+        stats = {
+            "total_parallel_missions": len(parallel_missions),
+            "by_complexity": {},
+            "avg_execution_times": {},
+            "success_rates": {},
+            "recent_activity": []
+        }
+        
+        # Group by complexity level
+        for mission in parallel_missions:
+            complexity = mission.complexity_level
+            if complexity not in stats["by_complexity"]:
+                stats["by_complexity"][complexity] = {
+                    "count": 0,
+                    "execution_times": [],
+                    "successful": 0,
+                    "failed": 0
+                }
+            
+            stats["by_complexity"][complexity]["count"] += 1
+            
+            if mission.execution_time:
+                stats["by_complexity"][complexity]["execution_times"].append(mission.execution_time)
+            
+            if mission.status == "completed":
+                stats["by_complexity"][complexity]["successful"] += 1
+            elif mission.status == "failed":
+                stats["by_complexity"][complexity]["failed"] += 1
+        
+        # Calculate averages and success rates
+        for complexity, data in stats["by_complexity"].items():
+            if data["execution_times"]:
+                stats["avg_execution_times"][complexity] = sum(data["execution_times"]) / len(data["execution_times"])
+            
+            total = data["successful"] + data["failed"]
+            if total > 0:
+                stats["success_rates"][complexity] = data["successful"] / total
+        
+        # Get recent activity
+        recent_missions = sorted(parallel_missions, key=lambda x: x.created_at, reverse=True)[:10]
+        stats["recent_activity"] = [
+            {
+                "mission_id": m.mission_id_str,
+                "complexity": m.complexity_level,
+                "status": m.status,
+                "created_at": m.created_at.isoformat(),
+                "execution_time": m.execution_time
+            }
+            for m in recent_missions
+        ]
+        
+        return stats
+        
+    except Exception as e:
+        logger.error(f"Error getting parallel execution stats: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to get parallel execution stats: {str(e)}")
+
+
+@app.get("/api/parallel-execution/stats")
+def get_parallel_execution_stats_api():
+    """
+    API endpoint for parallel execution statistics
+    """
+    return get_parallel_execution_stats()
 
 
 @app.get("/memory/search")

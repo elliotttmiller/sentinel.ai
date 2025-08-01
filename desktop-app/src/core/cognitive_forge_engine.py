@@ -163,10 +163,35 @@ class CognitiveForgeEngine:
         Returns:
             Crew execution result as string
         """
-        crew = Crew(agents=agents, tasks=tasks, process=process, verbose=True)
-        # Apply non-blocking refinement - run crew execution in separate thread
-        result = await asyncio.to_thread(crew.kickoff)
-        return result
+        # Use our own DirectAICrew bypass system instead of CrewAI
+        from ..utils.crewai_bypass import DirectAICrew
+        
+        # Check if we're using our custom agents
+        if agents and hasattr(agents[0], 'llm') and hasattr(agents[0], 'role'):
+            # Use our bypass system
+            crew = DirectAICrew(agents[0].llm)
+            
+            # Add agents and tasks
+            for agent in agents:
+                crew.add_agent(agent.role, agent.goal, agent.backstory)
+            
+            for task in tasks:
+                if isinstance(task, dict):
+                    # Handle our custom task structure
+                    crew.add_task(task["description"], crew.agents[-1], task["expected_output"])
+                else:
+                    # Handle CrewAI Task objects
+                    crew.add_task(task.description, crew.agents[-1], task.expected_output)
+            
+            # Execute in non-blocking manner
+            result = await asyncio.to_thread(crew.execute)
+            return result
+        else:
+            # Fallback to original CrewAI
+            crew = Crew(agents=agents, tasks=tasks, process=process, verbose=True)
+            # Apply non-blocking refinement - run crew execution in separate thread
+            result = await asyncio.to_thread(crew.kickoff)
+            return result
 
     @track_async_errors
     async def run_mission(
@@ -468,7 +493,8 @@ class CognitiveForgeEngine:
         """
         try:
             # Use Guardian Protocol to validate agent configurations
-            validation_result = await self.guardian_protocol.run_agent_validation_suite(agent_config)
+            # For now, use a default agent role since we're validating the entire config
+            validation_result = await self.guardian_protocol.run_agent_validation_suite("multi_agent_system", agent_config)
             
             test_results = {
                 "agent_tests": [],
@@ -523,8 +549,9 @@ class CognitiveForgeEngine:
             # Create Lead Architect for planning
             architect = self.planner_agents.lead_architect(self.llm)
             
-            planning_task = Task(
-                description=f"""Create a sophisticated execution plan based on:
+            # Create a simple task structure for our bypass system
+            planning_task = {
+                "description": f"""Create a sophisticated execution plan based on:
                 
                 OPTIMIZED PROMPT: {optimized_prompt.get('optimized_prompt', '')}
                 TECHNICAL CONTEXT: {json.dumps(optimized_prompt.get('technical_context', {}))}
@@ -561,15 +588,17 @@ class CognitiveForgeEngine:
                         "Optimization 2"
                     ]
                 }}""",
-                expected_output="A structured JSON object representing the execution plan.",
-                agent=architect
-            )
+                "expected_output": "A structured JSON object representing the execution plan.",
+                "agent": architect
+            }
             
             # Use non-blocking crew execution
             execution_plan_str = await self._run_crew(agents=[architect], tasks=[planning_task])
             
             try:
-                execution_plan = json.loads(execution_plan_str)
+                # Use our robust JSON parser to handle markdown-wrapped JSON
+                from ..utils.json_parser import extract_and_parse_json
+                execution_plan = extract_and_parse_json(execution_plan_str)
                 
                 # Store execution plan
                 self.db_manager.add_mission_update(
@@ -623,16 +652,26 @@ class CognitiveForgeEngine:
                 result = orchestrator_result["execution_plan"]
                 if result and "code" in result.lower():
                     update_callback("🛡️ Guardian Protocol: Applying auto-fixes to generated code...")
-                    fixed_result = await self.guardian_protocol.run_code_autofix(result)
-                    if fixed_result != result:
-                        result = fixed_result
-                        update_callback("✅ Guardian Protocol: Code auto-fixes applied successfully")
+                    try:
+                        fixed_result = await self.guardian_protocol.run_code_autofix(result, "Autonomous orchestrator execution")
+                        if fixed_result.get("status") == "success":
+                            result = fixed_result.get("fixed_code", result)
+                            update_callback("✅ Guardian Protocol: Code auto-fixes applied successfully")
+                    except Exception as e:
+                        logger.warning(f"Guardian Protocol auto-fix failed: {e}")
+                        update_callback("⚠️ Guardian Protocol: Auto-fix failed, continuing with original result")
                 
                 # Store execution result
                 self.db_manager.add_mission_update(
                     mission_id_str,
                     f"Autonomous Orchestrator executed mission successfully with optimized resource allocation",
                     "info"
+                )
+                
+                # Update mission status to executing
+                self.db_manager.update_mission_status(
+                    mission_id_str=mission_id_str,
+                    status="executing"
                 )
                 
                 return {
@@ -675,19 +714,35 @@ class CognitiveForgeEngine:
                 agent = self._create_agent_from_factory(agent_role, config)
                 crew_agents.append(agent)
             
-            # Create tasks from execution plan
+            # Create tasks from execution plan with proper agent assignment
             tasks = []
             phases = execution_plan.get("phases", [])
+            
+            # Create a map of agent roles to agent instances
+            agents_map = {}
+            for agent_role, config in agents.items():
+                agent = self._create_agent_from_factory(agent_role, config)
+                agents_map[agent_role] = agent
             
             for phase in phases:
                 phase_tasks = phase.get("tasks", [])
                 for task_data in phase_tasks:
-                    task = Task(
-                        description=task_data.get("description", "Execute task"),
-                        expected_output=task_data.get("expected_output", "Task result"),
-                        agent=crew_agents[0] if crew_agents else None
-                    )
-                    tasks.append(task)
+                    # Get the agent role for this task
+                    agent_role = task_data.get("agent_role", "senior_developer")
+                    agent_instance = agents_map.get(agent_role)
+                    
+                    if agent_instance:
+                        task = Task(
+                            description=task_data.get("description", "Execute task"),
+                            expected_output=task_data.get("expected_output", "Task result"),
+                            agent=agent_instance
+                        )
+                        tasks.append(task)
+                    else:
+                        logger.warning(f"No agent found for role '{agent_role}'. Skipping task.")
+            
+            if not tasks:
+                raise ValueError("No valid tasks could be assigned to agents.")
             
             # Create crew with optimized process
             execution_mode = strategy.get("execution_mode", "sequential")
@@ -695,21 +750,31 @@ class CognitiveForgeEngine:
             
             # Execute with Guardian Protocol protection using non-blocking crew execution
             update_callback("🔄 Executing with traditional crew and Guardian Protocol protection...")
-            result = await self._run_crew(agents=crew_agents, tasks=tasks, process=process)
+            result = await self._run_crew(agents=list(agents_map.values()), tasks=tasks, process=process)
             
             # Apply Guardian Protocol auto-fixing if needed
             if result and "code" in result.lower():
                 update_callback("🛡️ Guardian Protocol: Applying auto-fixes to generated code...")
-                fixed_result = await self.guardian_protocol.run_code_autofix(result)
-                if fixed_result != result:
-                    result = fixed_result
-                    update_callback("✅ Guardian Protocol: Code auto-fixes applied successfully")
+                try:
+                    fixed_result = await self.guardian_protocol.run_code_autofix(result, "Traditional crew execution")
+                    if fixed_result.get("status") == "success":
+                        result = fixed_result.get("fixed_code", result)
+                        update_callback("✅ Guardian Protocol: Code auto-fixes applied successfully")
+                except Exception as e:
+                    logger.warning(f"Guardian Protocol auto-fix failed: {e}")
+                    update_callback("⚠️ Guardian Protocol: Auto-fix failed, continuing with original result")
             
             # Store execution result
             self.db_manager.add_mission_update(
                 mission_id_str,
                 f"Traditional crew executed successfully with {len(crew_agents)} agents",
                 "info"
+            )
+            
+            # Update mission status to executing
+            self.db_manager.update_mission_status(
+                mission_id_str=mission_id_str,
+                status="executing"
             )
             
             return {
@@ -876,23 +941,33 @@ class CognitiveForgeEngine:
             # Use Self-Optimization Engineer for continuous improvement
             optimization_result = self.self_optimization_engineer.optimize_agent_performance(agent_outputs)
             
-            if optimization_result["status"] == "success":
+            # Ensure optimization_result is a dictionary
+            if isinstance(optimization_result, str):
+                logger.warning(f"Self-Optimization Engineer returned string instead of dict: {optimization_result}")
+                optimization_result = {"status": "error", "error": "Invalid response format", "raw_result": optimization_result}
+            
+            if optimization_result.get("status") == "success":
                 logger.info(f"Self-Optimization Engineer completed performance analysis for mission {mission_id_str}")
                 
                 # Apply Guardian Protocol validation if improvements are suggested
                 optimization_plan = optimization_result.get("optimization_plan", {})
-                if optimization_plan and "recommendations" in optimization_plan:
-                    validation_result = await self.guardian_protocol.run_agent_validation_suite(
-                        optimization_plan.get("recommendations", [])
-                    )
-                    
-                    if validation_result.get("validation_passed", False):
-                        # Mark optimizations as active
-                        self.db_manager.add_mission_update(
-                            mission_id_str,
-                            f"Self-Optimization improvements validated and applied",
-                            "optimization"
+                if optimization_plan and isinstance(optimization_plan, dict) and "recommendations" in optimization_plan:
+                    try:
+                        validation_result = await self.guardian_protocol.run_agent_validation_suite(
+                            "optimization_validation", 
+                            {"recommendations": optimization_plan.get("recommendations", [])}
                         )
+                        
+                        if validation_result.get("validation_passed", False):
+                            # Mark optimizations as active
+                            self.db_manager.add_mission_update(
+                                mission_id_str,
+                                f"Self-Optimization improvements validated and applied",
+                                "optimization"
+                            )
+                    except Exception as e:
+                        logger.warning(f"Guardian Protocol validation failed: {e}")
+                        validation_result = None
                 
                 return {
                     "optimization_result": optimization_result,
@@ -901,12 +976,13 @@ class CognitiveForgeEngine:
                     "self_optimization_used": True
                 }
             else:
-                logger.error(f"Self-Optimization Engineer failed: {optimization_result.get('error', 'Unknown error')}")
+                error_msg = optimization_result.get("error", "Unknown error") if isinstance(optimization_result, dict) else str(optimization_result)
+                logger.error(f"Self-Optimization Engineer failed: {error_msg}")
                 return {
                     "optimization_result": None,
                     "validation_result": None,
                     "evolution_applied": False,
-                    "error": optimization_result.get("error", "Self-optimization failed"),
+                    "error": error_msg,
                     "self_optimization_used": False
                 }
             
@@ -1222,14 +1298,21 @@ class CognitiveForgeEngine:
         # Clean the response string
         cleaned_response = response_str.strip()
         
-        # Try to extract JSON from markdown code blocks
-        json_pattern = r'```(?:json)?\s*(\{.*?\})\s*```'
-        match = re.search(json_pattern, cleaned_response, re.DOTALL)
+        # Try to extract JSON from markdown code blocks (more robust)
+        json_patterns = [
+            r'```(?:json)?\s*(\{.*?\})\s*```',  # ```json { ... } ```
+            r'```(\{.*?\})```',  # ``` { ... } ```
+            r'`(\{.*?\})`',  # ` { ... } `
+        ]
         
-        if match:
-            # Extract JSON from the code block
-            json_str = match.group(1)
-        else:
+        json_str = None
+        for pattern in json_patterns:
+            match = re.search(pattern, cleaned_response, re.DOTALL)
+            if match:
+                json_str = match.group(1)
+                break
+        
+        if not json_str:
             # If no code block found, try to find JSON in the response
             # Look for the first { and last } to extract JSON
             start_idx = cleaned_response.find('{')
@@ -1249,11 +1332,11 @@ class CognitiveForgeEngine:
         json_str = re.sub(r'[^}]*$', '', json_str)
         
         try:
-            # Parse the JSON
-            return json.loads(json_str)
-        except json.JSONDecodeError as e:
-            logger.error(f"Failed to parse JSON: {json_str}")
-            logger.error(f"Original response: {response_str}")
+            # Use our robust JSON parser to handle markdown-wrapped JSON
+            from ..utils.json_parser import extract_and_parse_json
+            return extract_and_parse_json(response_str)
+        except ValueError as e:
+            logger.error(f"Failed to parse JSON: {response_str}")
             raise ValueError(f"Invalid JSON format: {str(e)}") from e
 
     def get_system_info(self) -> Dict[str, Any]:

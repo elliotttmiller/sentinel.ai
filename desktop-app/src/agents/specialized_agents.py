@@ -13,7 +13,16 @@ class AutonomousOrchestratorAgent:
     """Parallel Execution Conductor - The central nervous system of every mission"""
     
     def __init__(self, llm=None):
-        self.llm = llm or create_google_ai_llm()
+        if llm is None:
+            logger.info("Creating new Google AI LLM for Autonomous Orchestrator")
+            self.llm = create_google_ai_llm()
+        else:
+            logger.info("Using provided LLM for Autonomous Orchestrator")
+            self.llm = llm
+        
+        if self.llm is None:
+            raise ValueError("Failed to create LLM for Autonomous Orchestrator")
+        
         self.agent = self._create_orchestrator()
         logger.info("Autonomous Orchestrator Agent initialized")
     
@@ -157,7 +166,7 @@ Provide specific optimization recommendations with expected performance improvem
             result = crew.execute()
             
             logger.info("Self-Optimization Engineer generated optimization recommendations")
-            return {"status": "success", "optimization_plan": result}
+            return {"status": "success", "optimization_plan": {"recommendations": [result]}}
             
         except Exception as e:
             logger.error(f"Self-Optimization Engineer optimization failed: {e}")

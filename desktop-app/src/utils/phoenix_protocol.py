@@ -103,12 +103,15 @@ Provide your response in this formal JSON format:
             solution_str = crew.execute()
             
             try:
-                solution = json.loads(solution_str)
+                # Use our robust JSON parser to handle markdown code blocks
+                from .json_parser import extract_and_parse_json
+                solution = extract_and_parse_json(solution_str)
                 logger.info(f"Phoenix Protocol: Solution generated with {solution.get('confidence', 0)} confidence")
                 return solution
                 
-            except json.JSONDecodeError as e:
-                logger.error(f"Phoenix Protocol: Invalid JSON response: {solution_str}")
+            except ValueError as e:
+                logger.error(f"Phoenix Protocol: The Elite Debugger returned invalid JSON. Cannot self-heal. Error: {e}")
+                logger.error(f"Raw response: {solution_str}")
                 return None
 
         except Exception as e:

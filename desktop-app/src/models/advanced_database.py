@@ -54,6 +54,7 @@ class Mission(Base):
     execution_time = Column(Integer, nullable=True)  # seconds
     tokens_used = Column(Integer, nullable=True)
     error_message = Column(Text, nullable=True)
+    complexity_level = Column(String, default="standard")  # standard, complex, advanced
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     completed_at = Column(DateTime, nullable=True)
@@ -128,24 +129,45 @@ class DatabaseManager:
             db.close()
 
     def create_mission(
-        self, mission_id_str: str, title: str, prompt: str, agent_type: str
+        self, mission_id_str: str, title: str, prompt: str, agent_type: str, complexity_level: str = "standard"
     ) -> Mission:
-        """Create a new mission record"""
+        """Create a new mission with enhanced metadata tracking"""
         db = SessionLocal()
         try:
+            logger.info(f"🆕 Creating mission: {mission_id_str}")
+            
             mission = Mission(
                 mission_id_str=mission_id_str,
                 title=title,
-                description=title,  # Use title as description for now
                 prompt=prompt,
                 agent_type=agent_type,
+                complexity_level=complexity_level,
                 status="pending",
+                created_at=datetime.utcnow(),
+                updated_at=datetime.utcnow()
             )
+            
             db.add(mission)
             db.commit()
             db.refresh(mission)
-            logger.info(f"Created mission: {mission_id_str}")
+            
+            logger.info(f"✅ Mission created successfully: {mission_id_str}")
+            
+            # Log system event
+            self.log_system_event(
+                level="INFO",
+                message=f"Mission created: {title}",
+                component="mission_creation",
+                metadata={
+                    "mission_id": mission_id_str,
+                    "agent_type": agent_type,
+                    "complexity_level": complexity_level,
+                    "title": title
+                }
+            )
+            
             return mission
+            
         except SQLAlchemyError as e:
             db.rollback()
             logger.error(f"Error creating mission: {e}")
@@ -162,36 +184,53 @@ class DatabaseManager:
         execution_time: int = None,
         error_message: str = None,
     ) -> bool:
-        """Update mission status and metadata"""
+        """Update mission status and metadata with enhanced logging"""
         db = SessionLocal()
         try:
+            logger.info(f"🔄 Updating mission status: {mission_id_str} -> {status}")
+            
             mission = db.query(Mission).filter(Mission.mission_id_str == mission_id_str).first()
             if not mission:
-                logger.error(f"Mission not found: {mission_id_str}")
+                logger.error(f"❌ Mission not found in database: {mission_id_str}")
                 return False
 
+            # Log the status change
+            old_status = mission.status
             mission.status = status
             mission.updated_at = datetime.utcnow()
 
             if result is not None:
                 mission.result = result
+                logger.debug(f"📝 Updated mission result for {mission_id_str}")
             if plan is not None:
                 mission.plan = plan
+                logger.debug(f"📋 Updated mission plan for {mission_id_str}")
             if execution_time is not None:
                 mission.execution_time = execution_time
+                logger.debug(f"⏱️ Updated execution time for {mission_id_str}: {execution_time}s")
             if error_message is not None:
                 mission.error_message = error_message
+                logger.warning(f"⚠️ Updated error message for {mission_id_str}: {error_message}")
 
             if status in ["completed", "failed"]:
                 mission.completed_at = datetime.utcnow()
+                logger.info(f"🏁 Mission {mission_id_str} marked as {status} at {mission.completed_at}")
 
             db.commit()
-            logger.info(f"Updated mission {mission_id_str} status to {status}")
+            logger.info(f"✅ Successfully updated mission {mission_id_str} status: {old_status} -> {status}")
+            
+            # Add detailed status update to mission updates
+            self.add_mission_update(
+                mission_id_str=mission_id_str,
+                message=f"Status updated: {old_status} -> {status}",
+                update_type="status_change"
+            )
+            
             return True
 
         except SQLAlchemyError as e:
             db.rollback()
-            logger.error(f"Error updating mission: {e}")
+            logger.error(f"❌ Database error updating mission {mission_id_str}: {e}")
             return False
         finally:
             db.close()

@@ -15,10 +15,21 @@ class DirectAIAgent:
     """Direct AI agent that bypasses CrewAI/LiteLLM entirely"""
     
     def __init__(self, llm, role: str, goal: str, backstory: str):
+        if llm is None:
+            raise ValueError(f"LLM cannot be None for DirectAIAgent with role: {role}")
+        
+        logger.info(f"Creating DirectAIAgent with role: {role}, LLM type: {type(llm)}")
+        
         self.llm = llm
         self.role = role
         self.goal = goal
         self.backstory = backstory
+    
+    def get(self, key: str, default=None):
+        """Compatibility method for crewai library"""
+        if hasattr(self, key):
+            return getattr(self, key)
+        return default
         
     def execute_task(self, task_description: str, expected_output: str = "") -> str:
         """Execute a task directly using our Google AI wrapper"""

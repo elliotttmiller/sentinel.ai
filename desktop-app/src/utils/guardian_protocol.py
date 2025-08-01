@@ -160,28 +160,34 @@ class GuardianProtocol:
     async def validate_agent_improvements(self, agent_config: Dict[str, Any]) -> Dict[str, Any]:
         """Validate agent configuration and improvements"""
         try:
-            test_task = Task(
-                description=f"""
-                Validate the following agent configuration for potential issues and improvements.
-                
-                AGENT CONFIG:
-                {json.dumps(agent_config, indent=2)}
-                
-                Analyze for:
-                1. Configuration completeness
-                2. Potential conflicts
-                3. Performance implications
-                4. Security considerations
-                5. Best practices compliance
-                
-                Return validation results in JSON format.
-                """,
-                expected_output="JSON validation results",
-                agent=self.test_agent
+            # Use our bypass system instead of CrewAI
+            from .crewai_bypass import DirectAICrew
+            
+            crew = DirectAICrew(self.llm)
+            agent = crew.add_agent(
+                role="Agent Configuration Validator",
+                goal="Validate agent configurations for issues and improvements",
+                backstory="You are an expert at analyzing agent configurations for potential issues."
             )
-
-            crew = Crew(agents=[self.test_agent], tasks=[test_task], process=Process.sequential)
-            result = crew.kickoff()
+            
+            task_description = f"""
+            Validate the following agent configuration for potential issues and improvements.
+            
+            AGENT CONFIG:
+            {json.dumps(agent_config, indent=2)}
+            
+            Analyze for:
+            1. Configuration completeness
+            2. Potential conflicts
+            3. Performance implications
+            4. Security considerations
+            5. Best practices compliance
+            
+            Return validation results in JSON format.
+            """
+            
+            crew.add_task(task_description, agent, "JSON validation results")
+            result = crew.execute()
             
             try:
                 validation = json.loads(result)
@@ -192,6 +198,101 @@ class GuardianProtocol:
         except Exception as e:
             logger.error(f"Agent validation failed: {e}")
             return {"status": "error", "error": str(e)}
+
+    async def run_agent_validation_suite(self, agent_role: str, agent_config: Dict[str, Any]) -> Dict[str, Any]:
+        """Run comprehensive agent validation suite"""
+        try:
+            # Use our bypass system instead of CrewAI
+            from .crewai_bypass import DirectAICrew
+            
+            crew = DirectAICrew(self.llm)
+            agent = crew.add_agent(
+                role="Agent Validation Specialist",
+                goal="Run comprehensive validation tests on agent configurations",
+                backstory="You are an expert at validating agent configurations and identifying potential issues."
+            )
+            
+            task_description = f"""
+            Run a comprehensive validation suite for the following agent:
+            
+            AGENT ROLE: {agent_role}
+            AGENT CONFIG:
+            {json.dumps(agent_config, indent=2)}
+            
+            Perform the following validation tests:
+            1. Configuration validation
+            2. Tool compatibility check
+            3. Performance assessment
+            4. Security audit
+            5. Integration testing
+            6. Error handling validation
+            7. Memory usage analysis
+            8. Response quality assessment
+            
+            Return a comprehensive validation report in JSON format with:
+            - Overall validation score (1-10)
+            - Passed tests list
+            - Failed tests list
+            - Recommendations for improvement
+            - Critical issues (if any)
+            """
+            
+            crew.add_task(task_description, agent, "JSON validation report")
+            result = crew.execute()
+            
+            try:
+                validation_report = json.loads(result)
+                return {"status": "success", "validation_report": validation_report}
+            except json.JSONDecodeError:
+                return {"status": "success", "validation_report": {"raw_result": result}}
+
+        except Exception as e:
+            logger.error(f"Agent validation suite failed: {e}")
+            return {"status": "error", "error": str(e)}
+
+    async def run_code_autofix(self, code_content: str, context: str = "") -> Dict[str, Any]:
+        """Run automatic code fixing using Fix-AI or LLM-based fixes"""
+        try:
+            task_description = f"""
+                Analyze and automatically fix issues in the following code.
+                
+                CODE CONTEXT: {context}
+                CODE CONTENT:
+                ```python
+                {code_content}
+                ```
+                
+                Identify and fix:
+                1. Syntax errors
+                2. Logic issues
+                3. Performance problems
+                4. Security vulnerabilities
+                5. Code style issues
+                6. Best practices violations
+                
+                Return the fixed code and a summary of changes in JSON format.
+                """
+            
+            expected_output = "JSON with fixed code and change summary"
+
+            # Use our bypass system
+            crew = DirectAICrew(self.llm)
+            agent = crew.add_agent(
+                role="Code Fixing Specialist",
+                goal="Automatically identify and fix code issues",
+                backstory="You are an expert at identifying and fixing code issues automatically. You can spot syntax errors, logic problems, and performance issues."
+            )
+            crew.add_task(task_description, agent, expected_output)
+            result = crew.execute()
+            
+            try:
+                analysis = json.loads(result)
+                return {"status": "success", "fixed_code": analysis.get("fixed_code", code_content), "changes": analysis.get("changes", [])}
+            except json.JSONDecodeError:
+                return {"status": "error", "message": "Failed to parse autofix result", "raw_result": result}
+        except Exception as e:
+            logger.error(f"Code autofix failed: {e}")
+            return {"status": "error", "message": str(e)}
 
     async def run_comprehensive_quality_check(self) -> Dict[str, Any]:
         """Run a comprehensive quality check including Fix-AI"""
