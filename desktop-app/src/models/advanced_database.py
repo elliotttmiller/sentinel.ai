@@ -1,452 +1,385 @@
 """
-Advanced Database System for Cognitive Forge
-Implements SQLite persistence and ChromaDB vector memory
+Advanced Database Management for Cognitive Forge v5.0
+Dual-database architecture with SQLite and ChromaDB
 """
 
-from dotenv import load_dotenv
-import os
-import json
-import time
-from datetime import datetime
-from typing import List, Dict, Any, Optional
-from sqlalchemy import create_engine, Column, Integer, String, Text, DateTime, JSON, Boolean
+from sqlalchemy import create_engine, Column, Integer, String, Text, DateTime, JSON, Boolean, Float
 from sqlalchemy.orm import sessionmaker, declarative_base
-from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.sql import func
 from loguru import logger
+from datetime import datetime
 import chromadb
-from chromadb.config import Settings
+import json
+import os
+from typing import Dict, Any, List, Optional
+from pathlib import Path
 
-# Ensure database directory exists
-os.makedirs("db", exist_ok=True)
-
-# Database Configuration - Supports both SQLite and PostgreSQL
-
-load_dotenv()
-
-# Get database URL from environment, fallback to SQLite
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///db/sentinel_missions.db")
-
-# Configure engine based on database type
-if DATABASE_URL.startswith("postgresql"):
-    # PostgreSQL configuration
-    engine = create_engine(DATABASE_URL)
-else:
-    # SQLite configuration
-    engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+# Database configuration
+DATABASE_URL = "sqlite:///../db/sentinel_missions.db"
+engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
 
 class Mission(Base):
-    """Mission tracking with comprehensive metadata"""
-
+    """Enhanced mission model with advanced tracking"""
     __tablename__ = "missions"
-
-    id = Column(Integer, primary_key=True, index=True)
+    
+    id = Column(Integer, primary_key=True)
     mission_id_str = Column(String, unique=True, index=True)
-    title = Column(String, nullable=True)
-    description = Column(Text, nullable=True)  # Made nullable to fix constraint issue
-    prompt = Column(Text, nullable=False)
+    title = Column(String)
+    prompt = Column(Text)
+    description = Column(Text, nullable=True)
     agent_type = Column(String, default="developer")
-    status = Column(String, default="pending")  # pending, planning, executing, completed, failed
-    result = Column(Text, nullable=True)
+    status = Column(String, default="pending")
+    result = Column(Text, nullable=True)  # JSON string
     plan = Column(JSON, nullable=True)
-    execution_time = Column(Integer, nullable=True)  # seconds
-    tokens_used = Column(Integer, nullable=True)
+    execution_path = Column(String, nullable=True)  # "golden_path" or "full_workflow"
+    complexity_score = Column(Float, nullable=True)
+    decision_metadata = Column(JSON, nullable=True)  # Hybrid decision data
+    execution_time = Column(Float, nullable=True)
+    user_satisfaction = Column(Float, nullable=True)
     error_message = Column(Text, nullable=True)
-    complexity_level = Column(String, default="standard")  # standard, complex, advanced
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     completed_at = Column(DateTime, nullable=True)
-    is_archived = Column(Boolean, default=False)
 
 
 class MissionUpdate(Base):
-    """Real-time mission updates for observability"""
-
+    """Real-time mission updates"""
     __tablename__ = "mission_updates"
-
-    id = Column(Integer, primary_key=True, index=True)
+    
+    id = Column(Integer, primary_key=True)
     mission_id_str = Column(String, index=True)
-    update_message = Column(Text, nullable=False)
-    update_type = Column(String, default="info")  # info, warning, error, success
+    phase = Column(String)  # planning, execution, validation, etc.
+    message = Column(Text)
+    data = Column(JSON, nullable=True)
     timestamp = Column(DateTime, default=datetime.utcnow)
-    agent_role = Column(String, nullable=True)
-    step_number = Column(Integer, nullable=True)
 
 
 class SystemLog(Base):
-    """System-level logging and monitoring"""
-
+    """System-wide logging"""
     __tablename__ = "system_logs"
+    
+    id = Column(Integer, primary_key=True)
+    level = Column(String)  # INFO, WARNING, ERROR, DEBUG
+    source = Column(String)  # main, cognitive_engine, hybrid_engine
+    message = Column(Text)
+    log_metadata = Column(JSON, nullable=True)
+    timestamp = Column(DateTime, default=datetime.utcnow)
 
-    id = Column(Integer, primary_key=True, index=True)
-    level = Column(String, nullable=False)  # DEBUG, INFO, WARNING, ERROR
-    message = Column(Text, nullable=False)
-    component = Column(String, nullable=True)  # agent_core, database, api, etc.
-    source = Column(String, nullable=True)  # source field for database compatibility
-    created_at = Column(DateTime, default=datetime.utcnow)  # Changed from timestamp to created_at
-    log_metadata = Column(
-        JSON, nullable=True
-    )  # Renamed from 'metadata' to avoid SQLAlchemy conflict
+
+class PerformanceMetric(Base):
+    """Performance tracking for hybrid system"""
+    __tablename__ = "performance_metrics"
+    
+    id = Column(Integer, primary_key=True)
+    execution_path = Column(String)  # golden_path, full_workflow
+    complexity_score = Column(Float)
+    execution_time = Column(Float)
+    success = Column(Boolean)
+    user_satisfaction = Column(Float, nullable=True)
+    timestamp = Column(DateTime, default=datetime.utcnow)
+
+
+class UserPreference(Base):
+    """User preference learning"""
+    __tablename__ = "user_preferences"
+    
+    id = Column(Integer, primary_key=True)
+    user_id = Column(String, default="default")
+    preferred_path = Column(String)  # golden_path, full_workflow
+    speed_preference = Column(Float)  # 0.0 = quality, 1.0 = speed
+    complexity_preference = Column(Float)  # 0.0 = simple, 1.0 = complex
+    satisfaction_history = Column(JSON)  # List of satisfaction scores
+    last_updated = Column(DateTime, default=datetime.utcnow)
 
 
 class DatabaseManager:
-    """Advanced database management with ChromaDB integration"""
-
+    """Advanced database manager with dual-database support"""
+    
     def __init__(self):
-        self.engine = engine
-        self.SessionLocal = SessionLocal
-        self.Base = Base
-
-        # Initialize ChromaDB for vector memory (optional)
-        self.memory_collection = None
-        try:
-            # Initialize ChromaDB for vector memory
-            self.chroma_client = chromadb.PersistentClient(
-                path="db/chroma_memory",
-                settings=Settings(anonymized_telemetry=False)
-            )
-            self.memory_collection = self.chroma_client.get_or_create_collection(
-                name="mission_memory",
-                metadata={"description": "Long-term mission memory and learnings"}
-            )
-            logger.info("ChromaDB memory system initialized successfully")
-        except Exception as e:
-            logger.warning(f"ChromaDB initialization failed (memory features disabled): {e}")
-            self.memory_collection = None
-
-        # Create all tables
+        # Ensure database directory exists
+        db_dir = Path("../db")
+        db_dir.mkdir(exist_ok=True)
+        
+        # Create SQLite tables
         Base.metadata.create_all(bind=engine)
-        logger.info(f"Database system initialized successfully with {DATABASE_URL}")
-
-    def get_db(self):
-        """Get database session with proper cleanup"""
-        db = SessionLocal()
+        
+        # Initialize ChromaDB for vector memory
+        chroma_path = "../db/chroma_memory"
+        os.makedirs(chroma_path, exist_ok=True)
+        
         try:
-            yield db
-        finally:
-            db.close()
-
-    def create_mission(
-        self, mission_id_str: str, title: str, prompt: str, agent_type: str, complexity_level: str = "standard", description: str = None
-    ) -> Mission:
-        """Create a new mission with enhanced metadata tracking"""
-        db = SessionLocal()
-        try:
-            logger.info(f"🆕 Creating mission: {mission_id_str}")
-            
-            # Provide default description if none provided
-            if description is None:
-                description = f"Mission created for {agent_type} agent with {complexity_level} complexity"
-            
-            mission = Mission(
-                mission_id_str=mission_id_str,
-                title=title,
-                description=description,
-                prompt=prompt,
-                agent_type=agent_type,
-                complexity_level=complexity_level,
-                status="pending",
-                created_at=datetime.utcnow(),
-                updated_at=datetime.utcnow()
+            self.chroma_client = chromadb.PersistentClient(path=chroma_path)
+            self.memory_collection = self.chroma_client.get_or_create_collection(
+                "mission_memory",
+                metadata={"description": "Cognitive Forge mission memory"}
             )
-            
+            logger.info("✅ ChromaDB memory system initialized successfully")
+        except Exception as e:
+            logger.error(f"❌ ChromaDB initialization failed: {e}")
+            self.memory_collection = None
+        
+        logger.info("✅ Database system initialized successfully")
+    
+    def create_mission(self, **kwargs) -> Mission:
+        """Create a new mission"""
+        db = SessionLocal()
+        try:
+            mission = Mission(**kwargs)
             db.add(mission)
             db.commit()
             db.refresh(mission)
-            
-            logger.info(f"✅ Mission created successfully: {mission_id_str}")
-            
-            # Log system event
-            self.log_system_event(
-                level="INFO",
-                message=f"Mission created: {title}",
-                component="mission_creation",
-                metadata={
-                    "mission_id": mission_id_str,
-                    "agent_type": agent_type,
-                    "complexity_level": complexity_level,
-                    "title": title
-                }
-            )
-            
+            logger.info(f"📝 Created mission: {mission.mission_id_str}")
             return mission
-            
-        except SQLAlchemyError as e:
+        except Exception as e:
             db.rollback()
-            logger.error(f"Error creating mission: {e}")
+            logger.error(f"❌ Failed to create mission: {e}")
             raise
         finally:
             db.close()
-
-    def update_mission_status(
-        self,
-        mission_id_str: str,
-        status: str,
-        result: str = None,
-        plan: Dict = None,
-        execution_time: int = None,
-        error_message: str = None,
-    ) -> bool:
-        """Update mission status and metadata with enhanced logging"""
+    
+    def update_mission_status(self, mission_id_str: str, status: str, 
+                            result: str = None, error_message: str = None,
+                            execution_time: float = None, user_satisfaction: float = None):
+        """Update mission status with comprehensive tracking"""
         db = SessionLocal()
         try:
-            logger.info(f"🔄 Updating mission status: {mission_id_str} -> {status}")
-            
             mission = db.query(Mission).filter(Mission.mission_id_str == mission_id_str).first()
-            if not mission:
-                logger.error(f"❌ Mission not found in database: {mission_id_str}")
-                return False
-
-            # Log the status change
-            old_status = mission.status
-            mission.status = status
-            mission.updated_at = datetime.utcnow()
-
-            if result is not None:
-                mission.result = result
-                logger.debug(f"📝 Updated mission result for {mission_id_str}")
-            if plan is not None:
-                mission.plan = plan
-                logger.debug(f"📋 Updated mission plan for {mission_id_str}")
-            if execution_time is not None:
-                mission.execution_time = execution_time
-                logger.debug(f"⏱️ Updated execution time for {mission_id_str}: {execution_time}s")
-            if error_message is not None:
-                mission.error_message = error_message
-                logger.warning(f"⚠️ Updated error message for {mission_id_str}: {error_message}")
-
-            if status in ["completed", "failed"]:
-                mission.completed_at = datetime.utcnow()
-                logger.info(f"🏁 Mission {mission_id_str} marked as {status} at {mission.completed_at}")
-
-            db.commit()
-            logger.info(f"✅ Successfully updated mission {mission_id_str} status: {old_status} -> {status}")
-            
-            # Add detailed status update to mission updates
-            self.add_mission_update(
-                mission_id_str=mission_id_str,
-                message=f"Status updated: {old_status} -> {status}",
-                update_type="status_change"
-            )
-            
-            return True
-
-        except SQLAlchemyError as e:
+            if mission:
+                mission.status = status
+                mission.updated_at = datetime.utcnow()
+                
+                if result:
+                    mission.result = result
+                if error_message:
+                    mission.error_message = error_message
+                if execution_time is not None:
+                    mission.execution_time = execution_time
+                if user_satisfaction is not None:
+                    mission.user_satisfaction = user_satisfaction
+                
+                if status in ["completed", "failed"]:
+                    mission.completed_at = datetime.utcnow()
+                
+                db.commit()
+                logger.info(f"📊 Updated mission {mission_id_str}: {status}")
+            else:
+                logger.warning(f"⚠️  Mission not found: {mission_id_str}")
+        except Exception as e:
             db.rollback()
-            logger.error(f"❌ Database error updating mission {mission_id_str}: {e}")
-            return False
+            logger.error(f"❌ Failed to update mission {mission_id_str}: {e}")
+            raise
         finally:
             db.close()
-
-    def add_mission_update(
-        self,
-        mission_id_str: str,
-        message: str,
-        update_type: str = "info",
-        agent_role: str = None,
-        step_number: int = None,
-    ) -> bool:
-        """Add a real-time update to a mission"""
+    
+    def add_mission_update(self, mission_id_str: str, phase: str, message: str, data: Dict = None):
+        """Add real-time mission update"""
         db = SessionLocal()
         try:
             update = MissionUpdate(
                 mission_id_str=mission_id_str,
-                update_message=message,
-                update_type=update_type,
-                agent_role=agent_role,
-                step_number=step_number,
+                phase=phase,
+                message=message,
+                data=data
             )
             db.add(update)
             db.commit()
-            return True
-        except SQLAlchemyError as e:
+        except Exception as e:
             db.rollback()
-            logger.error(f"Error adding mission update: {e}")
-            return False
+            logger.error(f"❌ Failed to add mission update: {e}")
         finally:
             db.close()
-
-    def get_mission_updates(self, mission_id_str: str, limit: int = 100) -> List[MissionUpdate]:
-        """Get recent updates for a mission"""
+    
+    def list_missions(self, limit: int = 50, status: str = None) -> List[Mission]:
+        """List missions with optional filtering"""
         db = SessionLocal()
         try:
-            updates = (
-                db.query(MissionUpdate)
-                .filter(MissionUpdate.mission_id_str == mission_id_str)
-                .order_by(MissionUpdate.timestamp.desc())
-                .limit(limit)
-                .all()
-            )
-            return updates
+            query = db.query(Mission)
+            if status:
+                query = query.filter(Mission.status == status)
+            return query.order_by(Mission.created_at.desc()).limit(limit).all()
         finally:
             db.close()
-
+    
     def get_mission(self, mission_id_str: str) -> Optional[Mission]:
-        """Get a mission by ID"""
+        """Get specific mission"""
         db = SessionLocal()
         try:
             return db.query(Mission).filter(Mission.mission_id_str == mission_id_str).first()
         finally:
             db.close()
-
-    def list_missions(self, limit: int = 50, include_archived: bool = False) -> List[Mission]:
-        """List recent missions"""
+    
+    def get_mission_updates(self, mission_id_str: str, limit: int = 50) -> List[MissionUpdate]:
+        """Get mission updates"""
         db = SessionLocal()
         try:
-            query = db.query(Mission)
-            if not include_archived:
-                query = query.filter(Mission.is_archived == False)
-            return query.order_by(Mission.created_at.desc()).limit(limit).all()
+            return db.query(MissionUpdate).filter(
+                MissionUpdate.mission_id_str == mission_id_str
+            ).order_by(MissionUpdate.timestamp.desc()).limit(limit).all()
         finally:
             db.close()
-
-    def store_memory(
-        self, mission_id_str: str, prompt: str, result: str, success: bool, metadata: Dict = None
-    ) -> bool:
-        """Store mission outcome in ChromaDB for long-term memory"""
-        if self.memory_collection is None:
-            logger.warning(f"ChromaDB memory collection not initialized, skipping memory storage for mission: {mission_id_str}")
-            return False
-
+    
+    def record_performance_metric(self, execution_path: str, complexity_score: float,
+                                execution_time: float, success: bool, 
+                                user_satisfaction: float = None):
+        """Record performance metric for hybrid learning"""
+        db = SessionLocal()
         try:
-            # Create a comprehensive memory entry
-            memory_text = f"""Mission ID: {mission_id_str}
-Prompt: {prompt}
-Success: {success}
-Result: {result}
-Timestamp: {datetime.utcnow().isoformat()}"""
-
-            # Store in ChromaDB
-            self.memory_collection.add(
-                documents=[memory_text],
-                metadatas=[
-                    {
-                        "mission_id": mission_id_str,
-                        "success": success,
-                        "timestamp": datetime.utcnow().isoformat(),
-                        **(metadata or {}),
-                    }
-                ],
-                ids=[f"memory_{mission_id_str}"],
+            metric = PerformanceMetric(
+                execution_path=execution_path,
+                complexity_score=complexity_score,
+                execution_time=execution_time,
+                success=success,
+                user_satisfaction=user_satisfaction
             )
-
-            logger.info(f"Memory stored for mission: {mission_id_str}")
-            return True
-
+            db.add(metric)
+            db.commit()
         except Exception as e:
-            logger.error(f"Error storing memory: {e}")
-            return False
-
-    def search_memory(self, query: str, limit: int = 5) -> List[Dict]:
-        """Search mission memory for relevant past experiences"""
-        if self.memory_collection is None:
-            logger.warning("ChromaDB memory collection not initialized, skipping memory search.")
-            return []
-
+            db.rollback()
+            logger.error(f"❌ Failed to record performance metric: {e}")
+        finally:
+            db.close()
+    
+    def update_user_preferences(self, user_id: str, preferred_path: str,
+                              speed_preference: float, complexity_preference: float,
+                              satisfaction_score: float):
+        """Update user preferences for learning"""
+        db = SessionLocal()
         try:
-            results = self.memory_collection.query(query_texts=[query], n_results=limit)
-
-            memories = []
-            for i in range(len(results["documents"][0])):
-                memory = {
-                    "content": results["documents"][0][i],
-                    "metadata": results["metadatas"][0][i],
-                    "distance": results["distances"][0][i] if "distances" in results else None,
-                }
-                memories.append(memory)
-
-            logger.info(f"Memory search returned {len(memories)} results")
-            return memories
-
-        except Exception as e:
-            logger.error(f"Error searching memory: {e}")
-            return []
-
-    def log_system_event(
-        self, level: str, message: str, component: str = None, metadata: Dict = None
-    ) -> bool:
-        """Log system-level events"""
-        try:
-            db = SessionLocal()
-            try:
-                log_entry = SystemLog(
-                    level=level,
-                    message=message,
-                    component=component,
-                    source=component,  # Use component as source for database compatibility
-                    log_metadata=metadata,
+            user_pref = db.query(UserPreference).filter(
+                UserPreference.user_id == user_id
+            ).first()
+            
+            if user_pref:
+                # Update existing preferences
+                user_pref.preferred_path = preferred_path
+                user_pref.speed_preference = speed_preference
+                user_pref.complexity_preference = complexity_preference
+                user_pref.last_updated = datetime.utcnow()
+                
+                # Update satisfaction history
+                history = user_pref.satisfaction_history or []
+                history.append(satisfaction_score)
+                if len(history) > 100:  # Keep last 100 scores
+                    history = history[-100:]
+                user_pref.satisfaction_history = history
+            else:
+                # Create new user preferences
+                user_pref = UserPreference(
+                    user_id=user_id,
+                    preferred_path=preferred_path,
+                    speed_preference=speed_preference,
+                    complexity_preference=complexity_preference,
+                    satisfaction_history=[satisfaction_score]
                 )
-                db.add(log_entry)
-                db.commit()
-                return True
-            except SQLAlchemyError as e:
-                db.rollback()
-                logger.warning(f"Database logging failed (continuing without logging): {e}")
-                return False
-            finally:
-                db.close()
+                db.add(user_pref)
+            
+            db.commit()
         except Exception as e:
-            logger.warning(f"System event logging failed: {e}")
-            return False
-
+            db.rollback()
+            logger.error(f"❌ Failed to update user preferences: {e}")
+        finally:
+            db.close()
+    
+    def get_user_preferences(self, user_id: str = "default") -> Optional[UserPreference]:
+        """Get user preferences"""
+        db = SessionLocal()
+        try:
+            return db.query(UserPreference).filter(
+                UserPreference.user_id == user_id
+            ).first()
+        finally:
+            db.close()
+    
+    def add_to_memory(self, mission_id: str, content: str, metadata: Dict = None):
+        """Add content to ChromaDB memory"""
+        if not self.memory_collection:
+            logger.warning("⚠️  ChromaDB not available for memory storage")
+            return
+        
+        try:
+            self.memory_collection.add(
+                documents=[content],
+                metadatas=[metadata or {}],
+                ids=[f"{mission_id}_{datetime.utcnow().timestamp()}"]
+            )
+            logger.info(f"💾 Added to memory: {mission_id}")
+        except Exception as e:
+            logger.error(f"❌ Failed to add to memory: {e}")
+    
+    def search_memory(self, query: str, limit: int = 5) -> List[Dict]:
+        """Search ChromaDB memory"""
+        if not self.memory_collection:
+            return []
+        
+        try:
+            results = self.memory_collection.query(
+                query_texts=[query],
+                n_results=limit
+            )
+            return [
+                {
+                    "content": doc,
+                    "metadata": meta,
+                    "distance": distance
+                }
+                for doc, meta, distance in zip(
+                    results["documents"][0],
+                    results["metadatas"][0],
+                    results["distances"][0]
+                )
+            ]
+        except Exception as e:
+            logger.error(f"❌ Memory search failed: {e}")
+            return []
+    
     def get_system_stats(self) -> Dict[str, Any]:
         """Get comprehensive system statistics"""
+        db = SessionLocal()
         try:
-            db = SessionLocal()
-            try:
-                total_missions = db.query(Mission).count()
-                completed_missions = db.query(Mission).filter(Mission.status == "completed").count()
-                failed_missions = db.query(Mission).filter(Mission.status == "failed").count()
-                pending_missions = db.query(Mission).filter(Mission.status == "pending").count()
-
-                # Get memory stats
-                memory_count = 0
-                if self.memory_collection:
-                    try:
-                        memory_count = self.memory_collection.count()
-                    except Exception as e:
-                        logger.warning(f"Error getting memory count: {e}")
-                        memory_count = 0
-
-                return {
-                    "total_missions": total_missions,
-                    "completed_missions": completed_missions,
-                    "failed_missions": failed_missions,
-                    "pending_missions": pending_missions,
-                    "success_rate": (
-                        (completed_missions / total_missions * 100) if total_missions > 0 else 0
-                    ),
-                    "memory_entries": memory_count,
-                    "last_updated": datetime.utcnow().isoformat(),
-                }
-            except SQLAlchemyError as e:
-                logger.warning(f"Database stats query failed: {e}")
-                return {
-                    "total_missions": 0,
-                    "completed_missions": 0,
-                    "failed_missions": 0,
-                    "pending_missions": 0,
-                    "success_rate": 0,
-                    "memory_entries": 0,
-                    "last_updated": datetime.utcnow().isoformat(),
-                    "error": "Database connection issue"
-                }
-            finally:
-                db.close()
-        except Exception as e:
-            logger.error(f"Error getting system stats: {e}")
+            total_missions = db.query(Mission).count()
+            pending_missions = db.query(Mission).filter(Mission.status == "pending").count()
+            executing_missions = db.query(Mission).filter(Mission.status == "executing").count()
+            completed_missions = db.query(Mission).filter(Mission.status == "completed").count()
+            failed_missions = db.query(Mission).filter(Mission.status == "failed").count()
+            
+            # Performance metrics
+            golden_path_metrics = db.query(PerformanceMetric).filter(
+                PerformanceMetric.execution_path == "golden_path"
+            ).all()
+            full_workflow_metrics = db.query(PerformanceMetric).filter(
+                PerformanceMetric.execution_path == "full_workflow"
+            ).all()
+            
             return {
-                "total_missions": 0,
-                "completed_missions": 0,
-                "failed_missions": 0,
-                "pending_missions": 0,
-                "success_rate": 0,
-                "memory_entries": 0,
-                "last_updated": datetime.utcnow().isoformat(),
-                "error": str(e)
+                "missions": {
+                    "total": total_missions,
+                    "pending": pending_missions,
+                    "executing": executing_missions,
+                    "completed": completed_missions,
+                    "failed": failed_missions
+                },
+                "performance": {
+                    "golden_path": {
+                        "count": len(golden_path_metrics),
+                        "avg_time": sum(m.execution_time for m in golden_path_metrics) / len(golden_path_metrics) if golden_path_metrics else 0,
+                        "success_rate": sum(1 for m in golden_path_metrics if m.success) / len(golden_path_metrics) if golden_path_metrics else 0
+                    },
+                    "full_workflow": {
+                        "count": len(full_workflow_metrics),
+                        "avg_time": sum(m.execution_time for m in full_workflow_metrics) / len(full_workflow_metrics) if full_workflow_metrics else 0,
+                        "success_rate": sum(1 for m in full_workflow_metrics if m.success) / len(full_workflow_metrics) if full_workflow_metrics else 0
+                    }
+                },
+                "memory": {
+                    "chromadb_available": self.memory_collection is not None,
+                    "collection_count": self.memory_collection.count() if self.memory_collection else 0
+                }
             }
+        finally:
+            db.close()
 
 
 # Global database manager instance

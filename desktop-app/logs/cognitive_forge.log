@@ -5012,3 +5012,109 @@ CONTEXT:  JSON data, line 1: Mission...
 2025-08-01 11:07:55.329 | INFO     | src.main:startup_event:1163 - 🔗 SSE endpoint available at /api/events/stream
 2025-08-01 11:07:55.587 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 57 new logs from server 8002
 2025-08-01 11:08:06.898 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 1 new logs from server 8002
+2025-08-01 11:11:20.289 | INFO     | src.main:startup_event:1158 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 11:11:20.291 | INFO     | src.main:startup_event:1159 - 📡 Real-time log streaming initialized
+2025-08-01 11:11:20.291 | INFO     | src.main:startup_event:1163 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 11:11:22.559 | ERROR    | src.main:forward_server_8002_logs:634 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 11:11:26.830 | ERROR    | src.main:forward_server_8002_logs:634 - Error forwarding server 8002 logs: Cannot connect to host localhost:8002 ssl:default [Multiple exceptions: [Errno 10061] Connect call failed ('::1', 8002, 0, 0), [Errno 10061] Connect call failed ('127.0.0.1', 8002)]
+2025-08-01 11:11:30.094 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 1 new logs from server 8002
+2025-08-01 11:11:32.352 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:11:34.606 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:11:36.883 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:11:39.150 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:11:41.412 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:11:43.692 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:11:45.948 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:11:48.229 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:11:50.495 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:11:52.777 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:11:55.034 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:11:57.283 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:11:59.536 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:12:01.827 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 3 new logs from server 8002
+2025-08-01 11:12:04.097 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:12:06.368 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:12:08.634 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:12:10.921 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:12:13.212 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:12:15.466 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:12:17.729 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:12:19.993 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:12:22.269 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:12:24.525 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:12:26.801 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 1 new logs from server 8002
+2025-08-01 11:12:31.279 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 1 new logs from server 8002
+2025-08-01 11:13:00.792 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 1 new logs from server 8002
+2025-08-01 11:13:30.321 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 1 new logs from server 8002
+2025-08-01 11:17:43.628 | ERROR    | src.main:analyze_task_complexity:1017 - Task analysis failed: name 'hybrid_decision_engine' is not defined
+2025-08-01 11:18:09.947 | INFO     | src.main:shutdown_event:1168 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 11:18:26.801 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 11:18:26.822 | INFO     | src.main:startup_event:1158 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 11:18:26.823 | INFO     | src.main:startup_event:1159 - 📡 Real-time log streaming initialized
+2025-08-01 11:18:26.823 | INFO     | src.main:startup_event:1163 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 11:18:27.085 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 1 new logs from server 8002
+2025-08-01 11:18:29.349 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:18:31.601 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:18:33.854 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:18:36.125 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:18:38.395 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:18:40.587 | INFO     | src.core.hybrid_decision_engine:set:101 - 💾 Cache SET for decision: a5230b24...
+2025-08-01 11:18:40.588 | INFO     | src.core.hybrid_decision_engine:make_hybrid_decision:366 - 🎯 Hybrid Decision: golden_path (user_preference) - Confidence: 0.32
+2025-08-01 11:18:40.665 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:18:42.942 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:18:45.194 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:18:47.451 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:18:49.711 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:18:51.980 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:18:54.245 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:18:56.503 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:18:58.778 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 3 new logs from server 8002
+2025-08-01 11:19:01.053 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:19:03.341 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:19:05.616 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:19:07.872 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:19:10.138 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:19:12.403 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:19:14.680 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:19:16.948 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:19:19.211 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:19:21.481 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:19:23.758 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 1 new logs from server 8002
+2025-08-01 11:19:28.298 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 1 new logs from server 8002
+2025-08-01 11:19:57.751 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 1 new logs from server 8002
+2025-08-01 11:20:27.223 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 1 new logs from server 8002
+2025-08-01 11:23:00.170 | INFO     | src.main:shutdown_event:1168 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 11:23:17.914 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 11:23:17.935 | INFO     | src.main:startup_event:1158 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 11:23:17.935 | INFO     | src.main:startup_event:1159 - 📡 Real-time log streaming initialized
+2025-08-01 11:23:17.935 | INFO     | src.main:startup_event:1163 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 11:23:18.211 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 1 new logs from server 8002
+2025-08-01 11:23:20.467 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:23:22.738 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:23:24.998 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:23:27.260 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:23:29.516 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:23:31.788 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:23:34.051 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:23:36.337 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:23:38.651 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:23:40.917 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:23:43.172 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:23:45.435 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:23:47.684 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 2 new logs from server 8002
+2025-08-01 11:23:49.944 | INFO     | src.main:forward_server_8002_logs:631 - Forwarded 3 new logs from server 8002
+2025-08-01 11:23:50.375 | INFO     | src.main:shutdown_event:1168 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 11:27:47.234 | INFO     | src.main:startup_event:475 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 11:27:47.235 | INFO     | src.main:startup_event:476 - 📡 Real-time log streaming initialized
+2025-08-01 11:27:47.235 | INFO     | src.main:startup_event:477 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 11:27:47.235 | INFO     | src.main:startup_event:478 - 🧠 Hybrid Decision Engine active
+2025-08-01 11:27:47.236 | INFO     | src.main:startup_event:479 - 💾 Database system ready
+2025-08-01 11:27:47.275 | SUCCESS  | src.utils.sentry_integration:_initialize_sentry:78 - Sentry integration initialized successfully
+2025-08-01 11:27:47.282 | SUCCESS  | src.main:startup_event:484 - ✅ Sentry integration initialized
+2025-08-01 11:35:21.646 | INFO     | src.main:startup_event:475 - 🚀 Sentinel Cognitive Forge v5.0 starting up...
+2025-08-01 11:35:21.646 | INFO     | src.main:startup_event:476 - 📡 Real-time log streaming initialized
+2025-08-01 11:35:21.646 | INFO     | src.main:startup_event:477 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-01 11:35:21.646 | INFO     | src.main:startup_event:478 - 🧠 Hybrid Decision Engine active
+2025-08-01 11:35:21.646 | INFO     | src.main:startup_event:479 - 💾 Database system ready
+2025-08-01 11:35:21.650 | ERROR    | src.utils.sentry_integration:_initialize_sentry:81 - Failed to initialize Sentry: Missing public key
+2025-08-01 11:35:21.650 | SUCCESS  | src.main:startup_event:484 - ✅ Sentry integration initialized
