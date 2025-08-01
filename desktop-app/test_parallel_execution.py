@@ -10,7 +10,7 @@ import time
 from datetime import datetime
 
 # Test configuration
-BASE_URL = "http://localhost:8000"
+BASE_URL = "http://localhost:8001"
 TEST_PROMPTS = {
     "standard": "Create a simple Python function to calculate fibonacci numbers",
     "complex": "Build a complete web application with user authentication, database integration, and API endpoints",

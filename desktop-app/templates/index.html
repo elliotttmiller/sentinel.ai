@@ -21,10 +21,22 @@
         <header class="header">
             <h1 class="header__heading"><a href="#" rel="noreferrer noopener">SENTINEL</a></h1>
             <div class="header__options">
-                <div class="sidebar-status me-5">
+                <div class="sidebar-status me-3">
                     <div class="status-indicator">
                         <div class="status-dot" :class="serviceStatus.overall_status === 'healthy' ? 'bg-success' : 'bg-danger'"></div>
                         <span class="status-text small ms-2" x-text="serviceStatus.overall_status.toUpperCase()">OPERATIONAL</span>
+                    </div>
+                </div>
+                <div class="sidebar-status me-3">
+                    <div class="status-indicator">
+                        <div class="status-dot bg-success"></div>
+                        <span class="status-text small ms-2">SERVER 8001</span>
+                    </div>
+                </div>
+                <div class="sidebar-status me-5">
+                    <div class="status-indicator">
+                        <div class="status-dot bg-success"></div>
+                        <span class="status-text small ms-2">SERVER 8002</span>
                     </div>
                 </div>
                 <button class="header__pro" @click="refreshAllData()"><i class="bi bi-arrow-clockwise"></i> REFRESH</button>
@@ -44,11 +56,11 @@
                 <!-- DASHBOARD TAB (STRATEGIC COMMAND CENTER) -->
                 <div x-show="activeTab === 'dashboard'" class="fade-in" style="width: 100%;">
                     <div class="row g-4">
-                        <!-- Active Missions (Moved from bottom) -->
-                        <div class="col-lg-6">
+                        <!-- Active Missions -->
+                        <div class="col-lg-4">
                             <div class="main__cards-container h-100">
                                 <h2 class="ss-heading">Active Missions</h2>
-                                <div style="height: 300px; overflow-y: auto;">
+                                <div style="height: 350px; overflow-y: auto;">
                                     <template x-for="mission in activeMissions" :key="mission.id">
                                         <div class="card mb-2" style="background: hsl(270, 50%, 8%);">
                                             <div class="card-body p-3">
@@ -65,8 +77,8 @@
                                 </div>
                             </div>
                             
-                        <!-- Enhanced Observability Hub (Bigger) -->
-                        <div class="col-lg-6">
+                        <!-- Enhanced Observability Hub -->
+                        <div class="col-lg-8">
                             <div class="main__cards-container h-100">
                                 <h2 class="ss-heading">Observability Hub</h2>
                                 <div class="btn-group w-100 mb-3" role="group">
@@ -75,7 +87,7 @@
                                     <button class="btn btn-sm" :class="observabilityView === 'wandb' ? 'btn-primary header__pro' : 'btn-outline-secondary'" @click="observabilityView = 'wandb'">WandB</button>
                                     <button class="btn btn-sm" :class="observabilityView === 'sentry' ? 'btn-primary header__pro' : 'btn-outline-secondary'" @click="observabilityView = 'sentry'">Sentry</button>
                                 </div>
-                                <div style="height: 300px; overflow-y: auto;">
+                                <div style="height: 350px; overflow-y: auto;">
                                     <!-- Overview -->
                                     <div x-show="observabilityView === 'overview'" class="row g-3">
                                         <div class="col-4 text-center">
@@ -186,14 +198,173 @@
                         <div class="col-lg-12">
                             <div class="main__cards-container">
                                 <h2 class="ss-heading">Live Event Feed</h2>
-                                <div class="terminal" style="height: 200px;">
-                                    <template x-for="event in liveEvents">
-                                        <p class="mb-1 small">
-                                            <span x-text="formatTime(event.timestamp) + ' '"></span>
-                                            <span :class="getEventClass(event.level)" x-text="'[' + event.level + '] '"></span>
-                                            <span x-text="event.message"></span>
-                                        </p>
-                                    </template>
+                                <div class="btn-group w-100 mb-3" role="group">
+                                    <button class="btn btn-sm" :class="liveFeedView === 'overview' ? 'btn-primary header__pro' : 'btn-outline-secondary'" @click="liveFeedView = 'overview'">Overview</button>
+                                    <button class="btn btn-sm" :class="liveFeedView === 'server_8001' ? 'btn-primary header__pro' : 'btn-outline-secondary'" @click="liveFeedView = 'server_8001'">Server 8001</button>
+                                    <button class="btn btn-sm" :class="liveFeedView === 'server_8002' ? 'btn-primary header__pro' : 'btn-outline-secondary'" @click="liveFeedView = 'server_8002'">Server 8002</button>
+                                    <button class="btn btn-sm" :class="liveFeedView === 'system' ? 'btn-primary header__pro' : 'btn-outline-secondary'" @click="liveFeedView = 'system'">System</button>
+
+                                </div>
+                                
+                                <!-- Overview Tab -->
+                                <div x-show="liveFeedView === 'overview'" class="terminal" style="height: 300px;">
+                                    <div class="row mb-3">
+                                        <div class="col-md-3 text-center">
+                                            <div class="card bg-dark border-secondary">
+                                                <div class="card-body p-2">
+                                                    <h6 class="text-primary mb-1">Server 8001</h6>
+                                                    <small class="text-muted" x-text="liveLogs.server_8001.length + ' logs'"></small>
+                                                    <div class="mt-1">
+                                                        <span class="badge bg-danger me-1" x-text="liveLogs.server_8001.filter(l => l.level === 'ERROR').length + ' errors'"></span>
+                                                        <span class="badge bg-warning" x-text="liveLogs.server_8001.filter(l => l.level === 'WARNING').length + ' warnings'"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 text-center">
+                                            <div class="card bg-dark border-secondary">
+                                                <div class="card-body p-2">
+                                                    <h6 class="text-info mb-1">Server 8002</h6>
+                                                    <small class="text-muted" x-text="liveLogs.server_8002.length + ' logs'"></small>
+                                                    <div class="mt-1">
+                                                        <span class="badge bg-danger me-1" x-text="liveLogs.server_8002.filter(l => l.level === 'ERROR').length + ' errors'"></span>
+                                                        <span class="badge bg-warning" x-text="liveLogs.server_8002.filter(l => l.level === 'WARNING').length + ' warnings'"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 text-center">
+                                            <div class="card bg-dark border-secondary">
+                                                <div class="card-body p-2">
+                                                    <h6 class="text-success mb-1">System</h6>
+                                                    <small class="text-muted" x-text="liveLogs.system.length + ' logs'"></small>
+                                                    <div class="mt-1">
+                                                        <span class="badge bg-danger me-1" x-text="liveLogs.system.filter(l => l.level === 'ERROR').length + ' errors'"></span>
+                                                        <span class="badge bg-warning" x-text="liveLogs.system.filter(l => l.level === 'WARNING').length + ' warnings'"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 text-center">
+                                            <div class="card bg-dark border-secondary">
+                                                <div class="card-body p-2">
+                                                    <h6 class="text-warning mb-1">Total</h6>
+                                                    <small class="text-muted" x-text="liveLogs.all.length + ' logs'"></small>
+                                                    <div class="mt-1">
+                                                        <small class="text-muted" x-text="'Live streaming active'"></small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="height: 200px; overflow-y: auto;">
+                                        <!-- Server 8001 Logs -->
+                                        <div class="mb-3">
+                                            <h6 class="text-primary mb-2"><i class="bi bi-server me-2"></i>Server 8001</h6>
+                                            <template x-for="log in liveLogs.server_8001">
+                                                <p class="mb-1 small">
+                                                    <span x-text="formatTime(log.timestamp) + ' '"></span>
+                                                    <span :class="getEventClass(log.level)" x-text="'[' + (log.level || 'INFO') + '] '"></span>
+                                                    <span x-text="log.message || log.msg || 'No message'"></span>
+                                                </p>
+                                            </template>
+                                        </div>
+                                        
+                                        <!-- Server 8002 Logs -->
+                                        <div class="mb-3">
+                                            <h6 class="text-info mb-2"><i class="bi bi-server me-2"></i>Server 8002</h6>
+                                            <template x-for="log in liveLogs.server_8002">
+                                                <p class="mb-1 small">
+                                                    <span x-text="formatTime(log.timestamp) + ' '"></span>
+                                                    <span :class="getEventClass(log.level)" x-text="'[' + (log.level || 'INFO') + '] '"></span>
+                                                    <span x-text="log.message || log.msg || 'No message'"></span>
+                                                </p>
+                                            </template>
+                                        </div>
+                                        
+                                        <!-- System Logs -->
+                                        <div class="mb-3">
+                                            <h6 class="text-success mb-2"><i class="bi bi-gear me-2"></i>System</h6>
+                                            <template x-for="log in liveLogs.system">
+                                                <p class="mb-1 small">
+                                                    <span x-text="formatTime(log.timestamp) + ' '"></span>
+                                                    <span :class="getEventClass(log.level)" x-text="'[' + (log.level || 'INFO') + '] '"></span>
+                                                    <span x-text="log.message || log.msg || 'No message'"></span>
+                                                </p>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Server 8001 Tab -->
+                                <div x-show="liveFeedView === 'server_8001'" class="terminal" style="height: 300px;">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h6 class="text-primary mb-0"><i class="bi bi-server me-2"></i>Server 8001 Logs</h6>
+                                        <div>
+                                            <span class="badge bg-success me-2">active</span>
+                                            <small class="text-muted" x-text="liveLogs.server_8001.length + ' total logs'"></small>
+                                        </div>
+                                    </div>
+                                    <div style="height: 240px; overflow-y: auto;">
+                                        <template x-for="log in liveLogs.server_8001">
+                                            <p class="mb-1 small">
+                                                <span x-text="formatTime(log.timestamp) + ' '"></span>
+                                                <span :class="getEventClass(log.level)" x-text="'[' + (log.level || 'INFO') + '] '"></span>
+                                                <span x-text="log.message || log.msg || 'No message'"></span>
+                                            </p>
+                                        </template>
+                                        <div x-show="!liveLogs.server_8001.length" class="text-center text-muted pt-5">
+                                            <i class="bi bi-inbox fs-1"></i>
+                                            <p>No logs available for Server 8001</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Server 8002 Tab -->
+                                <div x-show="liveFeedView === 'server_8002'" class="terminal" style="height: 300px;">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h6 class="text-info mb-0"><i class="bi bi-server me-2"></i>Server 8002 Logs</h6>
+                                        <div>
+                                            <span class="badge bg-success me-2">active</span>
+                                            <small class="text-muted" x-text="liveLogs.server_8002.length + ' total logs'"></small>
+                                        </div>
+                                    </div>
+                                    <div style="height: 240px; overflow-y: auto;">
+                                        <template x-for="log in liveLogs.server_8002">
+                                            <p class="mb-1 small">
+                                                <span x-text="formatTime(log.timestamp) + ' '"></span>
+                                                <span :class="getEventClass(log.level)" x-text="'[' + (log.level || 'INFO') + '] '"></span>
+                                                <span x-text="log.message || log.msg || 'No message'"></span>
+                                            </p>
+                                        </template>
+                                        <div x-show="!liveLogs.server_8002.length" class="text-center text-muted pt-5">
+                                            <i class="bi bi-inbox fs-1"></i>
+                                            <p>No logs available for Server 8002</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- System Tab -->
+                                <div x-show="liveFeedView === 'system'" class="terminal" style="height: 300px;">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h6 class="text-success mb-0"><i class="bi bi-gear me-2"></i>System Logs</h6>
+                                        <div>
+                                            <small class="text-muted" x-text="liveLogs.system.length + ' total logs'"></small>
+                                        </div>
+                                    </div>
+                                    <div style="height: 240px; overflow-y: auto;">
+                                        <template x-for="log in liveLogs.system">
+                                            <p class="mb-1 small">
+                                                <span x-text="formatTime(log.timestamp) + ' '"></span>
+                                                <span :class="getEventClass(log.level)" x-text="'[' + (log.level || 'INFO') + '] '"></span>
+                                                <span x-text="log.message || log.msg || 'No message'"></span>
+                                            </p>
+                                        </template>
+                                        <div x-show="!liveLogs.system.length" class="text-center text-muted pt-5">
+                                            <i class="bi bi-inbox fs-1"></i>
+                                            <p>No system logs available</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -342,22 +513,30 @@
                     wandb: { status: 'loading', active_runs: 0, best_accuracy: 0, avg_loss: 0 },
                     sentry: { status: 'loading', active_issues: 0, error_rate_percent: 0, uptime_percent: 0 }
                 },
+                liveFeedView: 'overview', // Added for live event feed tabs
+                liveLogs: {
+                    all: [],
+                    server_8001: [],
+                    server_8002: [],
+                    system: []
+                },
 
                 init() {
                     this.hideLoadingScreen();
-                    this.startPolling();
+                    this.loadInitialData();
+                    this.startLogStreaming();
                 },
                 
-                startPolling() {
-                    this.fetchAllData();
-                    setInterval(() => { this.fetchAllData(); }, 5000);
-                },
-
-                fetchAllData() {
-                    this.loadMissions();
-                    this.updateServiceStatus();
-                    this.updateObservabilityOverview();
-                    this.updateLiveEvents();
+                async loadInitialData() {
+                    // Load historical missions once on startup
+                    try {
+                        const response = await fetch('/missions');
+                        if (response.ok) {
+                            this.missions = await response.json();
+                        }
+                    } catch (error) {
+                        console.error('Error loading initial missions:', error);
+                    }
                 },
                 
                 setActiveTab(tab) { this.activeTab = tab; },
@@ -441,7 +620,29 @@
                     } catch(e) { console.error('Failed to load live events'); }
                 },
 
-                formatTime(dateString) { return new Date(dateString).toLocaleTimeString(); },
+
+
+                formatTime(dateString) { 
+                    if (!dateString) return 'N/A';
+                    try {
+                        const date = new Date(dateString);
+                        if (isNaN(date.getTime())) return 'Invalid Date';
+                        return date.toLocaleTimeString();
+                    } catch (e) {
+                        return 'Invalid Date';
+                    }
+                },
+
+                formatDate(dateString) {
+                    if (!dateString) return 'N/A';
+                    try {
+                        const date = new Date(dateString);
+                        if (isNaN(date.getTime())) return 'Invalid Date';
+                        return date.toLocaleString();
+                    } catch (e) {
+                        return 'Invalid Date';
+                    }
+                },
 
                 getStatusClass(status) {
                     const statusLower = status.toLowerCase();
@@ -453,8 +654,10 @@
                 },
                 
                 getEventClass(level) {
-                    if (level === 'ERROR') return 'text-danger';
-                    if (level === 'WARNING') return 'text-warning';
+                    if (!level) return 'text-info';
+                    const levelUpper = level.toUpperCase();
+                    if (levelUpper === 'ERROR') return 'text-danger';
+                    if (levelUpper === 'WARNING') return 'text-warning';
                     return 'text-info';
                 },
 
@@ -496,7 +699,47 @@
                 refreshAllData() {
                     this.fetchAllData();
                     this.showToast('Data refreshed', 'info');
-                }
+                },
+
+                startLogStreaming() {
+                    console.log("Connecting to real-time log stream...");
+                    const eventSource = new EventSource('/api/events/stream');
+
+                    eventSource.onmessage = (event) => {
+                        try {
+                            const logEntry = JSON.parse(event.data);
+                            if (logEntry.type === 'keepalive') return;
+
+                            // Add to the 'all' logs buffer
+                            this.liveLogs.all.unshift(logEntry);
+                            if (this.liveLogs.all.length > 200) this.liveLogs.all.pop();
+                            
+                            // Categorize by server port
+                            const serverPort = logEntry.server_port || '8001';
+                            if (serverPort === '8001') {
+                                this.liveLogs.server_8001.unshift(logEntry);
+                                if (this.liveLogs.server_8001.length > 50) this.liveLogs.server_8001.pop();
+                            } else if (serverPort === '8002') {
+                                this.liveLogs.server_8002.unshift(logEntry);
+                                if (this.liveLogs.server_8002.length > 50) this.liveLogs.server_8002.pop();
+                            } else {
+                                this.liveLogs.system.unshift(logEntry);
+                                if (this.liveLogs.system.length > 50) this.liveLogs.system.pop();
+                            }
+
+                        } catch (e) {
+                            console.error('Error parsing log stream:', e);
+                        }
+                    };
+
+                    eventSource.onerror = (error) => {
+                        console.error('Log streaming connection error. Reconnecting in 5s...', error);
+                        eventSource.close();
+                        setTimeout(() => this.startLogStreaming(), 5000);
+                    };
+                },
+
+
             }
         }
     </script>

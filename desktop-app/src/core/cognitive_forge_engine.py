@@ -653,10 +653,18 @@ class CognitiveForgeEngine:
                 if result and "code" in result.lower():
                     update_callback("🛡️ Guardian Protocol: Applying auto-fixes to generated code...")
                     try:
-                        fixed_result = await self.guardian_protocol.run_code_autofix(result, "Autonomous orchestrator execution")
-                        if fixed_result.get("status") == "success":
-                            result = fixed_result.get("fixed_code", result)
-                            update_callback("✅ Guardian Protocol: Code auto-fixes applied successfully")
+                        # Debug: Check if guardian_protocol exists and has the method
+                        if not hasattr(self, 'guardian_protocol') or self.guardian_protocol is None:
+                            logger.error("Guardian Protocol is not initialized")
+                            update_callback("⚠️ Guardian Protocol: Not initialized")
+                        elif not hasattr(self.guardian_protocol, 'run_code_autofix'):
+                            logger.error(f"Guardian Protocol missing run_code_autofix method. Available methods: {dir(self.guardian_protocol)}")
+                            update_callback("⚠️ Guardian Protocol: Method not found")
+                        else:
+                            fixed_result = await self.guardian_protocol.run_code_autofix(result, "Autonomous orchestrator execution")
+                            if fixed_result.get("status") == "success":
+                                result = fixed_result.get("fixed_code", result)
+                                update_callback("✅ Guardian Protocol: Code auto-fixes applied successfully")
                     except Exception as e:
                         logger.warning(f"Guardian Protocol auto-fix failed: {e}")
                         update_callback("⚠️ Guardian Protocol: Auto-fix failed, continuing with original result")
@@ -756,10 +764,18 @@ class CognitiveForgeEngine:
             if result and "code" in result.lower():
                 update_callback("🛡️ Guardian Protocol: Applying auto-fixes to generated code...")
                 try:
-                    fixed_result = await self.guardian_protocol.run_code_autofix(result, "Traditional crew execution")
-                    if fixed_result.get("status") == "success":
-                        result = fixed_result.get("fixed_code", result)
-                        update_callback("✅ Guardian Protocol: Code auto-fixes applied successfully")
+                    # Debug: Check if guardian_protocol exists and has the method
+                    if not hasattr(self, 'guardian_protocol') or self.guardian_protocol is None:
+                        logger.error("Guardian Protocol is not initialized")
+                        update_callback("⚠️ Guardian Protocol: Not initialized")
+                    elif not hasattr(self.guardian_protocol, 'run_code_autofix'):
+                        logger.error(f"Guardian Protocol missing run_code_autofix method. Available methods: {dir(self.guardian_protocol)}")
+                        update_callback("⚠️ Guardian Protocol: Method not found")
+                    else:
+                        fixed_result = await self.guardian_protocol.run_code_autofix(result, "Traditional crew execution")
+                        if fixed_result.get("status") == "success":
+                            result = fixed_result.get("fixed_code", result)
+                            update_callback("✅ Guardian Protocol: Code auto-fixes applied successfully")
                 except Exception as e:
                     logger.warning(f"Guardian Protocol auto-fix failed: {e}")
                     update_callback("⚠️ Guardian Protocol: Auto-fix failed, continuing with original result")

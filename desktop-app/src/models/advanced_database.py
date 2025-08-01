@@ -45,7 +45,7 @@ class Mission(Base):
     id = Column(Integer, primary_key=True, index=True)
     mission_id_str = Column(String, unique=True, index=True)
     title = Column(String, nullable=True)
-    description = Column(Text, nullable=True)  # Added missing description field
+    description = Column(Text, nullable=True)  # Made nullable to fix constraint issue
     prompt = Column(Text, nullable=False)
     agent_type = Column(String, default="developer")
     status = Column(String, default="pending")  # pending, planning, executing, completed, failed
@@ -129,16 +129,21 @@ class DatabaseManager:
             db.close()
 
     def create_mission(
-        self, mission_id_str: str, title: str, prompt: str, agent_type: str, complexity_level: str = "standard"
+        self, mission_id_str: str, title: str, prompt: str, agent_type: str, complexity_level: str = "standard", description: str = None
     ) -> Mission:
         """Create a new mission with enhanced metadata tracking"""
         db = SessionLocal()
         try:
             logger.info(f"🆕 Creating mission: {mission_id_str}")
             
+            # Provide default description if none provided
+            if description is None:
+                description = f"Mission created for {agent_type} agent with {complexity_level} complexity"
+            
             mission = Mission(
                 mission_id_str=mission_id_str,
                 title=title,
+                description=description,
                 prompt=prompt,
                 agent_type=agent_type,
                 complexity_level=complexity_level,
