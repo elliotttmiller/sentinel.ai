@@ -1465,3 +1465,742 @@ server closed the connection unexpectedly
 2025-07-31 17:57:46.934 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
 2025-07-31 17:58:05.169 | INFO     | src.main:startup_event:728 - 🚀 Cognitive Forge Desktop App starting up...
 2025-07-31 17:58:05.668 | INFO     | src.main:startup_event:728 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-31 18:05:35.675 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-31 18:05:35.675 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-31 18:05:51.987 | INFO     | src.main:startup_event:728 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-31 18:05:52.124 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-31 18:05:52.665 | INFO     | src.main:startup_event:728 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-31 18:05:52.804 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-31 18:06:09.586 | INFO     | src.main:startup_event:728 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-31 18:06:09.725 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-31 18:06:10.224 | INFO     | src.main:startup_event:728 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-31 18:06:10.362 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-31 18:06:25.652 | INFO     | src.main:startup_event:728 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-31 18:06:26.264 | INFO     | src.main:startup_event:728 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-31 18:06:40.164 | INFO     | src.utils.automated_debugger:__init__:36 - Automated Debugger initialized
+2025-07-31 18:06:42.245 | INFO     | src.utils.automated_debugger:start_monitoring:41 - Starting automated debugging monitoring...
+2025-07-31 18:06:42.250 | INFO     | src.utils.automated_debugger:check_for_new_errors:58 - Checking for new Sentry errors...
+2025-07-31 18:06:42.863 | ERROR    | src.utils.sentry_api_client:get_recent_issues:60 - Failed to fetch Sentry issues: 400 Client Error: Bad Request for url: https://sentry.io/api/0/projects/adminai/4509764514938880/issues/?limit=25&statsPeriod=1h
+2025-07-31 18:06:42.867 | INFO     | src.utils.automated_debugger:check_for_new_errors:76 - Found 2 new errors. Triggering Fix-AI...
+2025-07-31 18:06:42.869 | INFO     | src.utils.automated_debugger:trigger_fix_ai:87 - Triggering Fix-AI for 2 errors
+2025-07-31 18:06:42.872 | INFO     | src.utils.automated_debugger:_log_errors_for_fix_ai:128 - Logged 2 errors for Fix-AI processing
+2025-07-31 18:06:42.875 | SUCCESS  | src.utils.google_ai_wrapper:__init__:57 - Google Generative AI wrapper initialized successfully
+2025-07-31 18:06:42.877 | INFO     | src.utils.crewai_bypass:configure_direct_ai_environment:112 - Direct AI environment configured - LiteLLM disabled
+2025-07-31 18:06:42.878 | INFO     | Fix_AI:run:160 - [START] Initiating Fix-AI: The Sentient Codebase Healer with Sentry Integration
+2025-07-31 18:06:42.878 | INFO     | Fix_AI:run:169 - Creating a backup of the 'src' directory at: C:\Users\AMD\sentinel\desktop-app\backups\fix_ai_backup_20250731_180642
+2025-07-31 18:06:42.962 | SUCCESS  | Fix_AI:run:171 - Backup complete. Proceeding with healing process.
+2025-07-31 18:06:42.963 | INFO     | Fix_AI:_log_phase:152 - 
+=========================
+[PHASE] SENTRY ERROR ANALYSIS
+=========================
+2025-07-31 18:06:42.964 | INFO     | Fix_AI:run_sentry_analysis_phase:194 - Analyzing recent Sentry errors for automated fixing...
+2025-07-31 18:06:43.172 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-31 18:06:59.409 | INFO     | src.main:startup_event:728 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-31 18:07:29.715 | INFO     | Fix_AI:run_sentry_analysis_phase:198 - Found 25 errors from Sentry analysis
+2025-07-31 18:07:29.716 | SUCCESS  | Fix_AI:run_sentry_analysis_phase:209 - Added 25 Sentry errors to healing plan
+2025-07-31 18:07:29.716 | INFO     | Fix_AI:_log_phase:152 - 
+=========================
+[PHASE] DIAGNOSIS
+=========================
+2025-07-31 18:07:29.720 | INFO     | Fix_AI:run_diagnosis_phase:217 - Scanning 36 Python files...
+2025-07-31 18:07:43.068 | SUCCESS  | Fix_AI:run_diagnosis_phase:255 - Diagnosis complete. Found 25 issues.
+2025-07-31 18:07:43.069 | INFO     | Fix_AI:_log_phase:152 - 
+=========================
+[PHASE] TRIAGE & PLANNING
+=========================
+2025-07-31 18:07:43.070 | INFO     | src.utils.crewai_bypass:execute:81 - Executing task 1/1
+2025-07-31 18:07:43.070 | DEBUG    | src.utils.google_ai_wrapper:model:101 - Google Generative AI model created with: gemini-1.5-pro, temp=0.7
+2025-07-31 18:08:02.982 | ERROR    | Fix_AI:run_planning_phase:293 - Failed to parse AI-generated healing plan: ```json
+[
+  {
+    "file_path": "src/utils/google_ai_wrapper.py",
+    "line": 109,
+    "issue_type": "TypeError",
+    "message": "Error creating Google Generative AI model: float() argument must be a string or a real number, not 'FieldInfo'",
+    "proposed_action": "Inspect the arguments passed to the `float()` function within the `model` method. Ensure the argument is either a string or a real number. Likely, the 'FieldInfo' object needs to be converted or a different attribute should be used."
+  },
+  {
+    "file_path": "src/utils/google_ai_wrapper.py",
+    "line": 169,
+    "issue_type": "AttributeError",
+    "message": "Error during Google AI generation: 'GoogleGenerativeAIWrapper' object has no attribute '_model'",
+    "proposed_action": "Ensure the `_model` attribute is correctly initialized within the `GoogleGenerativeAIWrapper` class.  This may involve checking the constructor or the `model` method where the model is presumably created and assigned."
+  },
+{
+    "file_path": "src/utils/google_ai_wrapper.py",
+    "line": 161,
+    "issue_type": "AttributeError",
+    "message": "Error during Google AI generation: 'ModelPrivateAttr' object has no attribute 'generate_content'",
+    "proposed_action": "Verify that the object used for generation (likely an instance of a class related to 'ModelPrivateAttr') actually has a 'generate_content' method.  If not, either add the method or utilize the correct method for content generation."
+},
+  {
+    "file_path": "src/utils/crewai_bypass.py",
+    "line": 48,
+    "issue_type": "AttributeError",
+    "message": "Direct AI execution failed: 'NoneType' object has no attribute 'invoke'",
+    "proposed_action": "Debug the `execute_task` method in `crewai_bypass.py`. Identify why the object calling `invoke` is None.  Ensure the object is properly initialized before calling `invoke`."
+  },
+  {
+    "file_path": "src/utils/crewai_bypass.py",
+    "line": 48,
+    "issue_type": "TypeError",
+    "message": "Direct AI execution failed: float() argument must be a string or a real number, not 'FieldInfo'",
+    "proposed_action": "Similar to the Google AI wrapper issue, check the arguments being passed to `float()` within the `execute_task` method.  Convert 'FieldInfo' to the correct type or access the appropriate numerical attribute."
+  },
+  {
+    "file_path": "src/core/cognitive_forge_engine.py",
+    "line": 384,
+    "issue_type": "ValueError",
+    "message": "Prompt optimization failed: Invalid JSON format: Expecting value: line 1 column 1 (char 0)",
+    "proposed_action": "Investigate the JSON parsing within the `_execute_prompt_alchemy` method. The error suggests an empty string or invalid JSON is being passed to the parser.  Implement checks for empty or malformed JSON strings before parsing."
+  },
+    {
+    "file_path": "src/core/cognitive_forge_engine.py",
+    "line": 1256,
+    "issue_type": "JSONDecodeError",
+    "message": "Failed to parse JSON:",
+    "proposed_action": "Add robust error handling within the `_parse_agent_json_response` method to handle invalid JSON responses.  This could involve checking the response format before parsing or using a try-except block to catch JSON decoding errors."
+  },
+  {
+    "file_path": "src/core/cognitive_forge_engine.py",
+    "line": 1256,
+    "issue_type": "AttributeError",
+    "message": "Original response: An error occurred: 'GoogleGenerativeAIWrapper' object has no attribute '_model'",
+    "proposed_action": "This is related to the issue in `google_ai_wrapper.py`. Fix the root cause of the missing '_model' attribute as described above."
+
+  },
+  {
+    "file_path": "src/core/advanced_intelligence.py",
+    "line": 301,
+    "issue_type": "AttributeError",
+    "message": "Task execution failed: 'str' object has no attribute 'get'",
+    "proposed_action": "Debug the `_execute_phase` method.  A string is being used where a dictionary-like object with a `get` method is expected.   Determine the source of the string and replace it with the correct object, or handle the string case appropriately."
+  },
+  {
+    "file_path": "src/core/advanced_intelligence.py",
+    "line": 166,
+    "issue_type": "AttributeError",
+    "message": "Execution plan creation failed: 'str' object has no attribute 'get'",
+    "proposed_action": "Similar to the `_execute_phase` issue, investigate the `_create_execution_plan` method and correct the usage of strings where dictionary-like objects are expected."
+  },
+  {
+    "file_path": "src/utils/performance_optimizer.py",
+    "line": 492,
+    "issue_type": "AttributeError",
+    "message": "Parallel task execution failed: 'str' object has no attribute 'get'",
+    "proposed_action": "Debug the `parallelize_tasks` method and address the incorrect use of strings instead of dictionary-like objects."
+  },
+  {
+    "file_path": "unknown",
+    "line": 0,
+    "issue_type": "ConnectionAbortedError",
+    "message": "ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine",
+    "proposed_action": "Investigate network stability and potential firewall issues.  Ensure the server is running and accessible.  Implement proper connection handling with retries and timeouts."
+  }
+]
+```
+2025-07-31 18:08:02.988 | WARNING  | Fix_AI:run_planning_phase:298 - Falling back to a simple, prioritized plan.
+2025-07-31 18:08:02.988 | INFO     | Fix_AI:_log_phase:152 - 
+=========================
+[PHASE] EXECUTION & SELF-HEALING
+=========================
+2025-07-31 18:08:02.988 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 1/25: default: Sentry integration test message in unknown:0
+2025-07-31 18:08:02.996 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:02.996 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:02.996 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:02.998 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: Sentry integration test message after 3 attempts.
+2025-07-31 18:08:03.009 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 2/25: default: LLM initialized successfully in unknown:0
+2025-07-31 18:08:03.010 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.011 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.011 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.012 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: LLM initialized successfully after 3 attempts.
+2025-07-31 18:08:03.023 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 3/25: default: Cognitive Forge Engine initialized successfully in unknown:0
+2025-07-31 18:08:03.024 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.024 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.025 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.025 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: Cognitive Forge Engine initialized successfully after 3 attempts.
+2025-07-31 18:08:03.037 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 4/25: default: Traceback (most recent call last): in unknown:0
+2025-07-31 18:08:03.038 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.038 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.039 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.039 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: Traceback (most recent call last): after 3 attempts.
+2025-07-31 18:08:03.051 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 5/25: error: ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine in unknown:0
+2025-07-31 18:08:03.052 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.053 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.053 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.054 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix error: ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine after 3 attempts.
+2025-07-31 18:08:03.067 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 6/25: default: 2025-07-31 17:54:48.191 | ERROR    | src.utils.crewai_bypass:execute_task:48 - Direct AI execution failed: 'NoneType' object has no attribute 'invoke' in unknown:0
+2025-07-31 18:08:03.068 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.068 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.069 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.070 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:48.191 | ERROR    | src.utils.crewai_bypass:execute_task:48 - Direct AI execution failed: 'NoneType' object has no attribute 'invoke' after 3 attempts.
+2025-07-31 18:08:03.083 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 7/25: default: 2025-07-31 17:54:48.052 | ERROR    | src.core.cognitive_forge_engine:_execute_prompt_alchemy:384 - Prompt optimization failed: Invalid JSON format: Expecting value: line 1 column 1 (char 0) in unknown:0
+2025-07-31 18:08:03.084 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.084 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.084 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.084 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:48.052 | ERROR    | src.core.cognitive_forge_engine:_execute_prompt_alchemy:384 - Prompt optimization failed: Invalid JSON format: Expecting value: line 1 column 1 (char 0) after 3 attempts.
+2025-07-31 18:08:03.101 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 8/25: default: 2025-07-31 17:54:48.039 | ERROR    | src.core.cognitive_forge_engine:_parse_agent_json_response:1256 - Original response: Fallback response: Analyze and optimize the following user prompt: ''. in unknown:0
+2025-07-31 18:08:03.102 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.102 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.102 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.103 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:48.039 | ERROR    | src.core.cognitive_forge_engine:_parse_agent_json_response:1256 - Original response: Fallback response: Analyze and optimize the following user prompt: ''. after 3 attempts.
+2025-07-31 18:08:03.112 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 9/25: default: 2025-07-31 17:54:47.999 | ERROR    | src.utils.crewai_bypass:execute_task:48 - Direct AI execution failed: float() argument must be a string or a real number, not 'FieldInfo' in unknown:0
+2025-07-31 18:08:03.112 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.112 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.112 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.112 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:47.999 | ERROR    | src.utils.crewai_bypass:execute_task:48 - Direct AI execution failed: float() argument must be a string or a real number, not 'FieldInfo' after 3 attempts.
+2025-07-31 18:08:03.132 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 10/25: default: 2025-07-31 17:54:47.987 | ERROR    | src.utils.google_ai_wrapper:model:109 - Error creating Google Generative AI model: float() argument must be a string or a real number, not 'FieldInfo' in unknown:0
+2025-07-31 18:08:03.133 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.134 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.135 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.135 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:47.987 | ERROR    | src.utils.google_ai_wrapper:model:109 - Error creating Google Generative AI model: float() argument must be a string or a real number, not 'FieldInfo' after 3 attempts.
+2025-07-31 18:08:03.149 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 11/25: default: 2025-07-31 17:54:46.505 | ERROR    | src.core.cognitive_forge_engine:_parse_agent_json_response:1256 - Original response: Fallback response: Analyze and optimize the following user prompt: 'Create a simple Python web application with FastAPI... in unknown:0
+2025-07-31 18:08:03.150 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.151 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.151 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.151 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:46.505 | ERROR    | src.core.cognitive_forge_engine:_parse_agent_json_response:1256 - Original response: Fallback response: Analyze and optimize the following user prompt: 'Create a simple Python web application with FastAPI... after 3 attempts.
+2025-07-31 18:08:03.166 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 12/25: default: 2025-07-31 17:54:46.493 | ERROR    | src.core.cognitive_forge_engine:_parse_agent_json_response:1255 - Failed to parse JSON: in unknown:0
+2025-07-31 18:08:03.167 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.167 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.170 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.170 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:46.493 | ERROR    | src.core.cognitive_forge_engine:_parse_agent_json_response:1255 - Failed to parse JSON: after 3 attempts.
+2025-07-31 18:08:03.184 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 13/25: default: 2025-07-31 17:45:54.716 | ERROR    | src.core.cognitive_forge_engine:_parse_agent_json_response:1256 - Original response: An error occurred: 'GoogleGenerativeAIWrapper' object has no attribute '_model' in unknown:0
+2025-07-31 18:08:03.184 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.184 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.184 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.184 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:45:54.716 | ERROR    | src.core.cognitive_forge_engine:_parse_agent_json_response:1256 - Original response: An error occurred: 'GoogleGenerativeAIWrapper' object has no attribute '_model' after 3 attempts.
+2025-07-31 18:08:03.202 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 14/25: default: 2025-07-31 17:45:54.695 | ERROR    | src.utils.google_ai_wrapper:_generate:169 - Error during Google AI generation: 'GoogleGenerativeAIWrapper' object has no attribute '_model' in unknown:0
+2025-07-31 18:08:03.203 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.203 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.203 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.203 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:45:54.695 | ERROR    | src.utils.google_ai_wrapper:_generate:169 - Error during Google AI generation: 'GoogleGenerativeAIWrapper' object has no attribute '_model' after 3 attempts.
+2025-07-31 18:08:03.219 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 15/25: default: 2025-07-31 17:31:38.570 | ERROR    | src.core.advanced_intelligence:_execute_phase:301 - Task execution failed: 'str' object has no attribute 'get' in unknown:0
+2025-07-31 18:08:03.220 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.220 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.221 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.221 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:31:38.570 | ERROR    | src.core.advanced_intelligence:_execute_phase:301 - Task execution failed: 'str' object has no attribute 'get' after 3 attempts.
+2025-07-31 18:08:03.236 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 16/25: default: 2025-07-31 17:26:05.503 | ERROR    | src.core.advanced_intelligence:_create_execution_plan:166 - Execution plan creation failed: 'str' object has no attribute 'get' in unknown:0
+2025-07-31 18:08:03.237 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.238 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.238 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.239 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:26:05.503 | ERROR    | src.core.advanced_intelligence:_create_execution_plan:166 - Execution plan creation failed: 'str' object has no attribute 'get' after 3 attempts.
+2025-07-31 18:08:03.255 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 17/25: default: 2025-07-31 17:26:05.474 | ERROR    | src.utils.performance_optimizer:parallelize_tasks:492 - Parallel task execution failed: 'str' object has no attribute 'get' in unknown:0
+2025-07-31 18:08:03.257 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.257 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.258 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.259 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:26:05.474 | ERROR    | src.utils.performance_optimizer:parallelize_tasks:492 - Parallel task execution failed: 'str' object has no attribute 'get' after 3 attempts.
+2025-07-31 18:08:03.275 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 18/25: default: 2025-07-31 16:14:58.073 | ERROR    | src.core.cognitive_forge_engine:run_mission:266 - Mission test_mission_20250731_161458 failed: Invalid JSON format: Expecting value: line 1 column 1 (char 0) in unknown:0
+2025-07-31 18:08:03.276 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.276 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.277 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.277 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 16:14:58.073 | ERROR    | src.core.cognitive_forge_engine:run_mission:266 - Mission test_mission_20250731_161458 failed: Invalid JSON format: Expecting value: line 1 column 1 (char 0) after 3 attempts.
+2025-07-31 18:08:03.293 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 19/25: error: ValueError: Invalid JSON format: Expecting value: line 1 column 1 (char 0) in unknown:0
+2025-07-31 18:08:03.294 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.294 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.295 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.295 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix error: ValueError: Invalid JSON format: Expecting value: line 1 column 1 (char 0) after 3 attempts.
+2025-07-31 18:08:03.310 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 20/25: default: 2025-07-31 16:14:58.044 | ERROR    | src.core.cognitive_forge_engine:_parse_agent_json_response:1238 - Original response: An error occurred: 'ModelPrivateAttr' object has no attribute 'generate_content' in unknown:0
+2025-07-31 18:08:03.310 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.313 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.313 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.313 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 16:14:58.044 | ERROR    | src.core.cognitive_forge_engine:_parse_agent_json_response:1238 - Original response: An error occurred: 'ModelPrivateAttr' object has no attribute 'generate_content' after 3 attempts.
+2025-07-31 18:08:03.330 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 21/25: default: 2025-07-31 16:14:58.030 | ERROR    | src.utils.google_ai_wrapper:_generate:161 - Error during Google AI generation: 'ModelPrivateAttr' object has no attribute 'generate_content' in unknown:0
+2025-07-31 18:08:03.331 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.332 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.332 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.333 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 16:14:58.030 | ERROR    | src.utils.google_ai_wrapper:_generate:161 - Error during Google AI generation: 'ModelPrivateAttr' object has no attribute 'generate_content' after 3 attempts.
+2025-07-31 18:08:03.348 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 22/25: default: Mission started: test_mission_20250731_161458 in unknown:0
+2025-07-31 18:08:03.348 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.348 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.348 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.348 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: Mission started: test_mission_20250731_161458 after 3 attempts.
+2025-07-31 18:08:03.362 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 23/25: default: 2025-07-31 16:11:57.907 | ERROR    | src.core.cognitive_forge_engine:run_mission:266 - Mission test_mission_20250731_161157 failed: Invalid JSON format: Expecting value: line 1 column 1 (char 0) in unknown:0
+2025-07-31 18:08:03.362 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.368 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.368 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.369 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 16:11:57.907 | ERROR    | src.core.cognitive_forge_engine:run_mission:266 - Mission test_mission_20250731_161157 failed: Invalid JSON format: Expecting value: line 1 column 1 (char 0) after 3 attempts.
+2025-07-31 18:08:03.385 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 24/25: default: Mission started: test_mission_20250731_161157 in unknown:0
+2025-07-31 18:08:03.386 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.386 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.387 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.387 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: Mission started: test_mission_20250731_161157 after 3 attempts.
+2025-07-31 18:08:03.403 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 25/25: default: 2025-07-31 16:09:07.287 | ERROR    | src.core.cognitive_forge_engine:run_mission:266 - Mission test_mission_20250731_160907 failed: 'DirectAIAgent' object has no attribute 'get' in unknown:0
+2025-07-31 18:08:03.403 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.403 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.403 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:08:03.403 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 16:09:07.287 | ERROR    | src.core.cognitive_forge_engine:run_mission:266 - Mission test_mission_20250731_160907 failed: 'DirectAIAgent' object has no attribute 'get' after 3 attempts.
+2025-07-31 18:08:03.423 | INFO     | Fix_AI:_log_phase:152 - 
+=========================
+[PHASE] FINAL VALIDATION
+=========================
+2025-07-31 18:08:03.423 | INFO     | Fix_AI:_log_phase:152 - 
+=========================
+[PHASE] DIAGNOSIS
+=========================
+2025-07-31 18:08:03.427 | INFO     | Fix_AI:run_diagnosis_phase:217 - Scanning 36 Python files...
+2025-07-31 18:08:16.480 | SUCCESS  | Fix_AI:run_diagnosis_phase:255 - Diagnosis complete. Found 0 issues.
+2025-07-31 18:08:16.480 | SUCCESS  | Fix_AI:run_final_validation_phase:389 - Final validation passed. No remaining issues or regressions detected.
+2025-07-31 18:08:16.480 | INFO     | Fix_AI:_log_phase:152 - 
+=========================
+[PHASE] REPORTING
+=========================
+2025-07-31 18:08:16.480 | SUCCESS  | Fix_AI:generate_report:415 - Comprehensive report saved to C:\Users\AMD\sentinel\desktop-app\logs\fix_ai_reports\fix_ai_report_20250731_180816.json
+2025-07-31 18:08:16.480 | INFO     | Fix_AI:run:184 - [COMPLETE] Fix-AI process complete.
+2025-07-31 18:08:16.490 | SUCCESS  | src.utils.automated_debugger:_run_fix_ai:149 - Fix-AI completed successfully
+2025-07-31 18:08:16.610 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-31 18:08:32.809 | INFO     | src.main:startup_event:728 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-31 18:08:44.654 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-31 18:08:44.654 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-31 18:09:02.551 | INFO     | src.main:startup_event:728 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-31 18:09:02.609 | INFO     | src.main:startup_event:728 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-31 18:09:02.684 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-31 18:09:02.783 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-31 18:09:19.851 | INFO     | src.main:startup_event:728 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-31 18:09:19.867 | INFO     | src.main:startup_event:728 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-31 18:09:20.006 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-31 18:09:20.018 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-31 18:09:36.643 | INFO     | src.main:startup_event:728 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-31 18:09:36.686 | INFO     | src.main:startup_event:728 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-31 18:10:07.365 | INFO     | src.utils.automated_debugger:__init__:36 - Automated Debugger initialized
+2025-07-31 18:10:09.398 | INFO     | src.utils.automated_debugger:start_monitoring:41 - Starting automated debugging monitoring...
+2025-07-31 18:10:09.399 | INFO     | src.utils.automated_debugger:check_for_new_errors:58 - Checking for new Sentry errors...
+2025-07-31 18:10:10.028 | ERROR    | src.utils.sentry_api_client:get_recent_issues:60 - Failed to fetch Sentry issues: 400 Client Error: Bad Request for url: https://sentry.io/api/0/projects/adminai/4509764514938880/issues/?limit=25&statsPeriod=1h
+2025-07-31 18:10:10.036 | INFO     | src.utils.automated_debugger:check_for_new_errors:76 - Found 2 new errors. Triggering Fix-AI...
+2025-07-31 18:10:10.037 | INFO     | src.utils.automated_debugger:trigger_fix_ai:87 - Triggering Fix-AI for 2 errors
+2025-07-31 18:10:10.041 | INFO     | src.utils.automated_debugger:_log_errors_for_fix_ai:128 - Logged 2 errors for Fix-AI processing
+2025-07-31 18:10:10.046 | SUCCESS  | src.utils.google_ai_wrapper:__init__:57 - Google Generative AI wrapper initialized successfully
+2025-07-31 18:10:10.047 | INFO     | src.utils.crewai_bypass:configure_direct_ai_environment:112 - Direct AI environment configured - LiteLLM disabled
+2025-07-31 18:10:10.048 | INFO     | Fix_AI:run:160 - [START] Initiating Fix-AI: The Sentient Codebase Healer with Sentry Integration
+2025-07-31 18:10:10.049 | INFO     | Fix_AI:run:169 - Creating a backup of the 'src' directory at: C:\Users\AMD\sentinel\desktop-app\backups\fix_ai_backup_20250731_181010
+2025-07-31 18:10:10.138 | SUCCESS  | Fix_AI:run:171 - Backup complete. Proceeding with healing process.
+2025-07-31 18:10:10.138 | INFO     | Fix_AI:_log_phase:152 - 
+=========================
+[PHASE] SENTRY ERROR ANALYSIS
+=========================
+2025-07-31 18:10:10.138 | INFO     | Fix_AI:run_sentry_analysis_phase:194 - Analyzing recent Sentry errors for automated fixing...
+2025-07-31 18:10:10.384 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-31 18:10:27.322 | INFO     | src.main:startup_event:728 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-31 18:10:34.921 | INFO     | Fix_AI:run_sentry_analysis_phase:198 - Found 25 errors from Sentry analysis
+2025-07-31 18:10:34.921 | SUCCESS  | Fix_AI:run_sentry_analysis_phase:209 - Added 25 Sentry errors to healing plan
+2025-07-31 18:10:34.921 | INFO     | Fix_AI:_log_phase:152 - 
+=========================
+[PHASE] DIAGNOSIS
+=========================
+2025-07-31 18:10:34.924 | INFO     | Fix_AI:run_diagnosis_phase:217 - Scanning 36 Python files...
+2025-07-31 18:10:49.356 | SUCCESS  | Fix_AI:run_diagnosis_phase:255 - Diagnosis complete. Found 25 issues.
+2025-07-31 18:10:49.357 | INFO     | Fix_AI:_log_phase:152 - 
+=========================
+[PHASE] TRIAGE & PLANNING
+=========================
+2025-07-31 18:10:49.357 | INFO     | src.utils.crewai_bypass:execute:81 - Executing task 1/1
+2025-07-31 18:10:49.358 | DEBUG    | src.utils.google_ai_wrapper:model:101 - Google Generative AI model created with: gemini-1.5-pro, temp=0.7
+2025-07-31 18:11:20.746 | ERROR    | Fix_AI:run_planning_phase:293 - Failed to parse AI-generated healing plan: ```json
+[
+  {
+    "file_path": "src/utils/google_ai_wrapper.py",
+    "line": 109,
+    "issue_type": "TypeError",
+    "message": "default: 2025-07-31 18:08:03.135 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:47.987 | ERROR    | src.utils.google_ai_wrapper:model:109 - Error creating Google Generative AI model: float() argument must be a string or a r...",
+    "proposed_action": "Inspect the arguments passed to the `float()` function in `src.utils.google_ai_wrapper:model:109`. Ensure that the argument is either a string or a real number.  Add type checking or casting to correct the issue."
+  },
+    {
+    "file_path": "src/utils/crewai_bypass.py",
+    "line": 48,
+    "issue_type": "TypeError",
+    "message": "default: 2025-07-31 18:08:03.112 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:47.999 | ERROR    | src.utils.crewai_bypass:execute_task:48 - Direct AI execution failed: float() argument must be a string or a real number, n...",
+    "proposed_action": "Inspect the arguments passed to the `float()` function in `src.utils.crewai_bypass:execute_task:48`. Ensure that the argument is either a string or a real number. Add type checking or casting to correct the issue."
+  },
+  {
+    "file_path": "src/core/cognitive_forge_engine.py",
+    "line": 1238,
+    "issue_type": "AttributeError",
+    "message": "default: 2025-07-31 18:08:03.313 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 16:14:58.044 | ERROR    | src.core.cognitive_forge_engine:_parse_agent_json_response:1238 - Original response: An error occurred: 'ModelPrivateAttr' ...",
+    "proposed_action": "Investigate 'ModelPrivateAttr' object in `src.core.cognitive_forge_engine:_parse_agent_json_response:1238`. Determine why this object is being accessed without the required attribute.  Likely a model issue or incorrect data being passed."
+  },
+  {
+    "file_path": "src/utils/google_ai_wrapper.py",
+    "line": 161,
+    "issue_type": "AttributeError",
+    "message": "default: 2025-07-31 18:08:03.333 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 16:14:58.030 | ERROR    | src.utils.google_ai_wrapper:_generate:161 - Error during Google AI generation: 'ModelPrivateAttr' object has no attribute '...",
+    "proposed_action": "Investigate 'ModelPrivateAttr' object in `src.utils.google_ai_wrapper:_generate:161`. Determine why this object is being accessed without the required attribute. Likely a model issue or incorrect data being passed."
+  },
+  {
+    "file_path": "src/core/cognitive_forge_engine.py",
+    "line": 266,
+    "issue_type": "AttributeError",
+    "message": "default: 2025-07-31 18:08:03.403 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 16:09:07.287 | ERROR    | src.core.cognitive_forge_engine:run_mission:266 - Mission test_mission_20250731_160907 failed: 'DirectAIAgent' object has n...",
+    "proposed_action": "Investigate 'DirectAIAgent' object in `src.core.cognitive_forge_engine:run_mission:266`. Determine why this object is being accessed without the required attribute."
+  },
+
+  {
+    "file_path": "src/utils/performance_optimizer.py",
+    "line": 492,
+    "issue_type": "AttributeError",
+    "message": "default: 2025-07-31 18:08:03.259 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:26:05.474 | ERROR    | src.utils.performance_optimizer:parallelize_tasks:492 - Parallel task execution failed: 'str' object has no attribute 'get'...",
+    "proposed_action": "Review `src.utils.performance_optimizer:parallelize_tasks:492`.  A string object is being used where a dictionary-like object with a 'get' method is expected.  Inspect the data flow and correct the type mismatch."
+  },
+  {
+    "file_path": "src/core/advanced_intelligence.py",
+    "line": 166,
+    "issue_type": "AttributeError",
+    "message": "default: 2025-07-31 18:08:03.239 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:26:05.503 | ERROR    | src.core.advanced_intelligence:_create_execution_plan:166 - Execution plan creation failed: 'str' object has no attribute '...",
+    "proposed_action": "Review `src.core.advanced_intelligence:_create_execution_plan:166`. A string object is being used where a dictionary-like object is expected. Inspect the data flow and correct the type mismatch."
+  },
+  {
+    "file_path": "src/core/advanced_intelligence.py",
+    "line": 301,
+    "issue_type": "AttributeError",
+    "message": "default: 2025-07-31 18:08:03.221 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:31:38.570 | ERROR    | src.core.advanced_intelligence:_execute_phase:301 - Task execution failed: 'str' object has no attribute 'get' after 3 atte...",
+    "proposed_action": "Review `src.core.advanced_intelligence:_execute_phase:301`. A string object is being used where a dictionary-like object with a 'get' method is expected. Inspect the data flow and correct the type mismatch."
+  },
+  {
+    "file_path": "src/utils/google_ai_wrapper.py",
+    "line": 169,
+    "issue_type": "AttributeError",
+    "message": "default: 2025-07-31 18:08:03.203 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:45:54.695 | ERROR    | src.utils.google_ai_wrapper:_generate:169 - Error during Google AI generation: 'GoogleGenerativeAIWrapper' object has no at...",
+    "proposed_action": "Review `src.utils.google_ai_wrapper:_generate:169`. A 'GoogleGenerativeAIWrapper' object is missing an expected attribute. Verify correct initialization and usage of this wrapper."
+  },
+  {
+    "file_path": "src/core/cognitive_forge_engine.py",
+    "line": 1256,
+    "issue_type": "JSONDecodeError/ValueError",
+    "message": "Covers multiple JSON errors related to parsing and formatting",
+    "proposed_action": "Thoroughly review JSON parsing and generation logic within `src.core.cognitive_forge_engine.py`, particularly around lines 1256, 384, and other relevant areas. Implement robust error handling and validation to prevent invalid JSON from causing failures."
+  },
+  {
+    "file_path": "src/utils/crewai_bypass.py",
+    "line": 48,
+    "issue_type": "AttributeError",
+    "message": "default: 2025-07-31 18:08:03.070 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:48.191 | ERROR    | src.utils.crewai_bypass:execute_task:48 - Direct AI execution failed: 'NoneType' object has no attribute 'invoke' after 3 a...",
+    "proposed_action": "Review `src.utils.crewai_bypass:execute_task:48`. A 'NoneType' object is encountered where an object with an 'invoke' method is expected.  Add checks for None and handle the case appropriately."
+  },
+  {
+    "file_path": "unknown",
+    "line": 0,
+    "issue_type": "ConnectionAbortedError",
+    "message": "default: 2025-07-31 18:08:03.054 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix error: ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine after 3 attempts.",
+    "proposed_action": "Investigate the network connection issues.  Check firewall settings, network stability, and resource availability. Implement retry mechanisms with exponential backoff to handle transient network problems."
+  },  {
+    "file_path": "unknown",
+    "line": 0,
+    "issue_type": "SentryError",
+    "message": "All remaining Sentry errors with 'Could not fix' and tracebacks.",
+    "proposed_action": "Review the full tracebacks in Sentry for these errors, including local variables and context.  This will give more specific information for debugging and resolution."
+  }
+]
+```
+2025-07-31 18:11:20.765 | WARNING  | Fix_AI:run_planning_phase:298 - Falling back to a simple, prioritized plan.
+2025-07-31 18:11:20.765 | INFO     | Fix_AI:_log_phase:152 - 
+=========================
+[PHASE] EXECUTION & SELF-HEALING
+=========================
+2025-07-31 18:11:20.765 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 1/25: default: Cognitive Forge Engine initialized successfully in unknown:0
+2025-07-31 18:11:20.770 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.771 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.771 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.772 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: Cognitive Forge Engine initialized successfully after 3 attempts.
+2025-07-31 18:11:20.784 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 2/25: default: LLM initialized successfully in unknown:0
+2025-07-31 18:11:20.787 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.788 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.788 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.788 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: LLM initialized successfully after 3 attempts.
+2025-07-31 18:11:20.802 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 3/25: default: Traceback (most recent call last): in unknown:0
+2025-07-31 18:11:20.803 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.803 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.804 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.804 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: Traceback (most recent call last): after 3 attempts.
+2025-07-31 18:11:20.816 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 4/25: default: 2025-07-31 18:08:03.403 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 16:09:07.287 | ERROR    | src.core.cognitive_forge_engine:run_mission:266 - Mission test_mission_20250731_160907 failed: 'DirectAIAgent' object has n... in unknown:0
+2025-07-31 18:11:20.817 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.818 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.818 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.819 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 18:08:03.403 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 16:09:07.287 | ERROR    | src.core.cognitive_forge_engine:run_mission:266 - Mission test_mission_20250731_160907 failed: 'DirectAIAgent' object has n... after 3 attempts.
+2025-07-31 18:11:20.832 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 5/25: default: 2025-07-31 18:08:03.387 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: Mission started: test_mission_20250731_161157 after 3 attempts. in unknown:0
+2025-07-31 18:11:20.833 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.834 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.834 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.834 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 18:08:03.387 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: Mission started: test_mission_20250731_161157 after 3 attempts. after 3 attempts.
+2025-07-31 18:11:20.848 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 6/25: default: 2025-07-31 18:08:03.369 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 16:11:57.907 | ERROR    | src.core.cognitive_forge_engine:run_mission:266 - Mission test_mission_20250731_161157 failed: Invalid JSON format: Expecti... in unknown:0
+2025-07-31 18:11:20.851 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.853 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.854 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.855 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 18:08:03.369 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 16:11:57.907 | ERROR    | src.core.cognitive_forge_engine:run_mission:266 - Mission test_mission_20250731_161157 failed: Invalid JSON format: Expecti... after 3 attempts.
+2025-07-31 18:11:20.868 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 7/25: default: 2025-07-31 18:08:03.348 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: Mission started: test_mission_20250731_161458 after 3 attempts. in unknown:0
+2025-07-31 18:11:20.869 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.870 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.870 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.871 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 18:08:03.348 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: Mission started: test_mission_20250731_161458 after 3 attempts. after 3 attempts.
+2025-07-31 18:11:20.885 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 8/25: default: 2025-07-31 18:08:03.333 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 16:14:58.030 | ERROR    | src.utils.google_ai_wrapper:_generate:161 - Error during Google AI generation: 'ModelPrivateAttr' object has no attribute '... in unknown:0
+2025-07-31 18:11:20.886 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.886 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.888 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.888 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 18:08:03.333 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 16:14:58.030 | ERROR    | src.utils.google_ai_wrapper:_generate:161 - Error during Google AI generation: 'ModelPrivateAttr' object has no attribute '... after 3 attempts.
+2025-07-31 18:11:20.904 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 9/25: default: 2025-07-31 18:08:03.313 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 16:14:58.044 | ERROR    | src.core.cognitive_forge_engine:_parse_agent_json_response:1238 - Original response: An error occurred: 'ModelPrivateAttr' ... in unknown:0
+2025-07-31 18:11:20.905 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.907 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.908 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.909 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 18:08:03.313 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 16:14:58.044 | ERROR    | src.core.cognitive_forge_engine:_parse_agent_json_response:1238 - Original response: An error occurred: 'ModelPrivateAttr' ... after 3 attempts.
+2025-07-31 18:11:20.928 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 10/25: default: 2025-07-31 18:08:03.295 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix error: ValueError: Invalid JSON format: Expecting value: line 1 column 1 (char 0) after 3 attempts. in unknown:0
+2025-07-31 18:11:20.928 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.928 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.931 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.932 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 18:08:03.295 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix error: ValueError: Invalid JSON format: Expecting value: line 1 column 1 (char 0) after 3 attempts. after 3 attempts.
+2025-07-31 18:11:20.948 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 11/25: default: 2025-07-31 18:08:03.277 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 16:14:58.073 | ERROR    | src.core.cognitive_forge_engine:run_mission:266 - Mission test_mission_20250731_161458 failed: Invalid JSON format: Expecti... in unknown:0
+2025-07-31 18:11:20.949 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.950 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.951 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.952 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 18:08:03.277 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 16:14:58.073 | ERROR    | src.core.cognitive_forge_engine:run_mission:266 - Mission test_mission_20250731_161458 failed: Invalid JSON format: Expecti... after 3 attempts.
+2025-07-31 18:11:20.976 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 12/25: default: 2025-07-31 18:08:03.259 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:26:05.474 | ERROR    | src.utils.performance_optimizer:parallelize_tasks:492 - Parallel task execution failed: 'str' object has no attribute 'get'... in unknown:0
+2025-07-31 18:11:20.976 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.979 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.980 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:20.981 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 18:08:03.259 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:26:05.474 | ERROR    | src.utils.performance_optimizer:parallelize_tasks:492 - Parallel task execution failed: 'str' object has no attribute 'get'... after 3 attempts.
+2025-07-31 18:11:20.997 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 13/25: default: 2025-07-31 18:08:03.239 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:26:05.503 | ERROR    | src.core.advanced_intelligence:_create_execution_plan:166 - Execution plan creation failed: 'str' object has no attribute '... in unknown:0
+2025-07-31 18:11:20.999 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.001 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.003 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.003 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 18:08:03.239 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:26:05.503 | ERROR    | src.core.advanced_intelligence:_create_execution_plan:166 - Execution plan creation failed: 'str' object has no attribute '... after 3 attempts.
+2025-07-31 18:11:21.019 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 14/25: default: 2025-07-31 18:08:03.221 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:31:38.570 | ERROR    | src.core.advanced_intelligence:_execute_phase:301 - Task execution failed: 'str' object has no attribute 'get' after 3 atte... in unknown:0
+2025-07-31 18:11:21.022 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.023 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.023 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.024 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 18:08:03.221 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:31:38.570 | ERROR    | src.core.advanced_intelligence:_execute_phase:301 - Task execution failed: 'str' object has no attribute 'get' after 3 atte... after 3 attempts.
+2025-07-31 18:11:21.039 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 15/25: default: 2025-07-31 18:08:03.203 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:45:54.695 | ERROR    | src.utils.google_ai_wrapper:_generate:169 - Error during Google AI generation: 'GoogleGenerativeAIWrapper' object has no at... in unknown:0
+2025-07-31 18:11:21.042 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.042 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.043 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.043 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 18:08:03.203 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:45:54.695 | ERROR    | src.utils.google_ai_wrapper:_generate:169 - Error during Google AI generation: 'GoogleGenerativeAIWrapper' object has no at... after 3 attempts.
+2025-07-31 18:11:21.059 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 16/25: default: 2025-07-31 18:08:03.184 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:45:54.716 | ERROR    | src.core.cognitive_forge_engine:_parse_agent_json_response:1256 - Original response: An error occurred: 'GoogleGenerativeAI... in unknown:0
+2025-07-31 18:11:21.059 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.059 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.063 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.063 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 18:08:03.184 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:45:54.716 | ERROR    | src.core.cognitive_forge_engine:_parse_agent_json_response:1256 - Original response: An error occurred: 'GoogleGenerativeAI... after 3 attempts.
+2025-07-31 18:11:21.080 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 17/25: default: 2025-07-31 18:08:03.170 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:46.493 | ERROR    | src.core.cognitive_forge_engine:_parse_agent_json_response:1255 - Failed to parse JSON: after 3 attempts. in unknown:0
+2025-07-31 18:11:21.082 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.083 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.083 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.084 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 18:08:03.170 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:46.493 | ERROR    | src.core.cognitive_forge_engine:_parse_agent_json_response:1255 - Failed to parse JSON: after 3 attempts. after 3 attempts.
+2025-07-31 18:11:21.098 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 18/25: default: 2025-07-31 18:08:03.151 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:46.505 | ERROR    | src.core.cognitive_forge_engine:_parse_agent_json_response:1256 - Original response: Fallback response: Analyze and optimiz... in unknown:0
+2025-07-31 18:11:21.105 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.105 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.106 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.107 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 18:08:03.151 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:46.505 | ERROR    | src.core.cognitive_forge_engine:_parse_agent_json_response:1256 - Original response: Fallback response: Analyze and optimiz... after 3 attempts.
+2025-07-31 18:11:21.126 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 19/25: default: 2025-07-31 18:08:03.135 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:47.987 | ERROR    | src.utils.google_ai_wrapper:model:109 - Error creating Google Generative AI model: float() argument must be a string or a r... in unknown:0
+2025-07-31 18:11:21.126 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.126 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.130 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.130 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 18:08:03.135 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:47.987 | ERROR    | src.utils.google_ai_wrapper:model:109 - Error creating Google Generative AI model: float() argument must be a string or a r... after 3 attempts.
+2025-07-31 18:11:21.147 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 20/25: default: 2025-07-31 18:08:03.112 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:47.999 | ERROR    | src.utils.crewai_bypass:execute_task:48 - Direct AI execution failed: float() argument must be a string or a real number, n... in unknown:0
+2025-07-31 18:11:21.148 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.149 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.149 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.151 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 18:08:03.112 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:47.999 | ERROR    | src.utils.crewai_bypass:execute_task:48 - Direct AI execution failed: float() argument must be a string or a real number, n... after 3 attempts.
+2025-07-31 18:11:21.169 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 21/25: default: 2025-07-31 18:08:03.103 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:48.039 | ERROR    | src.core.cognitive_forge_engine:_parse_agent_json_response:1256 - Original response: Fallback response: Analyze and optimiz... in unknown:0
+2025-07-31 18:11:21.170 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.171 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.171 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.172 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 18:08:03.103 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:48.039 | ERROR    | src.core.cognitive_forge_engine:_parse_agent_json_response:1256 - Original response: Fallback response: Analyze and optimiz... after 3 attempts.
+2025-07-31 18:11:21.192 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 22/25: default: 2025-07-31 18:08:03.084 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:48.052 | ERROR    | src.core.cognitive_forge_engine:_execute_prompt_alchemy:384 - Prompt optimization failed: Invalid JSON format: Expecting va... in unknown:0
+2025-07-31 18:11:21.193 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.194 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.195 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.196 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 18:08:03.084 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:48.052 | ERROR    | src.core.cognitive_forge_engine:_execute_prompt_alchemy:384 - Prompt optimization failed: Invalid JSON format: Expecting va... after 3 attempts.
+2025-07-31 18:11:21.210 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 23/25: default: 2025-07-31 18:08:03.070 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:48.191 | ERROR    | src.utils.crewai_bypass:execute_task:48 - Direct AI execution failed: 'NoneType' object has no attribute 'invoke' after 3 a... in unknown:0
+2025-07-31 18:11:21.210 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.210 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.210 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.210 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 18:08:03.070 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 17:54:48.191 | ERROR    | src.utils.crewai_bypass:execute_task:48 - Direct AI execution failed: 'NoneType' object has no attribute 'invoke' after 3 a... after 3 attempts.
+2025-07-31 18:11:21.230 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 24/25: default: 2025-07-31 18:08:03.054 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix error: ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine after 3 attempts. in unknown:0
+2025-07-31 18:11:21.231 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.232 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.233 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.233 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 18:08:03.054 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix error: ConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine after 3 attempts. after 3 attempts.
+2025-07-31 18:11:21.263 | INFO     | Fix_AI:run_execution_phase:312 - Attempting to fix Step 25/25: default: 2025-07-31 18:08:03.039 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: Traceback (most recent call last): after 3 attempts. in unknown:0
+2025-07-31 18:11:21.286 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (2 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.286 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (1 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.290 | WARNING  | Fix_AI:run_execution_phase:370 - Attempt failed. Re-evaluating... (0 retries left). New error: Validation after fix failed: [Errno 2] No such file or directory: 'unknown'
+2025-07-31 18:11:21.290 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: 2025-07-31 18:08:03.039 | ERROR    | Fix_AI:run_execution_phase:372 - Could not fix default: Traceback (most recent call last): after 3 attempts. after 3 attempts.
+2025-07-31 18:11:21.307 | INFO     | Fix_AI:_log_phase:152 - 
+=========================
+[PHASE] FINAL VALIDATION
+=========================
+2025-07-31 18:11:21.308 | INFO     | Fix_AI:_log_phase:152 - 
+=========================
+[PHASE] DIAGNOSIS
+=========================
+2025-07-31 18:11:21.311 | INFO     | Fix_AI:run_diagnosis_phase:217 - Scanning 36 Python files...
+2025-07-31 18:11:34.115 | SUCCESS  | Fix_AI:run_diagnosis_phase:255 - Diagnosis complete. Found 0 issues.
+2025-07-31 18:11:34.115 | SUCCESS  | Fix_AI:run_final_validation_phase:389 - Final validation passed. No remaining issues or regressions detected.
+2025-07-31 18:11:34.116 | INFO     | Fix_AI:_log_phase:152 - 
+=========================
+[PHASE] REPORTING
+=========================
+2025-07-31 18:11:34.118 | SUCCESS  | Fix_AI:generate_report:415 - Comprehensive report saved to C:\Users\AMD\sentinel\desktop-app\logs\fix_ai_reports\fix_ai_report_20250731_181134.json
+2025-07-31 18:11:34.119 | INFO     | Fix_AI:run:184 - [COMPLETE] Fix-AI process complete.
+2025-07-31 18:11:34.119 | SUCCESS  | src.utils.automated_debugger:_run_fix_ai:149 - Fix-AI completed successfully
+2025-07-31 18:11:34.231 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-31 18:11:52.669 | INFO     | src.main:startup_event:728 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-31 18:36:00.423 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-31 18:36:00.528 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-31 18:36:21.453 | INFO     | src.main:startup_event:728 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-31 18:36:21.918 | INFO     | src.main:startup_event:728 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-31 18:53:50.203 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-31 18:53:50.212 | INFO     | src.main:shutdown_event:742 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-31 18:54:08.720 | INFO     | src.main:startup_event:974 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-31 18:54:08.868 | INFO     | src.main:shutdown_event:988 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-31 18:54:09.687 | INFO     | src.main:startup_event:974 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-31 18:54:09.832 | INFO     | src.main:shutdown_event:988 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-07-31 18:54:28.430 | INFO     | src.main:startup_event:974 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-31 18:54:28.561 | INFO     | src.main:startup_event:974 - 🚀 Cognitive Forge Desktop App starting up...
+2025-07-31 18:55:42.873 | INFO     | src.utils.weave_observability:_initialize_wandb:107 - ✅ Weights & Biases initialized successfully
+2025-07-31 18:55:42.877 | ERROR    | src.main:get_detailed_observability:867 - Error fetching detailed weave data: 'system_health'
+2025-07-31 18:55:43.490 | ERROR    | src.utils.sentry_api_client:get_recent_issues:60 - Failed to fetch Sentry issues: 400 Client Error: Bad Request for url: https://sentry.io/api/0/projects/adminai/4509764514938880/issues/?limit=25&statsPeriod=168h
+2025-07-31 18:55:44.121 | WARNING  | src.main:get_wandb_observability:711 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-07-31 18:56:19.671 | WARNING  | src.main:get_wandb_observability:711 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-07-31 18:56:20.307 | ERROR    | src.utils.sentry_api_client:get_recent_issues:60 - Failed to fetch Sentry issues: 400 Client Error: Bad Request for url: https://sentry.io/api/0/projects/adminai/4509764514938880/issues/?limit=25&statsPeriod=168h
+2025-07-31 18:56:21.074 | WARNING  | src.main:get_detailed_observability:831 - Could not fetch detailed WandB data: 'str' object has no attribute 'isoformat'
+2025-07-31 18:56:44.469 | WARNING  | src.main:get_wandb_observability:711 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-07-31 18:57:27.976 | WARNING  | src.main:get_wandb_observability:711 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-07-31 18:57:31.641 | WARNING  | src.main:get_wandb_observability:711 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-07-31 18:57:54.901 | WARNING  | src.main:get_wandb_observability:711 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-07-31 18:58:39.900 | WARNING  | src.main:get_wandb_observability:711 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-07-31 18:59:04.229 | WARNING  | src.main:get_wandb_observability:711 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-07-31 18:59:07.902 | WARNING  | src.main:get_wandb_observability:711 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-07-31 18:59:31.316 | WARNING  | src.main:get_wandb_observability:711 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-07-31 18:59:52.719 | ERROR    | src.utils.sentry_api_client:get_recent_issues:60 - Failed to fetch Sentry issues: 400 Client Error: Bad Request for url: https://sentry.io/api/0/projects/adminai/4509764514938880/issues/?limit=25&statsPeriod=168h
+2025-07-31 18:59:52.728 | ERROR    | src.main:get_detailed_observability:867 - Error fetching detailed weave data: 'system_health'
+2025-07-31 19:02:13.942 | WARNING  | src.main:get_wandb_observability:711 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-08-01 02:52:21.315 | INFO     | src.main:startup_event:974 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 02:52:55.250 | INFO     | src.main:startup_event:974 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 02:54:51.089 | INFO     | src.utils.weave_observability:_initialize_wandb:107 - ✅ Weights & Biases initialized successfully
+2025-08-01 02:54:51.716 | WARNING  | src.main:get_wandb_observability:711 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-08-01 02:58:49.411 | INFO     | src.main:shutdown_event:988 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 02:58:49.411 | INFO     | src.main:shutdown_event:988 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 02:59:05.266 | INFO     | src.main:startup_event:975 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 02:59:07.087 | INFO     | src.main:startup_event:975 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 02:59:13.691 | INFO     | src.main:shutdown_event:989 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 02:59:13.693 | INFO     | src.main:shutdown_event:989 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 02:59:29.624 | INFO     | src.main:startup_event:1057 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 02:59:30.322 | INFO     | src.main:startup_event:1057 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:01:38.593 | INFO     | src.utils.weave_observability:_initialize_wandb:107 - ✅ Weights & Biases initialized successfully
+2025-08-01 03:02:00.155 | WARNING  | src.main:get_wandb_observability:712 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-08-01 03:02:03.190 | ERROR    | src.main:get_detailed_observability:868 - Error fetching detailed weave data: 'system_health'
+2025-08-01 03:02:25.563 | WARNING  | src.main:get_wandb_observability:712 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-08-01 03:02:29.322 | ERROR    | src.utils.sentry_api_client:get_recent_issues:60 - Failed to fetch Sentry issues: 400 Client Error: Bad Request for url: https://sentry.io/api/0/projects/adminai/4509764514938880/issues/?limit=25&statsPeriod=168h
+2025-08-01 03:02:30.054 | WARNING  | src.main:get_wandb_observability:712 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-08-01 03:02:54.881 | WARNING  | src.main:get_wandb_observability:712 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-08-01 03:03:38.723 | ERROR    | src.main:get_live_events:951 - Error getting live events: 'DatabaseManager' object has no attribute 'get_session'
+2025-08-01 03:03:39.344 | WARNING  | src.main:get_wandb_observability:712 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-08-01 03:04:03.277 | WARNING  | src.main:get_wandb_observability:712 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-08-01 03:04:24.372 | ERROR    | src.main:get_live_events:951 - Error getting live events: 'DatabaseManager' object has no attribute 'get_session'
+2025-08-01 03:04:24.394 | ERROR    | src.main:get_live_events:951 - Error getting live events: 'DatabaseManager' object has no attribute 'get_session'
+2025-08-01 03:04:25.045 | WARNING  | src.main:get_wandb_observability:712 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-08-01 03:04:51.201 | WARNING  | src.main:get_wandb_observability:712 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-08-01 03:05:12.038 | ERROR    | src.main:get_live_events:951 - Error getting live events: 'DatabaseManager' object has no attribute 'get_session'
+2025-08-01 03:05:15.705 | WARNING  | src.main:get_wandb_observability:712 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-08-01 03:05:36.094 | ERROR    | src.main:get_live_events:951 - Error getting live events: 'DatabaseManager' object has no attribute 'get_session'
+2025-08-01 03:05:39.767 | WARNING  | src.main:get_wandb_observability:712 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-08-01 03:05:59.523 | ERROR    | src.main:get_live_events:951 - Error getting live events: 'DatabaseManager' object has no attribute 'get_session'
+2025-08-01 03:06:03.199 | WARNING  | src.main:get_wandb_observability:712 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-08-01 03:06:23.590 | WARNING  | src.main:get_wandb_observability:712 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-08-01 03:06:44.267 | ERROR    | src.main:get_live_events:951 - Error getting live events: 'DatabaseManager' object has no attribute 'get_session'
+2025-08-01 03:06:44.274 | ERROR    | src.main:get_live_events:951 - Error getting live events: 'DatabaseManager' object has no attribute 'get_session'
+2025-08-01 03:06:51.002 | WARNING  | src.main:get_wandb_observability:712 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-08-01 03:07:12.018 | ERROR    | src.main:get_live_events:951 - Error getting live events: 'DatabaseManager' object has no attribute 'get_session'
+2025-08-01 03:07:15.700 | WARNING  | src.main:get_wandb_observability:712 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-08-01 03:07:35.440 | ERROR    | src.main:get_live_events:951 - Error getting live events: 'DatabaseManager' object has no attribute 'get_session'
+2025-08-01 03:07:38.509 | ERROR    | src.main:get_live_events:951 - Error getting live events: 'DatabaseManager' object has no attribute 'get_session'
+2025-08-01 03:07:39.117 | WARNING  | src.main:get_wandb_observability:712 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-08-01 03:08:03.874 | WARNING  | src.main:get_wandb_observability:712 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-08-01 03:08:25.238 | ERROR    | src.main:get_live_events:951 - Error getting live events: 'DatabaseManager' object has no attribute 'get_session'
+2025-08-01 03:08:28.963 | WARNING  | src.main:get_wandb_observability:712 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-08-01 03:08:48.445 | ERROR    | src.main:get_live_events:951 - Error getting live events: 'DatabaseManager' object has no attribute 'get_session'
+2025-08-01 03:08:51.493 | ERROR    | src.main:get_live_events:951 - Error getting live events: 'DatabaseManager' object has no attribute 'get_session'
+2025-08-01 03:08:55.168 | WARNING  | src.main:get_wandb_observability:712 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-08-01 03:09:20.168 | ERROR    | src.main:get_live_events:951 - Error getting live events: 'DatabaseManager' object has no attribute 'get_session'
+2025-08-01 03:09:20.792 | WARNING  | src.main:get_wandb_observability:712 - Could not fetch WandB runs: 'str' object has no attribute 'isoformat'
+2025-08-01 03:09:22.394 | INFO     | src.main:shutdown_event:1071 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:09:38.454 | INFO     | src.main:startup_event:1056 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:09:38.583 | INFO     | src.main:shutdown_event:1070 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:09:49.528 | INFO     | src.main:shutdown_event:1071 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:09:54.117 | INFO     | src.main:startup_event:1056 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:10:04.626 | INFO     | src.main:startup_event:1056 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:10:04.749 | INFO     | src.main:shutdown_event:1070 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:10:20.066 | INFO     | src.main:startup_event:1056 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:10:28.098 | INFO     | src.utils.weave_observability:_initialize_wandb:107 - ✅ Weights & Biases initialized successfully
+2025-08-01 03:11:55.336 | INFO     | src.main:shutdown_event:1070 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:11:55.444 | INFO     | src.main:shutdown_event:1070 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:12:10.989 | INFO     | src.main:startup_event:1105 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:12:11.116 | INFO     | src.main:shutdown_event:1119 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:12:13.010 | INFO     | src.main:startup_event:1105 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:12:13.136 | INFO     | src.main:shutdown_event:1119 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:12:27.781 | INFO     | src.main:startup_event:1105 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:12:29.479 | INFO     | src.main:startup_event:1105 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:12:49.602 | INFO     | src.main:shutdown_event:1119 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:12:49.712 | INFO     | src.main:shutdown_event:1119 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:13:06.015 | INFO     | src.main:startup_event:1121 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:13:07.062 | INFO     | src.main:startup_event:1121 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:13:27.410 | INFO     | src.main:shutdown_event:1135 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:13:44.645 | INFO     | src.main:startup_event:1121 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:13:44.877 | INFO     | src.main:shutdown_event:1135 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:13:45.399 | INFO     | src.main:startup_event:1121 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:13:45.551 | INFO     | src.main:shutdown_event:1135 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:14:02.839 | INFO     | src.main:startup_event:1121 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:14:02.877 | INFO     | src.main:startup_event:1121 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:14:24.060 | INFO     | src.utils.weave_observability:_initialize_wandb:107 - ✅ Weights & Biases initialized successfully
+2025-08-01 03:14:56.459 | INFO     | src.main:shutdown_event:1135 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:15:14.460 | INFO     | src.main:startup_event:1224 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:15:16.225 | INFO     | src.main:startup_event:1224 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:16:03.756 | INFO     | src.utils.weave_observability:_initialize_wandb:107 - ✅ Weights & Biases initialized successfully
+2025-08-01 03:17:14.772 | INFO     | src.main:shutdown_event:1238 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:17:32.141 | INFO     | src.main:startup_event:1224 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:17:32.269 | INFO     | src.main:shutdown_event:1238 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:17:49.857 | INFO     | src.main:startup_event:1224 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:18:12.623 | INFO     | src.main:shutdown_event:1238 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:18:27.977 | INFO     | src.main:startup_event:1224 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:18:28.108 | INFO     | src.main:shutdown_event:1238 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:18:43.336 | INFO     | src.main:startup_event:1224 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:18:48.524 | INFO     | src.utils.weave_observability:_initialize_wandb:107 - ✅ Weights & Biases initialized successfully
+2025-08-01 03:20:44.847 | ERROR    | src.utils.sentry_api_client:get_recent_issues:60 - Failed to fetch Sentry issues: 400 Client Error: Bad Request for url: https://sentry.io/api/0/projects/adminai/4509764514938880/issues/?limit=25&statsPeriod=1h
+2025-08-01 03:24:25.167 | INFO     | src.main:shutdown_event:1238 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:24:41.249 | INFO     | src.main:startup_event:1224 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:24:41.391 | INFO     | src.main:shutdown_event:1238 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:24:43.645 | INFO     | src.main:shutdown_event:1238 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:24:57.489 | INFO     | src.main:startup_event:1224 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:24:58.187 | INFO     | src.main:shutdown_event:1238 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:25:01.024 | INFO     | src.main:startup_event:1224 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:25:01.174 | INFO     | src.main:shutdown_event:1238 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:25:13.385 | INFO     | src.main:startup_event:1224 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:25:16.324 | INFO     | src.main:startup_event:1224 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:25:24.823 | INFO     | src.utils.weave_observability:_initialize_wandb:107 - ✅ Weights & Biases initialized successfully
+2025-08-01 03:26:16.470 | INFO     | src.main:shutdown_event:1238 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:26:33.294 | INFO     | src.main:startup_event:1171 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:26:44.260 | INFO     | src.main:shutdown_event:1185 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:26:57.459 | INFO     | src.main:shutdown_event:1238 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:27:00.215 | INFO     | src.main:startup_event:1137 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:35:13.980 | INFO     | src.main:startup_event:1137 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:37:06.069 | INFO     | src.utils.weave_observability:_initialize_wandb:107 - ✅ Weights & Biases initialized successfully
+2025-08-01 03:37:59.618 | INFO     | src.main:shutdown_event:1151 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:38:17.054 | INFO     | src.main:startup_event:1123 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:38:26.651 | INFO     | src.main:shutdown_event:1137 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:38:43.750 | INFO     | src.main:startup_event:1102 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:39:05.352 | INFO     | src.utils.weave_observability:_initialize_wandb:107 - ✅ Weights & Biases initialized successfully
+2025-08-01 03:39:56.349 | INFO     | src.main:shutdown_event:1116 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:40:15.002 | INFO     | src.main:startup_event:1071 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:45:47.368 | INFO     | src.main:shutdown_event:1085 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:46:01.811 | INFO     | src.main:startup_event:1065 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:46:01.943 | INFO     | src.main:shutdown_event:1079 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:46:16.230 | INFO     | src.main:startup_event:1065 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:48:12.469 | INFO     | src.main:startup_event:1065 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:53:07.435 | INFO     | src.main:startup_event:1065 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:55:04.843 | INFO     | src.main:shutdown_event:1079 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:55:20.349 | INFO     | src.main:startup_event:1081 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:56:54.445 | INFO     | src.main:shutdown_event:1095 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:57:09.859 | INFO     | src.main:startup_event:1068 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 03:58:31.570 | INFO     | src.main:shutdown_event:1082 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 03:58:49.580 | INFO     | src.main:startup_event:1083 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 04:04:47.794 | INFO     | src.main:shutdown_event:1097 - 🛑 Cognitive Forge Desktop App shutting down...
+2025-08-01 04:05:04.563 | INFO     | src.main:startup_event:1070 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 04:05:42.081 | INFO     | src.main:startup_event:1070 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 04:08:38.221 | INFO     | src.main:startup_event:1070 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 04:20:09.783 | INFO     | src.main:startup_event:1070 - 🚀 Cognitive Forge Desktop App starting up...
+2025-08-01 04:24:44.508 | INFO     | src.main:startup_event:1070 - 🚀 Cognitive Forge Desktop App starting up...

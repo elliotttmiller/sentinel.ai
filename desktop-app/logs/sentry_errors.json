@@ -168,5 +168,53 @@
     "suggested_fix": "Check if object is None before calling .get() method",
     "issue_id": "test-1",
     "detected_at": "2025-07-31T13:52:29.621455"
+  },
+  {
+    "error_type": "AttributeError",
+    "message": "object has no attribute 'get'",
+    "file_path": "src/core/cognitive_forge_engine.py",
+    "line": 245,
+    "frequency": 3,
+    "last_seen": "2025-07-31T18:06:42.867777",
+    "suggested_fix": "Check if object is None before calling .get() method",
+    "issue_id": "simulated-1",
+    "severity": "error",
+    "detected_at": "2025-07-31T18:06:42.871036"
+  },
+  {
+    "error_type": "TypeError",
+    "message": "can't multiply sequence by non-int of type 'NoneType'",
+    "file_path": "src/utils/weave_observability.py",
+    "line": 156,
+    "frequency": 2,
+    "last_seen": "2025-07-31T18:06:42.867777",
+    "suggested_fix": "Add null check before multiplication operation",
+    "issue_id": "simulated-2",
+    "severity": "error",
+    "detected_at": "2025-07-31T18:06:42.871036"
+  },
+  {
+    "error_type": "AttributeError",
+    "message": "object has no attribute 'get'",
+    "file_path": "src/core/cognitive_forge_engine.py",
+    "line": 245,
+    "frequency": 3,
+    "last_seen": "2025-07-31T18:10:10.028331",
+    "suggested_fix": "Check if object is None before calling .get() method",
+    "issue_id": "simulated-1",
+    "severity": "error",
+    "detected_at": "2025-07-31T18:10:10.040245"
+  },
+  {
+    "error_type": "TypeError",
+    "message": "can't multiply sequence by non-int of type 'NoneType'",
+    "file_path": "src/utils/weave_observability.py",
+    "line": 156,
+    "frequency": 2,
+    "last_seen": "2025-07-31T18:10:10.028331",
+    "suggested_fix": "Add null check before multiplication operation",
+    "issue_id": "simulated-2",
+    "severity": "error",
+    "detected_at": "2025-07-31T18:10:10.040245"
   }
 ]

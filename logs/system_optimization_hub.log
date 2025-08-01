@@ -1028,3 +1028,22 @@ https://us-central1-aiplatform.googleapis.com/v1/projects/nexus-ai-466614/locati
 2025-07-31 18:00:24,380 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
 2025-07-31 18:00:24,485 - urllib3.connectionpool - DEBUG - https://o4509683080822784.ingest.us.sentry.io:443 "POST /api/4509764514938880/envelope/ HTTP/1.1" 200 0
 2025-07-31 18:00:24,620 - asyncio - DEBUG - Using proactor: IocpProactor
+2025-07-31 18:05:16,343 - SystemOptimizationHub - INFO - [INFO] Weave observability initialized for system optimization hub
+2025-07-31 18:05:16,351 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8000
+2025-07-31 18:05:20,407 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8000
+2025-07-31 18:05:24,467 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8000
+2025-07-31 18:05:28,504 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8000
+2025-07-31 18:05:32,558 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8000
+2025-07-31 18:05:36,638 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8000
+2025-07-31 18:05:40,691 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8000
+2025-07-31 18:05:44,748 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8000
+2025-07-31 18:05:48,778 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8000
+2025-07-31 18:05:52,831 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8000
+2025-07-31 18:06:49,080 - SystemOptimizationHub - INFO - [INFO] Weave observability initialized for system optimization hub
+2025-07-31 18:06:49,086 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8001
+2025-07-31 18:06:56,125 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8001
+2025-07-31 18:07:03,169 - urllib3.connectionpool - DEBUG - Starting new HTTP connection (1): localhost:8001
+2025-07-31 18:10:16,664 - SystemOptimizationHub - INFO - [INFO] Weave observability initialized for system optimization hub
+2025-07-31 18:10:58,203 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): o151352.ingest.us.sentry.io:443
+2025-07-31 18:10:58,812 - urllib3.connectionpool - DEBUG - https://o151352.ingest.us.sentry.io:443 "POST /api/4507019311251456/envelope/ HTTP/1.1" 200 0
+2025-07-31 18:10:58,876 - asyncio - DEBUG - Using proactor: IocpProactor

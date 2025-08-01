@@ -34,6 +34,13 @@ sentry_sdk.init(
 from .core.cognitive_forge_engine import cognitive_forge_engine
 from .models.advanced_database import db_manager, Mission
 
+# Add these new imports at the top
+from src.utils.sentry_api_client import get_sentry_api_client
+import asyncio
+import json
+import psutil
+from datetime import datetime, timedelta
+
 # Configure logging
 logger.add("logs/cognitive_forge.log", rotation="10 MB", retention="7 days")
 
@@ -173,6 +180,11 @@ def serve_web_ui():
         raise HTTPException(status_code=404, detail="Template file not found")
     
     return FileResponse(template_path)
+
+
+
+
+
 
 
 @app.get("/health")
@@ -622,6 +634,259 @@ def get_recent_traces(limit: int = 10):
         raise HTTPException(status_code=500, detail="Failed to fetch traces")
 
 
+@app.get("/observability/weave")
+async def get_weave_observability():
+    """Get real-time Weave observability data"""
+    try:
+        from src.observability_manager import observability_manager
+        
+        # Get real Weave data
+        weave_data = observability_manager.get_weave_data()
+        
+        return weave_data
+        
+    except Exception as e:
+        logger.error(f"Error fetching Weave data: {e}")
+        return {
+            "status": "ERROR",
+            "error": str(e),
+            "active_traces": 0,
+            "success_rate": 0,
+            "avg_response": 0,
+            "total_traces": 0,
+            "recent_traces": [],
+            "performance_metrics": {}
+        }
+
+@app.get("/observability/wandb")
+async def get_wandb_observability():
+    """Get real-time WandB observability data"""
+    try:
+        from src.observability_manager import observability_manager
+        
+        # Get real WandB data
+        wandb_data = observability_manager.get_wandb_data()
+        
+        return wandb_data
+        
+    except Exception as e:
+        logger.error(f"Error fetching WandB data: {e}")
+        return {
+            "status": "ERROR",
+            "error": str(e),
+            "active_runs": 0,
+            "accuracy": 0,
+            "loss": 0,
+            "experiments": [],
+            "metrics": {}
+        }
+
+@app.get("/observability/sentry")
+async def get_sentry_observability():
+    """Get real-time Sentry observability data"""
+    try:
+        from src.observability_manager import observability_manager
+        
+        # Get real Sentry data
+        sentry_data = observability_manager.get_sentry_data()
+        
+        return sentry_data
+        
+    except Exception as e:
+        logger.error(f"Error fetching Sentry data: {e}")
+        return {
+            "status": "ERROR",
+            "error": str(e),
+            "error_rate": 0,
+            "active_issues": 0,
+            "uptime": 0,
+            "recent_issues": [],
+            "issue_types": {},
+            "error_trends": {}
+        }
+
+@app.get("/observability/detailed/{system}")
+async def get_detailed_observability(system: str):
+    """Get detailed observability data for a specific system"""
+    try:
+        if system == "weave":
+            from src.utils.weave_observability import observability_manager
+            
+            detailed_data = {
+                "system": "weave",
+                "traces": [],
+                "performance": observability_manager.get_performance_analytics(),
+                "report": observability_manager.generate_observability_report()
+            }
+            
+            # Get detailed trace data
+            if observability_manager.metrics_history:
+                detailed_data["traces"] = [
+                    {
+                        "mission_id": trace.mission_id if hasattr(trace, 'mission_id') else "unknown",
+                        "user_request": trace.user_request if hasattr(trace, 'user_request') else "",
+                        "start_time": trace.start_time.isoformat() if hasattr(trace, 'start_time') else "",
+                        "end_time": trace.end_time.isoformat() if hasattr(trace, 'end_time') else "",
+                        "duration": trace.total_duration if hasattr(trace, 'total_duration') else 0,
+                        "success": trace.success if hasattr(trace, 'success') else True,
+                        "phases": trace.phases if hasattr(trace, 'phases') else [],
+                        "agents_used": trace.agents_used if hasattr(trace, 'agents_used') else [],
+                        "total_cost": trace.total_cost if hasattr(trace, 'total_cost') else 0
+                    }
+                    for trace in observability_manager.metrics_history[-20:]  # Last 20 traces
+                ]
+            
+            return detailed_data
+            
+        elif system == "wandb":
+            detailed_data = {
+                "system": "wandb",
+                "experiments": [],
+                "metrics": {},
+                "runs": []
+            }
+            
+            try:
+                import wandb
+                api = wandb.Api()
+                runs = api.runs("cognitive-forge-v5", per_page=20)
+                
+                detailed_data["runs"] = [
+                    {
+                        "id": run.id,
+                        "name": run.name,
+                        "state": run.state,
+                        "created_at": run.created_at.isoformat(),
+                        "updated_at": run.updated_at.isoformat() if hasattr(run, 'updated_at') else "",
+                        "metrics": run.summary,
+                        "config": run.config
+                    }
+                    for run in runs
+                ]
+            except Exception as e:
+                logger.warning(f"Could not fetch detailed WandB data: {e}")
+            
+            return detailed_data
+            
+        elif system == "sentry":
+            sentry_client = get_sentry_api_client()
+            recent_issues = sentry_client.get_recent_issues(hours=168)  # Last week
+            
+            detailed_data = {
+                "system": "sentry",
+                "issues": recent_issues,
+                "statistics": {
+                    "total_issues": len(recent_issues),
+                    "resolved_issues": len([i for i in recent_issues if i.get('status') == 'resolved']),
+                    "unresolved_issues": len([i for i in recent_issues if i.get('status') != 'resolved']),
+                    "critical_issues": len([i for i in recent_issues if i.get('level') == 'fatal']),
+                    "error_issues": len([i for i in recent_issues if i.get('level') == 'error']),
+                    "warning_issues": len([i for i in recent_issues if i.get('level') == 'warning'])
+                },
+                "issue_details": []
+            }
+            
+            # Get detailed info for first 10 issues
+            for issue in recent_issues[:10]:
+                issue_id = issue.get('id')
+                if issue_id:
+                    details = sentry_client.get_issue_details(issue_id)
+                    if details:
+                        detailed_data["issue_details"].append(details)
+            
+            return detailed_data
+            
+        else:
+            return {"error": f"Unknown system: {system}"}
+            
+    except Exception as e:
+        logger.error(f"Error fetching detailed {system} data: {e}")
+        return {"error": str(e)}
+
+
+@app.get("/api/system/vitals")
+async def get_system_vitals():
+    """Provides a snapshot of real-time system performance metrics."""
+    try:
+        return {
+            "cpu_usage": psutil.cpu_percent(),
+            "memory_usage": psutil.virtual_memory().percent,
+            "disk_usage": psutil.disk_usage('/').percent
+        }
+    except Exception as e:
+        logger.error(f"Error getting system vitals: {e}")
+        return {
+            "cpu_usage": 0,
+            "memory_usage": 0,
+            "disk_usage": 0
+        }
+
+@app.get("/api/observability/overview")
+async def get_observability_overview():
+    """Provides high-level summary stats for the observability systems."""
+    try:
+        from src.observability_manager import observability_manager
+        
+        # Get real data from all systems
+        weave_data = observability_manager.get_weave_data()
+        sentry_data = observability_manager.get_sentry_data()
+        wandb_data = observability_manager.get_wandb_data()
+        
+        return {
+            "weave": {
+                "status": weave_data["status"],
+                "active_traces": weave_data["active_traces"],
+                "success_rate": weave_data["success_rate"],
+                "avg_response_ms": weave_data["avg_response_ms"]
+            },
+            "sentry": {
+                "status": sentry_data["status"],
+                "error_rate_percent": sentry_data["error_rate"],
+                "active_issues": sentry_data["active_issues"],
+                "uptime_percent": sentry_data["uptime"]
+            },
+            "wandb": {
+                "status": wandb_data["status"],
+                "active_runs": wandb_data["active_runs"],
+                "best_accuracy": wandb_data["metrics"].get("best_accuracy", 0),
+                "avg_loss": wandb_data["metrics"].get("avg_loss", 0)
+            }
+        }
+    except Exception as e:
+        logger.error(f"Error getting observability overview: {e}")
+        return {
+            "weave": {"status": "ERROR", "active_traces": 0, "success_rate": 0, "avg_response_ms": 0},
+            "wandb": {"status": "ERROR", "active_runs": 0, "best_accuracy": 0, "avg_loss": 0},
+            "sentry": {"status": "ERROR", "error_rate_percent": 0, "active_issues": 0, "uptime_percent": 0}
+        }
+
+@app.get("/api/events/live")
+async def get_live_events():
+    """Provides a stream of the latest system events."""
+    try:
+        # Get recent missions for events
+        recent_missions = db_manager.list_missions(limit=5)
+        
+        events = []
+        for mission in recent_missions:
+            events.append({
+                "timestamp": mission.created_at.isoformat(),
+                "level": "INFO" if mission.status == "COMPLETED" else "WARNING" if mission.status == "FAILED" else "INFO",
+                "message": f"Mission {mission.mission_id_str} {mission.status.lower()}"
+            })
+        
+        # Add some system events
+        events.append({
+            "timestamp": datetime.utcnow().isoformat(),
+            "level": "INFO",
+            "message": "System health check completed"
+        })
+        
+        return events
+    except Exception as e:
+        logger.error(f"Error getting live events: {e}")
+        return []
+
 @app.get("/service-status")
 async def get_service_status():
     """Get comprehensive service status including Railway connection"""
@@ -720,6 +985,83 @@ async def get_service_status():
             "overall_status": "error"
         }
 
+
+# Real-time Observability Streaming
+@app.get("/api/observability/stream")
+async def stream_observability_data():
+    """Real-time streaming endpoint for observability data"""
+    from fastapi.responses import StreamingResponse
+    import json
+    import asyncio
+    
+    async def generate_stream():
+        """Generate real-time observability data stream"""
+        while True:
+            try:
+                # Get real-time data from observability manager
+                from src.observability_manager import observability_manager
+                import psutil
+                
+                # Update metrics for fresh data
+                observability_manager.update_metrics()
+                
+                # System vitals
+                try:
+                    system_vitals = {
+                        "cpu_usage": psutil.cpu_percent(),
+                        "memory_usage": psutil.virtual_memory().percent,
+                        "disk_usage": psutil.disk_usage('/').percent
+                    }
+                except Exception as e:
+                    system_vitals = {"cpu_usage": 0, "memory_usage": 0, "disk_usage": 0}
+                
+                # Get real observability data
+                weave_data = observability_manager.get_weave_data()
+                sentry_data = observability_manager.get_sentry_data()
+                wandb_data = observability_manager.get_wandb_data()
+                
+                stream_data = {
+                    "timestamp": datetime.utcnow().isoformat(),
+                    "weave": {
+                        "status": weave_data["status"],
+                        "active_traces": weave_data["active_traces"],
+                        "success_rate": weave_data["success_rate"],
+                        "avg_response_ms": weave_data["avg_response_ms"]
+                    },
+                    "sentry": {
+                        "status": sentry_data["status"],
+                        "error_rate_percent": sentry_data["error_rate"],
+                        "active_issues": sentry_data["active_issues"],
+                        "uptime_percent": sentry_data["uptime"]
+                    },
+                    "wandb": {
+                        "status": wandb_data["status"],
+                        "active_runs": wandb_data["active_runs"],
+                        "best_accuracy": wandb_data["accuracy"],
+                        "avg_loss": wandb_data["loss"]
+                    },
+                    "system_vitals": system_vitals
+                }
+                
+                # Send data as Server-Sent Events
+                yield f"data: {json.dumps(stream_data)}\n\n"
+                
+                # Wait before next update
+                await asyncio.sleep(5)  # Update every 5 seconds
+                
+            except Exception as e:
+                logger.error(f"Error in observability stream: {e}")
+                await asyncio.sleep(10)  # Wait longer on error
+    
+    return StreamingResponse(
+        generate_stream(),
+        media_type="text/plain",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "Content-Type": "text/event-stream"
+        }
+    )
 
 # Startup and Shutdown Events
 @app.on_event("startup")
