@@ -1,0 +1,12 @@
+{"time":"2025-08-02T13:56:41.1064861-05:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-08-02T13:56:41.3187179-05:00","level":"INFO","msg":"stream: created new stream","id":"qujamptc"}
+{"time":"2025-08-02T13:56:41.3192476-05:00","level":"INFO","msg":"stream: started","id":"qujamptc"}
+{"time":"2025-08-02T13:56:41.3192476-05:00","level":"INFO","msg":"writer: Do: started","stream_id":"qujamptc"}
+{"time":"2025-08-02T13:56:41.3192476-05:00","level":"INFO","msg":"handler: started","stream_id":"qujamptc"}
+{"time":"2025-08-02T13:56:41.3192476-05:00","level":"INFO","msg":"sender: started","stream_id":"qujamptc"}
+{"time":"2025-08-02T13:56:41.9680753-05:00","level":"INFO","msg":"stream: closing","id":"qujamptc"}
+{"time":"2025-08-02T13:56:42.3800035-05:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-08-02T13:56:42.5465023-05:00","level":"INFO","msg":"writer: Close: closed","stream_id":"qujamptc"}
+{"time":"2025-08-02T13:56:42.5465023-05:00","level":"INFO","msg":"handler: closed","stream_id":"qujamptc"}
+{"time":"2025-08-02T13:56:42.5465023-05:00","level":"INFO","msg":"sender: closed","stream_id":"qujamptc"}
+{"time":"2025-08-02T13:56:42.5465023-05:00","level":"INFO","msg":"stream: closed","id":"qujamptc"}

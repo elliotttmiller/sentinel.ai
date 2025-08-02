@@ -1,0 +1,1 @@
+Stats after initialization: {'overview': {'total_logs': 0, 'latest_log': None, 'error_count': 0, 'warning_count': 0, 'info_count': 0}, '8001': {'total_logs': 0, 'latest_log': None, 'error_count': 0, 'warning_count': 0, 'info_count': 0}, '8002': {'total_logs': 0, 'latest_log': None, 'error_count': 0, 'warning_count': 0, 'info_count': 0}}

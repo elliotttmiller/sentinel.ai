@@ -1,0 +1,12 @@
+{"time":"2025-08-02T14:16:29.6167594-05:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-08-02T14:16:29.8798526-05:00","level":"INFO","msg":"stream: created new stream","id":"fibqcrts"}
+{"time":"2025-08-02T14:16:29.8798526-05:00","level":"INFO","msg":"stream: started","id":"fibqcrts"}
+{"time":"2025-08-02T14:16:29.8798526-05:00","level":"INFO","msg":"writer: Do: started","stream_id":"fibqcrts"}
+{"time":"2025-08-02T14:16:29.8798526-05:00","level":"INFO","msg":"handler: started","stream_id":"fibqcrts"}
+{"time":"2025-08-02T14:16:29.8798526-05:00","level":"INFO","msg":"sender: started","stream_id":"fibqcrts"}
+{"time":"2025-08-02T14:16:30.4822014-05:00","level":"INFO","msg":"stream: closing","id":"fibqcrts"}
+{"time":"2025-08-02T14:16:30.8595188-05:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-08-02T14:16:31.0051701-05:00","level":"INFO","msg":"handler: closed","stream_id":"fibqcrts"}
+{"time":"2025-08-02T14:16:31.0051701-05:00","level":"INFO","msg":"writer: Close: closed","stream_id":"fibqcrts"}
+{"time":"2025-08-02T14:16:31.0051701-05:00","level":"INFO","msg":"sender: closed","stream_id":"fibqcrts"}
+{"time":"2025-08-02T14:16:31.0051701-05:00","level":"INFO","msg":"stream: closed","id":"fibqcrts"}

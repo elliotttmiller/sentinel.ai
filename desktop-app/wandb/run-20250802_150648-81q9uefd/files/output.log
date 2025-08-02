@@ -1,0 +1,41 @@
+[32m2025-08-02 15:06:50.371[0m | [1mINFO    [0m | [36mutils.agent_observability[0m:[36m_initialize_integrations[0m:[36m150[0m - [1m✅ W&B integration initialized[0m
+[32m2025-08-02 15:06:50.373[0m | [1mINFO    [0m | [36msrc.main[0m:[36m<module>[0m:[36m45[0m - [1m✅ Agent observability system loaded successfully.[0m
+[32m2025-08-02 15:06:50.374[0m | [1mINFO    [0m | [36msrc.main[0m:[36m<module>[0m:[36m94[0m - [1m✅ Core components initialized with fallback support.[0m
+[32mINFO[0m:     Started server process [[36m9416[0m]
+[32mINFO[0m:     Waiting for application startup.
+[32m2025-08-02 15:06:50.388[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m652[0m - [1m🚀 Sentinel Cognitive Forge v5.1 starting up...[0m
+[32m2025-08-02 15:06:50.389[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m653[0m - [1m📡 Unified Real-Time Event Bus initialized[0m
+[32m2025-08-02 15:06:50.390[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m654[0m - [1m🔗 SSE endpoint available at /api/events/stream[0m
+[32m2025-08-02 15:06:50.392[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m658[0m - [1m🔄 Periodic event generation started[0m
+[32mINFO[0m:     Application startup complete.
+[32m2025-08-02 15:06:50.393[0m | [1mINFO    [0m | [36msrc.main[0m:[36mshutdown_event[0m:[36m662[0m - [1m🛑 Shutting down Sentinel Cognitive Forge v5.1[0m
+[31mERROR[0m:    Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 686, in lifespan
+    await receive()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError

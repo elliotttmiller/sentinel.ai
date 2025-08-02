@@ -1,0 +1,103 @@
+2025-08-02 15:05:10.827 | INFO     | src.main:startup_event:597 - 🚀 Sentinel Cognitive Forge v5.1 starting up...
+2025-08-02 15:05:10.834 | INFO     | src.main:startup_event:598 - 📡 Unified Real-Time Event Bus initialized
+2025-08-02 15:05:10.837 | INFO     | src.main:startup_event:599 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-02 15:05:10.838 | INFO     | src.main:startup_event:603 - 🔄 Periodic event generation started
+2025-08-02 15:06:16.766 | INFO     | src.main:shutdown_event:607 - 🛑 Shutting down Sentinel Cognitive Forge v5.1
+2025-08-02 15:06:34.862 | INFO     | src.main:startup_event:649 - 🚀 Sentinel Cognitive Forge v5.1 starting up...
+2025-08-02 15:06:34.865 | INFO     | src.main:startup_event:650 - 📡 Unified Real-Time Event Bus initialized
+2025-08-02 15:06:34.868 | INFO     | src.main:startup_event:651 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-02 15:06:34.868 | INFO     | src.main:startup_event:655 - 🔄 Periodic event generation started
+2025-08-02 15:06:34.871 | INFO     | src.main:shutdown_event:659 - 🛑 Shutting down Sentinel Cognitive Forge v5.1
+2025-08-02 15:06:50.388 | INFO     | src.main:startup_event:652 - 🚀 Sentinel Cognitive Forge v5.1 starting up...
+2025-08-02 15:06:50.389 | INFO     | src.main:startup_event:653 - 📡 Unified Real-Time Event Bus initialized
+2025-08-02 15:06:50.390 | INFO     | src.main:startup_event:654 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-02 15:06:50.392 | INFO     | src.main:startup_event:658 - 🔄 Periodic event generation started
+2025-08-02 15:06:50.393 | INFO     | src.main:shutdown_event:662 - 🛑 Shutting down Sentinel Cognitive Forge v5.1
+2025-08-02 15:07:06.057 | INFO     | src.main:startup_event:652 - 🚀 Sentinel Cognitive Forge v5.1 starting up...
+2025-08-02 15:07:06.058 | INFO     | src.main:startup_event:653 - 📡 Unified Real-Time Event Bus initialized
+2025-08-02 15:07:06.059 | INFO     | src.main:startup_event:654 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-02 15:07:06.060 | INFO     | src.main:startup_event:658 - 🔄 Periodic event generation started
+2025-08-02 15:14:26.251 | ERROR    | src.main:event_generator:341 - Error in SSE event generator: name 'asdict' is not defined
+2025-08-02 15:14:27.260 | ERROR    | src.main:event_generator:341 - Error in SSE event generator: name 'asdict' is not defined
+2025-08-02 15:14:28.271 | ERROR    | src.main:event_generator:341 - Error in SSE event generator: name 'asdict' is not defined
+2025-08-02 15:14:29.285 | ERROR    | src.main:event_generator:341 - Error in SSE event generator: name 'asdict' is not defined
+2025-08-02 15:14:30.290 | ERROR    | src.main:event_generator:341 - Error in SSE event generator: name 'asdict' is not defined
+2025-08-02 15:14:31.292 | ERROR    | src.main:event_generator:341 - Error in SSE event generator: name 'asdict' is not defined
+2025-08-02 15:14:31.888 | ERROR    | src.main:event_generator:341 - Error in SSE event generator: name 'asdict' is not defined
+2025-08-02 15:14:32.894 | ERROR    | src.main:event_generator:341 - Error in SSE event generator: name 'asdict' is not defined
+2025-08-02 15:14:33.881 | ERROR    | src.main:event_generator:341 - Error in SSE event generator: name 'asdict' is not defined
+2025-08-02 15:14:34.874 | ERROR    | src.main:event_generator:341 - Error in SSE event generator: name 'asdict' is not defined
+2025-08-02 15:14:35.885 | ERROR    | src.main:event_generator:341 - Error in SSE event generator: name 'asdict' is not defined
+2025-08-02 15:14:36.880 | ERROR    | src.main:event_generator:341 - Error in SSE event generator: name 'asdict' is not defined
+2025-08-02 15:14:37.883 | ERROR    | src.main:event_generator:341 - Error in SSE event generator: name 'asdict' is not defined
+2025-08-02 15:14:38.878 | ERROR    | src.main:event_generator:341 - Error in SSE event generator: name 'asdict' is not defined
+2025-08-02 15:14:39.803 | ERROR    | src.main:event_generator:341 - Error in SSE event generator: name 'asdict' is not defined
+2025-08-02 15:14:43.439 | ERROR    | src.main:event_generator:341 - Error in SSE event generator: name 'asdict' is not defined
+2025-08-02 15:14:44.450 | ERROR    | src.main:event_generator:341 - Error in SSE event generator: name 'asdict' is not defined
+2025-08-02 15:14:45.468 | ERROR    | src.main:event_generator:341 - Error in SSE event generator: name 'asdict' is not defined
+2025-08-02 15:14:46.484 | ERROR    | src.main:event_generator:341 - Error in SSE event generator: name 'asdict' is not defined
+2025-08-02 15:14:47.500 | ERROR    | src.main:event_generator:341 - Error in SSE event generator: name 'asdict' is not defined
+2025-08-02 15:14:48.550 | ERROR    | src.main:event_generator:341 - Error in SSE event generator: name 'asdict' is not defined
+2025-08-02 15:14:49.551 | ERROR    | src.main:event_generator:341 - Error in SSE event generator: name 'asdict' is not defined
+2025-08-02 15:14:50.550 | ERROR    | src.main:event_generator:341 - Error in SSE event generator: name 'asdict' is not defined
+2025-08-02 15:15:48.537 | INFO     | src.main:shutdown_event:662 - 🛑 Shutting down Sentinel Cognitive Forge v5.1
+2025-08-02 15:16:01.664 | INFO     | src.main:startup_event:691 - 🚀 Sentinel Cognitive Forge v5.1 starting up...
+2025-08-02 15:16:01.666 | INFO     | src.main:startup_event:692 - 📡 Unified Real-Time Event Bus initialized
+2025-08-02 15:16:01.667 | INFO     | src.main:startup_event:693 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-02 15:16:01.668 | INFO     | src.main:startup_event:697 - 🔄 Periodic event generation started
+2025-08-02 15:16:47.584 | INFO     | src.main:event_generator:339 - SSE client disconnected
+2025-08-02 15:16:57.661 | INFO     | src.main:event_generator:339 - SSE client disconnected
+2025-08-02 15:17:04.285 | INFO     | src.main:event_generator:339 - SSE client disconnected
+2025-08-02 15:19:12.128 | INFO     | src.main:shutdown_event:701 - 🛑 Shutting down Sentinel Cognitive Forge v5.1
+2025-08-02 15:19:29.993 | INFO     | src.main:startup_event:691 - 🚀 Sentinel Cognitive Forge v5.1 starting up...
+2025-08-02 15:19:29.995 | INFO     | src.main:startup_event:692 - 📡 Unified Real-Time Event Bus initialized
+2025-08-02 15:19:29.996 | INFO     | src.main:startup_event:693 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-02 15:19:29.997 | INFO     | src.main:startup_event:697 - 🔄 Periodic event generation started
+2025-08-02 15:40:34.927 | INFO     | src.main:event_generator:339 - SSE client disconnected
+2025-08-02 15:40:44.651 | INFO     | src.main:event_generator:339 - SSE client disconnected
+2025-08-02 15:41:14.835 | INFO     | src.main:event_generator:339 - SSE client disconnected
+2025-08-02 15:41:17.768 | INFO     | src.main:event_generator:339 - SSE client disconnected
+2025-08-02 15:43:38.319 | INFO     | src.main:shutdown_event:701 - 🛑 Shutting down Sentinel Cognitive Forge v5.1
+2025-08-02 15:43:49.281 | INFO     | src.main:startup_event:691 - 🚀 Sentinel Cognitive Forge v5.1 starting up...
+2025-08-02 15:43:49.283 | INFO     | src.main:startup_event:692 - 📡 Unified Real-Time Event Bus initialized
+2025-08-02 15:43:49.284 | INFO     | src.main:startup_event:693 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-02 15:43:49.285 | INFO     | src.main:startup_event:697 - 🔄 Periodic event generation started
+2025-08-02 15:43:49.286 | INFO     | src.main:shutdown_event:701 - 🛑 Shutting down Sentinel Cognitive Forge v5.1
+2025-08-02 15:44:01.085 | INFO     | src.main:startup_event:691 - 🚀 Sentinel Cognitive Forge v5.1 starting up...
+2025-08-02 15:44:01.087 | INFO     | src.main:startup_event:692 - 📡 Unified Real-Time Event Bus initialized
+2025-08-02 15:44:01.088 | INFO     | src.main:startup_event:693 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-02 15:44:01.089 | INFO     | src.main:startup_event:697 - 🔄 Periodic event generation started
+2025-08-02 15:44:01.090 | INFO     | src.main:shutdown_event:701 - 🛑 Shutting down Sentinel Cognitive Forge v5.1
+2025-08-02 15:44:13.003 | INFO     | src.main:startup_event:691 - 🚀 Sentinel Cognitive Forge v5.1 starting up...
+2025-08-02 15:44:13.004 | INFO     | src.main:startup_event:692 - 📡 Unified Real-Time Event Bus initialized
+2025-08-02 15:44:13.005 | INFO     | src.main:startup_event:693 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-02 15:44:13.006 | INFO     | src.main:startup_event:697 - 🔄 Periodic event generation started
+2025-08-02 15:44:20.489 | INFO     | src.main:shutdown_event:701 - 🛑 Shutting down Sentinel Cognitive Forge v5.1
+2025-08-02 15:44:32.268 | INFO     | src.main:startup_event:691 - 🚀 Sentinel Cognitive Forge v5.1 starting up...
+2025-08-02 15:44:32.273 | INFO     | src.main:startup_event:692 - 📡 Unified Real-Time Event Bus initialized
+2025-08-02 15:44:32.276 | INFO     | src.main:startup_event:693 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-02 15:44:32.281 | INFO     | src.main:startup_event:697 - 🔄 Periodic event generation started
+2025-08-02 15:44:32.286 | INFO     | src.main:shutdown_event:701 - 🛑 Shutting down Sentinel Cognitive Forge v5.1
+2025-08-02 15:44:44.768 | INFO     | src.main:startup_event:691 - 🚀 Sentinel Cognitive Forge v5.1 starting up...
+2025-08-02 15:44:44.770 | INFO     | src.main:startup_event:692 - 📡 Unified Real-Time Event Bus initialized
+2025-08-02 15:44:44.771 | INFO     | src.main:startup_event:693 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-02 15:44:44.771 | INFO     | src.main:startup_event:697 - 🔄 Periodic event generation started
+2025-08-02 15:44:44.772 | INFO     | src.main:shutdown_event:701 - 🛑 Shutting down Sentinel Cognitive Forge v5.1
+2025-08-02 15:44:57.308 | INFO     | src.main:startup_event:691 - 🚀 Sentinel Cognitive Forge v5.1 starting up...
+2025-08-02 15:44:57.310 | INFO     | src.main:startup_event:692 - 📡 Unified Real-Time Event Bus initialized
+2025-08-02 15:44:57.311 | INFO     | src.main:startup_event:693 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-02 15:44:57.311 | INFO     | src.main:startup_event:697 - 🔄 Periodic event generation started
+2025-08-02 15:46:44.849 | INFO     | src.main:event_generator:339 - SSE client disconnected
+2025-08-02 15:46:53.704 | INFO     | src.main:event_generator:339 - SSE client disconnected
+2025-08-02 15:47:00.599 | INFO     | src.main:event_generator:339 - SSE client disconnected
+2025-08-02 15:48:48.147 | INFO     | src.main:shutdown_event:701 - 🛑 Shutting down Sentinel Cognitive Forge v5.1
+2025-08-02 15:48:58.926 | INFO     | src.main:startup_event:691 - 🚀 Sentinel Cognitive Forge v5.1 starting up...
+2025-08-02 15:48:58.928 | INFO     | src.main:startup_event:692 - 📡 Unified Real-Time Event Bus initialized
+2025-08-02 15:48:58.929 | INFO     | src.main:startup_event:693 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-02 15:48:58.929 | INFO     | src.main:startup_event:697 - 🔄 Periodic event generation started
+2025-08-02 15:48:58.931 | INFO     | src.main:shutdown_event:701 - 🛑 Shutting down Sentinel Cognitive Forge v5.1
+2025-08-02 15:49:13.067 | INFO     | src.main:startup_event:691 - 🚀 Sentinel Cognitive Forge v5.1 starting up...
+2025-08-02 15:49:13.068 | INFO     | src.main:startup_event:692 - 📡 Unified Real-Time Event Bus initialized
+2025-08-02 15:49:13.069 | INFO     | src.main:startup_event:693 - 🔗 SSE endpoint available at /api/events/stream
+2025-08-02 15:49:13.069 | INFO     | src.main:startup_event:697 - 🔄 Periodic event generation started
+2025-08-02 15:49:14.127 | INFO     | src.main:shutdown_event:701 - 🛑 Shutting down Sentinel Cognitive Forge v5.1

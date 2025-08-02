@@ -6,18 +6,18 @@ Integrates with the enhanced observability system for complete tracking.
 """
 
 import asyncio
+import json
 import time
 import uuid
-from datetime import datetime, timedelta
-from typing import Dict, List, Any, Optional
-from dataclasses import dataclass, field, asdict
-from collections import deque
-import logging
+from datetime import datetime
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 from loguru import logger
-from .agent_observability import agent_observability, AgentSession, MissionObservability
 
-# --- Test Mission Data Models ---
+from ..utils.agent_observability import AgentSession, agent_observability
+from ..core.cognitive_forge_engine import CognitiveForgeEngine
 
 @dataclass
 class TestMission:
@@ -48,13 +48,14 @@ class TestExecution:
     error_messages: List[str] = field(default_factory=list)
 
 class TestMissionSystem:
-    """Comprehensive test mission system for agent validation and analysis."""
-
+    """Manages test missions for evaluating agent capabilities."""
+    
     def __init__(self):
         self.test_missions: Dict[str, TestMission] = {}
-        self.test_executions: List[TestExecution] = []
+        self.executions: Dict[str, TestExecution] = {}
+        self.cognitive_engine: Optional[CognitiveForgeEngine] = None
         self._load_default_test_missions()
-
+    
     def _load_default_test_missions(self):
         """Load default test missions for various scenarios."""
         
@@ -155,71 +156,172 @@ def divide_numbers(a, b):
                     "input": {
                         "code": """
 def process_large_data():
-    data = []
-    for i in range(1000000):
-        data.append(i)
-    return sum(data)
+                            data = []
+                            for i in range(1000000):
+                                data.append(i)
+                            return data
                         """,
-                        "issue": "Memory usage grows indefinitely"
+                        "issue": "Potential memory leak with large data processing"
                     },
                     "expected_output": {
+                        "fix_applied": True,
                         "memory_optimized": True,
                         "performance_improved": True
                     }
                 }
             ],
             success_criteria={
-                "all_bugs_fixed": True,
-                "tests_pass": True,
-                "performance_improved": True
+                "min_fixes_applied": 2,
+                "max_response_time_seconds": 60,
+                "all_tests_pass": True
             }
         )
         
         # Feature Development Test Mission
         feature_dev_mission = TestMission(
             name="Feature Development",
-            description="Test agent's ability to implement new features and functionality",
+            description="Test agent's ability to implement new features",
             category="feature_dev",
-            difficulty="expert",
-            expected_agents=["Developer", "Architect", "Tester"],
+            difficulty="medium",
+            expected_agents=["SeniorDeveloper", "CodeReviewer", "QATester"],
             expected_duration_minutes=8,
             test_scenarios=[
                 {
                     "name": "API Endpoint Creation",
                     "input": {
-                        "requirement": "Create a REST API endpoint for user authentication",
-                        "specifications": {
-                            "method": "POST",
-                            "path": "/auth/login",
-                            "input": {"username": "string", "password": "string"},
-                            "output": {"token": "string", "user_id": "integer"}
-                        }
+                        "feature": "Create a new REST API endpoint for user authentication",
+                        "requirements": [
+                            "POST /api/auth/login",
+                            "Input: username, password",
+                            "Output: JWT token",
+                            "Error handling for invalid credentials"
+                        ]
                     },
                     "expected_output": {
                         "endpoint_created": True,
-                        "input_validation": True,
-                        "error_handling": True,
-                        "documentation": True
+                        "tests_passing": True,
+                        "documentation_updated": True
                     }
                 },
                 {
-                    "name": "Database Integration",
+                    "name": "Database Schema Update",
                     "input": {
-                        "requirement": "Add database support for user management",
-                        "database_type": "SQLite",
-                        "tables": ["users", "sessions"]
+                        "feature": "Add user profile fields to database",
+                        "requirements": [
+                            "Add fields: bio, avatar_url, preferences",
+                            "Create migration script",
+                            "Update model classes",
+                            "Add validation rules"
+                        ]
                     },
                     "expected_output": {
-                        "schema_created": True,
-                        "migrations": True,
-                        "crud_operations": True
+                        "schema_updated": True,
+                        "migration_created": True,
+                        "models_updated": True
                     }
                 }
             ],
             success_criteria={
-                "feature_complete": True,
-                "tests_written": True,
-                "documentation": True
+                "all_features_implemented": True,
+                "tests_passing": True,
+                "documentation_complete": True
+            }
+        )
+        
+        # Performance Optimization Test Mission
+        performance_mission = TestMission(
+            name="Performance Optimization",
+            description="Test agent's ability to optimize code performance",
+            category="optimization",
+            difficulty="hard",
+            expected_agents=["PerformanceOptimizer", "CodeAnalyzer", "Profiler"],
+            expected_duration_minutes=6,
+            test_scenarios=[
+                {
+                    "name": "Algorithm Optimization",
+                    "input": {
+                        "code": """
+def find_duplicates(items):
+    duplicates = []
+    for i in range(len(items)):
+        for j in range(i + 1, len(items)):
+            if items[i] == items[j]:
+                duplicates.append(items[i])
+    return duplicates
+                        """,
+                        "performance_issue": "O(n²) time complexity"
+                    },
+                    "expected_output": {
+                        "optimization_applied": True,
+                        "complexity_improved": True,
+                        "performance_measured": True
+                    }
+                },
+                {
+                    "name": "Database Query Optimization",
+                    "input": {
+                        "query": "SELECT * FROM users WHERE age > 18 AND city = 'New York'",
+                        "issue": "Missing indexes, inefficient query"
+                    },
+                    "expected_output": {
+                        "indexes_created": True,
+                        "query_optimized": True,
+                        "performance_improved": True
+                    }
+                }
+            ],
+            success_criteria={
+                "performance_improved": True,
+                "complexity_reduced": True,
+                "benchmarks_passing": True
+            }
+        )
+        
+        # Security Analysis Test Mission
+        security_mission = TestMission(
+            name="Security Analysis",
+            description="Test agent's ability to identify and fix security vulnerabilities",
+            category="security",
+            difficulty="expert",
+            expected_agents=["SecurityScanner", "VulnerabilityAnalyzer", "SecurityFixer"],
+            expected_duration_minutes=7,
+            test_scenarios=[
+                {
+                    "name": "SQL Injection Detection",
+                    "input": {
+                        "code": """
+def get_user_by_id(user_id):
+    query = f"SELECT * FROM users WHERE id = {user_id}"
+    return execute_query(query)
+                        """,
+                        "vulnerability": "SQL injection vulnerability"
+                    },
+                    "expected_output": {
+                        "vulnerability_detected": True,
+                        "fix_applied": True,
+                        "security_improved": True
+                    }
+                },
+                {
+                    "name": "XSS Prevention",
+                    "input": {
+                        "code": """
+def display_user_input(user_input):
+    return f"<div>{user_input}</div>"
+                        """,
+                        "vulnerability": "Cross-site scripting (XSS)"
+                    },
+                    "expected_output": {
+                        "vulnerability_detected": True,
+                        "sanitization_applied": True,
+                        "security_improved": True
+                    }
+                }
+            ],
+            success_criteria={
+                "all_vulnerabilities_detected": True,
+                "all_fixes_applied": True,
+                "security_audit_passed": True
             }
         )
         
@@ -227,15 +329,24 @@ def process_large_data():
         self.test_missions[code_review_mission.mission_id] = code_review_mission
         self.test_missions[bug_fix_mission.mission_id] = bug_fix_mission
         self.test_missions[feature_dev_mission.mission_id] = feature_dev_mission
+        self.test_missions[performance_mission.mission_id] = performance_mission
+        self.test_missions[security_mission.mission_id] = security_mission
+
+    def set_cognitive_engine(self, engine: CognitiveForgeEngine):
+        """Set the cognitive engine for real agent execution."""
+        self.cognitive_engine = engine
+        logger.info("Cognitive engine set for test mission system")
 
     async def run_test_mission(self, mission_id: str, user_request: str = None) -> TestExecution:
-        """Run a comprehensive test mission with full observability."""
-        
+        """Run a test mission with real agent execution."""
         if mission_id not in self.test_missions:
             raise ValueError(f"Test mission {mission_id} not found")
         
         test_mission = self.test_missions[mission_id]
         execution = TestExecution(test_mission=test_mission)
+        
+        # Store execution for tracking
+        self.executions[execution.execution_id] = execution
         
         # Use the enhanced observability system
         with agent_observability.mission_observability(
@@ -247,143 +358,136 @@ def process_large_data():
             try:
                 logger.info(f"🚀 Starting test mission: {test_mission.name}")
                 
-                # Execute each test scenario
+                # Create a test start event
+                test_start_event = agent_observability._create_live_stream_event(
+                    event_type="test_start",
+                    mission_id=execution.execution_id,
+                    event_data={
+                        "test_mission_name": test_mission.name,
+                        "test_mission_id": mission_id,
+                        "scenarios_count": len(test_mission.test_scenarios),
+                        "expected_duration_minutes": test_mission.expected_duration_minutes,
+                        "difficulty": test_mission.difficulty,
+                        "category": test_mission.category,
+                        "test_mode": True,
+                        "user_request": user_request or f"Test Mission: {test_mission.name}"
+                    },
+                    severity="info",
+                    tags=["test", "mission", "start"]
+                )
+                
+                # Execute each test scenario with real agents
                 for i, scenario in enumerate(test_mission.test_scenarios):
                     logger.info(f"📋 Executing scenario {i+1}: {scenario['name']}")
                     
-                    # Create agent session for this scenario
-                    with agent_observability.agent_session(
-                        f"TestAgent_{i+1}",
-                        execution.execution_id,
-                        f"Executing scenario: {scenario['name']}"
-                    ) as session:
-                        
-                        # Add session to mission data for proper tracking
-                        with agent_observability._lock:
-                            if execution.execution_id in agent_observability.active_missions:
-                                agent_observability.active_missions[execution.execution_id].agent_sessions[session.session_id] = session
-                        
-                        # Log agent thinking process
-                        agent_observability.log_agent_thinking(
-                            session.session_id,
-                            f"Analyzing scenario: {scenario['name']}",
-                            0.85
-                        )
-                        
-                        # Simulate agent decision making
-                        agent_observability.log_agent_decision(
-                            session.session_id,
-                            {"scenario": scenario['name'], "approach": "systematic_analysis"},
-                            0.9,
-                            "Using systematic approach to analyze the scenario"
-                        )
-                        
-                        # Simulate tool calls
-                        agent_observability.log_agent_tool_call(
-                            session.session_id,
-                            "code_analyzer",
-                            {"input": scenario['input']},
-                            {"analysis": "Code analysis completed"},
-                            1500.0
-                        )
-                        
-                        # Simulate API calls
-                        agent_observability.log_agent_api_call(
-                            session.session_id,
-                            "/api/validate",
-                            {"data": scenario['input']},
-                            {"valid": True, "issues": []},
-                            800.0
-                        )
-                        
-                        # Generate test result
-                        test_result = await self._execute_test_scenario(scenario)
-                        
-                        # Ensure test_result is JSON serializable
-                        serializable_result = self._make_serializable(test_result)
-                        execution.test_results.append(serializable_result)
-                        
-                        # Log final response
-                        agent_observability.log_agent_response(
-                            session.session_id,
-                            serializable_result,
-                            tokens_used=150
-                        )
-                        
-                        # Store session data in a serializable format instead of the session object
-                        execution.agent_sessions[session.session_id] = {
-                            "session_id": session.session_id,
-                            "agent_name": session.agent_name,
-                            "mission_id": session.mission_id,
-                            "session_description": session.session_description,
-                            "start_time": session.start_time.isoformat() if session.start_time else None,
-                            "end_time": session.end_time.isoformat() if session.end_time else None,
-                            "total_duration_ms": session.total_duration_ms,
-                            "success": session.success,
-                            "total_tokens": session.total_tokens,
-                            "error_count": session.error_count,
-                            "peak_memory_usage_mb": session.peak_memory_usage_mb,
-                            "avg_cpu_usage_percent": session.avg_cpu_usage_percent,
-                            "total_network_calls": session.total_network_calls,
-                            "total_api_calls": session.total_api_calls,
-                            "total_tool_calls": session.total_tool_calls
-                        }
+                    # Create scenario start event
+                    scenario_start_event = agent_observability._create_live_stream_event(
+                        event_type="scenario_start",
+                        mission_id=execution.execution_id,
+                        event_data={
+                            "scenario_name": scenario['name'],
+                            "scenario_index": i + 1,
+                            "total_scenarios": len(test_mission.test_scenarios),
+                            "scenario_input": scenario.get('input', {}),
+                            "expected_output": scenario.get('expected_output', {}),
+                            "test_mode": True
+                        },
+                        severity="info",
+                        tags=["test", "scenario", "start"]
+                    )
+                    
+                    # Execute scenario with real cognitive engine
+                    test_result = await self._execute_test_scenario_with_real_agents(scenario, execution.execution_id)
+                    
+                    # Ensure test_result is JSON serializable
+                    serializable_result = self._make_serializable(test_result)
+                    execution.test_results.append(serializable_result)
+                    
+                    # Create scenario complete event
+                    scenario_complete_event = agent_observability._create_live_stream_event(
+                        event_type="scenario_complete",
+                        mission_id=execution.execution_id,
+                        event_data={
+                            "scenario_name": scenario['name'],
+                            "scenario_index": i + 1,
+                            "test_result": serializable_result,
+                            "success": test_result.get('success', True),
+                            "duration_ms": test_result.get('duration_ms', 0),
+                            "test_mode": True
+                        },
+                        severity="info",
+                        tags=["test", "scenario", "complete"]
+                    )
                 
-                # Calculate success based on criteria
+                # Calculate final metrics
+                execution.end_time = datetime.utcnow()
+                execution.duration_seconds = (execution.end_time - execution.start_time).total_seconds()
                 execution.success = self._evaluate_test_success(execution, test_mission.success_criteria)
                 execution.performance_metrics = self._calculate_execution_performance(execution)
+                
+                # Create test completion event
+                test_complete_event = agent_observability._create_live_stream_event(
+                    event_type="test_complete",
+                    mission_id=execution.execution_id,
+                    event_data={
+                        "test_mission_name": test_mission.name,
+                        "success": execution.success,
+                        "duration_seconds": execution.duration_seconds,
+                        "scenarios_executed": len(execution.test_results),
+                        "performance_metrics": execution.performance_metrics,
+                        "test_mode": True
+                    },
+                    severity="info",
+                    tags=["test", "mission", "complete"]
+                )
                 
                 logger.info(f"✅ Test mission completed: {test_mission.name} - Success: {execution.success}")
                 
             except Exception as e:
-                execution.success = False
+                logger.error(f"❌ Test mission failed: {e}")
                 execution.error_messages.append(str(e))
-                logger.error(f"❌ Test mission failed: {test_mission.name} - Error: {e}")
-                agent_observability.log_error(e, {"mission_id": execution.execution_id}, execution.execution_id)
-            
-            finally:
+                execution.success = False
                 execution.end_time = datetime.utcnow()
                 execution.duration_seconds = (execution.end_time - execution.start_time).total_seconds()
-                self.test_executions.append(execution)
         
         return execution
 
-    async def _execute_test_scenario(self, scenario: Dict[str, Any]) -> Dict[str, Any]:
-        """Execute a single test scenario with realistic simulation."""
+    async def _execute_test_scenario_with_real_agents(self, scenario: Dict[str, Any], execution_id: str) -> Dict[str, Any]:
+        """Execute a test scenario using real cognitive engine agents."""
         start_time = time.time()
         
         try:
-            # Simulate processing time based on scenario complexity
-            complexity = len(str(scenario.get('input', {})))
-            await asyncio.sleep(min(complexity / 1000, 2.0))  # Max 2 seconds
+            if not self.cognitive_engine:
+                raise ValueError("Cognitive engine not available for real agent execution")
             
-            # Generate realistic test results
+            # Create a prompt based on the scenario
+            scenario_prompt = self._create_scenario_prompt(scenario)
+            
+            # Execute with real cognitive engine
+            result = await self.cognitive_engine.run_mission_simple(scenario_prompt, execution_id)
+            
+            # Analyze the result against expected output
+            analysis_result = self._analyze_scenario_result(result, scenario)
+            
             test_result = {
                 "scenario_name": scenario['name'],
-                "success": True,
+                "success": analysis_result.get('success', False),
                 "duration_ms": (time.time() - start_time) * 1000,
                 "input": scenario.get('input', {}),
-                "output": scenario.get('expected_output', {}),
-                "issues_found": 0,
-                "suggestions": [],
+                "output": result,
+                "analysis": analysis_result,
                 "performance_metrics": {
-                    "memory_usage_mb": 45.2,
-                    "cpu_usage_percent": 12.5,
-                    "response_time_ms": (time.time() - start_time) * 1000
+                    "memory_usage_mb": result.get('memory_usage', 0),
+                    "cpu_usage_percent": result.get('cpu_usage', 0),
+                    "response_time_ms": (time.time() - start_time) * 1000,
+                    "tokens_used": result.get('tokens_used', 0)
                 }
             }
-            
-            # Add realistic analysis based on scenario type
-            if "code" in scenario.get('input', {}):
-                test_result["issues_found"] = 2
-                test_result["suggestions"] = [
-                    "Consider adding input validation",
-                    "Optimize for better performance"
-                ]
             
             return test_result
             
         except Exception as e:
+            logger.error(f"Error executing scenario {scenario['name']}: {e}")
             return {
                 "scenario_name": scenario['name'],
                 "success": False,
@@ -391,9 +495,136 @@ def process_large_data():
                 "input": scenario.get('input', {}),
                 "output": {},
                 "error_message": str(e),
-                "issues_found": 0,
-                "suggestions": []
+                "analysis": {"success": False, "error": str(e)}
             }
+
+    def _create_scenario_prompt(self, scenario: Dict[str, Any]) -> str:
+        """Create a prompt for the cognitive engine based on the scenario."""
+        scenario_name = scenario['name']
+        scenario_input = scenario.get('input', {})
+        expected_output = scenario.get('expected_output', {})
+        
+        if scenario_name == "Syntax Error Detection":
+            code = scenario_input.get('code', '')
+            return f"""
+            Analyze this Python code for syntax errors and provide fixes:
+            
+            {code}
+            
+            Please identify any syntax errors and provide corrected code.
+            """
+        
+        elif scenario_name == "Runtime Error Fix":
+            code = scenario_input.get('code', '')
+            error_message = scenario_input.get('error_message', '')
+            return f"""
+            Fix this code that produces a runtime error:
+            
+            Code:
+            {code}
+            
+            Error: {error_message}
+            
+            Please provide a fixed version that handles the error properly.
+            """
+        
+        elif scenario_name == "API Endpoint Creation":
+            requirements = scenario_input.get('requirements', [])
+            return f"""
+            Create a REST API endpoint with these requirements:
+            
+            {chr(10).join(requirements)}
+            
+            Please provide the complete implementation including error handling and validation.
+            """
+        
+        elif scenario_name == "Algorithm Optimization":
+            code = scenario_input.get('code', '')
+            issue = scenario_input.get('performance_issue', '')
+            return f"""
+            Optimize this algorithm for better performance:
+            
+            {code}
+            
+            Issue: {issue}
+            
+            Please provide an optimized version with improved time/space complexity.
+            """
+        
+        elif scenario_name == "SQL Injection Detection":
+            code = scenario_input.get('code', '')
+            vulnerability = scenario_input.get('vulnerability', '')
+            return f"""
+            Identify and fix this security vulnerability:
+            
+            Code:
+            {code}
+            
+            Vulnerability: {vulnerability}
+            
+            Please provide a secure version that prevents this vulnerability.
+            """
+        
+        else:
+            # Generic scenario prompt
+            return f"""
+            Execute this test scenario: {scenario_name}
+            
+            Input: {scenario_input}
+            Expected Output: {expected_output}
+            
+            Please provide a solution that meets the expected output criteria.
+            """
+
+    def _analyze_scenario_result(self, result: Dict[str, Any], scenario: Dict[str, Any]) -> Dict[str, Any]:
+        """Analyze the cognitive engine result against expected output."""
+        expected_output = scenario.get('expected_output', {})
+        scenario_name = scenario['name']
+        
+        analysis = {
+            "success": False,
+            "criteria_met": [],
+            "criteria_failed": [],
+            "score": 0.0
+        }
+        
+        # Basic success check
+        if result.get('status') == 'completed' and result.get('result'):
+            analysis["success"] = True
+            analysis["score"] = 0.5  # Base score for completion
+        
+        # Scenario-specific analysis
+        if scenario_name == "Syntax Error Detection":
+            result_text = result.get('result', '')
+            if 'syntax' in result_text.lower() or 'error' in result_text.lower():
+                analysis["criteria_met"].append("syntax_error_detected")
+                analysis["score"] += 0.3
+            if 'fix' in result_text.lower() or 'correct' in result_text.lower():
+                analysis["criteria_met"].append("fix_provided")
+                analysis["score"] += 0.2
+        
+        elif scenario_name == "Runtime Error Fix":
+            result_text = result.get('result', '')
+            if 'try' in result_text.lower() or 'except' in result_text.lower():
+                analysis["criteria_met"].append("error_handling_added")
+                analysis["score"] += 0.4
+            if 'zero' in result_text.lower() or 'division' in result_text.lower():
+                analysis["criteria_met"].append("specific_error_handled")
+                analysis["score"] += 0.3
+        
+        elif scenario_name == "API Endpoint Creation":
+            result_text = result.get('result', '')
+            if 'def' in result_text.lower() and 'route' in result_text.lower():
+                analysis["criteria_met"].append("endpoint_created")
+                analysis["score"] += 0.4
+            if 'post' in result_text.lower() or 'get' in result_text.lower():
+                analysis["criteria_met"].append("http_method_specified")
+                analysis["score"] += 0.3
+        
+        # Cap score at 1.0
+        analysis["score"] = min(analysis["score"], 1.0)
+        
+        return analysis
 
     def _evaluate_test_success(self, execution: TestExecution, criteria: Dict[str, Any]) -> bool:
         """Evaluate if the test execution meets success criteria."""
@@ -433,7 +664,8 @@ def process_large_data():
             "total_issues_found": sum(r.get('issues_found', 0) for r in execution.test_results),
             "total_suggestions": sum(len(r.get('suggestions', [])) for r in execution.test_results),
             "execution_duration_seconds": execution.duration_seconds,
-            "success_rate": sum(1 for r in execution.test_results if r.get('success', False)) / len(execution.test_results)
+            "success_rate": sum(1 for r in execution.test_results if r.get('success', False)) / len(execution.test_results),
+            "avg_score": sum(r.get('analysis', {}).get('score', 0) for r in execution.test_results) / len(execution.test_results)
         }
 
     def get_available_test_missions(self) -> List[Dict[str, Any]]:
@@ -453,119 +685,111 @@ def process_large_data():
 
     def get_test_execution_details(self, execution_id: str) -> Optional[Dict[str, Any]]:
         """Get detailed results for a specific test execution."""
-        execution = next((ex for ex in self.test_executions if ex.execution_id == execution_id), None)
-        if execution:
-            return self._make_execution_serializable(execution)
-        return None
+        if execution_id not in self.executions:
+            return None
+        
+        execution = self.executions[execution_id]
+        return self._make_execution_serializable(execution)
 
     def get_test_execution_history(self) -> List[Dict[str, Any]]:
         """Get history of all test executions."""
-        return [self._make_execution_serializable(ex) for ex in self.test_executions]
+        return [self._make_execution_serializable(execution) for execution in self.executions.values()]
 
     def get_agent_performance_analysis(self) -> Dict[str, Any]:
-        """Get comprehensive analysis of agent performance across all test executions."""
-        if not self.test_executions:
-            return {"message": "No test executions available for analysis"}
+        """Get comprehensive analysis of test mission performance."""
+        if not self.executions:
+            return {"message": "No test executions available"}
         
-        analysis = {
-            "total_executions": len(self.test_executions),
-            "successful_executions": sum(1 for ex in self.test_executions if ex.success),
-            "success_rate": sum(1 for ex in self.test_executions if ex.success) / len(self.test_executions),
-            "avg_execution_duration": sum(ex.duration_seconds for ex in self.test_executions) / len(self.test_executions),
-            "by_category": {},
-            "by_difficulty": {},
-            "performance_trends": []
+        total_executions = len(self.executions)
+        successful_executions = sum(1 for e in self.executions.values() if e.success)
+        
+        # Calculate average metrics
+        avg_duration = sum(e.duration_seconds for e in self.executions.values()) / total_executions
+        avg_success_rate = sum(
+            sum(1 for r in e.test_results if r.get('success', False)) / len(e.test_results) 
+            for e in self.executions.values() if e.test_results
+        ) / total_executions
+        
+        return {
+            "total_executions": total_executions,
+            "successful_executions": successful_executions,
+            "overall_success_rate": successful_executions / total_executions,
+            "avg_execution_duration_seconds": avg_duration,
+            "avg_scenario_success_rate": avg_success_rate,
+            "executions_by_category": self._group_executions_by_category(),
+            "executions_by_difficulty": self._group_executions_by_difficulty()
         }
-        
-        # Analyze by category
-        for execution in self.test_executions:
+
+    def _group_executions_by_category(self) -> Dict[str, Any]:
+        """Group executions by test mission category."""
+        categories = {}
+        for execution in self.executions.values():
             category = execution.test_mission.category
-            if category not in analysis["by_category"]:
-                analysis["by_category"][category] = {
-                    "count": 0,
-                    "successful": 0,
-                    "avg_duration": 0
-                }
-            
-            analysis["by_category"][category]["count"] += 1
-            analysis["by_category"][category]["successful"] += 1 if execution.success else 0
+            if category not in categories:
+                categories[category] = {"count": 0, "successful": 0}
+            categories[category]["count"] += 1
+            if execution.success:
+                categories[category]["successful"] += 1
         
-        # Calculate averages
-        for category_data in analysis["by_category"].values():
-            category_data["success_rate"] = category_data["successful"] / category_data["count"]
+        return categories
+
+    def _group_executions_by_difficulty(self) -> Dict[str, Any]:
+        """Group executions by test mission difficulty."""
+        difficulties = {}
+        for execution in self.executions.values():
+            difficulty = execution.test_mission.difficulty
+            if difficulty not in difficulties:
+                difficulties[difficulty] = {"count": 0, "successful": 0}
+            difficulties[difficulty]["count"] += 1
+            if execution.success:
+                difficulties[difficulty]["successful"] += 1
         
-        return analysis
+        return difficulties
 
     def export_test_data(self, execution_id: Optional[str] = None) -> Dict[str, Any]:
         """Export test data for analysis."""
-        export_data = {
-            "export_timestamp": datetime.utcnow().isoformat(),
-            "available_missions": len(self.test_missions),
-            "total_executions": len(self.test_executions)
-        }
-        
         if execution_id:
-            execution_data = self.get_test_execution_details(execution_id)
-            if execution_data:
-                export_data["execution_data"] = execution_data
+            execution = self.executions.get(execution_id)
+            if not execution:
+                return {"error": "Execution not found"}
+            return self._make_execution_serializable(execution)
         else:
-            export_data["recent_executions"] = [self._make_execution_serializable(ex) for ex in self.test_executions[-5:]]
-            export_data["available_missions"] = self.get_available_test_missions()
-        
-        return export_data
+            return {
+                "test_missions": self.get_available_test_missions(),
+                "executions": self.get_test_execution_history(),
+                "analysis": self.get_agent_performance_analysis(),
+                "export_timestamp": datetime.utcnow().isoformat()
+            }
 
     def _make_serializable(self, obj: Any) -> Any:
-        """Recursively convert objects to a JSON-serializable format."""
-        if isinstance(obj, (datetime, uuid.UUID)):
-            return obj.isoformat()
-        elif isinstance(obj, deque):
-            return list(obj)
-        elif isinstance(obj, dict):
+        """Convert objects to JSON serializable format."""
+        if isinstance(obj, dict):
             return {k: self._make_serializable(v) for k, v in obj.items()}
         elif isinstance(obj, list):
             return [self._make_serializable(item) for item in obj]
-        elif isinstance(obj, set):
-            return [self._make_serializable(item) for item in obj]
-        elif hasattr(obj, '__dict__'):  # Handle dataclass and other objects
-            try:
-                return asdict(obj)
-            except:
-                return str(obj)
-        return obj
+        elif isinstance(obj, datetime):
+            return obj.isoformat()
+        elif hasattr(obj, '__dict__'):
+            return self._make_serializable(obj.__dict__)
+        else:
+            return obj
 
     def _make_execution_serializable(self, execution: TestExecution) -> Dict[str, Any]:
-        """Safely serialize a TestExecution object, handling complex nested objects."""
-        try:
-            # Create a safe copy of the execution data
-            safe_execution = {
-                "execution_id": execution.execution_id,
-                "test_mission": {
-                    "mission_id": execution.test_mission.mission_id,
-                    "name": execution.test_mission.name,
-                    "description": execution.test_mission.description,
-                    "category": execution.test_mission.category,
-                    "difficulty": execution.test_mission.difficulty
-                } if execution.test_mission else None,
-                "start_time": execution.start_time.isoformat() if execution.start_time else None,
-                "end_time": execution.end_time.isoformat() if execution.end_time else None,
-                "duration_seconds": execution.duration_seconds,
-                "success": execution.success,
-                "test_results": execution.test_results,
-                "performance_metrics": execution.performance_metrics,
-                "error_messages": execution.error_messages,
-                # agent_sessions are already simple dictionaries, so they're safe
-                "agent_sessions": execution.agent_sessions
-            }
-            return safe_execution
-        except Exception as e:
-            # Fallback to basic serialization if complex serialization fails
-            return {
-                "execution_id": execution.execution_id,
-                "success": execution.success,
-                "duration_seconds": execution.duration_seconds,
-                "error": f"Serialization error: {str(e)}"
-            }
-
-
-# Global instance for the application to use
-test_mission_system = TestMissionSystem() 
+        """Convert execution object to serializable format."""
+        return {
+            "execution_id": execution.execution_id,
+            "test_mission": {
+                "mission_id": execution.test_mission.mission_id,
+                "name": execution.test_mission.name,
+                "description": execution.test_mission.description,
+                "category": execution.test_mission.category,
+                "difficulty": execution.test_mission.difficulty
+            },
+            "start_time": execution.start_time.isoformat() if execution.start_time else None,
+            "end_time": execution.end_time.isoformat() if execution.end_time else None,
+            "duration_seconds": execution.duration_seconds,
+            "success": execution.success,
+            "test_results": execution.test_results,
+            "performance_metrics": execution.performance_metrics,
+            "error_messages": execution.error_messages
+        } 

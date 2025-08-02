@@ -19,6 +19,7 @@
     
     <!-- Alpine.js -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
 </head>
 
 <body>
@@ -111,7 +112,7 @@
             </nav>
 
             <!-- Content -->
-            <div class="content" x-data="sentinelApp()">
+            <div class="content" x-data="sentinelApp()" x-init="init()">
                 <!-- Top Row: System Overview & Performance -->
                 <div class="row mb-4">
                     <div class="col-lg-6 col-md-12 mb-4">
@@ -489,8 +490,34 @@
                     <div class="col-12">
                         <div class="card system-logs-container">
                             <div class="card-header">
-                                <h4 class="card-title">System Logs</h4>
-                                <p class="card-category">Real-time monitoring & observability</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h4 class="card-title">System Logs</h4>
+                                        <p class="card-category">Real-time monitoring & observability</p>
+                                    </div>
+                                    <div class="system-logs-filters">
+                                        <div class="btn-group" role="group">
+                                            <button type="button" 
+                                                    class="btn btn-sm btn-outline-primary" 
+                                                    :class="{ 'active': systemLogsFilter === 'overview' }"
+                                                    @click="changeSystemLogsFilter('overview')">
+                                                Overview
+                                            </button>
+                                            <button type="button" 
+                                                    class="btn btn-sm btn-outline-success" 
+                                                    :class="{ 'active': systemLogsFilter === '8001' }"
+                                                    @click="changeSystemLogsFilter('8001')">
+                                                Server 8001
+                                            </button>
+                                            <button type="button" 
+                                                    class="btn btn-sm btn-outline-info" 
+                                                    :class="{ 'active': systemLogsFilter === '8002' }"
+                                                    @click="changeSystemLogsFilter('8002')">
+                                                Server 8002
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="log-container">
@@ -610,6 +637,8 @@
     <!-- JavaScript Files -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/static/js/main.js"></script>
+    
+    <!-- Unified Real-time Controller -->
+    <script src="/static/js/unified-realtime.js"></script>
 </body>
 </html>

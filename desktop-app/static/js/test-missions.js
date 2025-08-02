@@ -171,17 +171,23 @@ function testMissionsApp() {
 
         async loadTestStreamEvents() {
             try {
-                const response = await fetch('/api/observability/live-stream');
+                const response = await fetch('/api/observability/test-mission-live-stream');
                 const data = await response.json();
                 
                 if (data.success) {
-                    // Filter for test-related events
-                    this.testStreamEvents = (data.events || []).filter(event => 
-                        event.event_type.includes('test') || 
-                        event.event_type.includes('mission') ||
-                        event.tags?.includes('test')
-                    );
-                    this.updateTestStreamStats();
+                    this.testStreamEvents = data.events || [];
+                    
+                    // Update stats from the API response
+                    if (data.stats) {
+                        this.testStreamStats = {
+                            activeTests: data.stats.active_tests || 0,
+                            successRate: data.stats.success_rate || 0,
+                            avgDuration: this.formatDuration(data.stats.avg_duration || 0),
+                            lastUpdate: new Date(data.stats.last_update).toLocaleTimeString()
+                        };
+                    } else {
+                        this.updateTestStreamStats();
+                    }
                 }
             } catch (error) {
                 console.error('Error loading test stream events:', error);

@@ -16,6 +16,9 @@
     
     <!-- Alpine.js -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Unified Real-time System -->
+    <script src="/static/js/unified-realtime.js"></script>
 </head>
 
 <body>
@@ -108,7 +111,7 @@
             </nav>
 
             <!-- Content -->
-            <div class="content" x-data="testMissionsApp()">
+            <div class="content" x-data="sentinelApp()" x-init="init()">
                 <!-- Header Section -->
                 <div class="row mb-4">
                     <div class="col-12">
@@ -580,6 +583,8 @@
     <!-- JavaScript Files -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/static/js/test-missions.js"></script>
+    
+    <!-- Unified Real-time Controller -->
+    <script src="/static/js/unified-realtime.js"></script>
 </body>
 </html> 

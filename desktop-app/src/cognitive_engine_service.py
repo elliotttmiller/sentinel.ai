@@ -27,76 +27,11 @@ cognitive_log_buffer = []  # Start with empty buffer
 # This is a queue that our SSE endpoint will listen to for new messages
 cognitive_log_queue = asyncio.Queue()
 
-class CognitiveLogInterceptor:
-    """
-    A custom handler class that intercepts log messages from cognitive engine
-    and pushes them to our real-time stream.
-    """
-    def write(self, message: str):
-        # This method is called for every log message
-        try:
-            # Clean the message and add it to our system
-            clean_message = message.strip()
-            if clean_message:
-                log_entry = self.parse_log(clean_message)
-                if log_entry is not None:  # Only add if not filtered out
-                    cognitive_log_buffer.append(log_entry)
-                    if len(cognitive_log_buffer) > 200: # Keep buffer from growing too large
-                        cognitive_log_buffer.pop(0)
-                    # Put the new log into the async queue for live streaming
-                    try:
-                        loop = asyncio.get_event_loop()
-                        asyncio.run_coroutine_threadsafe(cognitive_log_queue.put(log_entry), loop)
-                    except RuntimeError:
-                        # If no event loop is running, just add to buffer
-                        pass
-        except Exception as e:
-            # If parsing fails, just pass the raw message
-            pass
-
-    def parse_log(self, message: str) -> Dict:
-        """Parses a raw log string into a structured dictionary."""
-        timestamp = datetime.utcnow().isoformat()
-        level = "INFO"
-        source = "cognitive_engine"
-        server_port = "8002"  # Cognitive engine server
-        
-        # Skip debug logs to focus on real server logs
-        if "urllib3.connectionpool" in message or "sentry" in message.lower():
-            return None  # Skip these logs
-        
-        # Heuristics to parse different log formats
-        if "ERROR" in message: level = "ERROR"
-        elif "WARNING" in message: level = "WARNING"
-        elif "DEBUG" in message: level = "DEBUG"
-        
-        # Determine source based on message content
-        if "Cognitive Engine" in message: 
-            source = "cognitive_core"
-        elif "BACKGROUND TASK" in message: 
-            source = "cognitive_worker"
-        elif "API COGNITIVE" in message: 
-            source = "cognitive_api"
-        elif "ENGINE:" in message:
-            source = "engine_core"
-        elif "HTTP" in message and ("GET" in message or "POST" in message):
-            source = "http_request"
-            
-        return {
-            "timestamp": timestamp, 
-            "level": level, 
-            "message": message, 
-            "source": source,
-            "server_port": server_port
-        }
-
-# --- Configure Logging for Cognitive Engine ---
-# Configure standard logging to use our interceptor
-logging.basicConfig(
-    level=logging.INFO,
-    handlers=[logging.StreamHandler(CognitiveLogInterceptor())],
-    format='%(message)s'
-)
+# REMOVED: Log interceptor is now handled by the unified Event Bus in main.py
+# # Configure logging with our interceptor
+# logger.remove()
+# logger.add(sys.stdout, level="INFO")
+# logger.add(CognitiveLogInterceptor().write, level="INFO", format="{message}")
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -371,33 +306,30 @@ async def cognitive_process():
     }
 
 # --- Real-Time Streaming Endpoints ---
-@app.get("/api/events/stream")
-async def stream_events():
-    """Streams live server events using Server-Sent Events (SSE)."""
-    async def event_generator():
-        # Send the last 50 buffered logs immediately on connection
-        for log_entry in cognitive_log_buffer[-50:]:
-            yield f"data: {json.dumps(log_entry)}\n\n"
-        
-        # Now, wait for new logs from the queue
-        while True:
-            try:
-                log_entry = await asyncio.wait_for(cognitive_log_queue.get(), timeout=25)
-                yield f"data: {json.dumps(log_entry)}\n\n"
-            except asyncio.TimeoutError:
-                # Send a keepalive message to prevent the connection from closing
-                yield f"data: {json.dumps({'type': 'keepalive', 'server': '8002'})}\n\n"
-
-    return StreamingResponse(
-        event_generator(), 
-        media_type="text/event-stream",
-        headers={
-            "Cache-Control": "no-cache",
-            "Connection": "keep-alive",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "Cache-Control"
-        }
-    )
+# REMOVED: This endpoint is now handled by the unified Event Bus in main.py
+# @app.get("/api/events/stream")
+# async def stream_events():
+#     """Stream real-time events to the frontend"""
+#     
+#     async def event_generator():
+#         # Send the last 50 buffered logs immediately on connection
+#         initial_logs = log_buffer[-50:] if log_buffer else []
+#         for log_entry in initial_logs:
+#             yield f"data: {json.dumps(log_entry)}\n\n"
+#         
+#         # Continue streaming new logs
+#         while True:
+#             try:
+#                 # Wait for new logs
+#                 log_entry = await log_queue.get()
+#                 yield f"data: {json.dumps(log_entry)}\n\n"
+#             except asyncio.CancelledError:
+#                 break
+#             except Exception as e:
+#                 logger.error(f"Error in event stream: {e}")
+#                 await asyncio.sleep(1)
+#     
+#     return StreamingResponse(event_generator(), media_type="text/event-stream")
 
 @app.get("/api/logs/live")
 async def get_live_logs():
@@ -598,20 +530,4 @@ async def run_mission_background(mission_id: str, plan: Dict):
             "status": "failed",
             "error": str(e),
             "timestamp": datetime.utcnow().isoformat()
-        }
-
-# --- Startup and Shutdown Events ---
-@app.on_event("startup")
-async def startup_event():
-    """Initialize the cognitive engine on startup"""
-    logger.info("🚀 Cognitive AI Engine starting up...")
-    logger.info("📡 Real-time log streaming initialized for cognitive engine")
-    
-    # Start the background task to generate cognitive activity
-    asyncio.create_task(generate_cognitive_activity())
-    logger.info("🔗 SSE endpoint available at /api/events/stream")
-
-@app.on_event("shutdown")
-async def shutdown_event():
-    """Cleanup on cognitive engine shutdown"""
-    logger.info("🛑 Cognitive AI Engine shutting down...") 
+        } 

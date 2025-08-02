@@ -1,0 +1,59 @@
+[32m2025-08-02 15:44:57.296[0m | [1mINFO    [0m | [36mutils.agent_observability[0m:[36m_initialize_integrations[0m:[36m158[0m - [1m✅ W&B integration initialized[0m
+[32m2025-08-02 15:44:57.297[0m | [1mINFO    [0m | [36msrc.main[0m:[36m<module>[0m:[36m46[0m - [1m✅ Agent observability system loaded successfully.[0m
+[32m2025-08-02 15:44:57.297[0m | [1mINFO    [0m | [36msrc.main[0m:[36m<module>[0m:[36m95[0m - [1m✅ Core components initialized with fallback support.[0m
+[32mINFO[0m:     Started server process [[36m15032[0m]
+[32mINFO[0m:     Waiting for application startup.
+[32m2025-08-02 15:44:57.308[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m691[0m - [1m🚀 Sentinel Cognitive Forge v5.1 starting up...[0m
+[32m2025-08-02 15:44:57.310[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m692[0m - [1m📡 Unified Real-Time Event Bus initialized[0m
+[32m2025-08-02 15:44:57.311[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m693[0m - [1m🔗 SSE endpoint available at /api/events/stream[0m
+[32m2025-08-02 15:44:57.311[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m697[0m - [1m🔄 Periodic event generation started[0m
+[32mINFO[0m:     Application startup complete.
+[32mINFO[0m:     127.0.0.1:59192 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59193 - "[1mGET /api/observability/test-mission-live-stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59194 - "[1mGET /api/test-missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59194 - "[1mGET /api/test-missions/executions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59194 - "[1mGET /api/observability/agent-analytics HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59194 - "[1mGET /api/observability/live-stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59194 - "[1mGET /api/system/logs/stream?filter_type=overview HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59201 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59202 - "[1mGET /api/observability/agent-analytics HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59202 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59202 - "[1mGET /api/observability/agent-analytics HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59202 - "[1mGET /api/observability/real-time-metrics HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59202 - "[1mGET /api/observability/live-stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59202 - "[1mGET /api/observability/agent-analytics HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59203 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32m2025-08-02 15:46:44.849[0m | [1mINFO    [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m339[0m - [1mSSE client disconnected[0m
+[32mINFO[0m:     127.0.0.1:59203 - "[1mGET /api/observability/live-stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59203 - "[1mGET /api/observability/live-stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59202 - "[1mGET /api/system/logs/stream?filter_type=overview HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59204 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59203 - "[1mGET /api/observability/agent-analytics HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59203 - "[1mGET /api/observability/live-stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59203 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59203 - "[1mGET /api/observability/agent-analytics HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59203 - "[1mGET /api/observability/live-stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59203 - "[1mGET /api/observability/real-time-metrics HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59203 - "[1mGET /api/observability/live-stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59203 - "[1mGET /api/observability/agent-analytics HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59203 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59203 - "[1mGET /api/observability/live-stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59203 - "[1mGET /api/observability/agent-analytics HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59203 - "[1mGET /api/observability/live-stream HTTP/1.1[0m" [32m200 OK[0m
+[32m2025-08-02 15:46:53.704[0m | [1mINFO    [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m339[0m - [1mSSE client disconnected[0m
+[32mINFO[0m:     127.0.0.1:59203 - "[1mGET /api/observability/live-stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59208 - "[1mGET /api/system/logs/stream?filter_type=overview HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59203 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59210 - "[1mGET /api/observability/agent-analytics HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59210 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59210 - "[1mGET /api/observability/agent-analytics HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59210 - "[1mGET /api/observability/real-time-metrics HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59210 - "[1mGET /api/observability/live-stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59210 - "[1mGET /api/observability/agent-analytics HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:59210 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32m2025-08-02 15:47:00.599[0m | [1mINFO    [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m339[0m - [1mSSE client disconnected[0m
+[32mINFO[0m:     Shutting down
+[32mINFO[0m:     Waiting for application shutdown.
+[32m2025-08-02 15:48:48.147[0m | [1mINFO    [0m | [36msrc.main[0m:[36mshutdown_event[0m:[36m701[0m - [1m🛑 Shutting down Sentinel Cognitive Forge v5.1[0m
+[32mINFO[0m:     Application shutdown complete.
+[32mINFO[0m:     Finished server process [[36m15032[0m]

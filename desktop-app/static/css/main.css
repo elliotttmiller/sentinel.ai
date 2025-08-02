@@ -7,3 +7,140 @@ body {
   font-family: Arial, sans-serif;
 }
 /* End of Selection */
+
+/* System Logs Styles */
+.system-logs-container {
+    margin-top: 20px;
+}
+
+.system-logs-filters {
+    margin-bottom: 10px;
+}
+
+.server-status {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.server-status-item {
+    display: inline-block;
+    margin-right: 15px;
+    margin-bottom: 5px;
+}
+
+.log-container {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    padding: 10px;
+}
+
+.log-entry {
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 4px;
+    border-left: 4px solid #6c757d;
+    background-color: white;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.log-entry.log-error {
+    border-left-color: #dc3545;
+    background-color: #f8d7da;
+}
+
+.log-entry.log-warning {
+    border-left-color: #ffc107;
+    background-color: #fff3cd;
+}
+
+.log-entry.log-info {
+    border-left-color: #17a2b8;
+    background-color: #d1ecf1;
+}
+
+.log-entry.log-debug {
+    border-left-color: #6c757d;
+    background-color: #e2e3e5;
+}
+
+.log-entry-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    font-size: 0.8em;
+    color: #6c757d;
+}
+
+.log-timestamp {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.log-level {
+    margin-left: auto;
+    font-weight: bold;
+}
+
+.log-message {
+    color: #212529;
+    word-wrap: break-word;
+}
+
+.log-error {
+    color: #dc3545;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+.log-data {
+    margin-top: 5px;
+    padding: 5px;
+    background-color: #f8f9fa;
+    border-radius: 3px;
+    font-size: 0.8em;
+}
+
+.log-data pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Active button state */
+.btn-group .btn.active {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+.btn-group .btn.active.btn-outline-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-group .btn.active.btn-outline-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .system-logs-filters .btn-group {
+        flex-direction: column;
+    }
+    
+    .system-logs-filters .btn {
+        margin-bottom: 5px;
+    }
+    
+    .server-status-item {
+        display: block;
+        margin-bottom: 10px;
+    }
+}
