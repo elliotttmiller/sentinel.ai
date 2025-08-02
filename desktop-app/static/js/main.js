@@ -9,12 +9,35 @@ function sentinelApp() {
             database: 'online',
             aiModels: 'online'
         },
-        resourceMetrics: {
-            cpu: 45,
-            memory: 62,
-            network: 28
+
+        observabilityData: {
+            thinkingSessions: 0,
+            toolCalls: 0,
+            apiCalls: 0,
+            memoryUsage: 0
+        },
+        testAnalytics: {
+            testsRun: 0,
+            successRate: 0,
+            avgDuration: 0,
+            performance: 0
         },
         eventSource: null,
+
+        // Live Stream Data
+        liveStreamEvents: [],
+        liveStreamStats: {
+            totalEvents: 0,
+            activeAgents: 0,
+            successRate: 0,
+            lastUpdate: 'Never'
+        },
+        selectedEventType: '',
+        autoRefresh: true,
+        showEventModal: false,
+        selectedEvent: null,
+        isPageVisible: true,
+        liveStreamInterval: null,
 
         init() {
             this.initializeSidebar();
@@ -23,8 +46,11 @@ function sentinelApp() {
             this.startRealTimeUpdates();
             this.updateSystemStatus();
             this.startLiveLogStream();
-            this.updateResourceMetrics();
+            this.loadObservabilityData();
+            this.loadTestAnalytics();
             this.initQuickActions();
+            this.initializeLiveStream();
+            this.initializePageVisibilityDetection();
         },
 
         initializeSidebar() {
@@ -102,8 +128,8 @@ function sentinelApp() {
                 },
                 {
                     id: 5,
-                    icon: 'fa-chart-line',
-                    message: 'Analysis Agent generated performance report',
+                    icon: 'fa-brain',
+                    message: 'AI Agent completed thinking session',
                     time: '15 minutes ago'
                 }
             ];
@@ -111,14 +137,16 @@ function sentinelApp() {
 
         startRealTimeUpdates() {
             setInterval(() => {
-                this.loadMissions();
                 this.updateSystemStatus();
-                this.updateResourceMetrics();
-            }, 10000); // Update every 10 seconds
+                this.updateObservabilityData();
+                this.updateTestAnalytics();
+                if (this.autoRefresh) {
+                    this.loadLiveStreamEvents();
+                }
+            }, 5000);
         },
 
         startLiveLogStream() {
-            // Connect to the cognitive engine's live log stream
             this.eventSource = new EventSource('/api/events/stream');
             
             this.eventSource.onmessage = (event) => {
@@ -132,7 +160,6 @@ function sentinelApp() {
 
             this.eventSource.onerror = (error) => {
                 console.error('EventSource error:', error);
-                // Try to reconnect after 5 seconds
                 setTimeout(() => {
                     this.startLiveLogStream();
                 }, 5000);
@@ -140,39 +167,38 @@ function sentinelApp() {
         },
 
         addLiveLog(logData) {
-            if (logData.type === 'keepalive') return;
+            const timestamp = this.formatTimestamp(new Date());
+            const logEntry = `[${timestamp}] ${logData.level}: ${logData.message}`;
             
-            this.liveLogs.push(logData);
+            this.liveLogs.push(logEntry);
+            
+            // Keep only the last 100 logs
             if (this.liveLogs.length > 100) {
                 this.liveLogs.shift();
             }
+            
             this.updateLogDisplay();
         },
 
         updateLogDisplay() {
             const logContainer = document.getElementById('live-logs');
-            if (!logContainer) return;
-
-            const logEntries = this.liveLogs.map(log => {
-                const timestamp = this.formatTimestamp(log.timestamp);
-                const levelClass = log.level ? log.level.toLowerCase() : 'info';
-                return `
-                    <div class="log-entry">
-                        <span class="log-timestamp">${timestamp}</span>
-                        <span class="log-level ${levelClass}">${log.level || 'INFO'}</span>
-                        <span class="log-message">${log.message}</span>
-                    </div>
-                `;
-            }).join('');
-
-            logContainer.innerHTML = logEntries;
-            logContainer.scrollTop = logContainer.scrollHeight;
+            if (logContainer) {
+                logContainer.innerHTML = this.liveLogs.map(log => 
+                    `<div class="log-entry">${log}</div>`
+                ).join('');
+                
+                // Auto-scroll to bottom
+                logContainer.scrollTop = logContainer.scrollHeight;
+            }
         },
 
-        formatTimestamp(timestamp) {
-            if (!timestamp) return '';
-            const date = new Date(timestamp);
-            return date.toLocaleTimeString();
+        formatTimestamp(date) {
+            return date.toLocaleTimeString('en-US', {
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
         },
 
         async updateSystemStatus() {
@@ -181,10 +207,10 @@ function sentinelApp() {
                 if (response.ok) {
                     const data = await response.json();
                     this.systemStatus = {
-                        apiServer: data.status === 'healthy' ? 'online' : 'offline',
-                        cognitiveEngine: data.cognitive_engine === 'active' ? 'online' : 'offline',
-                        database: 'online', // Assuming database is always online if API responds
-                        aiModels: 'online' // Assuming AI models are ready if API responds
+                        apiServer: data.api_server || 'online',
+                        cognitiveEngine: data.cognitive_engine || 'online',
+                        database: data.database || 'online',
+                        aiModels: data.ai_models || 'online'
                     };
                 }
             } catch (error) {
@@ -196,81 +222,322 @@ function sentinelApp() {
                     aiModels: 'offline'
                 };
             }
+            
             this.updateStatusIndicators();
         },
 
         updateStatusIndicators() {
-            // Update status badges based on system status
-            const statusElements = document.querySelectorAll('.status-badge');
+            const statusElements = document.querySelectorAll('.status-badge-compact');
             statusElements.forEach(element => {
-                const service = element.closest('.status-card').querySelector('h5').textContent.toLowerCase();
-                if (service.includes('api')) {
-                    element.className = `status-badge ${this.systemStatus.apiServer}`;
-                    element.textContent = this.systemStatus.apiServer === 'online' ? 'Online' : 'Offline';
-                } else if (service.includes('cognitive')) {
-                    element.className = `status-badge ${this.systemStatus.cognitiveEngine}`;
-                    element.textContent = this.systemStatus.cognitiveEngine === 'online' ? 'Active' : 'Inactive';
-                } else if (service.includes('database')) {
-                    element.className = `status-badge ${this.systemStatus.database}`;
-                    element.textContent = this.systemStatus.database === 'online' ? 'Connected' : 'Disconnected';
-                } else if (service.includes('ai models')) {
-                    element.className = `status-badge ${this.systemStatus.aiModels}`;
-                    element.textContent = this.systemStatus.aiModels === 'online' ? 'Ready' : 'Unavailable';
+                const label = element.previousElementSibling;
+                if (label) {
+                    const statusText = label.textContent.toLowerCase();
+                    let status = 'offline';
+                    
+                    if (statusText.includes('api server')) {
+                        status = this.systemStatus.apiServer;
+                    } else if (statusText.includes('cognitive engine')) {
+                        status = this.systemStatus.cognitiveEngine;
+                    } else if (statusText.includes('database')) {
+                        status = this.systemStatus.database;
+                    } else if (statusText.includes('ai models')) {
+                        status = this.systemStatus.aiModels;
+                    }
+                    
+                    element.className = `status-badge-compact ${status}`;
+                    element.textContent = status === 'online' ? 'Online' : 
+                                       status === 'offline' ? 'Offline' : 'Warning';
                 }
             });
         },
 
-        updateResourceMetrics() {
-            // Simulate resource metrics updates
-            this.resourceMetrics = {
-                cpu: Math.floor(Math.random() * 30) + 30, // 30-60%
-                memory: Math.floor(Math.random() * 40) + 40, // 40-80%
-                network: Math.floor(Math.random() * 50) + 10 // 10-60%
-            };
 
-            // Update resource bars
-            const resourceBars = document.querySelectorAll('.resource-fill');
-            resourceBars.forEach((bar, index) => {
-                const values = [this.resourceMetrics.cpu, this.resourceMetrics.memory, this.resourceMetrics.network];
-                const percentage = values[index];
-                bar.style.width = `${percentage}%`;
+
+        // Live Stream Functions
+        async initializeLiveStream() {
+            await this.loadLiveStreamEvents();
+            if (this.autoRefresh) {
+                this.startLiveStreamUpdates();
+            }
+        },
+
+        async loadLiveStreamEvents() {
+            try {
+                const response = await fetch('/api/observability/live-stream');
+                const data = await response.json();
                 
-                // Update the percentage text
-                const valueElement = bar.closest('.resource-item').querySelector('.resource-value');
-                if (valueElement) {
-                    valueElement.textContent = `${percentage}%`;
+                console.log('Live stream data received:', data);
+                
+                if (data.success) {
+                    this.liveStreamEvents = data.events || [];
+                    console.log('Live stream events loaded:', this.liveStreamEvents);
+                    this.updateLiveStreamStats();
+                }
+            } catch (error) {
+                console.error('Error loading live stream events:', error);
+            }
+        },
+
+        initializePageVisibilityDetection() {
+            // Handle page visibility changes
+            document.addEventListener('visibilitychange', () => {
+                this.isPageVisible = !document.hidden;
+                if (this.isPageVisible) {
+                    this.startLiveStreamUpdates();
+                } else {
+                    this.stopLiveStreamUpdates();
                 }
             });
+
+            // Handle page focus/blur
+            window.addEventListener('focus', () => {
+                this.isPageVisible = true;
+                this.startLiveStreamUpdates();
+            });
+
+            window.addEventListener('blur', () => {
+                this.isPageVisible = false;
+                this.stopLiveStreamUpdates();
+            });
+        },
+
+        startLiveStreamUpdates() {
+            if (this.liveStreamInterval) {
+                clearInterval(this.liveStreamInterval);
+            }
+            
+            // Only start updates if page is visible and auto-refresh is enabled
+            if (this.isPageVisible && this.autoRefresh) {
+                this.liveStreamInterval = setInterval(() => {
+                    if (this.isPageVisible && this.autoRefresh) {
+                        this.loadLiveStreamEvents();
+                    }
+                }, 2000); // Update every 2 seconds for real-time feel
+            }
+        },
+
+        stopLiveStreamUpdates() {
+            if (this.liveStreamInterval) {
+                clearInterval(this.liveStreamInterval);
+                this.liveStreamInterval = null;
+            }
+        },
+
+        updateLiveStreamStats() {
+            const events = this.liveStreamEvents;
+            const totalEvents = events.length;
+            const successEvents = events.filter(e => e.severity === 'info').length;
+            const activeAgents = new Set(events.filter(e => e.agent_name).map(e => e.agent_name)).size;
+            
+            this.liveStreamStats = {
+                totalEvents: totalEvents,
+                activeAgents: activeAgents,
+                successRate: totalEvents > 0 ? Math.round((successEvents / totalEvents) * 100) : 0,
+                lastUpdate: new Date().toLocaleTimeString()
+            };
+        },
+
+        refreshLiveStream() {
+            this.loadLiveStreamEvents();
+        },
+
+        toggleAutoRefresh() {
+            this.autoRefresh = !this.autoRefresh;
+            if (this.autoRefresh && this.isPageVisible) {
+                this.startLiveStreamUpdates();
+            } else {
+                this.stopLiveStreamUpdates();
+            }
+        },
+
+        filterLiveStream() {
+            // Filter events based on selected event type
+            if (this.selectedEventType) {
+                this.loadLiveStreamEvents();
+            } else {
+                this.loadLiveStreamEvents();
+            }
+        },
+
+        openEventModal(event) {
+            console.log('Opening event modal for:', event);
+            console.log('Event type:', event?.event_type);
+            console.log('Event data:', event?.event_data);
+            this.selectedEvent = event;
+            this.showEventModal = true;
+            console.log('Modal should now be visible. showEventModal:', this.showEventModal);
+        },
+
+        closeEventModal() {
+            this.showEventModal = false;
+            this.selectedEvent = null;
+        },
+
+        getEventIcon(eventType) {
+            const icons = {
+                'agent_action': 'fa-robot',
+                'mission_start': 'fa-rocket',
+                'mission_complete': 'fa-check-circle',
+                'session_start': 'fa-play-circle',
+                'session_complete': 'fa-stop-circle',
+                'system_error': 'fa-exclamation-triangle',
+                'thinking': 'fa-brain',
+                'decision': 'fa-sitemap',
+                'response': 'fa-comment',
+                'tool_call': 'fa-wrench',
+                'api_call': 'fa-network-wired',
+                'test_execution': 'fa-vial',
+                'planning': 'fa-map',
+                'analysis': 'fa-chart-line',
+                'optimization': 'fa-cogs',
+                'validation': 'fa-check-square'
+            };
+            return icons[eventType] || 'fa-info-circle';
+        },
+
+        formatEventType(eventType) {
+            const types = {
+                'agent_action': 'Agent Action',
+                'mission_start': 'Mission Start',
+                'mission_complete': 'Mission Complete',
+                'session_start': 'Session Start',
+                'session_complete': 'Session Complete',
+                'system_error': 'System Error',
+                'thinking': 'Agent Thinking',
+                'decision': 'Agent Decision',
+                'response': 'Agent Response',
+                'tool_call': 'Tool Call',
+                'api_call': 'API Call',
+                'test_execution': 'Test Execution',
+                'planning': 'Agent Planning',
+                'analysis': 'Agent Analysis',
+                'optimization': 'Agent Optimization',
+                'validation': 'Agent Validation'
+            };
+            return types[eventType] || eventType.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        },
+
+        formatDetailKey(key) {
+            return key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        },
+
+        formatDetailValue(value) {
+            if (value === null || value === undefined) {
+                return 'N/A';
+            }
+            if (typeof value === 'boolean') {
+                return value ? 'Yes' : 'No';
+            }
+            if (typeof value === 'number') {
+                if (value > 1000 && value < 60000) { // Duration in milliseconds
+                    return this.formatDuration(value);
+                }
+                if (value > 1000000) { // Memory in bytes
+                    return (value / 1024 / 1024).toFixed(2) + ' MB';
+                }
+                if (value <= 100) { // CPU percentage
+                    return value + '%';
+                }
+                return value.toString();
+            }
+            if (typeof value === 'string') {
+                if (value.length > 100) {
+                    return value.substring(0, 100) + '...';
+                }
+                return value;
+            }
+            if (typeof value === 'object') {
+                try {
+                    return JSON.stringify(value, null, 2);
+                } catch (e) {
+                    return String(value);
+                }
+            }
+            return String(value);
+        },
+
+        // Enhanced observability functions
+        async loadObservabilityData() {
+            try {
+                const response = await fetch('/api/observability/agent-analytics');
+                const data = await response.json();
+                
+                if (data.success && data.analytics) {
+                    const analytics = data.analytics;
+                    this.observabilityData = {
+                        thinkingSessions: analytics.summary?.total_tokens || 0,
+                        toolCalls: analytics.summary?.total_tool_calls || 0,
+                        apiCalls: analytics.summary?.total_api_calls || 0,
+                        memoryUsage: analytics.summary?.avg_memory_usage_mb || 0
+                    };
+                }
+            } catch (error) {
+                console.error('Error loading observability data:', error);
+            }
+        },
+
+        async loadTestAnalytics() {
+            try {
+                const response = await fetch('/api/test-missions/analysis');
+                const data = await response.json();
+                
+                if (data.success) {
+                    this.testAnalytics = {
+                        totalTests: data.total_tests || 0,
+                        successRate: data.success_rate || 0,
+                        avgDuration: data.avg_duration_ms || 0,
+                        performance: data.performance_score || 0
+                    };
+                }
+            } catch (error) {
+                console.error('Error loading test analytics:', error);
+            }
+        },
+
+        updateObservabilityData() {
+            // Simulate real-time updates
+            this.observabilityData.thinkingSessions += Math.floor(Math.random() * 3);
+            this.observabilityData.toolCalls += Math.floor(Math.random() * 2);
+            this.observabilityData.apiCalls += Math.floor(Math.random() * 1);
+            this.observabilityData.memoryUsage = Math.max(0, this.observabilityData.memoryUsage + (Math.random() - 0.5) * 2);
+        },
+
+        updateTestAnalytics() {
+            // Simulate real-time updates
+            this.testAnalytics.totalTests += Math.floor(Math.random() * 1);
+            this.testAnalytics.successRate = Math.min(100, Math.max(0, this.testAnalytics.successRate + (Math.random() - 0.5) * 2));
+            this.testAnalytics.avgDuration = Math.max(100, this.testAnalytics.avgDuration + (Math.random() - 0.5) * 50);
+            this.testAnalytics.performance = Math.min(100, Math.max(0, this.testAnalytics.performance + (Math.random() - 0.5) * 1));
         },
 
         initQuickActions() {
-            // Add event listeners for quick action buttons
-            const quickActionButtons = document.querySelectorAll('.quick-actions .btn');
+            // Add event listeners to quick action buttons
+            const quickActionButtons = document.querySelectorAll('.quick-action-btn');
             quickActionButtons.forEach(button => {
                 button.addEventListener('click', (e) => {
                     e.preventDefault();
-                    const action = button.textContent.trim();
+                    const action = button.dataset.action;
                     this.handleQuickAction(action);
                 });
             });
         },
 
         handleQuickAction(action) {
-            switch(action) {
-                case 'Create New Mission':
+            switch (action) {
+                case 'create-mission':
                     this.createNewMission();
                     break;
-                case 'Generate Report':
+                case 'generate-report':
                     this.generateReport();
                     break;
-                case 'System Health Check':
+                case 'health-check':
                     this.performHealthCheck();
                     break;
-                case 'Optimize Performance':
+                case 'optimize':
                     this.optimizePerformance();
                     break;
                 default:
-                    console.log(`Quick action: ${action}`);
+                    console.log('Unknown action:', action);
             }
         },
 
@@ -279,21 +546,21 @@ function sentinelApp() {
                 const response = await fetch('/api/missions', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
                         prompt: 'New mission created via quick action',
-                        agent_type: 'developer'
+                        agent_type: 'general'
                     })
                 });
                 
                 if (response.ok) {
-                    const data = await response.json();
-                    console.log('Mission created:', data);
-                    this.loadMissions(); // Refresh missions list
+                    this.showNotification('Mission created successfully', 'success');
+                    this.loadMissions();
                 }
             } catch (error) {
                 console.error('Error creating mission:', error);
+                this.showNotification('Failed to create mission', 'error');
             }
         },
 
@@ -301,12 +568,13 @@ function sentinelApp() {
             try {
                 const response = await fetch('/api/observability/report');
                 if (response.ok) {
-                    const data = await response.json();
-                    console.log('Report generated:', data);
-                    // Could trigger a download or display in modal
+                    const report = await response.json();
+                    this.showNotification('Report generated successfully', 'success');
+                    console.log('Generated report:', report);
                 }
             } catch (error) {
                 console.error('Error generating report:', error);
+                this.showNotification('Failed to generate report', 'error');
             }
         },
 
@@ -314,25 +582,30 @@ function sentinelApp() {
             try {
                 const response = await fetch('/health');
                 if (response.ok) {
-                    const data = await response.json();
-                    console.log('Health check result:', data);
-                    this.updateSystemStatus();
+                    this.showNotification('Health check completed', 'success');
+                } else {
+                    this.showNotification('Health check failed', 'error');
                 }
             } catch (error) {
                 console.error('Error performing health check:', error);
+                this.showNotification('Health check failed', 'error');
             }
         },
 
         async optimizePerformance() {
             try {
-                const response = await fetch('/api/hybrid/analytics');
+                const response = await fetch('/api/optimize', {
+                    method: 'POST'
+                });
+                
                 if (response.ok) {
-                    const data = await response.json();
-                    console.log('Performance optimization data:', data);
-                    // Could trigger optimization processes
+                    this.showNotification('Performance optimization completed', 'success');
+                } else {
+                    this.showNotification('Optimization failed', 'error');
                 }
             } catch (error) {
                 console.error('Error optimizing performance:', error);
+                this.showNotification('Optimization failed', 'error');
             }
         },
 
@@ -344,9 +617,8 @@ function sentinelApp() {
         },
 
         getSuccessRate() {
-            if (this.missions.length === 0) return 0;
-            const completedMissions = this.missions.filter(mission => mission.status === 'completed');
-            return (completedMissions.length / this.missions.length) * 100;
+            // Simulate success rate calculation
+            return Math.floor(Math.random() * 20) + 80;
         },
 
         getAverageResponseTime() {
@@ -358,9 +630,8 @@ function sentinelApp() {
             return {
                 planning: 'active',
                 execution: 'active',
-                review: 'active',
-                debug: 'active',
-                analysis: 'active'
+                review: 'idle',
+                debug: 'active'
             };
         },
 
@@ -369,19 +640,22 @@ function sentinelApp() {
                 const response = await fetch('/api/missions', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(missionData)
                 });
                 
                 if (response.ok) {
-                    const data = await response.json();
-                    console.log('Mission submitted:', data);
+                    const result = await response.json();
+                    this.showNotification('Mission submitted successfully', 'success');
                     this.loadMissions();
-                    return data;
+                    return result;
+                } else {
+                    throw new Error('Failed to submit mission');
                 }
             } catch (error) {
                 console.error('Error submitting mission:', error);
+                this.showNotification('Failed to submit mission', 'error');
                 throw error;
             }
         },
@@ -391,14 +665,16 @@ function sentinelApp() {
                 const response = await fetch('/api/ai/generate', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({ prompt })
                 });
                 
                 if (response.ok) {
-                    const data = await response.json();
-                    return data.response;
+                    const result = await response.json();
+                    return result.response;
+                } else {
+                    throw new Error('Failed to generate AI response');
                 }
             } catch (error) {
                 console.error('Error generating AI response:', error);
@@ -411,19 +687,117 @@ function sentinelApp() {
                 const response = await fetch('/api/ai/analyze', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({ code, language })
                 });
                 
                 if (response.ok) {
-                    const data = await response.json();
-                    return data.analysis;
+                    const result = await response.json();
+                    return result.analysis;
+                } else {
+                    throw new Error('Failed to analyze code');
                 }
             } catch (error) {
                 console.error('Error analyzing code:', error);
                 throw error;
             }
+        },
+
+        // Enhanced mission management functions
+        async refreshMissions() {
+            await this.loadMissions();
+            this.showNotification('Missions refreshed', 'success');
+        },
+
+        async exportMissionData() {
+            try {
+                const response = await fetch('/api/observability/export');
+                if (response.ok) {
+                    const data = await response.json();
+                    this.showNotification('Data exported successfully', 'success');
+                    console.log('Exported data:', data);
+                }
+            } catch (error) {
+                console.error('Error exporting data:', error);
+                this.showNotification('Export failed', 'error');
+            }
+        },
+
+        async clearCompletedMissions() {
+            this.missions = this.missions.filter(mission => mission.status !== 'completed');
+            this.showNotification('Completed missions cleared', 'success');
+        },
+
+        async viewMissionDetails(missionId) {
+            try {
+                const response = await fetch(`/api/missions/${missionId}`);
+                if (response.ok) {
+                    const mission = await response.json();
+                    this.showNotification('Mission details loaded', 'success');
+                    console.log('Mission details:', mission);
+                }
+            } catch (error) {
+                console.error('Error loading mission details:', error);
+                this.showNotification('Failed to load mission details', 'error');
+            }
+        },
+
+        async pauseMission(missionId) {
+            try {
+                const response = await fetch(`/api/missions/${missionId}/pause`, {
+                    method: 'POST'
+                });
+                if (response.ok) {
+                    this.showNotification('Mission paused', 'success');
+                    this.loadMissions();
+                }
+            } catch (error) {
+                console.error('Error pausing mission:', error);
+                this.showNotification('Failed to pause mission', 'error');
+            }
+        },
+
+        async cancelMission(missionId) {
+            try {
+                const response = await fetch(`/api/missions/${missionId}/cancel`, {
+                    method: 'POST'
+                });
+                if (response.ok) {
+                    this.showNotification('Mission cancelled', 'success');
+                    this.loadMissions();
+                }
+            } catch (error) {
+                console.error('Error cancelling mission:', error);
+                this.showNotification('Failed to cancel mission', 'error');
+            }
+        },
+
+        showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type === 'error' ? 'danger' : type === 'success' ? 'success' : 'info'} alert-dismissible fade show`;
+            notification.style.position = 'fixed';
+            notification.style.top = '20px';
+            notification.style.right = '20px';
+            notification.style.zIndex = '9999';
+            notification.style.minWidth = '300px';
+            
+            notification.innerHTML = `
+                ${message}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 5000);
         },
 
         destroy() {

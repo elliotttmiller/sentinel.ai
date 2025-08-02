@@ -76,17 +76,27 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navigation">
                         <ul class="navbar-nav ml-auto">
-                            <li class="dropdown nav-item">
-                                <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                    <div class="notification d-none d-lg-block d-xl-block"></div>
-                                    <i class="fas fa-bell"></i>
-                                    <p class="d-lg-none">Notifications</p>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
-                                    <li class="nav-link"><a href="#" class="nav-item dropdown-item">New mission completed</a></li>
-                                    <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Agent status updated</a></li>
-                                    <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">System optimization complete</a></li>
-                                </ul>
+                            <li class="nav-item">
+                                <div class="search-container">
+                                    <div class="search-wrapper">
+                                        <input type="text" class="form-control search-input" placeholder="Search missions, agents, or logs...">
+                                        <i class="fas fa-search search-icon"></i>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <div class="notification-container">
+                                    <a href="javascript:void(0)" class="dropdown-toggle nav-link notification-link" data-toggle="dropdown">
+                                        <div class="notification d-none d-lg-block d-xl-block"></div>
+                                        <i class="fas fa-bell"></i>
+                                        <p class="d-lg-none">Notifications</p>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
+                                        <li class="nav-link"><a href="#" class="nav-item dropdown-item">Mission completed</a></li>
+                                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">New mission created</a></li>
+                                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Agent status updated</a></li>
+                                    </ul>
+                                </div>
                             </li>
                             <li class="dropdown nav-item">
                                 <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
@@ -110,7 +120,7 @@
             </nav>
 
             <!-- Content -->
-            <div class="content" x-data="missionsApp()">
+            <div class="content missions-page" x-data="missionsApp()">
                 <!-- Mission Creation -->
                 <div class="row">
                     <div class="col-12">
@@ -133,7 +143,7 @@
                                             <div class="form-group">
                                                 <label>Agent Type</label>
                                                 <select class="form-control" x-model="newMission.agent_type">
-                                                    <option value="developer">Developer Agent</option>
+                                                    <option value="developer" selected>Developer Agent</option>
                                                     <option value="analyst">Analyst Agent</option>
                                                     <option value="researcher">Researcher Agent</option>
                                                     <option value="optimizer">Optimizer Agent</option>
@@ -142,7 +152,7 @@
                                             <div class="form-group">
                                                 <label>Priority</label>
                                                 <select class="form-control" x-model="newMission.priority">
-                                                    <option value="low">Low</option>
+                                                    <option value="low" selected>Low</option>
                                                     <option value="medium">Medium</option>
                                                     <option value="high">High</option>
                                                     <option value="critical">Critical</option>

@@ -1,0 +1,13 @@
+{"time":"2025-08-01T22:35:50.7663477-05:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-08-01T22:35:51.0829618-05:00","level":"INFO","msg":"stream: created new stream","id":"j48rg4gl"}
+{"time":"2025-08-01T22:35:51.0829618-05:00","level":"INFO","msg":"stream: started","id":"j48rg4gl"}
+{"time":"2025-08-01T22:35:51.0829618-05:00","level":"INFO","msg":"handler: started","stream_id":"j48rg4gl"}
+{"time":"2025-08-01T22:35:51.0829618-05:00","level":"INFO","msg":"writer: Do: started","stream_id":"j48rg4gl"}
+{"time":"2025-08-01T22:35:51.0829618-05:00","level":"INFO","msg":"sender: started","stream_id":"j48rg4gl"}
+{"time":"2025-08-01T22:36:03.9744998-05:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-08-01T22:36:04.1513247-05:00","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-08-01T22:36:04.1563884-05:00","level":"INFO","msg":"stream: closing","id":"j48rg4gl"}
+{"time":"2025-08-01T22:36:04.1563884-05:00","level":"INFO","msg":"handler: closed","stream_id":"j48rg4gl"}
+{"time":"2025-08-01T22:36:04.1563884-05:00","level":"INFO","msg":"writer: Close: closed","stream_id":"j48rg4gl"}
+{"time":"2025-08-01T22:36:04.1563884-05:00","level":"INFO","msg":"sender: closed","stream_id":"j48rg4gl"}
+{"time":"2025-08-01T22:36:04.1570235-05:00","level":"INFO","msg":"stream: closed","id":"j48rg4gl"}

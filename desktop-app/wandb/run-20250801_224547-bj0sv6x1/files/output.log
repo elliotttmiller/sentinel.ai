@@ -1,0 +1,168 @@
+[32m2025-08-01 22:45:49.415[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m1180[0m - [1m🚀 Sentinel Cognitive Forge v5.0 starting up...[0m
+[32m2025-08-01 22:45:49.418[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m1181[0m - [1m📡 Real-time log streaming initialized[0m
+[32m2025-08-01 22:45:49.418[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m1182[0m - [1m🔗 SSE endpoint available at /api/events/stream[0m
+[32m2025-08-01 22:45:49.419[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m1183[0m - [1m🧠 Hybrid Decision Engine active[0m
+[32m2025-08-01 22:45:49.419[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m1184[0m - [1m💾 Database system ready[0m
+[32m2025-08-01 22:45:49.464[0m | [32m[1mSUCCESS [0m | [36msrc.utils.sentry_integration[0m:[36m_initialize_sentry[0m:[36m78[0m - [32m[1mSentry integration initialized successfully[0m
+[32m2025-08-01 22:45:49.464[0m | [32m[1mSUCCESS [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m1189[0m - [32m[1m✅ Sentry integration initialized[0m
+[32m2025-08-01 22:45:49.471[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/test-missions/executions | Client: 127.0.0.1[0m
+[32m2025-08-01 22:45:49.478[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:45:49.479[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/test-missions | Client: 127.0.0.1[0m
+[32m2025-08-01 22:45:49.481[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/agent-analytics | Client: 127.0.0.1[0m
+[32m2025-08-01 22:45:49.486[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/test-missions/executions | Time: 0.014s[0m
+[32m2025-08-01 22:45:49.487[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.010s[0m
+[32m2025-08-01 22:45:49.488[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/test-missions | Time: 0.009s[0m
+[32m2025-08-01 22:45:49.489[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/agent-analytics | Time: 0.007s[0m
+[32m2025-08-01 22:45:53.137[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 POST /api/test-missions/test_mission_c76445c3/run | Client: 127.0.0.1[0m
+[32m2025-08-01 22:45:53.137[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 404 for POST /api/test-missions/test_mission_c76445c3/run | Time: 0.000s[0m
+[32m2025-08-01 22:46:04.564[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/test-missions | Client: 127.0.0.1[0m
+[32m2025-08-01 22:46:04.566[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/test-missions | Time: 0.001s[0m
+[32m2025-08-01 22:46:14.267[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/test-missions | Client: 127.0.0.1[0m
+[32m2025-08-01 22:46:14.269[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/test-missions | Time: 0.002s[0m
+[32m2025-08-01 22:46:22.976[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 POST /api/test-missions/test_mission_ac44514a/run | Client: 127.0.0.1[0m
+[32m2025-08-01 22:46:23.417[0m | [1mINFO    [0m | [36msrc.utils.test_mission_system[0m:[36mrun_test_mission[0m:[36m248[0m - [1m🚀 Starting test mission: Code Review & Analysis[0m
+[32m2025-08-01 22:46:23.417[0m | [1mINFO    [0m | [36msrc.utils.test_mission_system[0m:[36mrun_test_mission[0m:[36m252[0m - [1m📋 Executing scenario 1: Syntax Error Detection[0m
+[32m2025-08-01 22:46:23.419[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_411a4278[0m
+[32m2025-08-01 22:46:23.419[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_411a4278[0m
+[32m2025-08-01 22:46:23.419[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_411a4278[0m
+[32m2025-08-01 22:46:23.420[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_411a4278[0m
+[32m2025-08-01 22:46:23.526[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_411a4278[0m
+[32m2025-08-01 22:46:23.528[0m | [1mINFO    [0m | [36msrc.utils.test_mission_system[0m:[36mrun_test_mission[0m:[36m252[0m - [1m📋 Executing scenario 2: Logic Error Detection[0m
+[32m2025-08-01 22:46:23.529[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_7e334669[0m
+[32m2025-08-01 22:46:23.530[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_7e334669[0m
+[32m2025-08-01 22:46:23.531[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_7e334669[0m
+[32m2025-08-01 22:46:23.531[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_7e334669[0m
+[32m2025-08-01 22:46:23.732[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_7e334669[0m
+[32m2025-08-01 22:46:23.734[0m | [1mINFO    [0m | [36msrc.utils.test_mission_system[0m:[36mrun_test_mission[0m:[36m252[0m - [1m📋 Executing scenario 3: Performance Analysis[0m
+[32m2025-08-01 22:46:23.734[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_07dcb30c[0m
+[32m2025-08-01 22:46:23.735[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_07dcb30c[0m
+[32m2025-08-01 22:46:23.735[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_07dcb30c[0m
+[32m2025-08-01 22:46:23.736[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_07dcb30c[0m
+[32m2025-08-01 22:46:23.887[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_07dcb30c[0m
+[32m2025-08-01 22:46:23.889[0m | [1mINFO    [0m | [36msrc.utils.test_mission_system[0m:[36mrun_test_mission[0m:[36m331[0m - [1m✅ Test mission completed: Code Review & Analysis - Success: True[0m
+[32m2025-08-01 22:46:23.890[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36mmission_observability[0m:[36m415[0m - [33m[1mW&B logging failed: Object of type deque is not JSON serializable[0m
+[32m2025-08-01 22:46:23.892[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for POST /api/test-missions/test_mission_ac44514a/run | Time: 0.916s[0m
+[32m2025-08-01 22:46:38.633[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:46:38.635[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.002s[0m
+[32m2025-08-01 22:46:42.101[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/test-missions | Client: 127.0.0.1[0m
+[32m2025-08-01 22:46:42.103[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/test-missions | Time: 0.001s[0m
+[32m2025-08-01 22:46:42.106[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/test-missions/executions | Client: 127.0.0.1[0m
+[32m2025-08-01 22:46:42.109[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/test-missions/executions | Time: 0.003s[0m
+[32m2025-08-01 22:46:42.115[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/agent-analytics | Client: 127.0.0.1[0m
+[32m2025-08-01 22:46:42.117[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/agent-analytics | Time: 0.003s[0m
+[32m2025-08-01 22:46:42.124[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:46:42.130[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.005s[0m
+[32m2025-08-01 22:47:28.481[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/test-missions | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:28.485[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/test-missions | Time: 0.004s[0m
+[32m2025-08-01 22:47:28.502[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/test-missions/executions | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:28.508[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/agent-analytics | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:28.517[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:28.521[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/test-missions/executions | Time: 0.019s[0m
+[32m2025-08-01 22:47:28.531[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/agent-analytics | Time: 0.024s[0m
+[32m2025-08-01 22:47:28.536[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.019s[0m
+[32m2025-08-01 22:47:29.819[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET / | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:29.832[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET / | Time: 0.013s[0m
+[32m2025-08-01 22:47:29.977[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /static/css/sentinel-dash.css | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:29.989[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /static/js/main.js | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:30.008[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /static/css/sentinel-dash.css | Time: 0.031s[0m
+[32m2025-08-01 22:47:30.012[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /static/js/main.js | Time: 0.023s[0m
+[32m2025-08-01 22:47:30.410[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:30.413[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /health | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:30.415[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/agent-analytics | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:30.419[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/agent-analytics | Time: 0.004s[0m
+[32m2025-08-01 22:47:30.423[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /health | Time: 0.010s[0m
+[32m2025-08-01 22:47:30.428[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/test-missions/analysis | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:30.432[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /missions | Time: 0.022s[0m
+[32m2025-08-01 22:47:30.441[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/test-missions/analysis | Time: 0.013s[0m
+[32m2025-08-01 22:47:30.445[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:30.466[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.021s[0m
+[32m2025-08-01 22:47:30.485[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/events/stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:30.491[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/events/stream | Time: 0.006s[0m
+[32m2025-08-01 22:47:32.522[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:32.524[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.002s[0m
+[32m2025-08-01 22:47:34.525[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:34.531[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.007s[0m
+[32m2025-08-01 22:47:35.413[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /health | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:35.415[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:35.419[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.004s[0m
+[32m2025-08-01 22:47:35.423[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /health | Time: 0.010s[0m
+[32m2025-08-01 22:47:36.520[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:36.524[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.003s[0m
+[32m2025-08-01 22:47:38.523[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:38.526[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.002s[0m
+[32m2025-08-01 22:47:40.424[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /health | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:40.426[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:40.428[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.003s[0m
+[32m2025-08-01 22:47:40.431[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /health | Time: 0.007s[0m
+[32m2025-08-01 22:47:40.524[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:40.527[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.002s[0m
+[32m2025-08-01 22:47:42.524[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:42.526[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.002s[0m
+[32m2025-08-01 22:47:44.518[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:44.523[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.005s[0m
+[32m2025-08-01 22:47:45.411[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /health | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:45.414[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:45.416[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.002s[0m
+[32m2025-08-01 22:47:45.422[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /health | Time: 0.010s[0m
+[32m2025-08-01 22:47:45.890[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /test-missions | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:45.894[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /test-missions | Time: 0.004s[0m
+[32m2025-08-01 22:47:45.944[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /static/js/test-missions.js | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:45.949[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /static/js/test-missions.js | Time: 0.004s[0m
+[32m2025-08-01 22:47:46.234[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/test-missions | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:46.238[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/test-missions/executions | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:46.248[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/agent-analytics | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:46.252[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/test-missions | Time: 0.018s[0m
+[32m2025-08-01 22:47:46.255[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/test-missions/executions | Time: 0.017s[0m
+[32m2025-08-01 22:47:46.258[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/agent-analytics | Time: 0.010s[0m
+[32m2025-08-01 22:47:46.268[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:46.273[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.005s[0m
+[32m2025-08-01 22:47:48.296[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:48.301[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.005s[0m
+[32m2025-08-01 22:47:49.275[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 POST /api/test-missions/test_mission_ac44514a/run | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:49.278[0m | [1mINFO    [0m | [36msrc.utils.test_mission_system[0m:[36mrun_test_mission[0m:[36m248[0m - [1m🚀 Starting test mission: Code Review & Analysis[0m
+[32m2025-08-01 22:47:49.279[0m | [1mINFO    [0m | [36msrc.utils.test_mission_system[0m:[36mrun_test_mission[0m:[36m252[0m - [1m📋 Executing scenario 1: Syntax Error Detection[0m
+[32m2025-08-01 22:47:49.279[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_1b00307d[0m
+[32m2025-08-01 22:47:49.280[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_1b00307d[0m
+[32m2025-08-01 22:47:49.281[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_1b00307d[0m
+[32m2025-08-01 22:47:49.281[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_1b00307d[0m
+[32m2025-08-01 22:47:49.385[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_1b00307d[0m
+[32m2025-08-01 22:47:49.386[0m | [1mINFO    [0m | [36msrc.utils.test_mission_system[0m:[36mrun_test_mission[0m:[36m252[0m - [1m📋 Executing scenario 2: Logic Error Detection[0m
+[32m2025-08-01 22:47:49.386[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_35a2f7c9[0m
+[32m2025-08-01 22:47:49.388[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_35a2f7c9[0m
+[32m2025-08-01 22:47:49.388[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_35a2f7c9[0m
+[32m2025-08-01 22:47:49.388[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_35a2f7c9[0m
+[32m2025-08-01 22:47:49.599[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_35a2f7c9[0m
+[32m2025-08-01 22:47:49.600[0m | [1mINFO    [0m | [36msrc.utils.test_mission_system[0m:[36mrun_test_mission[0m:[36m252[0m - [1m📋 Executing scenario 3: Performance Analysis[0m
+[32m2025-08-01 22:47:49.601[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_9db01659[0m
+[32m2025-08-01 22:47:49.602[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_9db01659[0m
+[32m2025-08-01 22:47:49.602[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_9db01659[0m
+[32m2025-08-01 22:47:49.603[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_9db01659[0m
+[32m2025-08-01 22:47:49.779[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_find_mission_for_session[0m:[36m748[0m - [33m[1mCould not find active mission for session_id: session_9db01659[0m
+[32m2025-08-01 22:47:49.781[0m | [1mINFO    [0m | [36msrc.utils.test_mission_system[0m:[36mrun_test_mission[0m:[36m331[0m - [1m✅ Test mission completed: Code Review & Analysis - Success: True[0m
+[32m2025-08-01 22:47:49.782[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36mmission_observability[0m:[36m415[0m - [33m[1mW&B logging failed: Object of type deque is not JSON serializable[0m
+[32m2025-08-01 22:47:49.783[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for POST /api/test-missions/test_mission_ac44514a/run | Time: 0.508s[0m
+[32m2025-08-01 22:47:50.306[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:50.309[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.003s[0m
+[32m2025-08-01 22:47:51.787[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/test-missions/executions | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:51.791[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/agent-analytics | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:51.793[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/test-missions/executions | Time: 0.005s[0m
+[32m2025-08-01 22:47:51.795[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/agent-analytics | Time: 0.004s[0m
+[32m2025-08-01 22:47:52.306[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:52.307[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.003s[0m
+[32m2025-08-01 22:47:54.312[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:54.316[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.004s[0m
+[32m2025-08-01 22:47:56.303[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:56.305[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.002s[0m
+[32m2025-08-01 22:47:58.302[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:47:58.305[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.003s[0m
+[32m2025-08-01 22:48:16.551[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/test-missions | Client: 127.0.0.1[0m
+[32m2025-08-01 22:48:16.552[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/agent-analytics | Client: 127.0.0.1[0m
+[32m2025-08-01 22:48:16.554[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/test-missions/executions | Client: 127.0.0.1[0m
+[32m2025-08-01 22:48:16.558[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1205[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:48:16.562[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/test-missions | Time: 0.011s[0m
+[32m2025-08-01 22:48:16.564[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/agent-analytics | Time: 0.011s[0m
+[32m2025-08-01 22:48:16.565[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/test-missions/executions | Time: 0.011s[0m
+[32m2025-08-01 22:48:16.568[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1211[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.010s[0m
+[32m2025-08-01 22:48:46.297[0m | [1mINFO    [0m | [36msrc.main[0m:[36mshutdown_event[0m:[36m1194[0m - [1m🛑 Shutting down Sentinel Cognitive Forge v5.0[0m
+[32m2025-08-01 22:48:46.298[0m | [1mINFO    [0m | [36msrc.main[0m:[36mshutdown_event[0m:[36m1195[0m - [1m💾 Saving final state...[0m
+[32m2025-08-01 22:48:46.298[0m | [1mINFO    [0m | [36msrc.main[0m:[36mshutdown_event[0m:[36m1196[0m - [1m✅ Shutdown complete[0m

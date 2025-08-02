@@ -30,6 +30,7 @@ try:
     from .utils.sentry_integration import initialize_sentry
     from .utils.weave_observability import observability_manager
     from .utils.agent_observability import agent_observability
+    from .utils.test_mission_system import test_mission_system
     
     # Initialize database manager
     logger.info("Database manager initialized successfully")
@@ -43,6 +44,7 @@ except ImportError as e:
     initialize_sentry = lambda: None
     observability_manager = None
     agent_observability = None
+    test_mission_system = None
 
 # --- Real-Time Logging & Streaming Setup ---
 log_buffer = []
@@ -220,8 +222,7 @@ async def run_mission_in_background(prompt: str, mission_id_str: str):
                     agent_observability.log_agent_response(
                         session.session_id,
                         {"result": result.get("result", ""), "status": result.get("status", "")},
-                        tokens_used=result.get("tokens_used", 0),
-                        cost_estimate=result.get("cost_estimate", 0.0)
+                        tokens_used=result.get("tokens_used", 0)
                     )
                     
                     session.success = result.get("status") == "completed"
@@ -261,8 +262,7 @@ async def run_mission_in_background(prompt: str, mission_id_str: str):
                         agent_observability.log_agent_response(
                             phase_session.session_id,
                             {"planning_result": planning_result},
-                            tokens_used=len(planning_prompt.split()) + len(planning_result.get("result", "").split()),
-                            cost_estimate=0.02
+                            tokens_used=len(planning_prompt.split()) + len(planning_result.get("result", "").split())
                         )
                         
                         phase_session.success = True
@@ -297,8 +297,7 @@ async def run_mission_in_background(prompt: str, mission_id_str: str):
                         agent_observability.log_agent_response(
                             phase_session.session_id,
                             {"research_result": research_result},
-                            tokens_used=len(research_prompt.split()) + len(research_result.get("result", "").split()),
-                            cost_estimate=0.03
+                            tokens_used=len(research_prompt.split()) + len(research_result.get("result", "").split())
                         )
                         
                         phase_session.success = True
@@ -335,8 +334,7 @@ async def run_mission_in_background(prompt: str, mission_id_str: str):
                         agent_observability.log_agent_response(
                             phase_session.session_id,
                             {"design_result": design_result},
-                            tokens_used=len(design_prompt.split()) + len(design_result.get("result", "").split()),
-                            cost_estimate=0.04
+                            tokens_used=len(design_prompt.split()) + len(design_result.get("result", "").split())
                         )
                         
                         phase_session.success = True
@@ -372,8 +370,7 @@ async def run_mission_in_background(prompt: str, mission_id_str: str):
                         agent_observability.log_agent_response(
                             phase_session.session_id,
                             {"implementation_result": implementation_result},
-                            tokens_used=len(implementation_prompt.split()) + len(implementation_result.get("result", "").split()),
-                            cost_estimate=0.05
+                            tokens_used=len(implementation_prompt.split()) + len(implementation_result.get("result", "").split())
                         )
                         
                         phase_session.success = True
@@ -406,8 +403,7 @@ async def run_mission_in_background(prompt: str, mission_id_str: str):
                         agent_observability.log_agent_response(
                             phase_session.session_id,
                             {"testing_result": testing_result},
-                            tokens_used=len(testing_prompt.split()) + len(testing_result.get("result", "").split()),
-                            cost_estimate=0.03
+                            tokens_used=len(testing_prompt.split()) + len(testing_result.get("result", "").split())
                         )
                         
                         phase_session.success = True
@@ -443,8 +439,7 @@ async def run_mission_in_background(prompt: str, mission_id_str: str):
                         agent_observability.log_agent_response(
                             phase_session.session_id,
                             {"optimization_result": optimization_result},
-                            tokens_used=len(optimization_prompt.split()) + len(optimization_result.get("result", "").split()),
-                            cost_estimate=0.04
+                            tokens_used=len(optimization_prompt.split()) + len(optimization_result.get("result", "").split())
                         )
                         
                         phase_session.success = True
@@ -477,8 +472,7 @@ async def run_mission_in_background(prompt: str, mission_id_str: str):
                         agent_observability.log_agent_response(
                             phase_session.session_id,
                             {"documentation_result": documentation_result},
-                            tokens_used=len(documentation_prompt.split()) + len(documentation_result.get("result", "").split()),
-                            cost_estimate=0.03
+                            tokens_used=len(documentation_prompt.split()) + len(documentation_result.get("result", "").split())
                         )
                         
                         phase_session.success = True
@@ -514,8 +508,7 @@ async def run_mission_in_background(prompt: str, mission_id_str: str):
                         agent_observability.log_agent_response(
                             phase_session.session_id,
                             {"deployment_result": deployment_result},
-                            tokens_used=len(deployment_prompt.split()) + len(deployment_result.get("result", "").split()),
-                            cost_estimate=0.04
+                            tokens_used=len(deployment_prompt.split()) + len(deployment_result.get("result", "").split())
                         )
                         
                         phase_session.success = True
@@ -660,6 +653,11 @@ def serve_ai_agents():
 def serve_settings():
     """Serve the settings page"""
     return FileResponse("templates/settings.html")
+
+@app.get("/test-missions", response_class=FileResponse)
+def serve_test_missions():
+    """Serve the test missions page"""
+    return FileResponse("templates/test-missions.html")
 
 @app.get("/static/{path:path}")
 def serve_static(path: str):
@@ -919,79 +917,261 @@ async def get_system_stats():
         logger.error(f"❌ Failed to get system stats: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.get("/api/test-missions")
+async def get_test_missions():
+    """Get available test missions."""
+    try:
+        missions = test_mission_system.get_available_test_missions()
+        return {
+            "success": True,
+            "missions": missions,
+            "total_missions": len(missions)
+        }
+    except Exception as e:
+        logger.error(f"Error getting test missions: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/test-missions/{mission_id}/run")
+async def run_test_mission(mission_id: str, request: dict = None):
+    """Run a specific test mission."""
+    try:
+        user_request = request.get("user_request", f"Test Mission: {mission_id}") if request else None
+        execution = await test_mission_system.run_test_mission(mission_id, user_request)
+        
+        # Use safe serialization for the execution object
+        execution_data = test_mission_system._make_execution_serializable(execution)
+        
+        return {
+            "success": True,
+            "execution_id": execution.execution_id,
+            "mission_name": execution.test_mission.name,
+            "execution_success": execution.success,
+            "duration_seconds": execution.duration_seconds,
+            "scenarios_executed": len(execution.test_results),
+            "performance_metrics": execution.performance_metrics,
+            "execution_data": execution_data
+        }
+        
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except Exception as e:
+        logger.error(f"Error running test mission: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/test-missions/executions")
+async def get_test_executions():
+    """Get history of test executions."""
+    try:
+        executions = test_mission_system.get_test_execution_history()
+        return {
+            "success": True,
+            "executions": executions,
+            "total_executions": len(executions)
+        }
+    except Exception as e:
+        logger.error(f"Error getting test executions: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/test-missions/executions/{execution_id}")
+async def get_test_execution_details(execution_id: str):
+    """Get detailed results for a specific test execution."""
+    try:
+        execution_data = test_mission_system.get_test_execution_details(execution_id)
+        if not execution_data:
+            raise HTTPException(status_code=404, detail="Test execution not found")
+        
+        return {
+            "success": True,
+            "execution": execution_data
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error getting test execution details: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/test-missions/analysis")
+async def get_test_analysis():
+    """Get comprehensive analysis of test mission performance."""
+    try:
+        analysis = test_mission_system.get_agent_performance_analysis()
+        return {
+            "success": True,
+            "analysis": analysis
+        }
+    except Exception as e:
+        logger.error(f"Error getting test analysis: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/observability/live-stream")
+async def get_live_stream_events(event_type: str = None, limit: int = 100):
+    """Get real-time live stream events for agent tracking."""
+    if agent_observability is None:
+        raise HTTPException(status_code=503, detail="Observability service unavailable")
+    
+    try:
+        events = agent_observability.get_live_stream_events(event_type=event_type, limit=limit)
+        return {
+            "success": True,
+            "events": events,
+            "total_events": len(events),
+            "event_type": event_type,
+            "timestamp": datetime.utcnow().isoformat()
+        }
+    except Exception as e:
+        logger.error(f"Error getting live stream events: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to get live stream events: {str(e)}")
+
+@app.get("/api/observability/real-time-metrics")
+async def get_real_time_metrics():
+    """Get real-time performance metrics."""
+    if agent_observability is None:
+        raise HTTPException(status_code=503, detail="Observability service unavailable")
+    
+    try:
+        metrics = agent_observability.get_real_time_metrics()
+        return {
+            "success": True,
+            "metrics": metrics,
+            "timestamp": datetime.utcnow().isoformat()
+        }
+    except Exception as e:
+        logger.error(f"Error getting real-time metrics: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to get real-time metrics: {str(e)}")
+
+@app.get("/api/observability/agent-live-stream/{agent_name}")
+async def get_agent_live_stream(agent_name: str, limit: int = 50):
+    """Get live stream of specific agent actions."""
+    if agent_observability is None:
+        raise HTTPException(status_code=503, detail="Observability service unavailable")
+    
+    try:
+        events = agent_observability.get_agent_live_stream(agent_name=agent_name, limit=limit)
+        return {
+            "success": True,
+            "agent_name": agent_name,
+            "events": events,
+            "total_events": len(events),
+            "timestamp": datetime.utcnow().isoformat()
+        }
+    except Exception as e:
+        logger.error(f"Error getting agent live stream: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to get agent live stream: {str(e)}")
+
+@app.get("/api/observability/mission-live-stream/{mission_id}")
+async def get_mission_live_stream(mission_id: str, limit: int = 50):
+    """Get live stream of specific mission events."""
+    if agent_observability is None:
+        raise HTTPException(status_code=503, detail="Observability service unavailable")
+    
+    try:
+        events = agent_observability.get_mission_live_stream(mission_id=mission_id, limit=limit)
+        return {
+            "success": True,
+            "mission_id": mission_id,
+            "events": events,
+            "total_events": len(events),
+            "timestamp": datetime.utcnow().isoformat()
+        }
+    except Exception as e:
+        logger.error(f"Error getting mission live stream: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to get mission live stream: {str(e)}")
+
 @app.get("/api/observability/agent-analytics")
 async def get_agent_analytics():
-    """Get comprehensive agent analytics and performance metrics."""
+    """Get comprehensive agent analytics with enhanced metrics."""
     if agent_observability is None:
-        raise HTTPException(status_code=503, detail="Agent observability service not available")
+        raise HTTPException(status_code=503, detail="Observability service unavailable")
     
     try:
         analytics = agent_observability.get_agent_analytics()
         return {
-            "status": "success",
+            "success": True,
             "analytics": analytics,
             "timestamp": datetime.utcnow().isoformat()
         }
     except Exception as e:
-        logger.error(f"❌ Failed to get agent analytics: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"Error getting agent analytics: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to get agent analytics: {str(e)}")
 
 @app.get("/api/observability/mission/{mission_id}")
 async def get_mission_observability(mission_id: str):
     """Get detailed observability data for a specific mission."""
     if agent_observability is None:
-        raise HTTPException(status_code=503, detail="Agent observability service not available")
+        raise HTTPException(status_code=503, detail="Observability service unavailable")
     
     try:
         mission_data = agent_observability.get_mission_details(mission_id)
         if not mission_data:
-            raise HTTPException(status_code=404, detail="Mission not found")
+            raise HTTPException(status_code=404, detail=f"Mission {mission_id} not found")
         
         return {
-            "status": "success",
+            "success": True,
             "mission_data": mission_data,
             "timestamp": datetime.utcnow().isoformat()
         }
+    except HTTPException:
+        raise
     except Exception as e:
-        logger.error(f"❌ Failed to get mission observability: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"Error getting mission observability: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to get mission observability: {str(e)}")
 
 @app.get("/api/observability/session/{session_id}")
 async def get_session_observability(session_id: str):
     """Get detailed observability data for a specific agent session."""
     if agent_observability is None:
-        raise HTTPException(status_code=503, detail="Agent observability service not available")
+        raise HTTPException(status_code=503, detail="Observability service unavailable")
     
     try:
         session_data = agent_observability.get_agent_session_details(session_id)
         if not session_data:
-            raise HTTPException(status_code=404, detail="Session not found")
+            raise HTTPException(status_code=404, detail=f"Session {session_id} not found")
         
         return {
-            "status": "success",
+            "success": True,
             "session_data": session_data,
             "timestamp": datetime.utcnow().isoformat()
         }
+    except HTTPException:
+        raise
     except Exception as e:
-        logger.error(f"❌ Failed to get session observability: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"Error getting session observability: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to get session observability: {str(e)}")
 
 @app.get("/api/observability/report")
 async def get_observability_report():
-    """Get comprehensive observability report."""
+    """Generate comprehensive observability report."""
     if agent_observability is None:
-        raise HTTPException(status_code=503, detail="Agent observability service not available")
+        raise HTTPException(status_code=503, detail="Observability service unavailable")
     
     try:
         report = agent_observability.generate_observability_report()
         return {
-            "status": "success",
+            "success": True,
             "report": report,
             "timestamp": datetime.utcnow().isoformat()
         }
     except Exception as e:
-        logger.error(f"❌ Failed to get observability report: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"Error generating observability report: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to generate observability report: {str(e)}")
+
+@app.post("/api/observability/export")
+async def export_observability_data(request: dict = None):
+    """Export observability data for analysis."""
+    if agent_observability is None:
+        raise HTTPException(status_code=503, detail="Observability service unavailable")
+    
+    try:
+        mission_id = request.get("mission_id") if request else None
+        export_data = agent_observability.export_observability_data(mission_id=mission_id)
+        return {
+            "success": True,
+            "export_data": export_data,
+            "timestamp": datetime.utcnow().isoformat()
+        }
+    except Exception as e:
+        logger.error(f"Error exporting observability data: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to export observability data: {str(e)}")
 
 # --- Startup and Shutdown Events ---
 @app.on_event("startup")

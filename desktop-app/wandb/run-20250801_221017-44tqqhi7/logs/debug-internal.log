@@ -1,0 +1,13 @@
+{"time":"2025-08-01T22:10:17.7079688-05:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-08-01T22:10:18.0088037-05:00","level":"INFO","msg":"stream: created new stream","id":"44tqqhi7"}
+{"time":"2025-08-01T22:10:18.0088037-05:00","level":"INFO","msg":"stream: started","id":"44tqqhi7"}
+{"time":"2025-08-01T22:10:18.0088037-05:00","level":"INFO","msg":"writer: Do: started","stream_id":"44tqqhi7"}
+{"time":"2025-08-01T22:10:18.0088037-05:00","level":"INFO","msg":"sender: started","stream_id":"44tqqhi7"}
+{"time":"2025-08-01T22:10:18.0088037-05:00","level":"INFO","msg":"handler: started","stream_id":"44tqqhi7"}
+{"time":"2025-08-01T22:10:26.9695921-05:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-08-01T22:10:27.1165824-05:00","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-08-01T22:10:27.1204978-05:00","level":"INFO","msg":"stream: closing","id":"44tqqhi7"}
+{"time":"2025-08-01T22:10:27.1204978-05:00","level":"INFO","msg":"handler: closed","stream_id":"44tqqhi7"}
+{"time":"2025-08-01T22:10:27.1204978-05:00","level":"INFO","msg":"writer: Close: closed","stream_id":"44tqqhi7"}
+{"time":"2025-08-01T22:10:27.1204978-05:00","level":"INFO","msg":"sender: closed","stream_id":"44tqqhi7"}
+{"time":"2025-08-01T22:10:27.121034-05:00","level":"INFO","msg":"stream: closed","id":"44tqqhi7"}

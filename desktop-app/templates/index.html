@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Sentinel Command Center | AI Agent Tracking & Mission Control</title>
+    <title>Sentinel Command Center | Advanced AI Agent Tracking & Mission Control</title>
     
     <!-- Fonts and icons -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
@@ -48,6 +48,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/test-missions" title="Test Missions">
+                            <i class="fas fa-vial"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/settings" title="Settings">
                             <i class="fas fa-cog"></i>
                         </a>
@@ -89,16 +94,16 @@
                             <li class="nav-item">
                                 <div class="notification-container">
                                     <a href="javascript:void(0)" class="dropdown-toggle nav-link notification-link" data-toggle="dropdown">
-                                        <div class="notification d-none d-lg-block d-xl-block"></div>
+                                    <div class="notification d-none d-lg-block d-xl-block"></div>
                                         <i class="fas fa-bell"></i>
-                                        <p class="d-lg-none">Notifications</p>
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
-                                        <li class="nav-link"><a href="#" class="nav-item dropdown-item">Settings updated</a></li>
-                                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">System optimized</a></li>
-                                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Backup completed</a></li>
-                                    </ul>
-                                </div>
+                                    <p class="d-lg-none">Notifications</p>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
+                                        <li class="nav-link"><a href="#" class="nav-item dropdown-item">Observability system active</a></li>
+                                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Agent tracking enabled</a></li>
+                                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Test mission completed</a></li>
+                                </ul>
+                                    </div>
                             </li>
                         </ul>
                     </div>
@@ -107,13 +112,13 @@
 
             <!-- Content -->
             <div class="content" x-data="sentinelApp()">
-                <!-- Top Row: Compact System Overview -->
+                <!-- Top Row: System Overview & Performance -->
                 <div class="row mb-4">
                     <div class="col-lg-6 col-md-12 mb-4">
-                        <div class="card">
+                        <div class="card status-overview-card">
                             <div class="card-header">
                                 <h4 class="card-title">System Status</h4>
-                                <p class="card-category">Service health</p>
+                                <p class="card-category">Service health & connectivity</p>
                             </div>
                             <div class="card-body">
                                 <div class="status-indicators-compact">
@@ -138,10 +143,10 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12 mb-4">
-                        <div class="card">
+                        <div class="card performance-overview-card">
                             <div class="card-header">
                                 <h4 class="card-title">AI Performance</h4>
-                                <p class="card-category">Service metrics</p>
+                                <p class="card-category">Real-time metrics</p>
                             </div>
                             <div class="card-body">
                                 <div class="performance-metrics-compact">
@@ -167,7 +172,205 @@
                     </div>
                 </div>
 
-                <!-- Middle Row: Missions & Activity -->
+                <!-- Second Row: Advanced Observability -->
+                <div class="row mb-4">
+                    <div class="col-lg-6 col-md-12 mb-4">
+                        <div class="card observability-card">
+                            <div class="card-header">
+                                <h4 class="card-title">🔍 Agent Observability</h4>
+                                <p class="card-category">Real-time agent performance tracking</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="observability-metrics">
+                                    <div class="observability-item">
+                                        <div class="observability-icon">
+                                            <i class="fas fa-brain"></i>
+                                        </div>
+                                        <div class="observability-content">
+                                            <div class="observability-label">Thinking Sessions</div>
+                                            <div class="observability-value" x-text="observabilityData.thinkingSessions || 0"></div>
+                                        </div>
+                                    </div>
+                                    <div class="observability-item">
+                                        <div class="observability-icon">
+                                            <i class="fas fa-wrench"></i>
+                                        </div>
+                                        <div class="observability-content">
+                                            <div class="observability-label">Tool Calls</div>
+                                            <div class="observability-value" x-text="observabilityData.toolCalls || 0"></div>
+                                        </div>
+                                    </div>
+                                    <div class="observability-item">
+                                        <div class="observability-icon">
+                                            <i class="fas fa-network-wired"></i>
+                                        </div>
+                                        <div class="observability-content">
+                                            <div class="observability-label">API Calls</div>
+                                            <div class="observability-value" x-text="observabilityData.apiCalls || 0"></div>
+                                        </div>
+                                    </div>
+                                    <div class="observability-item">
+                                        <div class="observability-icon">
+                                            <i class="fas fa-memory"></i>
+                                        </div>
+                                        <div class="observability-content">
+                                            <div class="observability-label">Memory Usage</div>
+                                            <div class="observability-value" x-text="(observabilityData.memoryUsage || 0) + ' MB'"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 mb-4">
+                        <div class="card test-analytics-card">
+                            <div class="card-header">
+                                <h4 class="card-title">🧪 Test Mission Analytics</h4>
+                                <p class="card-category">Comprehensive test performance metrics</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="test-analytics">
+                                    <div class="test-metric">
+                                        <div class="test-metric-icon">
+                                            <i class="fas fa-vial"></i>
+                                        </div>
+                                        <div class="test-metric-content">
+                                            <div class="test-metric-label">Tests Run</div>
+                                            <div class="test-metric-value" x-text="testAnalytics.totalTests || 0"></div>
+                                        </div>
+                                    </div>
+                                    <div class="test-metric">
+                                        <div class="test-metric-icon">
+                                            <i class="fas fa-check-circle"></i>
+                                        </div>
+                                        <div class="test-metric-content">
+                                            <div class="test-metric-label">Success Rate</div>
+                                            <div class="test-metric-value" x-text="(testAnalytics.successRate || 0) + '%'"></div>
+                                        </div>
+                                    </div>
+                                    <div class="test-metric">
+                                        <div class="test-metric-icon">
+                                            <i class="fas fa-clock"></i>
+                                        </div>
+                                        <div class="test-metric-content">
+                                            <div class="test-metric-label">Avg Duration</div>
+                                            <div class="test-metric-value" x-text="formatDuration(testAnalytics.avgDuration || 0)"></div>
+                                        </div>
+                                    </div>
+                                    <div class="test-metric">
+                                        <div class="test-metric-icon">
+                                            <i class="fas fa-chart-line"></i>
+                                        </div>
+                                        <div class="test-metric-content">
+                                            <div class="test-metric-label">Performance</div>
+                                            <div class="test-metric-value" x-text="(testAnalytics.performance || 0) + '%'"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Third Row: Cutting-Edge Live Stream Feed -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card live-stream-card">
+                            <div class="card-header">
+                                <h4 class="card-title">🚀 Live Agent Stream</h4>
+                                <p class="card-category">Real-time tracking of every agent move</p>
+                                <div class="live-stream-controls">
+                                    <button class="btn btn-sm btn-outline-primary" @click="refreshLiveStream()">
+                                        <i class="fas fa-sync-alt"></i> Refresh
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-success" @click="toggleAutoRefresh()">
+                                        <i class="fas fa-play" x-show="!autoRefresh"></i>
+                                        <i class="fas fa-pause" x-show="autoRefresh"></i>
+                                        <span x-text="autoRefresh ? 'Pause' : 'Auto'"></span>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-warning" @click="openEventModal({event_id: 'test', event_type: 'test', timestamp: new Date(), severity: 'info', event_data: {test: 'data'}})">
+                                        <i class="fas fa-vial"></i> Test Modal
+                                    </button>
+                                    <select class="form-control form-control-sm" x-model="selectedEventType" @change="filterLiveStream()">
+                                        <option value="">All Events</option>
+                                        <option value="agent_action">Agent Actions</option>
+                                        <option value="mission_start">Mission Start</option>
+                                        <option value="mission_complete">Mission Complete</option>
+                                        <option value="session_start">Session Start</option>
+                                        <option value="session_complete">Session Complete</option>
+                                        <option value="system_error">System Errors</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="live-stream-container">
+                                    <div class="live-stream-stats">
+                                        <div class="stat-item">
+                                            <span class="stat-label">Total Events:</span>
+                                            <span class="stat-value" x-text="liveStreamStats.totalEvents"></span>
+                                        </div>
+                                        <div class="stat-item">
+                                            <span class="stat-label">Active Agents:</span>
+                                            <span class="stat-value" x-text="liveStreamStats.activeAgents"></span>
+                                        </div>
+                                        <div class="stat-item">
+                                            <span class="stat-label">Success Rate:</span>
+                                            <span class="stat-value" x-text="liveStreamStats.successRate + '%'"></span>
+                                        </div>
+                                        <div class="stat-item">
+                                            <span class="stat-label">Last Update:</span>
+                                            <span class="stat-value" x-text="liveStreamStats.lastUpdate"></span>
+                                        </div>
+                                    </div>
+                                    <div class="live-stream-feed" id="liveStreamFeed">
+                                        <template x-for="event in liveStreamEvents" :key="event.event_id">
+                                            <div class="stream-event" :class="'event-' + event.severity" 
+                                                 @click="openEventModal(event)"
+                                                 @mouseenter="console.log('Mouse over event:', event)"
+                                                 style="cursor: pointer;">
+                                                <div class="event-header">
+                                                    <div class="event-type">
+                                                        <i class="fas" :class="getEventIcon(event.event_type)"></i>
+                                                        <span x-text="formatEventType(event.event_type)"></span>
+                                                    </div>
+                                                    <div class="event-timestamp" x-text="formatTimestamp(event.timestamp)"></div>
+                                                    <div class="event-severity" :class="'severity-' + event.severity" x-text="event.severity.toUpperCase()"></div>
+                                                </div>
+                                                <div class="event-content">
+                                                    <div class="event-agent" x-show="event.agent_name">
+                                                        <strong>Agent:</strong> <span x-text="event.agent_name"></span>
+                                                    </div>
+                                                    <div class="event-mission" x-show="event.mission_id">
+                                                        <strong>Mission:</strong> <span x-text="event.mission_id"></span>
+                                                    </div>
+                                                    <div class="event-details" x-show="event.event_data">
+                                                        <template x-for="(value, key) in event.event_data" :key="key">
+                                                            <div class="event-detail">
+                                                                <strong x-text="formatDetailKey(key) + ':'"></strong>
+                                                                <span x-text="formatDetailValue(value)"></span>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                    <div class="event-tags" x-show="event.tags && event.tags.length">
+                                                        <template x-for="tag in event.tags" :key="tag">
+                                                            <span class="event-tag" x-text="tag"></span>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                        <div class="no-events" x-show="liveStreamEvents.length === 0">
+                                            <i class="fas fa-info-circle"></i>
+                                            <p>No live stream events available. Start a mission to see real-time agent tracking.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Third Row: Missions & Activity -->
                 <div class="row mb-4">
                     <div class="col-lg-8 col-md-12 mb-4">
                         <div class="card active-missions-container">
@@ -182,10 +385,10 @@
                                             <i class="fas fa-cog"></i>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-navbar">
-                                            <a class="dropdown-item" href="javascript:void(0)">Refresh</a>
-                                            <a class="dropdown-item" href="javascript:void(0)">Settings</a>
+                                            <a class="dropdown-item" href="javascript:void(0)" @click="refreshMissions()">Refresh</a>
+                                            <a class="dropdown-item" href="javascript:void(0)" @click="exportMissionData()">Export</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="javascript:void(0)">Clear All</a>
+                                            <a class="dropdown-item" href="javascript:void(0)" @click="clearCompletedMissions()">Clear Completed</a>
                                         </div>
                                     </div>
                                 </div>
@@ -237,13 +440,13 @@
                                                     </td>
                                                     <td>
                                                         <div class="btn-group" role="group">
-                                                            <button type="button" class="btn btn-sm btn-outline-primary">
+                                                            <button type="button" class="btn btn-sm btn-outline-primary" @click="viewMissionDetails(mission.id)">
                                                                 <i class="fas fa-eye"></i>
                                                             </button>
-                                                            <button type="button" class="btn btn-sm btn-outline-warning">
+                                                            <button type="button" class="btn btn-sm btn-outline-warning" @click="pauseMission(mission.id)">
                                                                 <i class="fas fa-pause"></i>
                                                             </button>
-                                                            <button type="button" class="btn btn-sm btn-outline-danger">
+                                                            <button type="button" class="btn btn-sm btn-outline-danger" @click="cancelMission(mission.id)">
                                                                 <i class="fas fa-stop"></i>
                                                             </button>
                                                         </div>
@@ -282,12 +485,12 @@
                 </div>
 
                 <!-- System Logs Row -->
-                <div class="row">
+                <div class="row system-logs-row">
                     <div class="col-12">
-                        <div class="card">
+                        <div class="card system-logs-container">
                             <div class="card-header">
                                 <h4 class="card-title">System Logs</h4>
-                                <p class="card-category">Real-time monitoring</p>
+                                <p class="card-category">Real-time monitoring & observability</p>
                             </div>
                             <div class="card-body">
                                 <div class="log-container">
@@ -305,10 +508,102 @@
             <footer class="footer">
                 <div class="container-fluid">
                     <div class="copyright">
-                        © 2024 Sentinel Command Center. All rights reserved.
+                        © 2024 Sentinel Command Center. Advanced AI Agent Tracking & Mission Control.
                     </div>
                 </div>
             </footer>
+        </div>
+    </div>
+
+    <!-- Event Detail Modal -->
+    <div class="event-modal" id="eventModal" x-show="showEventModal" x-transition>
+        <div class="event-modal-content">
+            <div class="event-modal-header">
+                <h3 class="event-modal-title" x-text="selectedEvent ? formatEventType(selectedEvent.event_type) : 'Event Details'"></h3>
+                <button class="event-modal-close" @click="closeEventModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="event-modal-body" x-show="selectedEvent">
+                <div class="event-modal-section">
+                    <div class="event-modal-section-title">Event Information</div>
+                    <div class="event-modal-details">
+                        <div class="event-modal-detail-row">
+                            <div class="event-modal-detail-label">Event ID</div>
+                            <div class="event-modal-detail-value" x-text="selectedEvent?.event_id"></div>
+                        </div>
+                        <div class="event-modal-detail-row">
+                            <div class="event-modal-detail-label">Event Type</div>
+                            <div class="event-modal-detail-value" x-text="formatEventType(selectedEvent?.event_type)"></div>
+                        </div>
+                        <div class="event-modal-detail-row">
+                            <div class="event-modal-detail-label">Timestamp</div>
+                            <div class="event-modal-detail-value" x-text="formatTimestamp(selectedEvent?.timestamp)"></div>
+                        </div>
+                        <div class="event-modal-detail-row">
+                            <div class="event-modal-detail-label">Severity</div>
+                            <div class="event-modal-detail-value" x-text="selectedEvent?.severity?.toUpperCase()"></div>
+                        </div>
+                        <div class="event-modal-detail-row" x-show="selectedEvent?.agent_name">
+                            <div class="event-modal-detail-label">Agent</div>
+                            <div class="event-modal-detail-value" x-text="selectedEvent?.agent_name"></div>
+                        </div>
+                        <div class="event-modal-detail-row" x-show="selectedEvent?.mission_id">
+                            <div class="event-modal-detail-label">Mission ID</div>
+                            <div class="event-modal-detail-value" x-text="selectedEvent?.mission_id"></div>
+                        </div>
+                        <div class="event-modal-detail-row" x-show="selectedEvent?.session_id">
+                            <div class="event-modal-detail-label">Session ID</div>
+                            <div class="event-modal-detail-value" x-text="selectedEvent?.session_id"></div>
+                        </div>
+                        <div class="event-modal-detail-row" x-show="selectedEvent?.action_id">
+                            <div class="event-modal-detail-label">Action ID</div>
+                            <div class="event-modal-detail-value" x-text="selectedEvent?.action_id"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="event-modal-section" x-show="selectedEvent?.event_data && Object.keys(selectedEvent.event_data).length > 0">
+                    <div class="event-modal-section-title">Event Data</div>
+                    <div class="event-modal-details">
+                        <template x-for="(value, key) in selectedEvent?.event_data" :key="key">
+                            <div class="event-modal-detail-row">
+                                <div class="event-modal-detail-label" x-text="formatDetailKey(key)"></div>
+                                <div class="event-modal-detail-value">
+                                    <span x-show="typeof value !== 'object'" x-text="formatDetailValue(value)"></span>
+                                    <div x-show="typeof value === 'object'" class="event-modal-json" x-text="JSON.stringify(value, null, 2)"></div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+                
+                <div class="event-modal-section" x-show="selectedEvent?.tags && selectedEvent.tags.length > 0">
+                    <div class="event-modal-section-title">Tags</div>
+                    <div class="event-modal-details">
+                        <div class="event-tags">
+                            <template x-for="tag in selectedEvent?.tags" :key="tag">
+                                <span class="event-tag" x-text="tag"></span>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="event-modal-section" x-show="selectedEvent?.metadata && Object.keys(selectedEvent.metadata).length > 0">
+                    <div class="event-modal-section-title">Metadata</div>
+                    <div class="event-modal-details">
+                        <template x-for="(value, key) in selectedEvent?.metadata" :key="key">
+                            <div class="event-modal-detail-row">
+                                <div class="event-modal-detail-label" x-text="formatDetailKey(key)"></div>
+                                <div class="event-modal-detail-value">
+                                    <span x-show="typeof value !== 'object'" x-text="formatDetailValue(value)"></span>
+                                    <div x-show="typeof value === 'object'" class="event-modal-json" x-text="JSON.stringify(value, null, 2)"></div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

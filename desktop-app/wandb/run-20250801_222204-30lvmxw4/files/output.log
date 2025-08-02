@@ -1,0 +1,104 @@
+[32m2025-08-01 22:22:06.754[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m1178[0m - [1m🚀 Sentinel Cognitive Forge v5.0 starting up...[0m
+[32m2025-08-01 22:22:06.757[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m1179[0m - [1m📡 Real-time log streaming initialized[0m
+[32m2025-08-01 22:22:06.758[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m1180[0m - [1m🔗 SSE endpoint available at /api/events/stream[0m
+[32m2025-08-01 22:22:06.758[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m1181[0m - [1m🧠 Hybrid Decision Engine active[0m
+[32m2025-08-01 22:22:06.759[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m1182[0m - [1m💾 Database system ready[0m
+[32m2025-08-01 22:22:06.798[0m | [32m[1mSUCCESS [0m | [36msrc.utils.sentry_integration[0m:[36m_initialize_sentry[0m:[36m78[0m - [32m[1mSentry integration initialized successfully[0m
+[32m2025-08-01 22:22:06.799[0m | [32m[1mSUCCESS [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m1187[0m - [32m[1m✅ Sentry integration initialized[0m
+[32m2025-08-01 22:22:58.660[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /test-missions | Client: 127.0.0.1[0m
+[32m2025-08-01 22:22:58.663[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /test-missions | Time: 0.003s[0m
+[32m2025-08-01 22:22:58.709[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /static/css/sentinel-dash.css | Client: 127.0.0.1[0m
+[32m2025-08-01 22:22:58.717[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /static/css/sentinel-dash.css | Time: 0.008s[0m
+[32m2025-08-01 22:22:59.058[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/test-missions | Client: 127.0.0.1[0m
+[32m2025-08-01 22:22:59.064[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/test-missions/executions | Client: 127.0.0.1[0m
+[32m2025-08-01 22:22:59.066[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/agent-analytics | Client: 127.0.0.1[0m
+[32m2025-08-01 22:22:59.072[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/test-missions | Time: 0.014s[0m
+[32m2025-08-01 22:22:59.077[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/test-missions/executions | Time: 0.013s[0m
+[32m2025-08-01 22:22:59.079[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/agent-analytics | Time: 0.013s[0m
+[32m2025-08-01 22:22:59.089[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:22:59.095[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.006s[0m
+[32m2025-08-01 22:23:01.133[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:01.138[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.005s[0m
+[32m2025-08-01 22:23:02.373[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 POST /api/test-missions/test_mission_0745cb89/run | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:02.379[0m | [31m[1mERROR   [0m | [36msrc.utils.agent_observability[0m:[36mlog_error[0m:[36m733[0m - [31m[1mError in mission exec_2438423f: module 'weave' has no attribute 'span' | Context: {'context': 'mission_execution'}[0m
+[32m2025-08-01 22:23:02.452[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_process_stream_event[0m:[36m290[0m - [33m[1mWeave logging failed: module 'weave' has no attribute 'ops'[0m
+[32m2025-08-01 22:23:03.040[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mrun_test_mission[0m:[36m956[0m - [31m[1mError running test mission: Object of type deque is not JSON serializable[0m
+[32m2025-08-01 22:23:03.041[0m | [33m[1mWARNING [0m | [36msrc.utils.agent_observability[0m:[36m_process_stream_event[0m:[36m290[0m - [33m[1mWeave logging failed: module 'weave' has no attribute 'ops'[0m
+[32m2025-08-01 22:23:03.084[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 500 for POST /api/test-missions/test_mission_0745cb89/run | Time: 0.711s[0m
+[32m2025-08-01 22:23:03.133[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:03.135[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.002s[0m
+[32m2025-08-01 22:23:05.133[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:05.135[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.002s[0m
+[32m2025-08-01 22:23:07.141[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:07.143[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.002s[0m
+[32m2025-08-01 22:23:09.133[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:09.135[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.002s[0m
+[32m2025-08-01 22:23:11.138[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:11.141[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.003s[0m
+[32m2025-08-01 22:23:13.138[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:13.140[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.002s[0m
+[32m2025-08-01 22:23:15.132[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:15.135[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.002s[0m
+[32m2025-08-01 22:23:17.133[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:17.135[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.002s[0m
+[32m2025-08-01 22:23:19.140[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:19.142[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.002s[0m
+[32m2025-08-01 22:23:21.143[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:21.145[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.003s[0m
+[32m2025-08-01 22:23:23.132[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:23.134[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.002s[0m
+[32m2025-08-01 22:23:25.136[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:25.139[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.003s[0m
+[32m2025-08-01 22:23:27.134[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:27.137[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.003s[0m
+[32m2025-08-01 22:23:27.531[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET / | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:27.538[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET / | Time: 0.007s[0m
+[32m2025-08-01 22:23:27.613[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /static/js/main.js | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:27.620[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /static/js/main.js | Time: 0.008s[0m
+[32m2025-08-01 22:23:27.951[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /missions | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:27.962[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /health | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:27.973[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /health | Time: 0.011s[0m
+[32m2025-08-01 22:23:27.981[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /missions | Time: 0.032s[0m
+[32m2025-08-01 22:23:27.992[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/agent-analytics | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:28.002[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/agent-analytics | Time: 0.010s[0m
+[32m2025-08-01 22:23:28.029[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/test-missions/analysis | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:28.044[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:28.051[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/test-missions/analysis | Time: 0.022s[0m
+[32m2025-08-01 22:23:28.058[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.014s[0m
+[32m2025-08-01 22:23:28.080[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/events/stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:28.088[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/events/stream | Time: 0.008s[0m
+[32m2025-08-01 22:23:30.099[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:30.104[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.006s[0m
+[32m2025-08-01 22:23:32.102[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:32.110[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.008s[0m
+[32m2025-08-01 22:23:32.955[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /health | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:32.963[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:32.969[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.008s[0m
+[32m2025-08-01 22:23:32.974[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /health | Time: 0.019s[0m
+[32m2025-08-01 22:23:34.101[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:34.105[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.004s[0m
+[32m2025-08-01 22:23:36.100[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:36.104[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.004s[0m
+[32m2025-08-01 22:23:37.263[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /ai-agents | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:37.269[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /ai-agents | Time: 0.006s[0m
+[32m2025-08-01 22:23:37.644[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:37.651[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.007s[0m
+[32m2025-08-01 22:23:39.698[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:39.701[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.002s[0m
+[32m2025-08-01 22:23:41.695[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:41.700[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.005s[0m
+[32m2025-08-01 22:23:43.698[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:43.702[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.004s[0m
+[32m2025-08-01 22:23:45.706[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:45.711[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.004s[0m
+[32m2025-08-01 22:23:47.696[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:47.698[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.002s[0m
+[32m2025-08-01 22:23:49.697[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:49.700[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.002s[0m
+[32m2025-08-01 22:23:51.697[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:51.699[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.003s[0m
+[32m2025-08-01 22:23:53.703[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1203[0m - [1m🌐 GET /api/observability/live-stream | Client: 127.0.0.1[0m
+[32m2025-08-01 22:23:53.707[0m | [1mINFO    [0m | [36msrc.main[0m:[36mlog_requests[0m:[36m1209[0m - [1m📊 Response 200 for GET /api/observability/live-stream | Time: 0.004s[0m
+[32m2025-08-01 22:24:37.695[0m | [1mINFO    [0m | [36msrc.main[0m:[36mshutdown_event[0m:[36m1192[0m - [1m🛑 Shutting down Sentinel Cognitive Forge v5.0[0m
+[32m2025-08-01 22:24:37.697[0m | [1mINFO    [0m | [36msrc.main[0m:[36mshutdown_event[0m:[36m1193[0m - [1m💾 Saving final state...[0m
+[32m2025-08-01 22:24:37.697[0m | [1mINFO    [0m | [36msrc.main[0m:[36mshutdown_event[0m:[36m1194[0m - [1m✅ Shutdown complete[0m

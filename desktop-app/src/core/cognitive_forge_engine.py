@@ -13,6 +13,10 @@ from datetime import datetime
 from typing import Dict, Any, List, Optional, Callable
 from enum import Enum
 from crewai import Task, Crew, Process
+
+# Fix LangChain deprecation warning by using pydantic.v1 compatibility namespace
+from pydantic.v1 import BaseModel
+
 from ..utils.google_ai_wrapper import create_google_ai_llm, direct_inference, google_ai_wrapper
 from loguru import logger
 from dotenv import load_dotenv

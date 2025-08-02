@@ -1,0 +1,12 @@
+[36m[1mweave[0m: Error patching - some logs may not be captured
+[36m[1mweave[0m: Traceback (most recent call last):
+[36m[1mweave[0m:   File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\weave\integrations\patcher.py", line 36, in attempt_patch
+[36m[1mweave[0m:     all_successful = all_successful and patcher.attempt_patch()
+[36m[1mweave[0m:                                         ^^^^^^^^^^^^^^^^^^^^^^^
+[36m[1mweave[0m:   File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\weave\integrations\patcher.py", line 98, in attempt_patch
+[36m[1mweave[0m:     original_value = getattr(target.base_symbol, target.attr)
+[36m[1mweave[0m:                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[36m[1mweave[0m: AttributeError: type object 'Models' has no attribute 'generate_images'
+[36m[1mweave[0m: Logged in as Weights & Biases user: elliotttmiller.
+[36m[1mweave[0m: View Weave data at https://wandb.ai/elliotttmiller-north-hennepin-community-college/cognitive-forge-v5/weave
+[34m[1mwandb[0m: Finishing previous runs because reinit is set to True.
