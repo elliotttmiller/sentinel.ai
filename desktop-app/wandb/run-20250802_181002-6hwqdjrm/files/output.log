@@ -1,0 +1,239 @@
+[32m2025-08-02 18:10:03.188[0m | [32m[1mSUCCESS [0m | [36mutils.agent_observability[0m:[36m_initialize_integrations[0m:[36m109[0m - [32m[1m✅ W&B initialized for agent analytics.[0m
+[32mINFO[0m:     Started server process [[36m10628[0m]
+[32mINFO[0m:     Waiting for application startup.
+[32m2025-08-02 18:10:03.193[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m160[0m - [1m🚀 Sentinel Cognitive Forge v5.2 starting up...[0m
+[32mINFO[0m:     Application startup complete.
+[32mINFO[0m:     127.0.0.1:64355 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64356 - "[1mGET /js/unified-realtime.js HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:64356 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64392 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64392 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64429 - "[1mGET /test-missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64429 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64429 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64429 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64431 - "[1mGET /ai-agents HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64431 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64431 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64431 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64435 - "[1mGET /missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64435 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64435 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64435 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64782 - "[1mGET /missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64782 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64782 - "[1mGET /js/unified-realtime.js HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:64782 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64782 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64782 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64784 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64784 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64784 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64784 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64788 - "[1mGET /missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64788 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:64788 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64788 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64788 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64814 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64814 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64814 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64929 - "[1mGET /missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64929 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:64929 - "[1mGET /js/unified-realtime.js HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:64929 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64929 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64929 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64931 - "[1mGET /ai-agents HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64931 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64931 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64931 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64934 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64934 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64934 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64934 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64945 - "[1mGET /test-missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64945 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64945 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64945 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64952 - "[1mGET /settings HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64952 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64952 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64952 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64980 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64980 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64980 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64980 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64980 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64984 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64984 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:64984 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64984 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64984 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64986 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64986 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:64986 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64986 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:64986 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65022 - "[1mGET /ai-agents HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65022 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:65022 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65022 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65022 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65038 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65038 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:65038 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65038 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65038 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65044 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65044 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:65044 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65044 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65044 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65077 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65077 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65077 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65077 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65106 - "[1mGET /missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65106 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:65106 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65106 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65106 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65109 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65109 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65109 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65109 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65125 - "[1mGET /missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65125 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65125 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65125 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65127 - "[1mGET /js/unified-realtime.js HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65127 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65127 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65127 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65136 - "[1mGET /ai-agents HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65136 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65136 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65136 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65154 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:65155 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65155 - "[1mGET /js/unified-realtime.js HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:65155 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65154 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65154 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65340 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65340 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65340 - "[1mGET /js/unified-realtime.js HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65340 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65342 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65342 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65504 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65504 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65504 - "[1mGET /js/unified-realtime.js HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:65504 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65506 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:65506 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49213 - "[1mGET /missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49213 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:49213 - "[1mGET /js/unified-realtime.js HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:49213 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49213 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49213 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49215 - "[1mGET /ai-agents HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49215 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49215 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49215 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49218 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49218 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49219 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49219 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49230 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49230 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49230 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49230 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49233 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49233 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49233 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49233 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49233 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49237 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:49237 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49237 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49237 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49239 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:49239 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49239 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49239 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49256 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49256 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:49256 - "[1mGET /js/unified-realtime.js HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:49256 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49256 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49256 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49258 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49258 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:49258 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49258 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49258 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49294 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49294 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49294 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49294 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49412 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49412 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49412 - "[1mGET /js/unified-realtime.js HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49412 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49412 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49412 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49509 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49509 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49509 - "[1mGET /js/unified-realtime.js HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:49509 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49511 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49511 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49585 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49585 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49585 - "[1mGET /js/unified-realtime.js HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:49585 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49587 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49587 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49671 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49671 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49671 - "[1mGET /js/unified-realtime.js HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:49671 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49674 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:49674 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50131 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50131 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50131 - "[1mGET /js/unified-realtime.js HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:50131 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50133 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50133 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50451 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50451 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50451 - "[1mGET /js/unified-realtime.js HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:50451 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50453 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50453 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50527 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50527 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50527 - "[1mGET /js/unified-realtime.js HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:50527 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50531 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50527 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50709 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50709 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50709 - "[1mGET /js/unified-realtime.js HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:50709 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50713 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50713 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50729 - "[1mGET /test-missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50729 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:50729 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50729 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50729 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50732 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50732 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:50732 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50733 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:50733 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m

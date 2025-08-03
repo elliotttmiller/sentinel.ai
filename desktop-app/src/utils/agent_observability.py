@@ -134,7 +134,7 @@ class CuttingEdgeAgentObservabilityManager:
     # For example:
     def log_agent_action(self, agent_name: str, action_type: str, message: str, payload: dict):
         self.push_event(LiveStreamEvent(
-            event_type="agent_action",
+                    event_type="agent_action",
             source=agent_name,
             severity="INFO",
             message=message,

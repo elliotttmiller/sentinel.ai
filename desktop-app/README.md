@@ -1,28 +1,37 @@
-# 🚀 Sentinel Cognitive Forge v5.1
+# 🚀 Sentinel Cognitive Forge v5.2
 
-**State-of-the-art AI-powered mission execution system with enhanced observability, hybrid decision engine, and comprehensive agent tracking**
+**Advanced AI-powered mission execution system with Unified Event Bus, real-time UI/UX, and comprehensive agent tracking**
 
 ## 🎯 Overview
 
-Cognitive Forge v5.1 is a complete system upgrade that transforms your AI application into a production-ready, intelligent platform with unprecedented observability:
+Cognitive Forge v5.2 represents a complete system transformation with a **Unified Event Bus** architecture, enhanced real-time UI/UX, and comprehensive agent observability:
 
-- **🧠 Hybrid Decision Engine** - Intelligent routing between fast Golden Path and comprehensive Full Workflow
-- **📊 Enhanced Observability** - Real-time agent tracking with detailed action monitoring
+- **🌐 Unified Event Bus** - Centralized real-time data streaming across all system components
+- **🎨 Enhanced UI/UX** - Professional dashboard with sleek scrollbars and responsive design
+- **📊 Real-Time Observability** - Live agent tracking with detailed action monitoring
 - **🔮 Predictive Caching** - Intelligent result caching for improved performance
 - **📈 Machine Learning Integration** - Self-improving system that learns from execution patterns
-- **🌐 Real-Time Observability** - Live log streaming and comprehensive system monitoring
 - **🤖 Multi-Agent Tracking** - Detailed monitoring of every AI agent action and decision
+- **🎯 Scrollbar Implementation** - Sleek, hover-activated scrollbars across all modals and containers
 
 ## ✨ Key Features
 
-### 🧠 Hybrid Intelligence
-- **Task Complexity Analysis** - Multi-factor analysis of prompt complexity
-- **Performance Prediction** - ML-based execution time estimation
-- **User Preference Learning** - Adaptive system behavior based on user satisfaction
-- **Automatic Path Selection** - Intelligent routing between Golden Path and Full Workflow
+### 🌐 Unified Event Bus Architecture
+- **Centralized Data Streaming** - Single `/api/events/stream` endpoint for all real-time data
+- **Server-Sent Events (SSE)** - Efficient real-time updates without polling
+- **Event Dispatcher** - Intelligent routing of events to appropriate UI components
+- **Fallback Systems** - Robust error handling and graceful degradation
+- **Performance Optimization** - Reduced server load and improved responsiveness
 
-### 📊 Enhanced Observability
-- **Real-Time Agent Tracking** - Monitor every AI agent action in detail
+### 🎨 Enhanced UI/UX
+- **Professional Dashboard** - Black Dashboard theme with blue accent colors
+- **Sleek Scrollbars** - Always-visible, hover-activated scrollbars across all containers
+- **Responsive Design** - Mobile and tablet optimized layouts
+- **Real-Time Updates** - Live data streaming to all dashboard components
+- **Interactive Components** - Smooth transitions and hover effects
+
+### 📊 Real-Time Observability
+- **Live Agent Tracking** - Monitor every AI agent action in real-time
 - **Action-Level Monitoring** - Track thinking, tool calls, decisions, and responses
 - **Performance Metrics** - CPU, memory, execution time, and token usage
 - **Decision Analytics** - Complete visibility into routing decisions
@@ -45,12 +54,17 @@ Cognitive Forge v5.1 is a complete system upgrade that transforms your AI applic
 ### Core Components
 
 ```
-Cognitive Forge v5.1
-├── 🧠 Hybrid Decision Engine
-│   ├── Task Complexity Analyzer
-│   ├── Performance Learning System
-│   ├── Predictive Cache
-│   └── Advanced Analytics
+Cognitive Forge v5.2
+├── 🌐 Unified Event Bus
+│   ├── Central Event Stream
+│   ├── Event Dispatcher
+│   ├── SSE Endpoints
+│   └── Fallback Systems
+├── 🎨 Enhanced UI/UX
+│   ├── Professional Dashboard
+│   ├── Sleek Scrollbars
+│   ├── Responsive Design
+│   └── Real-Time Updates
 ├── 🔧 Cognitive Forge Engine
 │   ├── Golden Path (Fast Execution)
 │   ├── Full Workflow (8-Phase Comprehensive)
@@ -118,6 +132,16 @@ pip install -r requirements.txt
 Create a `.env` file with your configuration:
 
 ```env
+# Unified Event Bus Configuration
+ENABLE_UNIFIED_EVENT_BUS=true
+EVENT_STREAM_ENABLED=true
+SSE_KEEPALIVE_INTERVAL=30
+
+# UI/UX Configuration
+ENABLE_ENHANCED_UI=true
+SCROLLBAR_VISIBILITY=always
+RESPONSIVE_DESIGN=true
+
 # Hybrid System Configuration
 ENABLE_HYBRID_MODE=true
 AUTO_SWITCHING=true
@@ -167,6 +191,7 @@ uvicorn src.main:app --host 0.0.0.0 --port 8001 --reload
 - **API Documentation**: http://localhost:8001/docs
 - **Health Check**: http://localhost:8001/health
 - **Observability Dashboard**: http://localhost:8001/api/observability/agent-analytics
+- **Event Stream**: http://localhost:8001/api/events/stream
 
 ## 📊 API Endpoints
 
@@ -174,6 +199,11 @@ uvicorn src.main:app --host 0.0.0.0 --port 8001 --reload
 - `POST /api/missions` - Create new mission with hybrid routing
 - `GET /missions` - List all missions with metadata
 - `GET /api/missions/{id}/updates` - Get real-time mission updates
+
+### Unified Event Bus
+- `GET /api/events/stream` - Server-Sent Events for live updates
+- `GET /api/observability/live-stream` - Live observability stream
+- `GET /api/system/logs/stream` - Real-time system logs
 
 ### Enhanced Observability
 - `GET /api/observability/agent-analytics` - Comprehensive agent performance metrics
@@ -193,6 +223,26 @@ uvicorn src.main:app --host 0.0.0.0 --port 8001 --reload
 ### System Monitoring
 - `GET /health` - Health check
 - `GET /api/system/stats` - Comprehensive system statistics
+
+## 🎨 UI/UX Enhancements
+
+### Professional Dashboard
+- **Black Dashboard Theme** - Professional dark theme with blue accents
+- **Responsive Layout** - Mobile and tablet optimized
+- **Interactive Components** - Smooth transitions and hover effects
+- **Real-Time Updates** - Live data streaming to all components
+
+### Sleek Scrollbars
+- **Always Visible** - Scrollbars are always visible for better UX
+- **Hover Activation** - Enhanced hover effects for better interaction
+- **Cross-Browser Support** - Works on Chrome, Firefox, Safari, and Edge
+- **Custom Styling** - Professional appearance with subtle backgrounds
+
+### Container Modals
+- **Active Missions Modal** - Real-time mission tracking with scrollbars
+- **Agent Activity Modal** - Live agent activity with compact design
+- **System Logs Modal** - Real-time log streaming with syntax highlighting
+- **Live Stream Feed** - Comprehensive event streaming with scrollbars
 
 ## 🧠 Hybrid Decision Engine
 
@@ -283,6 +333,8 @@ curl http://localhost:8001/api/observability/session/session_456
 - **Zero database errors** with proper schema
 - **Real-time observability** for debugging
 - **Complete agent visibility** for optimization
+- **Enhanced UI/UX** with professional scrollbars
+- **Unified Event Bus** for efficient data streaming
 
 ### Monitoring
 
@@ -305,6 +357,12 @@ curl http://localhost:8001/api/observability/report
 
 | Variable | Description | Default |
 |----------|-------------|---------|
+| `ENABLE_UNIFIED_EVENT_BUS` | Enable unified event bus | `true` |
+| `EVENT_STREAM_ENABLED` | Enable event streaming | `true` |
+| `SSE_KEEPALIVE_INTERVAL` | SSE keepalive interval (seconds) | `30` |
+| `ENABLE_ENHANCED_UI` | Enable enhanced UI features | `true` |
+| `SCROLLBAR_VISIBILITY` | Scrollbar visibility mode | `always` |
+| `RESPONSIVE_DESIGN` | Enable responsive design | `true` |
 | `ENABLE_HYBRID_MODE` | Enable hybrid decision engine | `true` |
 | `HYBRID_SWITCH_THRESHOLD` | Complexity threshold for path selection | `0.4` |
 | `ENABLE_ML_PREDICTION` | Enable ML-based performance prediction | `true` |
@@ -317,6 +375,18 @@ curl http://localhost:8001/api/observability/report
 ### Advanced Settings
 
 ```env
+# Unified Event Bus Configuration
+ENABLE_UNIFIED_EVENT_BUS=true
+EVENT_STREAM_ENABLED=true
+SSE_KEEPALIVE_INTERVAL=30
+EVENT_BUFFER_SIZE=1000
+
+# UI/UX Configuration
+ENABLE_ENHANCED_UI=true
+SCROLLBAR_VISIBILITY=always
+RESPONSIVE_DESIGN=true
+HOVER_EFFECTS=true
+
 # Machine Learning Configuration
 ENABLE_ML_PREDICTION=true
 ML_MODEL_UPDATE_INTERVAL=3600
@@ -358,9 +428,15 @@ desktop-app/
 ├── config/
 │   └── settings.py
 ├── static/
+│   ├── css/
+│   │   └── sentinel-dash.css
+│   └── js/
+│       └── unified-realtime.js
+├── templates/
 │   └── index.html
 ├── logs/
 ├── db/
+├── tests/
 ├── pyproject.toml
 └── start_cognitive_forge.py
 ```
@@ -368,12 +444,8 @@ desktop-app/
 ### Testing
 
 ```bash
-# Test hybrid system
-python -c "
-from src.core.hybrid_decision_engine import hybrid_decision_engine
-result = hybrid_decision_engine.make_hybrid_decision('Hello world')
-print(f'Decision: {result}')
-"
+# Test unified event bus
+curl http://localhost:8001/api/events/stream
 
 # Test mission creation
 curl -X POST http://localhost:8001/api/missions \
@@ -405,7 +477,25 @@ curl http://localhost:8001/api/observability/agent-analytics
    python start_cognitive_forge.py
    ```
 
-3. **Hybrid Engine Not Working**
+3. **Event Bus Issues**
+   ```bash
+   # Check event stream
+   curl http://localhost:8001/api/events/stream
+   
+   # Test SSE connection
+   curl -N http://localhost:8001/api/events/stream
+   ```
+
+4. **UI/UX Issues**
+   ```bash
+   # Check static files
+   curl http://localhost:8001/static/css/sentinel-dash.css
+   
+   # Test JavaScript
+   curl http://localhost:8001/static/js/unified-realtime.js
+   ```
+
+5. **Hybrid Engine Not Working**
    ```bash
    # Check configuration
    curl http://localhost:8001/api/hybrid/status
@@ -416,7 +506,7 @@ curl http://localhost:8001/api/observability/agent-analytics
      -d '{"prompt": "test", "title": "Test"}'
    ```
 
-4. **Observability Issues**
+6. **Observability Issues**
    ```bash
    # Check observability endpoints
    curl http://localhost:8001/api/observability/agent-analytics
@@ -454,6 +544,9 @@ Set production environment variables:
 
 ```env
 # Production Settings
+ENABLE_UNIFIED_EVENT_BUS=true
+EVENT_STREAM_ENABLED=true
+ENABLE_ENHANCED_UI=true
 ENABLE_HYBRID_MODE=true
 ENABLE_ML_PREDICTION=true
 ENABLE_PREDICTIVE_CACHING=true
@@ -468,6 +561,7 @@ ALLOWED_SHELL_COMMANDS=ls,dir,pwd,echo,cat,head,tail,grep,find
 CACHE_SIZE_LIMIT=1000
 CACHE_TTL=3600
 LOG_BUFFER_SIZE=200
+EVENT_BUFFER_SIZE=1000
 
 # Observability
 WEAVE_PROJECT_NAME=cognitive-forge-v5-prod
@@ -482,6 +576,7 @@ SENTRY_DSN=your_production_sentry_dsn
 - **Hybrid Analytics**: http://localhost:8001/api/hybrid/analytics
 - **Agent Analytics**: http://localhost:8001/api/observability/agent-analytics
 - **Observability Report**: http://localhost:8001/api/observability/report
+- **Event Stream**: http://localhost:8001/api/events/stream
 
 ## 🤝 Contributing
 
@@ -504,7 +599,8 @@ For support and questions:
 3. Test the system health at http://localhost:8001/health
 4. Check hybrid system status at http://localhost:8001/api/hybrid/status
 5. Review observability data at http://localhost:8001/api/observability/agent-analytics
+6. Test event stream at http://localhost:8001/api/events/stream
 
 ---
 
-**🚀 Cognitive Forge v5.1 - The Future of AI Mission Execution with Enhanced Observability** 
+**🚀 Cognitive Forge v5.2 - The Future of AI Mission Execution with Unified Event Bus and Enhanced UI/UX** 

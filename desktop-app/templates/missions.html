@@ -16,9 +16,6 @@
     
     <!-- Alpine.js -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
-    <!-- Unified Real-time System -->
-    <script src="/static/js/unified-realtime.js"></script>
 </head>
 
 <body>
@@ -175,7 +172,7 @@
                 <!-- Mission Queue -->
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
+                        <div class="card card-fixed-height">
                             <div class="card-header">
                                 <h4 class="card-title">Active Missions</h4>
                                 <p class="card-category">Real-time mission status</p>
@@ -191,62 +188,51 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Status</th>
-                                                <th>Mission</th>
-                                                <th>Agent</th>
-                                                <th>Priority</th>
-                                                <th>Progress</th>
-                                                <th>Created</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <template x-for="mission in missions" :key="mission.id">
-                                                <tr>
-                                                    <td>
-                                                        <span class="badge" x-bind:class="getStatusClass(mission.status)" 
-                                                            x-text="mission.status"></span>
-                                                    </td>
-                                                    <td>
-                                                        <strong x-text="mission.title || mission.prompt.substring(0, 50)"></strong>
-                                                        <br>
-                                                        <small class="text-muted" x-text="mission.prompt"></small>
-                                                    </td>
-                                                    <td>
-                                                        <span x-text="mission.agent_type"></span>
-                                                    </td>
-                                                    <td>
-                                                        <span class="badge" x-bind:class="getPriorityClass(mission.priority)" 
-                                                            x-text="mission.priority"></span>
-                                                    </td>
-                                                    <td>
-                                                        <div class="progress">
-                                                            <div class="progress-bar" x-bind:style="'width: ' + getProgress(mission) + '%'"></div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <small x-text="formatDate(mission.created_at)"></small>
-                                                    </td>
-                                                    <td>
-                                                        <button class="btn btn-sm btn-info" @click="viewMission(mission)">
-                                                            <i class="fas fa-eye"></i>
-                                                        </button>
-                                                        <button class="btn btn-sm btn-warning" @click="pauseMission(mission)">
-                                                            <i class="fas fa-pause"></i>
-                                                        </button>
-                                                        <button class="btn btn-sm btn-danger" @click="cancelMission(mission)">
-                                                            <i class="fas fa-times"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </template>
-                                        </tbody>
-                                    </table>
+                            <div class="card-body card-content-scrollable">
+                                <div class="missions-grid">
+                                    <template x-if="missions.length === 0">
+                                        <div class="no-missions">
+                                            <i class="fas fa-inbox fa-2x mb-3 text-muted"></i>
+                                            <p class="text-muted">No Active Missions</p>
+                                        </div>
+                                    </template>
+                                    <template x-for="mission in missions" :key="mission.id">
+                                        <div class="mission-card" @click="openMissionModal(mission)" style="cursor: pointer;">
+                                            <div class="mission-header">
+                                                <div class="mission-status">
+                                                    <span class="status-dot" :class="getStatusClass(mission.status)"></span>
+                                                    <span class="status-text" x-text="mission.status"></span>
+                                                </div>
+                                                <div class="mission-priority">
+                                                    <span class="priority-badge" :class="getPriorityClass(mission.priority)" x-text="mission.priority"></span>
+                                                </div>
+                                            </div>
+                                            <div class="mission-content">
+                                                <h6 class="mission-title" x-text="mission.prompt.substring(0, 60) + (mission.prompt.length > 60 ? '...' : '')"></h6>
+                                                <div class="mission-meta">
+                                                    <span class="agent-type" x-text="mission.agent_type"></span>
+                                                    <span class="mission-id" x-text="'#' + mission.id"></span>
+                                                </div>
+                                            </div>
+                                            <div class="mission-progress">
+                                                <div class="progress-info">
+                                                    <span class="progress-text" x-text="getProgress(mission) + '%'"></span>
+                                                    <span class="progress-label">Complete</span>
+                                                </div>
+                                                <div class="progress-bar-container">
+                                                    <div class="progress-bar" :style="'width: ' + getProgress(mission) + '%'"></div>
+                                                </div>
+                                            </div>
+                                            <div class="mission-actions">
+                                                <button class="btn btn-sm btn-outline-warning" @click.stop="pauseMission(mission.id)">
+                                                    <i class="fas fa-pause"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger" @click.stop="cancelMission(mission.id)">
+                                                    <i class="fas fa-stop"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </template>
                                 </div>
                             </div>
                         </div>
@@ -342,6 +328,90 @@
                     </div>
                 </div>
             </footer>
+        </div>
+    </div>
+
+            <!-- Mission Modal -->
+            <div class="mission-modal" x-show="showMissionModal" x-transition>
+                <div class="mission-modal-content">
+                    <div class="mission-modal-header">
+                        <h5 class="mission-modal-title">Mission Details</h5>
+                        <button class="mission-modal-close" @click="closeMissionModal()">&times;</button>
+                    </div>
+                    <div class="mission-modal-body" x-show="selectedMission">
+                        <!-- Mission Overview -->
+                        <div class="mission-detail-section">
+                            <div class="mission-detail-title">Mission Overview</div>
+                            <div class="mission-detail-grid">
+                                <div class="mission-detail-item">
+                                    <span class="mission-detail-label">Status</span>
+                                    <span class="mission-detail-value" x-text="selectedMission?.status"></span>
+                                </div>
+                                <div class="mission-detail-item">
+                                    <span class="mission-detail-label">Priority</span>
+                                    <span class="mission-detail-value" x-text="selectedMission?.priority"></span>
+                                </div>
+                                <div class="mission-detail-item">
+                                    <span class="mission-detail-label">Agent Type</span>
+                                    <span class="mission-detail-value" x-text="selectedMission?.agent_type"></span>
+                                </div>
+                                <div class="mission-detail-item">
+                                    <span class="mission-detail-label">Progress</span>
+                                    <span class="mission-detail-value" x-text="getProgress(selectedMission) + '%'"></span>
+                                </div>
+                                <div class="mission-detail-item">
+                                    <span class="mission-detail-label">Created</span>
+                                    <span class="mission-detail-value" x-text="formatTimestamp(selectedMission?.created_at)"></span>
+                                </div>
+                                <div class="mission-detail-item">
+                                    <span class="mission-detail-label">Updated</span>
+                                    <span class="mission-detail-value" x-text="formatTimestamp(selectedMission?.updated_at)"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mission Description -->
+                        <div class="mission-detail-section">
+                            <div class="mission-detail-title">Description</div>
+                            <div class="mission-description" x-text="selectedMission?.prompt"></div>
+                        </div>
+
+                        <!-- Mission Timeline -->
+                        <div class="mission-detail-section">
+                            <div class="mission-detail-title">Timeline</div>
+                            <div class="mission-timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-icon">
+                                        <i class="fas fa-rocket"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Mission Created</div>
+                                        <div class="timeline-time" x-text="formatTimestamp(selectedMission?.created_at)"></div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item" x-show="selectedMission?.started_at">
+                                    <div class="timeline-icon">
+                                        <i class="fas fa-play"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Mission Started</div>
+                                        <div class="timeline-time" x-text="formatTimestamp(selectedMission?.started_at)"></div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item" x-show="selectedMission?.completed_at">
+                                    <div class="timeline-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Mission Completed</div>
+                                        <div class="timeline-time" x-text="formatTimestamp(selectedMission?.completed_at)"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

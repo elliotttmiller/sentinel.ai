@@ -49,13 +49,13 @@ class TestExecution:
 
 class TestMissionSystem:
     """Manages test missions for evaluating agent capabilities."""
-    
+
     def __init__(self):
         self.test_missions: Dict[str, TestMission] = {}
         self.executions: Dict[str, TestExecution] = {}
         self.cognitive_engine: Optional[CognitiveForgeEngine] = None
         self._load_default_test_missions()
-    
+
     def _load_default_test_missions(self):
         """Load default test missions for various scenarios."""
         
@@ -156,9 +156,9 @@ def divide_numbers(a, b):
                     "input": {
                         "code": """
 def process_large_data():
-                            data = []
-                            for i in range(1000000):
-                                data.append(i)
+    data = []
+    for i in range(1000000):
+        data.append(i)
                             return data
                         """,
                         "issue": "Potential memory leak with large data processing"
@@ -398,27 +398,27 @@ def display_user_input(user_input):
                     
                     # Execute scenario with real cognitive engine
                     test_result = await self._execute_test_scenario_with_real_agents(scenario, execution.execution_id)
-                    
-                    # Ensure test_result is JSON serializable
-                    serializable_result = self._make_serializable(test_result)
-                    execution.test_results.append(serializable_result)
-                    
-                    # Create scenario complete event
-                    scenario_complete_event = agent_observability._create_live_stream_event(
-                        event_type="scenario_complete",
-                        mission_id=execution.execution_id,
-                        event_data={
-                            "scenario_name": scenario['name'],
-                            "scenario_index": i + 1,
-                            "test_result": serializable_result,
-                            "success": test_result.get('success', True),
-                            "duration_ms": test_result.get('duration_ms', 0),
-                            "test_mode": True
-                        },
-                        severity="info",
-                        tags=["test", "scenario", "complete"]
-                    )
-                
+                        
+                        # Ensure test_result is JSON serializable
+                        serializable_result = self._make_serializable(test_result)
+                        execution.test_results.append(serializable_result)
+                        
+                        # Create scenario complete event
+                        scenario_complete_event = agent_observability._create_live_stream_event(
+                            event_type="scenario_complete",
+                            mission_id=execution.execution_id,
+                            event_data={
+                                "scenario_name": scenario['name'],
+                                "scenario_index": i + 1,
+                                "test_result": serializable_result,
+                                "success": test_result.get('success', True),
+                                "duration_ms": test_result.get('duration_ms', 0),
+                                "test_mode": True
+                            },
+                            severity="info",
+                            tags=["test", "scenario", "complete"]
+                        )
+                        
                 # Calculate final metrics
                 execution.end_time = datetime.utcnow()
                 execution.duration_seconds = (execution.end_time - execution.start_time).total_seconds()
@@ -686,7 +686,7 @@ def display_user_input(user_input):
     def get_test_execution_details(self, execution_id: str) -> Optional[Dict[str, Any]]:
         """Get detailed results for a specific test execution."""
         if execution_id not in self.executions:
-            return None
+        return None
         
         execution = self.executions[execution_id]
         return self._make_execution_serializable(execution)
@@ -772,24 +772,24 @@ def display_user_input(user_input):
         elif hasattr(obj, '__dict__'):
             return self._make_serializable(obj.__dict__)
         else:
-            return obj
+        return obj
 
     def _make_execution_serializable(self, execution: TestExecution) -> Dict[str, Any]:
         """Convert execution object to serializable format."""
         return {
-            "execution_id": execution.execution_id,
-            "test_mission": {
-                "mission_id": execution.test_mission.mission_id,
-                "name": execution.test_mission.name,
-                "description": execution.test_mission.description,
-                "category": execution.test_mission.category,
-                "difficulty": execution.test_mission.difficulty
+                "execution_id": execution.execution_id,
+                "test_mission": {
+                    "mission_id": execution.test_mission.mission_id,
+                    "name": execution.test_mission.name,
+                    "description": execution.test_mission.description,
+                    "category": execution.test_mission.category,
+                    "difficulty": execution.test_mission.difficulty
             },
-            "start_time": execution.start_time.isoformat() if execution.start_time else None,
-            "end_time": execution.end_time.isoformat() if execution.end_time else None,
-            "duration_seconds": execution.duration_seconds,
-            "success": execution.success,
-            "test_results": execution.test_results,
-            "performance_metrics": execution.performance_metrics,
+                "start_time": execution.start_time.isoformat() if execution.start_time else None,
+                "end_time": execution.end_time.isoformat() if execution.end_time else None,
+                "duration_seconds": execution.duration_seconds,
+                "success": execution.success,
+                "test_results": execution.test_results,
+                "performance_metrics": execution.performance_metrics,
             "error_messages": execution.error_messages
         } 

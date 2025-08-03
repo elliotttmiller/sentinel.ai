@@ -1,0 +1,12 @@
+{"time":"2025-08-02T17:59:07.5961897-05:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-08-02T17:59:07.8876666-05:00","level":"INFO","msg":"stream: created new stream","id":"gprioaoy"}
+{"time":"2025-08-02T17:59:07.8882379-05:00","level":"INFO","msg":"stream: started","id":"gprioaoy"}
+{"time":"2025-08-02T17:59:07.8882379-05:00","level":"INFO","msg":"handler: started","stream_id":"gprioaoy"}
+{"time":"2025-08-02T17:59:07.8882379-05:00","level":"INFO","msg":"sender: started","stream_id":"gprioaoy"}
+{"time":"2025-08-02T17:59:07.8882379-05:00","level":"INFO","msg":"writer: Do: started","stream_id":"gprioaoy"}
+{"time":"2025-08-02T17:59:08.5396491-05:00","level":"INFO","msg":"stream: closing","id":"gprioaoy"}
+{"time":"2025-08-02T17:59:08.9438659-05:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-08-02T17:59:09.0751725-05:00","level":"INFO","msg":"sender: closed","stream_id":"gprioaoy"}
+{"time":"2025-08-02T17:59:09.0751725-05:00","level":"INFO","msg":"handler: closed","stream_id":"gprioaoy"}
+{"time":"2025-08-02T17:59:09.0751725-05:00","level":"INFO","msg":"writer: Close: closed","stream_id":"gprioaoy"}
+{"time":"2025-08-02T17:59:09.075786-05:00","level":"INFO","msg":"stream: closed","id":"gprioaoy"}

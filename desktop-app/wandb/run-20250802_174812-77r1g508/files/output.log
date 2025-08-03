@@ -1,0 +1,140 @@
+[32m2025-08-02 17:48:13.884[0m | [32m[1mSUCCESS [0m | [36mutils.agent_observability[0m:[36m_initialize_integrations[0m:[36m109[0m - [32m[1m✅ W&B initialized for agent analytics.[0m
+[32mINFO[0m:     Started server process [[36m6380[0m]
+[32mINFO[0m:     Waiting for application startup.
+[32m2025-08-02 17:48:13.893[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m160[0m - [1m🚀 Sentinel Cognitive Forge v5.2 starting up...[0m
+[32mINFO[0m:     Application startup complete.
+[32mINFO[0m:     127.0.0.1:63226 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:62956 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:62956 - "[1mGET /js/unified-realtime.js HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:62956 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:62956 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:62956 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:63293 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:63293 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:63293 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:63293 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:63326 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:63326 - "[1mGET /js/unified-realtime.js HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:63326 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:63326 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:63326 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:63329 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:63329 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:63329 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:63331 - "[1mGET /missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:63331 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:63331 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:63331 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:63333 - "[1mGET /settings HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:63333 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:63333 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:63333 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:63339 - "[1mGET /ai-agents HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:63339 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:63339 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:63339 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     Shutting down
+[32mINFO[0m:     Waiting for connections to close. (CTRL+C to force quit)
+[32mINFO[0m:     Finished server process [[36m6380[0m]
+[31mERROR[0m:    Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 641, in run_until_complete
+    self.run_forever()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 608, in run_forever
+    self._run_once()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 1936, in _run_once
+    handle._run()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\events.py", line 84, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 70, in serve
+    with self.capture_signals():
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 144, in __exit__
+    next(self.gen)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 331, in capture_signals
+    signal.raise_signal(captured_signal)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 157, in _on_sigint
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 686, in lifespan
+    await receive()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+
+[31mERROR[0m:    Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 641, in run_until_complete
+    self.run_forever()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 608, in run_forever
+    self._run_once()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 1936, in _run_once
+    handle._run()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\events.py", line 84, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 70, in serve
+    with self.capture_signals():
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 144, in __exit__
+    next(self.gen)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\server.py", line 331, in capture_signals
+    signal.raise_signal(captured_signal)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 157, in _on_sigint
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py", line 409, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\applications.py", line 1106, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\applications.py", line 122, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\cors.py", line 83, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 69, in app
+    await response(scope, receive, send)
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\responses.py", line 277, in __call__
+    await wrap(partial(self.listen_for_disconnect, receive))
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\responses.py", line 273, in wrap
+    await func()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\responses.py", line 250, in listen_for_disconnect
+    message = await receive()
+              ^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py", line 563, in receive
+    await self.message_event.wait()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError

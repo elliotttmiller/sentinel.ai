@@ -16,9 +16,6 @@
     
     <!-- Alpine.js -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
-    <!-- Unified Real-time System -->
-    <script src="/static/js/unified-realtime.js"></script>
 </head>
 
 <body>
@@ -217,12 +214,12 @@
                 <!-- Recent Executions -->
                 <div class="row mb-4">
                     <div class="col-12">
-                        <div class="card">
+                        <div class="card card-fixed-height">
                             <div class="card-header">
                                 <h4 class="card-title">📊 Recent Test Executions</h4>
                                 <p class="card-category">Latest agent testing results</p>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body card-content-scrollable">
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
@@ -328,7 +325,7 @@
             <!-- Third Row: Test Execution Live Stream -->
             <div class="row mb-4">
                 <div class="col-12">
-                    <div class="card live-stream-card">
+                    <div class="card live-stream-card card-fixed-height">
                         <div class="card-header">
                             <h4 class="card-title">🧪 Test Execution Live Stream</h4>
                             <p class="card-category">Real-time tracking of test mission execution</p>
@@ -352,7 +349,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body card-content-scrollable">
                             <div class="live-stream-container">
                                 <div class="live-stream-stats">
                                     <div class="stat-item">
