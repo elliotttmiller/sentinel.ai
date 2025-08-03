@@ -1,0 +1,11 @@
+[32m2025-08-02 21:28:49.699[0m | [32m[1mSUCCESS [0m | [36mutils.agent_observability[0m:[36m_initialize_integrations[0m:[36m109[0m - [32m[1m✅ W&B initialized for agent analytics.[0m
+[32m2025-08-02 21:28:56.715[0m | [32m[1mSUCCESS [0m | [36mutils.sentry_integration[0m:[36m_initialize_sentry[0m:[36m78[0m - [32m[1mSentry integration initialized successfully[0m
+[32m2025-08-02 21:28:56.732[0m | [1mINFO    [0m | [36mcore.cognitive_forge_engine[0m:[36m__init__[0m:[36m111[0m - [1mGoogle Generative AI initialized with model: gemini-1.5-pro[0m
+[32m2025-08-02 21:28:56.739[0m | [1mINFO    [0m | [36mutils.crewai_bypass[0m:[36m__init__[0m:[36m21[0m - [1mCreating DirectAIAgent with role: Learning Analysis Specialist, LLM type: <class 'utils.google_ai_wrapper.GoogleGenerativeAIWrapper'>[0m
+[32m2025-08-02 21:28:56.741[0m | [1mINFO    [0m | [36mutils.crewai_bypass[0m:[36m__init__[0m:[36m21[0m - [1mCreating DirectAIAgent with role: Improvement Generation Specialist, LLM type: <class 'utils.google_ai_wrapper.GoogleGenerativeAIWrapper'>[0m
+[32m2025-08-02 21:28:56.741[0m | [1mINFO    [0m | [36mutils.self_learning_module[0m:[36m__init__[0m:[36m26[0m - [1mSelf-Learning Module initialized - Continuous improvement active[0m
+[32mINFO[0m:     Started server process [[36m9412[0m]
+[32mINFO[0m:     Waiting for application startup.
+[32m2025-08-02 21:28:56.752[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m493[0m - [1m🚀 Sentinel Cognitive Forge v5.4 (Predictive Intelligence Activated) starting up...[0m
+[32m2025-08-02 21:28:56.753[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m505[0m - [1m✅ All systems initialized and ready for missions[0m
+[32mINFO[0m:     Application startup complete.

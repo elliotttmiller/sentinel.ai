@@ -1,0 +1,59 @@
+[32m2025-08-02 21:05:39.809[0m | [32m[1mSUCCESS [0m | [36mutils.agent_observability[0m:[36m_initialize_integrations[0m:[36m109[0m - [32m[1m✅ W&B initialized for agent analytics.[0m
+[32m2025-08-02 21:05:45.950[0m | [32m[1mSUCCESS [0m | [36mutils.sentry_integration[0m:[36m_initialize_sentry[0m:[36m78[0m - [32m[1mSentry integration initialized successfully[0m
+[32m2025-08-02 21:05:45.969[0m | [1mINFO    [0m | [36mcore.cognitive_forge_engine[0m:[36m__init__[0m:[36m111[0m - [1mGoogle Generative AI initialized with model: gemini-1.5-pro[0m
+[32m2025-08-02 21:05:45.975[0m | [1mINFO    [0m | [36mutils.crewai_bypass[0m:[36m__init__[0m:[36m21[0m - [1mCreating DirectAIAgent with role: Learning Analysis Specialist, LLM type: <class 'utils.google_ai_wrapper.GoogleGenerativeAIWrapper'>[0m
+[32m2025-08-02 21:05:45.976[0m | [1mINFO    [0m | [36mutils.crewai_bypass[0m:[36m__init__[0m:[36m21[0m - [1mCreating DirectAIAgent with role: Improvement Generation Specialist, LLM type: <class 'utils.google_ai_wrapper.GoogleGenerativeAIWrapper'>[0m
+[32m2025-08-02 21:05:45.978[0m | [1mINFO    [0m | [36mutils.self_learning_module[0m:[36m__init__[0m:[36m26[0m - [1mSelf-Learning Module initialized - Continuous improvement active[0m
+[32mINFO[0m:     Started server process [[36m2068[0m]
+[32mINFO[0m:     Waiting for application startup.
+[32m2025-08-02 21:05:45.986[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m481[0m - [1m🚀 Sentinel Cognitive Forge v5.4 (Predictive Intelligence Activated) starting up...[0m
+[32m2025-08-02 21:05:45.986[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m493[0m - [1m✅ All systems initialized and ready for missions[0m
+[32mINFO[0m:     Application startup complete.
+[32mINFO[0m:     127.0.0.1:56197 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32m2025-08-02 21:05:45.999[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:05:47.021[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:05:48.015[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:05:49.025[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:05:50.028[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:05:51.036[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:05:52.032[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:05:53.030[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:05:54.033[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32mINFO[0m:     127.0.0.1:56198 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32m2025-08-02 21:05:59.113[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:06:00.110[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:06:01.112[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:06:02.120[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:06:03.150[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:06:04.140[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:06:05.148[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:06:06.144[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:06:07.130[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32mINFO[0m:     127.0.0.1:56234 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32m2025-08-02 21:06:13.408[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:06:14.429[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:06:15.422[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:06:16.426[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:06:17.427[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:06:18.441[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:06:19.448[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:06:20.456[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:06:21.461[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32mINFO[0m:     127.0.0.1:56235 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32m2025-08-02 21:06:27.116[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:06:28.130[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:06:29.138[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:06:30.165[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:06:31.177[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:06:32.186[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:06:33.209[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32mINFO[0m:     Shutting down
+[32mINFO[0m:     Waiting for connections to close. (CTRL+C to force quit)
+[32m2025-08-02 21:06:34.214[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32m2025-08-02 21:06:35.225[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mevent_generator[0m:[36m449[0m - [31m[1m❌ Event stream error: 'CuttingEdgeAgentObservabilityManager' object has no attribute 'get_event'[0m
+[32mINFO[0m:     Waiting for application shutdown.
+[32mINFO[0m:     Application shutdown complete.
+[32mINFO[0m:     Finished server process [[36m2068[0m]
+Sentry is attempting to send 1 pending events
+Waiting up to 2 seconds
+Press Ctrl-Break to quit

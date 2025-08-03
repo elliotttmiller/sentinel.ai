@@ -1,0 +1,12 @@
+{"time":"2025-08-02T21:06:46.2831979-05:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-08-02T21:06:46.5662216-05:00","level":"INFO","msg":"stream: created new stream","id":"cbmekwlk"}
+{"time":"2025-08-02T21:06:46.5662216-05:00","level":"INFO","msg":"stream: started","id":"cbmekwlk"}
+{"time":"2025-08-02T21:06:46.5662216-05:00","level":"INFO","msg":"handler: started","stream_id":"cbmekwlk"}
+{"time":"2025-08-02T21:06:46.5662216-05:00","level":"INFO","msg":"sender: started","stream_id":"cbmekwlk"}
+{"time":"2025-08-02T21:06:46.5662216-05:00","level":"INFO","msg":"writer: Do: started","stream_id":"cbmekwlk"}
+{"time":"2025-08-02T21:06:56.3855732-05:00","level":"INFO","msg":"stream: closing","id":"cbmekwlk"}
+{"time":"2025-08-02T21:06:56.7563287-05:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-08-02T21:06:56.922202-05:00","level":"INFO","msg":"sender: closed","stream_id":"cbmekwlk"}
+{"time":"2025-08-02T21:06:56.922202-05:00","level":"INFO","msg":"handler: closed","stream_id":"cbmekwlk"}
+{"time":"2025-08-02T21:06:56.922202-05:00","level":"INFO","msg":"writer: Close: closed","stream_id":"cbmekwlk"}
+{"time":"2025-08-02T21:06:56.9227264-05:00","level":"INFO","msg":"stream: closed","id":"cbmekwlk"}

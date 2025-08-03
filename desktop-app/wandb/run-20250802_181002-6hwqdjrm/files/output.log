@@ -237,3 +237,8 @@
 [32mINFO[0m:     127.0.0.1:50732 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
 [32mINFO[0m:     127.0.0.1:50733 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
 [32mINFO[0m:     127.0.0.1:50733 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     Shutting down
+[32mINFO[0m:     Waiting for connections to close. (CTRL+C to force quit)
+[32mINFO[0m:     Waiting for application shutdown.
+[32mINFO[0m:     Application shutdown complete.
+[32mINFO[0m:     Finished server process [[36m10628[0m]

@@ -16,6 +16,7 @@
     
     <!-- Alpine.js -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
 </head>
 
 <body>
@@ -71,6 +72,7 @@
                                 <span class="navbar-toggler-bar bar3"></span>
                             </button>
                         </div>
+                        <a class="navbar-brand" href="javascript:void(0)">Test Mission Control</a>
                     </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -83,7 +85,7 @@
                             <li class="nav-item">
                                 <div class="search-container">
                                     <div class="search-wrapper">
-                                        <input type="text" class="form-control search-input" placeholder="Search missions, agents, or logs...">
+                                        <input type="text" class="form-control search-input" placeholder="Search test missions, results, or logs...">
                                         <i class="fas fa-search search-icon"></i>
                                     </div>
                                 </div>
@@ -97,477 +99,213 @@
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
                                         <li class="nav-link"><a href="#" class="nav-item dropdown-item">Test completed</a></li>
-                                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Agent analysis ready</a></li>
-                                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Performance report generated</a></li>
+                                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">New test started</a></li>
+                                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Test failed</a></li>
                                     </ul>
                                 </div>
                             </li>
+                            <li class="dropdown nav-item">
+                                <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                    <div class="photo">
+                                        <img src="https://via.placeholder.com/40x40/4A90E2/ffffff?text=SC" alt="Profile Photo">
+                                    </div>
+                                    <b class="caret d-none d-lg-block d-xl-block"></b>
+                                    <p class="d-lg-none">User</p>
+                                </a>
+                                <ul class="dropdown-menu dropdown-navbar">
+                                    <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Profile</a></li>
+                                    <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Settings</a></li>
+                                    <li class="dropdown-divider"></li>
+                                    <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Log out</a></li>
+                                </ul>
+                            </li>
+                            <li class="separator d-lg-none"></li>
                         </ul>
                     </div>
                 </div>
             </nav>
 
             <!-- Content -->
-            <div class="content" x-data="sentinelApp()" x-init="init()">
-                <!-- Header Section -->
-                <div class="row mb-4">
+            <div class="content test-missions-page" x-data="sentinelApp()" x-init="init()">
+                <!-- Test Mission Creation -->
+                <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">🧪 Test Mission Control</h4>
-                                <p class="card-category">Comprehensive AI Agent Testing & Observability</p>
+                                <h4 class="card-title">Create Test Mission</h4>
+                                <p class="card-category">Validate system functionality and performance</p>
                             </div>
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="stat-card">
-                                            <div class="stat-icon">
-                                                <i class="fas fa-vial"></i>
-                                            </div>
-                                            <div class="stat-info">
-                                                <h5 x-text="availableMissions.length">0</h5>
-                                                <p>Available Tests</p>
+                                <form @submit.prevent="createTestMission()">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label>Test Description</label>
+                                                <textarea class="form-control" rows="3" x-model="newTestMission.prompt" 
+                                                    placeholder="Describe the test scenario you want to execute..."></textarea>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="stat-card">
-                                            <div class="stat-icon">
-                                                <i class="fas fa-play"></i>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Test Type</label>
+                                                <select class="form-control" x-model="newTestMission.test_type">
+                                                    <option value="unit" selected>Unit Test</option>
+                                                    <option value="integration">Integration Test</option>
+                                                    <option value="performance">Performance Test</option>
+                                                    <option value="stress">Stress Test</option>
+                                                </select>
                                             </div>
-                                            <div class="stat-info">
-                                                <h5 x-text="executions.length">0</h5>
-                                                <p>Executions</p>
+                                            <div class="form-group">
+                                                <label>Priority</label>
+                                                <select class="form-control" x-model="newTestMission.priority">
+                                                    <option value="low" selected>Low</option>
+                                                    <option value="medium">Medium</option>
+                                                    <option value="high">High</option>
+                                                    <option value="critical">Critical</option>
+                                                </select>
                                             </div>
+                                            <button type="submit" class="btn btn-primary btn-block">
+                                                <i class="fas fa-vial"></i> Run Test
+                                            </button>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="stat-card">
-                                            <div class="stat-icon">
-                                                <i class="fas fa-check-circle"></i>
-                                            </div>
-                                            <div class="stat-info">
-                                                <h5 x-text="getSuccessRate() + '%'">0%</h5>
-                                                <p>Success Rate</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="stat-card">
-                                            <div class="stat-icon">
-                                                <i class="fas fa-clock"></i>
-                                            </div>
-                                            <div class="stat-info">
-                                                <h5 x-text="getAverageDuration() + 's'">0s</h5>
-                                                <p>Avg Duration</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Available Test Missions -->
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">📋 Available Test Missions</h4>
-                                <p class="card-category">Select a test to run agent validation</p>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <template x-for="mission in availableMissions" :key="mission.mission_id">
-                                        <div class="mission-card" @click="viewMissionDetails(mission)">
-                                            <div class="mission-header">
-                                                <h5 class="mission-title" x-text="mission.name"></h5>
-                                                <span class="mission-difficulty" :class="getDifficultyClass(mission.difficulty)" x-text="mission.difficulty"></span>
-                                            </div>
-                                            <div class="mission-content">
-                                                <p class="mission-description" x-text="mission.description"></p>
-                                                <div class="mission-meta">
-                                                    <span class="meta-item">
-                                                        <i class="fas fa-clock"></i>
-                                                        <span x-text="formatDuration(mission.estimated_duration)"></span>
-                                                    </span>
-                                                    <span class="meta-item">
-                                                        <i class="fas fa-tasks"></i>
-                                                        <span x-text="mission.scenario_count + ' scenarios'"></span>
-                                                    </span>
-                                                </div>
-                                                <div class="mission-actions">
-                                                    <button class="btn btn-primary btn-sm" @click.stop="runTestMission(mission.mission_id)">
-                                                        <i class="fas fa-play"></i> Run Test
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </template>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recent Executions -->
-                <div class="row mb-4">
+                <!-- Test Stream Feed -->
+                <div class="row">
                     <div class="col-12">
                         <div class="card card-fixed-height">
                             <div class="card-header">
-                                <h4 class="card-title">📊 Recent Test Executions</h4>
-                                <p class="card-category">Latest agent testing results</p>
+                                <h4 class="card-title">Test Stream Feed</h4>
+                                <p class="card-category">Real-time test execution and results</p>
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-link dropdown-toggle btn-icon" data-toggle="dropdown">
+                                        <i class="fas fa-cog"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-navbar">
+                                        <a class="dropdown-item" href="javascript:void(0)" @click="refreshTestStream()">Refresh</a>
+                                        <a class="dropdown-item" href="javascript:void(0)">Export Results</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="javascript:void(0)" @click="clearTestResults()">Clear Results</a>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body card-content-scrollable">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Mission</th>
-                                                <th>Status</th>
-                                                <th>Duration</th>
-                                                <th>Scenarios</th>
-                                                <th>Success Rate</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <template x-for="execution in recentExecutions" :key="execution.execution_id">
-                                                <tr @click="viewExecutionDetails(execution.execution_id)" style="cursor: pointer;">
-                                                    <td>
-                                                        <div class="execution-info">
-                                                            <strong x-text="execution.mission_name"></strong>
-                                                            <small class="text-muted" x-text="execution.execution_id"></small>
+                                <div class="test-stream-feed">
+                                    <template x-if="testStreamEvents.length === 0">
+                                        <div class="no-test-events">
+                                            <i class="fas fa-vial fa-2x mb-3 text-muted"></i>
+                                            <p class="text-muted">No Test Events</p>
+                                            <small class="text-muted">Start a test mission to see real-time results</small>
+                                        </div>
+                                    </template>
+                                    <template x-for="event in testStreamEvents" :key="event.id">
+                                        <div class="test-event" :class="'test-' + event.status">
+                                            <div class="test-event-header">
+                                                <div class="test-event-type">
+                                                    <i class="fas fa-vial"></i>
+                                                    <span x-text="event.test_type"></span>
+                                                </div>
+                                                <div class="test-event-timestamp" x-text="formatDate(event.timestamp)"></div>
+                                                <div class="test-event-status" :class="'status-' + event.status" x-text="event.status.toUpperCase()"></div>
+                                            </div>
+                                            <div class="test-event-content">
+                                                <div class="test-event-description" x-text="event.description"></div>
+                                                <div class="test-event-details" x-show="event.details">
+                                                    <template x-for="(value, key) in event.details" :key="key">
+                                                        <div class="test-event-detail">
+                                                            <strong x-text="key + ':'"></strong>
+                                                            <span x-text="value"></span>
                                                         </div>
-                                                    </td>
-                                                    <td>
-                                                        <span class="status-badge" x-bind:class="execution.execution_success ? 'online' : 'offline'">
-                                                            <span x-text="execution.execution_success ? 'Success' : 'Failed'"></span>
-                                                        </span>
-                                                    </td>
-                                                    <td x-text="formatDuration(execution.duration_seconds)"></td>
-                                                    <td x-text="execution.scenarios_executed"></td>
-                                                    <td x-text="getExecutionSuccessRate(execution) + '%'"></td>
-                                                    <td>
-                                                        <div class="btn-group" role="group">
-                                                            <button type="button" class="btn btn-sm btn-outline-info" @click.stop="exportExecutionData(execution.execution_id)">
-                                                                <i class="fas fa-download"></i>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </template>
-                                        </tbody>
-                                    </table>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Agent Observability -->
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">🔍 Agent Observability</h4>
-                                <p class="card-category">Real-time agent performance tracking</p>
-                            </div>
+                <!-- Test Statistics -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card card-stats">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <h6>Agent Performance Analytics</h6>
-                                        <div class="analytics-summary" x-show="agentAnalytics.summary">
-                                            <div class="analytics-item">
-                                                <span class="label">Total Missions:</span>
-                                                <span class="value" x-text="agentAnalytics.summary?.total_missions || 0"></span>
-                                            </div>
-                                            <div class="analytics-item">
-                                                <span class="label">Success Rate:</span>
-                                                <span class="value" x-text="(agentAnalytics.summary?.successful_missions / agentAnalytics.summary?.total_missions * 100).toFixed(1) + '%'"></span>
-                                            </div>
-                                            <div class="analytics-item">
-                                                <span class="label">Avg Duration:</span>
-                                                <span class="value" x-text="formatDuration(agentAnalytics.summary?.avg_mission_duration_ms / 1000)"></span>
-                                            </div>
-
+                                    <div class="col-5">
+                                        <div class="icon-big text-center icon-success">
+                                            <i class="fas fa-check-circle"></i>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <h6>Agent Comparison</h6>
-                                        <div class="agent-comparison" x-show="agentAnalytics.by_agent">
-                                            <template x-for="(agent, name) in agentAnalytics.by_agent" :key="name">
-                                                <div class="agent-item">
-                                                    <div class="agent-name" x-text="name"></div>
-                                                    <div class="agent-metrics">
-                                                        <span class="metric">
-                                                            <i class="fas fa-check-circle"></i>
-                                                            <span x-text="(agent.success_rate * 100).toFixed(1) + '%'"></span>
-                                                        </span>
-                                                        <span class="metric">
-                                                            <i class="fas fa-clock"></i>
-                                                            <span x-text="formatDuration(agent.avg_duration_ms / 1000)"></span>
-                                                        </span>
-
-                                                    </div>
-                                                </div>
-                                            </template>
+                                    <div class="col-7">
+                                        <div class="numbers">
+                                            <p class="card-category">Passed</p>
+                                            <h4 class="card-title" x-text="getPassedTests()">0</h4>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Third Row: Test Execution Live Stream -->
-            <div class="row mb-4">
-                <div class="col-12">
-                    <div class="card live-stream-card card-fixed-height">
-                        <div class="card-header">
-                            <h4 class="card-title">🧪 Test Execution Live Stream</h4>
-                            <p class="card-category">Real-time tracking of test mission execution</p>
-                            <div class="live-stream-controls">
-                                <button class="btn btn-sm btn-outline-primary" @click="refreshTestStream()">
-                                    <i class="fas fa-sync-alt"></i> Refresh
-                                </button>
-                                <button class="btn btn-sm btn-outline-success" @click="toggleTestAutoRefresh()">
-                                    <i class="fas fa-play" x-show="!testAutoRefresh"></i>
-                                    <i class="fas fa-pause" x-show="testAutoRefresh"></i>
-                                    <span x-text="testAutoRefresh ? 'Pause' : 'Auto'"></span>
-                                </button>
-                                <select class="form-control form-control-sm" x-model="selectedTestEventType" @change="filterTestStream()">
-                                    <option value="">All Test Events</option>
-                                    <option value="test_start">Test Start</option>
-                                    <option value="test_complete">Test Complete</option>
-                                    <option value="scenario_start">Scenario Start</option>
-                                    <option value="scenario_complete">Scenario Complete</option>
-                                    <option value="agent_action">Agent Actions</option>
-                                    <option value="test_error">Test Errors</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="card-body card-content-scrollable">
-                            <div class="live-stream-container">
-                                <div class="live-stream-stats">
-                                    <div class="stat-item">
-                                        <span class="stat-label">Active Tests:</span>
-                                        <span class="stat-value" x-text="testStreamStats.activeTests"></span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">Success Rate:</span>
-                                        <span class="stat-value" x-text="testStreamStats.successRate + '%'"></span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">Avg Duration:</span>
-                                        <span class="stat-value" x-text="testStreamStats.avgDuration"></span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">Last Update:</span>
-                                        <span class="stat-value" x-text="testStreamStats.lastUpdate"></span>
-                                    </div>
-                                </div>
-                                <div class="live-stream-feed" id="testStreamFeed">
-                                    <template x-for="event in testStreamEvents" :key="event.event_id">
-                                        <div class="stream-event" :class="'event-' + event.severity" @click="openTestEventModal(event)">
-                                            <div class="event-header">
-                                                <div class="event-type">
-                                                    <i class="fas" :class="getTestEventIcon(event.event_type)"></i>
-                                                    <span x-text="formatTestEventType(event.event_type)"></span>
-                                                </div>
-                                                <div class="event-timestamp" x-text="formatTimestamp(event.timestamp)"></div>
-                                                <div class="event-severity" :class="'severity-' + event.severity" x-text="event.severity.toUpperCase()"></div>
-                                            </div>
-                                            <div class="event-content">
-                                                <div class="event-agent" x-show="event.agent_name">
-                                                    <strong>Agent:</strong> <span x-text="event.agent_name"></span>
-                                                </div>
-                                                <div class="event-mission" x-show="event.mission_id">
-                                                    <strong>Test Mission:</strong> <span x-text="event.mission_id"></span>
-                                                </div>
-                                                <div class="event-details" x-show="event.event_data">
-                                                    <template x-for="(value, key) in event.event_data" :key="key">
-                                                        <div class="event-detail">
-                                                            <strong x-text="formatDetailKey(key) + ':'"></strong>
-                                                            <span x-text="formatDetailValue(value)"></span>
-                                                        </div>
-                                                    </template>
-                                                </div>
-                                                <div class="event-tags" x-show="event.tags && event.tags.length">
-                                                    <template x-for="tag in event.tags" :key="tag">
-                                                        <span class="event-tag" x-text="tag"></span>
-                                                    </template>
-                                                </div>
-                                            </div>
+                    <div class="col-md-3">
+                        <div class="card card-stats">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <div class="icon-big text-center icon-danger">
+                                            <i class="fas fa-times-circle"></i>
                                         </div>
-                                    </template>
-                                    <div class="no-events" x-show="testStreamEvents.length === 0">
-                                        <i class="fas fa-info-circle"></i>
-                                        <p>No test execution events available. Run a test mission to see real-time tracking.</p>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="numbers">
+                                            <p class="card-category">Failed</p>
+                                            <h4 class="card-title" x-text="getFailedTests()">0</h4>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Execution Details Modal -->
-            <div class="event-modal" id="executionModal" x-show="showExecutionModal" x-transition>
-                <div class="event-modal-content">
-                    <div class="event-modal-header">
-                        <h3 class="event-modal-title" x-text="selectedExecution ? 'Test Execution Details' : 'Execution Details'"></h3>
-                        <button class="event-modal-close" @click="closeExecutionModal()">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <div class="event-modal-body" x-show="selectedExecution">
-                        <div class="event-modal-section">
-                            <div class="event-modal-section-title">Execution Information</div>
-                            <div class="event-modal-details">
-                                <div class="event-modal-detail-row">
-                                    <div class="event-modal-detail-label">Execution ID</div>
-                                    <div class="event-modal-detail-value" x-text="selectedExecution?.execution_id"></div>
-                                </div>
-                                <div class="event-modal-detail-row">
-                                    <div class="event-modal-detail-label">Mission Name</div>
-                                    <div class="event-modal-detail-value" x-text="selectedExecution?.mission_name"></div>
-                                </div>
-                                <div class="event-modal-detail-row">
-                                    <div class="event-modal-detail-label">Status</div>
-                                    <div class="event-modal-detail-value" x-text="selectedExecution?.status"></div>
-                                </div>
-                                <div class="event-modal-detail-row">
-                                    <div class="event-modal-detail-label">Start Time</div>
-                                    <div class="event-modal-detail-value" x-text="formatTimestamp(selectedExecution?.start_time)"></div>
-                                </div>
-                                <div class="event-modal-detail-row" x-show="selectedExecution?.end_time">
-                                    <div class="event-modal-detail-label">End Time</div>
-                                    <div class="event-modal-detail-value" x-text="formatTimestamp(selectedExecution?.end_time)"></div>
-                                </div>
-                                <div class="event-modal-detail-row" x-show="selectedExecution?.duration">
-                                    <div class="event-modal-detail-label">Duration</div>
-                                    <div class="event-modal-detail-value" x-text="formatDuration(selectedExecution?.duration)"></div>
-                                </div>
-                                <div class="event-modal-detail-row" x-show="selectedExecution?.success_rate">
-                                    <div class="event-modal-detail-label">Success Rate</div>
-                                    <div class="event-modal-detail-value" x-text="selectedExecution?.success_rate + '%'"></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="event-modal-section" x-show="selectedExecution?.scenarios && selectedExecution.scenarios.length > 0">
-                            <div class="event-modal-section-title">Test Scenarios</div>
-                            <div class="event-modal-details">
-                                <template x-for="scenario in selectedExecution?.scenarios" :key="scenario.name">
-                                    <div class="event-modal-detail-row">
-                                        <div class="event-modal-detail-label" x-text="scenario.name"></div>
-                                        <div class="event-modal-detail-value">
-                                            <span class="badge" :class="getStatusClass(scenario.status)" x-text="scenario.status"></span>
-                                            <span x-show="scenario.duration" x-text="' - ' + formatDuration(scenario.duration)"></span>
+                    <div class="col-md-3">
+                        <div class="card card-stats">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <div class="icon-big text-center icon-info">
+                                            <i class="fas fa-clock"></i>
                                         </div>
                                     </div>
-                                </template>
-                            </div>
-                        </div>
-                        
-                        <div class="event-modal-section" x-show="selectedExecution?.agent_actions && selectedExecution.agent_actions.length > 0">
-                            <div class="event-modal-section-title">Agent Actions</div>
-                            <div class="event-modal-details">
-                                <template x-for="action in selectedExecution?.agent_actions" :key="action.action_id">
-                                    <div class="event-modal-detail-row">
-                                        <div class="event-modal-detail-label" x-text="action.agent_name + ' - ' + action.action_type"></div>
-                                        <div class="event-modal-detail-value">
-                                            <span x-text="action.description"></span>
-                                            <span x-show="action.duration" x-text="' (' + formatDuration(action.duration) + ')'"></span>
+                                    <div class="col-7">
+                                        <div class="numbers">
+                                            <p class="card-category">Running</p>
+                                            <h4 class="card-title" x-text="getRunningTests()">0</h4>
                                         </div>
                                     </div>
-                                </template>
-                            </div>
-                        </div>
-                        
-                        <div class="event-modal-section" x-show="selectedExecution?.results && Object.keys(selectedExecution.results).length > 0">
-                            <div class="event-modal-section-title">Test Results</div>
-                            <div class="event-modal-details">
-                                <template x-for="(value, key) in selectedExecution?.results" :key="key">
-                                    <div class="event-modal-detail-row">
-                                        <div class="event-modal-detail-label" x-text="formatDetailKey(key)"></div>
-                                        <div class="event-modal-detail-value">
-                                            <span x-show="typeof value !== 'object'" x-text="formatDetailValue(value)"></span>
-                                            <div x-show="typeof value === 'object'" class="event-modal-json" x-text="JSON.stringify(value, null, 2)"></div>
-                                        </div>
-                                    </div>
-                                </template>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Test Event Detail Modal -->
-            <div class="event-modal" id="testEventModal" x-show="showTestEventModal" x-transition>
-                <div class="event-modal-content">
-                    <div class="event-modal-header">
-                        <h3 class="event-modal-title" x-text="selectedTestEvent ? formatTestEventType(selectedTestEvent.event_type) : 'Test Event Details'"></h3>
-                        <button class="event-modal-close" @click="closeTestEventModal()">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <div class="event-modal-body" x-show="selectedTestEvent">
-                        <div class="event-modal-section">
-                            <div class="event-modal-section-title">Event Information</div>
-                            <div class="event-modal-details">
-                                <div class="event-modal-detail-row">
-                                    <div class="event-modal-detail-label">Event ID</div>
-                                    <div class="event-modal-detail-value" x-text="selectedTestEvent?.event_id"></div>
-                                </div>
-                                <div class="event-modal-detail-row">
-                                    <div class="event-modal-detail-label">Event Type</div>
-                                    <div class="event-modal-detail-value" x-text="formatTestEventType(selectedTestEvent?.event_type)"></div>
-                                </div>
-                                <div class="event-modal-detail-row">
-                                    <div class="event-modal-detail-label">Timestamp</div>
-                                    <div class="event-modal-detail-value" x-text="formatTimestamp(selectedTestEvent?.timestamp)"></div>
-                                </div>
-                                <div class="event-modal-detail-row">
-                                    <div class="event-modal-detail-label">Severity</div>
-                                    <div class="event-modal-detail-value" x-text="selectedTestEvent?.severity?.toUpperCase()"></div>
-                                </div>
-                                <div class="event-modal-detail-row" x-show="selectedTestEvent?.agent_name">
-                                    <div class="event-modal-detail-label">Agent</div>
-                                    <div class="event-modal-detail-value" x-text="selectedTestEvent?.agent_name"></div>
-                                </div>
-                                <div class="event-modal-detail-row" x-show="selectedTestEvent?.mission_id">
-                                    <div class="event-modal-detail-label">Test Mission</div>
-                                    <div class="event-modal-detail-value" x-text="selectedTestEvent?.mission_id"></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="event-modal-section" x-show="selectedTestEvent?.event_data && Object.keys(selectedTestEvent.event_data).length > 0">
-                            <div class="event-modal-section-title">Event Data</div>
-                            <div class="event-modal-details">
-                                <template x-for="(value, key) in selectedTestEvent?.event_data" :key="key">
-                                    <div class="event-modal-detail-row">
-                                        <div class="event-modal-detail-label" x-text="formatDetailKey(key)"></div>
-                                        <div class="event-modal-detail-value">
-                                            <span x-show="typeof value !== 'object'" x-text="formatDetailValue(value)"></span>
-                                            <div x-show="typeof value === 'object'" class="event-modal-json" x-text="JSON.stringify(value, null, 2)"></div>
+                    <div class="col-md-3">
+                        <div class="card card-stats">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <div class="icon-big text-center icon-primary">
+                                            <i class="fas fa-percentage"></i>
                                         </div>
                                     </div>
-                                </template>
-                            </div>
-                        </div>
-                        
-                        <div class="event-modal-section" x-show="selectedTestEvent?.tags && selectedTestEvent.tags.length > 0">
-                            <div class="event-modal-section-title">Tags</div>
-                            <div class="event-modal-details">
-                                <div class="event-tags">
-                                    <template x-for="tag in selectedTestEvent?.tags" :key="tag">
-                                        <span class="event-tag" x-text="tag"></span>
-                                    </template>
+                                    <div class="col-7">
+                                        <div class="numbers">
+                                            <p class="card-category">Success Rate</p>
+                                            <h4 class="card-title" x-text="getTestSuccessRate() + '%'">0%</h4>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

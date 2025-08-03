@@ -1,0 +1,14 @@
+{"time":"2025-08-02T21:07:07.9759363-05:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-08-02T21:07:08.2355063-05:00","level":"INFO","msg":"stream: created new stream","id":"tbpng6cp"}
+{"time":"2025-08-02T21:07:08.2355063-05:00","level":"INFO","msg":"stream: started","id":"tbpng6cp"}
+{"time":"2025-08-02T21:07:08.2355063-05:00","level":"INFO","msg":"sender: started","stream_id":"tbpng6cp"}
+{"time":"2025-08-02T21:07:08.2355063-05:00","level":"INFO","msg":"handler: started","stream_id":"tbpng6cp"}
+{"time":"2025-08-02T21:07:08.2355063-05:00","level":"INFO","msg":"writer: Do: started","stream_id":"tbpng6cp"}
+{"time":"2025-08-02T21:27:53.359229-05:00","level":"ERROR","msg":"monitor: error sampling metrics: process does not exist"}
+{"time":"2025-08-02T21:28:08.3594908-05:00","level":"ERROR","msg":"monitor: error sampling metrics: process does not exist"}
+{"time":"2025-08-02T21:28:23.3593635-05:00","level":"ERROR","msg":"monitor: error sampling metrics: process does not exist"}
+{"time":"2025-08-02T21:28:38.3593693-05:00","level":"ERROR","msg":"monitor: error sampling metrics: process does not exist"}
+{"time":"2025-08-02T21:28:53.3594557-05:00","level":"ERROR","msg":"monitor: error sampling metrics: process does not exist"}
+{"time":"2025-08-02T21:29:08.3590458-05:00","level":"ERROR","msg":"monitor: error sampling metrics: process does not exist"}
+{"time":"2025-08-02T21:29:23.35938-05:00","level":"ERROR","msg":"monitor: error sampling metrics: process does not exist"}
+{"time":"2025-08-02T21:29:38.359206-05:00","level":"ERROR","msg":"monitor: error sampling metrics: process does not exist"}

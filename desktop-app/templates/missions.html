@@ -16,6 +16,7 @@
     
     <!-- Alpine.js -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
 </head>
 
 <body>
@@ -42,6 +43,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/ai-agents" title="AI Agents">
                             <span class="ai-icon">AI</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/test-missions" title="Test Missions">
+                            <i class="fas fa-vial"></i>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -136,8 +142,44 @@
                                             <div class="form-group">
                                                 <label>Mission Description</label>
                                                 <textarea class="form-control" rows="3" x-model="newMission.prompt" 
-                                                    placeholder="Describe the mission you want to execute..."></textarea>
+                                                    placeholder="Describe the mission you want to execute..."
+                                                    x-on:input.debounce.500ms="runPreFlightCheck()"></textarea>
                                             </div>
+                                            
+                                            <!-- NEW: Pre-flight Check Results Panel -->
+                                            <div x-show="preflightCheckResult" class="preflight-panel mt-3" x-transition>
+                                                <div class="preflight-header d-flex align-items-center mb-2">
+                                                    <i class="fas fa-shield-alt text-primary me-2"></i>
+                                                    <span class="fw-bold">Guardian Pre-Flight Check</span>
+                                                    <span x-show="isCheckingPrompt" class="spinner-border spinner-border-sm ms-2"></span>
+                                                </div>
+                                                <div class="preflight-body">
+                                                    <p :class="preflightCheckResult?.go_no_go ? 'text-success' : 'text-danger'" 
+                                                       x-text="preflightCheckResult?.feedback"></p>
+                                                    <ul x-show="preflightCheckResult?.suggestions?.length > 0" class="mt-2">
+                                                        <template x-for="suggestion in preflightCheckResult.suggestions" :key="suggestion">
+                                                            <li x-text="suggestion"></li>
+                                                        </template>
+                                                    </ul>
+                                                    <div class="row mt-2" x-show="preflightCheckResult?.clarity_score !== undefined">
+                                                        <div class="col-6">
+                                                            <small class="text-muted">Clarity Score:</small>
+                                                            <div class="progress" style="height: 8px;">
+                                                                <div class="progress-bar" :class="preflightCheckResult?.clarity_score >= 0.8 ? 'bg-success' : preflightCheckResult?.clarity_score >= 0.6 ? 'bg-warning' : 'bg-danger'"
+                                                                     :style="'width: ' + (preflightCheckResult?.clarity_score * 100) + '%'"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <small class="text-muted">Risk Score:</small>
+                                                            <div class="progress" style="height: 8px;">
+                                                                <div class="progress-bar" :class="preflightCheckResult?.risk_score >= 0.7 ? 'bg-danger' : preflightCheckResult?.risk_score >= 0.4 ? 'bg-warning' : 'bg-success'"
+                                                                     :style="'width: ' + (preflightCheckResult?.risk_score * 100) + '%'"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
@@ -319,17 +361,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Footer -->
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="copyright">
-                        © 2024 Sentinel Command Center. All rights reserved.
-                    </div>
-                </div>
-            </footer>
-        </div>
-    </div>
 
             <!-- Mission Modal -->
             <div class="mission-modal" x-show="showMissionModal" x-transition>

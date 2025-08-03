@@ -1,58 +1,62 @@
 #!/usr/bin/env python3
 """
-Database Schema Migration Script for Phase 2
-Handles the creation and migration of Phase 2 database tables
+Database Migration Script - Add missing columns to missions table
+Fixes the 'no such column: missions.progress' error
 """
 
+import sqlite3
 import os
-import sys
-import logging
 from pathlib import Path
 
-# Add the src directory to the path
-script_dir = os.path.dirname(os.path.abspath(__file__))
-src_path = os.path.join(script_dir, "..", "src")
-
-if os.path.exists(src_path):
-    sys.path.insert(0, src_path)
-    print(f"Added src path: {src_path}")
-else:
-    print(f"Error: src directory not found at {src_path}")
-    sys.exit(1)
-
-try:
-    from src.models.advanced_database import AdvancedDatabase
-    print("Successfully imported AdvancedDatabase")
-except ImportError as e:
-    print(f"Error: Could not import AdvancedDatabase: {e}")
-    print(f"Script directory: {script_dir}")
-    print(f"Python path: {sys.path}")
-    sys.exit(1)
-
-def main():
-    """Main migration function"""
-    logging.basicConfig(level=logging.INFO)
-    logger = logging.getLogger(__name__)
+def migrate_database():
+    """Add missing columns to the missions table"""
+    
+    # Get the database path
+    db_path = Path(__file__).parent.parent / "db" / "sentinel_missions.db"
+    
+    if not db_path.exists():
+        print(f"❌ Database not found at {db_path}")
+        return False
+    
+    print(f"🔧 Migrating database: {db_path}")
     
     try:
-        logger.info("Starting Phase 2 database schema migration...")
+        # Connect to the database
+        conn = sqlite3.connect(db_path)
+        cursor = conn.cursor()
         
-        # Initialize database
-        db = AdvancedDatabase()
-        logger.info("Database connection established")
+        # Check if columns already exist
+        cursor.execute("PRAGMA table_info(missions)")
+        columns = [column[1] for column in cursor.fetchall()]
         
-        # The Phase 2 tables are automatically created in the AdvancedDatabase constructor
-        # This script serves as a verification and migration tool
+        print(f"📋 Current columns: {columns}")
         
-        logger.info("Phase 2 database schema migration completed successfully")
-        logger.info("✅ All Phase 2 tables created and ready")
+        # Add progress column if it doesn't exist
+        if 'progress' not in columns:
+            print("➕ Adding 'progress' column...")
+            cursor.execute("ALTER TABLE missions ADD COLUMN progress INTEGER DEFAULT 0")
+            print("✅ 'progress' column added")
+        else:
+            print("✅ 'progress' column already exists")
         
+        # Add priority column if it doesn't exist
+        if 'priority' not in columns:
+            print("➕ Adding 'priority' column...")
+            cursor.execute("ALTER TABLE missions ADD COLUMN priority TEXT DEFAULT 'medium'")
+            print("✅ 'priority' column added")
+        else:
+            print("✅ 'priority' column already exists")
+        
+        # Commit changes
+        conn.commit()
+        conn.close()
+        
+        print("🎉 Database migration completed successfully!")
         return True
         
     except Exception as e:
-        logger.error(f"Database migration failed: {e}")
+        print(f"❌ Migration failed: {e}")
         return False
 
 if __name__ == "__main__":
-    success = main()
-    sys.exit(0 if success else 1) 
+    migrate_database() 
