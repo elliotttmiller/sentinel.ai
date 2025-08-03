@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - Sentinel Command Center</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="/static/css/sentinel-dash.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+</head>
+<body>
+    <div class="wrapper" x-data="sentinelApp()" x-init="init()">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-chart-pie"></i> Analytics</h3>
+            </div>
+            <ul class="list-unstyled">
+                <li><a href="/"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="/missions"><i class="fas fa-rocket"></i> Missions</a></li>
+                <li class="active"><a href="/analytics"><i class="fas fa-chart-pie"></i> Analytics</a></li>
+                <li><a href="/settings"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-panel">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <h4 class="mb-0">System Analytics</h4>
+                </div>
+            </nav>
+
+            <div class="content">
+                <!-- Analytics Summary Cards -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">📊 Total Missions</h5>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="text-primary" x-text="analyticsSummary.total_missions || 0">0</h3>
+                                <p class="text-muted mb-0">All time missions</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">✅ Completed</h5>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="text-success" x-text="analyticsSummary.completed_missions || 0">0</h3>
+                                <p class="text-muted mb-0">Successful missions</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">❌ Failed</h5>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="text-danger" x-text="analyticsSummary.failed_missions || 0">0</h3>
+                                <p class="text-muted mb-0">Failed missions</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">🔥 Healing</h5>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="text-warning" x-text="analyticsSummary.healing_missions || 0">0</h3>
+                                <p class="text-muted mb-0">Phoenix Protocol active</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Metrics -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">⚡ Performance Metrics</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p><strong>Success Rate:</strong></p>
+                                        <h4 class="text-success" x-text="((analyticsSummary.completed_missions || 0) / Math.max(analyticsSummary.total_missions || 1, 1) * 100).toFixed(1) + '%'">0%</h4>
+                                    </div>
+                                    <div class="col-6">
+                                        <p><strong>Avg Execution Time:</strong></p>
+                                        <h4 class="text-info" x-text="(analyticsSummary.avg_execution_time || 0).toFixed(2) + 's'">0.00s</h4>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-6">
+                                        <p><strong>Active Optimizations:</strong></p>
+                                        <h4 class="text-warning" x-text="analyticsSummary.active_optimizations || 0">0</h4>
+                                    </div>
+                                    <div class="col-6">
+                                        <p><strong>System Status:</strong></p>
+                                        <span class="badge bg-success">Operational</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">📈 Quick Stats</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p><strong>Today's Missions:</strong></p>
+                                        <h4 class="text-primary" x-text="missions.filter(m => new Date(m.created_at).toDateString() === new Date().toDateString()).length">0</h4>
+                                    </div>
+                                    <div class="col-6">
+                                        <p><strong>Active Agents:</strong></p>
+                                        <h4 class="text-info" x-text="agents.filter(a => a.status === 'online').length">0</h4>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-6">
+                                        <p><strong>Pending Missions:</strong></p>
+                                        <h4 class="text-warning" x-text="missions.filter(m => m.status === 'pending').length">0</h4>
+                                    </div>
+                                    <div class="col-6">
+                                        <p><strong>Running Missions:</strong></p>
+                                        <h4 class="text-info" x-text="missions.filter(m => m.status === 'running').length">0</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Chart -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">📊 Performance Over Time</h5>
+                                <p class="card-category">Daily mission success and failure rates</p>
+                            </div>
+                            <div class="card-body" style="height: 400px;">
+                                <canvas id="performanceChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">🔄 Recent Activity</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Time</th>
+                                                <th>Agent</th>
+                                                <th>Action</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <template x-for="activity in recentActivity.slice(0, 10)" :key="activity.id">
+                                                <tr>
+                                                    <td x-text="formatDate(activity.timestamp)"></td>
+                                                    <td x-text="activity.agent"></td>
+                                                    <td x-text="truncateText(activity.action, 50)"></td>
+                                                    <td>
+                                                        <span :class="'badge bg-' + (activity.severity === 'ERROR' ? 'danger' : activity.severity === 'WARNING' ? 'warning' : 'success')" 
+                                                              x-text="activity.severity"></span>
+                                                    </td>
+                                                </tr>
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- End of .content -->
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="text-muted">Sentinel Command Center v5.4</p>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <p class="text-muted">Phase 5 Analytics Active</p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="/static/js/unified-realtime.js"></script>
+</body>
+</html> 

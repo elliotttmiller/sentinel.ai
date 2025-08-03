@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Missions | Sentinel Command Center</title>
+    
+    <!-- Fonts and icons -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- CSS Files -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/css/sentinel-dash.css" rel="stylesheet" />
+    
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Skinny Sidebar -->
+        <div class="sidebar sidebar-mini" data-color="blue">
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="javascript:void(0)" class="simple-text logo-mini">
+                        SC
+                    </a>
+                </div>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/" title="Dashboard">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/missions" title="Missions">
+                            <i class="fas fa-rocket"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/ai-agents" title="AI Agents">
+                            <span class="ai-icon">AI</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/test-missions" title="Test Missions">
+                            <i class="fas fa-vial"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/settings" title="Settings">
+                            <i class="fas fa-cog"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Panel -->
+        <div class="main-panel">
+            <!-- Navigation -->
+            <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
+                <div class="container-fluid">
+                    <div class="navbar-wrapper">
+                        <div class="navbar-toggle d-inline">
+                            <button type="button" class="navbar-toggler">
+                                <span class="navbar-toggler-bar bar1"></span>
+                                <span class="navbar-toggler-bar bar2"></span>
+                                <span class="navbar-toggler-bar bar3"></span>
+                            </button>
+                        </div>
+                        <a class="navbar-brand" href="javascript:void(0)">Mission Control</a>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navigation">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <div class="search-container">
+                                    <div class="search-wrapper">
+                                        <input type="text" class="form-control search-input" placeholder="Search missions, agents, or logs...">
+                                        <i class="fas fa-search search-icon"></i>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <div class="notification-container">
+                                    <a href="javascript:void(0)" class="dropdown-toggle nav-link notification-link" data-toggle="dropdown">
+                                        <div class="notification d-none d-lg-block d-xl-block"></div>
+                                        <i class="fas fa-bell"></i>
+                                        <p class="d-lg-none">Notifications</p>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
+                                        <li class="nav-link"><a href="#" class="nav-item dropdown-item">Mission completed</a></li>
+                                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">New mission created</a></li>
+                                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Agent status updated</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="dropdown nav-item">
+                                <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                    <div class="photo">
+                                        <img src="https://via.placeholder.com/40x40/4A90E2/ffffff?text=SC" alt="Profile Photo">
+                                    </div>
+                                    <b class="caret d-none d-lg-block d-xl-block"></b>
+                                    <p class="d-lg-none">User</p>
+                                </a>
+                                <ul class="dropdown-menu dropdown-navbar">
+                                    <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Profile</a></li>
+                                    <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Settings</a></li>
+                                    <li class="dropdown-divider"></li>
+                                    <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Log out</a></li>
+                                </ul>
+                            </li>
+                            <li class="separator d-lg-none"></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Content -->
+            <div class="content missions-page" x-data="sentinelApp()" x-init="init()">
+                <!-- Mission Creation -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Create New Mission</h4>
+                                <p class="card-category">Deploy AI agents for complex tasks</p>
+                            </div>
+                            <div class="card-body">
+                                <form @submit.prevent="createMission()">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label>Mission Description</label>
+                                                <textarea class="form-control" rows="3" x-model="newMission.prompt" 
+                                                    placeholder="Describe the mission you want to execute..."
+                                                    x-on:input.debounce.500ms="runPreFlightCheck()"></textarea>
+                                            </div>
+                                            
+                                            <!-- Pre-flight Check Results Panel -->
+                                            <div x-show="preflightCheckResult" class="preflight-panel mt-3" x-transition>
+                                                <div class="preflight-header d-flex align-items-center mb-2">
+                                                    <i class="fas fa-shield-alt text-primary me-2"></i>
+                                                    <span class="fw-bold">Guardian Pre-Flight Check</span>
+                                                    <span x-show="isCheckingPrompt" class="spinner-border spinner-border-sm ms-2"></span>
+                                                </div>
+                                                <div class="preflight-body">
+                                                    <p :class="preflightCheckResult?.go_no_go ? 'text-success' : 'text-danger'" 
+                                                       x-text="preflightCheckResult?.feedback"></p>
+                                                    <ul x-show="preflightCheckResult?.suggestions?.length > 0" class="mt-2">
+                                                        <template x-for="suggestion in preflightCheckResult.suggestions" :key="suggestion">
+                                                            <li x-text="suggestion"></li>
+                                                        </template>
+                                                    </ul>
+                                                    <div class="row mt-2" x-show="preflightCheckResult?.clarity_score !== undefined">
+                                                        <div class="col-6">
+                                                            <small class="text-muted">Clarity Score:</small>
+                                                            <div class="progress" style="height: 8px;">
+                                                                <div class="progress-bar" :class="preflightCheckResult?.clarity_score >= 0.8 ? 'bg-success' : preflightCheckResult?.clarity_score >= 0.6 ? 'bg-warning' : 'bg-danger'"
+                                                                     :style="'width: ' + (preflightCheckResult?.clarity_score * 100) + '%'"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <small class="text-muted">Risk Score:</small>
+                                                            <div class="progress" style="height: 8px;">
+                                                                <div class="progress-bar" :class="preflightCheckResult?.risk_score >= 0.7 ? 'bg-danger' : preflightCheckResult?.risk_score >= 0.4 ? 'bg-warning' : 'bg-success'"
+                                                                     :style="'width: ' + (preflightCheckResult?.risk_score * 100) + '%'"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Agent Type</label>
+                                                <select class="form-control" x-model="newMission.agent_type">
+                                                    <option value="developer" selected>Developer Agent</option>
+                                                    <option value="analyst">Analyst Agent</option>
+                                                    <option value="researcher">Researcher Agent</option>
+                                                    <option value="optimizer">Optimizer Agent</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Priority</label>
+                                                <select class="form-control" x-model="newMission.priority">
+                                                    <option value="low" selected>Low</option>
+                                                    <option value="medium">Medium</option>
+                                                    <option value="high">High</option>
+                                                    <option value="critical">Critical</option>
+                                                </select>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary btn-block">
+                                                <i class="fas fa-rocket"></i> Launch Mission
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mission Queue (RESTORED TO TABLE LAYOUT) -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card card-fixed-height">
+                            <div class="card-header">
+                                <h4 class="card-title">Mission Queue</h4>
+                                <p class="card-category">Real-time mission status</p>
+                            </div>
+                            <div class="card-body card-content-scrollable">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="text-primary">
+                                            <tr>
+                                                <th>Status</th>
+                                                <th>Mission</th>
+                                                <th>Agent</th>
+                                                <th>Priority</th>
+                                                <th>Progress</th>
+                                                <th class="text-right">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <template x-if="missions.length === 0">
+                                                <tr><td colspan="6" class="text-center py-5"><p class="text-muted">No Missions Queued</p></td></tr>
+                                            </template>
+                                            <template x-for="mission in missions" :key="mission.mission_id_str">
+                                                <tr @click="openMissionModal(mission)" style="cursor: pointer;">
+                                                    <td>
+                                                        <span class="status-badge" :class="getStatusClass(mission.status)" x-text="mission.status"></span>
+                                                    </td>
+                                                    <td>
+                                                        <p class="mission-title" x-text="mission.prompt.substring(0, 70) + (mission.prompt.length > 70 ? '...' : '')"></p>
+                                                        <small class="text-muted" x-text="'ID: ' + mission.mission_id_str"></small>
+                                                    </td>
+                                                    <td><span x-text="mission.agent_type"></span></td>
+                                                    <td><span class="badge" :class="getPriorityClass(mission.priority)" x-text="mission.priority"></span></td>
+                                                    <td>
+                                                        <div class="progress-info" style="min-width: 100px;">
+                                                            <div class="progress-bar-container" style="flex-grow: 1; margin-right: 8px;">
+                                                                <div class="progress-bar" :style="'width: ' + mission.progress + '%'"></div>
+                                                            </div>
+                                                            <span class="progress-text" x-text="mission.progress + '%'"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <button class="btn btn-sm btn-info btn-icon" @click.stop="openMissionModal(mission)"><i class="fa fa-eye"></i></button>
+                                                        <button class="btn btn-sm btn-warning btn-icon" @click.stop="pauseMission(mission.mission_id_str)"><i class="fa fa-pause"></i></button>
+                                                        <button class="btn btn-sm btn-danger btn-icon" @click.stop="cancelMission(mission.mission_id_str)"><i class="fa fa-stop"></i></button>
+                                                    </td>
+                                                </tr>
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mission Statistics -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card card-stats">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <div class="icon-big text-center icon-warning">
+                                            <i class="fas fa-rocket"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="numbers">
+                                            <p class="card-category">Active</p>
+                                            <h4 class="card-title" x-text="getActiveCount()">0</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card card-stats">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <div class="icon-big text-center icon-success">
+                                            <i class="fas fa-check-circle"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="numbers">
+                                            <p class="card-category">Completed</p>
+                                            <h4 class="card-title" x-text="getCompletedCount()">0</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card card-stats">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <div class="icon-big text-center icon-info">
+                                            <i class="fas fa-clock"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="numbers">
+                                            <p class="card-category">Pending</p>
+                                            <h4 class="card-title" x-text="getPendingCount()">0</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card card-stats">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <div class="icon-big text-center icon-primary">
+                                            <i class="fas fa-percentage"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="numbers">
+                                            <p class="card-category">Success Rate</p>
+                                            <h4 class="card-title" x-text="getSuccessRate() + '%'">0%</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission Details Modal (Correctly wired) -->
+            <div class="mission-modal" x-show="showMissionModal" x-transition.opacity @click.self="closeMissionModal()" style="display: none;">
+                <div class="mission-modal-content">
+                    <div class="mission-modal-header">
+                        <h5 class="mission-modal-title">Mission Details</h5>
+                        <button class="mission-modal-close" @click="closeMissionModal()">×</button>
+                    </div>
+                    <div class="mission-modal-body" x-show="selectedMission">
+                        <!-- Mission Overview -->
+                        <div class="mission-detail-section">
+                            <div class="mission-detail-title">Mission Overview</div>
+                            <div class="mission-detail-grid">
+                                <div class="mission-detail-item">
+                                    <span class="mission-detail-label">Status</span>
+                                    <span class="mission-detail-value" x-text="selectedMission?.status"></span>
+                                </div>
+                                <div class="mission-detail-item">
+                                    <span class="mission-detail-label">Priority</span>
+                                    <span class="mission-detail-value" x-text="selectedMission?.priority"></span>
+                                </div>
+                                <div class="mission-detail-item">
+                                    <span class="mission-detail-label">Agent Type</span>
+                                    <span class="mission-detail-value" x-text="selectedMission?.agent_type"></span>
+                                </div>
+                                <div class="mission-detail-item">
+                                    <span class="mission-detail-label">Progress</span>
+                                    <span class="mission-detail-value" x-text="getProgress(selectedMission) + '%'"></span>
+                                </div>
+                                <div class="mission-detail-item">
+                                    <span class="mission-detail-label">Created</span>
+                                    <span class="mission-detail-value" x-text="formatTimestamp(selectedMission?.created_at)"></span>
+                                </div>
+                                <div class="mission-detail-item">
+                                    <span class="mission-detail-label">Updated</span>
+                                    <span class="mission-detail-value" x-text="formatTimestamp(selectedMission?.updated_at)"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mission Description -->
+                        <div class="mission-detail-section">
+                            <div class="mission-detail-title">Description</div>
+                            <div class="mission-description" x-text="selectedMission?.prompt"></div>
+                        </div>
+
+                        <!-- Mission Timeline -->
+                        <div class="mission-detail-section">
+                            <div class="mission-detail-title">Timeline</div>
+                            <div class="mission-timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-icon">
+                                        <i class="fas fa-rocket"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Mission Created</div>
+                                        <div class="timeline-time" x-text="formatTimestamp(selectedMission?.created_at)"></div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item" x-show="selectedMission?.started_at">
+                                    <div class="timeline-icon">
+                                        <i class="fas fa-play"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Mission Started</div>
+                                        <div class="timeline-time" x-text="formatTimestamp(selectedMission?.started_at)"></div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item" x-show="selectedMission?.completed_at">
+                                    <div class="timeline-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Mission Completed</div>
+                                        <div class="timeline-time" x-text="formatTimestamp(selectedMission?.completed_at)"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+    
+    <!-- CRITICAL: Lodash dependency for debounce -->
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    
+    <!-- Unified Real-time Controller -->
+    <script src="/static/js/unified-realtime.js"></script>
+</body>
+</html> 
