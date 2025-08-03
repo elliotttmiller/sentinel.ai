@@ -17,6 +17,7 @@ from fastapi import FastAPI, HTTPException, Request, BackgroundTasks, Depends
 from fastapi.responses import HTMLResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 from loguru import logger
 
 # Add the src directory to the Python path
@@ -50,6 +51,12 @@ app.add_middleware(
 
 # Mount static files
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Pydantic models for API requests
+class TestMissionRequest(BaseModel):
+    prompt: str
+    test_type: str = "unit"
+    priority: str = "low"
 
 # Global variables for fallback data
 live_missions: Dict[str, Dict] = {}
@@ -183,6 +190,24 @@ async def serve_analytics():
     except FileNotFoundError:
         return HTMLResponse(content="<h1>Analytics page not found</h1>")
 
+@app.get("/ai-agents", response_class=HTMLResponse)
+async def serve_ai_agents():
+    """Serve the AI agents page"""
+    try:
+        with open("templates/ai-agents.html", "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read())
+    except FileNotFoundError:
+        return HTMLResponse(content="<h1>AI Agents page not found</h1>")
+
+@app.get("/test-missions", response_class=HTMLResponse)
+async def serve_test_missions():
+    """Serve the test missions page"""
+    try:
+        with open("templates/test-missions.html", "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read())
+    except FileNotFoundError:
+        return HTMLResponse(content="<h1>Test Missions page not found</h1>")
+
 # API Endpoints for data
 @app.get("/api/missions")
 async def list_missions_api(current_user: User = Depends(get_current_user)):
@@ -282,6 +307,52 @@ async def create_mission(request: Request, background_tasks: BackgroundTasks, cu
     except Exception as e:
         logger.error(f"❌ Failed to create mission: {e}")
         raise HTTPException(status_code=500, detail=f"Failed to create mission: {str(e)}")
+
+@app.post("/api/test-missions")
+async def create_test_mission(request: TestMissionRequest, current_user: User = Depends(get_current_user)):
+    """Create a test mission with enhanced error handling"""
+    try:
+        logger.info(f"🧪 Creating test mission: {request.test_type} - {request.prompt[:50]}...")
+        
+        # Create a test mission with special identifier
+        test_mission_id = f"test_{uuid.uuid4().hex[:8]}"
+        
+        new_test_mission = db_manager.create_mission(
+            mission_id_str=test_mission_id,
+            prompt=request.prompt,
+            agent_type="tester",  # Special agent type for tests
+            priority=request.priority,
+            status="pending",
+            owner_id=current_user.id,
+            organization_id=current_user.organization_id
+        )
+        
+        # Add test-specific metadata
+        test_metadata = {
+            "test_type": request.test_type,
+            "is_test": True,
+            "created_at": datetime.utcnow().isoformat()
+        }
+        
+        # Store test metadata in mission updates
+        db_manager.add_mission_update(
+            test_mission_id,
+            "test_creation",
+            f"Test mission created: {request.test_type}",
+            test_metadata
+        )
+        
+        logger.info(f"✅ Test mission created: {test_mission_id}")
+        return {
+            "success": True,
+            "mission_id": test_mission_id,
+            "test_type": request.test_type,
+            "message": f"Test mission created successfully"
+        }
+        
+    except Exception as e:
+        logger.error(f"❌ Failed to create test mission: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to create test mission: {str(e)}")
 
 @app.get("/api/agents")
 async def list_agents_api():
@@ -423,29 +494,15 @@ async def get_system_logs_stats():
 # Real-time event streaming
 @app.get("/api/events/stream")
 async def stream_events():
-    """Stream real-time events"""
+    """Stream real-time events from the actual observability system"""
     async def event_generator():
         while True:
             try:
-                # Check if agent_observability has get_event method
+                # Get real events from the observability system
                 if hasattr(agent_observability, 'get_event'):
                     event = await agent_observability.get_event()
-                else:
-                    # Fallback: create a simple event
-                    event = FallbackLiveStreamEvent(
-                        event_type="heartbeat",
-                        source="system",
-                        severity="INFO",
-                        message="System heartbeat",
-                        payload={}
-                    )
-                
-                if event:
-                    # Convert event to dictionary format
-                    if hasattr(event, '__dataclass_fields__'):
-                        from dataclasses import asdict
-                        event_dict = asdict(event)
-                    else:
+                    if event:
+                        # Convert real event to stream format
                         event_dict = {
                             "event_type": getattr(event, 'event_type', 'system_log'),
                             "source": getattr(event, 'source', 'system'),
@@ -454,19 +511,21 @@ async def stream_events():
                             "payload": getattr(event, 'payload', {}),
                             "timestamp": getattr(event, 'timestamp', datetime.utcnow().isoformat())
                         }
-                    
-                    yield f"data: {json.dumps(event_dict)}\n\n"
+                        yield f"data: {json.dumps(event_dict)}\n\n"
+                    else:
+                        # No events available, send minimal heartbeat
+                        yield f"data: {json.dumps({'event_type': 'heartbeat', 'timestamp': datetime.utcnow().isoformat()})}\n\n"
                 else:
-                    # Send heartbeat
-                    yield f"data: {json.dumps({'event_type': 'heartbeat', 'timestamp': datetime.utcnow().isoformat()})}\n\n"
+                    # Observability system not available
+                    await asyncio.sleep(5)
                     
             except Exception as e:
                 logger.error(f"❌ Event stream error: {e}")
-                yield f"data: {json.dumps({'event_type': 'error', 'message': str(e)})}\n\n"
+                await asyncio.sleep(5)
             
-            await asyncio.sleep(1)
+            await asyncio.sleep(0.1)  # Check for events more frequently
     
-    return StreamingResponse(event_generator(), media_type="text/plain")
+    return StreamingResponse(event_generator(), media_type="text/event-stream")
 
 # Settings endpoint
 @app.get("/api/settings")

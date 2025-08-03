@@ -366,6 +366,44 @@ Provide your response as a JSON array of improvements:
         return True
 
     # --- NEW METHOD TO FIX THE ATTRIBUTE ERROR ---
+    async def synthesize_and_learn(self, mission) -> Dict[str, Any]:
+        """
+        Synthesize knowledge from a completed mission and store it for learning.
+        This method was missing, causing the AttributeError.
+        """
+        if not mission:
+            logger.warning("No mission provided for synthesis")
+            return {"error": "No mission provided"}
+        
+        logger.info(f"🧠 Synthesizing knowledge from mission: {mission.mission_id_str}")
+        
+        # Create a concise summary for vector storage
+        summary = f"""
+        Mission ID: {mission.mission_id_str}
+        Status: {mission.status}
+        Prompt: {mission.prompt}
+        Result: {mission.result}
+        Agent Type: {mission.agent_type}
+        Execution Time: {mission.execution_time}s
+        """
+        
+        metadata = {
+            "mission_id": mission.mission_id_str,
+            "status": mission.status,
+            "agent_type": mission.agent_type,
+            "execution_time": mission.execution_time or 0,
+            "success": mission.status == "completed"
+        }
+        
+        # Add to ChromaDB vector memory
+        self.db_manager.add_to_memory(
+            mission_id=mission.mission_id_str,
+            content=summary,
+            metadata=metadata
+        )
+        logger.success(f"✅ Knowledge from mission {mission.mission_id_str} synthesized and stored.")
+        return {"success": True, "mission_id": mission.mission_id_str}
+
     async def analyze_completed_missions(self) -> Dict[str, Any]:
         """
         Analyzes all completed missions to find patterns for optimization.

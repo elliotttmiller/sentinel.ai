@@ -377,11 +377,11 @@
                             <div class="mission-detail-grid">
                                 <div class="mission-detail-item">
                                     <span class="mission-detail-label">Status</span>
-                                    <span class="mission-detail-value" x-text="selectedMission?.status"></span>
+                                    <span class="mission-detail-value" :class="getStatusClass(selectedMission?.status)" x-text="selectedMission?.status"></span>
                                 </div>
                                 <div class="mission-detail-item">
                                     <span class="mission-detail-label">Priority</span>
-                                    <span class="mission-detail-value" x-text="selectedMission?.priority"></span>
+                                    <span class="mission-detail-value" :class="getPriorityClass(selectedMission?.priority)" x-text="selectedMission?.priority"></span>
                                 </div>
                                 <div class="mission-detail-item">
                                     <span class="mission-detail-label">Agent Type</span>
@@ -439,6 +439,45 @@
                                         <div class="timeline-time" x-text="formatTimestamp(selectedMission?.completed_at)"></div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+
+                        <!-- Mission Output -->
+                        <div class="mission-detail-section" x-show="selectedMission?.output">
+                            <div class="mission-detail-title">Output</div>
+                            <pre class="mission-output"><code x-text="selectedMission?.output"></code></pre>
+                        </div>
+
+                        <!-- Mission Logs -->
+                        <div class="mission-detail-section" x-show="selectedMission?.logs && selectedMission?.logs.length > 0">
+                            <div class="mission-detail-title">Logs</div>
+                            <div class="mission-logs">
+                                <template x-for="log in selectedMission?.logs" :key="log.id">
+                                    <div class="log-entry" :class="log.level.toLowerCase()">
+                                        <span class="log-timestamp" x-text="formatTimestamp(log.timestamp)"></span>
+                                        <span class="log-level" x-text="log.level"></span>
+                                        <span class="log-message" x-text="log.message"></span>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+
+                        <!-- Mission Actions -->
+                        <div class="mission-detail-section">
+                            <div class="mission-detail-title">Actions</div>
+                            <div class="mission-actions-modal">
+                                <button class="btn btn-outline-warning" @click="pauseMission(selectedMission?.id)" x-show="selectedMission?.status === 'running'">
+                                    <i class="fas fa-pause"></i> Pause Mission
+                                </button>
+                                <button class="btn btn-outline-success" @click="resumeMission(selectedMission?.id)" x-show="selectedMission?.status === 'paused'">
+                                    <i class="fas fa-play"></i> Resume Mission
+                                </button>
+                                <button class="btn btn-outline-danger" @click="cancelMission(selectedMission?.id)" x-show="selectedMission?.status === 'running' || selectedMission?.status === 'paused'">
+                                    <i class="fas fa-stop"></i> Cancel Mission
+                                </button>
+                                <button class="btn btn-outline-info" @click="duplicateMission(selectedMission?.id)">
+                                    <i class="fas fa-copy"></i> Duplicate Mission
+                                </button>
                             </div>
                         </div>
                     </div>

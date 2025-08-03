@@ -91,44 +91,58 @@ function sentinelApp() {
 
         // --- EVENT STREAM MANAGEMENT ---
         startUnifiedEventStream() {
+            console.log('🔌 Starting unified event stream...');
             this.eventSource = new EventSource('/api/events/stream');
             
+            this.eventSource.onopen = () => {
+                console.log('✅ Event stream connected successfully');
+            };
+            
             this.eventSource.onmessage = (event) => {
+                console.log('📨 Received event:', event.data);
                 try {
                     const data = JSON.parse(event.data);
+                    console.log('📊 Parsed event data:', data);
                     this.dispatchEvent(data);
                 } catch (e) {
-                    console.error('Failed to parse event:', e);
+                    console.error('❌ Failed to parse event:', e);
                 }
             };
             
             this.eventSource.onerror = (error) => {
-                console.error('Event stream error:', error);
+                console.error('❌ Event stream error:', error);
                 setTimeout(() => this.startUnifiedEventStream(), 5000);
             };
         },
 
         dispatchEvent(event) {
+            console.log('🔄 Dispatching event:', event.event_type);
+            
             switch (event.event_type) {
                 case 'mission_update':
                 case 'mission_complete':
                 case 'mission_error':
+                    console.log('📋 Mission event:', event);
                     this.updateMissionState(event);
                     break;
                 case 'agent_action':
+                    console.log('🤖 Agent event:', event);
                     this.addAgentActivity(event);
                     break;
                 case 'system_log':
+                    console.log('📝 System log event:', event);
                     this.addSystemLog(event);
                     break;
                 case 'live_stream_event':
+                    console.log('📡 Live stream event:', event);
                     this.addLiveStreamEvent(event);
                     break;
                 case 'heartbeat':
+                    console.log('💓 Heartbeat received');
                     // Keep connection alive
                     break;
                 default:
-                    console.log('Unhandled event type:', event.event_type);
+                    console.log('❓ Unhandled event type:', event.event_type, event);
             }
         },
 
@@ -138,12 +152,16 @@ function sentinelApp() {
             const missionId = missionData.mission_id_str || missionData.id;
             if (!missionId) return;
 
+            console.log('🔄 Updating mission state:', missionId, missionData);
+
             const existingMissionIndex = this.missions.findIndex(m => m.mission_id_str === missionId);
 
             if (existingMissionIndex > -1) {
                 this.missions[existingMissionIndex] = { ...this.missions[existingMissionIndex], ...missionData };
+                console.log('✅ Updated existing mission:', this.missions[existingMissionIndex]);
             } else {
                 this.missions.unshift({ mission_id_str: missionId, ...missionData });
+                console.log('➕ Added new mission:', this.missions[0]);
             }
             
             // Phase 4: Update healing missions list
@@ -166,6 +184,8 @@ function sentinelApp() {
             if (this.agentActivity.length > 50) {
                 this.agentActivity = this.agentActivity.slice(0, 50);
             }
+            
+            console.log('🤖 Added agent activity:', activity);
         },
 
         // --- SYSTEM LOG MANAGEMENT ---
@@ -178,12 +198,25 @@ function sentinelApp() {
                 message: event.message || ''
             };
             
-            this.systemLogs.unshift(log);
+            // Add to overview logs
+            this.systemLogs.overview.unshift(log);
             
-            // Keep only last 100 logs
-            if (this.systemLogs.length > 100) {
-                this.systemLogs = this.systemLogs.slice(0, 100);
+            // Add to specific source logs if it exists
+            if (event.source && this.systemLogs[event.source]) {
+                this.systemLogs[event.source].unshift(log);
             }
+            
+            // Keep only last 100 logs in overview
+            if (this.systemLogs.overview.length > 100) {
+                this.systemLogs.overview = this.systemLogs.overview.slice(0, 100);
+            }
+            
+            // Keep only last 50 logs in specific sources
+            if (event.source && this.systemLogs[event.source] && this.systemLogs[event.source].length > 50) {
+                this.systemLogs[event.source] = this.systemLogs[event.source].slice(0, 50);
+            }
+            
+            console.log('📝 Added system log:', log);
         },
 
         // --- LIVE STREAM EVENT MANAGEMENT ---
@@ -205,6 +238,7 @@ function sentinelApp() {
             }
             
             this.updateLiveStreamStats();
+            console.log('📡 Added live stream event:', streamEvent);
         },
 
         updateLiveStreamStats() {
@@ -228,7 +262,13 @@ function sentinelApp() {
                 const response = await fetch('/api/missions');
                 const data = await response.json();
                 if (data.success) {
-                    this.missions = data.missions;
+                    console.log('📋 Loaded missions:', data.missions);
+                    this.missions = data.missions.map(mission => ({
+                        ...mission,
+                        mission_id_str: mission.mission_id_str || mission.id,
+                        progress: mission.progress || 0,
+                        status: mission.status || 'pending'
+                    }));
                 }
             } catch (e) {
                 console.error('Failed to load missions:', e);
@@ -556,6 +596,19 @@ function sentinelApp() {
             this.selectedMission = mission;
             this.showMissionModal = true;
             console.log("Modal state after opening:", this.showMissionModal);
+            
+            // Force a DOM update
+            this.$nextTick(() => {
+                console.log("Modal should be visible now");
+                const modal = document.querySelector('.mission-modal');
+                if (modal) {
+                    console.log("Modal element found:", modal);
+                    console.log("Modal display style:", modal.style.display);
+                    console.log("Modal x-show attribute:", modal.getAttribute('x-show'));
+                } else {
+                    console.log("Modal element not found");
+                }
+            });
         },
         
         closeMissionModal() {
@@ -670,6 +723,7 @@ function sentinelApp() {
         },
         
         refreshMissions() { 
+            console.log('🔄 Refreshing missions...');
             this.loadMissions(); 
         },
         
@@ -681,6 +735,24 @@ function sentinelApp() {
         cancelMission(id) { 
             console.log("Canceling mission:", id); 
             /* Add API call here */ 
+        },
+        
+        resumeMission(id) {
+            console.log("Resuming mission:", id);
+            /* Add API call here */
+        },
+        
+        duplicateMission(id) {
+            console.log("Duplicating mission:", id);
+            const mission = this.missions.find(m => m.id === id);
+            if (mission) {
+                this.newMission.prompt = mission.prompt;
+                this.newMission.agent_type = mission.agent_type;
+                this.newMission.priority = mission.priority;
+                this.closeMissionModal();
+                // You could also auto-trigger mission creation here
+                this.showNotification('Mission copied to form. Click "Create Mission" to create a duplicate.', 'info');
+            }
         },
         
         toggleAutoRefresh() { 

@@ -1,0 +1,48 @@
+[32m2025-08-03 12:51:02.101[0m | [32m[1mSUCCESS [0m | [36mutils.agent_observability[0m:[36m_initialize_integrations[0m:[36m109[0m - [32m[1m✅ W&B initialized for agent analytics.[0m
+[32m2025-08-03 12:51:10.301[0m | [32m[1mSUCCESS [0m | [36mutils.sentry_integration[0m:[36m_initialize_sentry[0m:[36m78[0m - [32m[1mSentry integration initialized successfully[0m
+[32m2025-08-03 12:51:10.320[0m | [1mINFO    [0m | [36mcore.cognitive_forge_engine[0m:[36m__init__[0m:[36m111[0m - [1mGoogle Generative AI initialized with model: gemini-1.5-pro[0m
+[32m2025-08-03 12:51:10.326[0m | [1mINFO    [0m | [36mutils.crewai_bypass[0m:[36m__init__[0m:[36m21[0m - [1mCreating DirectAIAgent with role: Learning Analysis Specialist, LLM type: <class 'utils.google_ai_wrapper.GoogleGenerativeAIWrapper'>[0m
+[32m2025-08-03 12:51:10.328[0m | [1mINFO    [0m | [36mutils.crewai_bypass[0m:[36m__init__[0m:[36m21[0m - [1mCreating DirectAIAgent with role: Improvement Generation Specialist, LLM type: <class 'utils.google_ai_wrapper.GoogleGenerativeAIWrapper'>[0m
+[32m2025-08-03 12:51:10.329[0m | [1mINFO    [0m | [36mutils.self_learning_module[0m:[36m__init__[0m:[36m26[0m - [1mSelf-Learning Module initialized - Continuous improvement active[0m
+[32mINFO[0m:     Started server process [[36m13516[0m]
+[32mINFO[0m:     Waiting for application startup.
+[32m2025-08-03 12:51:10.342[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m555[0m - [1m🚀 Sentinel Cognitive Forge v5.4 (Predictive Intelligence Activated) starting up...[0m
+[32m2025-08-03 12:51:10.343[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m567[0m - [1m✅ All systems initialized and ready for missions[0m
+[32mINFO[0m:     Application startup complete.
+[31mERROR[0m:    Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\routing.py", line 686, in lifespan
+    await receive()
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\sentry_sdk\integrations\starlette.py", line 179, in _sentry_receive
+    return await receive(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\asyncio\queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+
+Sentry is attempting to send 3 pending events
+Waiting up to 2 seconds
+Press Ctrl-Break to quit

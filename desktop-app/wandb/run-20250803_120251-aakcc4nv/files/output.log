@@ -61,3 +61,304 @@ WHERE missions.organization_id = ? ORDER BY missions.created_at DESC
 [32mINFO[0m:     127.0.0.1:53854 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
 [32mINFO[0m:     127.0.0.1:53864 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
 [32mINFO[0m:     127.0.0.1:53865 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:53872 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:53873 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:53895 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:53894 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:53912 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:53911 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:53934 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:53933 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:53935 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:53951 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:53968 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:53969 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:53970 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:53987 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54002 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54003 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54004 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54022 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54029 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54030 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54031 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54053 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54063 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54064 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54065 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54068 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54080 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54081 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54082 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54090 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54108 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54107 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54110 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54120 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54129 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54128 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54130 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54135 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54143 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54142 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54144 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54151 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54166 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54167 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54169 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54178 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54202 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54203 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54222 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54223 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54224 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54263 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54281 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54280 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54282 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54287 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54301 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54302 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54303 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54309 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54318 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54317 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54319 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54328 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54333 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54334 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54335 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54340 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54358 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54357 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54359 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54364 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54376 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54377 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54378 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54385 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54392 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54393 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54394 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54424 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54452 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54453 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54456 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54468 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54488 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54487 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54489 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54499 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54510 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54509 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54511 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54518 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54527 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54528 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54529 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54535 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54560 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54561 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54562 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54566 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54602 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54603 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54604 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54621 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54631 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54632 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54633 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54642 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54654 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54655 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54656 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54666 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54679 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54680 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54681 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54688 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54702 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54701 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54703 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54711 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54722 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54721 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54723 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54733 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54743 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54744 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54745 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54750 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54755 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54756 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54768 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54770 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54784 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54785 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54792 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54793 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54799 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54800 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54811 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54812 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54819 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54820 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54826 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54827 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54840 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54841 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54845 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54846 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54856 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54857 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54864 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54865 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54874 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54875 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54882 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54883 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54887 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54888 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54895 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54897 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54903 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54904 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54913 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54914 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54919 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54922 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54946 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54947 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54957 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54958 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54969 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54970 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54979 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54980 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54987 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54988 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54995 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:54996 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55003 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55004 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55015 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55016 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55045 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55046 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55052 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55053 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55059 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55060 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55065 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55066 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55073 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55074 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55080 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55081 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55090 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55091 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55095 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55096 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55120 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55121 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55643 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55643 - "[1mGET /css/sentinel-dash.css HTTP/1.1[0m" [33m304 Not Modified[0m
+[32mINFO[0m:     127.0.0.1:55644 - "[1mGET /js/unified-realtime.js HTTP/1.1[0m" [33m304 Not Modified[0m
+[32m2025-08-03 12:36:46.041[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mlist_missions_api[0m:[36m197[0m - [31m[1mFailed to list missions due to a database error: (sqlite3.OperationalError) no such column: missions.progress
+[SQL: SELECT missions.id AS missions_id, missions.mission_id_str AS missions_mission_id_str, missions.title AS missions_title, missions.prompt AS missions_prompt, missions.description AS missions_description, missions.agent_type AS missions_agent_type, missions.status AS missions_status, missions.progress AS missions_progress, missions.priority AS missions_priority, missions.result AS missions_result, missions."plan" AS missions_plan, missions.execution_path AS missions_execution_path, missions.complexity_score AS missions_complexity_score, missions.decision_metadata AS missions_decision_metadata, missions.execution_time AS missions_execution_time, missions.user_satisfaction AS missions_user_satisfaction, missions.error_message AS missions_error_message, missions.created_at AS missions_created_at, missions.updated_at AS missions_updated_at, missions.completed_at AS missions_completed_at, missions.is_healing AS missions_is_healing, missions.phoenix_retries AS missions_phoenix_retries, missions.owner_id AS missions_owner_id, missions.organization_id AS missions_organization_id, missions.prompt_analysis AS missions_prompt_analysis, missions.risk_score AS missions_risk_score
+FROM missions
+WHERE missions.organization_id = ? ORDER BY missions.created_at DESC
+ LIMIT ? OFFSET ?]
+[parameters: (1, 50, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)[0m
+[32mINFO[0m:     127.0.0.1:55644 - "[1mGET /api/missions HTTP/1.1[0m" [91m500 Internal Server Error[0m
+[32mINFO[0m:     127.0.0.1:55643 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55646 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32m2025-08-03 12:36:46.121[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mlist_missions_api[0m:[36m197[0m - [31m[1mFailed to list missions due to a database error: (sqlite3.OperationalError) no such column: missions.progress
+[SQL: SELECT missions.id AS missions_id, missions.mission_id_str AS missions_mission_id_str, missions.title AS missions_title, missions.prompt AS missions_prompt, missions.description AS missions_description, missions.agent_type AS missions_agent_type, missions.status AS missions_status, missions.progress AS missions_progress, missions.priority AS missions_priority, missions.result AS missions_result, missions."plan" AS missions_plan, missions.execution_path AS missions_execution_path, missions.complexity_score AS missions_complexity_score, missions.decision_metadata AS missions_decision_metadata, missions.execution_time AS missions_execution_time, missions.user_satisfaction AS missions_user_satisfaction, missions.error_message AS missions_error_message, missions.created_at AS missions_created_at, missions.updated_at AS missions_updated_at, missions.completed_at AS missions_completed_at, missions.is_healing AS missions_is_healing, missions.phoenix_retries AS missions_phoenix_retries, missions.owner_id AS missions_owner_id, missions.organization_id AS missions_organization_id, missions.prompt_analysis AS missions_prompt_analysis, missions.risk_score AS missions_risk_score
+FROM missions
+WHERE missions.organization_id = ? ORDER BY missions.created_at DESC
+ LIMIT ? OFFSET ?]
+[parameters: (1, 50, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)[0m
+[32mINFO[0m:     127.0.0.1:55644 - "[1mGET /api/missions HTTP/1.1[0m" [91m500 Internal Server Error[0m
+[32mINFO[0m:     127.0.0.1:55644 - "[1mGET /api/agents HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55644 - "[1mGET /api/agents HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55644 - "[1mGET /api/system/logs HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55644 - "[1mGET /api/system/logs HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55644 - "[1mGET /missions HTTP/1.1[0m" [32m200 OK[0m
+[32m2025-08-03 12:36:49.537[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mlist_missions_api[0m:[36m197[0m - [31m[1mFailed to list missions due to a database error: (sqlite3.OperationalError) no such column: missions.progress
+[SQL: SELECT missions.id AS missions_id, missions.mission_id_str AS missions_mission_id_str, missions.title AS missions_title, missions.prompt AS missions_prompt, missions.description AS missions_description, missions.agent_type AS missions_agent_type, missions.status AS missions_status, missions.progress AS missions_progress, missions.priority AS missions_priority, missions.result AS missions_result, missions."plan" AS missions_plan, missions.execution_path AS missions_execution_path, missions.complexity_score AS missions_complexity_score, missions.decision_metadata AS missions_decision_metadata, missions.execution_time AS missions_execution_time, missions.user_satisfaction AS missions_user_satisfaction, missions.error_message AS missions_error_message, missions.created_at AS missions_created_at, missions.updated_at AS missions_updated_at, missions.completed_at AS missions_completed_at, missions.is_healing AS missions_is_healing, missions.phoenix_retries AS missions_phoenix_retries, missions.owner_id AS missions_owner_id, missions.organization_id AS missions_organization_id, missions.prompt_analysis AS missions_prompt_analysis, missions.risk_score AS missions_risk_score
+FROM missions
+WHERE missions.organization_id = ? ORDER BY missions.created_at DESC
+ LIMIT ? OFFSET ?]
+[parameters: (1, 50, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)[0m
+[32mINFO[0m:     127.0.0.1:55644 - "[1mGET /api/missions HTTP/1.1[0m" [91m500 Internal Server Error[0m
+[32mINFO[0m:     127.0.0.1:55651 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55650 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55644 - "[1mGET /api/agents HTTP/1.1[0m" [32m200 OK[0m
+[32m2025-08-03 12:36:49.623[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mlist_missions_api[0m:[36m197[0m - [31m[1mFailed to list missions due to a database error: (sqlite3.OperationalError) no such column: missions.progress
+[SQL: SELECT missions.id AS missions_id, missions.mission_id_str AS missions_mission_id_str, missions.title AS missions_title, missions.prompt AS missions_prompt, missions.description AS missions_description, missions.agent_type AS missions_agent_type, missions.status AS missions_status, missions.progress AS missions_progress, missions.priority AS missions_priority, missions.result AS missions_result, missions."plan" AS missions_plan, missions.execution_path AS missions_execution_path, missions.complexity_score AS missions_complexity_score, missions.decision_metadata AS missions_decision_metadata, missions.execution_time AS missions_execution_time, missions.user_satisfaction AS missions_user_satisfaction, missions.error_message AS missions_error_message, missions.created_at AS missions_created_at, missions.updated_at AS missions_updated_at, missions.completed_at AS missions_completed_at, missions.is_healing AS missions_is_healing, missions.phoenix_retries AS missions_phoenix_retries, missions.owner_id AS missions_owner_id, missions.organization_id AS missions_organization_id, missions.prompt_analysis AS missions_prompt_analysis, missions.risk_score AS missions_risk_score
+FROM missions
+WHERE missions.organization_id = ? ORDER BY missions.created_at DESC
+ LIMIT ? OFFSET ?]
+[parameters: (1, 50, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)[0m
+[32mINFO[0m:     127.0.0.1:55652 - "[1mGET /api/missions HTTP/1.1[0m" [91m500 Internal Server Error[0m
+[32mINFO[0m:     127.0.0.1:55644 - "[1mGET /api/system/logs HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55644 - "[1mGET /api/agents HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55644 - "[1mGET /api/system/logs HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55663 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55662 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55691 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55692 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55706 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55707 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55716 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32m2025-08-03 12:37:29.145[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mlist_missions_api[0m:[36m197[0m - [31m[1mFailed to list missions due to a database error: (sqlite3.OperationalError) no such column: missions.progress
+[SQL: SELECT missions.id AS missions_id, missions.mission_id_str AS missions_mission_id_str, missions.title AS missions_title, missions.prompt AS missions_prompt, missions.description AS missions_description, missions.agent_type AS missions_agent_type, missions.status AS missions_status, missions.progress AS missions_progress, missions.priority AS missions_priority, missions.result AS missions_result, missions."plan" AS missions_plan, missions.execution_path AS missions_execution_path, missions.complexity_score AS missions_complexity_score, missions.decision_metadata AS missions_decision_metadata, missions.execution_time AS missions_execution_time, missions.user_satisfaction AS missions_user_satisfaction, missions.error_message AS missions_error_message, missions.created_at AS missions_created_at, missions.updated_at AS missions_updated_at, missions.completed_at AS missions_completed_at, missions.is_healing AS missions_is_healing, missions.phoenix_retries AS missions_phoenix_retries, missions.owner_id AS missions_owner_id, missions.organization_id AS missions_organization_id, missions.prompt_analysis AS missions_prompt_analysis, missions.risk_score AS missions_risk_score
+FROM missions
+WHERE missions.organization_id = ? ORDER BY missions.created_at DESC
+ LIMIT ? OFFSET ?]
+[parameters: (1, 50, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)[0m
+[32mINFO[0m:     127.0.0.1:55716 - "[1mGET /api/missions HTTP/1.1[0m" [91m500 Internal Server Error[0m
+[32mINFO[0m:     127.0.0.1:55716 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55718 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32m2025-08-03 12:37:35.620[0m | [31m[1mERROR   [0m | [36msrc.main[0m:[36mlist_missions_api[0m:[36m197[0m - [31m[1mFailed to list missions due to a database error: (sqlite3.OperationalError) no such column: missions.progress
+[SQL: SELECT missions.id AS missions_id, missions.mission_id_str AS missions_mission_id_str, missions.title AS missions_title, missions.prompt AS missions_prompt, missions.description AS missions_description, missions.agent_type AS missions_agent_type, missions.status AS missions_status, missions.progress AS missions_progress, missions.priority AS missions_priority, missions.result AS missions_result, missions."plan" AS missions_plan, missions.execution_path AS missions_execution_path, missions.complexity_score AS missions_complexity_score, missions.decision_metadata AS missions_decision_metadata, missions.execution_time AS missions_execution_time, missions.user_satisfaction AS missions_user_satisfaction, missions.error_message AS missions_error_message, missions.created_at AS missions_created_at, missions.updated_at AS missions_updated_at, missions.completed_at AS missions_completed_at, missions.is_healing AS missions_is_healing, missions.phoenix_retries AS missions_phoenix_retries, missions.owner_id AS missions_owner_id, missions.organization_id AS missions_organization_id, missions.prompt_analysis AS missions_prompt_analysis, missions.risk_score AS missions_risk_score
+FROM missions
+WHERE missions.organization_id = ? ORDER BY missions.created_at DESC
+ LIMIT ? OFFSET ?]
+[parameters: (1, 50, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)[0m
+[32mINFO[0m:     127.0.0.1:55726 - "[1mGET /api/missions HTTP/1.1[0m" [91m500 Internal Server Error[0m
+[32mINFO[0m:     127.0.0.1:55726 - "[1mGET /api/agents HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55726 - "[1mGET /api/agents HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55726 - "[1mGET /api/system/logs HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55726 - "[1mGET /api/system/logs HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55726 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55727 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55742 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55743 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55752 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55754 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55785 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55786 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55814 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55815 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55831 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55832 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55834 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55847 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55855 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55857 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     Shutting down
+[32mINFO[0m:     Waiting for connections to close. (CTRL+C to force quit)
+[32mINFO[0m:     Waiting for application shutdown.
+[32mINFO[0m:     Application shutdown complete.
+[32mINFO[0m:     Finished server process [[36m14208[0m]
+Sentry is attempting to send 1 pending events
+Waiting up to 2 seconds
+Press Ctrl-Break to quit

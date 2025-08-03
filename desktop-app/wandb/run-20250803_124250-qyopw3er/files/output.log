@@ -1,0 +1,60 @@
+[32m2025-08-03 12:42:51.321[0m | [32m[1mSUCCESS [0m | [36mutils.agent_observability[0m:[36m_initialize_integrations[0m:[36m109[0m - [32m[1m✅ W&B initialized for agent analytics.[0m
+[32m2025-08-03 12:42:59.532[0m | [32m[1mSUCCESS [0m | [36mutils.sentry_integration[0m:[36m_initialize_sentry[0m:[36m78[0m - [32m[1mSentry integration initialized successfully[0m
+[32m2025-08-03 12:42:59.563[0m | [1mINFO    [0m | [36mcore.cognitive_forge_engine[0m:[36m__init__[0m:[36m111[0m - [1mGoogle Generative AI initialized with model: gemini-1.5-pro[0m
+[32m2025-08-03 12:42:59.569[0m | [1mINFO    [0m | [36mutils.crewai_bypass[0m:[36m__init__[0m:[36m21[0m - [1mCreating DirectAIAgent with role: Learning Analysis Specialist, LLM type: <class 'utils.google_ai_wrapper.GoogleGenerativeAIWrapper'>[0m
+[32m2025-08-03 12:42:59.571[0m | [1mINFO    [0m | [36mutils.crewai_bypass[0m:[36m__init__[0m:[36m21[0m - [1mCreating DirectAIAgent with role: Improvement Generation Specialist, LLM type: <class 'utils.google_ai_wrapper.GoogleGenerativeAIWrapper'>[0m
+[32m2025-08-03 12:42:59.572[0m | [1mINFO    [0m | [36mutils.self_learning_module[0m:[36m__init__[0m:[36m26[0m - [1mSelf-Learning Module initialized - Continuous improvement active[0m
+[32mINFO[0m:     Started server process [[36m10536[0m]
+[32mINFO[0m:     Waiting for application startup.
+[32m2025-08-03 12:42:59.583[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m514[0m - [1m🚀 Sentinel Cognitive Forge v5.4 (Predictive Intelligence Activated) starting up...[0m
+[32m2025-08-03 12:42:59.585[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m526[0m - [1m✅ All systems initialized and ready for missions[0m
+[32mINFO[0m:     Application startup complete.
+[32mINFO[0m:     127.0.0.1:56335 - "[1mGET / HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56336 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56337 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56335 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56335 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56335 - "[1mGET /api/agents HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56335 - "[1mGET /api/agents HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56335 - "[1mGET /api/system/logs HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56335 - "[1mGET /api/system/logs HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56335 - "[1mGET /ai-agents HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56335 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56335 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56341 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56340 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56340 - "[1mGET /api/agents HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56340 - "[1mGET /api/agents HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56340 - "[1mGET /api/system/logs HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56340 - "[1mGET /api/system/logs HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56340 - "[1mGET /test-missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56340 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56347 - "[1mGET /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56340 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56347 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56352 - "[1mGET /api/agents HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56352 - "[1mGET /api/agents HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56352 - "[1mGET /api/system/logs HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56352 - "[1mGET /api/system/logs HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56352 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56354 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56367 - "[1mPOST /api/test-missions HTTP/1.1[0m" [31m404 Not Found[0m
+[32mINFO[0m:     127.0.0.1:56367 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56369 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56374 - "[1mPOST /api/test-missions HTTP/1.1[0m" [31m404 Not Found[0m
+[32mINFO[0m:     127.0.0.1:56374 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56380 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56388 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56390 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56398 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56401 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56418 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56419 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56434 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56436 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56437 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:56444 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     Shutting down
+[32mINFO[0m:     Waiting for application shutdown.
+[32mINFO[0m:     Application shutdown complete.
+[32mINFO[0m:     Finished server process [[36m10536[0m]

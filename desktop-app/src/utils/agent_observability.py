@@ -141,5 +141,15 @@ class CuttingEdgeAgentObservabilityManager:
             payload=payload
         ))
 
+    async def get_event(self) -> Optional[LiveStreamEvent]:
+        """Get the next event from the live stream queue."""
+        try:
+            return await asyncio.wait_for(self.live_event_stream.get(), timeout=0.1)
+        except asyncio.TimeoutError:
+            return None
+        except Exception as e:
+            logger.error(f"Error getting event from queue: {e}")
+            return None
+
 # Global instance
 agent_observability = CuttingEdgeAgentObservabilityManager() 

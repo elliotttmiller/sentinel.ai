@@ -1,0 +1,23 @@
+[32m2025-08-03 12:39:20.182[0m | [32m[1mSUCCESS [0m | [36mutils.agent_observability[0m:[36m_initialize_integrations[0m:[36m109[0m - [32m[1m✅ W&B initialized for agent analytics.[0m
+[32m2025-08-03 12:39:28.327[0m | [32m[1mSUCCESS [0m | [36mutils.sentry_integration[0m:[36m_initialize_sentry[0m:[36m78[0m - [32m[1mSentry integration initialized successfully[0m
+[32m2025-08-03 12:39:28.348[0m | [1mINFO    [0m | [36mcore.cognitive_forge_engine[0m:[36m__init__[0m:[36m111[0m - [1mGoogle Generative AI initialized with model: gemini-1.5-pro[0m
+[32m2025-08-03 12:39:28.353[0m | [1mINFO    [0m | [36mutils.crewai_bypass[0m:[36m__init__[0m:[36m21[0m - [1mCreating DirectAIAgent with role: Learning Analysis Specialist, LLM type: <class 'utils.google_ai_wrapper.GoogleGenerativeAIWrapper'>[0m
+[32m2025-08-03 12:39:28.354[0m | [1mINFO    [0m | [36mutils.crewai_bypass[0m:[36m__init__[0m:[36m21[0m - [1mCreating DirectAIAgent with role: Improvement Generation Specialist, LLM type: <class 'utils.google_ai_wrapper.GoogleGenerativeAIWrapper'>[0m
+[32m2025-08-03 12:39:28.356[0m | [1mINFO    [0m | [36mutils.self_learning_module[0m:[36m__init__[0m:[36m26[0m - [1mSelf-Learning Module initialized - Continuous improvement active[0m
+[32mINFO[0m:     Started server process [[36m10224[0m]
+[32mINFO[0m:     Waiting for application startup.
+[32m2025-08-03 12:39:28.365[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m496[0m - [1m🚀 Sentinel Cognitive Forge v5.4 (Predictive Intelligence Activated) starting up...[0m
+[32m2025-08-03 12:39:28.366[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m508[0m - [1m✅ All systems initialized and ready for missions[0m
+[32mINFO[0m:     Application startup complete.
+[32mINFO[0m:     127.0.0.1:55889 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55888 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55890 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     127.0.0.1:55958 - "[1mGET /api/events/stream HTTP/1.1[0m" [32m200 OK[0m
+[32mINFO[0m:     Shutting down
+[32mINFO[0m:     Waiting for connections to close. (CTRL+C to force quit)
+[32mINFO[0m:     Waiting for application shutdown.
+[32mINFO[0m:     Application shutdown complete.
+[32mINFO[0m:     Finished server process [[36m10224[0m]
+Sentry is attempting to send 1 pending events
+Waiting up to 2 seconds
+Press Ctrl-Break to quit
