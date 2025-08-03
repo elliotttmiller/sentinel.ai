@@ -1,0 +1,11 @@
+2025-08-03 12:03:32,031 INFO    MainThread:9948 [wandb_setup.py:_flush():80] Current SDK version is 0.21.0
+2025-08-03 12:03:32,031 INFO    MainThread:9948 [wandb_setup.py:_flush():80] Configure stats pid to 9948
+2025-08-03 12:03:32,031 INFO    MainThread:9948 [wandb_setup.py:_flush():80] Loading settings from C:\Users\AMD\.config\wandb\settings
+2025-08-03 12:03:32,031 INFO    MainThread:9948 [wandb_setup.py:_flush():80] Loading settings from C:\Users\AMD\sentinel\desktop-app\wandb\settings
+2025-08-03 12:03:32,031 INFO    MainThread:9948 [wandb_setup.py:_flush():80] Loading settings from environment variables
+2025-08-03 12:03:32,031 INFO    MainThread:9948 [wandb_init.py:setup_run_log_directory():703] Logging user logs to C:\Users\AMD\sentinel\desktop-app\wandb\run-20250803_120332-kps4qv76\logs\debug.log
+2025-08-03 12:03:32,031 INFO    MainThread:9948 [wandb_init.py:setup_run_log_directory():704] Logging internal logs to C:\Users\AMD\sentinel\desktop-app\wandb\run-20250803_120332-kps4qv76\logs\debug-internal.log
+2025-08-03 12:03:32,031 INFO    MainThread:9948 [wandb_init.py:init():830] calling init triggers
+2025-08-03 12:03:32,031 INFO    MainThread:9948 [wandb_init.py:init():835] wandb.init called with sweep_config: {}
+config: {'_wandb': {}}
+2025-08-03 12:03:32,031 INFO    MainThread:9948 [wandb_init.py:init():871] starting backend

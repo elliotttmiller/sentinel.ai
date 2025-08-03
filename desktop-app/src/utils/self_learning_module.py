@@ -365,6 +365,60 @@ Provide your response as a JSON array of improvements:
         
         return True
 
+    # --- NEW METHOD TO FIX THE ATTRIBUTE ERROR ---
+    async def analyze_completed_missions(self) -> Dict[str, Any]:
+        """
+        Analyzes all completed missions to find patterns for optimization.
+        This method was missing, causing the AttributeError.
+        """
+        logger.info("Analyzing performance of all completed missions...")
+        
+        try:
+            completed_missions = self.db_manager.list_missions(status='completed')
+            failed_missions = self.db_manager.list_missions(status='failed')
+
+            if not completed_missions and not failed_missions:
+                return {"patterns": [], "summary": "No completed or failed missions to analyze."}
+
+            # Simple analysis for demonstration purposes
+            success_rate = len(completed_missions) / (len(completed_missions) + len(failed_missions))
+            
+            avg_execution_time = 0
+            if completed_missions:
+                total_time = sum(m.execution_time for m in completed_missions if m.execution_time)
+                avg_execution_time = total_time / len(completed_missions)
+
+            insights = {
+                "patterns": [],
+                "summary": {
+                    "total_completed": len(completed_missions),
+                    "total_failed": len(failed_missions),
+                    "success_rate": f"{success_rate:.2%}",
+                    "avg_execution_time_sec": f"{avg_execution_time:.2f}"
+                }
+            }
+
+            if success_rate < 0.8 and (len(completed_missions) + len(failed_missions)) > 10:
+                insights["patterns"].append({
+                    "type": "low_success_rate",
+                    "description": f"Overall mission success rate is low ({success_rate:.2%}). Suggests a review of agent error handling or prompt clarity.",
+                    "data": {"success_rate": success_rate}
+                })
+
+            if avg_execution_time > 30: # 30 seconds
+                insights["patterns"].append({
+                    "type": "high_execution_time",
+                    "description": f"Average mission execution time is high ({avg_execution_time:.2f}s). Suggests optimizing agent tools or core logic.",
+                    "data": {"avg_execution_time_sec": avg_execution_time}
+                })
+
+            logger.info(f"Analysis complete. Found {len(insights['patterns'])} potential optimization patterns.")
+            return insights
+            
+        except Exception as e:
+            logger.error(f"Failed to analyze completed missions: {e}")
+            return {"patterns": [], "summary": f"Analysis failed: {str(e)}"}
+
     def get_protocol_stats(self) -> Dict[str, Any]:
         """Get Self-Learning Module statistics and status"""
         return {

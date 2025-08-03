@@ -5,35 +5,35 @@
 
 function sentinelApp() {
     return {
-        // State properties
-        missions: [],
-        agents: [],
-        systemLogs: [],
-        liveStreamEvents: [],
+        // --- STATE ---
+        systemLogs: { overview: [], "8001": [], "8002": [] },
         agentActivity: [],
-        systemStatus: {
-            api_server: { status: 'online', last_check: new Date().toISOString() },
-            cognitive_engine: { status: 'online', last_check: new Date().toISOString() }
-        },
-        newMission: {
-            prompt: '',
-            agent_type: 'developer',
-            priority: 'medium'
-        },
-        
-        // Phase 4 State Properties
+        missions: [],
+        liveStreamEvents: [],
+        agents: [],
         optimizationProposals: [],
-        healingMissions: [],
         
-        // NEW: Phase 5 State Properties
+        // --- UI & STATS ---
+        systemLogsFilter: "overview",
+        liveStreamStats: { totalEvents: 0, activeAgents: 0, successRate: 0, lastUpdate: 'Never' },
         preflightCheckResult: null,
         isCheckingPrompt: false,
         analyticsSummary: { missions: {}, performance: {} },
         performanceChart: null,
         
-        // Modal State Properties
+        // UI Control State
+        autoRefresh: true,
+        showEventModal: false,
+        selectedEvent: null,
+
+        // CRITICAL: State for the Mission Details Modal
         showMissionModal: false,
         selectedMission: null,
+
+        newMission: { prompt: '', agent_type: 'developer', priority: 'medium' },
+        
+        // Phase 4 State Properties
+        healingMissions: [],
         
         // Test Mission State Properties
         newTestMission: {
@@ -42,8 +42,10 @@ function sentinelApp() {
             priority: 'low'
         },
         testStreamEvents: [],
-        
-        // Computed properties
+
+        eventSource: null,
+
+        // --- COMPUTED PROPERTIES ---
         get recentActivity() {
             return this.agentActivity.slice(0, 10);
         },
@@ -60,37 +62,38 @@ function sentinelApp() {
             return this.missions.filter(m => m.status === 'failed');
         },
 
-        // Initialize the application
+        // --- INITIALIZATION ---
         init() {
+            console.log("🚀 Sentinel Command Center v5.4 Initializing (Sentience Active)...");
+            console.log("Initial modal state:", this.showMissionModal);
+            this.startUnifiedEventStream();
             this.loadInitialData();
-            this.connectToEventStream();
-            this.startPeriodicUpdates();
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+            console.log("Component initialized successfully");
         },
 
         async loadInitialData() {
-            await Promise.all([
-                this.loadMissions(),
-                this.loadAgents(),
-                this.loadSystemLogs()
-            ]);
+            await this.loadMissions();
+            await this.loadAgents();
+            await this.loadSystemLogs();
             
-            // Load Phase 4 data if on settings page
-            if (window.location.pathname.includes('settings')) {
+            const path = window.location.pathname;
+            if (path.includes('settings')) {
                 await this.loadOptimizationProposals();
             }
-            
-            // Load Phase 5 data if on analytics page
-            if (window.location.pathname.includes('analytics')) {
+            if (path.includes('analytics')) {
                 await this.loadAnalyticsSummary();
                 await this.loadPerformanceChartData();
             }
         },
 
-        // Event stream connection
-        connectToEventStream() {
-            const eventSource = new EventSource('/api/events/stream');
+        // --- EVENT STREAM MANAGEMENT ---
+        startUnifiedEventStream() {
+            this.eventSource = new EventSource('/api/events/stream');
             
-            eventSource.onmessage = (event) => {
+            this.eventSource.onmessage = (event) => {
                 try {
                     const data = JSON.parse(event.data);
                     this.dispatchEvent(data);
@@ -99,13 +102,12 @@ function sentinelApp() {
                 }
             };
             
-            eventSource.onerror = (error) => {
+            this.eventSource.onerror = (error) => {
                 console.error('Event stream error:', error);
-                setTimeout(() => this.connectToEventStream(), 5000);
+                setTimeout(() => this.startUnifiedEventStream(), 5000);
             };
         },
 
-        // Event dispatcher
         dispatchEvent(event) {
             switch (event.event_type) {
                 case 'mission_update':
@@ -119,6 +121,9 @@ function sentinelApp() {
                 case 'system_log':
                     this.addSystemLog(event);
                     break;
+                case 'live_stream_event':
+                    this.addLiveStreamEvent(event);
+                    break;
                 case 'heartbeat':
                     // Keep connection alive
                     break;
@@ -127,7 +132,7 @@ function sentinelApp() {
             }
         },
 
-        // Mission state management
+        // --- MISSION STATE MANAGEMENT ---
         updateMissionState(event) {
             const missionData = event.payload || {};
             const missionId = missionData.mission_id_str || missionData.id;
@@ -145,7 +150,7 @@ function sentinelApp() {
             this.updateHealingMissions();
         },
 
-        // Agent activity management
+        // --- AGENT ACTIVITY MANAGEMENT ---
         addAgentActivity(event) {
             const activity = {
                 id: Date.now(),
@@ -163,7 +168,7 @@ function sentinelApp() {
             }
         },
 
-        // System log management
+        // --- SYSTEM LOG MANAGEMENT ---
         addSystemLog(event) {
             const log = {
                 id: Date.now(),
@@ -181,7 +186,43 @@ function sentinelApp() {
             }
         },
 
-        // Data loading functions
+        // --- LIVE STREAM EVENT MANAGEMENT ---
+        addLiveStreamEvent(event) {
+            const streamEvent = {
+                id: Date.now(),
+                timestamp: event.timestamp || new Date().toISOString(),
+                type: event.event_type,
+                source: event.source,
+                message: event.message,
+                severity: event.severity || 'INFO'
+            };
+            
+            this.liveStreamEvents.unshift(streamEvent);
+            
+            // Keep only last 100 events
+            if (this.liveStreamEvents.length > 100) {
+                this.liveStreamEvents = this.liveStreamEvents.slice(0, 100);
+            }
+            
+            this.updateLiveStreamStats();
+        },
+
+        updateLiveStreamStats() {
+            this.liveStreamStats = {
+                totalEvents: this.liveStreamEvents.length,
+                activeAgents: this.agents.filter(a => a.status === 'active').length,
+                successRate: this.calculateSuccessRate(),
+                lastUpdate: new Date().toLocaleTimeString()
+            };
+        },
+
+        calculateSuccessRate() {
+            const completed = this.missions.filter(m => m.status === 'completed').length;
+            const total = this.missions.length;
+            return total > 0 ? Math.round((completed / total) * 100) : 0;
+        },
+
+        // --- DATA LOADING FUNCTIONS ---
         async loadMissions() {
             try {
                 const response = await fetch('/api/missions');
@@ -218,7 +259,7 @@ function sentinelApp() {
             }
         },
 
-        // Phase 4: Optimization proposals management
+        // --- PHASE 4: OPTIMIZATION PROPOSALS MANAGEMENT ---
         async loadOptimizationProposals() {
             try {
                 const response = await fetch('/api/optimizations');
@@ -263,7 +304,7 @@ function sentinelApp() {
             }
         },
 
-        // Phase 5: Pre-flight check logic
+        // --- PHASE 5: PRE-FLIGHT CHECK LOGIC ---
         runPreFlightCheck: _.debounce(async function() {
             if (!this.newMission.prompt || this.newMission.prompt.length < 10) {
                 this.preflightCheckResult = null;
@@ -292,7 +333,7 @@ function sentinelApp() {
             }
         }, 500), // Debounce for 500ms
 
-        // Phase 5: Analytics logic
+        // --- PHASE 5: ANALYTICS LOGIC ---
         async loadAnalyticsSummary() {
             try {
                 const response = await fetch('/api/analytics/summary');
@@ -362,7 +403,7 @@ function sentinelApp() {
             });
         },
 
-        // Mission creation
+        // --- MISSION CREATION ---
         async createMission() {
             if (!this.newMission.prompt.trim()) {
                 this.showNotification('Please enter a mission prompt', 'warning');
@@ -399,12 +440,12 @@ function sentinelApp() {
             }
         },
 
-        // Phase 4: Healing missions management
+        // --- PHASE 4: HEALING MISSIONS MANAGEMENT ---
         updateHealingMissions() {
             this.healingMissions = this.missions.filter(m => m.status === 'healing');
         },
 
-        // UI helpers
+        // --- UI HELPERS ---
         getStatusClass(status) {
             const classes = { 
                 'completed': 'online', 
@@ -440,7 +481,13 @@ function sentinelApp() {
             return mins > 0 ? `${mins}m ${secs}s` : `${secs}s`;
         },
 
-        // Notifications
+        formatTimestamp(timestamp) {
+            if (!timestamp) return 'N/A';
+            const date = new Date(timestamp);
+            return date.toLocaleString();
+        },
+
+        // --- NOTIFICATIONS ---
         showNotification(message, type = 'info') {
             // Simple notification system
             const notification = document.createElement('div');
@@ -461,7 +508,7 @@ function sentinelApp() {
             }, 5000);
         },
 
-        // Periodic updates
+        // --- PERIODIC UPDATES ---
         startPeriodicUpdates() {
             setInterval(() => {
                 this.loadMissions();
@@ -469,7 +516,7 @@ function sentinelApp() {
             }, 30000); // Update every 30 seconds
         },
 
-        // Utility functions
+        // --- UTILITY FUNCTIONS ---
         truncateText(text, maxLength = 50) {
             if (!text) return '';
             return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
@@ -491,18 +538,35 @@ function sentinelApp() {
             return 'bg-secondary';
         },
 
-        // Modal Functions
+        // --- MODAL FUNCTIONS ---
+        // Event Modal Functions (for Live Stream)
+        openEventModal(event) { 
+            this.selectedEvent = event; 
+            this.showEventModal = true; 
+        },
+        
+        closeEventModal() { 
+            this.showEventModal = false; 
+            this.selectedEvent = null; 
+        },
+
+        // CRITICAL: Functions for the Mission Details Modal
         openMissionModal(mission) {
+            console.log("Opening mission modal for:", mission);
             this.selectedMission = mission;
             this.showMissionModal = true;
+            console.log("Modal state after opening:", this.showMissionModal);
         },
-
+        
         closeMissionModal() {
+            console.log("Closing mission modal");
             this.showMissionModal = false;
-            this.selectedMission = null;
+            // It's good practice to nullify the selection after a delay to prevent visual glitches during transitions
+            setTimeout(() => { this.selectedMission = null; }, 300);
+            console.log("Modal state after closing:", this.showMissionModal);
         },
 
-        // Mission Helper Functions
+        // --- MISSION HELPER FUNCTIONS ---
         getProgress(mission) {
             return mission?.progress || 0;
         },
@@ -525,13 +589,7 @@ function sentinelApp() {
             return total > 0 ? Math.round((completed / total) * 100) : 0;
         },
 
-        formatTimestamp(timestamp) {
-            if (!timestamp) return 'N/A';
-            const date = new Date(timestamp);
-            return date.toLocaleString();
-        },
-
-        // Test Mission Functions
+        // --- TEST MISSION FUNCTIONS ---
         async createTestMission() {
             try {
                 const response = await fetch('/api/test-missions', {
@@ -571,7 +629,7 @@ function sentinelApp() {
             return total > 0 ? Math.round((passed / total) * 100) : 0;
         },
 
-        // Pre-flight Check Functions
+        // --- PRE-FLIGHT CHECK FUNCTIONS ---
         async runPreFlightCheck() {
             if (!this.newMission.prompt.trim()) {
                 this.preflightCheckResult = null;
@@ -604,6 +662,29 @@ function sentinelApp() {
             } finally {
                 this.isCheckingPrompt = false;
             }
+        },
+
+        // --- OTHER HELPER FUNCTIONS ---
+        clearCompletedMissions() { 
+            this.missions = this.missions.filter(m => m.status !== 'completed'); 
+        },
+        
+        refreshMissions() { 
+            this.loadMissions(); 
+        },
+        
+        pauseMission(id) { 
+            console.log("Pausing mission:", id); 
+            /* Add API call here */ 
+        },
+        
+        cancelMission(id) { 
+            console.log("Canceling mission:", id); 
+            /* Add API call here */ 
+        },
+        
+        toggleAutoRefresh() { 
+            this.autoRefresh = !this.autoRefresh; 
         }
     };
 } 

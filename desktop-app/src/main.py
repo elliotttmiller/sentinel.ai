@@ -186,14 +186,17 @@ async def serve_analytics():
 # API Endpoints for data
 @app.get("/api/missions")
 async def list_missions_api(current_user: User = Depends(get_current_user)):
-    """List all missions from database with organization scoping"""
+    """List all missions from the live database."""
     try:
-        missions_from_db = db_manager.list_missions(org_id=current_user.organization_id, limit=50)
+        missions_from_db = db_manager.list_missions(org_id=current_user.organization_id)
         missions_dict = [m.as_dict() for m in missions_from_db]
         return {"success": True, "missions": missions_dict}
     except Exception as e:
-        logger.error(f"❌ Failed to list missions: {e}")
-        return {"success": True, "missions": []}
+        # This will now catch the OperationalError and report it properly
+        error_message = f"Failed to list missions due to a database error: {e}"
+        logger.error(error_message)
+        # Return a proper HTTP error instead of a silent 200 OK
+        raise HTTPException(status_code=500, detail=error_message)
 
 # --- NEW: Pre-flight Check Endpoint ---
 @app.post("/api/missions/pre-flight-check")

@@ -146,7 +146,7 @@
                                                     x-on:input.debounce.500ms="runPreFlightCheck()"></textarea>
                                             </div>
                                             
-                                            <!-- NEW: Pre-flight Check Results Panel -->
+                                            <!-- Pre-flight Check Results Panel -->
                                             <div x-show="preflightCheckResult" class="preflight-panel mt-3" x-transition>
                                                 <div class="preflight-header d-flex align-items-center mb-2">
                                                     <i class="fas fa-shield-alt text-primary me-2"></i>
@@ -211,70 +211,59 @@
                     </div>
                 </div>
 
-                <!-- Mission Queue -->
+                <!-- Mission Queue (RESTORED TO TABLE LAYOUT) -->
                 <div class="row">
                     <div class="col-12">
                         <div class="card card-fixed-height">
                             <div class="card-header">
-                                <h4 class="card-title">Active Missions</h4>
+                                <h4 class="card-title">Mission Queue</h4>
                                 <p class="card-category">Real-time mission status</p>
-                                <div class="dropdown">
-                                    <button type="button" class="btn btn-link dropdown-toggle btn-icon" data-toggle="dropdown">
-                                        <i class="fas fa-cog"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-navbar">
-                                        <a class="dropdown-item" href="javascript:void(0)" @click="refreshMissions()">Refresh</a>
-                                        <a class="dropdown-item" href="javascript:void(0)">Export</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="javascript:void(0)" @click="clearCompleted()">Clear Completed</a>
-                                    </div>
-                                </div>
                             </div>
                             <div class="card-body card-content-scrollable">
-                                <div class="missions-grid">
-                                    <template x-if="missions.length === 0">
-                                        <div class="no-missions">
-                                            <i class="fas fa-inbox fa-2x mb-3 text-muted"></i>
-                                            <p class="text-muted">No Active Missions</p>
-                                        </div>
-                                    </template>
-                                    <template x-for="mission in missions" :key="mission.id">
-                                        <div class="mission-card" @click="openMissionModal(mission)" style="cursor: pointer;">
-                                            <div class="mission-header">
-                                                <div class="mission-status">
-                                                    <span class="status-dot" :class="getStatusClass(mission.status)"></span>
-                                                    <span class="status-text" x-text="mission.status"></span>
-                                                </div>
-                                                <div class="mission-priority">
-                                                    <span class="priority-badge" :class="getPriorityClass(mission.priority)" x-text="mission.priority"></span>
-                                                </div>
-                                            </div>
-                                            <div class="mission-content">
-                                                <h6 class="mission-title" x-text="mission.prompt.substring(0, 60) + (mission.prompt.length > 60 ? '...' : '')"></h6>
-                                                <div class="mission-meta">
-                                                    <span class="agent-type" x-text="mission.agent_type"></span>
-                                                    <span class="mission-id" x-text="'#' + mission.id"></span>
-                                                </div>
-                                            </div>
-                                            <div class="mission-progress">
-                                                <div class="progress-info">
-                                                    <span class="progress-text" x-text="getProgress(mission) + '%'"></span>
-                                                    <span class="progress-label">Complete</span>
-                                                </div>
-                                                <div class="progress-bar-container">
-                                                    <div class="progress-bar" :style="'width: ' + getProgress(mission) + '%'"></div>
-                                                </div>
-                                            </div>
-                                            <div class="mission-actions">
-                                                <button class="btn btn-sm btn-outline-warning" @click.stop="pauseMission(mission.id)">
-                                                    <i class="fas fa-pause"></i>
-                                                </button>
-                                                <button class="btn btn-sm btn-outline-danger" @click.stop="cancelMission(mission.id)">
-                                                    <i class="fas fa-stop"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </template>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="text-primary">
+                                            <tr>
+                                                <th>Status</th>
+                                                <th>Mission</th>
+                                                <th>Agent</th>
+                                                <th>Priority</th>
+                                                <th>Progress</th>
+                                                <th class="text-right">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <template x-if="missions.length === 0">
+                                                <tr><td colspan="6" class="text-center py-5"><p class="text-muted">No Missions Queued</p></td></tr>
+                                            </template>
+                                            <template x-for="mission in missions" :key="mission.mission_id_str">
+                                                <tr @click="openMissionModal(mission)" style="cursor: pointer;">
+                                                    <td>
+                                                        <span class="status-badge" :class="getStatusClass(mission.status)" x-text="mission.status"></span>
+                                                    </td>
+                                                    <td>
+                                                        <p class="mission-title" x-text="mission.prompt.substring(0, 70) + (mission.prompt.length > 70 ? '...' : '')"></p>
+                                                        <small class="text-muted" x-text="'ID: ' + mission.mission_id_str"></small>
+                                                    </td>
+                                                    <td><span x-text="mission.agent_type"></span></td>
+                                                    <td><span class="badge" :class="getPriorityClass(mission.priority)" x-text="mission.priority"></span></td>
+                                                    <td>
+                                                        <div class="progress-info" style="min-width: 100px;">
+                                                            <div class="progress-bar-container" style="flex-grow: 1; margin-right: 8px;">
+                                                                <div class="progress-bar" :style="'width: ' + mission.progress + '%'"></div>
+                                                            </div>
+                                                            <span class="progress-text" x-text="mission.progress + '%'"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <button class="btn btn-sm btn-info btn-icon" @click.stop="openMissionModal(mission)"><i class="fa fa-eye"></i></button>
+                                                        <button class="btn btn-sm btn-warning btn-icon" @click.stop="pauseMission(mission.mission_id_str)"><i class="fa fa-pause"></i></button>
+                                                        <button class="btn btn-sm btn-danger btn-icon" @click.stop="cancelMission(mission.mission_id_str)"><i class="fa fa-stop"></i></button>
+                                                    </td>
+                                                </tr>
+                                            </template>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -362,12 +351,12 @@
                 </div>
             </div>
 
-            <!-- Mission Modal -->
-            <div class="mission-modal" x-show="showMissionModal" x-transition>
+            <!-- Mission Details Modal (Correctly wired) -->
+            <div class="mission-modal" x-show="showMissionModal" x-transition.opacity @click.self="closeMissionModal()" style="display: none;">
                 <div class="mission-modal-content">
                     <div class="mission-modal-header">
                         <h5 class="mission-modal-title">Mission Details</h5>
-                        <button class="mission-modal-close" @click="closeMissionModal()">&times;</button>
+                        <button class="mission-modal-close" @click="closeMissionModal()">×</button>
                     </div>
                     <div class="mission-modal-body" x-show="selectedMission">
                         <!-- Mission Overview -->
@@ -449,6 +438,10 @@
     <!-- JavaScript Files -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+    
+    <!-- CRITICAL: Lodash dependency for debounce -->
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
     
     <!-- Unified Real-time Controller -->
     <script src="/static/js/unified-realtime.js"></script>
