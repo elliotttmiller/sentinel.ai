@@ -1,3 +1,537 @@
+
+/* === Modern Play/Stop Toggle Button === */
+.modern-toggle-btn {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1.7rem;
+  color: #40c057; /* Green by default (play) */
+  transition: color 0.2s, background 0.2s, box-shadow 0.2s;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  cursor: pointer;
+  padding: 0;
+}
+.modern-toggle-btn.active {
+  color: #fa5252; /* Red when active (stop) */
+  background: rgba(250,82,82,0.08);
+}
+.modern-toggle-btn:focus {
+  box-shadow: 0 0 0 2px #40c05733;
+}
+.modern-toggle-btn .icon-play {
+  display: inline;
+}
+.modern-toggle-btn.active .icon-play {
+  display: none;
+}
+.modern-toggle-btn .icon-stop {
+  display: none;
+}
+.modern-toggle-btn.active .icon-stop {
+  display: inline;
+}
+
+/* === FINAL OVERRIDE: Updated Toggle Button Styles === */
+.stream-toggle-btn {
+  background: none;
+  border: 2px solid #4CAF50;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  position: relative;
+  width: auto;
+  height: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #4CAF50;
+  font-weight: bold;
+  font-size: 0.875rem;
+  margin-right: 10px;
+  z-index: 10;
+}
+
+.stream-toggle-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.5);
+}
+
+.stream-toggle-btn i {
+  margin-right: 5px;
+}
+
+.stream-toggle-btn:hover {
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+.stream-toggle-btn.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.stream-toggle-btn.active:hover {
+  background-color: #45a049;
+}
+
+.live-stream-controls {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.live-stream-controls .stream-toggle-btn {
+  margin-right: 10px;
+}
+/* Updated Toggle Button Styles */
+.stream-toggle-btn {
+  background: none;
+  border: 2px solid #4CAF50;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  position: relative;
+  width: auto;
+  height: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #4CAF50;
+  font-weight: bold;
+  font-size: 0.875rem;
+  margin-right: 10px;
+}
+
+.stream-toggle-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.5);
+}
+
+.stream-toggle-btn i {
+  margin-right: 5px;
+}
+
+.stream-toggle-btn:hover {
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+.stream-toggle-btn.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.stream-toggle-btn.active:hover {
+  background-color: #45a049;
+}
+
+/* Ensure the button is visible in the live stream controls */
+.live-stream-controls {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.live-stream-controls .stream-toggle-btn {
+  margin-right: 10px;
+}
+
+/* Additional styles for the filter dropdown */
+.live-stream-controls select {
+  background-color: #2b3553;
+  color: white;
+  border: 1px solid #4A90E2;
+  border-radius: 4px;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+}
+/* Live Stream Controls */
+.live-stream-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.stream-toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  position: relative;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stream-toggle-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.5);
+}
+
+.stream-toggle-btn i {
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.stream-toggle-btn .play-icon {
+  color: #4CAF50;
+}
+
+.stream-toggle-btn .stop-icon {
+  color: #F44336;
+}
+
+.stream-toggle-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.stream-toggle-btn.active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.stream-toggle-btn.active .play-icon {
+  display: none;
+}
+
+.stream-toggle-btn.active .stop-icon {
+  display: inline-block;
+}
+/* === Modern Play/Stop Toggle Button === */
+.modern-toggle-btn {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1.7rem;
+  color: #40c057; /* Green by default (play) */
+  transition: color 0.2s, background 0.2s, box-shadow 0.2s;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  cursor: pointer;
+  padding: 0;
+}
+.modern-toggle-btn.active {
+  color: #fa5252; /* Red when active (stop) */
+  background: rgba(250,82,82,0.08);
+}
+.modern-toggle-btn:focus {
+  box-shadow: 0 0 0 2px #40c05733;
+}
+.modern-toggle-btn .icon-play {
+  display: inline;
+}
+.modern-toggle-btn.active .icon-play {
+  display: none;
+}
+.modern-toggle-btn .icon-stop {
+  display: none;
+}
+.modern-toggle-btn.active .icon-stop {
+  display: inline;
+}
+/* === Custom Pause Toggle Button === */
+.pause-toggle-btn {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1.5rem;
+  color: #fa5252; /* Red by default */
+  transition: color 0.2s, background 0.2s, box-shadow 0.2s;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  cursor: pointer;
+}
+.pause-toggle-btn.active {
+  color: #40c057; /* Green when active */
+  background: rgba(64,192,87,0.08);
+}
+.pause-toggle-btn:focus {
+  box-shadow: 0 0 0 2px #40c05733;
+}
+.pause-toggle-btn .fa-play {
+  display: none;
+}
+.pause-toggle-btn.active .fa-pause {
+  display: none;
+}
+.pause-toggle-btn.active .fa-play {
+  display: inline;
+}
+.pause-toggle-btn .fa-pause {
+  display: inline;
+}
+/* ===== HOVER-TRIGGERED SIDEBAR NAVIGATOR ===== */
+
+/* Base Sidebar Structure */
+/* Sidebar Styles */
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  display: block;
+  z-index: 1;
+  color: #fff;
+  font-weight: 200;
+  background-size: cover;
+  background-position: center center;
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transition: width 0.3s ease;
+}
+
+.sidebar:hover {
+  width: 260px;
+}
+
+.sidebar-wrapper {
+  position: relative;
+  height: calc(100vh - 75px);
+  overflow: auto;
+  width: 80px;
+  z-index: 4;
+  padding-bottom: 30px;
+  transition: width 0.3s ease;
+}
+
+.sidebar:hover .sidebar-wrapper {
+  width: 260px;
+}
+
+/* Logo Styles */
+.sidebar .logo {
+  padding: 18px 0px;
+  margin: 0 20px;
+  display: block;
+  position: relative;
+  z-index: 4;
+  text-align: center;
+}
+
+.sidebar .logo .simple-text {
+  text-transform: uppercase;
+  padding: 5px 0px;
+  display: block;
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: 400;
+  line-height: 30px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.sidebar .logo .logo-mini {
+  display: block;
+}
+
+.sidebar .logo .logo-normal {
+  display: none;
+}
+
+.sidebar:hover .logo .logo-mini {
+  display: none;
+}
+
+.sidebar:hover .logo .logo-normal {
+  display: block;
+}
+
+/* Navigation Styles */
+.sidebar .nav {
+  margin-top: 20px;
+  display: block;
+}
+
+.sidebar .nav li {
+  width: 100%;
+}
+
+.sidebar .nav li > a {
+  margin: 10px 15px 0;
+  border-radius: 4px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  position: relative;
+  text-decoration: none;
+}
+
+.sidebar .nav li > a i,
+.sidebar .nav li > a .ai-icon {
+  font-size: 18px;
+  margin-right: 15px;
+  width: 30px;
+  text-align: center;
+  vertical-align: middle;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.sidebar .nav li > a .sidebar-label {
+  display: none;
+  opacity: 0;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+  margin-left: 0;
+}
+
+.sidebar:hover .nav li > a .sidebar-label {
+  display: inline;
+  opacity: 1;
+  margin-left: 0;
+}
+
+/* Active State */
+.sidebar .nav li.active > a {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.sidebar .nav li.active > a i,
+.sidebar .nav li.active > a .ai-icon {
+  color: #ffffff;
+}
+
+/* Hover Effects */
+.sidebar .nav li > a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
+  .sidebar {
+    width: 260px;
+    transform: translate3d(-260px, 0, 0);
+  }
+
+  .sidebar.show {
+    transform: translate3d(0, 0, 0);
+  }
+
+  .sidebar-wrapper {
+    width: 260px;
+  }
+
+  .sidebar .nav li > a .sidebar-label {
+    display: inline;
+    opacity: 1;
+  }
+}
+
+.sidebar:hover .nav {
+  align-items: flex-start;
+}
+
+.sidebar:hover .nav li > a {
+  width: 100%;
+  justify-content: flex-start;
+  padding: 0 15px;
+}
+
+.sidebar:hover .nav li > a i,
+.sidebar:hover .nav li > a .ai-icon {
+  margin-right: 15px;
+}
+
+.sidebar:hover .nav li > a .sidebar-label {
+  display: inline;
+  opacity: 1;
+  margin-left: 0;
+}
+
+/* Active State */
+.sidebar .nav li.active > a {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar .nav li.active > a i,
+.sidebar .nav li.active > a .ai-icon {
+  color: #ffffff;
+}
+
+/* Active State Indicator */
+.sidebar .nav li.active > a::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 20px;
+  background: #4A90E2;
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Main Panel Adjustment */
+.main-panel {
+  margin-left: 80px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar:hover + .main-panel {
+  margin-left: 240px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 60px;
+  }
+  
+  .sidebar:hover {
+    width: 200px;
+  }
+  
+  .main-panel {
+    margin-left: 60px;
+  }
+  
+  .sidebar:hover + .main-panel {
+    margin-left: 200px;
+  }
+}
+
+/* Smooth Transition Overrides */
+.sidebar,
+.sidebar-wrapper,
+.sidebar .logo,
+.sidebar .nav,
+.sidebar .nav li > a,
+.sidebar .nav li > a i,
+.sidebar .nav li > a .ai-icon,
+.sidebar .nav li > a .sidebar-label,
+.main-panel {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Focus States for Accessibility */
+.sidebar .nav li > a:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
 /* Sentinel Command Center - Black Dashboard Theme with Blue Color Scheme */
 
 /* Basic Reset and Variables */
@@ -86,6 +620,33 @@ body {
 .sidebar-mini .sidebar-wrapper {
   width: 80px;
   background: #2c2c44 !important;
+  transition: width 0.2s;
+}
+
+.sidebar-wrapper.expanded {
+  width: 220px !important;
+  transition: width 0.2s;
+}
+
+.sidebar-wrapper.expanded .nav li > a {
+  flex-direction: row !important;
+  justify-content: flex-start;
+  text-align: left;
+}
+.sidebar-wrapper.expanded .sidebar-label {
+  display: inline-flex !important;
+  align-items: center;
+  margin-left: 16px;
+  font-size: 15px;
+  color: #fff;
+  font-weight: 400;
+  white-space: nowrap;
+  vertical-align: middle;
+  opacity: 1;
+  transition: opacity 0.2s;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .sidebar .logo {
@@ -203,9 +764,39 @@ body {
   height: 45px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 4px;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 0.75rem;
+  position: relative;
+  transition: width 0.2s;
+}
+
+/* Hide sidebar labels in mini (collapsed) mode */
+
+/* Tooltip styles for sidebar nav */
+.sidebar .nav li > a[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(44,44,68,0.98);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 6px;
+  white-space: nowrap;
+  font-size: 13px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  opacity: 1;
+  pointer-events: none;
+  z-index: 9999;
+  margin-left: 12px;
+  display: block;
+}
+
+/* Hide tooltip if sidebar is expanded */
+.sidebar:not(.sidebar-mini) .nav li > a[title]:hover::after {
+  display: none;
 }
 
 .sidebar-mini .nav li > a:hover {
@@ -270,8 +861,27 @@ body {
 }
 
 /* Hide text labels in mini sidebar */
-.sidebar-mini .nav li > a p {
-  display: none;
+.sidebar-mini .sidebar-label {
+  display: none !important;
+}
+
+/* When sidebar is expanded, show labels to the right of icons */
+.sidebar-wrapper[x-data][expanded] .nav li > a {
+  flex-direction: row !important;
+  justify-content: flex-start;
+  width: 220px;
+  text-align: left;
+}
+.sidebar-wrapper[x-data][expanded] .sidebar-label {
+  display: inline-block !important;
+  margin-left: 16px;
+  font-size: 15px;
+  color: #fff;
+  font-weight: 400;
+  white-space: nowrap;
+  vertical-align: middle;
+  opacity: 1;
+  transition: opacity 0.2s;
 }
 
 /* Logo styling for mini sidebar */
@@ -720,14 +1330,25 @@ body {
   transition: width 0.6s ease;
 }
 
-.bg-success {
-  background-color: #00f2c3 !important;
-}
 
-.bg-info {
-  background-color: #11cdef !important;
+/* Fix for toggle button visibility */
+.btn-success.toggle-stream-btn, .btn-danger.toggle-stream-btn {
+  color: #fff !important;
+  border: none;
+  box-shadow: none;
 }
-
+.btn-success.toggle-stream-btn {
+  background-color: #4CAF50 !important;
+}
+.btn-danger.toggle-stream-btn {
+  background-color: #F44336 !important;
+}
+.toggle-stream-btn i.fa-play {
+  color: #fff;
+}
+.toggle-stream-btn i.fa-stop {
+  color: #fff;
+}
 .bg-warning {
   background-color: #ff8d72 !important;
 }

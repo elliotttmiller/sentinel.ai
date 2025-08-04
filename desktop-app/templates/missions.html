@@ -22,16 +22,16 @@
     <div class="wrapper" x-data="sentinelApp()" x-init="init()">
         <!-- Sidebar -->
         <div class="sidebar sidebar-mini" data-color="blue">
-            <div class="sidebar-wrapper">
+            <div x-data="{ expanded: false }" :class="expanded ? 'sidebar-wrapper expanded' : 'sidebar-wrapper'" @mouseenter="expanded = true" @mouseleave="expanded = false">
                 <div class="logo">
                     <a href="javascript:void(0)" class="simple-text logo-mini">SC</a>
                 </div>
                 <ul class="nav">
-                    <li class="nav-item"><a class="nav-link" href="/" title="Dashboard"><i class="fas fa-tachometer-alt"></i></a></li>
-                    <li class="nav-item active"><a class="nav-link" href="/missions" title="Missions"><i class="fas fa-rocket"></i></a></li>
-                    <li class="nav-item"><a class="nav-link" href="/ai-agents" title="AI Agents"><span class="ai-icon">AI</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="/test-missions" title="Test Missions"><i class="fas fa-vial"></i></a></li>
-                    <li class="nav-item"><a class="nav-link" href="/settings" title="Settings"><i class="fas fa-cog"></i></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/" title="Dashboard"><i class="fas fa-tachometer-alt"></i><template x-if="expanded"><span class="sidebar-label">Dashboard</span></template></a></li>
+                    <li class="nav-item active"><a class="nav-link" href="/missions" title="Missions"><i class="fas fa-rocket"></i><template x-if="expanded"><span class="sidebar-label">Missions</span></template></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/ai-agents" title="AI Agents"><span class="ai-icon">AI</span><template x-if="expanded"><span class="sidebar-label">AI Agents</span></template></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/test-missions" title="Test Missions"><i class="fas fa-vial"></i><template x-if="expanded"><span class="sidebar-label">Test Missions</span></template></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/settings" title="Settings"><i class="fas fa-cog"></i><template x-if="expanded"><span class="sidebar-label">Settings</span></template></a></li>
                 </ul>
             </div>
         </div>
@@ -206,8 +206,9 @@
                                                         <button class="btn btn-sm btn-info" @click="openMissionModal(mission)">
                                                             <i class="fas fa-eye"></i> View
                                                         </button>
-                                                        <button class="btn btn-sm btn-warning" @click="pauseMission(mission.mission_id_str)">
-                                                            <i class="fas fa-pause"></i> Pause
+                                                        <button class="modern-toggle-btn" :class="{active: mission.status === 'paused'}" @click="pauseMission(mission.mission_id_str)" :aria-pressed="mission.status === 'paused'" :title="mission.status === 'paused' ? 'Stop' : 'Start'">
+                                                            <svg class="icon-play" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><polygon points="6,4 20,12 6,20"/></svg>
+                                                            <svg class="icon-stop" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="6" width="12" height="12" rx="3"/></svg>
                                                         </button>
                                                         <button class="btn btn-sm btn-danger" @click="cancelMission(mission.mission_id_str)">
                                                             <i class="fas fa-times"></i> Cancel

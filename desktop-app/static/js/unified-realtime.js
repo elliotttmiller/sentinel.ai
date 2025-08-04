@@ -22,7 +22,7 @@ function sentinelApp() {
         performanceChart: null,
         
         // UI Control State
-        autoRefresh: true,
+        autoRefresh: false,
         showEventModal: false,
         selectedEvent: null,
 
@@ -755,8 +755,62 @@ function sentinelApp() {
             }
         },
         
-        toggleAutoRefresh() { 
-            this.autoRefresh = !this.autoRefresh; 
+
+        toggleAutoRefresh() {
+            this.autoRefresh = !this.autoRefresh;
+            if (this.autoRefresh) {
+                this.startStream();
+            } else {
+                this.stopStream();
+            }
+        },
+
+        startStream() {
+            if (this.eventSource) {
+                this.eventSource.close();
+            }
+            this.liveStreamEvents = [];
+            this.eventSource = new EventSource('/api/events/stream');
+            this.eventSource.onmessage = (event) => {
+                try {
+                    const data = JSON.parse(event.data);
+                    this.appendEventToStream(data);
+                } catch (e) {
+                    console.error('Failed to parse event:', e);
+                }
+            };
+            this.eventSource.onerror = (error) => {
+                console.error('EventSource failed:', error);
+                this.stopStream();
+            };
+        },
+
+        stopStream() {
+            if (this.eventSource) {
+                this.eventSource.close();
+                this.eventSource = null;
+            }
+        },
+
+        appendEventToStream(event) {
+            this.liveStreamEvents.push(event);
+            if (this.liveStreamEvents.length > 50) {
+                this.liveStreamEvents.shift();
+            }
+            this.$nextTick(() => {
+                const feedContainer = document.querySelector('.live-stream-feed');
+                if (feedContainer) {
+                    feedContainer.scrollTop = feedContainer.scrollHeight;
+                }
+            });
+        },
+
+        getToggleButtonClass() {
+            return this.autoRefresh ? 'btn-danger' : 'btn-success';
+        },
+
+        getToggleIconClass() {
+            return this.autoRefresh ? 'fa-stop' : 'fa-play';
         }
     };
 } 

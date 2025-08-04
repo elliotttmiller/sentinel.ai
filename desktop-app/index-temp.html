@@ -144,8 +144,14 @@
                             <div class="card-header">
                                 <h4 class="card-title">🚀 Live Agent Stream</h4>
                                 <p class="card-category">Real-time tracking of every agent move</p>
-                                <div class="live-stream-controls">
-                                    <button class="btn btn-sm btn-outline-primary" @click="toggleAutoRefresh()" x-text="autoRefresh ? 'Pause' : 'Resume'"></button>
+                                <div class="live-stream-controls d-flex align-items-center">
+                                    <!-- Modern Toggle Button: Play (green) / Stop (red) -->
+                                    <button class="btn btn-sm toggle-stream-btn d-flex align-items-center justify-content-center mr-2"
+                                            :class="{'btn-success': !autoRefresh, 'btn-danger': autoRefresh}"
+                                            @click="toggleAutoRefresh()"
+                                            :title="autoRefresh ? 'Stop Live Stream' : 'Start Live Stream'">
+                                        <i class="fas" :class="autoRefresh ? 'fa-stop' : 'fa-play'" style="font-size: 1.2rem;"></i>
+                                    </button>
                                     <select class="form-control form-control-sm" x-model="systemLogsFilter">
                                         <option value="overview">All Events</option>
                                         <option value="8001">Server 8001</option>

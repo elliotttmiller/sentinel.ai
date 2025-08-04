@@ -14,15 +14,17 @@
     <div class="wrapper" x-data="sentinelApp()" x-init="init()">
         <!-- Sidebar -->
         <nav class="sidebar">
-            <div class="sidebar-header">
-                <h3><i class="fas fa-chart-pie"></i> Analytics</h3>
+            <div x-data="{ expanded: false }" :class="expanded ? 'sidebar-wrapper expanded' : 'sidebar-wrapper'" @mouseenter="expanded = true" @mouseleave="expanded = false">
+                <div class="logo">
+                    <a href="javascript:void(0)" class="simple-text logo-mini">SC</a>
+                </div>
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link" href="/" title="Dashboard"><i class="fas fa-tachometer-alt"></i><template x-if="expanded"><span class="sidebar-label">Dashboard</span></template></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/missions" title="Missions"><i class="fas fa-rocket"></i><template x-if="expanded"><span class="sidebar-label">Missions</span></template></a></li>
+                    <li class="nav-item active"><a class="nav-link" href="/analytics" title="Analytics"><i class="fas fa-chart-pie"></i><template x-if="expanded"><span class="sidebar-label">Analytics</span></template></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/settings" title="Settings"><i class="fas fa-cog"></i><template x-if="expanded"><span class="sidebar-label">Settings</span></template></a></li>
+                </ul>
             </div>
-            <ul class="list-unstyled">
-                <li><a href="/"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                <li><a href="/missions"><i class="fas fa-rocket"></i> Missions</a></li>
-                <li class="active"><a href="/analytics"><i class="fas fa-chart-pie"></i> Analytics</a></li>
-                <li><a href="/settings"><i class="fas fa-cog"></i> Settings</a></li>
-            </ul>
         </nav>
 
         <!-- Main Content -->
