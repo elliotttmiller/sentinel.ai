@@ -1,3 +1,0 @@
-[32m2025-08-02 13:23:06.685[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m1268[0m - [1m🚀 Cognitive AI Engine starting up...[0m
-[32m2025-08-02 13:23:06.689[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m1271[0m - [1m📡 Real-time log streaming initialized for cognitive engine[0m
-[32m2025-08-02 13:23:06.690[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m1274[0m - [1m🔗 SSE endpoint available at /api/events/stream[0m

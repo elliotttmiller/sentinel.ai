@@ -1,6 +1,0 @@
-[32m2025-08-02 13:24:15.044[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m1268[0m - [1m🚀 Cognitive AI Engine starting up...[0m
-[32m2025-08-02 13:24:15.047[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m1271[0m - [1m📡 Real-time log streaming initialized for cognitive engine[0m
-[32m2025-08-02 13:24:15.048[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m1274[0m - [1m🔗 SSE endpoint available at /api/events/stream[0m
-[32m2025-08-02 13:24:15.048[0m | [33m[1mWARNING [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m1281[0m - [33m[1m⚠️ Test mission system or cognitive engine not available[0m
-[32m2025-08-02 13:24:15.049[0m | [33m[1mWARNING [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m1288[0m - [33m[1m⚠️ Agent observability system or cognitive engine not available[0m
-[32m2025-08-02 13:24:15.049[0m | [1mINFO    [0m | [36msrc.main[0m:[36mstartup_event[0m:[36m1291[0m - [1m📊 System logs integration initialized[0m

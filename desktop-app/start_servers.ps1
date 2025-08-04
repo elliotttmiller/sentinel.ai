@@ -18,3 +18,5 @@ Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$CurrentDir';
 Write-Host "Both servers started with --reload!" -ForegroundColor Green
 Write-Host "Desktop App: http://localhost:8001" -ForegroundColor Cyan
 Write-Host "Cognitive Engine: http://localhost:8002" -ForegroundColor Cyan 
+
+29935489e31e251ab182e648ff7c9905ba6a5d79 

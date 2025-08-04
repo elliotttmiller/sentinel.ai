@@ -1,5 +1,0 @@
-2025-08-01 16:54:17,814 INFO    MainThread:14036 [wandb_init.py:setup_run_log_directory():703] Logging user logs to C:\Users\AMD\sentinel\desktop-app\wandb\run-20250801_165417-6i8lhwmn\logs\debug.log
-2025-08-01 16:54:17,814 INFO    MainThread:14036 [wandb_init.py:setup_run_log_directory():704] Logging internal logs to C:\Users\AMD\sentinel\desktop-app\wandb\run-20250801_165417-6i8lhwmn\logs\debug-internal.log
-2025-08-01 16:54:17,814 INFO    MainThread:14036 [wandb_init.py:init():830] calling init triggers
-2025-08-01 16:54:17,814 INFO    MainThread:14036 [wandb_init.py:init():835] wandb.init called with sweep_config: {}
-config: {'system_version': 'v5.1', '_wandb': {}}

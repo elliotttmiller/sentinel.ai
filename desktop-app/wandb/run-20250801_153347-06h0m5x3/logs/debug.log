@@ -1,6 +1,0 @@
-2025-08-01 15:33:47,984 INFO    MainThread:8148 [wandb_init.py:setup_run_log_directory():703] Logging user logs to C:\Users\AMD\sentinel\desktop-app\wandb\run-20250801_153347-06h0m5x3\logs\debug.log
-2025-08-01 15:33:47,984 INFO    MainThread:8148 [wandb_init.py:setup_run_log_directory():704] Logging internal logs to C:\Users\AMD\sentinel\desktop-app\wandb\run-20250801_153347-06h0m5x3\logs\debug-internal.log
-2025-08-01 15:33:47,988 INFO    MainThread:8148 [wandb_init.py:init():830] calling init triggers
-2025-08-01 15:33:47,988 INFO    MainThread:8148 [wandb_init.py:init():835] wandb.init called with sweep_config: {}
-config: {'system_version': 'v5.1', '_wandb': {}}
-2025-08-01 15:33:48,449 INFO    MsgRouterThr:8148 [mailbox.py:close():129] [no run ID] Closing mailbox, abandoning 1 handles.
