@@ -27,6 +27,16 @@ from utils.guardian_protocol import GuardianProtocol
 from utils.self_learning_module import SelfLearningModule
 from utils.sentry_integration import initialize_sentry, get_sentry, capture_error, start_transaction, track_async_errors
 
+# Import for real agent execution (with fallback)
+try:
+    from .real_mission_executor import RealMissionExecutor
+    REAL_EXECUTOR_AVAILABLE = True
+    logger.info("✅ Real mission executor available - agents will perform actual tasks")
+except ImportError as e:
+    logger.warning(f"⚠️ Real mission executor not available: {e} - falling back to simulation")
+    REAL_EXECUTOR_AVAILABLE = False
+    RealMissionExecutor = None
+
 load_dotenv(os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
 
 class MissionState(Enum):
@@ -72,63 +82,117 @@ class CognitiveForgeEngine:
                     event_type="mission_update",
                     source="mission_control",
                     severity="INFO",
-                    message=f"Mission '{mission_id_str}' initiated.",
+                    message=f"Mission '{mission_id_str}' initiated - deploying real AI agents.",
                     payload=self.db_manager.get_mission(mission_id_str).as_dict()
                 ))
-            await asyncio.sleep(2)
-            agent_observability.push_event(LiveStreamEvent(
-                event_type="agent_action", source="Prompt Alchemist", severity="INFO",
-                message="Optimizing user prompt for clarity and technical detail.",
-                payload={"mission_id": mission_id_str, "phase": "Prompt Alchemy"}
-            ))
-            self.db_manager.update_mission_status(mission_id_str=mission_id_str, status="running", progress=25)
-            agent_observability.push_event(LiveStreamEvent(
-                event_type="mission_update", source="mission_control", severity="INFO",
-                message=f"Mission '{mission_id_str}' progress: 25%",
-                payload=self.db_manager.get_mission(mission_id_str).as_dict()
-            ))
+            
+            # Use REAL AGENT EXECUTION if available, otherwise fallback to simulation
+            if REAL_EXECUTOR_AVAILABLE and RealMissionExecutor:
+                # REAL AGENT EXECUTION PATH
+                logger.info(f"🚀 Using REAL AGENT EXECUTION for mission {mission_id_str}")
+                
+                # Create real mission executor
+                real_executor = RealMissionExecutor()
+                
+                # Prepare mission data for real execution
+                mission_data = {
+                    'id': mission_id_str,
+                    'objective': user_prompt,
+                    'agent_type': agent_type,
+                    'complexity': 'medium',  # Could be derived from user_prompt analysis
+                    'metadata': {
+                        'is_healing_attempt': is_healing_attempt,
+                        'created_by': 'cognitive_forge_engine'
+                    }
+                }
+                
+                agent_observability.push_event(LiveStreamEvent(
+                    event_type="agent_deployment", 
+                    source="real_mission_executor", 
+                    severity="INFO",
+                    message="Deploying real CrewAI agents to complete mission.",
+                    payload={"mission_id": mission_id_str, "phase": "Real Agent Deployment"}
+                ))
+                self.db_manager.update_mission_status(mission_id_str=mission_id_str, status="running", progress=25)
+                
+                # Execute the mission using REAL AGENTS (not simulation)
+                logger.info(f"🤖 Deploying real AI agents for mission {mission_id_str}: {user_prompt}")
+                execution_result = await real_executor.execute_mission(mission_data)
+                
+                self.db_manager.update_mission_status(mission_id_str=mission_id_str, status="running", progress=75)
+                
+                # Process the real execution result
+                if execution_result.get("success", False):
+                    final_result_text = (
+                        f"Mission '{mission_id_str}' completed successfully by real AI agents. "
+                        f"Real-world changes made: {execution_result.get('real_world_changes', False)}"
+                    )
+                    self.db_manager.update_mission_status(
+                        mission_id_str=mission_id_str, 
+                        status="completed", 
+                        progress=100, 
+                        result=final_result_text
+                    )
+                    agent_observability.push_event(LiveStreamEvent(
+                        event_type="mission_complete",
+                        source="mission_control",
+                        severity="SUCCESS", 
+                        message=final_result_text,
+                        payload={
+                            **self.db_manager.get_mission(mission_id_str).as_dict(),
+                            **execution_result
+                        }
+                    ))
+                    await self.self_learning_module.synthesize_and_learn(self.db_manager.get_mission(mission_id_str))
+                    return {"status": "completed", "real_execution": True, "result": execution_result}
+                else:
+                    # Real execution failed, this is a genuine failure
+                    error_message = execution_result.get("message", "Real agent execution failed")
+                    raise ValueError(f"Real agent execution failed: {error_message}")
+                    
+            else:
+                # SIMULATION FALLBACK PATH (when real agents not available)
+                logger.warning(f"⚠️ Using SIMULATION MODE for mission {mission_id_str} - real agents not available")
+                
+                await asyncio.sleep(2)
+                agent_observability.push_event(LiveStreamEvent(
+                    event_type="agent_action", source="Simulated Agent", severity="WARNING",
+                    message="Using simulation mode - real agents not available.",
+                    payload={"mission_id": mission_id_str, "phase": "Simulation Fallback"}
+                ))
+                self.db_manager.update_mission_status(mission_id_str=mission_id_str, status="running", progress=25)
+                
+                await asyncio.sleep(3)
+                agent_observability.push_event(LiveStreamEvent(
+                    event_type="agent_action", source="Simulated Planner", severity="WARNING",
+                    message="Simulating task planning and execution.",
+                    payload={"mission_id": mission_id_str, "phase": "Simulated Planning"}
+                ))
+                self.db_manager.update_mission_status(mission_id_str=mission_id_str, status="running", progress=50)
 
-            await asyncio.sleep(3)
-            agent_observability.push_event(LiveStreamEvent(
-                event_type="agent_action", source="Lead Architect", severity="INFO",
-                message="Generating multi-step execution plan.",
-                payload={"mission_id": mission_id_str, "phase": "Planning"}
-            ))
-            self.db_manager.update_mission_status(mission_id_str=mission_id_str, status="running", progress=50)
-            agent_observability.push_event(LiveStreamEvent(
-                event_type="mission_update", source="mission_control", severity="INFO",
-                message=f"Mission '{mission_id_str}' progress: 50%",
-                payload=self.db_manager.get_mission(mission_id_str).as_dict()
-            ))
+                if not is_healing_attempt and random.random() < 0.3:
+                    raise ValueError("Simulated failure: Critical component 'CodeGenerator' failed.")
 
-            if not is_healing_attempt and random.random() < 0.3:
-                raise ValueError("Simulated failure: Critical component 'CodeGenerator' failed.")
+                await asyncio.sleep(4)
+                agent_observability.push_event(LiveStreamEvent(
+                    event_type="agent_action", source="Simulated Executor", severity="WARNING",
+                    message="Simulating task execution - no real changes made.",
+                    payload={"mission_id": mission_id_str, "phase": "Simulated Execution"}
+                ))
+                self.db_manager.update_mission_status(mission_id_str=mission_id_str, status="running", progress=75)
 
-            await asyncio.sleep(4)
-            agent_observability.push_event(LiveStreamEvent(
-                event_type="agent_action", source="Senior Developer Agent", severity="INFO",
-                message="Executing primary tasks from blueprint.",
-                payload={"mission_id": mission_id_str, "phase": "Execution"}
-            ))
-            self.db_manager.update_mission_status(mission_id_str=mission_id_str, status="running", progress=75)
-            agent_observability.push_event(LiveStreamEvent(
-                event_type="mission_update", source="mission_control", severity="INFO",
-                message=f"Mission '{mission_id_str}' progress: 75%",
-                payload=self.db_manager.get_mission(mission_id_str).as_dict()
-            ))
-
-            await asyncio.sleep(2)
-            final_result_text = f"Mission '{mission_id_str}' completed successfully."
-            self.db_manager.update_mission_status(mission_id_str=mission_id_str, status="completed", progress=100, result=final_result_text)
-            agent_observability.push_event(LiveStreamEvent(
-                event_type="mission_complete",
-                source="mission_control",
-                severity="SUCCESS",
-                message=final_result_text,
-                payload=self.db_manager.get_mission(mission_id_str).as_dict()
-            ))
-            await self.self_learning_module.synthesize_and_learn(self.db_manager.get_mission(mission_id_str))
-            return {"status": "completed"}
+                await asyncio.sleep(2)
+                final_result_text = f"Mission '{mission_id_str}' completed in SIMULATION MODE - no real changes made."
+                self.db_manager.update_mission_status(mission_id_str=mission_id_str, status="completed", progress=100, result=final_result_text)
+                agent_observability.push_event(LiveStreamEvent(
+                    event_type="mission_complete",
+                    source="mission_control",
+                    severity="WARNING",
+                    message=final_result_text,
+                    payload=self.db_manager.get_mission(mission_id_str).as_dict()
+                ))
+                await self.self_learning_module.synthesize_and_learn(self.db_manager.get_mission(mission_id_str))
+                return {"status": "completed", "real_execution": False, "simulation_mode": True}
         except Exception as e:
             error_message = str(e)
             logger.error(f"Mission {mission_id_str} failed: {error_message}")
