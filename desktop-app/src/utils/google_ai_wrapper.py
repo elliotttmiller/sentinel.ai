@@ -89,7 +89,7 @@ def get_crewai_llm():
             convert_system_message_to_human=True
         )
         
-        logger.success(f"✅ Initialized CrewAI-compatible Google Generative AI LLM with model: {crew_llm._litellm_model_name}")
+        logger.success(f"✅ Initialized CrewAI-compatible Google Generative AI LLM with model: {getattr(crew_llm, '_litellm_model_name', 'gemini/gemini-1.5-pro')}")
         return crew_llm
     except Exception as e:
         logger.error(f"❌ Failed to create CrewAI-compatible LLM. Real agent execution will fail. Error: {e}")
