@@ -23,7 +23,13 @@ class CrewAICompatibleLLM(ChatGoogleGenerativeAI):
     resulting in 'models/gemini/model-name' being passed to litellm,
     but litellm expects just 'gemini/model-name' format.
     """
-    _litellm_model_name: str
+    
+    # Pydantic v2 configuration
+    model_config = {"arbitrary_types_allowed": True}
+    
+    # Pydantic v1 fallback configuration (for compatibility)
+    class Config:
+        arbitrary_types_allowed = True
     
     def __init__(self, *args, **kwargs):
         # Extract the model name before calling super().__init__
@@ -36,27 +42,35 @@ class CrewAICompatibleLLM(ChatGoogleGenerativeAI):
             clean_model_name = model_name
             
         # Store the correct format that litellm expects
-        self._litellm_model_name = f"gemini/{clean_model_name}"
+        litellm_model_name = f"gemini/{clean_model_name}"
         
         # Pass the clean model name to the parent class
         kwargs['model'] = clean_model_name
         
         super().__init__(*args, **kwargs)
         
-        logger.success(f"✅ CrewAI-compatible LLM initialized with litellm format: {self._litellm_model_name}")
+        # Use multiple approaches to ensure the field is set correctly
+        try:
+            self._litellm_model_name = litellm_model_name
+        except (AttributeError, ValueError):
+            # Fallback: use setattr if direct assignment fails
+            setattr(self, '_litellm_model_name', litellm_model_name)
+        
+        logger.success(f"✅ CrewAI-compatible LLM initialized with litellm format: {litellm_model_name}")
     
     @property
     def _llm_type(self) -> str:
         """Override to return the correct model name for litellm"""
-        return self._litellm_model_name
+        return getattr(self, '_litellm_model_name', 'gemini/gemini-1.5-pro')
     
     def _get_model_name(self) -> str:
         """Override to return the correct model name for litellm"""
-        return self._litellm_model_name
+        return getattr(self, '_litellm_model_name', 'gemini/gemini-1.5-pro')
     
     def __str__(self) -> str:
         """String representation should show the litellm format"""
-        return f"CrewAICompatibleLLM(model='{self._litellm_model_name}')"
+        model_name = getattr(self, '_litellm_model_name', 'gemini/gemini-1.5-pro')
+        return f"CrewAICompatibleLLM(model='{model_name}')"
 
 
 # --- Dedicated, LangChain-compatible LLM for CrewAI ---
@@ -75,7 +89,7 @@ def get_crewai_llm():
             convert_system_message_to_human=True
         )
         
-        logger.success(f"✅ Initialized CrewAI-compatible Google Generative AI LLM with model: {crew_llm._litellm_model_name}")
+        logger.success(f"✅ Initialized CrewAI-compatible Google Generative AI LLM with model: {getattr(crew_llm, '_litellm_model_name', 'gemini/gemini-1.5-pro')}")
         return crew_llm
     except Exception as e:
         logger.error(f"❌ Failed to create CrewAI-compatible LLM. Real agent execution will fail. Error: {e}")
