@@ -150,29 +150,40 @@ function sentinelApp() {
                 case 'mission_update':
                 case 'mission_complete':
                 case 'mission_error':
-                    console.log('📋 Mission event:', event);
                     this.updateMissionState(event);
                     break;
+                case 'mission_insight':
+                    this.updateMissionInsight(event.payload);
+                    break;
                 case 'agent_action':
-                    console.log('🤖 Agent event:', event);
                     this.addAgentActivity(event);
                     break;
                 case 'system_log':
-                    console.log('📝 System log event:', event);
                     this.addSystemLog(event);
                     break;
                 case 'live_stream_event':
-                    // Only process live stream events if the feed is active
                     if (this.liveStreamActive) {
                         this.addLiveStreamEvent(event);
                     }
                     break;
                 case 'heartbeat':
-                    console.log('💓 Heartbeat received');
                     // Keep connection alive
                     break;
                 default:
                     console.log('❓ Unhandled event type:', event.event_type, event);
+            }
+        },
+
+        updateMissionInsight(insight) {
+            const missionIndex = this.missions.findIndex(m => m.mission_id_str === insight.mission_id_str);
+            if (missionIndex > -1) {
+                // Merge new insight data into the existing mission object
+                this.missions[missionIndex] = { ...this.missions[missionIndex], ...insight };
+                
+                // If the updated mission is the selected one, update selectedMission as well
+                if (this.selectedMission?.mission_id_str === insight.mission_id_str) {
+                    this.selectedMission = { ...this.selectedMission, ...insight };
+                }
             }
         },
 

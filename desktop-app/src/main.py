@@ -134,12 +134,33 @@ if cognitive_forge_engine is None:
             self.guardian_protocol = GuardianProtocol() if GuardianProtocol else None
         
         async def run_mission(self, user_prompt, mission_id_str, agent_type):
-            logger.info(f"Fallback: Running mission {mission_id_str}")
-            # Simulate mission execution
-            await asyncio.sleep(2)
-            if db_manager:
-                db_manager.update_mission_status(mission_id_str, "completed")
-        
+            logger.info(f"Starting mission: {mission_id_str}")
+            db_manager.update_mission_status(mission_id_str, "running", progress=10)
+
+            # Simulate a long-running mission with real-time insights
+            for i in range(1, 11):
+                await asyncio.sleep(2)
+                progress = i * 10
+                db_manager.update_mission_status(mission_id_str, "running", progress=progress)
+
+                # Create and push a detailed insight event
+                insight_event = LiveStreamEvent(
+                    event_type="mission_insight",
+                    source="cognitive_engine",
+                    payload={
+                        "mission_id_str": mission_id_str,
+                        "current_thought": f"Agent is on step {i}, progress at {progress}%.",
+                        "events": [{"id": uuid.uuid4().hex, "timestamp": datetime.utcnow().isoformat(), "message": f"Executing task {i}..."}],
+                        "sentry_logs": f"Sentry log for step {i}",
+                        "weave_logs": f"Weave trace for step {i}",
+                        "wandb_logs": f"Wandb metric for step {i}"
+                    }
+                )
+                agent_observability.push_event(insight_event)
+
+            db_manager.update_mission_status(mission_id_str, "completed", progress=100)
+            logger.info(f"Mission {mission_id_str} completed.")
+
         async def run_periodic_self_optimization(self):
             logger.info("Fallback: Periodic self-optimization")
             # Simulate optimization
@@ -349,51 +370,16 @@ async def create_mission(request: Request, background_tasks: BackgroundTasks, cu
         logger.error(f"❌ Failed to create mission: {e}")
         raise HTTPException(status_code=500, detail=f"Failed to create mission: {str(e)}")
 
-@app.post("/api/test-missions")
-async def create_test_mission(request: TestMissionRequest, current_user: User = Depends(get_current_user)):
-    """Create a test mission with enhanced error handling"""
+@app.post("/api/missions/{mission_id_str}/cancel")
+async def cancel_mission_api(mission_id_str: str):
+    """Cancel a running mission."""
     try:
-        logger.info(f"🧪 Creating test mission: {request.test_type} - {request.prompt[:50]}...")
-        
-        # Create a test mission with special identifier
-        test_mission_id = f"test_{uuid.uuid4().hex[:8]}"
-        
-        new_test_mission = db_manager.create_mission(
-            mission_id_str=test_mission_id,
-            prompt=request.prompt,
-            agent_type="tester",  # Special agent type for tests
-            priority=request.priority,
-            status="pending",
-            owner_id=current_user.id,
-            organization_id=current_user.organization_id
-        )
-        
-        # Add test-specific metadata
-        test_metadata = {
-            "test_type": request.test_type,
-            "is_test": True,
-            "created_at": datetime.utcnow().isoformat()
-        }
-        
-        # Store test metadata in mission updates
-        db_manager.add_mission_update(
-            test_mission_id,
-            "test_creation",
-            f"Test mission created: {request.test_type}",
-            test_metadata
-        )
-        
-        logger.info(f"✅ Test mission created: {test_mission_id}")
-        return {
-            "success": True,
-            "mission_id": test_mission_id,
-            "test_type": request.test_type,
-            "message": f"Test mission created successfully"
-        }
-        
+        db_manager.update_mission_status(mission_id_str, "canceled")
+        logger.info(f"Mission {mission_id_str} canceled by user.")
+        return {"success": True, "message": "Mission canceled."}
     except Exception as e:
-        logger.error(f"❌ Failed to create test mission: {e}")
-        raise HTTPException(status_code=500, detail=f"Failed to create test mission: {str(e)}")
+        logger.error(f"Failed to cancel mission {mission_id_str}: {e}")
+        raise HTTPException(status_code=500, detail="Failed to cancel mission.")
 
 @app.get("/api/agents")
 async def list_agents_api():
