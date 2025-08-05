@@ -1,6 +1,26 @@
 """
 Sentinel Command Center - Main API Server v5.4
 Real-time dashboard with Phase 5 predictive intelligence and multi-tenancy
+
+ARCHITECTURE OVERVIEW:
+This is the main FastAPI server that provides:
+1. REST API endpoints for mission management and system control
+2. Server-Sent Events (SSE) for real-time updates to the dashboard
+3. Static file serving for the web dashboard
+4. Integration with the cognitive forge engine for AI operations
+5. Robust import fallback system for both package and script execution
+
+KEY DESIGN PATTERNS:
+- Fallback import strategy: Works whether run as script or imported as package
+- Graceful degradation: Core functionality works even if optional modules fail
+- Event-driven architecture: Real-time updates via SSE streams
+- Modular design: Clear separation between API, engine, and database layers
+
+DEPENDENCIES:
+- FastAPI for REST API and SSE
+- Cognitive Forge Engine for AI operations
+- Advanced Database for persistence
+- Agent Observability for real-time monitoring
 """
 
 import asyncio
@@ -29,11 +49,20 @@ try:
     from src.utils.guardian_protocol import GuardianProtocol
 except ImportError as e:
     logger.warning(f"Failed to import core modules: {e}")
-    # Create fallback classes
-    cognitive_forge_engine = None
-    db_manager = None
-    agent_observability = None
-    GuardianProtocol = None
+    # Try relative imports as fallback
+    try:
+        from core.cognitive_forge_engine import cognitive_forge_engine
+        from models.advanced_database import User, db_manager
+        from utils.agent_observability import agent_observability
+        from utils.guardian_protocol import GuardianProtocol
+        logger.info("Using relative imports as fallback")
+    except ImportError as e2:
+        logger.warning(f"Relative imports also failed: {e2}")
+        # Create fallback classes
+        cognitive_forge_engine = None
+        db_manager = None
+        agent_observability = None
+        GuardianProtocol = None
 
 # Initialize FastAPI app
 app = FastAPI(title="Sentinel Command Center v5.4", version="5.4.0")

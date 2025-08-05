@@ -1,6 +1,34 @@
 """
 Cognitive Forge Engine v5.3 - Simplified Live Mission Execution with Phase 4 Sentience
 Implements live mission execution with real-time database integration and self-healing capabilities
+
+ARCHITECTURE OVERVIEW:
+The Cognitive Forge Engine is the core AI orchestration system that:
+1. Manages the 8-phase mission workflow (analyze, plan, execute, verify, etc.)
+2. Coordinates multiple AI agents using CrewAI framework
+3. Provides real-time mission tracking and observability
+4. Implements self-healing through the Guardian Protocol
+5. Uses advanced decision-making with hybrid golden path optimization
+
+KEY COMPONENTS:
+- Mission Lifecycle: 8-phase workflow for structured AI task execution
+- Agent Coordination: Dynamic crew assembly based on mission requirements
+- Observability: Real-time event streaming and performance metrics
+- Self-Healing: Automatic error detection and correction
+- Memory System: Long-term learning and context retention
+
+DESIGN PATTERNS:
+- Event-driven architecture for real-time updates
+- Strategy pattern for different execution modes (golden path vs full workflow)
+- Observer pattern for mission lifecycle events
+- Factory pattern for dynamic agent creation
+- Fallback pattern for graceful degradation
+
+INTEGRATION POINTS:
+- Database: SQLAlchemy + ChromaDB for persistence and vector search
+- LLM: Google AI (Gemini) with fallback handling
+- Observability: Weave + W&B for monitoring and analytics
+- Error Tracking: Sentry for production error monitoring
 """
 
 import asyncio
@@ -20,6 +48,15 @@ from loguru import logger
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Import settings
+try:
+    from src.config.settings import settings
+except ImportError:
+    try:
+        from config.settings import settings
+        logger.info("Using relative imports for settings")
+    except ImportError:
+        logger.warning("Failed to import settings, using fallback")
+        settings = None
 
 # Import utils with fallback
 try:
@@ -29,56 +66,80 @@ try:
         google_ai_wrapper,
     )
 except ImportError:
-    logger.warning("Failed to import google_ai_wrapper, using fallback")
-    create_google_ai_llm = None
-    direct_inference = None
-    google_ai_wrapper = None
+    try:
+        from utils.google_ai_wrapper import (
+            create_google_ai_llm,
+            direct_inference,
+            google_ai_wrapper,
+        )
+        logger.info("Using relative imports for google_ai_wrapper")
+    except ImportError:
+        logger.warning("Failed to import google_ai_wrapper, using fallback")
+        create_google_ai_llm = None
+        direct_inference = None
+        google_ai_wrapper = None
 
 # Import models
 try:
     from src.models.advanced_database import db_manager
 except ImportError:
-    logger.warning("Failed to import db_manager, using fallback")
-    db_manager = None
+    try:
+        from models.advanced_database import db_manager
+        logger.info("Using relative imports for db_manager")
+    except ImportError:
+        logger.warning("Failed to import db_manager, using fallback")
+        db_manager = None
 
 # Import observability
 try:
     from src.utils.agent_observability import LiveStreamEvent, agent_observability
 except ImportError:
-    logger.warning("Failed to import agent_observability, using fallback")
-    agent_observability = None
-    LiveStreamEvent = None
+    try:
+        from utils.agent_observability import LiveStreamEvent, agent_observability
+        logger.info("Using relative imports for agent_observability")
+    except ImportError:
+        logger.warning("Failed to import agent_observability, using fallback")
+        agent_observability = None
+        LiveStreamEvent = None
 
 # Import Phase 4 components
+GuardianProtocol = None
+SelfLearningModule = None
+
 try:
     from src.utils.guardian_protocol import GuardianProtocol
     from src.utils.self_learning_module import SelfLearningModule
 except ImportError:
-    logger.warning(
-        "Failed to import guardian_protocol or self_learning_module, using fallback"
-    )
+    try:
+        from utils.guardian_protocol import GuardianProtocol
+        from utils.self_learning_module import SelfLearningModule
+        logger.info("Using relative imports for Phase 4 components")
+    except ImportError:
+        logger.warning(
+            "Failed to import guardian_protocol or self_learning_module, using fallback"
+        )
 
-    # Create fallback classes if imports fail
-    class GuardianProtocol:
-        def __init__(self, llm):
-            self.llm = llm
+        # Create fallback classes if imports fail
+        class GuardianProtocol:
+            def __init__(self, llm):
+                self.llm = llm
 
-        async def run_agent_validation_suite(self, *args, **kwargs):
-            return {"validation_passed": True}
+            async def run_agent_validation_suite(self, *args, **kwargs):
+                return {"validation_passed": True}
 
-        async def run_code_autofix(self, *args, **kwargs):
-            return {"status": "success", "fixed_code": "Auto-fix applied"}
+            async def run_code_autofix(self, *args, **kwargs):
+                return {"status": "success", "fixed_code": "Auto-fix applied"}
 
-    class SelfLearningModule:
-        def __init__(self, llm, db_manager):
-            self.llm = llm
-            self.db_manager = db_manager
+        class SelfLearningModule:
+            def __init__(self, llm, db_manager):
+                self.llm = llm
+                self.db_manager = db_manager
 
-        async def synthesize_and_learn(self, mission):
-            logger.info("Self-learning module processing mission")
+            async def synthesize_and_learn(self, mission):
+                logger.info("Self-learning module processing mission")
 
-        async def analyze_completed_missions(self):
-            return {"patterns": [], "insights": []}
+            async def analyze_completed_missions(self):
+                return {"patterns": [], "insights": []}
 
 
 # Load environment variables

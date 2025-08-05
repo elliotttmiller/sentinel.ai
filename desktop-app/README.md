@@ -452,6 +452,34 @@ SENTRY_DSN=your_sentry_dsn_here
 
 ## 🛠️ Development
 
+### Robust Import Structure
+
+The project uses a sophisticated import system that works in both package and script contexts:
+
+#### Key Features
+- **Dual Import Strategy**: Supports both absolute (`src.module`) and relative (`module`) imports
+- **Graceful Fallback**: Automatically falls back to relative imports if absolute imports fail
+- **Script-First Design**: Optimized for running directly from the desktop-app directory
+- **Package Compatible**: Also works when imported as a package from elsewhere
+
+#### Import Examples
+```python
+# Primary attempt: absolute import (for package context)
+from src.core.cognitive_forge_engine import cognitive_forge_engine
+
+# Fallback: relative import (for script context)  
+from core.cognitive_forge_engine import cognitive_forge_engine
+
+# Smart import helper (recommended for new code)
+from src.utils.smart_imports import smart_import_from
+```
+
+#### Architecture Benefits
+- **Flexible Deployment**: Works in various execution contexts
+- **Development Friendly**: Easy to run and test locally
+- **Production Ready**: Handles import failures gracefully
+- **Maintenance Simplified**: Clear import patterns across the codebase
+
 ### Project Structure
 
 ```

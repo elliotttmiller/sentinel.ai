@@ -79,7 +79,7 @@ class LogCollector:
                     ) as response:
                         if response.status == 200:
                             return {"online": True, "status": "healthy"}
-                except:
+                except Exception:
                     pass
 
                 # Try root endpoint
@@ -87,7 +87,7 @@ class LogCollector:
                     async with session.get(server_url, timeout=3) as response:
                         if response.status == 200:
                             return {"online": True, "status": "responding"}
-                except:
+                except Exception:
                     pass
 
                 return {"online": False, "error": "Server not responding"}

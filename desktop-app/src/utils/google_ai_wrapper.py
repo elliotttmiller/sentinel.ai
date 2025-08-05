@@ -28,7 +28,8 @@ from loguru import logger
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from config.settings import settings
 
-logger = logging.getLogger(__name__)
+# Use Python's standard logger for this module
+std_logger = logging.getLogger(__name__)
 
 
 class GoogleGenerativeAIWrapper(BaseChatModel):
