@@ -29,10 +29,10 @@ from config.settings import settings
 
 # Import utils with fallback
 try:
-    from utils.google_ai_wrapper import create_google_ai_llm, direct_inference, google_ai_wrapper
+    from utils.google_ai_wrapper import create_google_ai_llm, llm
 except ImportError:
     # Fallback for relative imports
-    from ..utils.google_ai_wrapper import create_google_ai_llm, direct_inference, google_ai_wrapper
+    from ..utils.google_ai_wrapper import create_google_ai_llm, llm
 
 # Import models
 try:
@@ -104,10 +104,7 @@ class CognitiveForgeEngine:
 
         # Use our custom Google Generative AI wrapper
         try:
-            self.llm = create_google_ai_llm(
-                model_name=LLM_MODEL,
-                temperature=LLM_TEMPERATURE
-            )
+            self.llm = llm  # Use the pre-configured LLM instance
             logger.info(f"Google Generative AI initialized with model: {LLM_MODEL}")
             
             # Track successful LLM initialization

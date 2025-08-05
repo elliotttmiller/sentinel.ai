@@ -1,5 +1,8 @@
 """
-Tool-Enabled Executable Agents for Real Task Execution
+Tool-Enabled Executable Agents for Real Ta    def __init__(self, llm=None):
+        self.llm = llm if llm is not None else get_crewai_llm()
+        self.crewai_available = CREWAI_AVAILABLE
+        logger.info(f"ExecutableAgents initialized with Google AI LLM (CrewAI available: {self.crewai_available})")xecution
 These agents use CrewAI's native tool support to perform actual work
 """
 
@@ -28,11 +31,11 @@ except Exception as e:
             if verbose:
                 logger.info(f"Fallback Agent created: {role}")
 
-# Import LLM
+# Import LLM - use CrewAI compatible LLM
 try:
-    from ..utils.google_ai_wrapper import create_google_ai_llm
+    from ..utils.google_ai_wrapper import get_crewai_llm
 except ImportError:
-    from utils.google_ai_wrapper import create_google_ai_llm
+    from utils.google_ai_wrapper import get_crewai_llm
 
 # Import tools
 try:
@@ -45,10 +48,10 @@ class ExecutableAgents:
     Contains the definitions for agents that can perform real, executable tasks.
     """
     
-    def __init__(self):
-        self.llm = create_google_ai_llm()
+    def __init__(self, llm=None):
+        self.llm = llm if llm is not None else get_crewai_llm()
         self.crewai_available = CREWAI_AVAILABLE
-        logger.info(f"ExecutableAgents initialized with Google AI LLM (CrewAI available: {self.crewai_available})")
+        logger.info(f"ExecutableAgents initialized with CrewAI compatible LLM (CrewAI available: {self.crewai_available})")
     
     def planner_agent(self) -> Agent:
         """Agent that creates detailed execution plans"""

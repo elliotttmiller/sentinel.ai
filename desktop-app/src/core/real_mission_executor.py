@@ -9,12 +9,8 @@ from datetime import datetime
 from loguru import logger
 
 # Import the new execution workflow
-try:
-    from .execution_workflow import ExecutionWorkflow
-    from ..utils.agent_observability import agent_observability, LiveStreamEvent
-except ImportError:
-    from core.execution_workflow import ExecutionWorkflow
-    from utils.agent_observability import agent_observability, LiveStreamEvent
+from src.core.execution_workflow import ExecutionWorkflow
+from src.utils.agent_observability import agent_observability, LiveStreamEvent
 
 
 class RealMissionExecutor:

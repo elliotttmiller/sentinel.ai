@@ -248,44 +248,15 @@ async def websocket_diagnostics():
         raise HTTPException(status_code=500, detail=f"Error generating diagnostics: {str(e)}")
 
 # Import core components with proper error handling
-try:
-    from config.settings import settings
-    from src.core.cognitive_forge_engine import cognitive_forge_engine
-    from src.core.real_mission_executor import RealMissionExecutor
-    from src.models.advanced_database import db_manager
-    from src.utils.agent_observability import agent_observability, LiveStreamEvent
-    from src.utils.guardian_protocol import GuardianProtocol
-    
-    # Initialize the real mission executor
-    real_mission_executor = RealMissionExecutor()
-    
-    # Try to import User model, create fallback if it doesn't exist
-    try:
-        from src.models.advanced_database import User
-    except ImportError:
-        # Create a simple User model as fallback
-        from pydantic import BaseModel
-        class User(BaseModel):
-            id: int
-            username: str
-            email: str
-            
-except ImportError as e:
-    logger.warning(f"Failed to import core modules: {e}")
-    # Create fallback classes
-    cognitive_forge_engine = None
-    real_mission_executor = None
-    db_manager = None
-    agent_observability = None
-    GuardianProtocol = None
-    settings = None
-    
-    # Create fallback User model
-    from pydantic import BaseModel
-    class User(BaseModel):
-        id: int = 1
-        username: str = "default"
-        email: str = "user@sentinel.ai"
+from config.settings import settings
+from src.core.cognitive_forge_engine import cognitive_forge_engine
+from src.core.real_mission_executor import RealMissionExecutor
+from src.models.advanced_database import db_manager, User
+from src.utils.agent_observability import agent_observability, LiveStreamEvent
+from src.utils.guardian_protocol import GuardianProtocol
+
+# Initialize the real mission executor
+real_mission_executor = RealMissionExecutor()
 
 # Mount static files
 STATIC_DIR = os.path.join(SRC_ROOT, "..", "static")
