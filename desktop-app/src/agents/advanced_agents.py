@@ -3,8 +3,20 @@ Advanced Agent Definitions for Cognitive Forge Engine v5.0
 Enhanced with specialized agents for sentient capabilities
 """
 
-from ..utils.crewai_bypass import DirectAIAgent
-from ..utils.google_ai_wrapper import create_google_ai_llm
+# Import utilities using absolute imports with fallback
+try:
+    from utils.crewai_bypass import DirectAIAgent
+    from utils.google_ai_wrapper import create_google_ai_llm
+except ImportError:
+    from loguru import logger
+    logger.warning("Failed to import from utils, trying src prefix")
+    try:
+        from src.utils.crewai_bypass import DirectAIAgent
+        from src.utils.google_ai_wrapper import create_google_ai_llm
+    except ImportError:
+        logger.error("Failed to import required utilities for advanced agents")
+        DirectAIAgent = None
+        create_google_ai_llm = None
 
 
 class PromptOptimizationAgents:

@@ -19,10 +19,15 @@ from dataclasses import dataclass, asdict
 from contextlib import contextmanager
 
 try:
-    from .google_ai_wrapper import create_google_ai_llm
+    from utils.google_ai_wrapper import create_google_ai_llm
     LLM_AVAILABLE = True
 except ImportError:
-    LLM_AVAILABLE = False
+    try:
+        from src.utils.google_ai_wrapper import create_google_ai_llm
+        LLM_AVAILABLE = True
+    except ImportError:
+        LLM_AVAILABLE = False
+        create_google_ai_llm = None
 
 from loguru import logger
 import sys
@@ -356,10 +361,6 @@ class SurgicalPatcher:
 class RollbackManager:
     def __init__(self, backup_dir):
         self.backup_dir = backup_dir
-
-class PhoenixProtocol:
-    def __init__(self):
-        pass
 
 class MissionAwareHealer:
     def __init__(self):

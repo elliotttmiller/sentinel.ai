@@ -23,7 +23,7 @@ from loguru import logger
 # Add the src directory to the Python path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__)))
 
-# Import core components with proper error handling
+# Import core components with proper error handling and absolute imports
 try:
     from core.cognitive_forge_engine import cognitive_forge_engine
     from models.advanced_database import db_manager, User
@@ -31,11 +31,26 @@ try:
     from utils.guardian_protocol import GuardianProtocol
 except ImportError as e:
     logger.warning(f"Failed to import core modules: {e}")
-    # Create fallback classes
-    cognitive_forge_engine = None
-    db_manager = None
-    agent_observability = None
-    GuardianProtocol = None
+    try:
+        # Fallback to src-prefixed imports
+        from src.core.cognitive_forge_engine import cognitive_forge_engine
+        from src.models.advanced_database import db_manager, User
+        from src.utils.agent_observability import agent_observability, LiveStreamEvent
+        from src.utils.guardian_protocol import GuardianProtocol
+    except ImportError as e:
+        logger.warning(f"Failed to import core modules with src prefix: {e}")
+        # Create fallback classes
+        cognitive_forge_engine = None
+        db_manager = None
+        agent_observability = None
+        GuardianProtocol = None
+        
+        # Create fallback User class for type hints
+        class User:
+            """Fallback User class for dependency injection when database is unavailable"""
+            def __init__(self):
+                self.id = 1
+                self.organization_id = 1
 
 # Initialize FastAPI app
 app = FastAPI(title="Sentinel Command Center v5.4", version="5.4.0")
@@ -54,6 +69,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Pydantic models for API requests
 class TestMissionRequest(BaseModel):
+    """Request model for test mission creation"""
     prompt: str
     test_type: str = "unit"
     priority: str = "low"
@@ -65,6 +81,7 @@ system_logs: List[Dict] = []
 
 # Fallback classes for missing components
 class FallbackLiveStreamEvent:
+    """Fallback event class when observability system is unavailable"""
     def __init__(self, event_type="system_log", source="system", severity="INFO", message="", payload=None):
         self.event_type = event_type
         self.source = source
@@ -151,6 +168,7 @@ if cognitive_forge_engine is None:
 # In a real app, this would involve JWT tokens and a database lookup.
 # For now, this dependency provides a default user for all operations.
 def get_current_user() -> User:
+    """Get current authenticated user (fallback implementation for development)"""
     return db_manager.get_or_create_default_user_and_org()
 
 # API Endpoints for pages
