@@ -12,6 +12,15 @@
     <!-- CSS Files -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/static/css/sentinel-dash.css" rel="stylesheet" />
+    <style>
+        .custom-page-title {
+            min-height: 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #40c057;
+            margin: 0 0 0.5rem 1.5rem;
+        }
+    </style>
     
     <!-- Alpine.js -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -39,6 +48,8 @@
         <!-- Main Panel -->
         <div class="main-panel">
             <!-- Navigation -->
+            <!-- Navigation -->
+            <div class="page-title custom-page-title"></div>
             <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
                 <div class="container-fluid">
                     <div class="navbar-wrapper">
@@ -146,12 +157,14 @@
                                 <p class="card-category">Real-time tracking of every agent move</p>
                                 <div class="live-stream-controls d-flex align-items-center">
                                     <button 
-                                        class="stream-toggle-btn"
-                                        :class="{ 'active': autoRefresh }"
-                                        @click="toggleAutoRefresh()"
+                                      class="modern-toggle-btn"
+                                      :class="{active: liveStreamActive}"
+                                      @click="toggleLiveStream()"
+                                      aria-label="Toggle stream"
+                                      :aria-pressed="liveStreamActive"
                                     >
-                                        <i :class="autoRefresh ? 'fas fa-stop' : 'fas fa-play'"></i>
-                                        <span x-text="autoRefresh ? 'Stop' : 'Start'"></span>
+                                      <i class="icon-play fas fa-play"></i>
+                                      <i class="icon-stop fas fa-stop"></i>
                                     </button>
                                     <select class="form-control form-control-sm" x-model="systemLogsFilter">
                                         <option value="overview">All Events</option>
@@ -274,9 +287,15 @@
                                 <h4 class="card-title">🚀 Live Agent Stream</h4>
                                 <p class="card-category">Real-time tracking of every agent move</p>
                                 <div class="live-stream-controls">
-                                    <button class="stream-toggle-btn" :class="{active: autoRefresh}" @click="toggleAutoRefresh()" aria-label="Toggle stream" :aria-pressed="autoRefresh">
-                                        <i class="fas fa-play play-icon" :style="autoRefresh ? 'display:none' : ''"></i>
-                                        <i class="fas fa-stop stop-icon" :style="autoRefresh ? '' : 'display:none'" ></i>
+                                    <button 
+                                      class="modern-toggle-btn"
+                                      :class="{active: liveStreamActive}"
+                                      @click="toggleLiveStream()"
+                                      aria-label="Toggle stream"
+                                      :aria-pressed="liveStreamActive"
+                                    >
+                                      <i class="icon-play fas fa-play"></i>
+                                      <i class="icon-stop fas fa-stop"></i>
                                     </button>
                                     <select class="form-control form-control-sm" x-model="systemLogsFilter">
                                         <option value="overview">All Events</option>
@@ -518,5 +537,7 @@
     
     <!-- Unified Real-time Controller -->
     <script src="/static/js/unified-realtime.js"></script>
+    <!-- Sidebar Hover Title Script -->
+    <script src="/static/js/sidebar.js"></script>
 </body>
 </html>

@@ -222,6 +222,47 @@ async def list_missions_api(current_user: User = Depends(get_current_user)):
         logger.error(error_message)
         # Return a proper HTTP error instead of a silent 200 OK
         raise HTTPException(status_code=500, detail=error_message)
+@app.post("/api/missions/pre-flight-check")
+async def pre_flight_check(request: Request):
+    """Analyze mission prompt for risk and clarity before execution"""
+    try:
+        data = await request.json()
+        prompt = data.get("prompt", "")
+        
+        if not prompt:
+            return {
+                "go_no_go": False, 
+                "feedback": "Prompt is empty.",
+                "clarity_score": 0.0,
+                "risk_score": 0.0,
+                "suggestions": ["Please provide a mission description"]
+            }
+        
+        # Run Guardian Protocol pre-flight check
+        if cognitive_forge_engine and cognitive_forge_engine.guardian_protocol:
+            analysis = await cognitive_forge_engine.guardian_protocol.run_pre_flight_check(prompt)
+        else:
+            # Fallback analysis
+            analysis = {
+                "clarity_score": 0.7,
+                "risk_score": 0.1,
+                "suggestions": ["System is in fallback mode"],
+                "go_no_go": True,
+                "feedback": "Fallback mode - prompt accepted",
+                "risk_level": "low",
+                "clarity_level": "good"
+            }
+        return analysis
+        
+    except Exception as e:
+        logger.error(f"❌ Pre-flight check failed: {e}")
+        return {
+            "go_no_go": False,
+            "feedback": "Error connecting to Guardian Protocol.",
+            "clarity_score": 0.0,
+            "risk_score": 0.0,
+            "suggestions": ["Please try again"]
+        }
 
 # --- NEW: Pre-flight Check Endpoint ---
 @app.post("/api/missions/pre-flight-check")

@@ -22,13 +22,13 @@ function sentinelApp() {
         performanceChart: null,
         
         // UI Control State
-        autoRefresh: false,
+        liveStreamActive: false, // NEW: Track live stream state
         showEventModal: false,
         selectedEvent: null,
 
-        // CRITICAL: State for the Mission Details Modal
-        showMissionModal: false,
+        // --- Mission Page State ---
         selectedMission: null,
+        showMissionModal: false,
 
         newMission: { prompt: '', agent_type: 'developer', priority: 'medium' },
         
@@ -43,7 +43,7 @@ function sentinelApp() {
         },
         testStreamEvents: [],
 
-        eventSource: null,
+        eventSource: null, // Single event source for all server events
 
         // --- COMPUTED PROPERTIES ---
         get recentActivity() {
@@ -91,28 +91,56 @@ function sentinelApp() {
 
         // --- EVENT STREAM MANAGEMENT ---
         startUnifiedEventStream() {
+            // Used for always-on event stream (not the live stream feed)
             console.log('🔌 Starting unified event stream...');
             this.eventSource = new EventSource('/api/events/stream');
-            
             this.eventSource.onopen = () => {
                 console.log('✅ Event stream connected successfully');
             };
-            
             this.eventSource.onmessage = (event) => {
-                console.log('📨 Received event:', event.data);
                 try {
                     const data = JSON.parse(event.data);
-                    console.log('📊 Parsed event data:', data);
                     this.dispatchEvent(data);
                 } catch (e) {
                     console.error('❌ Failed to parse event:', e);
                 }
             };
-            
             this.eventSource.onerror = (error) => {
                 console.error('❌ Event stream error:', error);
                 setTimeout(() => this.startUnifiedEventStream(), 5000);
             };
+        },
+
+
+        // --- LIVE STREAM TOGGLE LOGIC (simplified) ---
+        startLiveStream() {
+            if (this.liveStreamActive) { return; }
+            this.liveStreamActive = true;
+            this.liveStreamEvents = []; // Clear previous events on start
+            console.log('✅ Live stream feed activated. State:', this.liveStreamActive);
+        },
+
+        pauseLiveStream() {
+            if (!this.liveStreamActive) { return; }
+            this.liveStreamActive = false;
+            console.log('⏸️ Live stream feed paused. State:', this.liveStreamActive);
+        },
+
+        toggleLiveStream() {
+            console.log('🔘 toggleLiveStream called. Current state:', this.liveStreamActive);
+            if (this.liveStreamActive) {
+                this.pauseLiveStream();
+            } else {
+                this.startLiveStream();
+            }
+        },
+
+        getLiveStreamButtonClass() {
+            return this.liveStreamActive ? 'btn-danger' : 'btn-success';
+        },
+
+        getLiveStreamIconClass() {
+            return this.liveStreamActive ? 'fa-stop' : 'fa-play';
         },
 
         dispatchEvent(event) {
@@ -134,8 +162,10 @@ function sentinelApp() {
                     this.addSystemLog(event);
                     break;
                 case 'live_stream_event':
-                    console.log('📡 Live stream event:', event);
-                    this.addLiveStreamEvent(event);
+                    // Only process live stream events if the feed is active
+                    if (this.liveStreamActive) {
+                        this.addLiveStreamEvent(event);
+                    }
                     break;
                 case 'heartbeat':
                     console.log('💓 Heartbeat received');
@@ -150,7 +180,7 @@ function sentinelApp() {
         updateMissionState(event) {
             const missionData = event.payload || {};
             const missionId = missionData.mission_id_str || missionData.id;
-            if (!missionId) return;
+            if (!missionId) { return; }
 
             console.log('🔄 Updating mission state:', missionId, missionData);
 
@@ -509,20 +539,26 @@ function sentinelApp() {
         },
 
         formatDate(dateString) {
-            if (!dateString) return '';
+            if (!dateString) {
+                return '';
+            }
             const date = new Date(dateString);
             return date.toLocaleString();
         },
 
         formatDuration(seconds) {
-            if (!seconds) return '0s';
+            if (!seconds) {
+                return '0s';
+            }
             const mins = Math.floor(seconds / 60);
             const secs = seconds % 60;
             return mins > 0 ? `${mins}m ${secs}s` : `${secs}s`;
         },
 
         formatTimestamp(timestamp) {
-            if (!timestamp) return 'N/A';
+            if (!timestamp) {
+                return 'N/A';
+            }
             const date = new Date(timestamp);
             return date.toLocaleString();
         },
@@ -549,12 +585,7 @@ function sentinelApp() {
         },
 
         // --- PERIODIC UPDATES ---
-        startPeriodicUpdates() {
-            setInterval(() => {
-                this.loadMissions();
-                this.loadAgents();
-            }, 30000); // Update every 30 seconds
-        },
+        startPeriodicUpdates() {},
 
         // --- UTILITY FUNCTIONS ---
         truncateText(text, maxLength = 50) {
@@ -564,11 +595,11 @@ function sentinelApp() {
 
         getPriorityClass(priority) {
             const classes = {
-                'low': 'badge bg-success',
-                'medium': 'badge bg-warning',
-                'high': 'badge bg-danger'
+                'high': 'text-danger',
+                'medium': 'text-warning',
+                'low': 'text-info'
             };
-            return classes[priority] || classes['medium'];
+            return classes[priority] || 'text-secondary';
         },
 
         getProgressClass(progress) {
@@ -590,33 +621,37 @@ function sentinelApp() {
             this.selectedEvent = null; 
         },
 
-        // CRITICAL: Functions for the Mission Details Modal
+        // --- Mission Page Functions (Updated for Alpine Modal) ---
         openMissionModal(mission) {
-            console.log("Opening mission modal for:", mission);
             this.selectedMission = mission;
             this.showMissionModal = true;
-            console.log("Modal state after opening:", this.showMissionModal);
-            
-            // Force a DOM update
-            this.$nextTick(() => {
-                console.log("Modal should be visible now");
-                const modal = document.querySelector('.mission-modal');
-                if (modal) {
-                    console.log("Modal element found:", modal);
-                    console.log("Modal display style:", modal.style.display);
-                    console.log("Modal x-show attribute:", modal.getAttribute('x-show'));
-                } else {
-                    console.log("Modal element not found");
-                }
-            });
         },
-        
+
         closeMissionModal() {
-            console.log("Closing mission modal");
             this.showMissionModal = false;
             // It's good practice to nullify the selection after a delay to prevent visual glitches during transitions
             setTimeout(() => { this.selectedMission = null; }, 300);
-            console.log("Modal state after closing:", this.showMissionModal);
+        },
+
+        async cancelMission(missionId) {
+            if (!confirm('Are you sure you want to cancel this mission?')) {
+                return;
+            }
+            try {
+                const response = await fetch(`/api/missions/${missionId}/cancel`, { method: 'POST' });
+                const data = await response.json();
+                if (data.success) {
+                    this.showNotification(`Mission ${missionId} canceled.`, 'success');
+                    this.loadMissions(); // Refresh the mission list
+                    if (this.selectedMission?.mission_id_str === missionId) {
+                        this.closeMissionModal();
+                    }
+                } else {
+                    throw new Error(data.detail || 'Failed to cancel mission');
+                }
+            } catch (e) {
+                this.showNotification(e.message, 'error');
+            }
         },
 
         // --- MISSION HELPER FUNCTIONS ---
@@ -697,120 +732,21 @@ function sentinelApp() {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ prompt: this.newMission.prompt })
                 });
-                
-                if (response.ok) {
-                    this.preflightCheckResult = await response.json();
-                } else {
-                    throw new Error('Pre-flight check failed');
-                }
+                this.preflightCheckResult = await response.json();
             } catch (e) {
-                console.error('Pre-flight check error:', e);
-                this.preflightCheckResult = {
-                    go_no_go: false,
-                    feedback: 'Pre-flight check failed. Please try again.',
-                    clarity_score: 0,
-                    risk_score: 0,
-                    suggestions: []
+                console.error('Pre-flight check failed:', e);
+                this.preflightCheckResult = { 
+                    go_no_go: false, 
+                    feedback: "Error connecting to Guardian Protocol.",
+                    clarity_score: 0.0,
+                    risk_score: 0.0,
+                    suggestions: ["Please try again"]
                 };
             } finally {
                 this.isCheckingPrompt = false;
             }
         },
 
-        // --- OTHER HELPER FUNCTIONS ---
-        clearCompletedMissions() { 
-            this.missions = this.missions.filter(m => m.status !== 'completed'); 
-        },
-        
-        refreshMissions() { 
-            console.log('🔄 Refreshing missions...');
-            this.loadMissions(); 
-        },
-        
-        pauseMission(id) { 
-            console.log("Pausing mission:", id); 
-            /* Add API call here */ 
-        },
-        
-        cancelMission(id) { 
-            console.log("Canceling mission:", id); 
-            /* Add API call here */ 
-        },
-        
-        resumeMission(id) {
-            console.log("Resuming mission:", id);
-            /* Add API call here */
-        },
-        
-        duplicateMission(id) {
-            console.log("Duplicating mission:", id);
-            const mission = this.missions.find(m => m.id === id);
-            if (mission) {
-                this.newMission.prompt = mission.prompt;
-                this.newMission.agent_type = mission.agent_type;
-                this.newMission.priority = mission.priority;
-                this.closeMissionModal();
-                // You could also auto-trigger mission creation here
-                this.showNotification('Mission copied to form. Click "Create Mission" to create a duplicate.', 'info');
-            }
-        },
-        
-
-        toggleAutoRefresh() {
-            this.autoRefresh = !this.autoRefresh;
-            if (this.autoRefresh) {
-                this.startStream();
-            } else {
-                this.stopStream();
-            }
-        },
-
-        startStream() {
-            if (this.eventSource) {
-                this.eventSource.close();
-            }
-            this.liveStreamEvents = [];
-            this.eventSource = new EventSource('/api/events/stream');
-            this.eventSource.onmessage = (event) => {
-                try {
-                    const data = JSON.parse(event.data);
-                    this.appendEventToStream(data);
-                } catch (e) {
-                    console.error('Failed to parse event:', e);
-                }
-            };
-            this.eventSource.onerror = (error) => {
-                console.error('EventSource failed:', error);
-                this.stopStream();
-            };
-        },
-
-        stopStream() {
-            if (this.eventSource) {
-                this.eventSource.close();
-                this.eventSource = null;
-            }
-        },
-
-        appendEventToStream(event) {
-            this.liveStreamEvents.push(event);
-            if (this.liveStreamEvents.length > 50) {
-                this.liveStreamEvents.shift();
-            }
-            this.$nextTick(() => {
-                const feedContainer = document.querySelector('.live-stream-feed');
-                if (feedContainer) {
-                    feedContainer.scrollTop = feedContainer.scrollHeight;
-                }
-            });
-        },
-
-        getToggleButtonClass() {
-            return this.autoRefresh ? 'btn-danger' : 'btn-success';
-        },
-
-        getToggleIconClass() {
-            return this.autoRefresh ? 'fa-stop' : 'fa-play';
-        }
+        // --- END LIVE STREAM TOGGLE LOGIC ---
     };
-} 
+}

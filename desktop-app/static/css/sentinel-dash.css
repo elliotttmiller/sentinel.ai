@@ -1,4 +1,3 @@
-
 /* === Modern Play/Stop Toggle Button === */
 .modern-toggle-btn {
   background: transparent;
@@ -2074,12 +2073,12 @@ body {
 
 /* Enhanced Responsive Design */
 @media (max-width: 991.98px) {
-  .sidebar {
-    transform: translate3d(-260px, 0, 0);
+  .sidebar-mini {
+    transform: translate3d(-80px, 0, 0);
     transition: transform 0.3s ease;
   }
   
-  .sidebar.show {
+  .sidebar-mini.show {
     transform: translate3d(0, 0, 0);
   }
   
@@ -2976,70 +2975,100 @@ body .wrapper .main-panel .content .ai-agents-page .activity-list:hover::-webkit
   left: 100%;
 }
 
-/* Main Panel Adjustment */
-.main-panel {
-  margin-left: 80px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+/* Mission Modal Tabs */
+.mission-modal .nav-tabs {
+    border-bottom: 1px solid #2b3553;
 }
 
-.sidebar:hover + .main-panel {
-  margin-left: 240px;
+.mission-modal .nav-tabs .nav-link {
+    background-color: transparent;
+    border: none;
+    color: #9a9a9a;
+    font-weight: 500;
+    padding: 1rem 1.25rem;
+    transition: all 0.2s ease;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .sidebar {
-    width: 60px;
-  }
-  
-  .sidebar:hover {
-    width: 200px;
-  }
-  
-  .main-panel {
-    margin-left: 60px;
-  }
-  
-  .sidebar:hover + .main-panel {
-    margin-left: 200px;
-  }
-  
-  .sidebar .nav li > a {
-    width: 50px;
-    height: 45px;
-  }
-  
-  .sidebar:hover .nav li > a {
-    width: 100%;
-    height: 40px;
-  }
+.mission-modal .nav-tabs .nav-link.active,
+.mission-modal .nav-tabs .nav-link:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-bottom: 2px solid #4A90E2;
 }
 
-/* Smooth Transition Overrides */
-.sidebar,
-.sidebar-wrapper,
-.sidebar .logo,
-.sidebar .nav,
-.sidebar .nav li > a,
-.sidebar .nav li > a i,
-.sidebar .nav li > a .ai-icon,
-.sidebar .nav li > a p,
-.main-panel {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+/* Insight Section Styles */
+.insight-section {
+    margin-bottom: 1.5rem;
 }
 
-/* Focus States for Accessibility */
-.sidebar .nav li > a:focus {
-  outline: 2px solid rgba(255, 255, 255, 0.5);
-  outline-offset: 2px;
+.insight-section h5 {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
-/* Loading State */
-.sidebar.loading {
-  pointer-events: none;
-  opacity: 0.8;
+/* Thought Bubble Styles */
+.thought-bubble {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0.375rem;
+    padding: 1rem;
+    color: #e0e0e0;
+    font-style: italic;
+    border-left: 3px solid #4A90E2;
 }
 
-.sidebar.loading .nav li > a {
-  cursor: wait;
-} 
+/* Live Events Feed and Service Logs Styles */
+.live-events-feed, .service-logs pre {
+    background: #1e1e2f;
+    border: 1px solid #2b3553;
+    border-radius: 0.375rem;
+    padding: 1rem;
+    max-height: 250px;
+    overflow-y: auto;
+    color: #c0c0c0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem;
+}
+
+/* Event Item Styles */
+.event-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #2b3553;
+}
+
+.event-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.event-timestamp {
+    color: #9a9a9a;
+    min-width: 120px;
+}
+
+.event-message {
+    color: #e0e0e0;
+}
+
+/* Service Logs Styles */
+.service-logs .log-source {
+    margin-bottom: 1rem;
+}
+
+.service-logs .log-source h6 {
+    color: #ffffff;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+/* Mission Actions Styles */
+.mission-actions {
+    margin-top: 1.5rem;
+    text-align: right;
+}

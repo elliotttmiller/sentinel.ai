@@ -186,7 +186,7 @@
                                                 <tr><td colspan="6" class="text-center">No Missions Queued</td></tr>
                                             </template>
                                             <template x-for="mission in missions" :key="mission.mission_id_str">
-                                                <tr>
+                                                <tr @click="openMissionModal(mission)" style="cursor: pointer;">
                                                     <td>
                                                         <span class="badge" :class="getStatusClass(mission.status)" x-text="mission.status"></span>
                                                     </td>
@@ -203,14 +203,11 @@
                                                         </div>
                                                     </td>
                                                     <td class="text-right">
-                                                        <button class="btn btn-sm btn-info" @click="openMissionModal(mission)">
-                                                            <i class="fas fa-eye"></i> View
-                                                        </button>
-                                                        <button class="modern-toggle-btn" :class="{active: mission.status === 'paused'}" @click="pauseMission(mission.mission_id_str)" :aria-pressed="mission.status === 'paused'" :title="mission.status === 'paused' ? 'Stop' : 'Start'">
+                                                        <button class="modern-toggle-btn" :class="{active: mission.status === 'paused'}" @click.stop="pauseMission(mission.mission_id_str)" :aria-pressed="mission.status === 'paused'" :title="mission.status === 'paused' ? 'Stop' : 'Start'">
                                                             <svg class="icon-play" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><polygon points="6,4 20,12 6,20"/></svg>
                                                             <svg class="icon-stop" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="6" width="12" height="12" rx="3"/></svg>
                                                         </button>
-                                                        <button class="btn btn-sm btn-danger" @click="cancelMission(mission.mission_id_str)">
+                                                        <button class="btn btn-sm btn-danger" @click.stop="cancelMission(mission.mission_id_str)" x-show="mission.status !== 'completed' && mission.status !== 'failed'">
                                                             <i class="fas fa-times"></i> Cancel
                                                         </button>
                                                     </td>
@@ -224,45 +221,57 @@
                     </div>
                 </div>
 
-                <!-- Mission Details Modal -->
-                <div class="modal fade" id="missionModal" tabindex="-1" role="dialog" aria-labelledby="missionModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="missionModalLabel">Mission Details</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body" x-show="selectedMission">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <h6>Status: <span x-text="selectedMission?.status" :class="getStatusClass(selectedMission?.status)"></span></h6>
-                                        <h6>Priority: <span x-text="selectedMission?.priority" :class="getPriorityClass(selectedMission?.priority)"></span></h6>
-                                        <h6>Agent Type: <span x-text="selectedMission?.agent_type"></span></h6>
-                                        <h6>Progress: <span x-text="getProgress(selectedMission) + '%'"></span></h6>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <h6>Created: <span x-text="formatTimestamp(selectedMission?.created_at)"></span></h6>
-                                        <h6>Updated: <span x-text="formatTimestamp(selectedMission?.updated_at)"></span></h6>
-                                        <h6>Mission ID: <span x-text="selectedMission?.mission_id_str"></span></h6>
-                                    </div>
-                                </div>
-                                <div class="mt-3">
-                                    <h6>Mission Description:</h6>
-                                    <p x-text="selectedMission?.prompt"></p>
-                                </div>
-                                <div class="mt-3" x-show="selectedMission?.result">
-                                    <h6>Result:</h6>
-                                    <pre x-text="selectedMission?.result"></pre>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
+                <!-- Mission Details Modal (Redesigned for Real-time Insights) -->
+                <div class="mission-modal" x-show="showMissionModal" x-transition>
+                    <div class="mission-modal-content">
+                        <div class="mission-modal-header">
+                            <h5 class="mission-modal-title">Mission Insights: <span x-text="selectedMission?.mission_id_str"></span></h5>
+                            <button class="mission-modal-close" @click="closeMissionModal()">&times;</button>
                         </div>
-                    </div>
-                </div>
+                        <div class="mission-modal-body" x-show="selectedMission">
+                            <!-- Mission Overview -->
+                            <div class="mission-detail-section">
+                                <div class="mission-detail-grid">
+                                    <!-- ... (mission details like status, priority, etc.) ... -->
+                                </div>
+                            </div>
++
++                            <!-- Tabbed Interface for Live Data -->
++                            <div x-data="{ tab: 'live' }">
++                                <ul class="nav nav-tabs">
++                                    <li class="nav-item"><a class="nav-link" :class="{'active': tab === 'live'}" @click.prevent="tab = 'live'" href="#">Live Agent Feed</a></li>
++                                    <li class="nav-item"><a class="nav-link" :class="{'active': tab === 'sentry'}" @click.prevent="tab = 'sentry'" href="#">Sentry</a></li>
++                                    <li class="nav-item"><a class="nav-link" :class="{'active': tab === 'weave'}" @click.prevent="tab = 'weave'" href="#">Weave</a></li>
++                                    <li class="nav-item"><a class="nav-link" :class="{'active': tab === 'wandb'}" @click.prevent="tab = 'wandb'" href="#">Wandb</a></li>
++                                    <li class="nav-item"><a class="nav-link" :class="{'active': tab === 'output'}" @click.prevent="tab = 'output'" href="#">Output</a></li>
++                                </ul>
++
++                                <div class="tab-content mt-3">
++                                    <!-- Live Agent Feed -->
++                                    <div x-show="tab === 'live'">
++                                        <div class="insight-section">
++                                            <div class="thought-bubble" x-text="selectedMission?.current_thought || 'Awaiting agent thoughts...'"></div>
++                                            <div class="live-events-feed">
++                                                <template x-for="event in selectedMission?.events" :key="event.id">
++                                                    <div class="event-item">
++                                                        <span class="event-timestamp" x-text="formatTimestamp(event.timestamp)"></span>
++                                                        <span class="event-message" x-text="event.message"></span>
++                                                    </div>
++                                                </template>
++                                                <div x-show="!selectedMission?.events?.length">No events yet.</div>
++                                            </div>
++                                        </div>
++                                    </div>
++                                    <!-- Service Logs -->
++                                    <div x-show="tab === 'sentry'"><pre x-text="selectedMission?.sentry_logs || 'No Sentry logs.'"></pre></div>
++                                    <div x-show="tab === 'weave'"><pre x-text="selectedMission?.weave_logs || 'No Weave logs.'"></pre></div>
++                                    <div x-show="tab === 'wandb'"><pre x-text="selectedMission?.wandb_logs || 'No Wandb logs.'"></pre></div>
++                                    <div x-show="tab === 'output'"><pre x-text="selectedMission?.result || 'Mission has not produced a final result.'"></pre></div>
++                                </div>
++                            </div>
++                        </div>
++                    </div>
++                </div>
             </div>
         </div>
     </div>
