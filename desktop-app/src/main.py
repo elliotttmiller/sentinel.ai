@@ -249,6 +249,23 @@ async def websocket_diagnostics():
 
 # Import core components with proper error handling
 from config.settings import settings
+
+# Apply LLM compatibility patches early
+try:
+    from src.utils.llm_patch import apply_all_patches
+    apply_all_patches()
+except ImportError:
+    from utils.llm_patch import apply_all_patches
+    apply_all_patches()
+
+# Import and configure litellm early to ensure proper model name handling
+try:
+    from src.utils.litellm_custom_provider import configure_litellm
+    configure_litellm()
+except ImportError:
+    from utils.litellm_custom_provider import configure_litellm
+    configure_litellm()
+
 from src.core.cognitive_forge_engine import cognitive_forge_engine
 from src.core.real_mission_executor import RealMissionExecutor
 from src.models.advanced_database import db_manager, User
