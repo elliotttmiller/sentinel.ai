@@ -30,36 +30,26 @@ class SandboxExecutor:
         self.image_name = image_name
         self.docker_available = DOCKER_AVAILABLE
         
-        if self.docker_available:
-            try:
-                self.client = docker.from_env()
-                logger.info("Docker client initialized successfully")
-            except Exception as e:
-                logger.warning(f"Failed to connect to Docker: {e}. Using local execution.")
-                self.docker_available = False
-                self.client = None
-        else:
-            self.client = None
-        self.docker_available = False
-        
-        # Try to initialize Docker
+        # Try to initialize Docker connection
         try:
-            self.client = docker.from_env()
-            # Test Docker connectivity
-            self.client.ping()
-            
-            # Ensure the Python image is available locally
-            try:
-                self.client.images.get(self.image_name)
-                logger.info(f"Docker image '{self.image_name}' found.")
-            except docker.errors.ImageNotFound:
-                logger.info(f"Docker image '{self.image_name}' not found. Pulling from Docker Hub...")
-                self.client.images.pull(self.image_name)
-                logger.success(f"Successfully pulled Docker image '{self.image_name}'.")
-            
-            self.docker_available = True
-            logger.success("Docker is available and ready for sandboxed execution.")
-            
+            if self.docker_available:
+                self.client = docker.from_env()
+                # Test Docker connectivity
+                self.client.ping()
+                
+                # Ensure the Python image is available locally
+                try:
+                    self.client.images.get(self.image_name)
+                    logger.info(f"Docker image '{self.image_name}' found.")
+                except docker.errors.ImageNotFound:
+                    logger.info(f"Docker image '{self.image_name}' not found. Pulling from Docker Hub...")
+                    self.client.images.pull(self.image_name)
+                    logger.success(f"Successfully pulled Docker image '{self.image_name}'.")
+                
+                logger.success("Docker is available and ready for sandboxed execution.")
+            else:
+                raise Exception("Docker library not available")
+                
         except (docker.errors.DockerException, Exception) as e:
             logger.warning(f"Docker is not available: {e}. Will use local execution with safety measures.")
             self.client = None
