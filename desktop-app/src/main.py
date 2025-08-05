@@ -23,6 +23,41 @@ from loguru import logger
 # Add the src directory to the Python path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__)))
 
+from fastapi import WebSocket, WebSocketDisconnect
+# Initialize FastAPI app
+app = FastAPI(title="Sentinel Command Center v5.4", version="5.4.0")
+
+# --- WebSocket endpoint for real-time mission updates (must be after app is defined) ---
+@app.websocket("/ws/mission-updates")
+async def websocket_endpoint(websocket: WebSocket):
+    # For local dev, we can be permissive. In production, you'd want to
+    # validate the origin against a list of allowed domains.
+    await websocket.accept()
+    agent_observability.add_websocket(websocket)
+    try:
+        while True:
+            # Keep the connection alive; actual events are pushed from the event bus
+            await asyncio.sleep(60)
+    except WebSocketDisconnect:
+        agent_observability.remove_websocket(websocket)
+        logger.info("WebSocket client disconnected.")
+    except Exception as e:
+        agent_observability.remove_websocket(websocket)
+        logger.error(f"WebSocket error: {e}")
+    finally:
+        try:
+            await websocket.close()
+        except Exception:
+            pass
+
+# --- NEW: Test WebSocket Endpoint ---
+@app.websocket("/ws/test")
+async def test_ws(websocket: WebSocket):
+    logger.info("WebSocket /ws/test connection attempt received")
+    await websocket.accept()
+    await websocket.send_text("hello from /ws/test")
+    await websocket.close()
+
 # Import core components with proper error handling
 try:
     from core.cognitive_forge_engine import cognitive_forge_engine

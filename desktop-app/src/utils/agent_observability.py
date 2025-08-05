@@ -82,6 +82,8 @@ def _serialize_for_json(data: Any) -> Any:
         return _serialize_for_json(asdict(data))
     return data
 
+from fastapi import WebSocket
+
 class CuttingEdgeAgentObservabilityManager:
     """Acts as the central Event Bus for all real-time data."""
 
@@ -93,7 +95,35 @@ class CuttingEdgeAgentObservabilityManager:
         self.completed_missions: deque = deque(maxlen=50)
         self.live_event_stream: asyncio.Queue = asyncio.Queue(maxsize=1000)
         self._lock = threading.Lock()
+        self._websockets: List[WebSocket] = []
         self._initialize_integrations()
+        try:
+            asyncio.create_task(self._broadcast_events())
+        except RuntimeError:
+            # If not in an event loop, skip for now (will need to be started in app startup)
+            pass
+
+    def add_websocket(self, websocket: WebSocket):
+        if websocket not in self._websockets:
+            self._websockets.append(websocket)
+
+    def remove_websocket(self, websocket: WebSocket):
+        if websocket in self._websockets:
+            self._websockets.remove(websocket)
+
+    async def _broadcast_events(self):
+        while True:
+            event = await self.live_event_stream.get()
+            for websocket in list(self._websockets):
+                try:
+                    await websocket.send_json(_serialize_for_json(event))
+                except Exception as e:
+                    logger.error(f"Failed to send event to websocket: {e}")
+                    try:
+                        await websocket.close()
+                    except Exception:
+                        pass
+                    self.remove_websocket(websocket)
 
     def _initialize_integrations(self):
         if WEAVE_AVAILABLE:

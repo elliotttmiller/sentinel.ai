@@ -63,15 +63,43 @@ function sentinelApp() {
         },
 
         // --- INITIALIZATION ---
+
         init() {
             console.log("🚀 Sentinel Command Center v5.4 Initializing (Sentience Active)...");
             console.log("Initial modal state:", this.showMissionModal);
-            this.startUnifiedEventStream();
+            this.startUnifiedEventStream(); // Keep for legacy/compatibility
+            this.startWebSocketStream();    // NEW: WebSocket for true real-time
             this.loadInitialData();
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
             }
             console.log("Component initialized successfully");
+        },
+
+        // --- WEBSOCKET REAL-TIME STREAM ---
+        startWebSocketStream() {
+            const wsProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+            const wsUrl = `${wsProtocol}://${window.location.host}/ws/mission-updates`;
+            console.log('🔌 Connecting to WebSocket:', wsUrl);
+            this.ws = new WebSocket(wsUrl);
+            this.ws.onopen = () => {
+                console.log('✅ WebSocket connected');
+            };
+            this.ws.onmessage = (event) => {
+                try {
+                    const data = JSON.parse(event.data);
+                    this.dispatchEvent(data);
+                } catch (e) {
+                    console.error('❌ Failed to parse WebSocket event:', e);
+                }
+            };
+            this.ws.onerror = (error) => {
+                console.error('❌ WebSocket error:', error);
+            };
+            this.ws.onclose = () => {
+                console.warn('⚠️ WebSocket closed. Attempting reconnect in 5s...');
+                setTimeout(() => this.startWebSocketStream(), 5000);
+            };
         },
 
         async loadInitialData() {
