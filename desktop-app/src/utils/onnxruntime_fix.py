@@ -4,10 +4,8 @@ ONNX Runtime Import Fix
 Handles DLL loading issues and provides graceful fallbacks for Windows systems
 """
 
-import sys
-import os
-import importlib
-from typing import Optional, Any
+from typing import Any, Optional
+
 from loguru import logger
 
 
@@ -30,7 +28,9 @@ def safe_import_onnxruntime() -> Optional[Any]:
 
         # Try to diagnose the issue
         if "DLL" in str(e) or "dynamic link library" in str(e).lower():
-            logger.error("DLL loading issue detected - this is a common Windows problem")
+            logger.error(
+                "DLL loading issue detected - this is a common Windows problem"
+            )
             logger.info("Possible solutions:")
             logger.info("1. Install Microsoft Visual C++ Redistributable")
             logger.info("2. Try a different onnxruntime version")
@@ -131,7 +131,9 @@ def create_onnxruntime_proxy():
         def __getattr__(self, name):
             """Proxy attribute access to the actual onnxruntime module"""
             if not self._available:
-                raise AttributeError(f"ONNX Runtime not available: {self._error_message}")
+                raise AttributeError(
+                    f"ONNX Runtime not available: {self._error_message}"
+                )
             return getattr(self._ort, name)
 
         def __call__(self, *args, **kwargs):

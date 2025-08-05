@@ -7,8 +7,9 @@ Adds missing columns to existing tables
 import os
 import sys
 from pathlib import Path
-from sqlalchemy import create_engine, text, inspect
+
 from dotenv import load_dotenv
+from sqlalchemy import create_engine, inspect, text
 
 # Add the src directory to the path
 sys.path.append(str(Path(__file__).parent.parent))
@@ -47,7 +48,9 @@ def fix_database_schema():
         if "component" not in columns:
             print("➕ Adding missing 'component' column...")
             with engine.connect() as conn:
-                conn.execute(text("ALTER TABLE system_logs ADD COLUMN component VARCHAR(255)"))
+                conn.execute(
+                    text("ALTER TABLE system_logs ADD COLUMN component VARCHAR(255)")
+                )
                 conn.commit()
             print("✅ 'component' column added successfully")
         else:
@@ -57,7 +60,9 @@ def fix_database_schema():
         if "log_metadata" not in columns:
             print("➕ Adding missing 'log_metadata' column...")
             with engine.connect() as conn:
-                conn.execute(text("ALTER TABLE system_logs ADD COLUMN log_metadata JSONB"))
+                conn.execute(
+                    text("ALTER TABLE system_logs ADD COLUMN log_metadata JSONB")
+                )
                 conn.commit()
             print("✅ 'log_metadata' column added successfully")
         else:
@@ -83,7 +88,9 @@ def fix_database_schema():
             print(f"✅ Test insert successful (ID: {test_id})")
 
             # Clean up test record
-            conn.execute(text("DELETE FROM system_logs WHERE id = :id"), {"id": test_id})
+            conn.execute(
+                text("DELETE FROM system_logs WHERE id = :id"), {"id": test_id}
+            )
             conn.commit()
             print("🧹 Test record cleaned up")
 

@@ -3,8 +3,7 @@ Advanced Agent Definitions for Cognitive Forge Engine v5.0
 Enhanced with specialized agents for sentient capabilities
 """
 
-from ..utils.crewai_bypass import DirectAIAgent
-from ..utils.google_ai_wrapper import create_google_ai_llm
+from src.utils.crewai_bypass import DirectAIAgent
 
 
 class PromptOptimizationAgents:
@@ -33,7 +32,7 @@ class PromptOptimizationAgents:
                 "\n- Adding specific success criteria and constraints"
                 "\n- Ensuring technical accuracy and completeness"
                 "\nYou are the first line of defense against mission failure due to poor communication."
-            )
+            ),
         )
 
     def blueprint_planner(self, llm) -> DirectAIAgent:
@@ -59,7 +58,7 @@ class PromptOptimizationAgents:
                 "\n- Performance metrics and success measurement"
                 "\nYour blueprints are the foundation upon which successful missions are built. "
                 "You understand that a well-crafted plan is the difference between success and failure."
-            )
+            ),
         )
 
 
@@ -78,7 +77,7 @@ class PlannerAgents:
                 "microservices architecture, and AI/ML pipeline design. Your expertise spans from "
                 "low-level system optimization to high-level architectural patterns. You excel at "
                 "creating plans that balance technical excellence with practical implementation."
-            )
+            ),
         )
 
     def plan_validator(self, llm) -> DirectAIAgent:
@@ -94,7 +93,7 @@ class PlannerAgents:
                 "proposed plans, identify potential issues, and suggest improvements to ensure "
                 "successful execution. You are known for your thorough analysis and ability to "
                 "spot problems before they occur."
-            )
+            ),
         )
 
     def prompt_alchemist(self, llm) -> DirectAIAgent:
@@ -114,7 +113,7 @@ class PlannerAgents:
                 "which all successful missions are built. You leave no room for ambiguity or misinterpretation. "
                 "You have mastered the art of prompt engineering through years of experimentation and refinement. "
                 "Your transformations consistently produce results that exceed expectations."
-            )
+            ),
         )
 
 
@@ -133,7 +132,7 @@ class WorkerAgents:
                 "architecture, design patterns, and best practices. You excel at writing clean, "
                 "efficient code and can handle complex technical challenges. You are known for "
                 "your attention to detail and ability to create robust, scalable solutions."
-            )
+            ),
         )
 
     def code_analyzer(self, llm) -> DirectAIAgent:
@@ -147,7 +146,7 @@ class WorkerAgents:
                 "You have a deep understanding of programming best practices, security vulnerabilities, "
                 "and performance optimization techniques. You excel at identifying potential issues and "
                 "providing constructive feedback. Your analysis helps ensure code quality and maintainability."
-            )
+            ),
         )
 
     def qa_tester(self, llm) -> DirectAIAgent:
@@ -162,7 +161,7 @@ class WorkerAgents:
                 "and quality control processes. You excel at designing test cases, identifying bugs, "
                 "and ensuring software meets quality standards. Your testing helps ensure reliable, "
                 "bug-free software."
-            )
+            ),
         )
 
     def system_integrator(self, llm) -> DirectAIAgent:
@@ -177,7 +176,7 @@ class WorkerAgents:
                 "configuration management, and system monitoring. You excel at ensuring smooth "
                 "deployments and optimal system performance. Your expertise helps ensure reliable, "
                 "scalable software systems."
-            )
+            ),
         )
 
     def debugger(self, llm) -> DirectAIAgent:
@@ -191,7 +190,7 @@ class WorkerAgents:
                 "You have a deep understanding of debugging techniques, error analysis, and "
                 "problem-solving methodologies. You excel at identifying root causes and implementing "
                 "effective solutions. Your expertise helps ensure reliable, bug-free software systems."
-            )
+            ),
         )
 
 
@@ -209,5 +208,5 @@ class MemoryAgents:
                 "mission outcomes. You excel at identifying patterns, learning from successes and "
                 "failures, and synthesizing knowledge for future missions. Your work helps improve "
                 "system performance and mission success rates."
-            )
+            ),
         )

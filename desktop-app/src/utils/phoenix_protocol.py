@@ -6,10 +6,11 @@ Transforms failures into opportunities for system improvement
 import json
 import traceback
 from datetime import datetime
-from typing import Dict, Any, Optional
+from typing import Any, Dict, Optional
+
 from loguru import logger
-from crewai import Task, Crew, Process
-from .crewai_bypass import DirectAIAgent, DirectAICrew
+
+from src.utils.crewai_bypass import DirectAIAgent, DirectAICrew
 
 
 class PhoenixProtocol:
@@ -40,22 +41,26 @@ class PhoenixProtocol:
                 "You have solved countless complex problems and have a reputation for turning failures into "
                 "opportunities for system improvement. Your solutions are always precise, actionable, and "
                 "designed to prevent similar issues in the future."
-            )
+            ),
         )
 
-    async def analyze_and_resolve(self, failure_context: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    async def analyze_and_resolve(
+        self, failure_context: Dict[str, Any]
+    ) -> Optional[Dict[str, Any]]:
         """
         Analyze failure and provide a solution
-        
+
         Args:
             failure_context: Dictionary containing error details, mission info, and context
-            
+
         Returns:
             Solution dictionary with formal contract structure, or None if no solution found
         """
         try:
-            logger.info("Phoenix Protocol: Analyzing failure and generating solution...")
-            
+            logger.info(
+                "Phoenix Protocol: Analyzing failure and generating solution..."
+            )
+
             # Create analysis task using our bypass system
             task_description = f"""Analyze this failure and provide a precise solution:
 
@@ -97,20 +102,25 @@ Provide your response in this formal JSON format:
                     "You have solved countless complex problems and have a reputation for turning failures into "
                     "opportunities for system improvement. Your solutions are always precise, actionable, and "
                     "designed to prevent similar issues in the future."
-                )
+                ),
             )
             crew.add_task(task_description, agent, expected_output)
             solution_str = crew.execute()
-            
+
             try:
                 # Use our robust JSON parser to handle markdown code blocks
                 from .json_parser import extract_and_parse_json
+
                 solution = extract_and_parse_json(solution_str)
-                logger.info(f"Phoenix Protocol: Solution generated with {solution.get('confidence', 0)} confidence")
+                logger.info(
+                    f"Phoenix Protocol: Solution generated with {solution.get('confidence', 0)} confidence"
+                )
                 return solution
-                
+
             except ValueError as e:
-                logger.error(f"Phoenix Protocol: The Elite Debugger returned invalid JSON. Cannot self-heal. Error: {e}")
+                logger.error(
+                    f"Phoenix Protocol: The Elite Debugger returned invalid JSON. Cannot self-heal. Error: {e}"
+                )
                 logger.error(f"Raw response: {solution_str}")
                 return None
 
@@ -118,15 +128,17 @@ Provide your response in this formal JSON format:
             logger.error(f"Phoenix Protocol analysis failed: {e}")
             return None
 
-    def capture_failure_snapshot(self, error: Exception, mission_id: str, current_task: str) -> Dict[str, Any]:
+    def capture_failure_snapshot(
+        self, error: Exception, mission_id: str, current_task: str
+    ) -> Dict[str, Any]:
         """
         Capture a comprehensive failure snapshot
-        
+
         Args:
             error: The exception that occurred
             mission_id: The mission identifier
             current_task: Description of the task that failed
-            
+
         Returns:
             Structured failure context
         """
@@ -140,20 +152,21 @@ Provide your response in this formal JSON format:
             "system_state": {
                 "memory_usage": self._get_memory_usage(),
                 "cpu_usage": self._get_cpu_usage(),
-                "active_processes": self._get_active_processes()
-            }
+                "active_processes": self._get_active_processes(),
+            },
         }
 
     def _get_memory_usage(self) -> Dict[str, Any]:
         """Get current memory usage statistics"""
         try:
             import psutil
+
             memory = psutil.virtual_memory()
             return {
                 "total": memory.total,
                 "available": memory.available,
                 "percent": memory.percent,
-                "used": memory.used
+                "used": memory.used,
             }
         except ImportError:
             return {"error": "psutil not available"}
@@ -162,12 +175,10 @@ Provide your response in this formal JSON format:
         """Get current CPU usage statistics"""
         try:
             import psutil
+
             cpu_percent = psutil.cpu_percent(interval=1)
             cpu_count = psutil.cpu_count()
-            return {
-                "percent": cpu_percent,
-                "count": cpu_count
-            }
+            return {"percent": cpu_percent, "count": cpu_count}
         except ImportError:
             return {"error": "psutil not available"}
 
@@ -175,6 +186,7 @@ Provide your response in this formal JSON format:
         """Get number of active processes"""
         try:
             import psutil
+
             return len(psutil.pids())
         except ImportError:
             return 0
@@ -182,43 +194,49 @@ Provide your response in this formal JSON format:
     def validate_solution(self, solution: Dict[str, Any]) -> bool:
         """
         Validate that a solution is complete and actionable using formal contract
-        
+
         Args:
             solution: The solution to validate
-            
+
         Returns:
             True if solution is valid, False otherwise
         """
         required_fields = ["status", "solution_type", "solution_value", "confidence"]
-        
+
         # Check for required fields
         for field in required_fields:
             if field not in solution:
-                logger.warning(f"Phoenix Protocol: Missing required field '{field}' in solution")
+                logger.warning(
+                    f"Phoenix Protocol: Missing required field '{field}' in solution"
+                )
                 return False
-        
+
         # Validate solution type
         valid_types = ["code_fix", "plan_change", "system_fix"]
         if solution["solution_type"] not in valid_types:
-            logger.warning(f"Phoenix Protocol: Invalid solution type '{solution['solution_type']}'")
+            logger.warning(
+                f"Phoenix Protocol: Invalid solution type '{solution['solution_type']}'"
+            )
             return False
-        
+
         # Validate confidence level
         confidence = solution.get("confidence", 0)
         if not isinstance(confidence, (int, float)) or confidence < 0 or confidence > 1:
             logger.warning(f"Phoenix Protocol: Invalid confidence level {confidence}")
             return False
-        
+
         # Validate solution value is not empty
         if not solution.get("solution_value"):
             logger.warning("Phoenix Protocol: Empty solution value")
             return False
-        
+
         # Validate status
         if solution.get("status") != "solution_found":
-            logger.warning(f"Phoenix Protocol: Invalid status '{solution.get('status')}'")
+            logger.warning(
+                f"Phoenix Protocol: Invalid status '{solution.get('status')}'"
+            )
             return False
-        
+
         return True
 
     def get_protocol_stats(self) -> Dict[str, Any]:
@@ -232,13 +250,9 @@ Provide your response in this formal JSON format:
                 "Precise solution generation",
                 "Failure snapshot capture",
                 "Solution validation",
-                "System state monitoring"
+                "System state monitoring",
             ],
-            "solution_types": [
-                "code_fix",
-                "plan_change", 
-                "system_fix"
-            ],
+            "solution_types": ["code_fix", "plan_change", "system_fix"],
             "confidence_threshold": 0.7,
-            "max_analysis_time": "30 seconds"
-        } 
+            "max_analysis_time": "30 seconds",
+        }

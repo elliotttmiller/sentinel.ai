@@ -3,8 +3,9 @@ Blueprint System Tasks for Cognitive Forge Engine
 Specialized tasks for prompt optimization and blueprint planning
 """
 
+from typing import Any, Dict
+
 from crewai import Task
-from typing import Dict, Any
 
 
 class PromptOptimizationTasks:
@@ -42,11 +43,13 @@ class PromptOptimizationTasks:
                 "A comprehensive JSON object containing the optimized prompt and all associated metadata. "
                 "The structure should be clear, complete, and ready for the Blueprint Planning Specialist."
             ),
-            agent="prompt_optimizer"
+            agent="prompt_optimizer",
         )
 
     @staticmethod
-    def create_blueprint_task(optimized_prompt: Dict[str, Any], mission_id: str) -> Task:
+    def create_blueprint_task(
+        optimized_prompt: Dict[str, Any], mission_id: str
+    ) -> Task:
         """Task for Phase 2: Blueprint Planning and Strategic Architecture"""
         return Task(
             description=(
@@ -81,7 +84,7 @@ class PromptOptimizationTasks:
                 "dependencies, and quality assurance measures. The blueprint should be ready "
                 "for immediate execution by the worker agents."
             ),
-            agent="blueprint_planner"
+            agent="blueprint_planner",
         )
 
 
@@ -116,7 +119,7 @@ class BlueprintValidationTasks:
                 "A detailed validation report with specific feedback, recommendations, "
                 "and an overall assessment of blueprint quality and feasibility."
             ),
-            agent="plan_validator"
+            agent="plan_validator",
         )
 
 
@@ -138,5 +141,5 @@ class BlueprintExecutionTasks:
                 "Detailed execution results including completed tasks, outcomes, "
                 "quality checkpoint results, and any issues encountered."
             ),
-            agent="senior_developer"  # This will be dynamically assigned based on phase requirements
-        ) 
+            agent="senior_developer",  # This will be dynamically assigned based on phase requirements
+        )

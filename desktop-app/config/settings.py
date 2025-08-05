@@ -18,58 +18,87 @@ class Settings(BaseSettings):
     # Hybrid Decision Engine
     ENABLE_HYBRID_MODE: bool = True
     AUTO_SWITCHING: bool = True
-    
+
     # Golden Path Feature Flags
     ENABLE_FULL_WORKFLOW: bool = False
     MINIMAL_MODE: bool = True
     GOLDEN_PATH_LOGGING: bool = True
-    
+
     # Advanced AI Features
     ENABLE_ML_PREDICTION: bool = True
     ENABLE_PREDICTIVE_CACHING: bool = True
     ENABLE_ADVANCED_ANALYTICS: bool = True
     ENABLE_DYNAMIC_THRESHOLDS: bool = True
-    
+
     # --- HYBRID SYSTEM CONFIGURATION ---
     # Complexity analysis thresholds
     SIMPLE_TASK_KEYWORDS: List[str] = [
-        "hello", "simple", "basic", "quick", "function", "print", 
-        "calculate", "add", "multiply", "convert", "format", "sort",
-        "test", "check", "verify", "list", "show", "display"
+        "hello",
+        "simple",
+        "basic",
+        "quick",
+        "function",
+        "print",
+        "calculate",
+        "add",
+        "multiply",
+        "convert",
+        "format",
+        "sort",
+        "test",
+        "check",
+        "verify",
+        "list",
+        "show",
+        "display",
     ]
     COMPLEX_TASK_KEYWORDS: List[str] = [
-        "design", "architecture", "system", "complex", "advanced",
-        "algorithm", "optimization", "machine learning", "neural network",
-        "database", "api", "framework", "microservice", "distributed",
-        "refactor", "implement", "create a script", "build an app"
+        "design",
+        "architecture",
+        "system",
+        "complex",
+        "advanced",
+        "algorithm",
+        "optimization",
+        "machine learning",
+        "neural network",
+        "database",
+        "api",
+        "framework",
+        "microservice",
+        "distributed",
+        "refactor",
+        "implement",
+        "create a script",
+        "build an app",
     ]
-    
+
     # Performance thresholds (seconds)
     GOLDEN_PATH_TIME_LIMIT: float = 5.0
     FULL_WORKFLOW_TIME_LIMIT: float = 60.0
     HYBRID_SWITCH_THRESHOLD: float = 0.4
-    
+
     # Decision weights (0.0 to 1.0)
     USER_PREFERENCE_WEIGHT: float = 0.3
     PERFORMANCE_WEIGHT: float = 0.4
     COMPLEXITY_WEIGHT: float = 0.3
-    
+
     # Machine learning configuration
     ML_MODEL_UPDATE_INTERVAL: int = 3600  # 1 hour
     MIN_TRAINING_SAMPLES: int = 50
-    
+
     # Predictive caching
     CACHE_SIZE_LIMIT: int = 1000
     CACHE_TTL: int = 3600  # 1 hour
-    
+
     # Advanced analytics
     ANALYTICS_SAMPLE_RATE: float = 0.1  # 10% of requests
     PERFORMANCE_METRICS_RETENTION: int = 86400  # 24 hours
-    
+
     # Dynamic threshold adjustment
     THRESHOLD_UPDATE_INTERVAL: int = 1800  # 30 minutes
     THRESHOLD_LEARNING_RATE: float = 0.1
-    
+
     # --- SERVER CONFIGURATION ---
     HOST: str = Field(default="0.0.0.0", env="HOST")
     PORT: int = Field(default=8001, env="PORT")
@@ -77,7 +106,7 @@ class Settings(BaseSettings):
     SERVER_8002_PORT: int = 8002
     SERVER_HOST: str = "0.0.0.0"
     RELOAD: bool = Field(default=True, env="RELOAD")
-    
+
     # --- LLM CONFIGURATION ---
     GOOGLE_API_KEY: Optional[str] = Field(default=None, env="GOOGLE_API_KEY")
     GOOGLE_APPLICATION_CREDENTIALS: Optional[str] = Field(
@@ -85,13 +114,15 @@ class Settings(BaseSettings):
     )
     LLM_MODEL: str = Field(default="gemini-1.5-pro-latest", env="LLM_MODEL")
     LLM_TEMPERATURE: float = Field(default=0.7, env="LLM_TEMPERATURE")
-    
+
     # --- DATABASE CONFIGURATION ---
-    DATABASE_URL: str = Field(default="sqlite:///db/sentinel_missions.db", env="DATABASE_URL")
+    DATABASE_URL: str = Field(
+        default="sqlite:///db/sentinel_missions.db", env="DATABASE_URL"
+    )
     POSTGRES_URL: Optional[str] = None
     CHROMA_PERSIST_DIRECTORY: str = "db/chroma_memory"
     CHROMA_PATH: str = Field(default="db/chroma_memory", env="CHROMA_PATH")
-    
+
     # --- LOGGING CONFIGURATION ---
     LOG_LEVEL: str = Field(default="INFO", env="LOG_LEVEL")
     LOG_FILE: str = Field(default="logs/cognitive_forge.log", env="LOG_FILE")
@@ -100,65 +131,96 @@ class Settings(BaseSettings):
     LOG_BUFFER_SIZE: int = 200
     LOG_FORWARDING_INTERVAL: int = 2
     SSE_KEEPALIVE_INTERVAL: int = 25
-    
+
     # --- MISSION CONFIGURATION ---
-    MAX_MISSION_DURATION: int = Field(default=3600, env="MAX_MISSION_DURATION")  # seconds
+    MAX_MISSION_DURATION: int = Field(
+        default=3600, env="MAX_MISSION_DURATION"
+    )  # seconds
     MAX_CONCURRENT_MISSIONS: int = Field(default=5, env="MAX_CONCURRENT_MISSIONS")
     MISSION_TIMEOUT: int = Field(default=3600, env="MISSION_TIMEOUT")  # seconds
     STUCK_MISSION_TIMEOUT: int = 300  # 5 minutes
-    BACKGROUND_TASK_TIMEOUT: int = 3   # 3 seconds per step
-    
+    BACKGROUND_TASK_TIMEOUT: int = 3  # 3 seconds per step
+
     # --- MEMORY CONFIGURATION ---
     MEMORY_SEARCH_LIMIT: int = Field(default=5, env="MEMORY_SEARCH_LIMIT")
     MEMORY_SYNTHESIS_ENABLED: bool = Field(default=True, env="MEMORY_SYNTHESIS_ENABLED")
     MEMORY_RETENTION_DAYS: int = Field(default=30, env="MEMORY_RETENTION_DAYS")
     MAX_MEMORY_ENTRIES: int = Field(default=1000, env="MAX_MEMORY_ENTRIES")
-    
+
     # --- SECURITY SETTINGS ---
     ALLOWED_FILE_EXTENSIONS: List[str] = Field(
-        default=[".py", ".js", ".html", ".css", ".json", ".txt", ".md", ".yml", ".yaml"],
+        default=[
+            ".py",
+            ".js",
+            ".html",
+            ".css",
+            ".json",
+            ".txt",
+            ".md",
+            ".yml",
+            ".yaml",
+        ],
         env="ALLOWED_FILE_EXTENSIONS",
     )
     ALLOWED_SHELL_COMMANDS: List[str] = Field(
         default=[
-            "ls", "dir", "pwd", "echo", "cat", "head", "tail", "grep", "find",
-            "python", "pip", "node", "npm", "git", "mkdir", "touch", "cp", "mv",
-            "python -m py_compile", "python -c", "pip list", "pip show",
+            "ls",
+            "dir",
+            "pwd",
+            "echo",
+            "cat",
+            "head",
+            "tail",
+            "grep",
+            "find",
+            "python",
+            "pip",
+            "node",
+            "npm",
+            "git",
+            "mkdir",
+            "touch",
+            "cp",
+            "mv",
+            "python -m py_compile",
+            "python -c",
+            "pip list",
+            "pip show",
         ],
         env="ALLOWED_SHELL_COMMANDS",
     )
-    
+
     # --- AGENT SETTINGS ---
     ENABLE_PLAN_VALIDATION: bool = Field(default=True, env="ENABLE_PLAN_VALIDATION")
     ENABLE_MEMORY_SYNTHESIS: bool = Field(default=True, env="ENABLE_MEMORY_SYNTHESIS")
     ENABLE_REAL_TIME_UPDATES: bool = Field(default=True, env="ENABLE_REAL_TIME_UPDATES")
-    
+
     # --- PERFORMANCE SETTINGS ---
     WORKER_TIMEOUT: int = Field(default=60, env="WORKER_TIMEOUT")  # seconds
     PLANNING_TIMEOUT: int = Field(default=120, env="PLANNING_TIMEOUT")  # seconds
-    
+
     # --- ADDITIONAL SETTINGS ---
     WORKSPACE_PATH: str = Field(default=".", env="WORKSPACE_PATH")
     LOGS_DIR: str = Field(default="logs", env="LOGS_DIR")
     DESKTOP_TUNNEL_URL: Optional[str] = Field(default=None, env="DESKTOP_TUNNEL_URL")
     VECTOR_DB_URL: str = Field(default="http://localhost:8000", env="VECTOR_DB_URL")
     VECTOR_DB_TYPE: str = Field(default="chromadb", env="VECTOR_DB_TYPE")
-    
+
     # --- SENTRY CONFIGURATION ---
     SENTRY_DSN: Optional[str] = Field(default=None, env="SENTRY_DSN")
     SENTRY_AUTH_TOKEN: Optional[str] = Field(default=None, env="SENTRY_AUTH_TOKEN")
     SENTRY_ORG_SLUG: Optional[str] = Field(default=None, env="SENTRY_ORG_SLUG")
     SENTRY_PROJECT_ID: Optional[str] = Field(default=None, env="SENTRY_PROJECT_ID")
-    
+
     # Application Settings
     app_name: str = "Sentinel Cognitive Forge v5.0"
     app_version: str = "5.0.0"
-    
+
     class Config:
         env_file = ".env"
         case_sensitive = False
         extra = "allow"  # Allow extra fields from .env
-    
+
     def get_llm_config(self) -> Dict[str, Any]:
         """Get LLM configuration"""
         return {
@@ -167,7 +229,7 @@ class Settings(BaseSettings):
             "api_key": self.GOOGLE_API_KEY,
             "credentials": self.GOOGLE_APPLICATION_CREDENTIALS,
         }
-    
+
     def get_database_config(self) -> Dict[str, Any]:
         """Get database configuration"""
         return {
@@ -176,7 +238,7 @@ class Settings(BaseSettings):
             "vector_db_url": self.VECTOR_DB_URL,
             "vector_db_type": self.VECTOR_DB_TYPE,
         }
-    
+
     def get_logging_config(self) -> Dict[str, Any]:
         """Get logging configuration"""
         return {
@@ -186,14 +248,14 @@ class Settings(BaseSettings):
             "retention": self.LOG_RETENTION,
             "buffer_size": self.LOG_BUFFER_SIZE,
         }
-    
+
     def get_security_config(self) -> Dict[str, Any]:
         """Get security configuration"""
         return {
             "allowed_extensions": set(self.ALLOWED_FILE_EXTENSIONS),
             "allowed_commands": set(self.ALLOWED_SHELL_COMMANDS),
         }
-    
+
     def get_agent_config(self) -> Dict[str, Any]:
         """Get agent configuration"""
         return {
@@ -213,20 +275,20 @@ def get_settings() -> Settings:
 def validate_environment() -> bool:
     """Validate environment configuration"""
     settings = get_settings()
-    
+
     # Check required settings
     if not settings.GOOGLE_API_KEY:
         print("❌ GOOGLE_API_KEY is required")
         return False
-    
+
     if not settings.DATABASE_URL:
         print("❌ DATABASE_URL is required")
         return False
-    
+
     # Check optional but recommended settings
     if not settings.SENTRY_DSN:
         print("⚠️  SENTRY_DSN not set - error tracking disabled")
-    
+
     print("✅ Environment validation passed")
     return True
 

@@ -7,10 +7,8 @@ Similar to npx ts-autofix but for Python.
 
 import subprocess
 import sys
-import os
 from pathlib import Path
-from typing import List, Dict, Any
-import json
+from typing import Any, Dict, List
 
 
 class PythonAutoFixer:
@@ -46,7 +44,12 @@ class PythonAutoFixer:
         except SyntaxError as e:
             result["valid"] = False
             result["errors"].append(
-                {"type": "SyntaxError", "line": e.lineno, "message": str(e), "text": e.text}
+                {
+                    "type": "SyntaxError",
+                    "line": e.lineno,
+                    "message": str(e),
+                    "text": e.text,
+                }
             )
         except Exception as e:
             result["valid"] = False
@@ -61,7 +64,9 @@ class PythonAutoFixer:
         try:
             # Run black in check mode first
             check_result = subprocess.run(
-                ["black", "--check", "--quiet", str(file_path)], capture_output=True, text=True
+                ["black", "--check", "--quiet", str(file_path)],
+                capture_output=True,
+                text=True,
             )
 
             if check_result.returncode != 0:
@@ -89,7 +94,13 @@ class PythonAutoFixer:
         try:
             # Run autopep8 to fix imports and basic issues
             fix_result = subprocess.run(
-                ["autopep8", "--in-place", "--aggressive", "--aggressive", str(file_path)],
+                [
+                    "autopep8",
+                    "--in-place",
+                    "--aggressive",
+                    "--aggressive",
+                    str(file_path),
+                ],
                 capture_output=True,
                 text=True,
             )
@@ -110,7 +121,12 @@ class PythonAutoFixer:
 
         try:
             lint_result = subprocess.run(
-                ["flake8", "--max-line-length=100", "--ignore=E501,W503", str(file_path)],
+                [
+                    "flake8",
+                    "--max-line-length=100",
+                    "--ignore=E501,W503",
+                    str(file_path),
+                ],
                 capture_output=True,
                 text=True,
             )

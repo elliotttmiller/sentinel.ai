@@ -4,11 +4,10 @@ Fix Railway Backend Database Schema
 This script updates the Railway backend to use the correct database schema.
 """
 
-import os
 import sys
-import requests
-import json
 from pathlib import Path
+
+import requests
 
 # Add the parent directory to the path to import modules
 sys.path.append(str(Path(__file__).parent.parent.parent))
@@ -38,7 +37,9 @@ def fix_railway_backend_schema():
 
     # The issue is that the Railway backend is still using the old database schema
     # We need to update the backend code to use the correct column names
-    print("\n📝 The Railway backend needs to be updated with the correct database schema.")
+    print(
+        "\n📝 The Railway backend needs to be updated with the correct database schema."
+    )
     print(
         "The backend is still using 'timestamp' instead of 'created_at' and missing 'source' column."
     )

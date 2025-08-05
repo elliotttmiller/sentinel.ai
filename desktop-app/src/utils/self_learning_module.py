@@ -4,12 +4,12 @@ Analyzes mission outcomes and generates agent improvements
 """
 
 import json
-import time
 from datetime import datetime
-from typing import Dict, Any, List, Optional
+from typing import Any, Dict, List
+
 from loguru import logger
-from crewai import Task, Crew, Process
-from .crewai_bypass import DirectAIAgent, DirectAICrew
+
+from src.utils.crewai_bypass import DirectAIAgent, DirectAICrew
 
 
 class SelfLearningModule:
@@ -38,7 +38,7 @@ class SelfLearningModule:
                 "You are the Learning Specialist, responsible for extracting wisdom from every mission outcome. "
                 "You have deep expertise in data analysis, pattern recognition, and continuous improvement methodologies. "
                 "Your analysis helps the system evolve and adapt based on real-world performance data."
-            )
+            ),
         )
 
     def _create_improvement_agent(self) -> DirectAIAgent:
@@ -54,29 +54,33 @@ class SelfLearningModule:
                 "You are the Improvement Specialist, responsible for translating analysis into actionable improvements. "
                 "You have extensive experience in optimization, performance tuning, and system enhancement. "
                 "Your improvements are always practical, measurable, and designed for real-world implementation."
-            )
+            ),
         )
 
-    async def analyze_mission_outcome(self, mission_id: str, success: bool) -> Dict[str, Any]:
+    async def analyze_mission_outcome(
+        self, mission_id: str, success: bool
+    ) -> Dict[str, Any]:
         """
         Analyze mission outcome and generate learning insights
-        
+
         Args:
             mission_id: The mission identifier
             success: Whether the mission was successful
-            
+
         Returns:
             Learning analysis results
         """
         try:
-            logger.info(f"Self-Learning Module: Analyzing mission {mission_id} outcome...")
-            
+            logger.info(
+                f"Self-Learning Module: Analyzing mission {mission_id} outcome..."
+            )
+
             # Get mission data from database
             mission_data = self.db_manager.get_mission(mission_id)
             if not mission_data:
                 logger.warning(f"Mission {mission_id} not found in database")
                 return {"error": "Mission not found"}
-            
+
             # Create learning analysis task using our bypass system
             task_description = f"""Analyze this mission outcome and extract learning insights:
 
@@ -123,7 +127,9 @@ Provide your response in this JSON format:
     "overall_score": 0.88
 }}"""
 
-            expected_output = "A structured JSON object with learning analysis and insights."
+            expected_output = (
+                "A structured JSON object with learning analysis and insights."
+            )
 
             # Execute analysis using our bypass system
             crew = DirectAICrew(self.llm)
@@ -137,45 +143,51 @@ Provide your response in this JSON format:
                     "You are the Learning Specialist, responsible for extracting wisdom from every mission outcome. "
                     "You have deep expertise in data analysis, pattern recognition, and continuous improvement methodologies. "
                     "Your analysis helps the system evolve and adapt based on real-world performance data."
-                )
+                ),
             )
             crew.add_task(task_description, agent, expected_output)
             analysis_result_str = crew.execute()
-            
+
             try:
                 analysis_result = json.loads(analysis_result_str)
-                logger.info(f"Self-Learning Module: Analysis completed with score {analysis_result.get('overall_score', 0)}")
-                
+                logger.info(
+                    f"Self-Learning Module: Analysis completed with score {analysis_result.get('overall_score', 0)}"
+                )
+
                 # Store analysis in database
                 self.db_manager.add_mission_update(
                     mission_id,
                     f"Learning analysis completed: {len(analysis_result.get('learning_insights', []))} insights extracted",
-                    "learning"
+                    "learning",
                 )
-                
+
                 return analysis_result
-                
+
             except json.JSONDecodeError as e:
-                logger.error(f"Self-Learning Module: Invalid JSON response: {analysis_result_str}")
+                logger.error(
+                    f"Self-Learning Module: Invalid JSON response: {analysis_result_str}"
+                )
                 return {"error": "Invalid analysis response format"}
 
         except Exception as e:
             logger.error(f"Self-Learning Module analysis failed: {e}")
             return {"error": str(e)}
 
-    async def generate_agent_improvements(self, analysis_result: Dict[str, Any]) -> List[Dict[str, Any]]:
+    async def generate_agent_improvements(
+        self, analysis_result: Dict[str, Any]
+    ) -> List[Dict[str, Any]]:
         """
         Generate specific agent improvements based on analysis
-        
+
         Args:
             analysis_result: The learning analysis results
-            
+
         Returns:
             List of agent improvements
         """
         try:
             logger.info("Self-Learning Module: Generating agent improvements...")
-            
+
             # Create improvement generation task using our bypass system
             task_description = f"""Generate specific agent improvements based on this analysis:
 
@@ -224,38 +236,46 @@ Provide your response as a JSON array of improvements:
                     "You are the Improvement Specialist, responsible for translating analysis into actionable improvements. "
                     "You have extensive experience in optimization, performance tuning, and system enhancement. "
                     "Your improvements are always practical, measurable, and designed for real-world implementation."
-                )
+                ),
             )
             crew.add_task(task_description, agent, expected_output)
             improvements_str = crew.execute()
-            
+
             try:
                 improvements = json.loads(improvements_str)
-                logger.info(f"Self-Learning Module: Generated {len(improvements)} improvements")
+                logger.info(
+                    f"Self-Learning Module: Generated {len(improvements)} improvements"
+                )
                 return improvements
-                
+
             except json.JSONDecodeError as e:
-                logger.error(f"Self-Learning Module: Invalid JSON response: {improvements_str}")
+                logger.error(
+                    f"Self-Learning Module: Invalid JSON response: {improvements_str}"
+                )
                 return []
 
         except Exception as e:
             logger.error(f"Self-Learning Module improvement generation failed: {e}")
             return []
 
-    async def mark_improvements_active(self, mission_id: str, improvements: List[Dict[str, Any]]) -> bool:
+    async def mark_improvements_active(
+        self, mission_id: str, improvements: List[Dict[str, Any]]
+    ) -> bool:
         """
         Mark improvements as active after validation
-        
+
         Args:
             mission_id: The mission identifier
             improvements: List of improvements to activate
-            
+
         Returns:
             True if successful, False otherwise
         """
         try:
-            logger.info(f"Self-Learning Module: Marking {len(improvements)} improvements as active...")
-            
+            logger.info(
+                f"Self-Learning Module: Marking {len(improvements)} improvements as active..."
+            )
+
             # Store improvements in database with active status
             for improvement in improvements:
                 improvement_data = {
@@ -263,23 +283,27 @@ Provide your response as a JSON array of improvements:
                     "improvement": improvement,
                     "status": "active",
                     "activated_at": datetime.utcnow().isoformat(),
-                    "validation_passed": True
+                    "validation_passed": True,
                 }
-                
+
                 # Store in database (assuming there's a method for this)
                 # self.db_manager.store_improvement(improvement_data)
-            
-            logger.info("Self-Learning Module: Improvements marked as active successfully")
+
+            logger.info(
+                "Self-Learning Module: Improvements marked as active successfully"
+            )
             return True
-            
+
         except Exception as e:
-            logger.error(f"Self-Learning Module: Failed to mark improvements active: {e}")
+            logger.error(
+                f"Self-Learning Module: Failed to mark improvements active: {e}"
+            )
             return False
 
     def get_learning_stats(self) -> Dict[str, Any]:
         """
         Get learning module statistics
-        
+
         Returns:
             Learning module statistics
         """
@@ -293,7 +317,7 @@ Provide your response as a JSON array of improvements:
                 "Performance optimization",
                 "Error analysis",
                 "Improvement generation",
-                "Continuous adaptation"
+                "Continuous adaptation",
             ],
             "analysis_types": [
                 "performance_analysis",
@@ -301,68 +325,74 @@ Provide your response as a JSON array of improvements:
                 "error_analysis",
                 "success_factors",
                 "optimization_opportunities",
-                "learning_insights"
+                "learning_insights",
             ],
             "improvement_types": [
                 "agent_configuration",
                 "prompt_engineering",
                 "tool_integration",
                 "error_handling",
-                "performance_optimization"
+                "performance_optimization",
             ],
             "learning_threshold": 0.7,
-            "max_analysis_time": "120 seconds"
+            "max_analysis_time": "120 seconds",
         }
 
     def validate_improvement(self, improvement: Dict[str, Any]) -> bool:
         """
         Validate that an improvement is complete and actionable
-        
+
         Args:
             improvement: The improvement to validate
-            
+
         Returns:
             True if improvement is valid, False otherwise
         """
         required_fields = [
             "target_component",
-            "improvement_type", 
+            "improvement_type",
             "description",
             "expected_impact",
             "implementation_strategy",
             "success_metrics",
-            "priority"
+            "priority",
         ]
-        
+
         # Check for required fields
         for field in required_fields:
             if field not in improvement:
-                logger.warning(f"Self-Learning Module: Missing required field '{field}' in improvement")
+                logger.warning(
+                    f"Self-Learning Module: Missing required field '{field}' in improvement"
+                )
                 return False
-        
+
         # Validate improvement type
         valid_types = [
             "configuration",
-            "prompt", 
+            "prompt",
             "tool",
             "error_handling",
-            "performance"
+            "performance",
         ]
         if improvement["improvement_type"] not in valid_types:
-            logger.warning(f"Self-Learning Module: Invalid improvement type '{improvement['improvement_type']}'")
+            logger.warning(
+                f"Self-Learning Module: Invalid improvement type '{improvement['improvement_type']}'"
+            )
             return False
-        
+
         # Validate priority
         valid_priorities = ["high", "medium", "low"]
         if improvement["priority"] not in valid_priorities:
-            logger.warning(f"Self-Learning Module: Invalid priority '{improvement['priority']}'")
+            logger.warning(
+                f"Self-Learning Module: Invalid priority '{improvement['priority']}'"
+            )
             return False
-        
+
         # Validate description is not empty
         if not improvement.get("description"):
             logger.warning("Self-Learning Module: Empty improvement description")
             return False
-        
+
         return True
 
     # --- NEW METHOD TO FIX THE ATTRIBUTE ERROR ---
@@ -374,9 +404,9 @@ Provide your response as a JSON array of improvements:
         if not mission:
             logger.warning("No mission provided for synthesis")
             return {"error": "No mission provided"}
-        
+
         logger.info(f"🧠 Synthesizing knowledge from mission: {mission.mission_id_str}")
-        
+
         # Create a concise summary for vector storage
         summary = f"""
         Mission ID: {mission.mission_id_str}
@@ -386,22 +416,22 @@ Provide your response as a JSON array of improvements:
         Agent Type: {mission.agent_type}
         Execution Time: {mission.execution_time}s
         """
-        
+
         metadata = {
             "mission_id": mission.mission_id_str,
             "status": mission.status,
             "agent_type": mission.agent_type,
             "execution_time": mission.execution_time or 0,
-            "success": mission.status == "completed"
+            "success": mission.status == "completed",
         }
-        
+
         # Add to ChromaDB vector memory
         self.db_manager.add_to_memory(
-            mission_id=mission.mission_id_str,
-            content=summary,
-            metadata=metadata
+            mission_id=mission.mission_id_str, content=summary, metadata=metadata
         )
-        logger.success(f"✅ Knowledge from mission {mission.mission_id_str} synthesized and stored.")
+        logger.success(
+            f"✅ Knowledge from mission {mission.mission_id_str} synthesized and stored."
+        )
         return {"success": True, "mission_id": mission.mission_id_str}
 
     async def analyze_completed_missions(self) -> Dict[str, Any]:
@@ -410,20 +440,27 @@ Provide your response as a JSON array of improvements:
         This method was missing, causing the AttributeError.
         """
         logger.info("Analyzing performance of all completed missions...")
-        
+
         try:
-            completed_missions = self.db_manager.list_missions(status='completed')
-            failed_missions = self.db_manager.list_missions(status='failed')
+            completed_missions = self.db_manager.list_missions(status="completed")
+            failed_missions = self.db_manager.list_missions(status="failed")
 
             if not completed_missions and not failed_missions:
-                return {"patterns": [], "summary": "No completed or failed missions to analyze."}
+                return {
+                    "patterns": [],
+                    "summary": "No completed or failed missions to analyze.",
+                }
 
             # Simple analysis for demonstration purposes
-            success_rate = len(completed_missions) / (len(completed_missions) + len(failed_missions))
-            
+            success_rate = len(completed_missions) / (
+                len(completed_missions) + len(failed_missions)
+            )
+
             avg_execution_time = 0
             if completed_missions:
-                total_time = sum(m.execution_time for m in completed_missions if m.execution_time)
+                total_time = sum(
+                    m.execution_time for m in completed_missions if m.execution_time
+                )
                 avg_execution_time = total_time / len(completed_missions)
 
             insights = {
@@ -432,27 +469,36 @@ Provide your response as a JSON array of improvements:
                     "total_completed": len(completed_missions),
                     "total_failed": len(failed_missions),
                     "success_rate": f"{success_rate:.2%}",
-                    "avg_execution_time_sec": f"{avg_execution_time:.2f}"
-                }
+                    "avg_execution_time_sec": f"{avg_execution_time:.2f}",
+                },
             }
 
-            if success_rate < 0.8 and (len(completed_missions) + len(failed_missions)) > 10:
-                insights["patterns"].append({
-                    "type": "low_success_rate",
-                    "description": f"Overall mission success rate is low ({success_rate:.2%}). Suggests a review of agent error handling or prompt clarity.",
-                    "data": {"success_rate": success_rate}
-                })
+            if (
+                success_rate < 0.8
+                and (len(completed_missions) + len(failed_missions)) > 10
+            ):
+                insights["patterns"].append(
+                    {
+                        "type": "low_success_rate",
+                        "description": f"Overall mission success rate is low ({success_rate:.2%}). Suggests a review of agent error handling or prompt clarity.",
+                        "data": {"success_rate": success_rate},
+                    }
+                )
 
-            if avg_execution_time > 30: # 30 seconds
-                insights["patterns"].append({
-                    "type": "high_execution_time",
-                    "description": f"Average mission execution time is high ({avg_execution_time:.2f}s). Suggests optimizing agent tools or core logic.",
-                    "data": {"avg_execution_time_sec": avg_execution_time}
-                })
+            if avg_execution_time > 30:  # 30 seconds
+                insights["patterns"].append(
+                    {
+                        "type": "high_execution_time",
+                        "description": f"Average mission execution time is high ({avg_execution_time:.2f}s). Suggests optimizing agent tools or core logic.",
+                        "data": {"avg_execution_time_sec": avg_execution_time},
+                    }
+                )
 
-            logger.info(f"Analysis complete. Found {len(insights['patterns'])} potential optimization patterns.")
+            logger.info(
+                f"Analysis complete. Found {len(insights['patterns'])} potential optimization patterns."
+            )
             return insights
-            
+
         except Exception as e:
             logger.error(f"Failed to analyze completed missions: {e}")
             return {"patterns": [], "summary": f"Analysis failed: {str(e)}"}
@@ -469,23 +515,23 @@ Provide your response as a JSON array of improvements:
                 "Performance optimization",
                 "Error analysis",
                 "Improvement generation",
-                "Continuous adaptation"
+                "Continuous adaptation",
             ],
             "analysis_types": [
                 "performance_analysis",
-                "pattern_insights", 
+                "pattern_insights",
                 "error_analysis",
                 "success_factors",
                 "optimization_opportunities",
-                "learning_insights"
+                "learning_insights",
             ],
             "improvement_types": [
                 "agent_configuration",
                 "prompt_engineering",
                 "tool_integration",
                 "error_handling",
-                "performance_optimization"
+                "performance_optimization",
             ],
             "learning_threshold": 0.7,
-            "max_analysis_time": "120 seconds"
-        } 
+            "max_analysis_time": "120 seconds",
+        }

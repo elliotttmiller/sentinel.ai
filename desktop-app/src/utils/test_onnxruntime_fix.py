@@ -3,14 +3,18 @@
 Test script for ONNX Runtime Fix
 """
 
-import sys
 import os
+import sys
 
 # Add the utils directory to the path
 sys.path.append(os.path.dirname(__file__))
 
 try:
-    from onnxruntime_fix import get_onnxruntime, is_onnxruntime_available, get_onnxruntime_error
+    from onnxruntime_fix import (
+        get_onnxruntime,
+        get_onnxruntime_error,
+        is_onnxruntime_available,
+    )
 
     print("🔧 Testing ONNX Runtime Fix...")
 

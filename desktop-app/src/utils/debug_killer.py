@@ -4,24 +4,21 @@ Debug Killer Optimization System
 Advanced error detection, analysis, and automated problem resolution for the Sentinel ecosystem.
 """
 
-import subprocess
-import time
-import psutil
-import sys
-import shutil
-import platform
-import importlib
-import socket
-import re
 import datetime
-import json
-import traceback
 import os
-from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Any, Union
+import platform
+import re
+import subprocess
+import sys
+import time
+import traceback
 from dataclasses import dataclass
-from colorama import init, Fore, Style, Back
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+
+import psutil
 import requests
+from colorama import Back, Fore, Style, init
 
 init(autoreset=True)
 
@@ -85,7 +82,11 @@ SOLUTION_STRATEGIES = {
         "Verify firewall settings",
         "Test network endpoints",
     ],
-    "file_not_found": ["Verify file paths", "Check file permissions", "Create missing directories"],
+    "file_not_found": [
+        "Verify file paths",
+        "Check file permissions",
+        "Create missing directories",
+    ],
     "syntax_error": [
         "Fix code syntax errors",
         "Validate Python version compatibility",
@@ -222,7 +223,9 @@ def analyze_error_severity(error_type: str, context: Dict[str, Any]) -> str:
         return "UNKNOWN"
 
 
-def extract_error_context(error_message: str, stack_trace: str = None) -> Dict[str, Any]:
+def extract_error_context(
+    error_message: str, stack_trace: str = None
+) -> Dict[str, Any]:
     """Extract contextual information from error"""
     context = {
         "error_message": error_message,
@@ -265,19 +268,26 @@ def generate_solutions(issue_type: str, context: Dict[str, Any]) -> List[DebugSo
             customized_solution = solution
 
             if issue_type == "import_error" and "missing_package" in context:
-                customized_solution = solution.replace("{package}", context["missing_package"])
+                customized_solution = solution.replace(
+                    "{package}", context["missing_package"]
+                )
             elif issue_type == "port_conflict" and "conflicting_port" in context:
-                customized_solution = solution.replace("{port}", str(context["conflicting_port"]))
+                customized_solution = solution.replace(
+                    "{port}", str(context["conflicting_port"])
+                )
 
             # Calculate success probability based on issue type and context
-            success_prob = 0.8 if issue_type in ["import_error", "file_not_found"] else 0.6
+            success_prob = (
+                0.8 if issue_type in ["import_error", "file_not_found"] else 0.6
+            )
 
             solutions.append(
                 DebugSolution(
                     issue_type=issue_type,
                     solution=customized_solution,
                     success_probability=success_prob,
-                    requires_restart=issue_type in ["port_conflict", "permission_error"],
+                    requires_restart=issue_type
+                    in ["port_conflict", "permission_error"],
                     requires_admin=issue_type in ["permission_error"],
                 )
             )
@@ -363,8 +373,12 @@ def execute_solution(solution: DebugSolution) -> bool:
         solution.execution_time = time.time() - start_time
 
         if success:
-            print_debug_success(f"Solution executed successfully in {solution.execution_time:.2f}s")
-            log_debug_event(f"Solution executed successfully: {solution.solution}", "SUCCESS")
+            print_debug_success(
+                f"Solution executed successfully in {solution.execution_time:.2f}s"
+            )
+            log_debug_event(
+                f"Solution executed successfully: {solution.solution}", "SUCCESS"
+            )
         else:
             print_debug_error(f"Solution execution failed")
             log_debug_event(f"Solution execution failed: {solution.solution}", "ERROR")
@@ -385,7 +399,9 @@ def kill_process_on_port(port: int) -> bool:
             try:
                 for conn in proc.info.get("connections", []):
                     if conn.laddr.port == port and conn.status == psutil.CONN_LISTEN:
-                        print_debug_info(f"Killing process {proc.pid} using port {port}")
+                        print_debug_info(
+                            f"Killing process {proc.pid} using port {port}"
+                        )
                         proc.terminate()
                         proc.wait(timeout=5)
                         return True
@@ -514,7 +530,9 @@ def handle_error_with_debug_killer(error: Exception, context: str = "") -> bool:
 
         # Execute solutions
         for i, solution in enumerate(solutions, 1):
-            print_debug_info(f"Trying solution {i}/{len(solutions)}: {solution.solution}")
+            print_debug_info(
+                f"Trying solution {i}/{len(solutions)}: {solution.solution}"
+            )
 
             if execute_solution(solution):
                 print_debug_success(f"Successfully resolved {pattern}")
@@ -713,7 +731,7 @@ def debug_killer_main():
 
             # Check and fix missing packages
             try:
-                import crewai
+                pass
 
                 print_debug_success("✓ crewai package found")
             except ImportError:

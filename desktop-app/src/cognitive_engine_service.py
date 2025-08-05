@@ -4,22 +4,18 @@ Combines the best features from both engine implementations
 """
 
 import asyncio
-import json
-from fastapi import FastAPI, Request, HTTPException
-from fastapi.responses import FileResponse, StreamingResponse
-from pydantic import BaseModel
-from typing import Dict, Any, List, Optional
-import os
-from datetime import datetime
-import sys
-from loguru import logger
-from starlette.responses import Response
 import time
-import logging
+from datetime import datetime
+from typing import Any, Dict, List, Optional
+
+from fastapi import FastAPI, HTTPException, Request
+from loguru import logger
+from pydantic import BaseModel
+from starlette.responses import Response
 
 # Import our AI components
-from .core.cognitive_forge_engine import cognitive_forge_engine
-from .models.advanced_database import db_manager
+from src.core.cognitive_forge_engine import cognitive_forge_engine
+from src.models.advanced_database import db_manager
 
 # --- Real-Time Logging & Streaming Setup ---
 # This is the in-memory buffer that will hold recent logs for streaming
@@ -46,12 +42,15 @@ mission_results: Dict[str, Any] = {}
 # Configure logging
 logger.add("logs/cognitive_engine.log", rotation="10 MB", retention="7 days")
 
+
 # Pydantic Models
 class ExecutionPlan(BaseModel):
     """A simple model to receive the plan from the backend."""
+
     mission_id: str
     steps: list
     metadata: Dict[str, Any]
+
 
 class AIRequest(BaseModel):
     prompt: str
@@ -59,16 +58,19 @@ class AIRequest(BaseModel):
     temperature: float = 0.7
     max_tokens: Optional[int] = None
 
+
 class AIResponse(BaseModel):
     response: str
     model: str
     tokens_used: Optional[int] = None
     timestamp: str
 
+
 class CodeAnalysisRequest(BaseModel):
     code: str
     language: str = "python"
     analysis_type: str = "general"
+
 
 class CodeAnalysisResponse(BaseModel):
     analysis: str
@@ -76,8 +78,10 @@ class CodeAnalysisResponse(BaseModel):
     issues: List[str]
     score: float
 
+
 # Request logging middleware
 MAX_LOG_BODY = 2048
+
 
 def safe_log_body(body):
     if not body:
@@ -88,40 +92,45 @@ def safe_log_body(body):
         return body[:MAX_LOG_BODY] + "... [truncated]"
     return body
 
+
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
     """Capture HTTP requests for cognitive engine with enhanced logging"""
     start_time = time.time()
-    
+
     # Log incoming request
     log_entry = {
         "timestamp": datetime.utcnow().isoformat(),
         "level": "INFO",
         "message": f'INFO: {request.client.host}:{request.client.port} - "{request.method} {request.url.path} HTTP/{request.scope["http_version"]}"',
         "source": "http_request",
-        "server_port": "8002"
+        "server_port": "8002",
     }
-    
+
     cognitive_log_buffer.append(log_entry)
     if len(cognitive_log_buffer) > 200:
         cognitive_log_buffer.pop(0)
-    
+
     # Also add to queue for real-time streaming
     try:
         loop = asyncio.get_event_loop()
         asyncio.run_coroutine_threadsafe(cognitive_log_queue.put(log_entry), loop)
     except RuntimeError:
         pass
-    
-    logger.info(f"ENGINE: {request.method} {request.url} | Body: {safe_log_body(await request.body())}")
-    
+
+    logger.info(
+        f"ENGINE: {request.method} {request.url} | Body: {safe_log_body(await request.body())}"
+    )
+
     try:
         response = await call_next(request)
         resp_body = b""
         async for chunk in response.body_iterator:
             resp_body += chunk
-        logger.info(f"ENGINE: Response {response.status_code} for {request.method} {request.url}")
-        
+        logger.info(
+            f"ENGINE: Response {response.status_code} for {request.method} {request.url}"
+        )
+
         # Log response
         process_time = time.time() - start_time
         log_entry = {
@@ -129,24 +138,33 @@ async def log_requests(request: Request, call_next):
             "level": "INFO",
             "message": f'INFO: {request.client.host}:{request.client.port} - "{request.method} {request.url.path} HTTP/{request.scope["http_version"]}" {response.status_code} OK',
             "source": "http_request",
-            "server_port": "8002"
+            "server_port": "8002",
         }
-        
+
         cognitive_log_buffer.append(log_entry)
         if len(cognitive_log_buffer) > 200:
             cognitive_log_buffer.pop(0)
-        
+
         # Also add to queue for real-time streaming
         try:
             loop = asyncio.get_event_loop()
             asyncio.run_coroutine_threadsafe(cognitive_log_queue.put(log_entry), loop)
         except RuntimeError:
             pass
-        
-        return Response(content=resp_body, status_code=response.status_code, headers=dict(response.headers), media_type=response.media_type)
+
+        return Response(
+            content=resp_body,
+            status_code=response.status_code,
+            headers=dict(response.headers),
+            media_type=response.media_type,
+        )
     except Exception as e:
-        logger.error(f"ENGINE: Exception during request: {request.method} {request.url} - {e}", exc_info=True)
+        logger.error(
+            f"ENGINE: Exception during request: {request.method} {request.url} - {e}",
+            exc_info=True,
+        )
         raise
+
 
 # Core endpoints
 @app.get("/health")
@@ -157,8 +175,9 @@ async def health_check():
         "status": "healthy",
         "service": "cognitive_engine",
         "timestamp": datetime.utcnow().isoformat(),
-        "version": "2.0.0"
+        "version": "2.0.0",
     }
+
 
 @app.get("/")
 async def root():
@@ -169,8 +188,9 @@ async def root():
         "version": "2.0.0",
         "status": "active",
         "port": "8002",
-        "timestamp": datetime.utcnow().isoformat()
+        "timestamp": datetime.utcnow().isoformat(),
     }
+
 
 # AI endpoints
 @app.post("/ai/generate")
@@ -180,16 +200,17 @@ async def generate_ai_response(request: AIRequest):
     try:
         # Use the cognitive forge engine for real AI generation
         response = cognitive_forge_engine.llm.invoke(request.prompt)
-        
+
         return AIResponse(
             response=response.content,
             model=request.model,
             tokens_used=response.usage.total_tokens,
-            timestamp=datetime.utcnow().isoformat()
+            timestamp=datetime.utcnow().isoformat(),
         )
     except Exception as e:
         logger.error(f"Error generating AI response: {e}")
         raise HTTPException(status_code=500, detail=f"AI generation failed: {str(e)}")
+
 
 @app.post("/ai/analyze-code")
 async def analyze_code_endpoint(request: CodeAnalysisRequest):
@@ -198,7 +219,7 @@ async def analyze_code_endpoint(request: CodeAnalysisRequest):
     try:
         # Create a mission for code analysis
         mission_id = f"code_analysis_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}"
-        
+
         prompt = f"""
         Analyze this {request.language} code:
         
@@ -210,22 +231,23 @@ async def analyze_code_endpoint(request: CodeAnalysisRequest):
         3. Improvement suggestions
         4. Security considerations
         """
-        
+
         # Use the cognitive forge engine
         response = cognitive_forge_engine.llm.invoke(prompt)
-        
+
         # Parse the response for structured analysis
         analysis = response.content
-        
+
         return CodeAnalysisResponse(
             analysis=analysis,
             suggestions=["Use the AI response above for detailed suggestions"],
             issues=["Check the AI analysis above for issues"],
-            score=8.5
+            score=8.5,
         )
     except Exception as e:
         logger.error(f"Error analyzing code: {e}")
         raise HTTPException(status_code=500, detail=f"Code analysis failed: {str(e)}")
+
 
 @app.post("/ai/chat")
 async def chat_with_ai(request: AIRequest):
@@ -233,16 +255,17 @@ async def chat_with_ai(request: AIRequest):
     logger.info("API COGNITIVE: Chat requested")
     try:
         response = cognitive_forge_engine.llm.invoke(request.prompt)
-        
+
         return AIResponse(
             response=response.content,
             model=request.model,
             tokens_used=response.usage.total_tokens,
-            timestamp=datetime.utcnow().isoformat()
+            timestamp=datetime.utcnow().isoformat(),
         )
     except Exception as e:
         logger.error(f"Error in AI chat: {e}")
         raise HTTPException(status_code=500, detail=f"AI chat failed: {str(e)}")
+
 
 @app.get("/ai/models")
 async def list_available_models():
@@ -254,17 +277,18 @@ async def list_available_models():
                 "id": "gemini-1.5-pro-latest",
                 "name": "Gemini 1.5 Pro",
                 "provider": "Google",
-                "capabilities": ["text-generation", "code-analysis", "reasoning"]
+                "capabilities": ["text-generation", "code-analysis", "reasoning"],
             },
             {
                 "id": "gemini-1.5-flash",
-                "name": "Gemini 1.5 Flash", 
+                "name": "Gemini 1.5 Flash",
                 "provider": "Google",
-                "capabilities": ["text-generation", "fast-response"]
-            }
+                "capabilities": ["text-generation", "fast-response"],
+            },
         ],
-        "default_model": "gemini-1.5-pro-latest"
+        "default_model": "gemini-1.5-pro-latest",
     }
+
 
 @app.get("/ai/status")
 async def ai_status():
@@ -276,12 +300,13 @@ async def ai_status():
         "model": "gemini-1.5-pro-latest",
         "capabilities": [
             "Text Generation",
-            "Code Analysis", 
+            "Code Analysis",
             "Mission Planning",
-            "Agent Execution"
+            "Agent Execution",
         ],
-        "timestamp": datetime.utcnow().isoformat()
+        "timestamp": datetime.utcnow().isoformat(),
     }
+
 
 @app.get("/api/cognitive/status")
 async def cognitive_status():
@@ -291,8 +316,9 @@ async def cognitive_status():
         "status": "active",
         "model": "gemini-1.5-pro-latest",
         "server": "8002",
-        "last_update": datetime.utcnow().isoformat()
+        "last_update": datetime.utcnow().isoformat(),
     }
+
 
 @app.get("/api/cognitive/process")
 async def cognitive_process():
@@ -302,21 +328,22 @@ async def cognitive_process():
         "process_id": "cog_123",
         "status": "processing",
         "server": "8002",
-        "timestamp": datetime.utcnow().isoformat()
+        "timestamp": datetime.utcnow().isoformat(),
     }
+
 
 # --- Real-Time Streaming Endpoints ---
 # REMOVED: This endpoint is now handled by the unified Event Bus in main.py
 # @app.get("/api/events/stream")
 # async def stream_events():
 #     """Stream real-time events to the frontend"""
-#     
+#
 #     async def event_generator():
 #         # Send the last 50 buffered logs immediately on connection
 #         initial_logs = log_buffer[-50:] if log_buffer else []
 #         for log_entry in initial_logs:
 #             yield f"data: {json.dumps(log_entry)}\n\n"
-#         
+#
 #         # Continue streaming new logs
 #         while True:
 #             try:
@@ -328,8 +355,9 @@ async def cognitive_process():
 #             except Exception as e:
 #                 logger.error(f"Error in event stream: {e}")
 #                 await asyncio.sleep(1)
-#     
+#
 #     return StreamingResponse(event_generator(), media_type="text/event-stream")
+
 
 @app.get("/api/logs/live")
 async def get_live_logs():
@@ -339,7 +367,7 @@ async def get_live_logs():
         http_logs = []
         cognitive_logs = []
         system_logs = []
-        
+
         for log_entry in cognitive_log_buffer[-100:]:
             source = log_entry.get("source", "system")
             if source == "http_request":
@@ -348,7 +376,7 @@ async def get_live_logs():
                 cognitive_logs.append(log_entry)
             else:
                 system_logs.append(log_entry)
-        
+
         return {
             "overview": {
                 "total_logs": len(cognitive_log_buffer),
@@ -356,37 +384,54 @@ async def get_live_logs():
                 "http_count": len(http_logs),
                 "cognitive_count": len(cognitive_logs),
                 "system_count": len(system_logs),
-                "last_update": datetime.utcnow().isoformat()
+                "last_update": datetime.utcnow().isoformat(),
             },
             "logs": {
                 "http_requests": {
                     "status": "active",
                     "logs": http_logs[-50:],
                     "log_count": len(http_logs),
-                    "error_count": len([l for l in http_logs if l.get("level") == "ERROR"]),
-                    "warning_count": len([l for l in http_logs if l.get("level") == "WARNING"]),
-                    "last_event": max([l["timestamp"] for l in http_logs], default=None)
+                    "error_count": len(
+                        [l for l in http_logs if l.get("level") == "ERROR"]
+                    ),
+                    "warning_count": len(
+                        [l for l in http_logs if l.get("level") == "WARNING"]
+                    ),
+                    "last_event": max(
+                        [l["timestamp"] for l in http_logs], default=None
+                    ),
                 },
                 "cognitive_engine": {
                     "status": "active",
                     "logs": cognitive_logs[-50:],
                     "log_count": len(cognitive_logs),
-                    "error_count": len([l for l in cognitive_logs if l.get("level") == "ERROR"]),
-                    "warning_count": len([l for l in cognitive_logs if l.get("level") == "WARNING"]),
-                    "last_event": max([l["timestamp"] for l in cognitive_logs], default=None)
+                    "error_count": len(
+                        [l for l in cognitive_logs if l.get("level") == "ERROR"]
+                    ),
+                    "warning_count": len(
+                        [l for l in cognitive_logs if l.get("level") == "WARNING"]
+                    ),
+                    "last_event": max(
+                        [l["timestamp"] for l in cognitive_logs], default=None
+                    ),
                 },
                 "system": {
                     "logs": system_logs[-50:],
                     "log_count": len(system_logs),
-                    "error_count": len([l for l in system_logs if l.get("level") == "ERROR"]),
-                    "warning_count": len([l for l in system_logs if l.get("level") == "WARNING"])
-                }
+                    "error_count": len(
+                        [l for l in system_logs if l.get("level") == "ERROR"]
+                    ),
+                    "warning_count": len(
+                        [l for l in system_logs if l.get("level") == "WARNING"]
+                    ),
+                },
             },
-            "server": "8002"
+            "server": "8002",
         }
     except Exception as e:
         logger.error(f"Error getting cognitive logs: {e}")
         return {"error": str(e), "server": "8002"}
+
 
 @app.get("/api/logs/history")
 async def get_log_history(limit: int = 100):
@@ -395,8 +440,9 @@ async def get_log_history(limit: int = 100):
         "logs": cognitive_log_buffer[-limit:],
         "total_logs": len(cognitive_log_buffer),
         "server_time": datetime.utcnow().isoformat(),
-        "server": "8002"
+        "server": "8002",
     }
+
 
 @app.get("/api/logs/clear")
 async def clear_logs():
@@ -404,7 +450,12 @@ async def clear_logs():
     global cognitive_log_buffer
     cognitive_log_buffer.clear()
     logger.info("API COGNITIVE: Log buffer cleared")
-    return {"message": "Log buffer cleared", "timestamp": datetime.utcnow().isoformat(), "server": "8002"}
+    return {
+        "message": "Log buffer cleared",
+        "timestamp": datetime.utcnow().isoformat(),
+        "server": "8002",
+    }
+
 
 # --- Background Tasks ---
 async def generate_cognitive_activity():
@@ -417,57 +468,63 @@ async def generate_cognitive_activity():
                 "level": "INFO",
                 "message": f"BACKGROUND TASK: Cognitive engine processing cycle completed",
                 "source": "cognitive_worker",
-                "server_port": "8002"
+                "server_port": "8002",
             }
             cognitive_log_buffer.append(log_entry)
             if len(cognitive_log_buffer) > 200:
                 cognitive_log_buffer.pop(0)
-            
+
             # Add to queue for real-time streaming
             try:
                 await cognitive_log_queue.put(log_entry)
             except Exception:
                 pass
-                
+
         except Exception as e:
             logger.error(f"Error in cognitive activity generation: {e}")
+
 
 # Mission execution endpoints
 @app.post("/mission/execute")
 async def execute_mission(mission_data: Dict[str, Any]):
     """Execute a mission using the Cognitive Forge Engine"""
     try:
-        mission_id = mission_data.get("mission_id", f"mission_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}")
+        mission_id = mission_data.get(
+            "mission_id", f"mission_{datetime.utcnow().strftime('%Y%m%d_%H%M%S')}"
+        )
         prompt = mission_data.get("prompt", "")
         agent_type = mission_data.get("agent_type", "developer")
-        
+
         logger.info(f"ENGINE: Starting mission execution for {mission_id}")
-        
+
         # Use the cognitive forge engine to run the mission
         def update_callback(message: str):
             logger.info(f"ENGINE: Mission {mission_id} - {message}")
-        
+
         # Run the mission
         result = cognitive_forge_engine.run_mission(
             prompt, mission_id, agent_type, update_callback
         )
-        
+
         mission_results[mission_id] = {
             "status": "completed",
             "result": result,
-            "timestamp": datetime.utcnow().isoformat()
+            "timestamp": datetime.utcnow().isoformat(),
         }
-        
+
         return {
             "mission_id": mission_id,
             "status": "completed",
             "result": result,
-            "message": "Mission executed successfully"
+            "message": "Mission executed successfully",
         }
-        
+
     except Exception as e:
         logger.error(f"Error executing mission: {e}")
-        raise HTTPException(status_code=500, detail=f"Mission execution failed: {str(e)}")
+        raise HTTPException(
+            status_code=500, detail=f"Mission execution failed: {str(e)}"
+        )
+
 
 @app.get("/mission/result/{mission_id}")
 async def get_mission_result(mission_id: str):
@@ -484,10 +541,11 @@ async def get_mission_result(mission_id: str):
                 "result": mission.result,
                 "execution_time": mission.execution_time,
                 "created_at": mission.created_at.isoformat(),
-                "updated_at": mission.updated_at.isoformat()
+                "updated_at": mission.updated_at.isoformat(),
             }
         else:
             raise HTTPException(status_code=404, detail="Mission not found")
+
 
 @app.post("/execute_mission")
 async def execute_mission_legacy(plan: Dict):
@@ -495,39 +553,40 @@ async def execute_mission_legacy(plan: Dict):
     mission_id = plan.get("mission_id")
     if not mission_id:
         return {"error": "mission_id is required in the plan"}
-    
+
     # Start execution as background task
     asyncio.create_task(run_mission_background(mission_id, plan))
     return {"message": f"Execution started for mission {mission_id}."}
+
 
 async def run_mission_background(mission_id: str, plan: Dict):
     """Execute mission in background"""
     try:
         logger.info(f"ENGINE: Starting background execution for mission {mission_id}")
-        
+
         # Extract prompt from plan
         prompt = plan.get("prompt", "Execute the mission plan")
-        
+
         def update_callback(message: str):
             logger.info(f"ENGINE: Background mission {mission_id} - {message}")
-        
+
         # Run the mission
         result = cognitive_forge_engine.run_mission(
             prompt, mission_id, "developer", update_callback
         )
-        
+
         mission_results[mission_id] = {
             "status": "completed",
             "result": result,
-            "timestamp": datetime.utcnow().isoformat()
+            "timestamp": datetime.utcnow().isoformat(),
         }
-        
+
         logger.info(f"ENGINE: Background mission {mission_id} completed successfully")
-        
+
     except Exception as e:
         logger.error(f"ENGINE: Background mission {mission_id} failed: {e}")
         mission_results[mission_id] = {
             "status": "failed",
             "error": str(e),
-            "timestamp": datetime.utcnow().isoformat()
-        } 
+            "timestamp": datetime.utcnow().isoformat(),
+        }

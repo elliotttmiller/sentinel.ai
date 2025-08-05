@@ -5,30 +5,36 @@ Provides detailed tracking and a central, unified live stream for all system eve
 """
 
 import os
+
 # Disable problematic auto-patching before importing weave
 os.environ["WEAVE_PATCH_ALL"] = "false"
 
-import uuid
-import time
-import threading
-import json
 import asyncio
-from datetime import datetime
-from typing import Dict, List, Any, Optional
-from dataclasses import dataclass, field, asdict
-from contextlib import contextmanager
+import threading
+import uuid
 from collections import deque
+from contextlib import contextmanager
+from dataclasses import asdict, dataclass, field
+from datetime import datetime
+from typing import Any, Dict, Optional
 
 try:
     import weave
-    from weave.monitoring import span, log as weave_log
+    from weave.monitoring import log as weave_log
+    from weave.monitoring import span
+
     WEAVE_AVAILABLE = True
 except ImportError:
-    weave, span, weave_log = None, contextmanager(lambda name: (yield)), lambda data: None
+    weave, span, weave_log = (
+        None,
+        contextmanager(lambda name: (yield)),
+        lambda data: None,
+    )
     WEAVE_AVAILABLE = False
 
 try:
     import wandb
+
     WANDB_AVAILABLE = True
 except ImportError:
     wandb = None
@@ -38,9 +44,11 @@ from loguru import logger
 
 # --- Unified Data Models ---
 
+
 @dataclass
 class LiveStreamEvent:
     """A standardized model for any real-time event pushed to the frontend."""
+
     event_id: str = field(default_factory=lambda: f"evt_{uuid.uuid4().hex[:8]}")
     timestamp: str = field(default_factory=lambda: datetime.utcnow().isoformat())
     event_type: str = "generic"
@@ -50,16 +58,19 @@ class LiveStreamEvent:
     message: str = ""
     payload: Dict[str, Any] = field(default_factory=dict)
 
+
 # Your other dataclasses for internal structure
 @dataclass
 class AgentAction:
     action_id: str = field(default_factory=lambda: f"action_{uuid.uuid4().hex[:8]}")
     # ... other fields as needed
 
+
 @dataclass
 class AgentSession:
     session_id: str = field(default_factory=lambda: f"session_{uuid.uuid4().hex[:8]}")
     # ... other fields as needed
+
 
 @dataclass
 class MissionObservability:
@@ -67,6 +78,7 @@ class MissionObservability:
     user_request: str
     agent_sessions: Dict[str, AgentSession] = field(default_factory=dict)
     # ... other fields as needed
+
 
 def _serialize_for_json(data: Any) -> Any:
     """Robustly and recursively converts objects to JSON-serializable formats."""
@@ -78,9 +90,10 @@ def _serialize_for_json(data: Any) -> Any:
         return {k: _serialize_for_json(v) for k, v in data.items()}
     if isinstance(data, list):
         return [_serialize_for_json(item) for item in data]
-    if hasattr(data, '__dataclass_fields__'):
+    if hasattr(data, "__dataclass_fields__"):
         return _serialize_for_json(asdict(data))
     return data
+
 
 class CuttingEdgeAgentObservabilityManager:
     """Acts as the central Event Bus for all real-time data."""
@@ -120,26 +133,40 @@ class CuttingEdgeAgentObservabilityManager:
         except Exception:
             pass
 
-    def log_error(self, error: Exception, context: Dict, mission_id: Optional[str] = None):
+    def log_error(
+        self, error: Exception, context: Dict, mission_id: Optional[str] = None
+    ):
         """Log an error and push it to the event stream."""
-        self.push_event(LiveStreamEvent(
-            event_type="system_log",
-            severity="ERROR",
-            message=f"Error in {context.get('component', 'system')}: {str(error)}",
-            payload={"error_type": type(error).__name__, "context": context, "mission_id": mission_id}
-        ))
-        logger.error(f"Error in mission {mission_id or 'N/A'}: {error} | Context: {context}")
+        self.push_event(
+            LiveStreamEvent(
+                event_type="system_log",
+                severity="ERROR",
+                message=f"Error in {context.get('component', 'system')}: {str(error)}",
+                payload={
+                    "error_type": type(error).__name__,
+                    "context": context,
+                    "mission_id": mission_id,
+                },
+            )
+        )
+        logger.error(
+            f"Error in mission {mission_id or 'N/A'}: {error} | Context: {context}"
+        )
 
     # You can add more specific logging methods here that call push_event
     # For example:
-    def log_agent_action(self, agent_name: str, action_type: str, message: str, payload: dict):
-        self.push_event(LiveStreamEvent(
-                    event_type="agent_action",
-            source=agent_name,
-            severity="INFO",
-            message=message,
-            payload=payload
-        ))
+    def log_agent_action(
+        self, agent_name: str, action_type: str, message: str, payload: dict
+    ):
+        self.push_event(
+            LiveStreamEvent(
+                event_type="agent_action",
+                source=agent_name,
+                severity="INFO",
+                message=message,
+                payload=payload,
+            )
+        )
 
     async def get_event(self) -> Optional[LiveStreamEvent]:
         """Get the next event from the live stream queue."""
@@ -151,5 +178,6 @@ class CuttingEdgeAgentObservabilityManager:
             logger.error(f"Error getting event from queue: {e}")
             return None
 
+
 # Global instance
-agent_observability = CuttingEdgeAgentObservabilityManager() 
+agent_observability = CuttingEdgeAgentObservabilityManager()

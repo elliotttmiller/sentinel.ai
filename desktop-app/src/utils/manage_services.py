@@ -3,27 +3,24 @@
 Sentinel Comprehensive System Service Manager
 Advanced service management, monitoring, diagnostics, and system control for the Sentinel ecosystem.
 """
-import subprocess
-import time
-import psutil
-import sys
-import shutil
-import platform
-import importlib
-import socket
-import re
 import datetime
+import importlib
 import json
-import threading
-import webbrowser
-import sqlite3
-from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Any
-from dataclasses import dataclass
-from colorama import init, Fore, Style, Back
-import requests
 import os
-import logging
+import platform
+import shutil
+import socket
+import subprocess
+import sys
+import time
+import webbrowser
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+
+import psutil
+import requests
+from colorama import Back, Fore, Style, init
 from loguru import logger
 
 # Enhanced debug logging configuration
@@ -72,7 +69,9 @@ class DebugContext:
         else:
             logger.debug(f"✅ Operation completed: {self.operation} in {duration:.2f}s")
             if self.details:
-                logger.debug(f"📊 Operation details: {json.dumps(self.details, indent=2)}")
+                logger.debug(
+                    f"📊 Operation details: {json.dumps(self.details, indent=2)}"
+                )
 
     def add_detail(self, key: str, value: Any):
         self.details[key] = value
@@ -115,7 +114,6 @@ try:
         handle_error_with_debug_killer,
         run_comprehensive_system_scan,
         run_system_diagnostics,
-        log_debug_event,
     )
 except ImportError:
     # Fallback for direct script execution
@@ -123,15 +121,20 @@ except ImportError:
         handle_error_with_debug_killer,
         run_comprehensive_system_scan,
         run_system_diagnostics,
-        log_debug_event,
     )
 
 # Import onnxruntime fix
 try:
-    from .onnxruntime_fix import get_onnxruntime, is_onnxruntime_available, get_onnxruntime_error
+    from .onnxruntime_fix import (
+        get_onnxruntime_error,
+        is_onnxruntime_available,
+    )
 except ImportError:
     # Fallback for direct script execution
-    from onnxruntime_fix import get_onnxruntime, is_onnxruntime_available, get_onnxruntime_error
+    from onnxruntime_fix import (
+        get_onnxruntime_error,
+        is_onnxruntime_available,
+    )
 
 init(autoreset=True)
 
@@ -399,7 +402,9 @@ def kill_all_related_processes():
             )
 
             if should_kill:
-                print_warning(f"Killing process: {proc.pid} ({proc.name()}) - {cmdline[:100]}")
+                print_warning(
+                    f"Killing process: {proc.pid} ({proc.name()}) - {cmdline[:100]}"
+                )
                 try:
                     proc.terminate()
                     killed_processes.append(proc.pid)
@@ -490,8 +495,12 @@ def kill_all_related_processes():
                                 parts = line.split()
                                 if len(parts) > 4:
                                     pid = parts[-1]
-                                    print_critical(f"System killing process {pid} on port {port}")
-                                    subprocess.run(f"taskkill /F /PID {pid}", shell=True)
+                                    print_critical(
+                                        f"System killing process {pid} on port {port}"
+                                    )
+                                    subprocess.run(
+                                        f"taskkill /F /PID {pid}", shell=True
+                                    )
                                     killed_processes.append(int(pid))
                 except Exception as e:
                     print_warning(f"System command failed for port {port}: {e}")
@@ -506,7 +515,9 @@ def kill_all_related_processes():
                         pids = result.stdout.strip().split("\n")
                         for pid in pids:
                             if pid:
-                                print_critical(f"System killing process {pid} on port {port}")
+                                print_critical(
+                                    f"System killing process {pid} on port {port}"
+                                )
                                 subprocess.run(f"kill -9 {pid}", shell=True)
                                 killed_processes.append(int(pid))
                 except Exception as e:
@@ -702,7 +713,9 @@ def monitor_services_continuous():
                 status = get_service_status(service_name)
                 status_icon = "🟢" if status.is_running else "🔴"
                 pid_str = str(status.pid) if status.pid else "N/A"
-                memory_str = f"{status.memory_usage:.1f}%" if status.memory_usage else "N/A"
+                memory_str = (
+                    f"{status.memory_usage:.1f}%" if status.memory_usage else "N/A"
+                )
                 cpu_str = f"{status.cpu_usage:.1f}%" if status.cpu_usage else "N/A"
                 uptime_str = f"{status.uptime/60:.1f}m" if status.uptime else "N/A"
 
@@ -745,7 +758,9 @@ def start_service(service_name: str, background: bool = True) -> bool:
                 print_success(f"{service_config['name']} is accessible")
                 return True
             else:
-                print_error(f"{service_config['name']} returned status {response.status_code}")
+                print_error(
+                    f"{service_config['name']} returned status {response.status_code}"
+                )
                 return False
         except Exception as e:
             print_error(f"Failed to connect to {service_config['name']}: {e}")
@@ -776,7 +791,9 @@ def start_service(service_name: str, background: bool = True) -> bool:
                 cwd=service_config["cwd"],
                 stdout=log_file,
                 stderr=log_file,
-                creationflags=subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0,
+                creationflags=(
+                    subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0
+                ),
             )
 
             # Wait for startup
@@ -879,14 +896,18 @@ def full_desktop_app_startup() -> Dict[str, bool]:
     print_info("Checking system dependencies...")
     dependencies = check_dependencies()
     missing_required = [
-        pkg for pkg, installed in dependencies["required_packages"].items() if not installed
+        pkg
+        for pkg, installed in dependencies["required_packages"].items()
+        if not installed
     ]
 
     if missing_required:
         print_warning(f"Missing required packages: {', '.join(missing_required)}")
         print_info("Attempting to install missing dependencies...")
         if not install_missing_dependencies():
-            print_error("Failed to install required dependencies. Please install manually.")
+            print_error(
+                "Failed to install required dependencies. Please install manually."
+            )
             return {"error": "Dependency installation failed"}
 
     # Check environment
@@ -937,7 +958,9 @@ def full_desktop_app_startup() -> Dict[str, bool]:
         print_success("Railway Backend API is accessible")
         time.sleep(2)  # Brief wait
     else:
-        print_warning("Railway Backend API is not accessible - continuing with desktop app")
+        print_warning(
+            "Railway Backend API is not accessible - continuing with desktop app"
+        )
 
     # Start desktop app
     print_info("Starting Desktop App...")
@@ -971,11 +994,15 @@ def full_desktop_app_startup() -> Dict[str, bool]:
             if response.status_code == 200:
                 print_success("Cognitive AI Engine health check passed")
             else:
-                print_warning(f"Cognitive AI Engine health check returned {response.status_code}")
+                print_warning(
+                    f"Cognitive AI Engine health check returned {response.status_code}"
+                )
         except Exception as e:
             print_warning(f"Cognitive AI Engine health check failed: {e}")
     else:
-        print_warning("Cognitive AI Engine failed to start - some AI features may be limited")
+        print_warning(
+            "Cognitive AI Engine failed to start - some AI features may be limited"
+        )
 
     # Phase 4: System validation and optimization
     print_header("Phase 4: System Validation", 2)
@@ -1015,7 +1042,9 @@ def full_desktop_app_startup() -> Dict[str, bool]:
     for service_name, result in results.items():
         status_icon = "🟢" if result else "🔴"
         service_name_display = SERVICES[service_name]["name"]
-        print(f"  {status_icon} {service_name_display}: {'ONLINE' if result else 'OFFLINE'}")
+        print(
+            f"  {status_icon} {service_name_display}: {'ONLINE' if result else 'OFFLINE'}"
+        )
 
     # Show system resources
     sys_info = get_system_info()
@@ -1032,7 +1061,9 @@ def full_desktop_app_startup() -> Dict[str, bool]:
     if results.get("cognitive_engine"):
         print(f"  Cognitive Engine: http://localhost:8002")
 
-    print(f"\n{Fore.GREEN}✅ Full Desktop App System Startup Complete!{Style.RESET_ALL}")
+    print(
+        f"\n{Fore.GREEN}✅ Full Desktop App System Startup Complete!{Style.RESET_ALL}"
+    )
     print_info("Your Sentinel ecosystem is now ready for AI-powered missions!")
 
     return results
@@ -1062,7 +1093,9 @@ def kill_process_on_port(port: int) -> bool:
             connections = proc.connections()
             for conn in connections:
                 if conn.laddr.port == port:
-                    print_warning(f"Found process {proc.pid} ({proc.name()}) on port {port}")
+                    print_warning(
+                        f"Found process {proc.pid} ({proc.name()}) on port {port}"
+                    )
                     try:
                         proc.terminate()
                         time.sleep(1)
@@ -1079,7 +1112,10 @@ def kill_process_on_port(port: int) -> bool:
         if platform.system() == "Windows":
             # Windows: Use netstat and taskkill
             result = subprocess.run(
-                f"netstat -ano | findstr :{port}", shell=True, capture_output=True, text=True
+                f"netstat -ano | findstr :{port}",
+                shell=True,
+                capture_output=True,
+                text=True,
             )
             if result.stdout:
                 for line in result.stdout.split("\n"):
@@ -1087,12 +1123,16 @@ def kill_process_on_port(port: int) -> bool:
                         parts = line.split()
                         if len(parts) > 4:
                             pid = parts[-1]
-                            print_critical(f"System killing process {pid} on port {port}")
+                            print_critical(
+                                f"System killing process {pid} on port {port}"
+                            )
                             subprocess.run(f"taskkill /F /PID {pid}", shell=True)
                             killed = True
         else:
             # Linux/Mac: Use lsof and kill
-            result = subprocess.run(f"lsof -ti:{port}", shell=True, capture_output=True, text=True)
+            result = subprocess.run(
+                f"lsof -ti:{port}", shell=True, capture_output=True, text=True
+            )
             if result.stdout:
                 pids = result.stdout.strip().split("\n")
                 for pid in pids:
@@ -1140,14 +1180,18 @@ def health_check_service(service_name: str) -> Dict[str, Any]:
         if service_config.get("is_remote"):
             ctx.add_detail("service_type", "remote")
             try:
-                health_url = f"{service_config['url']}{service_config['health_endpoint']}"
+                health_url = (
+                    f"{service_config['url']}{service_config['health_endpoint']}"
+                )
                 ctx.add_detail("health_url", health_url)
 
                 start_time = time.time()
                 response = debug_request("GET", health_url, timeout=10)
                 health_info["response_time"] = (time.time() - start_time) * 1000
                 health_info["health_endpoint"] = response.status_code == 200
-                health_info["status"] = "healthy" if health_info["health_endpoint"] else "unhealthy"
+                health_info["status"] = (
+                    "healthy" if health_info["health_endpoint"] else "unhealthy"
+                )
 
                 ctx.add_detail("response_status", response.status_code)
                 ctx.add_detail("response_time_ms", health_info["response_time"])
@@ -1164,7 +1208,9 @@ def health_check_service(service_name: str) -> Dict[str, Any]:
                 health_info["health_endpoint_error"] = str(e)
                 health_info["status"] = "unreachable"
                 ctx.add_detail("remote_error", str(e))
-                logger.error(f"❌ Remote service {service_name} health check failed: {e}")
+                logger.error(
+                    f"❌ Remote service {service_name} health check failed: {e}"
+                )
 
             return health_info
 
@@ -1203,7 +1249,9 @@ def health_check_service(service_name: str) -> Dict[str, Any]:
         # Check health endpoint
         if health_info["process_running"] and health_info["port_accessible"]:
             try:
-                health_url = f"http://localhost:{port}{service_config['health_endpoint']}"
+                health_url = (
+                    f"http://localhost:{port}{service_config['health_endpoint']}"
+                )
                 ctx.add_detail("local_health_url", health_url)
 
                 start_time = time.time()
@@ -1223,7 +1271,9 @@ def health_check_service(service_name: str) -> Dict[str, Any]:
 
             except Exception as e:
                 ctx.add_detail("health_check_error", str(e))
-                logger.error(f"❌ Local service {service_name} health check failed: {e}")
+                logger.error(
+                    f"❌ Local service {service_name} health check failed: {e}"
+                )
 
         # Determine final status
         if (
@@ -1276,7 +1326,12 @@ def comprehensive_health_check() -> Dict[str, Any]:
     rows = []
 
     for service_name, health in results.items():
-        status_icons = {"healthy": "🟢", "running": "🟡", "process_only": "🟠", "stopped": "🔴"}
+        status_icons = {
+            "healthy": "🟢",
+            "running": "🟡",
+            "process_only": "🟠",
+            "stopped": "🔴",
+        }
 
         rows.append(
             [
@@ -1285,7 +1340,11 @@ def comprehensive_health_check() -> Dict[str, Any]:
                 "✅" if health["process_running"] else "❌",
                 "✅" if health["port_accessible"] else "❌",
                 "✅" if health["health_endpoint"] else "❌",
-                f"{health['response_time']:.1f}ms" if health["response_time"] else "N/A",
+                (
+                    f"{health['response_time']:.1f}ms"
+                    if health["response_time"]
+                    else "N/A"
+                ),
             ]
         )
 
@@ -1326,7 +1385,9 @@ def check_dependencies() -> Dict[str, bool]:
         print_success(f"Python {platform.python_version()} ✓")
         results["python_version"] = True
     else:
-        print_error(f"Python {REQUIRED_PYTHON_VERSION[0]}.{REQUIRED_PYTHON_VERSION[1]}+ required")
+        print_error(
+            f"Python {REQUIRED_PYTHON_VERSION[0]}.{REQUIRED_PYTHON_VERSION[1]}+ required"
+        )
 
     # Check required packages
     print_info("Checking required packages...")
@@ -1423,7 +1484,9 @@ def install_missing_dependencies():
         for pkg in missing_packages:
             print_info(f"Installing {pkg}...")
             result = subprocess.run(
-                [sys.executable, "-m", "pip", "install", pkg], capture_output=True, text=True
+                [sys.executable, "-m", "pip", "install", pkg],
+                capture_output=True,
+                text=True,
             )
             if result.returncode == 0:
                 print_success(f"✓ {pkg} installed successfully")
@@ -1490,7 +1553,9 @@ def check_cognitive_engine_config():
             print_success("✓ Google AI credentials configured")
         else:
             print_warning("⚠ Google AI credentials not configured")
-            print_info("Set GOOGLE_APPLICATION_CREDENTIALS_JSON or GOOGLE_API_KEY in .env")
+            print_info(
+                "Set GOOGLE_APPLICATION_CREDENTIALS_JSON or GOOGLE_API_KEY in .env"
+            )
     except Exception as e:
         print_warning(f"⚠ Could not check Google credentials: {e}")
 
@@ -1509,7 +1574,9 @@ def check_cognitive_engine_config():
         for pkg in missing_ai_packages:
             try:
                 subprocess.run(
-                    [sys.executable, "-m", "pip", "install", pkg], check=True, capture_output=True
+                    [sys.executable, "-m", "pip", "install", pkg],
+                    check=True,
+                    capture_output=True,
                 )
                 print_success(f"✓ {pkg} installed")
             except subprocess.CalledProcessError:
@@ -1551,7 +1618,10 @@ def analyze_log_file(log_path: Path, lines: int = 50) -> Dict[str, Any]:
 
             for line in recent_lines:
                 line_lower = line.lower()
-                if any(keyword in line_lower for keyword in ["error", "exception", "traceback"]):
+                if any(
+                    keyword in line_lower
+                    for keyword in ["error", "exception", "traceback"]
+                ):
                     analysis["error_count"] += 1
                     analysis["recent_errors"].append(line.strip())
                 elif "warning" in line_lower:
@@ -1649,21 +1719,27 @@ def analyze_debug_logs():
             print("  No errors found")
 
         # Look for specific Railway backend issues
-        railway_issues = [line for line in lines if "Railway" in line or "sentinel-backend" in line]
+        railway_issues = [
+            line for line in lines if "Railway" in line or "sentinel-backend" in line
+        ]
         if railway_issues:
             print(f"\n{Fore.YELLOW}Railway Backend Issues:{Style.RESET_ALL}")
             for issue in railway_issues[-3:]:
                 print(f"  {issue}")
 
         # Network connectivity analysis
-        network_errors = [line for line in lines if "ConnectionError" in line or "Timeout" in line]
+        network_errors = [
+            line for line in lines if "ConnectionError" in line or "Timeout" in line
+        ]
         if network_errors:
             print(f"\n{Fore.RED}Network Connectivity Issues:{Style.RESET_ALL}")
             for error in network_errors[-3:]:
                 print(f"  {error}")
 
         # DNS resolution issues
-        dns_errors = [line for line in lines if "NameResolution" in line or "getaddrinfo" in line]
+        dns_errors = [
+            line for line in lines if "NameResolution" in line or "getaddrinfo" in line
+        ]
         if dns_errors:
             print(f"\n{Fore.RED}DNS Resolution Issues:{Style.RESET_ALL}")
             for error in dns_errors[-3:]:
@@ -1676,7 +1752,9 @@ def analyze_debug_logs():
             for error in ssl_errors[-3:]:
                 print(f"  {error}")
 
-        print(f"\n{Fore.GREEN}Debug log analysis complete. Check the full log at:{Style.RESET_ALL}")
+        print(
+            f"\n{Fore.GREEN}Debug log analysis complete. Check the full log at:{Style.RESET_ALL}"
+        )
         print(f"  {debug_log_file}")
 
     except Exception as e:
@@ -1733,7 +1811,8 @@ def run_network_diagnostics():
                         url = f"http://localhost:{service_config['port']}{service_config['health_endpoint']}"
                         response = debug_request("GET", url, timeout=5)
                         ctx.add_detail(
-                            f"{service}_connectivity", f"OK: HTTP {response.status_code}"
+                            f"{service}_connectivity",
+                            f"OK: HTTP {response.status_code}",
                         )
                         print_success(f"✅ {service}: OK (HTTP {response.status_code})")
                     except Exception as e:
@@ -1799,7 +1878,8 @@ def backup_configuration():
     }
 
     backup_file = (
-        APP_DIR / f"config_backup_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        APP_DIR
+        / f"config_backup_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
     )
 
     try:
@@ -1832,7 +1912,7 @@ def show_main_menu():
     print(f"{Fore.CYAN}Service Status:{Style.RESET_ALL}")
     for service_name in SERVICES:
         health = health_check_service(service_name)
-        
+
         # Determine status based on comprehensive health check
         if health["status"] == "healthy":
             status_icon = "🟢"
@@ -1846,7 +1926,7 @@ def show_main_menu():
         else:
             status_icon = "🔴"
             status_text = "OFFLINE"
-        
+
         print(f"  {status_icon} {SERVICES[service_name]['name']}: {status_text}")
 
     print(f"\n{Fore.YELLOW}Available Actions:{Style.RESET_ALL}")
@@ -1900,7 +1980,9 @@ def service_management_menu():
         print("1-{}. Manage specific service".format(len(SERVICES)))
         print("0. Back to main menu")
 
-        choice = input(f"\nChoose service (1-{len(SERVICES)}) or 0 to go back: ").strip()
+        choice = input(
+            f"\nChoose service (1-{len(SERVICES)}) or 0 to go back: "
+        ).strip()
 
         if choice == "0":
             break
@@ -1922,9 +2004,17 @@ def manage_individual_service(service_name: str):
         print(f"Status: {'🟢 ONLINE' if status.is_running else '🔴 OFFLINE'}")
         if status.pid:
             print(f"PID: {status.pid}")
-            print(f"Memory: {status.memory_usage:.1f}%" if status.memory_usage else "Memory: N/A")
+            print(
+                f"Memory: {status.memory_usage:.1f}%"
+                if status.memory_usage
+                else "Memory: N/A"
+            )
             print(f"CPU: {status.cpu_usage:.1f}%" if status.cpu_usage else "CPU: N/A")
-            print(f"Uptime: {status.uptime/60:.1f} minutes" if status.uptime else "Uptime: N/A")
+            print(
+                f"Uptime: {status.uptime/60:.1f} minutes"
+                if status.uptime
+                else "Uptime: N/A"
+            )
 
         print(f"\n{Fore.YELLOW}Actions:{Style.RESET_ALL}")
         print("1. Start Service")
@@ -2070,7 +2160,11 @@ def show_network_analysis():
                         "pid": proc.info["pid"],
                         "name": proc.info["name"],
                         "local": f"{conn.laddr.ip}:{conn.laddr.port}",
-                        "remote": f"{conn.raddr.ip}:{conn.raddr.port}" if conn.raddr else "N/A",
+                        "remote": (
+                            f"{conn.raddr.ip}:{conn.raddr.port}"
+                            if conn.raddr
+                            else "N/A"
+                        ),
                         "status": conn.status,
                     }
                 )
@@ -2082,7 +2176,13 @@ def show_network_analysis():
         rows = []
         for conn in connections[:20]:  # Show first 20 connections
             rows.append(
-                [str(conn["pid"]), conn["name"][:15], conn["local"], conn["remote"], conn["status"]]
+                [
+                    str(conn["pid"]),
+                    conn["name"][:15],
+                    conn["local"],
+                    conn["remote"],
+                    conn["status"],
+                ]
             )
         print_table(headers, rows)
         print_info("No active connections found")
@@ -2093,7 +2193,23 @@ def scan_ports():
     """Scan for open ports"""
     print_header("Port Scanner", 3)
 
-    common_ports = [21, 22, 23, 25, 53, 80, 110, 143, 443, 993, 995, 8000, 8001, 8080, 8443]
+    common_ports = [
+        21,
+        22,
+        23,
+        25,
+        53,
+        80,
+        110,
+        143,
+        443,
+        993,
+        995,
+        8000,
+        8001,
+        8080,
+        8443,
+    ]
 
     print("Scanning common ports...")
     open_ports = []
@@ -2166,7 +2282,9 @@ def debug_killer_interface():
             diagnostic = run_system_diagnostics()
 
         elif choice == "4":
-            debug_log_file = Path(__file__).parent.parent.parent / "logs" / "debug_killer.log"
+            debug_log_file = (
+                Path(__file__).parent.parent.parent / "logs" / "debug_killer.log"
+            )
             if debug_log_file.exists():
                 print_info("Recent debug log entries:")
                 try:
@@ -2185,7 +2303,7 @@ def debug_killer_interface():
 
             # Check and fix missing packages
             try:
-                import crewai
+                pass
 
                 print_success("✓ crewai package found")
             except ImportError:
@@ -2209,7 +2327,9 @@ def debug_killer_interface():
 
         elif choice == "6":
             print_header("Reset Debug System", 2)
-            debug_log_file = Path(__file__).parent.parent.parent / "logs" / "debug_killer.log"
+            debug_log_file = (
+                Path(__file__).parent.parent.parent / "logs" / "debug_killer.log"
+            )
             if debug_log_file.exists():
                 debug_log_file.unlink()
                 print_success("Debug log cleared")

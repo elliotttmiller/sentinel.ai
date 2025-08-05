@@ -1,32 +1,31 @@
 # Advanced AI Agents Package for Cognitive Forge
 
 # Import advanced agents
-from .advanced_agents import (
-    PromptOptimizationAgents,
+from src.agents.advanced_agents import (
+    MemoryAgents,
     PlannerAgents,
+    PromptOptimizationAgents,
     WorkerAgents,
-    MemoryAgents
 )
 
 # Import specialized agents
-from .specialized_agents import (
+from src.agents.specialized_agents import (
     AutonomousOrchestratorAgent,
-    SelfOptimizationEngineerAgent,
     ContextSynthesisAgent,
-    SpecializedAgentFactory
+    SelfOptimizationEngineerAgent,
+    SpecializedAgentFactory,
 )
 
 # Export all agent classes
 __all__ = [
     # Advanced Agents
-    'PromptOptimizationAgents',
-    'PlannerAgents', 
-    'WorkerAgents',
-    'MemoryAgents',
-    
+    "PromptOptimizationAgents",
+    "PlannerAgents",
+    "WorkerAgents",
+    "MemoryAgents",
     # Specialized Agents
-    'AutonomousOrchestratorAgent',
-    'SelfOptimizationEngineerAgent', 
-    'ContextSynthesisAgent',
-    'SpecializedAgentFactory'
+    "AutonomousOrchestratorAgent",
+    "SelfOptimizationEngineerAgent",
+    "ContextSynthesisAgent",
+    "SpecializedAgentFactory",
 ]
