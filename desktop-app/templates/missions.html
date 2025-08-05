@@ -240,6 +240,7 @@
 +                            <div x-data="{ tab: 'live' }">
 +                                <ul class="nav nav-tabs">
 +                                    <li class="nav-item"><a class="nav-link" :class="{'active': tab === 'live'}" @click.prevent="tab = 'live'" href="#">Live Agent Feed</a></li>
++                                    <li class="nav-item"><a class="nav-link" :class="{'active': tab === 'workspace'}" @click.prevent="tab = 'workspace'" href="#">Workspace</a></li>
 +                                    <li class="nav-item"><a class="nav-link" :class="{'active': tab === 'sentry'}" @click.prevent="tab = 'sentry'" href="#">Sentry</a></li>
 +                                    <li class="nav-item"><a class="nav-link" :class="{'active': tab === 'weave'}" @click.prevent="tab = 'weave'" href="#">Weave</a></li>
 +                                    <li class="nav-item"><a class="nav-link" :class="{'active': tab === 'wandb'}" @click.prevent="tab = 'wandb'" href="#">Wandb</a></li>
@@ -262,6 +263,38 @@
 +                                            </div>
 +                                        </div>
 +                                    </div>
++                                    
++                                    <!-- Workspace Contents -->
++                                    <div x-show="tab === 'workspace'">
++                                        <div class="workspace-section">
++                                            <template x-if="selectedMission?.workspace">
++                                                <div>
++                                                    <h6 class="text-success">
++                                                        <i class="fas fa-folder-open"></i> 
++                                                        Mission Workspace: <code x-text="selectedMission.workspace.path"></code>
++                                                    </h6>
++                                                    <div class="workspace-contents mt-3">
++                                                        <template x-for="item in selectedMission.workspace.items" :key="item.path">
++                                                            <div class="workspace-item d-flex align-items-center mb-2">
++                                                                <i class="fas" :class="item.type === 'directory' ? 'fa-folder text-warning' : 'fa-file text-info'"></i>
++                                                                <span class="ml-2" x-text="item.path"></span>
++                                                                <template x-if="item.type === 'file'">
++                                                                    <small class="ml-auto text-muted" x-text="formatFileSize(item.size)"></small>
++                                                                </template>
++                                                            </div>
++                                                        </template>
++                                                        <div x-show="!selectedMission.workspace.items?.length" class="text-muted">
++                                                            <i class="fas fa-info-circle"></i> No files created yet.
++                                                        </div>
++                                                    </div>
++                                                </div>
++                                            </template>
++                                            <div x-show="!selectedMission?.workspace" class="text-muted">
++                                                <i class="fas fa-hourglass-half"></i> Workspace information will appear when the mission creates files.
++                                            </div>
++                                        </div>
++                                    </div>
++                                    
 +                                    <!-- Service Logs -->
 +                                    <div x-show="tab === 'sentry'"><pre x-text="selectedMission?.sentry_logs || 'No Sentry logs.'"></pre></div>
 +                                    <div x-show="tab === 'weave'"><pre x-text="selectedMission?.weave_logs || 'No Weave logs.'"></pre></div>

@@ -1,0 +1,42 @@
+2025-08-05 07:48:53.880 | DEBUG    | utils.debug_logger:wrapper:93 | {'request_id': 'req_83c6af57', 'function': 'CuttingEdgeAgentObservabilityManager.__init__', 'module': 'utils.agent_observability', 'caller': '<module>'} | ENTER CuttingEdgeAgentObservabilityManager.__init__
+2025-08-05 07:48:55.945 | SUCCESS  | utils.agent_observability:_initialize_integrations:283 | {} | ✅ W&B initialized for agent analytics.
+2025-08-05 07:48:55.949 | DEBUG    | utils.debug_logger:wrapper:98 | {'request_id': 'req_83c6af57', 'function': 'CuttingEdgeAgentObservabilityManager.__init__', 'module': 'utils.agent_observability', 'caller': '<module>', 'duration_ms': 2068.8} | EXIT CuttingEdgeAgentObservabilityManager.__init__
+2025-08-05 07:49:04.264 | SUCCESS  | utils.sentry_integration:_initialize_sentry:78 | {} | Sentry integration initialized successfully
+2025-08-05 07:49:04.272 | INFO     | core.cognitive_forge_engine:__init__:111 | {} | Google Generative AI initialized with model: gemini-1.5-pro
+2025-08-05 07:49:04.277 | INFO     | utils.crewai_bypass:__init__:21 | {} | Creating DirectAIAgent with role: Learning Analysis Specialist, LLM type: <class 'utils.google_ai_wrapper.GoogleGenerativeAIWrapper'>
+2025-08-05 07:49:04.279 | INFO     | utils.crewai_bypass:__init__:21 | {} | Creating DirectAIAgent with role: Improvement Generation Specialist, LLM type: <class 'utils.google_ai_wrapper.GoogleGenerativeAIWrapper'>
+2025-08-05 07:49:04.280 | INFO     | utils.self_learning_module:__init__:26 | {} | Self-Learning Module initialized - Continuous improvement active
+2025-08-05 07:49:04.286 | WARNING  | __main__:<module>:274 | {} | Failed to import core modules: attempted relative import beyond top-level package
+2025-08-05 07:51:07.211 | DEBUG    | utils.debug_logger:wrapper:93 | {'request_id': 'req_ac374369', 'function': 'CuttingEdgeAgentObservabilityManager.__init__', 'module': 'utils.agent_observability', 'caller': '<module>'} | ENTER CuttingEdgeAgentObservabilityManager.__init__
+2025-08-05 07:51:09.652 | SUCCESS  | utils.agent_observability:_initialize_integrations:287 | {} | ✅ W&B initialized for agent analytics.
+2025-08-05 07:51:09.653 | DEBUG    | utils.debug_logger:wrapper:98 | {'request_id': 'req_ac374369', 'function': 'CuttingEdgeAgentObservabilityManager.__init__', 'module': 'utils.agent_observability', 'caller': '<module>', 'duration_ms': 2441.9} | EXIT CuttingEdgeAgentObservabilityManager.__init__
+2025-08-05 07:51:18.884 | SUCCESS  | utils.sentry_integration:_initialize_sentry:78 | {} | Sentry integration initialized successfully
+2025-08-05 07:51:18.891 | INFO     | core.cognitive_forge_engine:__init__:111 | {} | Google Generative AI initialized with model: gemini-1.5-pro
+2025-08-05 07:51:18.896 | INFO     | utils.crewai_bypass:__init__:21 | {} | Creating DirectAIAgent with role: Learning Analysis Specialist, LLM type: <class 'utils.google_ai_wrapper.GoogleGenerativeAIWrapper'>
+2025-08-05 07:51:18.899 | INFO     | utils.crewai_bypass:__init__:21 | {} | Creating DirectAIAgent with role: Improvement Generation Specialist, LLM type: <class 'utils.google_ai_wrapper.GoogleGenerativeAIWrapper'>
+2025-08-05 07:51:18.900 | INFO     | utils.self_learning_module:__init__:26 | {} | Self-Learning Module initialized - Continuous improvement active
+2025-08-05 07:51:18.908 | WARNING  | __main__:<module>:274 | {} | Failed to import core modules: attempted relative import beyond top-level package
+2025-08-05 07:51:19.029 | INFO     | __main__:startup_event:308 | {} | Sentinel API Server is starting up...
+2025-08-05 07:52:29.001 | DEBUG    | utils.debug_logger:wrapper:93 | {'request_id': 'req_6b4cfdc7', 'function': 'CuttingEdgeAgentObservabilityManager.__init__', 'module': 'utils.agent_observability', 'caller': '<module>'} | ENTER CuttingEdgeAgentObservabilityManager.__init__
+2025-08-05 07:52:30.997 | SUCCESS  | utils.agent_observability:_initialize_integrations:287 | {} | ✅ W&B initialized for agent analytics.
+2025-08-05 07:52:30.999 | DEBUG    | utils.debug_logger:wrapper:98 | {'request_id': 'req_6b4cfdc7', 'function': 'CuttingEdgeAgentObservabilityManager.__init__', 'module': 'utils.agent_observability', 'caller': '<module>', 'duration_ms': 1997.95} | EXIT CuttingEdgeAgentObservabilityManager.__init__
+2025-08-05 07:52:39.318 | SUCCESS  | utils.sentry_integration:_initialize_sentry:78 | {} | Sentry integration initialized successfully
+2025-08-05 07:52:39.325 | INFO     | core.cognitive_forge_engine:__init__:111 | {} | Google Generative AI initialized with model: gemini-1.5-pro
+2025-08-05 07:52:39.331 | INFO     | utils.crewai_bypass:__init__:21 | {} | Creating DirectAIAgent with role: Learning Analysis Specialist, LLM type: <class 'utils.google_ai_wrapper.GoogleGenerativeAIWrapper'>
+2025-08-05 07:52:39.333 | INFO     | utils.crewai_bypass:__init__:21 | {} | Creating DirectAIAgent with role: Improvement Generation Specialist, LLM type: <class 'utils.google_ai_wrapper.GoogleGenerativeAIWrapper'>
+2025-08-05 07:52:39.335 | INFO     | utils.self_learning_module:__init__:26 | {} | Self-Learning Module initialized - Continuous improvement active
+2025-08-05 07:52:39.342 | WARNING  | __main__:<module>:274 | {} | Failed to import core modules: attempted relative import beyond top-level package
+2025-08-05 07:52:39.465 | INFO     | __main__:startup_event:308 | {} | Sentinel API Server is starting up...
+2025-08-05 07:52:39.465 | WARNING  | __main__:start_broadcast_loop:368 | {} | [FALLBACK] start_broadcast_loop called, but no real broadcasting will occur.
+2025-08-05 07:52:39.466 | INFO     | __main__:startup_event:312 | {} | Startup complete.
+2025-08-05 07:52:39.467 | INFO     | __main__:startup_event:1017 | {} | 🚀 Sentinel Cognitive Forge v5.4 (Predictive Intelligence Activated) starting up...
+2025-08-05 07:52:39.467 | INFO     | __main__:push_event:362 | {} | [FALLBACK] Event pushed: system_log - Backend Server 8001 is online. Phase 5 features activated - Predictive Intelligence & Multi-Tenancy ready.
+2025-08-05 07:52:39.468 | INFO     | __main__:startup_event:1029 | {} | ✅ All systems initialized and ready for missions
+2025-08-05 07:52:39.469 | INFO     | __main__:run_periodic_self_optimization:452 | {} | Fallback: Periodic self-optimization
+2025-08-05 07:52:43.553 | DEBUG    | utils.debug_logger:request_context:59 | {'request_id': 'req_23bca8ff', 'event_context_id': 'evt_ef1e6f', 'mission_id': 'mission_e57eff70'} | Starting context: req_23bca8ff
+2025-08-05 07:52:43.553 | INFO     | __main__:create_mission:665 | {'mission_id': 'mission_e57eff70', 'event_type': 'mission_update'} | Preparing to broadcast mission creation event for mission_e57eff70
+2025-08-05 07:52:43.557 | ERROR    | __main__:create_mission:699 | {'error': "name 'LiveStreamEvent' is not defined", 'error_type': 'NameError', 'mission_id': 'mission_e57eff70', 'traceback': True} | Failed to broadcast mission creation event for mission_e57eff70: name 'LiveStreamEvent' is not defined
+2025-08-05 07:52:43.561 | DEBUG    | utils.debug_logger:request_context:70 | {'request_id': 'req_23bca8ff', 'event_context_id': 'evt_ef1e6f', 'mission_id': 'mission_e57eff70'} | Ending context: req_23bca8ff
+2025-08-05 07:52:43.568 | INFO     | __main__:execute_real_mission:727 | {} | 🚀 Executing REAL mission mission_e57eff70: Create a new file named 'agent_hello.txt' in the workspace with the content 'Hello from a real Sentinel agent!'
+2025-08-05 07:52:43.569 | WARNING  | __main__:execute_mission:462 | {} | Using fallback RealMissionExecutor - no actual execution
+2025-08-05 07:52:43.570 | ERROR    | __main__:execute_real_mission:736 | {} | ❌ Real mission mission_e57eff70 failed: RealMissionExecutor not available

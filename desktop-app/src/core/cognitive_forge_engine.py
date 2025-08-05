@@ -140,83 +140,50 @@ class CognitiveForgeEngine:
         is_healing_attempt: bool = False
     ) -> Dict[str, Any]:
         """
-        Execute a complete mission with live event streaming, database updates, and Phase 4 sentience.
+        Execute a complete mission with REAL task execution and live event streaming.
         """
         transaction = start_transaction(f"mission_execution_{mission_id_str}", "mission")
         
         try:
+            # Import the real mission executor with absolute import
+            import sys
+            import os
+            # Add src directory to path
+            src_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            if src_dir not in sys.path:
+                sys.path.insert(0, src_dir)
+            
+            from agents.real_mission_executor import RealMissionExecutor
+            
+            # Create real mission executor
+            real_executor = RealMissionExecutor()
+            
             if not is_healing_attempt:
                 # PUSH MISSION START EVENT & UPDATE DB
                 self.db_manager.update_mission_status(mission_id_str=mission_id_str, status="running", progress=5)
                 agent_observability.push_event(LiveStreamEvent(
                     event_type="mission_update",
-                    source="mission_control",
+                    source="cognitive_forge_engine",
                     severity="INFO",
-                    message=f"Mission '{mission_id_str}' initiated.",
-                    payload=self.db_manager.get_mission(mission_id_str).as_dict() # Send full mission object
+                    message=f"Mission '{mission_id_str}' initiated with REAL execution capabilities.",
+                    payload=self.db_manager.get_mission(mission_id_str).as_dict()
                 ))
             
-            # --- Simulate a multi-phase workflow with real events ---
-            await asyncio.sleep(2) # Simulate work
-            agent_observability.push_event(LiveStreamEvent(
-                event_type="agent_action", source="Prompt Alchemist", severity="INFO",
-                message="Optimizing user prompt for clarity and technical detail.",
-                payload={"mission_id": mission_id_str, "phase": "Prompt Alchemy"}
-            ))
-            self.db_manager.update_mission_status(mission_id_str=mission_id_str, status="running", progress=25)
-            agent_observability.push_event(LiveStreamEvent(
-                event_type="mission_update", source="mission_control", severity="INFO",
-                message=f"Mission '{mission_id_str}' progress: 25%",
-                payload=self.db_manager.get_mission(mission_id_str).as_dict()
-            ))
-
-            await asyncio.sleep(3) # Simulate work
-            agent_observability.push_event(LiveStreamEvent(
-                event_type="agent_action", source="Lead Architect", severity="INFO",
-                message="Generating multi-step execution plan.",
-                payload={"mission_id": mission_id_str, "phase": "Planning"}
-            ))
-            self.db_manager.update_mission_status(mission_id_str=mission_id_str, status="running", progress=50)
-            agent_observability.push_event(LiveStreamEvent(
-                event_type="mission_update", source="mission_control", severity="INFO",
-                message=f"Mission '{mission_id_str}' progress: 50%",
-                payload=self.db_manager.get_mission(mission_id_str).as_dict()
-            ))
-
-            # --- SIMULATED FAILURE POINT FOR PHOENIX PROTOCOL TESTING ---
-            if not is_healing_attempt and random.random() < 0.3:  # 30% chance of failure for testing
-                raise ValueError("Simulated failure: Critical component 'CodeGenerator' failed.")
-
-            await asyncio.sleep(4) # Simulate work
-            agent_observability.push_event(LiveStreamEvent(
-                event_type="agent_action", source="Senior Developer Agent", severity="INFO",
-                message="Executing primary tasks from blueprint.",
-                payload={"mission_id": mission_id_str, "phase": "Execution"}
-            ))
-            self.db_manager.update_mission_status(mission_id_str=mission_id_str, status="running", progress=75)
-            agent_observability.push_event(LiveStreamEvent(
-                event_type="mission_update", source="mission_control", severity="INFO",
-                message=f"Mission '{mission_id_str}' progress: 75%",
-                payload=self.db_manager.get_mission(mission_id_str).as_dict()
-            ))
-
-            await asyncio.sleep(2) # Simulate work
+            # Execute the mission using the real executor
+            logger.info(f"🚀 Starting REAL mission execution for {mission_id_str}")
+            result = await real_executor.execute_mission(user_prompt, mission_id_str, agent_type)
             
-            # PUSH MISSION COMPLETE EVENT & UPDATE DB
-            final_result_text = f"Mission '{mission_id_str}' completed successfully."
-            self.db_manager.update_mission_status(mission_id_str=mission_id_str, status="completed", progress=100, result=final_result_text)
-            agent_observability.push_event(LiveStreamEvent(
-                event_type="mission_complete",
-                source="mission_control",
-                severity="SUCCESS",
-                message=final_result_text,
-                payload=self.db_manager.get_mission(mission_id_str).as_dict()
-            ))
-            
-            # Phase 4: Self-Learning Integration
-            await self.self_learning_module.synthesize_and_learn(self.db_manager.get_mission(mission_id_str))
-            
-            return {"status": "completed"}
+            # Handle the result
+            if result.get("status") == "completed":
+                # Phase 4: Self-Learning Integration
+                await self.self_learning_module.synthesize_and_learn(self.db_manager.get_mission(mission_id_str))
+                return {"status": "completed", "real_execution": True, "results": result}
+            else:
+                # Mission failed, but don't trigger phoenix protocol for real execution failures
+                # Real failures are usually due to actual system issues, not simulation problems
+                error_message = result.get("error", "Real execution failed")
+                logger.error(f"Real mission execution failed for {mission_id_str}: {error_message}")
+                return {"status": "failed", "real_execution": True, "error": error_message}
             
         except Exception as e:
             error_message = str(e)

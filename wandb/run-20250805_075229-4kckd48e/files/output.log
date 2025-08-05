@@ -1,0 +1,40 @@
+[32m2025-08-05 07:52:30.997[0m | [32m[1mSUCCESS [0m | [36mutils.agent_observability[0m:[36m_initialize_integrations[0m:[36m287[0m | [33m{}[0m | [32m[1m✅ W&B initialized for agent analytics.[0m
+C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\crewai\telemetry\telemetry.py:9: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[32m2025-08-05 07:52:39.318[0m | [32m[1mSUCCESS [0m | [36mutils.sentry_integration[0m:[36m_initialize_sentry[0m:[36m78[0m | [33m{}[0m | [32m[1mSentry integration initialized successfully[0m
+[32m2025-08-05 07:52:39.325[0m | [1mINFO    [0m | [36mcore.cognitive_forge_engine[0m:[36m__init__[0m:[36m111[0m | [33m{}[0m | [1mGoogle Generative AI initialized with model: gemini-1.5-pro[0m
+[32m2025-08-05 07:52:39.331[0m | [1mINFO    [0m | [36mutils.crewai_bypass[0m:[36m__init__[0m:[36m21[0m | [33m{}[0m | [1mCreating DirectAIAgent with role: Learning Analysis Specialist, LLM type: <class 'utils.google_ai_wrapper.GoogleGenerativeAIWrapper'>[0m
+[32m2025-08-05 07:52:39.333[0m | [1mINFO    [0m | [36mutils.crewai_bypass[0m:[36m__init__[0m:[36m21[0m | [33m{}[0m | [1mCreating DirectAIAgent with role: Improvement Generation Specialist, LLM type: <class 'utils.google_ai_wrapper.GoogleGenerativeAIWrapper'>[0m
+[32m2025-08-05 07:52:39.335[0m | [1mINFO    [0m | [36mutils.self_learning_module[0m:[36m__init__[0m:[36m26[0m | [33m{}[0m | [1mSelf-Learning Module initialized - Continuous improvement active[0m
+[32m2025-08-05 07:52:39.342[0m | [33m[1mWARNING [0m | [36m__main__[0m:[36m<module>[0m:[36m274[0m | [33m{}[0m | [33m[1mFailed to import core modules: attempted relative import beyond top-level package[0m
+C:\Users\AMD\sentinel\desktop-app\src\main.py:305: DeprecationWarning:
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+
+  @app.on_event("startup")
+C:\Users\AMD\sentinel\desktop-app\src\main.py:1014: DeprecationWarning:
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+
+  @app.on_event("startup")
+[32mINFO[0m:     Started server process [[36m11376[0m]
+[32mINFO[0m:     Waiting for application startup.
+[32m2025-08-05 07:52:39.465[0m | [1mINFO    [0m | [36m__main__[0m:[36mstartup_event[0m:[36m308[0m | [33m{}[0m | [1mSentinel API Server is starting up...[0m
+[32m2025-08-05 07:52:39.465[0m | [33m[1mWARNING [0m | [36m__main__[0m:[36mstart_broadcast_loop[0m:[36m368[0m | [33m{}[0m | [33m[1m[FALLBACK] start_broadcast_loop called, but no real broadcasting will occur.[0m
+[32m2025-08-05 07:52:39.466[0m | [1mINFO    [0m | [36m__main__[0m:[36mstartup_event[0m:[36m312[0m | [33m{}[0m | [1mStartup complete.[0m
+[32m2025-08-05 07:52:39.467[0m | [1mINFO    [0m | [36m__main__[0m:[36mstartup_event[0m:[36m1017[0m | [33m{}[0m | [1m🚀 Sentinel Cognitive Forge v5.4 (Predictive Intelligence Activated) starting up...[0m
+[32m2025-08-05 07:52:39.467[0m | [1mINFO    [0m | [36m__main__[0m:[36mpush_event[0m:[36m362[0m | [33m{}[0m | [1m[FALLBACK] Event pushed: system_log - Backend Server 8001 is online. Phase 5 features activated - Predictive Intelligence & Multi-Tenancy ready.[0m
+[32m2025-08-05 07:52:39.468[0m | [1mINFO    [0m | [36m__main__[0m:[36mstartup_event[0m:[36m1029[0m | [33m{}[0m | [1m✅ All systems initialized and ready for missions[0m
+[32m2025-08-05 07:52:39.469[0m | [1mINFO    [0m | [36m__main__[0m:[36mrun_periodic_self_optimization[0m:[36m452[0m | [33m{}[0m | [1mFallback: Periodic self-optimization[0m
+[32mINFO[0m:     Application startup complete.
+[32mINFO[0m:     Uvicorn running on [1mhttp://0.0.0.0:8001[0m (Press CTRL+C to quit)
+[32m2025-08-05 07:52:43.553[0m | [1mINFO    [0m | [36m__main__[0m:[36mcreate_mission[0m:[36m665[0m | [33m{'mission_id': 'mission_e57eff70', 'event_type': 'mission_update'}[0m | [1mPreparing to broadcast mission creation event for mission_e57eff70[0m
+[32m2025-08-05 07:52:43.557[0m | [31m[1mERROR   [0m | [36m__main__[0m:[36mcreate_mission[0m:[36m699[0m | [33m{'error': "name 'LiveStreamEvent' is not defined", 'error_type': 'NameError', 'mission_id': 'mission_e57eff70', 'traceback': True}[0m | [31m[1mFailed to broadcast mission creation event for mission_e57eff70: name 'LiveStreamEvent' is not defined[0m
+[32mINFO[0m:     127.0.0.1:56260 - "[1mPOST /api/missions HTTP/1.1[0m" [32m200 OK[0m
+[32m2025-08-05 07:52:43.568[0m | [1mINFO    [0m | [36m__main__[0m:[36mexecute_real_mission[0m:[36m727[0m | [33m{}[0m | [1m🚀 Executing REAL mission mission_e57eff70: Create a new file named 'agent_hello.txt' in the workspace with the content 'Hello from a real Sentinel agent!'[0m
+[32m2025-08-05 07:52:43.569[0m | [33m[1mWARNING [0m | [36m__main__[0m:[36mexecute_mission[0m:[36m462[0m | [33m{}[0m | [33m[1mUsing fallback RealMissionExecutor - no actual execution[0m
+[32m2025-08-05 07:52:43.570[0m | [31m[1mERROR   [0m | [36m__main__[0m:[36mexecute_real_mission[0m:[36m736[0m | [33m{}[0m | [31m[1m❌ Real mission mission_e57eff70 failed: RealMissionExecutor not available[0m

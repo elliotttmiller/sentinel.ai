@@ -1,0 +1,22 @@
+[32m2025-08-05 07:48:55.945[0m | [32m[1mSUCCESS [0m | [36mutils.agent_observability[0m:[36m_initialize_integrations[0m:[36m283[0m | [33m{}[0m | [32m[1m✅ W&B initialized for agent analytics.[0m
+C:\Users\AMD\sentinel\desktop-app\src\utils\agent_observability.py:108: RuntimeWarning: coroutine 'CuttingEdgeAgentObservabilityManager._broadcast_events' was never awaited
+  with suppress(RuntimeError):
+RuntimeWarning: Enable tracemalloc to get the object allocation traceback
+C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\crewai\telemetry\telemetry.py:9: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+[32m2025-08-05 07:49:04.264[0m | [32m[1mSUCCESS [0m | [36mutils.sentry_integration[0m:[36m_initialize_sentry[0m:[36m78[0m | [33m{}[0m | [32m[1mSentry integration initialized successfully[0m
+[32m2025-08-05 07:49:04.272[0m | [1mINFO    [0m | [36mcore.cognitive_forge_engine[0m:[36m__init__[0m:[36m111[0m | [33m{}[0m | [1mGoogle Generative AI initialized with model: gemini-1.5-pro[0m
+[32m2025-08-05 07:49:04.277[0m | [1mINFO    [0m | [36mutils.crewai_bypass[0m:[36m__init__[0m:[36m21[0m | [33m{}[0m | [1mCreating DirectAIAgent with role: Learning Analysis Specialist, LLM type: <class 'utils.google_ai_wrapper.GoogleGenerativeAIWrapper'>[0m
+[32m2025-08-05 07:49:04.279[0m | [1mINFO    [0m | [36mutils.crewai_bypass[0m:[36m__init__[0m:[36m21[0m | [33m{}[0m | [1mCreating DirectAIAgent with role: Improvement Generation Specialist, LLM type: <class 'utils.google_ai_wrapper.GoogleGenerativeAIWrapper'>[0m
+[32m2025-08-05 07:49:04.280[0m | [1mINFO    [0m | [36mutils.self_learning_module[0m:[36m__init__[0m:[36m26[0m | [33m{}[0m | [1mSelf-Learning Module initialized - Continuous improvement active[0m
+[32m2025-08-05 07:49:04.286[0m | [33m[1mWARNING [0m | [36m__main__[0m:[36m<module>[0m:[36m274[0m | [33m{}[0m | [33m[1mFailed to import core modules: attempted relative import beyond top-level package[0m
+Traceback (most recent call last):
+  File "C:\Users\AMD\sentinel\desktop-app\src\main.py", line 291, in <module>
+    app.mount("/static", StaticFiles(directory="static"), name="static")
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\AMD\AppData\Local\Programs\Python\Python311\Lib\site-packages\starlette\staticfiles.py", line 56, in __init__
+    raise RuntimeError(f"Directory '{directory}' does not exist")
+RuntimeError: Directory 'static' does not exist
+Sentry is attempting to send 4 pending events
+Waiting up to 2 seconds
+Press Ctrl-Break to quit

@@ -66,40 +66,461 @@ function sentinelApp() {
 
         init() {
             console.log("🚀 Sentinel Command Center v5.4 Initializing (Sentience Active)...");
-            console.log("Initial modal state:", this.showMissionModal);
-            this.startUnifiedEventStream(); // Keep for legacy/compatibility
-            this.startWebSocketStream();    // NEW: WebSocket for true real-time
+            
+            // Initialize state variables
+            this.wsConnected = false;
+            this.reconnectTimeout = null;
+            this.heartbeatInterval = null;
+            this.pageVisibilityHandler = null;
+            this.navigationHandler = null;
+            this.connectionId = Math.random().toString(36).substring(2, 8);
+            
+            // Start WebSocket connection immediately
+            this.startWebSocketStream();
+            
+            // Load initial data from API
             this.loadInitialData();
+            
+            // Initialize Lucide icons if available
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
             }
-            console.log("Component initialized successfully");
+            
+            // Handle page visibility changes (tab switching, minimizing)
+            this.pageVisibilityHandler = () => {
+                if (document.visibilityState === 'visible') {
+                    console.log("📱 Page became visible, checking WebSocket connection...");
+                    // If we're visible again and the connection was lost, reconnect
+                    if (!this.wsConnected || !this.ws || this.ws.readyState !== WebSocket.OPEN) {
+                        console.log("🔄 Reconnecting WebSocket after visibility change");
+                        this.startWebSocketStream();
+                    }
+                }
+            };
+            document.addEventListener('visibilitychange', this.pageVisibilityHandler);
+            
+            // Set up a heartbeat to keep the connection alive and check health
+            this.heartbeatInterval = setInterval(() => {
+                // Only send heartbeats when the page is visible
+                if (document.visibilityState === 'visible') {
+                    if (this.wsConnected && this.ws && this.ws.readyState === WebSocket.OPEN) {
+                        // Connection is open, send a heartbeat
+                        console.log(`[${this.connectionId}] 💓 Sending heartbeat...`);
+                        try {
+                            this.ws.send(JSON.stringify({ type: 'heartbeat', page: window.location.pathname }));
+                        } catch (e) {
+                            console.error(`[${this.connectionId}] ❌ Failed to send heartbeat:`, e);
+                            this.startWebSocketStream(); // Reconnect on failure
+                        }
+                    } else if (document.visibilityState === 'visible') {
+                        // We're visible but not connected, try to reconnect
+                        console.log(`[${this.connectionId}] 🔄 Connection check failed, attempting to reconnect...`);
+                        this.startWebSocketStream();
+                    }
+                }
+            }, 30000); // Check connection every 30 seconds
+            
+            // Listen for beforeunload event to clean up resources
+            window.addEventListener('beforeunload', () => this.cleanup());
+            
+            // Handle navigation events within the SPA
+            this.navigationHandler = () => {
+                console.log(`[${this.connectionId}] 🧭 Navigation detected, checking if we need to reconnect...`);
+                
+                // Check if we've changed pages
+                if (this.currentPage !== window.location.pathname) {
+                    console.log(`[${this.connectionId}] 📄 Page changed from ${this.currentPage} to ${window.location.pathname}`);
+                    this.currentPage = window.location.pathname;
+                    
+                    // Re-initialize the WebSocket connection for the new page
+                    this.startWebSocketStream();
+                }
+            };
+            window.addEventListener('popstate', this.navigationHandler);
+            
+            console.log(`[${this.connectionId}] ✅ Component initialized successfully on ${window.location.pathname}`);
         },
 
         // --- WEBSOCKET REAL-TIME STREAM ---
         startWebSocketStream() {
+            // Generate a unique connection ID for logging
+            
+            // Initialize or reset the last message time
+            this.lastMessageTime = null;
+            this.connectionId = Math.random().toString(36).substring(2, 8);
+            const timestamp = new Date().toISOString();
+            
+            // Initialize or reset the last message time
+            this.lastMessageTime = null;
+            
+            // Create a detailed log entry with connection attempt info
+            console.log(`[${this.connectionId}] 🔄 Starting WebSocket connection at ${timestamp}...`);
+            
+            // Enhanced logging with detailed diagnostics
+            const diagnostics = {
+                connectionId: this.connectionId,
+                timestamp: timestamp,
+                url: window.location.href,
+                path: window.location.pathname,
+                userAgent: navigator.userAgent,
+                screenWidth: window.innerWidth,
+                screenHeight: window.innerHeight,
+            };
+            
+            // Log detailed diagnostics to console
+            console.debug(`[${this.connectionId}] Connection diagnostics:`, diagnostics);
+            
+            // Check current page to set in connection metadata
+            const currentPage = window.location.pathname;
+            this.currentPage = currentPage;
+            
+            // Save diagnostic info for debugging
+            try {
+                const connectionLog = JSON.parse(localStorage.getItem('connectionAttempts') || '[]');
+                connectionLog.push(diagnostics);
+                // Keep only the last 20 connection attempts
+                localStorage.setItem('connectionAttempts', JSON.stringify(connectionLog.slice(-20)));
+            } catch (e) {
+                console.error(`[${this.connectionId}] Failed to save connection diagnostics:`, e);
+            }
+            
+            // Don't reconnect if we already have an open connection that's working
+            if (this.ws && this.ws.readyState === WebSocket.OPEN) {
+                try {
+                    // Test if the connection is actually working by sending a ping
+                    // Use a string for readyState to avoid JSON serialization issues
+                    const readyStateText = ['CONNECTING', 'OPEN', 'CLOSING', 'CLOSED'][this.ws.readyState] || 'UNKNOWN';
+                    
+                    this.ws.send(JSON.stringify({
+                        type: 'ping',
+                        timestamp: new Date().toISOString(),
+                        connectionId: this.connectionId,
+                        readyState: this.ws.readyState, // Send as a number
+                        readyStateText: readyStateText  // Send as a string
+                    }));
+                    
+                    // Check if we've received any messages recently (within last 30 seconds)
+                    const isConnectionActive = !this.lastMessageTime || 
+                        (Date.now() - this.lastMessageTime < 30000);
+                    
+                    if (isConnectionActive) {
+                        console.log(`[${this.connectionId}] ✅ WebSocket already connected and working on page ${currentPage}`);
+                        return;
+                    } else {
+                        console.warn(`[${this.connectionId}] ⚠️ WebSocket connected but no recent messages, refreshing connection...`);
+                        // Continue to reconnection logic below
+                    }
+                } catch (e) {
+                    console.warn(`[${this.connectionId}] 🔄 Existing WebSocket appears broken, reconnecting...`, e);
+                    // Continue to reconnection logic below
+                }
+            }
+            
+            // Clean up any existing connection - only if it's not in a good state
+            if (!this.ws || this.ws.readyState === WebSocket.CLOSING || this.ws.readyState === WebSocket.CLOSED) {
+                this.cleanupExistingWebSocket();
+            } else if (this.ws.readyState === WebSocket.CONNECTING) {
+                // If it's still connecting, give it a chance to complete
+                console.log(`[${this.connectionId}] ⏳ WebSocket still connecting, waiting...`);
+                // Set a shorter timeout to check back
+                setTimeout(() => {
+                    if (!this.ws || this.ws.readyState !== WebSocket.OPEN) {
+                        this.cleanupExistingWebSocket();
+                        this.startWebSocketStream();
+                    }
+                }, 2000);
+                return;
+            }
+
+            // Create new WebSocket with the proper URL and include diagnostic info
             const wsProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
             const wsUrl = `${wsProtocol}://${window.location.host}/ws/mission-updates`;
-            console.log('🔌 Connecting to WebSocket:', wsUrl);
-            this.ws = new WebSocket(wsUrl);
-            this.ws.onopen = () => {
-                console.log('✅ WebSocket connected');
-            };
-            this.ws.onmessage = (event) => {
+            console.log(`[${this.connectionId}] 🔌 Connecting to WebSocket on page ${currentPage}:`, wsUrl);
+            
+            try {
+                // Store the previous WebSocket for potential cleanup
+                const previousWs = this.ws;
+                
+                // Create new WebSocket connection
+                this.ws = new WebSocket(wsUrl);
+                
+                // Set a timeout to detect connection failures
+                this.connectionTimeout = setTimeout(() => {
+                    if (this.ws && this.ws.readyState !== WebSocket.OPEN) {
+                        console.error(`[${this.connectionId}] ⏱️ WebSocket connection timeout after 10 seconds`);
+                        
+                        // Log connection state for debugging
+                        console.debug(`[${this.connectionId}] Connection state:`, {
+                            readyState: this.ws ? this.ws.readyState : 'No WebSocket',
+                            readyStateText: this.ws ? ['CONNECTING', 'OPEN', 'CLOSING', 'CLOSED'][this.ws.readyState] : 'N/A',
+                            page: currentPage
+                        });
+                        
+                        // Force cleanup and try again
+                        this.cleanupExistingWebSocket();
+                        this.startWebSocketStream();
+                    }
+                }, 10000);
+                
+                this.ws.onopen = () => {
+                    // Clear timeout since connection succeeded
+                    if (this.connectionTimeout) {
+                        clearTimeout(this.connectionTimeout);
+                        this.connectionTimeout = null;
+                    }
+                    
+                    console.log(`[${this.connectionId}] ✅ WebSocket connected successfully on page ${currentPage}`);
+                    
+                    // Set a flag to indicate we're connected
+                    this.wsConnected = true;
+                    this.lastConnectTime = Date.now();
+                    
+                    // Store connection info with detailed metadata
+                    const connectionInfo = {
+                        connectionId: this.connectionId,
+                        page: currentPage,
+                        timestamp: new Date().toISOString(),
+                        userAgent: navigator.userAgent,
+                        windowDimensions: `${window.innerWidth}x${window.innerHeight}`,
+                        url: window.location.href
+                    };
+                    
+                    localStorage.setItem('lastWsConnection', JSON.stringify(connectionInfo));
+                    
+                    // Send an immediate ping to verify two-way communication
+                    try {
+                        // Use a more detailed client_ready message with browser info
+                        this.ws.send(JSON.stringify({ 
+                            type: 'client_ready',
+                            connectionId: this.connectionId,
+                            page: currentPage,
+                            timestamp: new Date().toISOString(),
+                            client_info: {
+                                browser: navigator.userAgent,
+                                viewport: `${window.innerWidth}x${window.innerHeight}`,
+                                url: window.location.href,
+                                pathname: window.location.pathname
+                            },
+                            // Add readyState as a number, not as the WebSocketState object
+                            readyState: this.ws.readyState,
+                            readyStateText: ['CONNECTING', 'OPEN', 'CLOSING', 'CLOSED'][this.ws.readyState]
+                        }));
+                        console.log(`[${this.connectionId}] 📤 Sent client_ready message`);
+                        
+                        // Set up ping interval specific to this connection to keep it alive
+                        this.pingInterval = setInterval(() => {
+                            if (this.ws && this.ws.readyState === WebSocket.OPEN) {
+                                try {
+                                    this.ws.send(JSON.stringify({
+                                        type: 'ping',
+                                        connectionId: this.connectionId,
+                                        timestamp: new Date().toISOString(),
+                                        // Add readyState as a number, not as the WebSocketState object
+                                        readyState: this.ws.readyState,
+                                        readyStateText: ['CONNECTING', 'OPEN', 'CLOSING', 'CLOSED'][this.ws.readyState]
+                                    }));
+                                    console.debug(`[${this.connectionId}] 📤 Sent ping`);
+                                } catch (e) {
+                                    console.error(`[${this.connectionId}] ❌ Failed to send ping:`, e);
+                                    clearInterval(this.pingInterval);
+                                    this.pingInterval = null;
+                                }
+                            } else {
+                                clearInterval(this.pingInterval);
+                                this.pingInterval = null;
+                            }
+                        }, 15000); // Send ping every 15 seconds to keep connection alive
+                        
+                    } catch (e) {
+                        console.error(`[${this.connectionId}] ❌ Failed to send ready message:`, e);
+                    }
+                };
+                
+                this.ws.onmessage = (event) => {
+                    // Use our enhanced message handler
+                    this.handleWebSocketMessage(event);
+                };
+                
+                this.ws.onerror = (error) => {
+                    console.error(`[${this.connectionId}] ❌ WebSocket error on page ${currentPage}:`, error);
+                    this.wsConnected = false;
+                    
+                    // Log detailed error diagnostics
+                    try {
+                        const errorLog = JSON.parse(localStorage.getItem('websocketErrors') || '[]');
+                        errorLog.push({
+                            connectionId: this.connectionId,
+                            timestamp: new Date().toISOString(),
+                            page: currentPage,
+                            error: error.toString(),
+                            readyState: this.ws ? this.ws.readyState : 'No WebSocket'
+                        });
+                        localStorage.setItem('websocketErrors', JSON.stringify(errorLog.slice(-20)));
+                    } catch (e) {
+                        console.error(`[${this.connectionId}] Failed to log error:`, e);
+                    }
+                };
+                
+                this.ws.onclose = (event) => {
+                    this.wsConnected = false;
+                    
+                    // Clear timeout if it exists
+                    if (this.connectionTimeout) {
+                        clearTimeout(this.connectionTimeout);
+                        this.connectionTimeout = null;
+                    }
+                    
+                    // Log detailed close information
+                    const closeInfo = {
+                        code: event.code,
+                        reason: event.reason || 'No reason provided',
+                        wasClean: event.wasClean,
+                        timestamp: new Date().toISOString(),
+                        page: currentPage,
+                        connectionDuration: this.lastMessageTime ? 
+                            `${Math.round((Date.now() - this.lastMessageTime) / 1000)}s ago` : 'unknown'
+                    };
+                    
+                    console.warn(`[${this.connectionId}] ⚠️ WebSocket closed on ${currentPage}:`, closeInfo);
+                    
+                    // Log close events to localStorage for debugging
+                    try {
+                        const closeLog = JSON.parse(localStorage.getItem('websocketCloses') || '[]');
+                        closeLog.push({
+                            connectionId: this.connectionId,
+                            ...closeInfo
+                        });
+                        localStorage.setItem('websocketCloses', JSON.stringify(closeLog.slice(-20)));
+                    } catch (e) {
+                        console.error(`[${this.connectionId}] Failed to log close event:`, e);
+                    }
+                    
+                    // Use an exponential backoff strategy for reconnection
+                    if (!this.reconnectAttempts) {
+                        this.reconnectAttempts = 0;
+                    }
+                    this.reconnectAttempts++;
+                    
+                    const baseDelay = 1000;
+                    const maxDelay = 10000; // Cap at 10 seconds
+                    const randomFactor = Math.random() * 0.5 + 0.75; // 0.75-1.25 randomization
+                    
+                    // Calculate backoff with jitter
+                    const delay = Math.min(
+                        baseDelay * Math.pow(1.5, Math.min(this.reconnectAttempts - 1, 8)) * randomFactor,
+                        maxDelay
+                    );
+                    
+                    console.log(`[${this.connectionId}] 🔄 Reconnecting in ${Math.round(delay)}ms (attempt ${this.reconnectAttempts})`);
+                    
+                    // Schedule reconnection
+                    this.reconnectTimeout = setTimeout(() => {
+                        console.log(`[${this.connectionId}] 🔄 Attempting reconnect #${this.reconnectAttempts}...`);
+                        this.startWebSocketStream();
+                    }, delay);
+                };
+            } catch (e) {
+                console.error(`[${this.connectionId}] ❌ Failed to create WebSocket on page ${currentPage}:`, e);
+                this.reconnectTimeout = setTimeout(() => this.startWebSocketStream(), 3000);
+            }
+        },
+        
+        cleanupExistingWebSocket() {
+            // Close any existing WebSocket connection with detailed logging
+            if (this.ws) {
+                const wsState = this.ws.readyState;
+                const wsStateText = ['CONNECTING', 'OPEN', 'CLOSING', 'CLOSED'][wsState] || 'UNKNOWN';
+                
+                console.log(`[${this.connectionId}] 🧹 Cleaning up existing WebSocket connection (state: ${wsStateText})...`);
+                
                 try {
-                    const data = JSON.parse(event.data);
-                    this.dispatchEvent(data);
+                    // Log detailed cleanup info
+                    console.debug(`[${this.connectionId}] WebSocket cleanup details:`, {
+                        readyState: wsState,
+                        readyStateText: wsStateText,
+                        page: this.currentPage,
+                        timestamp: new Date().toISOString()
+                    });
+                    
+                    // Remove all event listeners to prevent memory leaks
+                    this.ws.onopen = null;
+                    this.ws.onmessage = null;
+                    this.ws.onerror = null;
+                    this.ws.onclose = null;
+                    
+                    // Close the connection if it's not already closed
+                    if (this.ws.readyState !== WebSocket.CLOSED) {
+                        // Send a goodbye message if the connection is open
+                        if (this.ws.readyState === WebSocket.OPEN) {
+                            try {
+                                this.ws.send(JSON.stringify({ 
+                                    type: 'client_disconnect',
+                                    reason: 'cleanup',
+                                    connectionId: this.connectionId,
+                                    timestamp: new Date().toISOString()
+                                }));
+                                console.debug(`[${this.connectionId}] 👋 Sent goodbye message before closing`);
+                            } catch (e) {
+                                console.debug(`[${this.connectionId}] Could not send goodbye message:`, e);
+                            }
+                        }
+                        
+                        // Set a close timeout to ensure we don't hang waiting for close
+                        const closeTimeout = setTimeout(() => {
+                            console.warn(`[${this.connectionId}] ⏱️ WebSocket close timed out, forcing cleanup`);
+                            this.ws = null;
+                        }, 2000);
+                        
+                        // Now close the connection
+                        this.ws.close(1000, "Client navigation or cleanup");
+                        
+                        // Clear the timeout if the close event fires normally
+                        if (this.ws) {
+                            this.ws.onclose = () => {
+                                clearTimeout(closeTimeout);
+                                console.debug(`[${this.connectionId}] WebSocket closed by cleanup`);
+                            };
+                        }
+                    }
                 } catch (e) {
-                    console.error('❌ Failed to parse WebSocket event:', e);
+                    console.error(`[${this.connectionId}] ❌ Error during WebSocket cleanup:`, e);
                 }
-            };
-            this.ws.onerror = (error) => {
-                console.error('❌ WebSocket error:', error);
-            };
-            this.ws.onclose = () => {
-                console.warn('⚠️ WebSocket closed. Attempting reconnect in 5s...');
-                setTimeout(() => this.startWebSocketStream(), 5000);
-            };
+                
+                // Clear the WebSocket object
+                this.ws = null;
+                this.wsConnected = false;
+            }
+            
+            // Clear any pending timeouts
+            if (this.reconnectTimeout) {
+                clearTimeout(this.reconnectTimeout);
+                this.reconnectTimeout = null;
+                console.debug(`[${this.connectionId}] Cleared reconnect timeout`);
+            }
+            
+            if (this.connectionTimeout) {
+                clearTimeout(this.connectionTimeout);
+                this.connectionTimeout = null;
+                console.debug(`[${this.connectionId}] Cleared connection timeout`);
+            }
+            
+            if (this.pingTimeout) {
+                clearTimeout(this.pingTimeout);
+                this.pingTimeout = null;
+                console.debug(`[${this.connectionId}] Cleared ping timeout`);
+            }
+            
+            if (this.pingInterval) {
+                clearInterval(this.pingInterval);
+                this.pingInterval = null;
+                console.debug(`[${this.connectionId}] Cleared ping interval`);
+            }
+            
+            // Reset connection attempts to give fresh start on next connection
+            this.reconnectAttempts = 0;
+            
+            // Log cleanup completion
+            console.log(`[${this.connectionId}] 🧹 WebSocket cleanup completed`);
         },
 
         async loadInitialData() {
@@ -119,24 +540,8 @@ function sentinelApp() {
 
         // --- EVENT STREAM MANAGEMENT ---
         startUnifiedEventStream() {
-            // Used for always-on event stream (not the live stream feed)
-            console.log('🔌 Starting unified event stream...');
-            this.eventSource = new EventSource('/api/events/stream');
-            this.eventSource.onopen = () => {
-                console.log('✅ Event stream connected successfully');
-            };
-            this.eventSource.onmessage = (event) => {
-                try {
-                    const data = JSON.parse(event.data);
-                    this.dispatchEvent(data);
-                } catch (e) {
-                    console.error('❌ Failed to parse event:', e);
-                }
-            };
-            this.eventSource.onerror = (error) => {
-                console.error('❌ Event stream error:', error);
-                setTimeout(() => this.startUnifiedEventStream(), 5000);
-            };
+            // This function is kept for legacy purposes but is superseded by WebSocket.
+            console.log('🔌 Unified event stream (legacy) is available but WebSocket is preferred.');
         },
 
 
@@ -169,6 +574,51 @@ function sentinelApp() {
 
         getLiveStreamIconClass() {
             return this.liveStreamActive ? 'fa-stop' : 'fa-play';
+        },
+        
+        // --- END LIVE STREAM TOGGLE LOGIC ---
+        
+        // Clean up resources when component is destroyed
+        cleanup() {
+            console.log(`[${this.connectionId}] 🧹 Cleaning up resources on page ${window.location.pathname}...`);
+            
+            // Remove event listeners
+            if (this.pageVisibilityHandler) {
+                document.removeEventListener('visibilitychange', this.pageVisibilityHandler);
+                this.pageVisibilityHandler = null;
+            }
+            
+            if (this.navigationHandler) {
+                window.removeEventListener('popstate', this.navigationHandler);
+                this.navigationHandler = null;
+            }
+            
+            // Clear intervals and timeouts
+            if (this.heartbeatInterval) {
+                clearInterval(this.heartbeatInterval);
+                this.heartbeatInterval = null;
+                console.log(`[${this.connectionId}] 🛑 Heartbeat interval cleared`);
+            }
+            
+            if (this.reconnectTimeout) {
+                clearTimeout(this.reconnectTimeout);
+                this.reconnectTimeout = null;
+                console.log(`[${this.connectionId}] 🛑 Reconnect timeout cleared`);
+            }
+            
+            // Cleanup WebSocket
+            this.cleanupExistingWebSocket();
+            
+            // Record cleanup in localStorage for debugging
+            const cleanupLog = JSON.parse(localStorage.getItem('websocketCleanups') || '[]');
+            cleanupLog.push({
+                connectionId: this.connectionId,
+                page: window.location.pathname,
+                timestamp: new Date().toISOString()
+            });
+            localStorage.setItem('websocketCleanups', JSON.stringify(cleanupLog.slice(-10)));
+            
+            console.log(`[${this.connectionId}] ✅ Resources cleaned up successfully`);
         },
 
         dispatchEvent(event) {
@@ -228,6 +678,11 @@ function sentinelApp() {
             if (existingMissionIndex > -1) {
                 this.missions[existingMissionIndex] = { ...this.missions[existingMissionIndex], ...missionData };
                 console.log('✅ Updated existing mission:', this.missions[existingMissionIndex]);
+                
+                // If mission completed, try to load workspace contents
+                if (event.event_type === 'mission_complete') {
+                    this.loadMissionWorkspace(missionId);
+                }
             } else {
                 this.missions.unshift({ mission_id_str: missionId, ...missionData });
                 console.log('➕ Added new mission:', this.missions[0]);
@@ -235,6 +690,32 @@ function sentinelApp() {
             
             // Phase 4: Update healing missions list
             this.updateHealingMissions();
+        },
+
+        async loadMissionWorkspace(missionId) {
+            try {
+                console.log(`🔍 Loading workspace for mission: ${missionId}`);
+                const response = await fetch(`/api/missions/${missionId}/workspace`);
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Find mission and add workspace data
+                    const missionIndex = this.missions.findIndex(m => m.mission_id_str === missionId);
+                    if (missionIndex > -1) {
+                        this.missions[missionIndex].workspace = data.workspace;
+                        console.log(`✅ Workspace loaded for mission ${missionId}:`, data.workspace);
+                        
+                        // Update selected mission if it matches
+                        if (this.selectedMission?.mission_id_str === missionId) {
+                            this.selectedMission.workspace = data.workspace;
+                        }
+                    }
+                } else {
+                    console.log(`ℹ️ No workspace found for mission ${missionId}`);
+                }
+            } catch (error) {
+                console.error(`❌ Failed to load workspace for mission ${missionId}:`, error);
+            }
         },
 
         // --- AGENT ACTIVITY MANAGEMENT ---
@@ -469,7 +950,9 @@ function sentinelApp() {
 
         renderPerformanceChart(data) {
             const ctx = document.getElementById('performanceChart');
-            if (!ctx) return;
+            if (!ctx) {
+                return;
+            }
 
             const labels = data.map(d => d.date);
             const successData = data.map(d => d.successful);
@@ -602,6 +1085,16 @@ function sentinelApp() {
             return date.toLocaleString();
         },
 
+        formatFileSize(bytes) {
+            if (!bytes || bytes === 0) {
+                return '0 B';
+            }
+            const sizes = ['B', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(1024));
+            const size = (bytes / Math.pow(1024, i)).toFixed(1);
+            return `${size} ${sizes[i]}`;
+        },
+
         // --- NOTIFICATIONS ---
         showNotification(message, type = 'info') {
             // Simple notification system
@@ -628,7 +1121,9 @@ function sentinelApp() {
 
         // --- UTILITY FUNCTIONS ---
         truncateText(text, maxLength = 50) {
-            if (!text) return '';
+            if (!text) {
+                return '';
+            }
             return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
         },
 
@@ -642,9 +1137,15 @@ function sentinelApp() {
         },
 
         getProgressClass(progress) {
-            if (progress >= 100) return 'bg-success';
-            if (progress >= 75) return 'bg-info';
-            if (progress >= 50) return 'bg-warning';
+            if (progress >= 100) {
+                return 'bg-success';
+            }
+            if (progress >= 75) {
+                return 'bg-info';
+            }
+            if (progress >= 50) {
+                return 'bg-warning';
+            }
             return 'bg-secondary';
         },
 
@@ -785,7 +1286,74 @@ function sentinelApp() {
                 this.isCheckingPrompt = false;
             }
         },
-
-        // --- END LIVE STREAM TOGGLE LOGIC ---
+        
+        /**
+         * Enhanced WebSocket message handler with improved error handling for serialization issues
+         * @param {MessageEvent} event - The WebSocket message event
+         */
+        handleWebSocketMessage(event) {
+            // Update last activity timestamp for any message received
+            this.lastMessageTime = Date.now();
+            
+            try {
+                // Check if the message contains a JSON serialization error from server
+                if (typeof event.data === 'string' && event.data.includes('not JSON serializable')) {
+                    console.warn(`[${this.connectionId}] ⚠️ Received server-side JSON serialization error:`, event.data);
+                    
+                    // Send a special diagnostic message to the server
+                    this.ws.send(JSON.stringify({
+                        type: 'serialization_issue_detected',
+                        message: 'Client detected server-side serialization issue',
+                        timestamp: new Date().toISOString()
+                    }));
+                    
+                    // Don't try to parse this message further
+                    return;
+                }
+                
+                // Try parsing as normal
+                const data = JSON.parse(event.data);
+                
+                // Log connection health info in heartbeat responses
+                if (data.event_type === 'heartbeat') {
+                    const latency = Date.now() - new Date(data.timestamp).getTime();
+                    console.debug(`[${this.connectionId}] 💓 Heartbeat received (latency: ${latency}ms)`);
+                } else {
+                    // Log other events more prominently
+                    console.log(`[${this.connectionId}] 📩 Received ${data.event_type} event`, {
+                        event_id: data.event_id || 'none',
+                        source: data.source || 'unknown',
+                        timestamp: data.timestamp
+                    });
+                }
+                
+                // Dispatch event to the proper handler
+                this.dispatchEvent(data);
+            } catch (e) {
+                console.error(`[${this.connectionId}] ❌ Failed to parse WebSocket event:`, e);
+                
+                // Log the problematic message for debugging
+                const messagePreview = typeof event.data === 'string' 
+                    ? (event.data.length > 200 ? event.data.substring(0, 200) + '...' : event.data)
+                    : 'Non-string data received';
+                
+                console.debug(`[${this.connectionId}] Problematic message (preview):`, messagePreview);
+                
+                // Send diagnostic info to the server if possible
+                try {
+                    if (this.ws && this.ws.readyState === WebSocket.OPEN) {
+                        this.ws.send(JSON.stringify({
+                            type: 'parse_error',
+                            timestamp: new Date().toISOString(),
+                            error_type: e.name,
+                            error_message: e.message
+                        }));
+                    }
+                } catch (sendError) {
+                    // If we can't even send an error report, the connection might be truly broken
+                    console.error(`[${this.connectionId}] 🔥 Failed to send error report:`, sendError);
+                }
+            }
+        }
     };
 }
