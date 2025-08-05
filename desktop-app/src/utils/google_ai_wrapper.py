@@ -23,6 +23,7 @@ class CrewAICompatibleLLM(ChatGoogleGenerativeAI):
     resulting in 'models/gemini/model-name' being passed to litellm,
     but litellm expects just 'gemini/model-name' format.
     """
+    _litellm_model_name: str
     
     def __init__(self, *args, **kwargs):
         # Extract the model name before calling super().__init__
