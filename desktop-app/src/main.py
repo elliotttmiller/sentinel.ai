@@ -23,7 +23,7 @@ from loguru import logger
 # Add the src directory to the Python path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__)))
 
-# Import core components with proper error handling
+# Import core components with proper error handling and absolute imports
 try:
     from core.cognitive_forge_engine import cognitive_forge_engine
     from models.advanced_database import db_manager, User
@@ -31,11 +31,25 @@ try:
     from utils.guardian_protocol import GuardianProtocol
 except ImportError as e:
     logger.warning(f"Failed to import core modules: {e}")
-    # Create fallback classes
-    cognitive_forge_engine = None
-    db_manager = None
-    agent_observability = None
-    GuardianProtocol = None
+    try:
+        # Fallback to src-prefixed imports
+        from src.core.cognitive_forge_engine import cognitive_forge_engine
+        from src.models.advanced_database import db_manager, User
+        from src.utils.agent_observability import agent_observability, LiveStreamEvent
+        from src.utils.guardian_protocol import GuardianProtocol
+    except ImportError as e:
+        logger.warning(f"Failed to import core modules with src prefix: {e}")
+        # Create fallback classes
+        cognitive_forge_engine = None
+        db_manager = None
+        agent_observability = None
+        GuardianProtocol = None
+        
+        # Create fallback User class for type hints
+        class User:
+            def __init__(self):
+                self.id = 1
+                self.organization_id = 1
 
 # Initialize FastAPI app
 app = FastAPI(title="Sentinel Command Center v5.4", version="5.4.0")

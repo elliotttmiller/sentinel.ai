@@ -22,7 +22,20 @@ import logging
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from config.settings import settings
+
+# Import settings with fallback
+try:
+    from config.settings import settings
+except ImportError:
+    try:
+        from src.config.settings import settings
+    except ImportError:
+        # Create fallback settings object
+        class FallbackSettings:
+            GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+            LLM_MODEL = os.getenv("LLM_MODEL", "gemini-1.5-pro")
+            GOLDEN_PATH_LOGGING = True
+        settings = FallbackSettings()
 
 logger = logging.getLogger(__name__)
 

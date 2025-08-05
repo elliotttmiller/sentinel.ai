@@ -5,8 +5,21 @@ Implements the three core specialized agents for hierarchical crew architecture
 
 from typing import Dict, Any, List, Optional
 from loguru import logger
-from ..utils.crewai_bypass import DirectAIAgent, DirectAICrew
-from ..utils.google_ai_wrapper import create_google_ai_llm
+
+# Import utilities using absolute imports with fallback
+try:
+    from utils.crewai_bypass import DirectAIAgent, DirectAICrew
+    from utils.google_ai_wrapper import create_google_ai_llm
+except ImportError:
+    logger.warning("Failed to import from utils, trying src prefix")
+    try:
+        from src.utils.crewai_bypass import DirectAIAgent, DirectAICrew
+        from src.utils.google_ai_wrapper import create_google_ai_llm
+    except ImportError:
+        logger.error("Failed to import required utilities")
+        DirectAIAgent = None
+        DirectAICrew = None
+        create_google_ai_llm = None
 
 
 class AutonomousOrchestratorAgent:

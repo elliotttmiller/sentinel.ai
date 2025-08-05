@@ -24,50 +24,81 @@ import os
 # Add the src directory to the path for imports
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# Import settings
-from config.settings import settings
+# Import settings using absolute imports
+try:
+    from config.settings import settings
+except ImportError:
+    logger.warning("Failed to import config.settings, trying src prefix")
+    try:
+        from src.config.settings import settings
+    except ImportError:
+        logger.error("Settings import failed, creating fallback")
+        settings = None
 
-# Import utils with fallback
+# Import utils using absolute imports with fallback
 try:
     from utils.google_ai_wrapper import create_google_ai_llm, direct_inference, google_ai_wrapper
 except ImportError:
-    # Fallback for relative imports
-    from ..utils.google_ai_wrapper import create_google_ai_llm, direct_inference, google_ai_wrapper
+    logger.warning("Failed to import from utils.google_ai_wrapper, trying src prefix")
+    try:
+        from src.utils.google_ai_wrapper import create_google_ai_llm, direct_inference, google_ai_wrapper
+    except ImportError:
+        logger.error("All google_ai_wrapper imports failed, creating fallbacks")
+        create_google_ai_llm = None
+        direct_inference = None
+        google_ai_wrapper = None
 
-# Import models
+# Import models using absolute imports with fallback
 try:
     from models.advanced_database import db_manager
 except ImportError:
-    from ..models.advanced_database import db_manager
+    logger.warning("Failed to import from models.advanced_database, trying src prefix")
+    try:
+        from src.models.advanced_database import db_manager
+    except ImportError:
+        logger.error("Database manager import failed")
+        db_manager = None
 
-# Import observability
+# Import observability using absolute imports with fallback
 try:
     from utils.agent_observability import agent_observability, LiveStreamEvent
 except ImportError:
-    from ..utils.agent_observability import agent_observability, LiveStreamEvent
+    logger.warning("Failed to import from utils.agent_observability, trying src prefix")
+    try:
+        from src.utils.agent_observability import agent_observability, LiveStreamEvent
+    except ImportError:
+        logger.error("Agent observability import failed")
+        agent_observability = None
+        LiveStreamEvent = None
 
-# Import Phase 4 components
+# Import Phase 4 components using absolute imports with fallback
 try:
     from utils.guardian_protocol import GuardianProtocol
     from utils.self_learning_module import SelfLearningModule
 except ImportError:
-    # Create fallback classes if imports fail
-    class GuardianProtocol:
-        def __init__(self, llm):
-            self.llm = llm
-        async def run_agent_validation_suite(self, *args, **kwargs):
-            return {"validation_passed": True}
-        async def run_code_autofix(self, *args, **kwargs):
-            return {"status": "success", "fixed_code": "Auto-fix applied"}
-    
-    class SelfLearningModule:
-        def __init__(self, llm, db_manager):
-            self.llm = llm
-            self.db_manager = db_manager
-        async def synthesize_and_learn(self, mission):
-            logger.info("Self-learning module processing mission")
-        async def analyze_completed_missions(self):
-            return {"patterns": [], "insights": []}
+    logger.warning("Failed to import Phase 4 components from utils, trying src prefix")
+    try:
+        from src.utils.guardian_protocol import GuardianProtocol
+        from src.utils.self_learning_module import SelfLearningModule
+    except ImportError:
+        logger.warning("Phase 4 components not available, creating fallback classes")
+        # Create fallback classes if imports fail
+        class GuardianProtocol:
+            def __init__(self, llm):
+                self.llm = llm
+            async def run_agent_validation_suite(self, *args, **kwargs):
+                return {"validation_passed": True}
+            async def run_code_autofix(self, *args, **kwargs):
+                return {"status": "success", "fixed_code": "Auto-fix applied"}
+        
+        class SelfLearningModule:
+            def __init__(self, llm, db_manager):
+                self.llm = llm
+                self.db_manager = db_manager
+            async def synthesize_and_learn(self, mission):
+                logger.info("Self-learning module processing mission")
+            async def analyze_completed_missions(self):
+                return {"patterns": [], "insights": []}
 
 # Load environment variables
 load_dotenv(os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
@@ -76,7 +107,22 @@ load_dotenv(os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
 try:
     from utils.sentry_integration import initialize_sentry, get_sentry, capture_error, start_transaction, track_async_errors
 except ImportError:
-    from ..utils.sentry_integration import initialize_sentry, get_sentry, capture_error, start_transaction, track_async_errors
+    logger.warning("Failed to import Sentry integration from utils, trying src prefix")
+    try:
+        from src.utils.sentry_integration import initialize_sentry, get_sentry, capture_error, start_transaction, track_async_errors
+    except ImportError:
+        logger.warning("Sentry integration not available, creating fallback functions")
+        # Create fallback functions
+        def initialize_sentry(environment="production"):
+            return None
+        def get_sentry():
+            return None
+        def capture_error(error):
+            logger.error(f"Error (Sentry unavailable): {error}")
+        def start_transaction(name, op):
+            return None
+        def track_async_errors(func):
+            return func
 
 
 class MissionState(Enum):
