@@ -84,6 +84,7 @@ except ImportError:
         logger.warning("Phase 4 components not available, creating fallback classes")
         # Create fallback classes if imports fail
         class GuardianProtocol:
+            """Fallback Guardian Protocol class when real implementation is unavailable"""
             def __init__(self, llm):
                 self.llm = llm
             async def run_agent_validation_suite(self, *args, **kwargs):
@@ -92,6 +93,7 @@ except ImportError:
                 return {"status": "success", "fixed_code": "Auto-fix applied"}
         
         class SelfLearningModule:
+            """Fallback Self-Learning Module when real implementation is unavailable"""
             def __init__(self, llm, db_manager):
                 self.llm = llm
                 self.db_manager = db_manager
@@ -114,14 +116,19 @@ except ImportError:
         logger.warning("Sentry integration not available, creating fallback functions")
         # Create fallback functions
         def initialize_sentry(environment="production"):
+            """Fallback Sentry initialization when real Sentry is unavailable"""
             return None
         def get_sentry():
+            """Fallback Sentry getter when real Sentry is unavailable"""
             return None
         def capture_error(error):
+            """Fallback error capture when real Sentry is unavailable"""
             logger.error(f"Error (Sentry unavailable): {error}")
         def start_transaction(name, op):
+            """Fallback transaction starter when real Sentry is unavailable"""
             return None
         def track_async_errors(func):
+            """Fallback async error tracker when real Sentry is unavailable"""
             return func
 
 

@@ -32,6 +32,7 @@ except ImportError:
     except ImportError:
         # Create fallback settings object
         class FallbackSettings:
+            """Fallback settings class when config system is unavailable"""
             GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
             LLM_MODEL = os.getenv("LLM_MODEL", "gemini-1.5-pro")
             GOLDEN_PATH_LOGGING = True

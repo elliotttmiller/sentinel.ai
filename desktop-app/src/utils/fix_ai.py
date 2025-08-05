@@ -362,10 +362,6 @@ class RollbackManager:
     def __init__(self, backup_dir):
         self.backup_dir = backup_dir
 
-class PhoenixProtocol:
-    def __init__(self):
-        pass
-
 class MissionAwareHealer:
     def __init__(self):
         pass

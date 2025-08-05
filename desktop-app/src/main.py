@@ -47,6 +47,7 @@ except ImportError as e:
         
         # Create fallback User class for type hints
         class User:
+            """Fallback User class for dependency injection when database is unavailable"""
             def __init__(self):
                 self.id = 1
                 self.organization_id = 1
@@ -68,6 +69,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Pydantic models for API requests
 class TestMissionRequest(BaseModel):
+    """Request model for test mission creation"""
     prompt: str
     test_type: str = "unit"
     priority: str = "low"
@@ -79,6 +81,7 @@ system_logs: List[Dict] = []
 
 # Fallback classes for missing components
 class FallbackLiveStreamEvent:
+    """Fallback event class when observability system is unavailable"""
     def __init__(self, event_type="system_log", source="system", severity="INFO", message="", payload=None):
         self.event_type = event_type
         self.source = source
@@ -165,6 +168,7 @@ if cognitive_forge_engine is None:
 # In a real app, this would involve JWT tokens and a database lookup.
 # For now, this dependency provides a default user for all operations.
 def get_current_user() -> User:
+    """Get current authenticated user (fallback implementation for development)"""
     return db_manager.get_or_create_default_user_and_org()
 
 # API Endpoints for pages
