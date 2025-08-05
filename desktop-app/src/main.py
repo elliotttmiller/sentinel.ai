@@ -13,20 +13,6 @@ from datetime import datetime
 from typing import Dict, Any, List, Optional
 from pathlib import Path
 
-
-# --- Robust Python Path Setup ---
-# Ensures the 'desktop-app' directory is the root for imports.
-# This allows for consistent absolute imports from 'src' and 'config'.
-APP_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-if APP_ROOT not in sys.path:
-    sys.path.insert(0, APP_ROOT)
-
-# Remove the current script's directory from the path to avoid ambiguity.
-# The APP_ROOT is now the single source of truth.
-SRC_ROOT = os.path.abspath(os.path.dirname(__file__))
-if SRC_ROOT in sys.path:
-    sys.path.remove(SRC_ROOT)
-
 from fastapi import FastAPI, HTTPException, Request, BackgroundTasks, Depends
 from fastapi.responses import HTMLResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
@@ -34,290 +20,43 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from loguru import logger
 
+# Add the src directory to the Python path
+# sys.path.insert(0, os.path.join(os.path.dirname(__file__)))
 
+# Import core components with proper error handling
+try:
+    from .core.cognitive_forge_engine import cognitive_forge_engine
+    from .models.advanced_database import db_manager, User
+    from .utils.agent_observability import agent_observability, LiveStreamEvent
+    from .utils.guardian_protocol import GuardianProtocol
+except ImportError as e:
+    logger.warning(f"Failed to import core modules: {e}")
+    # Create fallback classes
+    cognitive_forge_engine = None
+    db_manager = None
+    agent_observability = None
+    GuardianProtocol = None
 
-from fastapi import WebSocket, WebSocketDisconnect
 # Initialize FastAPI app
 app = FastAPI(title="Sentinel Command Center v5.4", version="5.4.0")
 
 # Add CORS middleware
-# This MUST be done BEFORE any routes are defined.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods
-    allow_headers=["*"],  # Allows all headers
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-# --- WebSocket endpoint for real-time mission updates (must be after app is defined) ---
-@app.websocket("/ws/mission-updates")
-async def websocket_endpoint(websocket: WebSocket):
-    # Create a unique connection ID for this WebSocket session
-    connection_id = f"ws_{uuid.uuid4().hex[:8]}"
-    
-    # Import debug logging tools
-    from utils.debug_logger import debug_logger, request_context, log_websocket_event
-    
-    # Create context for this entire WebSocket connection
-    with request_context(connection_id=connection_id):
-        client = f"{websocket.client.host}:{websocket.client.port}" if websocket.client else "Unknown client"
-        debug_logger.info(f"WebSocket connection request from {client}")
-        
-        # Log request headers for debugging
-        headers = dict(websocket.headers.items())
-        user_agent = headers.get('user-agent', 'Unknown')
-        origin = headers.get('origin', 'Unknown')
-        host = headers.get('host', 'Unknown')
-        
-        debug_logger.debug(
-            f"WebSocket connection details from {client}",
-            user_agent=user_agent,
-            origin=origin,
-            host=host,
-            path="/ws/mission-updates"
-        )
-        
-        # Accept the connection
-        try:
-            await websocket.accept()
-            debug_logger.info(f"WebSocket connection {connection_id} accepted from {client}")
-            
-            # Register the WebSocket with our observability manager
-            agent_observability.add_websocket(websocket)
-            
-            # Send an immediate welcome event to confirm connection
-            welcome_msg = {
-                "event_type": "connection_established",
-                "connection_id": connection_id,
-                "timestamp": datetime.utcnow().isoformat(),
-                "message": "WebSocket connection established successfully",
-                "source": "server",
-                "client": client
-            }
-            
-            try:
-                await websocket.send_json(welcome_msg)
-                debug_logger.debug(f"Welcome message sent to WebSocket {connection_id}")
-            except Exception as e:
-                debug_logger.error(
-                    f"Failed to send welcome message to {connection_id}: {str(e)}",
-                    error=str(e),
-                    error_type=type(e).__name__
-                )
-            
-            try:
-                # Main connection loop with improved heartbeat and diagnostics
-                heartbeat_count = 0
-                while True:
-                    # Every 15 seconds, send a heartbeat (reduced from 30s)
-                    await asyncio.sleep(15)
-                    
-                    heartbeat_count += 1
-                    heartbeat_id = f"hb_{heartbeat_count}"
-                    
-                    # Get client state for diagnostics
-                    client_state = websocket.client_state.name if hasattr(websocket, "client_state") else "UNKNOWN"
-                    app_state = websocket.application_state.name if hasattr(websocket, "application_state") else "UNKNOWN"
-                    
-                    debug_logger.debug(
-                        f"Sending heartbeat {heartbeat_id} to WebSocket {connection_id}",
-                        client_state=client_state,
-                        application_state=app_state,
-                        heartbeat_count=heartbeat_count
-                    )
-                    
-                    try:
-                        await websocket.send_json({
-                            "event_type": "heartbeat",
-                            "timestamp": datetime.utcnow().isoformat(),
-                            "heartbeat_id": heartbeat_id,
-                            "connection_id": connection_id
-                        })
-                        
-                        debug_logger.debug(
-                            f"Heartbeat {heartbeat_id} successfully sent to {connection_id}",
-                            client_state=client_state
-                        )
-                    except Exception as e:
-                        debug_logger.warning(
-                            f"Failed to send heartbeat to {connection_id}: {str(e)}",
-                            error=str(e),
-                            error_type=type(e).__name__,
-                            client_state=client_state
-                        )
-                        break
-                        
-            except WebSocketDisconnect:
-                debug_logger.info(f"WebSocket {connection_id} disconnected gracefully from {client}")
-            except Exception as e:
-                debug_logger.error(
-                    f"WebSocket {connection_id} error: {str(e)}",
-                    error=str(e),
-                    error_type=type(e).__name__,
-                    client=client
-                )
-            finally:
-                # Clean up resources
-                debug_logger.info(f"Cleaning up WebSocket {connection_id} from {client}")
-                agent_observability.remove_websocket(websocket)
-                
-                try:
-                    await websocket.close()
-                    debug_logger.debug(f"WebSocket {connection_id} closed successfully")
-                except Exception as e:
-                    debug_logger.warning(
-                        f"Error while closing WebSocket {connection_id}: {str(e)}",
-                        error=str(e)
-                    )
-                
-                debug_logger.info(f"WebSocket {connection_id} from {client} cleaned up completely")
-                
-        except Exception as e:
-            debug_logger.error(
-                f"Failed to establish WebSocket connection {connection_id}: {str(e)}",
-                error=str(e),
-                error_type=type(e).__name__,
-                client=client
-            )
-
-# --- WebSocket Test Endpoint ---
-@app.websocket("/ws/test")
-async def test_ws(websocket: WebSocket):
-    """Simple test endpoint for WebSocket connection diagnostics."""
-    from utils.debug_logger import debug_logger, diagnose_websockets
-    
-    debug_logger.info("WebSocket test connection attempt received")
-    await websocket.accept()
-    
-    # Send diagnostic info
-    client = f"{websocket.client.host}:{websocket.client.port}" if websocket.client else "Unknown client"
-    await websocket.send_json({
-        "message": "WebSocket test connection successful",
-        "client": client,
-        "timestamp": datetime.utcnow().isoformat(),
-        "server_info": {
-            "version": "5.4.0",
-            "active_websockets": len(agent_observability._websockets),
-            "event_queue_size": agent_observability.live_event_stream.qsize(),
-            "event_queue_max": agent_observability.live_event_stream.maxsize,
-        }
-    })
-    
-    # Wait briefly before closing
-    await asyncio.sleep(1)
-    await websocket.close()
-    debug_logger.info(f"WebSocket test connection from {client} closed")
-
-# --- Diagnostic API Endpoint for WebSocket Health ---
-@app.get("/api/system/diagnostics/websockets")
-async def websocket_diagnostics():
-    """Diagnostic endpoint for WebSocket system health."""
-    from utils.debug_logger import debug_logger, diagnose_websockets
-    
-    try:
-        # Create diagnostic snapshot
-        diagnostics = {
-            "timestamp": datetime.utcnow().isoformat(),
-            "active_connections": len(agent_observability._websockets),
-            "event_queue_size": agent_observability.live_event_stream.qsize(),
-            "event_queue_max": agent_observability.live_event_stream.maxsize,
-        }
-        
-        # Add detailed connection diagnostics
-        if agent_observability._websockets:
-            diagnostics["connections"] = diagnose_websockets(agent_observability._websockets)
-        
-        # Add memory usage info
-        import psutil
-        import os
-        process = psutil.Process(os.getpid())
-        memory_info = process.memory_info()
-        diagnostics["system"] = {
-            "memory_usage_mb": memory_info.rss / 1024 / 1024,
-            "cpu_percent": process.cpu_percent(),
-            "threads": process.num_threads(),
-            "uptime_seconds": time.time() - process.create_time()
-        }
-        
-        debug_logger.info(f"Websocket diagnostics requested, found {diagnostics['active_connections']} connections")
-        return diagnostics
-    
-    except Exception as e:
-        debug_logger.exception(f"Error generating WebSocket diagnostics: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error generating diagnostics: {str(e)}")
-
-# Import core components with proper error handling
-from config.settings import settings
-
-# Apply LLM compatibility patches early
-try:
-    from src.utils.llm_patch import apply_all_patches
-    apply_all_patches()
-except ImportError:
-    from utils.llm_patch import apply_all_patches
-    apply_all_patches()
-
-# Import and configure litellm early to ensure proper model name handling
-try:
-    from src.utils.litellm_custom_provider import configure_litellm
-    configure_litellm()
-except ImportError:
-    from utils.litellm_custom_provider import configure_litellm
-    configure_litellm()
-
-from src.core.cognitive_forge_engine import cognitive_forge_engine
-from src.core.real_mission_executor import RealMissionExecutor
-from src.models.advanced_database import db_manager, User
-from src.utils.agent_observability import agent_observability, LiveStreamEvent
-from src.utils.guardian_protocol import GuardianProtocol
-
-# Initialize the real mission executor
-real_mission_executor = RealMissionExecutor()
-
 # Mount static files
-STATIC_DIR = os.path.join(SRC_ROOT, "..", "static")
-STATIC_DIR = os.path.abspath(STATIC_DIR)
-if not os.path.exists(STATIC_DIR):
-    # fallback to src/static if desktop-app/static doesn't exist
-    STATIC_DIR = os.path.join(SRC_ROOT, "static")
-    STATIC_DIR = os.path.abspath(STATIC_DIR)
-app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Pydantic models for API requests
 class TestMissionRequest(BaseModel):
     prompt: str
     test_type: str = "unit"
     priority: str = "low"
-
-# Define an application startup event handler
-@app.on_event("startup")
-async def startup_event():
-    """Initialize system components on application startup."""
-    from utils.debug_logger import debug_logger, request_context
-    
-    # Create a startup context
-    with request_context(context="app_startup"):
-        try:
-            debug_logger.info("🚀 Sentinel Command Center starting up")
-            
-            # Initialize the WebSocket broadcast task if it hasn't been started
-            if agent_observability:
-                # Force the broadcast task to start in this event loop
-                debug_logger.info("Ensuring WebSocket broadcast task is running")
-                try:
-                    asyncio.create_task(agent_observability._broadcast_events())
-                    debug_logger.success("WebSocket broadcast task started successfully")
-                except Exception as e:
-                    debug_logger.error(
-                        f"Failed to start WebSocket broadcast task: {str(e)}",
-                        error=str(e),
-                        error_type=type(e).__name__
-                    )
-            
-            debug_logger.info("🚀 Sentinel Command Center startup complete")
-        except Exception as e:
-            debug_logger.exception(f"Error during application startup: {str(e)}")
 
 # Global variables for fallback data
 live_missions: Dict[str, Dict] = {}
@@ -326,7 +65,6 @@ system_logs: List[Dict] = []
 
 # Fallback classes for missing components
 class FallbackLiveStreamEvent:
-    """A fallback class for LiveStreamEvent if the real one fails to import."""
     def __init__(self, event_type="system_log", source="system", severity="INFO", message="", payload=None):
         self.event_type = event_type
         self.source = source
@@ -336,49 +74,20 @@ class FallbackLiveStreamEvent:
         self.timestamp = datetime.utcnow().isoformat()
 
 class FallbackAgentObservability:
-    """A robust fallback for the agent observability system."""
     def __init__(self):
-        self._is_running = False
-        self._broadcast_task = None
-        logger.info("[FALLBACK] Initialized FallbackAgentObservability")
-
+        self.event_queue = asyncio.Queue()
+    
     def push_event(self, event):
-        """In fallback mode, simply log the event to the console."""
-        logger.info(f"[FALLBACK EVENT] Type: {event.event_type}, Source: {event.source}, Message: {event.message}")
-
-    async def _broadcast_events(self):
-        """A mock broadcast loop that does nothing, to prevent crashes."""
-        logger.info("[FALLBACK] Starting mock broadcast event loop.")
-        while self._is_running:
-            await asyncio.sleep(1)
-        logger.info("[FALLBACK] Mock broadcast event loop stopped.")
-
-    def is_running(self):
-        return self._is_running
-
-    async def start(self):
-        """Starts the mock broadcast loop."""
-        if not self._is_running:
-            self._is_running = True
-            self._broadcast_task = asyncio.create_task(self._broadcast_events())
-            logger.info("[FALLBACK] Agent Observability started.")
-
-    async def stop(self):
-        """Stops the mock broadcast loop."""
-        if self._is_running:
-            self._is_running = False
-            if self._broadcast_task:
-                self._broadcast_task.cancel()
-                try:
-                    await self._broadcast_task
-                except asyncio.CancelledError:
-                    pass
-            logger.info("[FALLBACK] Agent Observability stopped.")
-
+        try:
+            asyncio.create_task(self.event_queue.put(event))
+        except Exception as e:
+            logger.error(f"Failed to push event: {e}")
+    
     async def get_event(self):
-        """Returns None as there is no real event queue."""
-        await asyncio.sleep(1)
-        return None
+        try:
+            return await asyncio.wait_for(self.event_queue.get(), timeout=1.0)
+        except asyncio.TimeoutError:
+            return None
 
 # Initialize observability with fallback
 if agent_observability is None:
@@ -425,52 +134,18 @@ if cognitive_forge_engine is None:
             self.guardian_protocol = GuardianProtocol() if GuardianProtocol else None
         
         async def run_mission(self, user_prompt, mission_id_str, agent_type):
-            logger.info(f"Starting mission: {mission_id_str}")
-            db_manager.update_mission_status(mission_id_str, "running", progress=10)
-
-            # Simulate a long-running mission with real-time insights
-            for i in range(1, 11):
-                await asyncio.sleep(2)
-                progress = i * 10
-                db_manager.update_mission_status(mission_id_str, "running", progress=progress)
-
-                # Create and push a detailed insight event
-                insight_event = LiveStreamEvent(
-                    event_type="mission_insight",
-                    source="cognitive_engine",
-                    payload={
-                        "mission_id_str": mission_id_str,
-                        "current_thought": f"Agent is on step {i}, progress at {progress}%.",
-                        "events": [{"id": uuid.uuid4().hex, "timestamp": datetime.utcnow().isoformat(), "message": f"Executing task {i}..."}],
-                        "sentry_logs": f"Sentry log for step {i}",
-                        "weave_logs": f"Weave trace for step {i}",
-                        "wandb_logs": f"Wandb metric for step {i}"
-                    }
-                )
-                agent_observability.push_event(insight_event)
-
-            db_manager.update_mission_status(mission_id_str, "completed", progress=100)
-            logger.info(f"Mission {mission_id_str} completed.")
-
+            logger.info(f"Fallback: Running mission {mission_id_str}")
+            # Simulate mission execution
+            await asyncio.sleep(2)
+            if db_manager:
+                db_manager.update_mission_status(mission_id_str, "completed")
+        
         async def run_periodic_self_optimization(self):
             logger.info("Fallback: Periodic self-optimization")
             # Simulate optimization
             await asyncio.sleep(30)
 
     cognitive_forge_engine = FallbackCognitiveForgeEngine()
-
-# Initialize real mission executor with fallback
-if real_mission_executor is None:
-    class FallbackRealMissionExecutor:
-        async def execute_mission(self, mission_data):
-            logger.warning("Using fallback RealMissionExecutor - no actual execution")
-            return {
-                "success": False,
-                "message": "RealMissionExecutor not available",
-                "mission_id": mission_data.get("id", "unknown")
-            }
-    
-    real_mission_executor = FallbackRealMissionExecutor()
 
 # --- SIMULATED AUTHENTICATION ---
 # In a real app, this would involve JWT tokens and a database lookup.
@@ -547,47 +222,6 @@ async def list_missions_api(current_user: User = Depends(get_current_user)):
         logger.error(error_message)
         # Return a proper HTTP error instead of a silent 200 OK
         raise HTTPException(status_code=500, detail=error_message)
-@app.post("/api/missions/pre-flight-check")
-async def pre_flight_check(request: Request):
-    """Analyze mission prompt for risk and clarity before execution"""
-    try:
-        data = await request.json()
-        prompt = data.get("prompt", "")
-        
-        if not prompt:
-            return {
-                "go_no_go": False, 
-                "feedback": "Prompt is empty.",
-                "clarity_score": 0.0,
-                "risk_score": 0.0,
-                "suggestions": ["Please provide a mission description"]
-            }
-        
-        # Run Guardian Protocol pre-flight check
-        if cognitive_forge_engine and cognitive_forge_engine.guardian_protocol:
-            analysis = await cognitive_forge_engine.guardian_protocol.run_pre_flight_check(prompt)
-        else:
-            # Fallback analysis
-            analysis = {
-                "clarity_score": 0.7,
-                "risk_score": 0.1,
-                "suggestions": ["System is in fallback mode"],
-                "go_no_go": True,
-                "feedback": "Fallback mode - prompt accepted",
-                "risk_level": "low",
-                "clarity_level": "good"
-            }
-        return analysis
-        
-    except Exception as e:
-        logger.error(f"❌ Pre-flight check failed: {e}")
-        return {
-            "go_no_go": False,
-            "feedback": "Error connecting to Guardian Protocol.",
-            "clarity_score": 0.0,
-            "risk_score": 0.0,
-            "suggestions": ["Please try again"]
-        }
 
 # --- NEW: Pre-flight Check Endpoint ---
 @app.post("/api/missions/pre-flight-check")
@@ -658,106 +292,13 @@ async def create_mission(request: Request, background_tasks: BackgroundTasks, cu
             organization_id=current_user.organization_id
         )
         
-        # REAL-TIME UPDATE: Push event for new mission with enhanced debugging
-        from utils.debug_logger import debug_logger, request_context
-        
-        # Create a unique context for this event broadcast
-        event_context_id = f"evt_{uuid.uuid4().hex[:6]}"
-        with request_context(event_context_id=event_context_id, mission_id=mission_id):
-            try:
-                debug_logger.info(
-                    f"Preparing to broadcast mission creation event for {mission_id}",
-                    mission_id=mission_id,
-                    event_type="mission_update"
-                )
-                
-                # Create event with detailed diagnostic info
-                event = LiveStreamEvent(
-                    event_type="mission_update",
-                    source="api_server",
-                    severity="INFO",
-                    message=f"New mission created: {mission_id}",
-                    payload={
-                        **new_mission.as_dict(),
-                        "_debug_context": {
-                            "event_context_id": event_context_id,
-                            "timestamp": datetime.utcnow().isoformat()
-                        }
-                    }
-                )
-                
-                # Track active connections before pushing
-                active_connections = len(getattr(agent_observability, "_websockets", []))
-                debug_logger.info(
-                    f"Broadcasting mission {mission_id} creation to {active_connections} connections",
-                    active_connections=active_connections
-                )
-                
-                # Push the event
-                agent_observability.push_event(event)
-                
-                debug_logger.info(f"Mission {mission_id} creation event queued successfully")
-                
-            except Exception as e:
-                debug_logger.error(
-                    f"Failed to broadcast mission creation event for {mission_id}: {str(e)}",
-                    error=str(e),
-                    error_type=type(e).__name__,
-                    mission_id=mission_id,
-                    traceback=True
-                )
-
-        # Launch REAL mission execution in background
-        async def execute_real_mission():
-            """Execute the mission using real agents that perform actual tasks"""
-            try:
-                # Prepare mission data for the real executor
-                mission_data = {
-                    "id": mission_id,
-                    "objective": prompt,
-                    "agent_type": agent_type,
-                    "complexity": "medium",  # Default complexity
-                    "metadata": {
-                        "created_at": datetime.utcnow().isoformat(),
-                        "user_id": "default"  # In production, get from auth
-                    }
-                }
-                
-                # Update mission status to running
-                db_manager.update_mission_status(mission_id, "running", progress=5)
-                
-                # Execute the mission using real agents
-                logger.info(f"🚀 Executing REAL mission {mission_id}: {prompt}")
-                result = await real_mission_executor.execute_mission(mission_data)
-                
-                # Update mission status based on result
-                if result.get("success"):
-                    db_manager.update_mission_status(mission_id, "completed", progress=100)
-                    logger.success(f"✅ Real mission {mission_id} completed successfully!")
-                else:
-                    db_manager.update_mission_status(mission_id, "failed", progress=0)
-                    logger.error(f"❌ Real mission {mission_id} failed: {result.get('message', 'Unknown error')}")
-                
-            except Exception as e:
-                logger.error(f"❌ Real mission {mission_id} execution error: {e}")
-                db_manager.update_mission_status(mission_id, "failed", progress=0)
-                
-                # Broadcast error event
-                agent_observability.push_event(LiveStreamEvent(
-                    event_type="mission_error",
-                    source="real_mission_executor",
-                    severity="ERROR",
-                    message=f"Mission {mission_id} execution failed: {str(e)}",
-                    payload={
-                        "mission_id": mission_id,
-                        "error": str(e),
-                        "objective": prompt,
-                        "agent_type": agent_type
-                    }
-                ))
-        
-        # Launch the real execution in background
-        background_tasks.add_task(execute_real_mission)
+        # Launch mission execution in background
+        background_tasks.add_task(
+            cognitive_forge_engine.run_mission,
+            user_prompt=prompt, 
+            mission_id_str=mission_id, 
+            agent_type=agent_type
+        )
 
         return {"success": True, "mission": new_mission.as_dict()}
         
@@ -767,56 +308,51 @@ async def create_mission(request: Request, background_tasks: BackgroundTasks, cu
         logger.error(f"❌ Failed to create mission: {e}")
         raise HTTPException(status_code=500, detail=f"Failed to create mission: {str(e)}")
 
-@app.post("/api/missions/{mission_id_str}/cancel")
-async def cancel_mission_api(mission_id_str: str):
-    """Cancel a running mission."""
+@app.post("/api/test-missions")
+async def create_test_mission(request: TestMissionRequest, current_user: User = Depends(get_current_user)):
+    """Create a test mission with enhanced error handling"""
     try:
-        # Update the status in the database
-        updated_mission = db_manager.update_mission_status(mission_id_str, "canceled")
-        if not updated_mission:
-            raise HTTPException(status_code=404, detail="Mission not found to cancel.")
-
-        logger.info(f"Mission {mission_id_str} canceled by user.")
-
-        # REAL-TIME UPDATE: Push event for canceled mission
-        try:
-            agent_observability.push_event(LiveStreamEvent(
-                event_type="mission_update",
-                source="api_server",
-                severity="WARNING",
-                message=f"Mission {mission_id_str} was canceled by user",
-                payload=updated_mission.as_dict()
-            ))
-            logger.info(f"WebSocket event broadcasted for canceled mission: {mission_id_str}")
-        except Exception as e:
-            logger.error(f"Failed to broadcast WebSocket event: {e}")
-
-        return {"success": True, "message": "Mission canceled."}
-    except Exception as e:
-        logger.error(f"Failed to cancel mission {mission_id_str}: {e}")
-        raise HTTPException(status_code=500, detail="Failed to cancel mission.")
-
-@app.get("/api/missions/{mission_id}/workspace")
-async def get_mission_workspace(mission_id: str):
-    """Get the workspace contents for a completed mission."""
-    try:
-        from agents.real_mission_executor import RealMissionExecutor
+        logger.info(f"🧪 Creating test mission: {request.test_type} - {request.prompt[:50]}...")
         
-        real_executor = RealMissionExecutor()
-        workspace_contents = real_executor.list_workspace_contents(mission_id)
+        # Create a test mission with special identifier
+        test_mission_id = f"test_{uuid.uuid4().hex[:8]}"
         
-        if not workspace_contents.get("exists", False):
-            raise HTTPException(status_code=404, detail="Mission workspace not found")
+        new_test_mission = db_manager.create_mission(
+            mission_id_str=test_mission_id,
+            prompt=request.prompt,
+            agent_type="tester",  # Special agent type for tests
+            priority=request.priority,
+            status="pending",
+            owner_id=current_user.id,
+            organization_id=current_user.organization_id
+        )
         
+        # Add test-specific metadata
+        test_metadata = {
+            "test_type": request.test_type,
+            "is_test": True,
+            "created_at": datetime.utcnow().isoformat()
+        }
+        
+        # Store test metadata in mission updates
+        db_manager.add_mission_update(
+            test_mission_id,
+            "test_creation",
+            f"Test mission created: {request.test_type}",
+            test_metadata
+        )
+        
+        logger.info(f"✅ Test mission created: {test_mission_id}")
         return {
             "success": True,
-            "mission_id": mission_id,
-            "workspace": workspace_contents
+            "mission_id": test_mission_id,
+            "test_type": request.test_type,
+            "message": f"Test mission created successfully"
         }
         
     except Exception as e:
-        logger.error(f"Failed to get workspace for mission {mission_id}: {e}")
-        raise HTTPException(status_code=500, detail=f"Failed to get workspace: {str(e)}")
+        logger.error(f"❌ Failed to create test mission: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to create test mission: {str(e)}")
 
 @app.get("/api/agents")
 async def list_agents_api():
@@ -1026,7 +562,8 @@ async def startup_event():
     ))
     
     # Start the self-optimization background task
-    asyncio.create_task(cognitive_forge_engine.run_periodic_self_optimization())
+    if cognitive_forge_engine:
+        asyncio.create_task(cognitive_forge_engine.run_periodic_self_optimization())
     
     logger.info("✅ All systems initialized and ready for missions")
 
