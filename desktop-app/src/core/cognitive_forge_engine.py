@@ -18,14 +18,15 @@ from loguru import logger
 from dotenv import load_dotenv
 import sys
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from config.settings import settings
-from utils.google_ai_wrapper import create_google_ai_llm, direct_inference, google_ai_wrapper
-from models.advanced_database import db_manager
-from utils.agent_observability import agent_observability, LiveStreamEvent
-from utils.guardian_protocol import GuardianProtocol
-from utils.self_learning_module import SelfLearningModule
-from utils.sentry_integration import initialize_sentry, get_sentry, capture_error, start_transaction, track_async_errors
+# Import core modules using relative imports
+# sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from ..config.settings import settings
+from ..utils.google_ai_wrapper import create_google_ai_llm, direct_inference, google_ai_wrapper
+from ..models.advanced_database import db_manager
+from ..utils.agent_observability import agent_observability, LiveStreamEvent
+from ..utils.guardian_protocol import GuardianProtocol
+from ..utils.self_learning_module import SelfLearningModule
+from ..utils.sentry_integration import initialize_sentry, get_sentry, capture_error, start_transaction, track_async_errors
 
 load_dotenv(os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
 

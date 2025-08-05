@@ -6,13 +6,18 @@ Tests the fixes applied to resolve the critical system issues.
 
 import sys
 import os
-sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
+
+# Add the desktop-app/src directory to Python path
+script_dir = os.path.dirname(__file__)
+repo_root = os.path.dirname(os.path.dirname(script_dir))
+desktop_app_src = os.path.join(repo_root, 'desktop-app', 'src')
+sys.path.insert(0, desktop_app_src)
 
 def test_llm_import_fix():
     """Test that the missing get_crewai_llm function is now available"""
     print("🧪 Testing LLM Import Fix...")
     try:
-        from src.utils.google_ai_wrapper import get_crewai_llm
+        from utils.google_ai_wrapper import get_crewai_llm
         print("✅ get_crewai_llm function successfully imported")
         
         # Test if function can be called (may fail due to missing API key, but shouldn't error on import)
@@ -39,7 +44,7 @@ def test_websocket_encoder():
     """Test that WebSocket serialization encoder is working"""
     print("\n🧪 Testing WebSocket Serialization Fix...")
     try:
-        from src.utils.websocket_helpers import WebSocketStateEncoder
+        from utils.websocket_helpers import WebSocketStateEncoder
         import json
         
         # Test serializing a mock WebSocket state object
@@ -74,10 +79,10 @@ def test_system_imports():
     print("\n🧪 Testing Critical System Imports...")
     
     imports_to_test = [
-        ('src.utils.agent_observability', 'CuttingEdgeAgentObservabilityManager'),
-        ('src.utils.debug_logger', 'debug_logger'),
-        ('src.core.cognitive_forge_engine', None),
-        ('src.models.advanced_database', None),
+        ('utils.agent_observability', 'CuttingEdgeAgentObservabilityManager'),
+        ('utils.debug_logger', 'debug_logger'),
+        ('core.cognitive_forge_engine', None),
+        ('models.advanced_database', None),
     ]
     
     all_passed = True
