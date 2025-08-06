@@ -6,7 +6,153 @@
     <title>Sentinel Command Center | Mission Control</title>
     
     <!-- Fonts and icons -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+    <link href="https://fonts.go                                                                                 <!-- Service Logs -->
+                                    <div x-show="tab === 'sentry'"><pre x-text="selectedMission?.sentry_logs || 'No Sentry logs.'"></pre></div>
+                                    <div x-show="tab === 'weave'"><pre x-text="selectedMission?.weave_logs || 'No Weave logs.'"></pre></div>
+                                    <div x-show="tab === 'wandb'"><pre x-text="selectedMission?.wandb_logs || 'No Wandb logs.'"></pre></div>
+                                    
+                                    <!-- Enhanced Professional Output Display -->
+                                    <div x-show="tab === 'output'">
+    <div class="mission-output-container">
+        <div class="output-header">
+            <div class="output-controls">
+                <button class="btn btn-sm btn-outline-primary" @click="formatMissionOutput()">
+                    <i class="fas fa-magic"></i> Format
+                </button>
+                <button class="btn btn-sm btn-outline-secondary" @click="copyMissionOutput()">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </div>
+        </div>
+        <div class="enhanced-output-display mission-output" x-html="formatMissionOutput(selectedMission?.result || 'Mission has not produced a final result.')"></div>
+        <!-- Performance Metrics for Output -->
+        <template x-if="selectedMission?.status === 'completed'">
+            <div class="output-metrics">
+                <div class="metric-badge success">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Completed</span>
+                </div>
+                <div class="metric-badge info" x-show="selectedMission?.execution_time">
+                    <i class="fas fa-clock"></i>
+                    <span x-text="'Duration: ' + (selectedMission?.execution_time || 'N/A')"></span>
+                </div>
+                <div class="metric-badge" :class="selectedMission?.result?.includes('SIMULATION') ? 'warning' : 'success'">
+                    <i class="fas fa-cog"></i>
+                    <span x-text="selectedMission?.result?.includes('SIMULATION') ? 'Simulation Mode' : 'Production Mode'"></span>
+                </div>
+            </div>
+        </template>
+    </div>
+                                    </div>  <div class="event-item clickable-event" @click="openEventModal(event.id || event)">
+                                                        <span class="event-timestamp" x-text="formatTimestamp(event.timestamp)"></span>
+                                                        <span class="event-message" x-text="event.message"></span>
+                                                        <i class="fas fa-external-link-alt event-expand-icon"></i>
+                                                    </div>                                  <!-- Service Logs -->
+                                    <div x-show="tab === 'sentry'"><pre x-text="selectedMission?.sentry_logs || 'No Sentry logs.'"></pre></div>
+                                    <div x-show="tab === 'weave'"><pre x-text="selectedMission?.weave_logs || 'No Weave logs.'"></pre></div>
+                                    <div x-show="tab === 'wandb'"><pre x-text="selectedMission?.wandb_logs || 'No Wandb logs.'"></pre></div>
+                                    <div x-show="tab === 'output'"><pre x-text="selectedMission?.result || 'Mission has not produced a final result.'"></pre></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Event Modal -->
+    <div id="event-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="event-modal-title" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="event-modal-title">
+                        <i class="fas fa-info-circle"></i> Event Details
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="event-modal-content">
+                    <!-- Real-Time Observability & Tracking System -->
+                    <div class="event-observability-container">
+                        <!-- Event Header -->
+                        <div class="event-header d-flex align-items-center mb-3">
+                            <span class="event-id-badge mr-2" x-text="activeEvent?.id"></span>
+                            <span class="event-type-badge mr-2" x-text="activeEvent?.type"></span>
+                            <span class="severity-badge" :class="'severity-' + (activeEvent?.severity || 'info')" x-text="activeEvent?.severity"></span>
+                            <span class="ml-auto text-muted" x-text="formatTimestamp(activeEvent?.timestamp)"></span>
+                        </div>
+
+                        <!-- Event Message -->
+                        <div class="event-message mb-2" x-text="activeEvent?.message"></div>
+
+                        <!-- Context Card -->
+                        <div class="event-context-card mb-3">
+                            <div class="event-context-description" x-text="activeEvent?.context"></div>
+                            <div class="event-context-importance" x-text="activeEvent?.importance"></div>
+                        </div>
+
+                        <!-- Performance Metrics -->
+                        <div class="event-metrics-grid mb-3">
+                            <div class="metric-item">
+                                <span class="metric-label">Agent</span>
+                                <span class="metric-value" x-text="activeEvent?.agent"></span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Execution Time</span>
+                                <span class="metric-value" x-text="activeEvent?.execution_time"></span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Status</span>
+                                <span class="metric-value" x-text="activeEvent?.status"></span>
+                            </div>
+                        </div>
+
+                        <!-- Technical Details -->
+                        <div class="technical-details-grid mb-3">
+                            <div class="tech-detail-item">
+                                <span class="tech-label">System</span>
+                                <span class="tech-value" x-text="activeEvent?.system"></span>
+                            </div>
+                            <div class="tech-detail-item">
+                                <span class="tech-label">Resource Usage</span>
+                                <span class="tech-value" x-text="activeEvent?.resource_usage"></span>
+                            </div>
+                            <div class="tech-detail-item">
+                                <span class="tech-label">Agent Status</span>
+                                <span class="tech-value" x-text="activeEvent?.agent_status"></span>
+                            </div>
+                        </div>
+
+                        <!-- Event Payload -->
+                        <div class="event-payload-container mb-3">
+                            <h6 class="text-info">Payload</h6>
+                            <div class="event-modal-json">
+                                <pre x-text="formatJson(activeEvent?.payload)"></pre>
+                            </div>
+                        </div>
+
+                        <!-- Related Events -->
+                        <div class="related-events-list mb-3">
+                            <h6 class="text-success">Related Events</h6>
+                            <template x-for="related in activeEvent?.related_events || []" :key="related.id">
+                                <div class="event-item clickable-event" @click="openEventModal(related.id)">
+                                    <span class="event-timestamp" x-text="formatTimestamp(related.timestamp)"></span>
+                                    <span class="event-message" x-text="related.message"></span>
+                                    <span class="event-type-badge ml-2" x-text="related.type"></span>
+                                </div>
+                            </template>
+                            <div x-show="!activeEvent?.related_events?.length" class="text-muted">No related events.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>s?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <!-- CSS Files -->

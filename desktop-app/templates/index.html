@@ -366,24 +366,34 @@
                 </div>
             </footer>
 
-            <!-- Event Modal -->
+            <!-- Enhanced Event Modal -->
             <div class="event-modal" x-show="showEventModal" x-transition>
                 <div class="event-modal-content">
                     <div class="event-modal-header">
-                        <h5 class="event-modal-title">Event Information</h5>
+                        <h5 class="event-modal-title">
+                            <i class="fas fa-chart-line"></i> Event Analytics & Details
+                        </h5>
                         <button class="event-modal-close" @click="closeEventModal()">&times;</button>
                     </div>
                     <div class="event-modal-body" x-show="selectedEvent">
-                        <div class="event-modal-section">
-                            <h6 class="event-modal-section-title">Event Details</h6>
+                        <!-- Loading State -->
+                        <div x-show="selectedEvent?.loading" class="text-center p-4">
+                            <i class="fas fa-spinner fa-spin"></i> Loading detailed analytics...
+                        </div>
+                        
+                        <!-- Event Overview -->
+                        <div x-show="!selectedEvent?.loading" class="event-modal-section">
+                            <h6 class="event-modal-section-title">
+                                <i class="fas fa-info-circle"></i> Event Overview
+                            </h6>
                             <div class="event-modal-details">
                                 <div class="event-modal-detail-row">
                                     <span class="event-modal-detail-label">Event ID:</span>
-                                    <span class="event-modal-detail-value" x-text="selectedEvent?.event_id"></span>
+                                    <span class="event-modal-detail-value event-id-badge" x-text="selectedEvent?.event_id"></span>
                                 </div>
                                 <div class="event-modal-detail-row">
                                     <span class="event-modal-detail-label">Event Type:</span>
-                                    <span class="event-modal-detail-value" x-text="formatEventType(selectedEvent?.event_type)"></span>
+                                    <span class="event-modal-detail-value event-type-badge" x-text="formatEventType(selectedEvent?.event_type)"></span>
                                 </div>
                                 <div class="event-modal-detail-row">
                                     <span class="event-modal-detail-label">Timestamp:</span>
@@ -391,13 +401,84 @@
                                 </div>
                                 <div class="event-modal-detail-row">
                                     <span class="event-modal-detail-label">Severity:</span>
-                                    <span class="event-modal-detail-value" x-text="selectedEvent?.severity"></span>
+                                    <span class="event-modal-detail-value severity-badge" :class="'severity-' + selectedEvent?.severity?.toLowerCase()" x-text="selectedEvent?.severity"></span>
+                                </div>
+                                <div class="event-modal-detail-row">
+                                    <span class="event-modal-detail-label">Source:</span>
+                                    <span class="event-modal-detail-value" x-text="selectedEvent?.source || 'system'"></span>
                                 </div>
                             </div>
                         </div>
-                        <div class="event-modal-section" x-show="selectedEvent?.payload">
-                            <h6 class="event-modal-section-title">Event Data</h6>
-                            <pre class="event-modal-json" x-text="formatDetailValue(selectedEvent?.payload)"></pre>
+
+                        <!-- Enhanced Context Analysis -->
+                        <div x-show="selectedEvent?.enhanced_details" class="event-modal-section">
+                            <h6 class="event-modal-section-title">
+                                <i class="fas fa-brain"></i> Context Analysis
+                            </h6>
+                            <div class="event-context-card">
+                                <div class="event-context-description" x-text="selectedEvent?.enhanced_details?.context?.description"></div>
+                                <div class="event-context-importance" x-text="selectedEvent?.enhanced_details?.context?.importance"></div>
+                            </div>
+                        </div>
+
+                        <!-- Event Metrics -->
+                        <div x-show="selectedEvent?.enhanced_details?.metrics" class="event-modal-section">
+                            <h6 class="event-modal-section-title">
+                                <i class="fas fa-chart-bar"></i> Event Metrics
+                            </h6>
+                            <div class="event-metrics-grid">
+                                <div class="metric-item">
+                                    <span class="metric-label">Age:</span>
+                                    <span class="metric-value" x-text="selectedEvent?.enhanced_details?.metrics?.age"></span>
+                                </div>
+                                <div class="metric-item">
+                                    <span class="metric-label">Frequency:</span>
+                                    <span class="metric-value" x-text="selectedEvent?.enhanced_details?.metrics?.frequency"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Technical Details -->
+                        <div x-show="selectedEvent?.enhanced_details?.technical_details" class="event-modal-section">
+                            <h6 class="event-modal-section-title">
+                                <i class="fas fa-cog"></i> Technical Details
+                            </h6>
+                            <div class="technical-details-grid">
+                                <div class="tech-detail-item">
+                                    <span class="tech-label">Component:</span>
+                                    <span class="tech-value" x-text="selectedEvent?.enhanced_details?.technical_details?.source_component"></span>
+                                </div>
+                                <div class="tech-detail-item">
+                                    <span class="tech-label">Payload Size:</span>
+                                    <span class="tech-value" x-text="formatFileSize(selectedEvent?.enhanced_details?.technical_details?.payload_size)"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Enhanced Event Data -->
+                        <div x-show="selectedEvent?.payload" class="event-modal-section">
+                            <h6 class="event-modal-section-title">
+                                <i class="fas fa-database"></i> Event Payload
+                            </h6>
+                            <div class="event-payload-container">
+                                <pre class="event-modal-json" x-html="formatEventPayload(selectedEvent?.payload)"></pre>
+                            </div>
+                        </div>
+
+                        <!-- Related Events -->
+                        <div x-show="selectedEvent?.enhanced_details?.related_events?.length > 0" class="event-modal-section">
+                            <h6 class="event-modal-section-title">
+                                <i class="fas fa-link"></i> Related Events
+                            </h6>
+                            <div class="related-events-list">
+                                <template x-for="relatedEvent in selectedEvent?.enhanced_details?.related_events" :key="relatedEvent.event_id">
+                                    <div class="related-event-item" @click="openEventModal(relatedEvent)">
+                                        <div class="related-event-type" x-text="relatedEvent.event_type"></div>
+                                        <div class="related-event-message" x-text="relatedEvent.message"></div>
+                                        <div class="related-event-time" x-text="formatTimestamp(relatedEvent.timestamp)"></div>
+                                    </div>
+                                </template>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -482,10 +563,66 @@
                             </div>
                         </div>
 
-                        <!-- Mission Output -->
-                        <div class="mission-detail-section" x-show="selectedMission?.output">
-                            <div class="mission-detail-title">Output</div>
-                            <pre class="mission-output"><code x-text="selectedMission?.output"></code></pre>
+                        <!-- Enhanced Mission Output -->
+                        <div class="mission-detail-section" x-show="selectedMission?.result || selectedMission?.processedResult">
+                            <div class="mission-detail-title">
+                                <i class="fas fa-terminal"></i> Mission Output
+                                <div class="output-metadata" x-show="selectedMission?.processedResult?.metadata">
+                                    <span class="output-stat" x-text="'Type: ' + (selectedMission?.processedResult?.metadata?.type || 'text')"></span>
+                                    <span class="output-stat" x-text="'Size: ' + formatFileSize(selectedMission?.processedResult?.metadata?.size || 0)"></span>
+                                    <span class="output-stat" x-text="'Lines: ' + (selectedMission?.processedResult?.metadata?.lines || 0)"></span>
+                                </div>
+                            </div>
+                            
+                            <!-- Loading State -->
+                            <div x-show="selectedMission?.loading" class="output-loading">
+                                <i class="fas fa-spinner fa-spin"></i> Processing output...
+                            </div>
+                            
+                            <!-- Enhanced Output Display -->
+                            <div x-show="!selectedMission?.loading" class="enhanced-output-container">
+                                <!-- Output Controls -->
+                                <div class="output-controls">
+                                    <button class="output-control-btn" x-data="{ copied: false }" @click="navigator.clipboard.writeText(selectedMission?.result || ''); copied = true; setTimeout(() => copied = false, 2000)">
+                                        <i class="fas fa-copy" x-show="!copied"></i>
+                                        <i class="fas fa-check" x-show="copied"></i>
+                                        <span x-text="copied ? 'Copied!' : 'Copy'"></span>
+                                    </button>
+                                    <button class="output-control-btn" @click="window.open('data:text/plain;charset=utf-8,' + encodeURIComponent(selectedMission?.result || ''), '_blank')">
+                                        <i class="fas fa-external-link-alt"></i> Open
+                                    </button>
+                                </div>
+                                
+                                <!-- Formatted Output -->
+                                <div class="mission-output-enhanced">
+                                    <pre class="mission-output"><code x-html="selectedMission?.processedResult?.formatted || formatMissionOutput(selectedMission?.result)"></code></pre>
+                                </div>
+                            </div>
+                            
+                            <!-- Execution Metrics -->
+                            <div x-show="selectedMission?.executionMetrics" class="execution-metrics">
+                                <div class="metrics-title">
+                                    <i class="fas fa-chart-line"></i> Execution Analytics
+                                </div>
+                                <div class="metrics-grid">
+                                    <div class="metric-card">
+                                        <div class="metric-label">Duration</div>
+                                        <div class="metric-value" x-text="selectedMission?.executionMetrics?.duration"></div>
+                                    </div>
+                                    <div class="metric-card">
+                                        <div class="metric-label">Performance Grade</div>
+                                        <div class="metric-value performance-grade" :class="'grade-' + selectedMission?.executionMetrics?.performance_grade?.replace('+', 'plus')" x-text="selectedMission?.executionMetrics?.performance_grade"></div>
+                                    </div>
+                                    <div class="metric-card" x-show="selectedMission?.execution_time">
+                                        <div class="metric-label">Exec Time</div>
+                                        <div class="metric-value" x-text="formatDuration(selectedMission?.execution_time)"></div>
+                                    </div>
+                                    <div class="metric-card" x-show="selectedMission?.progress">
+                                        <div class="metric-label">Progress</div>
+                                        <div class="metric-value" x-text="selectedMission?.progress + '%'"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Mission Logs -->

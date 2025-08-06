@@ -247,3 +247,6 @@ class GuardianProtocol:
             "low_risk_patterns": len(self.risk_patterns["low_risk"]),
             "total_patterns": sum(len(patterns) for patterns in self.risk_patterns.values())
         } 
+
+# Global instance
+guardian_protocol = GuardianProtocol()

@@ -1095,6 +1095,127 @@ function sentinelApp() {
             return `${size} ${sizes[i]}`;
         },
 
+        // --- ENHANCED OUTPUT FORMATTING ---
+        formatMissionOutput(output) {
+            if (!output) return 'No output available';
+            
+            try {
+                // Try to parse as JSON first
+                const parsed = JSON.parse(output);
+                return this.formatJsonOutput(parsed);
+            } catch {
+                // Handle as plain text with enhanced formatting
+                return this.formatTextOutput(output);
+            }
+        },
+        
+        formatJsonOutput(jsonData) {
+            // Enhanced JSON formatting with syntax highlighting
+            const formatted = JSON.stringify(jsonData, null, 2);
+            return this.addSyntaxHighlighting(formatted);
+        },
+        
+        formatTextOutput(text) {
+            // Enhanced text formatting with better readability
+            return text
+                .replace(/\n\s*\n/g, '\n\n') // Clean up extra whitespace
+                .replace(/^(\[.*?\])/gm, '<span class="output-timestamp">$1</span>') // Highlight timestamps
+                .replace(/(\b(?:ERROR|WARN|INFO|DEBUG)\b)/g, '<span class="output-level output-level-$1">$1</span>') // Highlight log levels
+                .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" class="output-link">$1</a>') // Make URLs clickable
+                .replace(/(`[^`]+`)/g, '<span class="output-code">$1</span>') // Highlight inline code
+                .replace(/(\b\d+(?:\.\d+)?(?:ms|s|MB|KB|GB)\b)/g, '<span class="output-metric">$1</span>'); // Highlight metrics
+        },
+        
+        addSyntaxHighlighting(json) {
+            return json
+                .replace(/("[\w]+":\s*"[^"]*")/g, '<span class="json-string">$1</span>')
+                .replace(/("[\w]+":\s*\d+)/g, '<span class="json-number">$1</span>')
+                .replace(/("[\w]+":\s*(?:true|false))/g, '<span class="json-boolean">$1</span>')
+                .replace(/("[\w]+":\s*null)/g, '<span class="json-null">$1</span>')
+                .replace(/([\{\[\}])/g, '<span class="json-bracket">$1</span>');
+        },
+        
+        // Copy mission output to clipboard
+        copyMissionOutput() {
+            const outputElement = document.querySelector('.enhanced-output-display');
+            if (outputElement) {
+                // Get plain text without HTML formatting
+                const text = outputElement.textContent || outputElement.innerText;
+                navigator.clipboard.writeText(text).then(() => {
+                    // Show success feedback
+                    const btn = event.target.closest('button');
+                    const originalText = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    btn.classList.add('btn-success');
+                    btn.classList.remove('btn-outline-secondary');
+                    
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.classList.remove('btn-success');
+                        btn.classList.add('btn-outline-secondary');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy text: ', err);
+                    alert('Failed to copy output to clipboard');
+                });
+            }
+        },
+
+        // Enhanced mission result processing
+        processMissionResult(mission) {
+            if (!mission.result) return null;
+            
+            const processed = {
+                raw: mission.result,
+                formatted: this.formatMissionOutput(mission.result),
+                metadata: {
+                    size: mission.result.length,
+                    lines: mission.result.split('\n').length,
+                    type: this.detectOutputType(mission.result)
+                }
+            };
+            
+            // Add execution metrics if available
+            if (mission.execution_time) {
+                processed.metadata.execution_time = mission.execution_time;
+            }
+            
+            return processed;
+        },
+        
+        detectOutputType(output) {
+            try {
+                JSON.parse(output);
+                return 'json';
+            } catch {
+                if (output.includes('ERROR') || output.includes('WARN')) {
+                    return 'log';
+                } else if (output.includes('http://') || output.includes('https://')) {
+                    return 'mixed';
+                } else {
+                    return 'text';
+                }
+            }
+        },
+        
+        // Enhanced event detail formatting
+        formatEventPayload(payload) {
+            if (!payload) return 'No payload data';
+            
+            if (typeof payload === 'string') {
+                try {
+                    const parsed = JSON.parse(payload);
+                    return this.formatJsonOutput(parsed);
+                } catch {
+                    return this.formatTextOutput(payload);
+                }
+            } else if (typeof payload === 'object') {
+                return this.formatJsonOutput(payload);
+            } else {
+                return String(payload);
+            }
+        },
+
         // --- NOTIFICATIONS ---
         showNotification(message, type = 'info') {
             // Simple notification system
@@ -1150,10 +1271,117 @@ function sentinelApp() {
         },
 
         // --- MODAL FUNCTIONS ---
-        // Event Modal Functions (for Live Stream)
-        openEventModal(event) { 
-            this.selectedEvent = event; 
-            this.showEventModal = true; 
+        // Event Modal Functions (for Live Stream) - Enhanced with detailed tracking
+        async openEventModal(event) {
+            this.selectedEvent = { ...event, loading: true };
+            this.showEventModal = true;
+            
+            // Fetch detailed event information if event_id is available
+            if (event.event_id) {
+                try {
+                    const response = await fetch(`/api/events/${event.event_id}/details`);
+                    if (response.ok) {
+                        const eventDetails = await response.json();
+                        this.selectedEvent = { ...event, ...eventDetails, loading: false };
+                    } else {
+                        // Enhanced event details from local data
+                        this.selectedEvent = {
+                            ...event,
+                            loading: false,
+                            enhanced_details: this.enhanceEventDetails(event)
+                        };
+                    }
+                } catch (error) {
+                    console.warn('Failed to fetch detailed event data:', error);
+                    this.selectedEvent = {
+                        ...event,
+                        loading: false,
+                        enhanced_details: this.enhanceEventDetails(event)
+                    };
+                }
+            }
+        },
+        
+        // Enhance event details with additional context
+        enhanceEventDetails(event) {
+            const enhanced = {
+                context: {},
+                metrics: {},
+                related_events: [],
+                technical_details: {}
+            };
+            
+            // Add context based on event type
+            switch (event.event_type) {
+                case 'mission_start':
+                    enhanced.context.description = 'Mission execution initiated';
+                    enhanced.context.importance = 'High - System activity increased';
+                    break;
+                case 'agent_deployment':
+                    enhanced.context.description = 'AI agent deployed for task execution';
+                    enhanced.context.importance = 'Medium - Resource allocation active';
+                    break;
+                case 'system_optimization':
+                    enhanced.context.description = 'System performance optimization executed';
+                    enhanced.context.importance = 'High - System efficiency improved';
+                    break;
+                default:
+                    enhanced.context.description = `${event.event_type.replace(/_/g, ' ')} event occurred`;
+                    enhanced.context.importance = 'Standard system event';
+            }
+            
+            // Add timing metrics
+            enhanced.metrics.age = this.getEventAge(event.timestamp);
+            enhanced.metrics.frequency = this.getEventFrequency(event.event_type);
+            
+            // Add technical details
+            enhanced.technical_details.source_component = event.source || 'system';
+            enhanced.technical_details.severity_level = event.severity || 'INFO';
+            enhanced.technical_details.payload_size = event.payload ? JSON.stringify(event.payload).length : 0;
+            
+            // Find related events
+            enhanced.related_events = this.findRelatedEvents(event);
+            
+            return enhanced;
+        },
+        
+        // Get event age in human readable format
+        getEventAge(timestamp) {
+            const eventTime = new Date(timestamp);
+            const now = new Date();
+            const diffMs = now - eventTime;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffSecs = Math.floor((diffMs % 60000) / 1000);
+            
+            if (diffMins > 0) {
+                return `${diffMins}m ${diffSecs}s ago`;
+            } else {
+                return `${diffSecs}s ago`;
+            }
+        },
+        
+        // Get event frequency
+        getEventFrequency(eventType) {
+            const matching = this.liveStreamEvents.filter(e => e.event_type === eventType);
+            const totalEvents = this.liveStreamEvents.length;
+            const percentage = totalEvents > 0 ? ((matching.length / totalEvents) * 100).toFixed(1) : 0;
+            return `${matching.length} occurrences (${percentage}%)`;
+        },
+        
+        // Find related events
+        findRelatedEvents(event) {
+            return this.liveStreamEvents
+                .filter(e => 
+                    e.event_id !== event.event_id && 
+                    (e.source === event.source || e.event_type === event.event_type)
+                )
+                .slice(0, 5)
+                .map(e => ({
+                    event_id: e.event_id,
+                    event_type: e.event_type,
+                    timestamp: e.timestamp,
+                    message: e.message
+                }));
         },
         
         closeEventModal() { 
@@ -1164,7 +1392,7 @@ function sentinelApp() {
         // --- Mission Page Functions (Updated for Alpine Modal) ---
         async openMissionModal(mission) {
             // Set basic mission data first for immediate display
-            this.selectedMission = mission;
+            this.selectedMission = { ...mission, loading: true };
             this.showMissionModal = true;
             
             // Fetch complete mission details including result
@@ -1173,14 +1401,66 @@ function sentinelApp() {
                 if (response.ok) {
                     const data = await response.json();
                     if (data.success) {
+                        // Process mission result with enhanced formatting
+                        const processedMission = {
+                            ...data.mission,
+                            loading: false,
+                            processedResult: this.processMissionResult(data.mission),
+                            executionMetrics: this.calculateExecutionMetrics(data.mission)
+                        };
+                        
                         // Update the selected mission with complete details
-                        this.selectedMission = data.mission;
+                        this.selectedMission = processedMission;
+                    } else {
+                        this.selectedMission = { ...mission, loading: false, error: 'Failed to load mission details' };
                     }
+                } else {
+                    this.selectedMission = { ...mission, loading: false, error: 'Mission not found' };
                 }
             } catch (error) {
-                console.error('Failed to fetch mission details:', error);
-                // Keep the basic mission data if detailed fetch fails
+                console.error('Error fetching mission details:', error);
+                this.selectedMission = { ...mission, loading: false, error: 'Connection error' };
             }
+        },
+        
+        // Calculate execution metrics for enhanced display
+        calculateExecutionMetrics(mission) {
+            const metrics = {
+                duration: 'Unknown',
+                efficiency: 'N/A',
+                status_progression: [],
+                performance_grade: 'B'
+            };
+            
+            // Calculate duration
+            if (mission.created_at && mission.completed_at) {
+                const start = new Date(mission.created_at);
+                const end = new Date(mission.completed_at);
+                const durationMs = end - start;
+                metrics.duration = this.formatDuration(Math.floor(durationMs / 1000));
+            } else if (mission.created_at) {
+                const start = new Date(mission.created_at);
+                const now = new Date();
+                const durationMs = now - start;
+                metrics.duration = this.formatDuration(Math.floor(durationMs / 1000)) + ' (ongoing)';
+            }
+            
+            // Determine performance grade
+            if (mission.status === 'completed' && mission.execution_time) {
+                if (mission.execution_time < 30) {
+                    metrics.performance_grade = 'A+';
+                } else if (mission.execution_time < 60) {
+                    metrics.performance_grade = 'A';
+                } else if (mission.execution_time < 120) {
+                    metrics.performance_grade = 'B+';
+                } else {
+                    metrics.performance_grade = 'B';
+                }
+            } else if (mission.status === 'failed') {
+                metrics.performance_grade = 'F';
+            }
+            
+            return metrics;
         },
 
         closeMissionModal() {

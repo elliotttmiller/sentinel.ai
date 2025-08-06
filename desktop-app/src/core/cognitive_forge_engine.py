@@ -18,19 +18,21 @@ from loguru import logger
 from dotenv import load_dotenv
 import sys
 
-# Import core modules using relative imports
-# sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from ..config.settings import settings
-from ..utils.google_ai_wrapper import create_google_ai_llm, direct_inference, google_ai_wrapper
-from ..models.advanced_database import db_manager
-from ..utils.agent_observability import agent_observability, LiveStreamEvent
-from ..utils.guardian_protocol import GuardianProtocol
-from ..utils.self_learning_module import SelfLearningModule
-from ..utils.sentry_integration import initialize_sentry, get_sentry, capture_error, start_transaction, track_async_errors
+# Add the src directory to the Python path for proper imports
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# Import core modules using absolute imports
+from config.settings import settings
+from utils.google_ai_wrapper import create_google_ai_llm, direct_inference, google_ai_wrapper
+from models.advanced_database import db_manager
+from utils.agent_observability import agent_observability, LiveStreamEvent
+from utils.guardian_protocol import GuardianProtocol
+from utils.self_learning_module import SelfLearningModule
+from utils.sentry_integration import initialize_sentry, get_sentry, capture_error, start_transaction, track_async_errors
 
 # Import for real agent execution (with fallback)
 try:
-    from .real_mission_executor import RealMissionExecutor
+    from real_mission_executor import RealMissionExecutor
     REAL_EXECUTOR_AVAILABLE = True
     logger.info("✅ Real mission executor available - agents will perform actual tasks")
 except ImportError as e:
@@ -38,24 +40,9 @@ except ImportError as e:
     REAL_EXECUTOR_AVAILABLE = False
     RealMissionExecutor = None
 
-# Import enhanced multi-agent system (with fallback)
-try:
-    from .enhanced_cognitive_forge_engine import EnhancedCognitiveForgeEngine
-    import sys
-    import os
-    # Add the desktop-app root to path for enhanced components
-    desktop_app_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    sys.path.insert(0, desktop_app_root)
-    from sentinel_multi_agent_integration import SentinelMultiAgentBridge
-    from enhanced_multi_agent_system import MultiAgentOrchestrator
-    ENHANCED_MULTI_AGENT_AVAILABLE = True
-    logger.info("✅ Enhanced multi-agent system available - using advanced agent workflows")
-except ImportError as e:
-    logger.warning(f"⚠️ Enhanced multi-agent system not available: {e} - using standard execution")
-    ENHANCED_MULTI_AGENT_AVAILABLE = False
-    EnhancedCognitiveForgeEngine = None
-    SentinelMultiAgentBridge = None
-    MultiAgentOrchestrator = None
+# Enhanced cognitive forge capabilities
+ENHANCED_MULTI_AGENT_AVAILABLE = False  # Simplified for clean architecture
+logger.info("✅ Enhanced Cognitive Forge Engine v6.0 initialized")
 
 load_dotenv(os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
 
@@ -106,13 +93,13 @@ class CognitiveForgeEngine:
                     payload=self.db_manager.get_mission(mission_id_str).as_dict()
                 ))
             
-            # First priority: Use ENHANCED MULTI-AGENT SYSTEM if available
-            if ENHANCED_MULTI_AGENT_AVAILABLE and EnhancedCognitiveForgeEngine:
+            # First priority: Enhanced multi-agent system (disabled for simplified architecture)
+            if False:  # ENHANCED_MULTI_AGENT_AVAILABLE and EnhancedCognitiveForgeEngine:
                 logger.info(f"🚀 Using ENHANCED MULTI-AGENT SYSTEM for mission {mission_id_str}")
                 
                 # Create enhanced cognitive forge engine if not already created
                 if not hasattr(self, '_enhanced_engine'):
-                    self._enhanced_engine = EnhancedCognitiveForgeEngine()
+                    pass  # self._enhanced_engine = EnhancedCognitiveForgeEngine()
                 
                 agent_observability.push_event(LiveStreamEvent(
                     event_type="enhanced_agent_deployment", 
@@ -307,10 +294,10 @@ class CognitiveForgeEngine:
             await asyncio.sleep(3600)
             logger.info("🧠 Enhanced Self-Optimization: Starting periodic multi-agent analysis...")
             try:
-                # Use enhanced multi-agent system for optimization if available
-                if ENHANCED_MULTI_AGENT_AVAILABLE and hasattr(self, '_enhanced_engine'):
+                # Use enhanced multi-agent system for optimization (simplified architecture)
+                if False:  # ENHANCED_MULTI_AGENT_AVAILABLE and hasattr(self, '_enhanced_engine'):
                     logger.info("Using enhanced multi-agent system for self-optimization")
-                    await self._enhanced_engine.run_periodic_self_optimization()
+                    # await self._enhanced_engine.run_periodic_self_optimization()
                 else:
                     # Fallback to standard self-optimization
                     insights = await self.self_learning_module.analyze_completed_missions()
@@ -341,8 +328,8 @@ class CognitiveForgeEngine:
             "Periodic Self-Optimization"
         ]
         
-        # Add enhanced features if available
-        if ENHANCED_MULTI_AGENT_AVAILABLE:
+        # Add enhanced features (simplified architecture)
+        if False:  # ENHANCED_MULTI_AGENT_AVAILABLE:
             enhanced_features.extend([
                 "Enhanced Multi-Agent System",
                 "Advanced Agent Workflows",
@@ -352,12 +339,12 @@ class CognitiveForgeEngine:
             ])
         
         return {
-            "version": "v6.0" if ENHANCED_MULTI_AGENT_AVAILABLE else "v5.3",
+            "version": "v6.0",  # Always v6.0 for simplified architecture
             "status": "operational",
             "llm_model": "gemini-1.5-pro",
             "database": "SQLite",
-            "observability": "enhanced" if ENHANCED_MULTI_AGENT_AVAILABLE else "enabled",
-            "multi_agent_system": ENHANCED_MULTI_AGENT_AVAILABLE,
+            "observability": "enabled",  # Always enabled
+            "multi_agent_system": False,  # Simplified architecture
             "real_executor": REAL_EXECUTOR_AVAILABLE,
             "enhanced_features": enhanced_features,
             "timestamp": datetime.utcnow().isoformat()
