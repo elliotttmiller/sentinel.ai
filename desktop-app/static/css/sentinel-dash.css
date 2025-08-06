@@ -3122,7 +3122,305 @@ body .wrapper .main-panel .content .ai-agents-page .activity-list:hover::-webkit
   max-height: 200px;
 }
 
-/* Enhanced Event Styling for Missions Page */
+/* === Enhanced Mission Observability Styling === */
+
+.mission-modal .nav-tabs.mission-tabs {
+  border-bottom: 2px solid #2b2b3e;
+  margin-bottom: 1.5rem;
+}
+
+.mission-modal .nav-tabs.mission-tabs .nav-link {
+  color: #9ca3af;
+  border: none;
+  background: transparent;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.3s ease;
+  border-radius: 0;
+  border-bottom: 2px solid transparent;
+  font-weight: 500;
+}
+
+.mission-modal .nav-tabs.mission-tabs .nav-link i {
+  margin-right: 0.5rem;
+}
+
+.mission-modal .nav-tabs.mission-tabs .nav-link.active,
+.mission-modal .nav-tabs.mission-tabs .nav-link:hover {
+  color: #40c057;
+  background: rgba(64, 192, 87, 0.1);
+  border-bottom-color: #40c057;
+}
+
+/* Enhanced Mission Detail Styling */
+.mission-detail-section {
+  background: linear-gradient(145deg, #1e1e2f, #252540);
+  border: 1px solid rgba(64, 192, 87, 0.2);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.mission-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.mission-detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.detail-label {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.detail-value {
+  color: #e0e0e0;
+  font-weight: 600;
+}
+
+.performance-grade {
+  color: #40c057;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.mission-prompt-section {
+  border-top: 1px solid rgba(64, 192, 87, 0.2);
+  padding-top: 1rem;
+}
+
+.mission-prompt {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(64, 192, 87, 0.2);
+  border-radius: 6px;
+  padding: 1rem;
+  color: #e0e0e0;
+  font-family: 'Monaco', 'Consolas', monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+/* Enhanced Tab Content Styling */
+.tab-pane-custom {
+  min-height: 300px;
+  padding: 1.5rem;
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  border-radius: 8px;
+  border: 1px solid rgba(64, 192, 87, 0.1);
+}
+
+.thought-bubble-container {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.thought-bubble {
+  background: linear-gradient(135deg, #40c057, #51cf66);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(64, 192, 87, 0.3);
+  font-style: italic;
+  animation: thoughtPulse 2s ease-in-out infinite;
+}
+
+.thought-bubble i {
+  margin-right: 0.5rem;
+}
+
+.thought-bubble::before {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 30px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #51cf66;
+}
+
+@keyframes thoughtPulse {
+  0%, 100% { box-shadow: 0 4px 15px rgba(64, 192, 87, 0.3); }
+  50% { box-shadow: 0 6px 20px rgba(64, 192, 87, 0.5); }
+}
+
+/* Enhanced Events Feed */
+.live-events-feed {
+  margin-top: 1rem;
+}
+
+.events-container {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid rgba(64, 192, 87, 0.2);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.event-item {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.event-item:hover {
+  background: rgba(64, 192, 87, 0.1);
+  transform: translateX(4px);
+}
+
+.event-item:last-child {
+  border-bottom: none;
+}
+
+.event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.event-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.event-timestamp {
+  color: #9ca3af;
+  font-size: 0.75rem;
+  font-family: monospace;
+}
+
+.event-type {
+  color: #60a5fa;
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+}
+
+.event-message {
+  color: #e0e0e0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.no-events-message {
+  padding: 2rem;
+  text-align: center;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* Enhanced Workspace Styling */
+.workspace-section {
+  padding: 1rem;
+}
+
+.workspace-contents {
+  border: 1px solid rgba(64, 192, 87, 0.2);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.workspace-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background 0.3s ease;
+}
+
+.workspace-item:hover {
+  background: rgba(64, 192, 87, 0.1);
+}
+
+.workspace-item:last-child {
+  border-bottom: none;
+}
+
+/* Enhanced Service Logs */
+.service-logs {
+  border: 1px solid rgba(64, 192, 87, 0.2);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.service-logs pre {
+  margin: 0;
+  padding: 1.5rem;
+  color: #e0e0e0;
+  font-family: 'Monaco', 'Consolas', monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Empty State Styling */
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.empty-state i {
+  margin-right: 0.5rem;
+  opacity: 0.7;
+}
+
+/* Metric Badges for Output */
+.output-metrics {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(64, 192, 87, 0.2);
+}
+
+.metric-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.metric-badge.success {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.metric-badge.info {
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.metric-badge.warning {
+  background: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
 .clickable-event {
   cursor: pointer;
   position: relative;

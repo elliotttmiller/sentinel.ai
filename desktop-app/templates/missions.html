@@ -368,89 +368,224 @@
                 </div>
 
                 <!-- Mission Details Modal (Redesigned for Real-time Insights) -->
-                <div class="mission-modal" x-show="showMissionModal" x-transition>
-                    <div class="mission-modal-content">
+                <div class="mission-modal" x-show="showMissionModal" x-transition @click.self="closeMissionModal()">
+                    <div class="mission-modal-content" @click.stop>
                         <div class="mission-modal-header">
-                            <h5 class="mission-modal-title">Mission Insights: <span x-text="selectedMission?.mission_id_str"></span></h5>
+                            <h5 class="mission-modal-title">
+                                <i class="fas fa-rocket text-primary"></i>
+                                Mission Insights: <span x-text="selectedMission?.mission_id_str"></span>
+                            </h5>
                             <button class="mission-modal-close" @click="closeMissionModal()">&times;</button>
                         </div>
                         <div class="mission-modal-body" x-show="selectedMission">
-                            <!-- Mission Overview -->
-                            <div class="mission-detail-section">
+                            
+                            <!-- Mission Overview Section -->
+                            <div class="mission-detail-section mb-4" x-show="selectedMission && !selectedMission.loading">
                                 <div class="mission-detail-grid">
-                                    <!-- ... (mission details like status, priority, etc.) ... -->
+                                    <div class="mission-detail-item">
+                                        <span class="detail-label">Status</span>
+                                        <span class="badge detail-value" :class="getStatusClass(selectedMission.status)" x-text="selectedMission.status"></span>
+                                    </div>
+                                    <div class="mission-detail-item">
+                                        <span class="detail-label">Agent Type</span>
+                                        <span class="detail-value" x-text="selectedMission.agent_type"></span>
+                                    </div>
+                                    <div class="mission-detail-item">
+                                        <span class="detail-label">Priority</span>
+                                        <span class="badge detail-value" :class="getPriorityClass(selectedMission.priority)" x-text="selectedMission.priority"></span>
+                                    </div>
+                                    <div class="mission-detail-item" x-show="selectedMission.executionMetrics?.duration">
+                                        <span class="detail-label">Duration</span>
+                                        <span class="detail-value" x-text="selectedMission.executionMetrics.duration"></span>
+                                    </div>
+                                    <div class="mission-detail-item" x-show="selectedMission.executionMetrics?.performance_grade">
+                                        <span class="detail-label">Performance</span>
+                                        <span class="detail-value performance-grade" x-text="selectedMission.executionMetrics.performance_grade"></span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Mission Prompt Display -->
+                                <div class="mission-prompt-section mt-3">
+                                    <h6 class="text-info"><i class="fas fa-comment-dots"></i> Mission Prompt</h6>
+                                    <div class="mission-prompt" x-text="selectedMission.prompt"></div>
                                 </div>
                             </div>
-+
-+                            <!-- Tabbed Interface for Live Data -->
-+                            <div x-data="{ tab: 'live' }">
-+                                <ul class="nav nav-tabs">
-+                                    <li class="nav-item"><a class="nav-link" :class="{'active': tab === 'live'}" @click.prevent="tab = 'live'" href="#">Live Agent Feed</a></li>
-+                                    <li class="nav-item"><a class="nav-link" :class="{'active': tab === 'workspace'}" @click.prevent="tab = 'workspace'" href="#">Workspace</a></li>
-+                                    <li class="nav-item"><a class="nav-link" :class="{'active': tab === 'sentry'}" @click.prevent="tab = 'sentry'" href="#">Sentry</a></li>
-+                                    <li class="nav-item"><a class="nav-link" :class="{'active': tab === 'weave'}" @click.prevent="tab = 'weave'" href="#">Weave</a></li>
-+                                    <li class="nav-item"><a class="nav-link" :class="{'active': tab === 'wandb'}" @click.prevent="tab = 'wandb'" href="#">Wandb</a></li>
-+                                    <li class="nav-item"><a class="nav-link" :class="{'active': tab === 'output'}" @click.prevent="tab = 'output'" href="#">Output</a></li>
-+                                </ul>
-+
-+                                <div class="tab-content mt-3">
-+                                    <!-- Live Agent Feed -->
-+                                    <div x-show="tab === 'live'">
-+                                        <div class="insight-section">
-+                                            <div class="thought-bubble" x-text="selectedMission?.current_thought || 'Awaiting agent thoughts...'"></div>
-+                                            <div class="live-events-feed">
-+                                                <template x-for="event in selectedMission?.events" :key="event.id">
-+                                                    <div class="event-item">
-+                                                        <span class="event-timestamp" x-text="formatTimestamp(event.timestamp)"></span>
-+                                                        <span class="event-message" x-text="event.message"></span>
-+                                                    </div>
-+                                                </template>
-+                                                <div x-show="!selectedMission?.events?.length">No events yet.</div>
-+                                            </div>
-+                                        </div>
-+                                    </div>
-+                                    
-+                                    <!-- Workspace Contents -->
-+                                    <div x-show="tab === 'workspace'">
-+                                        <div class="workspace-section">
-+                                            <template x-if="selectedMission?.workspace">
-+                                                <div>
-+                                                    <h6 class="text-success">
-+                                                        <i class="fas fa-folder-open"></i> 
-+                                                        Mission Workspace: <code x-text="selectedMission.workspace.path"></code>
-+                                                    </h6>
-+                                                    <div class="workspace-contents mt-3">
-+                                                        <template x-for="item in selectedMission.workspace.items" :key="item.path">
-+                                                            <div class="workspace-item d-flex align-items-center mb-2">
-+                                                                <i class="fas" :class="item.type === 'directory' ? 'fa-folder text-warning' : 'fa-file text-info'"></i>
-+                                                                <span class="ml-2" x-text="item.path"></span>
-+                                                                <template x-if="item.type === 'file'">
-+                                                                    <small class="ml-auto text-muted" x-text="formatFileSize(item.size)"></small>
-+                                                                </template>
-+                                                            </div>
-+                                                        </template>
-+                                                        <div x-show="!selectedMission.workspace.items?.length" class="text-muted">
-+                                                            <i class="fas fa-info-circle"></i> No files created yet.
-+                                                        </div>
-+                                                    </div>
-+                                                </div>
-+                                            </template>
-+                                            <div x-show="!selectedMission?.workspace" class="text-muted">
-+                                                <i class="fas fa-hourglass-half"></i> Workspace information will appear when the mission creates files.
-+                                            </div>
-+                                        </div>
-+                                    </div>
-+                                    
-+                                    <!-- Service Logs -->
-+                                    <div x-show="tab === 'sentry'"><pre x-text="selectedMission?.sentry_logs || 'No Sentry logs.'"></pre></div>
-+                                    <div x-show="tab === 'weave'"><pre x-text="selectedMission?.weave_logs || 'No Weave logs.'"></pre></div>
-+                                    <div x-show="tab === 'wandb'"><pre x-text="selectedMission?.wandb_logs || 'No Wandb logs.'"></pre></div>
-+                                    <div x-show="tab === 'output'"><pre x-text="selectedMission?.result || 'Mission has not produced a final result.'"></pre></div>
-+                                </div>
-+                            </div>
-+                        </div>
-+                    </div>
-+                </div>
+
+                            <!-- Loading State -->
+                            <div x-show="selectedMission?.loading" class="text-center py-5">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <p class="mt-3 text-muted">Loading comprehensive observability data...</p>
+                            </div>
+
+                            <!-- Tabbed Interface for Live Data -->
+                            <div x-data="{ tab: 'live' }" x-show="selectedMission && !selectedMission.loading">
+                                <ul class="nav nav-tabs mission-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link" :class="{'active': tab === 'live'}" @click.prevent="tab = 'live'" href="#">
+                                            <i class="fas fa-broadcast-tower"></i> Live Agent Feed
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" :class="{'active': tab === 'workspace'}" @click.prevent="tab = 'workspace'" href="#">
+                                            <i class="fas fa-folder-open"></i> Workspace
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" :class="{'active': tab === 'sentry'}" @click.prevent="tab = 'sentry'" href="#">
+                                            <i class="fas fa-bug"></i> Sentry
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" :class="{'active': tab === 'weave'}" @click.prevent="tab = 'weave'" href="#">
+                                            <i class="fas fa-project-diagram"></i> Weave
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" :class="{'active': tab === 'wandb'}" @click.prevent="tab = 'wandb'" href="#">
+                                            <i class="fas fa-chart-line"></i> Wandb
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" :class="{'active': tab === 'output'}" @click.prevent="tab = 'output'" href="#">
+                                            <i class="fas fa-terminal"></i> Output
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content mt-4">
+                                    <!-- Live Agent Feed -->
+                                    <div x-show="tab === 'live'" class="tab-pane-custom">
+                                        <div class="insight-section">
+                                            <!-- Agent Thought Bubble -->
+                                            <div class="thought-bubble-container mb-4">
+                                                <div class="thought-bubble">
+                                                    <i class="fas fa-brain text-primary"></i>
+                                                    <span x-text="selectedMission?.current_thought || 'Awaiting agent thoughts...'"></span>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Real-time Events Feed -->
+                                            <div class="live-events-feed">
+                                                <h6 class="text-success mb-3">
+                                                    <i class="fas fa-stream"></i> Live Events Stream
+                                                </h6>
+                                                <div class="events-container">
+                                                    <template x-for="event in selectedMission?.events || []" :key="event.id">
+                                                        <div class="event-item clickable-event" @click="openEventModal(event.id || event)">
+                                                            <div class="event-header">
+                                                                <span class="event-timestamp" x-text="formatTimestamp(event.timestamp)"></span>
+                                                                <span class="severity-badge" :class="'severity-' + (event.severity || 'info')" x-text="event.severity"></span>
+                                                            </div>
+                                                            <div class="event-content">
+                                                                <span class="event-type" x-text="event.type"></span>
+                                                                <span class="event-message" x-text="event.message"></span>
+                                                            </div>
+                                                            <i class="fas fa-external-link-alt event-expand-icon"></i>
+                                                        </div>
+                                                    </template>
+                                                    <div x-show="!selectedMission?.events?.length" class="no-events-message">
+                                                        <i class="fas fa-info-circle"></i> No events yet. Events will appear as the mission progresses.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Workspace Contents -->
+                                    <div x-show="tab === 'workspace'" class="tab-pane-custom">
+                                        <div class="workspace-section">
+                                            <template x-if="selectedMission?.workspace">
+                                                <div>
+                                                    <h6 class="text-success mb-3">
+                                                        <i class="fas fa-folder-open"></i> 
+                                                        Mission Workspace: <code x-text="selectedMission.workspace.path"></code>
+                                                    </h6>
+                                                    <div class="workspace-contents">
+                                                        <template x-for="item in selectedMission.workspace.items" :key="item.path">
+                                                            <div class="workspace-item d-flex align-items-center mb-2 p-2">
+                                                                <i class="fas mr-3" :class="item.type === 'directory' ? 'fa-folder text-warning' : 'fa-file text-info'"></i>
+                                                                <span class="flex-grow-1" x-text="item.path"></span>
+                                                                <template x-if="item.type === 'file' && item.size">
+                                                                    <small class="text-muted" x-text="formatFileSize(item.size)"></small>
+                                                                </template>
+                                                            </div>
+                                                        </template>
+                                                        <div x-show="!selectedMission.workspace.items?.length" class="empty-state">
+                                                            <i class="fas fa-info-circle"></i> No files created yet.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                            <div x-show="!selectedMission?.workspace" class="empty-state">
+                                                <i class="fas fa-hourglass-half"></i> Workspace information will appear when the mission creates files.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Service Logs Tabs -->
+                                    <div x-show="tab === 'sentry'" class="tab-pane-custom">
+                                        <h6 class="text-danger mb-3"><i class="fas fa-bug"></i> Sentry Error Monitoring</h6>
+                                        <div class="service-logs">
+                                            <pre x-text="selectedMission?.sentry_logs || 'Loading Sentry logs...'"></pre>
+                                        </div>
+                                    </div>
+                                    
+                                    <div x-show="tab === 'weave'" class="tab-pane-custom">
+                                        <h6 class="text-info mb-3"><i class="fas fa-project-diagram"></i> Weave Execution Traces</h6>
+                                        <div class="service-logs">
+                                            <pre x-text="selectedMission?.weave_logs || 'Loading Weave traces...'"></pre>
+                                        </div>
+                                    </div>
+                                    
+                                    <div x-show="tab === 'wandb'" class="tab-pane-custom">
+                                        <h6 class="text-success mb-3"><i class="fas fa-chart-line"></i> Wandb Performance Metrics</h6>
+                                        <div class="service-logs">
+                                            <pre x-text="selectedMission?.wandb_logs || 'Loading Wandb metrics...'"></pre>
+                                        </div>
+                                    </div>
+                                    
+                                    <div x-show="tab === 'output'" class="tab-pane-custom">
+                                        <h6 class="text-primary mb-3"><i class="fas fa-terminal"></i> Mission Output</h6>
+                                        <!-- Enhanced Professional Output Display -->
+                                        <div class="mission-output-container">
+                                            <div class="output-header">
+                                                <div class="output-controls">
+                                                    <button class="btn btn-sm btn-outline-primary" @click="formatMissionOutput()">
+                                                        <i class="fas fa-magic"></i> Format
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-secondary" @click="copyMissionOutput()">
+                                                        <i class="fas fa-copy"></i> Copy
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="enhanced-output-display mission-output" x-html="formatMissionOutput(selectedMission?.result || 'Mission has not produced a final result.')"></div>
+                                            
+                                            <!-- Performance Metrics for Output -->
+                                            <template x-if="selectedMission?.status === 'completed'">
+                                                <div class="output-metrics">
+                                                    <div class="metric-badge success">
+                                                        <i class="fas fa-check-circle"></i>
+                                                        <span>Completed</span>
+                                                    </div>
+                                                    <div class="metric-badge info" x-show="selectedMission?.execution_time">
+                                                        <i class="fas fa-clock"></i>
+                                                        <span x-text="'Duration: ' + (selectedMission?.execution_time || 'N/A')"></span>
+                                                    </div>
+                                                    <div class="metric-badge" :class="selectedMission?.result?.includes('SIMULATION') ? 'warning' : 'success'">
+                                                        <i class="fas fa-cog"></i>
+                                                        <span x-text="selectedMission?.result?.includes('SIMULATION') ? 'Simulation Mode' : 'Production Mode'"></span>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
