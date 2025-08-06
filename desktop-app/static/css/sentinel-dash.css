@@ -1648,6 +1648,110 @@ body {
   font-size: 0.75rem;
 }
 
+/* Mission Modal Mobile Responsiveness */
+@media (max-width: 768px) {
+  .mission-modal-content {
+    width: 95%;
+    max-height: 95vh;
+    margin: 2.5vh auto;
+    border-radius: 8px;
+  }
+  
+  .mission-modal-header {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+  
+  .mission-modal-title {
+    font-size: 1.25rem;
+    line-height: 1.3;
+  }
+  
+  .mission-modal-body {
+    padding: 1rem;
+  }
+  
+  /* Performance cards in mobile */
+  .performance-cards {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .performance-card {
+    min-height: auto;
+    padding: 0.75rem;
+  }
+  
+  /* Tab navigation in mobile */
+  .nav-tabs-enhanced {
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.875rem;
+  }
+  
+  .nav-tabs-enhanced .nav-link {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+  
+  /* Event items in mobile */
+  .event-item {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  .event-item .d-flex {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .event-timestamp {
+    order: -1;
+    font-size: 0.75rem;
+  }
+  
+  .event-type-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+  
+  /* Live feed header mobile */
+  .live-feed-header {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+  }
+  
+  .live-feed-header .btn {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mission-modal-content {
+    width: 98%;
+    max-height: 98vh;
+    margin: 1vh auto;
+    border-radius: 4px;
+  }
+  
+  .mission-modal-header {
+    padding: 0.75rem;
+  }
+  
+  .mission-modal-body {
+    padding: 0.75rem;
+  }
+  
+  .mission-modal-title {
+    font-size: 1.1rem;
+  }
+}
+
 /* Enhanced Mission Output */
 .mission-output-enhanced {
   position: relative;

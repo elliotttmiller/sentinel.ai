@@ -64,21 +64,32 @@ function sentinelApp() {
             return this.missions.filter(m => m.status === 'failed');
         },
 
-        // Get events for display (limited to 10 unless showAllEvents is true)
+        // Cache for performance optimization
+        _cachedSortedEvents: null,
+        _lastEventsHash: null,
+
+        // Get events for display (limited to 10 unless showAllEvents is true) - Optimized with caching
         displayEvents() {
             if (!this.selectedMission?.events) {
                 return [];
             }
             
-            // Sort events by timestamp (most recent first)
-            const sortedEvents = [...this.selectedMission.events].sort((a, b) => {
-                const timeA = new Date(a.timestamp || a.created_at || 0);
-                const timeB = new Date(b.timestamp || b.created_at || 0);
-                return timeB - timeA;
-            });
+            // Create a simple hash of the events array to detect changes
+            const eventsHash = JSON.stringify(this.selectedMission.events.map(e => e.timestamp || e.created_at || e.id));
+            
+            // Only re-sort if events have changed
+            if (this._lastEventsHash !== eventsHash || !this._cachedSortedEvents) {
+                console.log('🔄 Re-sorting events (events changed)');
+                this._cachedSortedEvents = [...this.selectedMission.events].sort((a, b) => {
+                    const timeA = new Date(a.timestamp || a.created_at || 0);
+                    const timeB = new Date(b.timestamp || b.created_at || 0);
+                    return timeB - timeA;
+                });
+                this._lastEventsHash = eventsHash;
+            }
             
             // Return limited or all events based on showAllEvents flag
-            return this.showAllEvents ? sortedEvents : sortedEvents.slice(0, 10);
+            return this.showAllEvents ? this._cachedSortedEvents : this._cachedSortedEvents.slice(0, 10);
         },
 
         // Check if there are more events to show
@@ -87,6 +98,58 @@ function sentinelApp() {
         },
 
         // --- INITIALIZATION ---
+
+        initKeyboardNavigation() {
+            console.log("⌨️ Setting up keyboard navigation...");
+            
+            // Global keyboard event handler
+            document.addEventListener('keydown', (e) => {
+                // ESC key - close modals
+                if (e.key === 'Escape') {
+                    if (this.showMissionModal) {
+                        this.closeMissionModal();
+                        e.preventDefault();
+                    }
+                    if (this.showEventModal) {
+                        $('#event-modal').modal('hide');
+                        e.preventDefault();
+                    }
+                }
+                
+                // Ctrl/Cmd + M - Open/close mission modal (if mission selected)
+                if ((e.ctrlKey || e.metaKey) && e.key === 'm' && !e.shiftKey) {
+                    if (this.missions.length > 0 && !this.showMissionModal) {
+                        // Open first available mission if none selected
+                        if (!this.selectedMission) {
+                            this.openMissionModal(this.missions[0]);
+                        }
+                        e.preventDefault();
+                    }
+                }
+                
+                // Tab navigation within modals - let browser handle naturally
+                if (e.key === 'Tab' && this.showMissionModal) {
+                    // Ensure focus stays within modal
+                    const modal = document.querySelector('.mission-modal');
+                    const focusableElements = modal?.querySelectorAll(
+                        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                    );
+                    
+                    if (focusableElements && focusableElements.length > 0) {
+                        const firstElement = focusableElements[0];
+                        const lastElement = focusableElements[focusableElements.length - 1];
+                        
+                        if (e.shiftKey && document.activeElement === firstElement) {
+                            lastElement.focus();
+                            e.preventDefault();
+                        } else if (!e.shiftKey && document.activeElement === lastElement) {
+                            firstElement.focus();
+                            e.preventDefault();
+                        }
+                    }
+                }
+            });
+        },
 
         init() {
             console.log("🚀 Sentinel Command Center v5.4 Initializing (Sentience Active)...");
@@ -98,6 +161,9 @@ function sentinelApp() {
             this.pageVisibilityHandler = null;
             this.navigationHandler = null;
             this.connectionId = Math.random().toString(36).substring(2, 8);
+            
+            // Set up keyboard navigation
+            this.initKeyboardNavigation();
             
             // Start WebSocket connection immediately
             this.startWebSocketStream();
@@ -1424,6 +1490,10 @@ function sentinelApp() {
             console.log('🚀 Opening mission modal for:', mission);
             console.log('🔍 Current showMissionModal state:', this.showMissionModal);
             
+            // Invalidate events cache when switching missions
+            this._cachedSortedEvents = null;
+            this._lastEventsHash = null;
+            
             // Set basic mission data first for immediate display
             this.selectedMission = { ...mission, loading: true };
             this.showMissionModal = true;
@@ -1526,6 +1596,9 @@ function sentinelApp() {
             this.showMissionModal = false;
             // Reset showAllEvents when closing modal
             this.showAllEvents = false;
+            // Invalidate events cache
+            this._cachedSortedEvents = null;
+            this._lastEventsHash = null;
             // It's good practice to nullify the selection after a delay to prevent visual glitches during transitions
             setTimeout(() => { this.selectedMission = null; }, 300);
         },
