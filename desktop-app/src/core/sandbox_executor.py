@@ -28,14 +28,20 @@ class SandboxExecutor:
     def __init__(self, image_name="python:3.11-slim", workspace_dir="workspace"):
         self.workspace_dir = os.path.abspath(workspace_dir)
         self.image_name = image_name
-        self.docker_available = DOCKER_AVAILABLE
         
-        # Try to initialize Docker connection
-        try:
-            if self.docker_available:
+        # Default to local execution - Docker is optional
+        self.client = None
+        self.docker_available = False
+        
+        # Only attempt Docker if explicitly enabled via environment variable
+        use_docker = os.getenv("SENTINEL_USE_DOCKER", "false").lower() == "true"
+        
+        if use_docker and DOCKER_AVAILABLE:
+            try:
                 self.client = docker.from_env()
                 # Test Docker connectivity
                 self.client.ping()
+                self.docker_available = True
                 
                 # Ensure the Python image is available locally
                 try:
@@ -47,13 +53,16 @@ class SandboxExecutor:
                     logger.success(f"Successfully pulled Docker image '{self.image_name}'.")
                 
                 logger.success("Docker is available and ready for sandboxed execution.")
-            else:
-                raise Exception("Docker library not available")
                 
-        except (docker.errors.DockerException, Exception) as e:
-            logger.warning(f"Docker is not available: {e}. Will use local execution with safety measures.")
-            self.client = None
-            self.docker_available = False
+            except (docker.errors.DockerException, Exception) as e:
+                logger.info(f"Docker not available: {e}. Using local execution.")
+                self.client = None
+                self.docker_available = False
+        else:
+            if use_docker:
+                logger.info("Docker requested but not available. Using local execution.")
+            else:
+                logger.info("Using local execution mode (Docker disabled by default)")
 
         # Ensure the workspace directory exists on the host
         os.makedirs(self.workspace_dir, exist_ok=True)

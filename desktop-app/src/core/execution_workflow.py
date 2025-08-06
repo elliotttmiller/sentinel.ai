@@ -14,11 +14,16 @@ import asyncio
 try:
     from ..agents.executable_agent import ExecutableAgents
     from ..utils.agent_observability import agent_observability, LiveStreamEvent
-    from ..utils.google_ai_wrapper import crewai_llm # Directly import the configured LLM
-except ImportError:
-    from agents.executable_agent import ExecutableAgents
-    from utils.agent_observability import agent_observability, LiveStreamEvent
-    from utils.google_ai_wrapper import crewai_llm
+    from ..utils.google_ai_wrapper import get_crewai_llm # Import the function instead of variable
+except ImportError as e:
+    # Fallback for when module is imported from outside the package
+    try:
+        from src.agents.executable_agent import ExecutableAgents
+        from src.utils.agent_observability import agent_observability, LiveStreamEvent
+        from src.utils.google_ai_wrapper import get_crewai_llm
+    except ImportError:
+        logger.error(f"Failed to import required modules: {e}")
+        raise ImportError("Could not import ExecutableAgents and related components")
 
 from crewai import Crew, Task, Process
 
@@ -31,6 +36,9 @@ class ExecutionWorkflow:
     """
 
     def __init__(self):
+        # Get the configured CrewAI-compatible LLM
+        crewai_llm = get_crewai_llm()
+        
         if not crewai_llm:
             # This is a critical failure. The wrapper should have logged the error.
             # We raise an exception to prevent the application from starting in a broken state.
@@ -77,6 +85,9 @@ class ExecutionWorkflow:
             # Define the tasks for the crew
             planning_task = self._create_planning_task(user_request, mission_context)
             execution_task = self._create_execution_task()
+            
+            # Get the configured CrewAI-compatible LLM for manager
+            crewai_llm = get_crewai_llm()
             
             # Assemble and run the crew
             crew = Crew(

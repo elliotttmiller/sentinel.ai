@@ -1162,9 +1162,25 @@ function sentinelApp() {
         },
 
         // --- Mission Page Functions (Updated for Alpine Modal) ---
-        openMissionModal(mission) {
+        async openMissionModal(mission) {
+            // Set basic mission data first for immediate display
             this.selectedMission = mission;
             this.showMissionModal = true;
+            
+            // Fetch complete mission details including result
+            try {
+                const response = await fetch(`/api/missions/${mission.mission_id_str}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.success) {
+                        // Update the selected mission with complete details
+                        this.selectedMission = data.mission;
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to fetch mission details:', error);
+                // Keep the basic mission data if detailed fetch fails
+            }
         },
 
         closeMissionModal() {

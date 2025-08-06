@@ -13,7 +13,7 @@ from datetime import datetime
 from typing import Dict, Any, List, Optional
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException, Request, BackgroundTasks, Depends
+from fastapi import FastAPI, HTTPException, Request, BackgroundTasks, Depends, WebSocket, WebSocketDisconnect
 from fastapi.responses import HTMLResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
@@ -33,9 +33,25 @@ except ImportError as e:
     logger.warning(f"Failed to import core modules: {e}")
     # Create fallback classes
     cognitive_forge_engine = None
-    db_manager = None
     agent_observability = None
     GuardianProtocol = None
+    
+    # Create fallback User class
+    class User:
+        def __init__(self, id=1, username="default_user", email="user@example.com"):
+            self.id = id
+            self.username = username
+            self.email = email
+    
+    # Create fallback db_manager
+    class FallbackDbManager:
+        def get_or_create_default_user_and_org(self):
+            return User(id=1, username="default_user", email="user@example.com")
+        
+        def update_mission_status(self, mission_id, status):
+            logger.info(f"Fallback: Mission {mission_id} status: {status}")
+    
+    db_manager = FallbackDbManager()
 
 # Initialize FastAPI app
 app = FastAPI(title="Sentinel Command Center v5.4", version="5.4.0")
@@ -354,6 +370,152 @@ async def create_test_mission(request: TestMissionRequest, current_user: User = 
         logger.error(f"❌ Failed to create test mission: {e}")
         raise HTTPException(status_code=500, detail=f"Failed to create test mission: {str(e)}")
 
+# --- INDIVIDUAL MISSION ENDPOINTS ---
+@app.get("/api/missions/{mission_id}")
+async def get_mission_details(mission_id: str, current_user: User = Depends(get_current_user)):
+    """Get detailed information about a specific mission including results"""
+    try:
+        mission = db_manager.get_mission(mission_id)
+        if not mission:
+            raise HTTPException(status_code=404, detail=f"Mission {mission_id} not found")
+        
+        # Check if user has access to this mission
+        if mission.organization_id != current_user.organization_id:
+            raise HTTPException(status_code=403, detail="Access denied")
+        
+        # Get mission updates for detailed timeline
+        updates = db_manager.get_mission_updates(mission_id)
+        mission_data = mission.as_dict()
+        
+        # Manually serialize mission updates since they don't have as_dict method
+        updates_data = []
+        if updates:
+            for update in updates:
+                update_dict = {
+                    "id": update.id,
+                    "mission_id_str": update.mission_id_str,
+                    "phase": update.phase,
+                    "message": update.message,
+                    "data": update.data,
+                    "timestamp": update.timestamp.isoformat() if update.timestamp else None
+                }
+                updates_data.append(update_dict)
+        
+        mission_data["updates"] = updates_data
+        
+        return {"success": True, "mission": mission_data}
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to get mission details for {mission_id}: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to get mission details: {str(e)}")
+
+@app.post("/api/missions/{mission_id}/cancel")
+async def cancel_mission(mission_id: str, current_user: User = Depends(get_current_user)):
+    """Cancel a running mission"""
+    try:
+        mission = db_manager.get_mission(mission_id)
+        if not mission:
+            raise HTTPException(status_code=404, detail=f"Mission {mission_id} not found")
+        
+        # Check if user has access to this mission
+        if mission.organization_id != current_user.organization_id:
+            raise HTTPException(status_code=403, detail="Access denied")
+        
+        # Check if mission can be canceled
+        if mission.status in ["completed", "failed", "cancelled"]:
+            raise HTTPException(status_code=400, detail=f"Cannot cancel mission with status: {mission.status}")
+        
+        # Update mission status
+        db_manager.update_mission_status(mission_id, status="cancelled")
+        
+        # Add cancellation update
+        db_manager.add_mission_update(
+            mission_id,
+            "cancellation",
+            f"Mission cancelled by user {current_user.email}",
+            {"cancelled_by": current_user.id, "cancelled_at": datetime.utcnow().isoformat()}
+        )
+        
+        # Broadcast the update
+        cancellation_event = FallbackLiveStreamEvent(
+            event_type="mission_cancelled",
+            source="system", 
+            severity="INFO",
+            message=f"Mission {mission_id} has been cancelled by user",
+            payload={
+                "mission_id": mission_id,
+                "status": "cancelled",
+                "cancelled_by": current_user.email
+            }
+        )
+        agent_observability.push_event(cancellation_event)
+        
+        # Also broadcast via WebSocket if available
+        try:
+            await websocket_manager.broadcast({
+                "type": "mission_cancelled",
+                "mission_id": mission_id,
+                "status": "cancelled",
+                "message": "Mission has been cancelled by user"
+            })
+        except Exception as e:
+            logger.warning(f"Failed to broadcast cancellation via WebSocket: {e}")
+        
+        logger.info(f"✅ Mission {mission_id} cancelled by user {current_user.email}")
+        return {"success": True, "message": f"Mission {mission_id} has been cancelled"}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to cancel mission {mission_id}: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to cancel mission: {str(e)}")
+
+@app.get("/api/missions/{mission_id}/workspace")
+async def get_mission_workspace(mission_id: str, current_user: User = Depends(get_current_user)):
+    """Get workspace files created/modified by a mission"""
+    try:
+        mission = db_manager.get_mission(mission_id)
+        if not mission:
+            raise HTTPException(status_code=404, detail=f"Mission {mission_id} not found")
+        
+        # Check if user has access to this mission
+        if mission.organization_id != current_user.organization_id:
+            raise HTTPException(status_code=403, detail="Access denied")
+        
+        # Get workspace files from mission updates or result
+        workspace_files = []
+        
+        # Check if mission has workspace data in result
+        if mission.result:
+            try:
+                result_data = json.loads(mission.result)
+                if "workspace_files" in result_data:
+                    workspace_files = result_data["workspace_files"]
+            except (json.JSONDecodeError, TypeError):
+                pass
+        
+        # Also check mission updates for file operations
+        updates = db_manager.get_mission_updates(mission_id)
+        for update in updates:
+            try:
+                if update.metadata:
+                    metadata = json.loads(update.metadata) if isinstance(update.metadata, str) else update.metadata
+                    if "files_created" in metadata:
+                        workspace_files.extend(metadata["files_created"])
+                    if "files_modified" in metadata:
+                        workspace_files.extend(metadata["files_modified"])
+            except (json.JSONDecodeError, TypeError):
+                continue
+        
+        return {"success": True, "workspace_files": workspace_files}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to get workspace for mission {mission_id}: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to get mission workspace: {str(e)}")
+
 @app.get("/api/agents")
 async def list_agents_api():
     """List all agents"""
@@ -548,11 +710,111 @@ async def get_settings():
         logger.error(f"❌ Failed to get settings: {e}")
         return {"version": "v5.4", "features": {}, "optimization_proposals_count": 0}
 
+# --- WEBSOCKET ENDPOINTS ---
+class ConnectionManager:
+    """Manages WebSocket connections"""
+    def __init__(self):
+        self.active_connections: List[WebSocket] = []
+
+    async def connect(self, websocket: WebSocket):
+        await websocket.accept()
+        self.active_connections.append(websocket)
+        logger.info(f"WebSocket connected. Total connections: {len(self.active_connections)}")
+
+    def disconnect(self, websocket: WebSocket):
+        if websocket in self.active_connections:
+            self.active_connections.remove(websocket)
+            logger.info(f"WebSocket disconnected. Total connections: {len(self.active_connections)}")
+
+    async def broadcast(self, message: dict):
+        """Broadcast message to all connected clients"""
+        if self.active_connections:
+            disconnected = []
+            for connection in self.active_connections:
+                try:
+                    await connection.send_json(message)
+                except Exception as e:
+                    logger.warning(f"Failed to send message to WebSocket: {e}")
+                    disconnected.append(connection)
+            
+            # Remove disconnected connections
+            for conn in disconnected:
+                self.disconnect(conn)
+
+# Global connection manager
+websocket_manager = ConnectionManager()
+
+@app.websocket("/ws/mission-updates")
+async def mission_updates_websocket(websocket: WebSocket):
+    """WebSocket endpoint for real-time mission updates"""
+    await websocket_manager.connect(websocket)
+    
+    try:
+        # Send initial connection message
+        await websocket.send_json({
+            "type": "connection_established",
+            "message": "Connected to Sentinel mission updates",
+            "timestamp": datetime.utcnow().isoformat()
+        })
+        
+        # Keep connection alive and handle incoming messages
+        while True:
+            try:
+                # Wait for messages from client (like ping/pong)
+                data = await websocket.receive_json()
+                if data.get("type") == "ping":
+                    await websocket.send_json({"type": "pong", "timestamp": datetime.utcnow().isoformat()})
+            except WebSocketDisconnect:
+                break
+            except Exception as e:
+                logger.error(f"WebSocket error: {e}")
+                break
+                
+    except WebSocketDisconnect:
+        logger.info("WebSocket client disconnected")
+    finally:
+        websocket_manager.disconnect(websocket)
+
+# Update the agent observability to use WebSocket broadcasting
+def setup_websocket_broadcasting():
+    """Setup WebSocket broadcasting for agent events"""
+    if hasattr(agent_observability, 'push_event'):
+        original_push_event = agent_observability.push_event
+        
+        async def enhanced_push_event(event):
+            # Call original push_event
+            if asyncio.iscoroutinefunction(original_push_event):
+                await original_push_event(event)
+            else:
+                original_push_event(event)
+            
+            # Broadcast to WebSocket clients
+            try:
+                message = {
+                    "type": "agent_event",
+                    "event_type": getattr(event, 'event_type', 'unknown'),
+                    "source": getattr(event, 'source', 'system'),
+                    "severity": getattr(event, 'severity', 'INFO'),
+                    "message": getattr(event, 'message', ''),
+                    "payload": getattr(event, 'payload', {}),
+                    "timestamp": getattr(event, 'timestamp', datetime.utcnow().isoformat())
+                }
+                await websocket_manager.broadcast(message)
+            except Exception as e:
+                logger.error(f"Failed to broadcast WebSocket message: {e}")
+        
+        # Replace the push_event method
+        agent_observability.push_event = enhanced_push_event
+
 # Startup event
 @app.on_event("startup")
 async def startup_event():
     """Initialize the application on startup"""
     logger.info("🚀 Sentinel Cognitive Forge v5.4 (Predictive Intelligence Activated) starting up...")
+    
+    # Setup WebSocket broadcasting
+    setup_websocket_broadcasting()
+    logger.info("✅ WebSocket broadcasting enabled")
     
     # Push initial system event
     agent_observability.push_event(FallbackLiveStreamEvent(

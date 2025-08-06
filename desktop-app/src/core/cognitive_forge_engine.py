@@ -40,16 +40,22 @@ except ImportError as e:
 
 # Import enhanced multi-agent system (with fallback)
 try:
+    from .enhanced_cognitive_forge_engine import EnhancedCognitiveForgeEngine
     import sys
     import os
-    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-    from enhanced_cognitive_forge_engine import EnhancedCognitiveForgeEngine
+    # Add the desktop-app root to path for enhanced components
+    desktop_app_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    sys.path.insert(0, desktop_app_root)
+    from sentinel_multi_agent_integration import SentinelMultiAgentBridge
+    from enhanced_multi_agent_system import MultiAgentOrchestrator
     ENHANCED_MULTI_AGENT_AVAILABLE = True
     logger.info("✅ Enhanced multi-agent system available - using advanced agent workflows")
 except ImportError as e:
     logger.warning(f"⚠️ Enhanced multi-agent system not available: {e} - using standard execution")
     ENHANCED_MULTI_AGENT_AVAILABLE = False
     EnhancedCognitiveForgeEngine = None
+    SentinelMultiAgentBridge = None
+    MultiAgentOrchestrator = None
 
 load_dotenv(os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
 
