@@ -250,13 +250,25 @@
         </div>
 
         <!-- Mission Modal -->
-        <div class="mission-modal" x-show="selectedMission" @click.away="closeMissionModal()" x-transition>
+        <div class="mission-modal" 
+             x-show="selectedMission" 
+             @click.away="closeMissionModal()" 
+             x-transition
+             role="dialog"
+             aria-modal="true"
+             :aria-labelledby="'mission-modal-title-' + (selectedMission?.mission_id_str || 'default')"
+             aria-describedby="mission-modal-description">
             <div class="mission-modal-content">
                 <div class="mission-modal-header">
-                    <h5 class="mission-modal-title" x-text="'Mission: ' + selectedMission?.description?.substring(0, 50) + '...'"></h5>
-                    <button class="mission-modal-close" @click="closeMissionModal()">&times;</button>
+                    <h5 class="mission-modal-title" 
+                        :id="'mission-modal-title-' + (selectedMission?.mission_id_str || 'default')"
+                        x-text="'Mission: ' + selectedMission?.description?.substring(0, 50) + '...'"></h5>
+                    <button class="mission-modal-close" 
+                            @click="closeMissionModal()"
+                            aria-label="Close mission modal"
+                            title="Close modal (ESC)">&times;</button>
                 </div>
-                <div class="mission-modal-body">
+                <div class="mission-modal-body" id="mission-modal-description">
                     <!-- Real-Time Mission Observability Command Center -->
                     <div class="mission-observability-center">
                         <!-- Mission Overview Header -->
@@ -346,17 +358,75 @@
                         <!-- Mission Intelligence Tabs -->
                         <div class="mission-content-tabs mt-4">
                             <div class="tab-navigation" x-data="{ tab: 'intelligence' }">
-                                <ul class="nav nav-tabs nav-tabs-enhanced">
-                                    <li class="nav-item"><a class="nav-link" :class="{'active': tab === 'intelligence'}" @click.prevent="tab = 'intelligence'" href="#"><i class="fas fa-brain"></i> Intelligence</a></li>
-                                    <li class="nav-item"><a class="nav-link" :class="{'active': tab === 'live'}" @click.prevent="tab = 'live'" href="#"><i class="fas fa-satellite-dish"></i> Live Feed</a></li>
-                                    <li class="nav-item"><a class="nav-link" :class="{'active': tab === 'workspace'}" @click.prevent="tab = 'workspace'" href="#"><i class="fas fa-folder-open"></i> Workspace</a></li>
-                                    <li class="nav-item"><a class="nav-link" :class="{'active': tab === 'analytics'}" @click.prevent="tab = 'analytics'" href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
-                                    <li class="nav-item"><a class="nav-link" :class="{'active': tab === 'output'}" @click.prevent="tab = 'output'" href="#"><i class="fas fa-terminal"></i> Output</a></li>
+                                <ul class="nav nav-tabs nav-tabs-enhanced" role="tablist" aria-label="Mission details navigation">
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link" 
+                                           :class="{'active': tab === 'intelligence'}" 
+                                           @click.prevent="tab = 'intelligence'" 
+                                           href="#" 
+                                           role="tab"
+                                           :aria-selected="tab === 'intelligence'"
+                                           aria-controls="intelligence-panel"
+                                           tabindex="0">
+                                            <i class="fas fa-brain" aria-hidden="true"></i> Intelligence
+                                        </a>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link" 
+                                           :class="{'active': tab === 'live'}" 
+                                           @click.prevent="tab = 'live'" 
+                                           href="#" 
+                                           role="tab"
+                                           :aria-selected="tab === 'live'"
+                                           aria-controls="live-panel"
+                                           tabindex="0">
+                                            <i class="fas fa-satellite-dish" aria-hidden="true"></i> Live Feed
+                                        </a>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link" 
+                                           :class="{'active': tab === 'workspace'}" 
+                                           @click.prevent="tab = 'workspace'" 
+                                           href="#" 
+                                           role="tab"
+                                           :aria-selected="tab === 'workspace'"
+                                           aria-controls="workspace-panel"
+                                           tabindex="0">
+                                            <i class="fas fa-folder-open" aria-hidden="true"></i> Workspace
+                                        </a>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link" 
+                                           :class="{'active': tab === 'analytics'}" 
+                                           @click.prevent="tab = 'analytics'" 
+                                           href="#" 
+                                           role="tab"
+                                           :aria-selected="tab === 'analytics'"
+                                           aria-controls="analytics-panel"
+                                           tabindex="0">
+                                            <i class="fas fa-chart-line" aria-hidden="true"></i> Analytics
+                                        </a>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link" 
+                                           :class="{'active': tab === 'output'}" 
+                                           @click.prevent="tab = 'output'" 
+                                           href="#" 
+                                           role="tab"
+                                           :aria-selected="tab === 'output'"
+                                           aria-controls="output-panel"
+                                           tabindex="0">
+                                            <i class="fas fa-terminal" aria-hidden="true"></i> Output
+                                        </a>
+                                    </li>
                                 </ul>
 
                                 <div class="tab-content mt-3">
                                     <!-- Mission Intelligence Overview -->
-                                    <div x-show="tab === 'intelligence'">
+                                    <div x-show="tab === 'intelligence'" 
+                                         role="tabpanel" 
+                                         id="intelligence-panel"
+                                         aria-labelledby="intelligence-tab">
                                         <div class="intelligence-center">
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -393,7 +463,10 @@
                                     </div>
                                     
                                     <!-- Live Feed Tab - Event Display with Limiting -->
-                                    <div x-show="tab === 'live'">
+                                    <div x-show="tab === 'live'" 
+                                         role="tabpanel" 
+                                         id="live-panel"
+                                         aria-labelledby="live-tab">
                                         <div class="live-feed-section">
                                             <div class="live-feed-header d-flex justify-content-between align-items-center mb-3">
                                                 <h6 class="text-info mb-0">
@@ -403,8 +476,12 @@
                                                 </h6>
                                                 <!-- Event Display Toggle Button -->
                                                 <div x-show="hasMoreEvents()">
-                                                    <button class="btn btn-sm btn-outline-primary" @click="toggleShowAllEvents()">
-                                                        <i class="fas" :class="showAllEvents ? 'fa-compress' : 'fa-expand'"></i>
+                                                    <button class="btn btn-sm btn-outline-primary" 
+                                                            @click="toggleShowAllEvents()"
+                                                            :aria-pressed="showAllEvents"
+                                                            :aria-label="showAllEvents ? 'Show only recent 10 events' : 'Show all events'"
+                                                            :title="showAllEvents ? 'Show Recent 10' : 'View All'">
+                                                        <i class="fas" :class="showAllEvents ? 'fa-compress' : 'fa-expand'" aria-hidden="true"></i>
                                                         <span x-text="showAllEvents ? 'Show Recent 10' : 'View All'"></span>
                                                     </button>
                                                 </div>
