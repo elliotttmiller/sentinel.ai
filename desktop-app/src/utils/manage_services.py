@@ -142,7 +142,7 @@ init(autoreset=True)
 APP_DIR = Path(__file__).parent.parent.parent
 LOG_DIR = APP_DIR / "logs"
 DESKTOP_APP_PORT = 8001
-BACKEND_PORT = 8000
+BACKEND_PORT = 8002
 MOBILE_APP_PORT = 8081
 
 REQUIRED_PYTHON_VERSION = (3, 9)
