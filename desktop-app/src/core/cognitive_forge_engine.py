@@ -38,6 +38,19 @@ except ImportError as e:
     REAL_EXECUTOR_AVAILABLE = False
     RealMissionExecutor = None
 
+# Import enhanced multi-agent system (with fallback)
+try:
+    import sys
+    import os
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+    from enhanced_cognitive_forge_engine import EnhancedCognitiveForgeEngine
+    ENHANCED_MULTI_AGENT_AVAILABLE = True
+    logger.info("✅ Enhanced multi-agent system available - using advanced agent workflows")
+except ImportError as e:
+    logger.warning(f"⚠️ Enhanced multi-agent system not available: {e} - using standard execution")
+    ENHANCED_MULTI_AGENT_AVAILABLE = False
+    EnhancedCognitiveForgeEngine = None
+
 load_dotenv(os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
 
 class MissionState(Enum):
@@ -87,8 +100,68 @@ class CognitiveForgeEngine:
                     payload=self.db_manager.get_mission(mission_id_str).as_dict()
                 ))
             
+            # First priority: Use ENHANCED MULTI-AGENT SYSTEM if available
+            if ENHANCED_MULTI_AGENT_AVAILABLE and EnhancedCognitiveForgeEngine:
+                logger.info(f"🚀 Using ENHANCED MULTI-AGENT SYSTEM for mission {mission_id_str}")
+                
+                # Create enhanced cognitive forge engine if not already created
+                if not hasattr(self, '_enhanced_engine'):
+                    self._enhanced_engine = EnhancedCognitiveForgeEngine()
+                
+                agent_observability.push_event(LiveStreamEvent(
+                    event_type="enhanced_agent_deployment", 
+                    source="enhanced_multi_agent_system", 
+                    severity="INFO",
+                    message="Deploying enhanced multi-agent system for mission execution.",
+                    payload={"mission_id": mission_id_str, "phase": "Enhanced Multi-Agent Deployment"}
+                ))
+                self.db_manager.update_mission_status(mission_id_str=mission_id_str, status="running", progress=30)
+                
+                # Execute using enhanced multi-agent system
+                logger.info(f"🤖 Deploying enhanced multi-agent workflow for mission {mission_id_str}: {user_prompt}")
+                enhanced_result = await self._enhanced_engine.run_mission(user_prompt, mission_id_str, agent_type)
+                
+                self.db_manager.update_mission_status(mission_id_str=mission_id_str, status="running", progress=85)
+                
+                # Process enhanced execution result
+                if enhanced_result.get("status") == "completed":
+                    final_result_text = (
+                        f"Mission '{mission_id_str}' completed successfully by enhanced multi-agent system. "
+                        f"Workflow pattern: {enhanced_result.get('summary', {}).get('workflow_pattern', 'standard')}. "
+                        f"Agents involved: {enhanced_result.get('summary', {}).get('agents_involved', 'multiple')}."
+                    )
+                    self.db_manager.update_mission_status(
+                        mission_id_str=mission_id_str, 
+                        status="completed", 
+                        progress=100, 
+                        result=final_result_text
+                    )
+                    agent_observability.push_event(LiveStreamEvent(
+                        event_type="mission_complete",
+                        source="enhanced_multi_agent_system",
+                        severity="SUCCESS", 
+                        message=final_result_text,
+                        payload={
+                            **self.db_manager.get_mission(mission_id_str).as_dict(),
+                            **enhanced_result
+                        }
+                    ))
+                    await self.self_learning_module.synthesize_and_learn(self.db_manager.get_mission(mission_id_str))
+                    return {"status": "completed", "enhanced_multi_agent": True, "result": enhanced_result}
+                else:
+                    # Enhanced execution failed, try fallback
+                    logger.warning(f"Enhanced multi-agent execution failed for {mission_id_str}, trying fallback")
+                    error_message = enhanced_result.get("error", "Enhanced multi-agent execution failed")
+                    agent_observability.push_event(LiveStreamEvent(
+                        event_type="enhanced_execution_fallback",
+                        source="enhanced_multi_agent_system",
+                        severity="WARNING", 
+                        message=f"Enhanced execution failed, falling back: {error_message}",
+                        payload=enhanced_result
+                    ))
+            
             # Use REAL AGENT EXECUTION if available, otherwise fallback to simulation
-            if REAL_EXECUTOR_AVAILABLE and RealMissionExecutor:
+            elif REAL_EXECUTOR_AVAILABLE and RealMissionExecutor:
                 # REAL AGENT EXECUTION PATH
                 logger.info(f"🚀 Using REAL AGENT EXECUTION for mission {mission_id_str}")
                 
@@ -223,43 +296,64 @@ class CognitiveForgeEngine:
                 transaction.finish()
 
     async def run_periodic_self_optimization(self):
+        """Enhanced periodic self-optimization using multi-agent analysis"""
         while True:
             await asyncio.sleep(3600)
-            logger.info("🧠 Self-Optimization Engineer: Starting periodic analysis...")
+            logger.info("🧠 Enhanced Self-Optimization: Starting periodic multi-agent analysis...")
             try:
-                insights = await self.self_learning_module.analyze_completed_missions()
-                if not insights or not insights.get("patterns"):
-                    logger.info("No patterns found for optimization")
-                    continue
-                proposal_type = "performance_optimization"
-                description = f"System optimization based on {len(insights.get('patterns', []))} identified patterns"
-                rationale = f"Analysis of recent missions revealed opportunities for improvement in execution efficiency and success rates."
-                proposal = self.db_manager.create_optimization_proposal(
-                    proposal_type=proposal_type,
-                    description=description,
-                    rationale=rationale
-                )
-                agent_observability.push_event(LiveStreamEvent(
-                    event_type="system_log", source="Optimizer", severity="WARNING",
-                    message="New system optimization proposal is available for review in Settings."
-                ))
-                logger.info(f"💡 Created optimization proposal: {description}")
+                # Use enhanced multi-agent system for optimization if available
+                if ENHANCED_MULTI_AGENT_AVAILABLE and hasattr(self, '_enhanced_engine'):
+                    logger.info("Using enhanced multi-agent system for self-optimization")
+                    await self._enhanced_engine.run_periodic_self_optimization()
+                else:
+                    # Fallback to standard self-optimization
+                    insights = await self.self_learning_module.analyze_completed_missions()
+                    if not insights or not insights.get("patterns"):
+                        logger.info("No patterns found for optimization")
+                        continue
+                    proposal_type = "performance_optimization"
+                    description = f"System optimization based on {len(insights.get('patterns', []))} identified patterns"
+                    rationale = f"Analysis of recent missions revealed opportunities for improvement in execution efficiency and success rates."
+                    proposal = self.db_manager.create_optimization_proposal(
+                        proposal_type=proposal_type,
+                        description=description,
+                        rationale=rationale
+                    )
+                    agent_observability.push_event(LiveStreamEvent(
+                        event_type="system_log", source="Optimizer", severity="WARNING",
+                        message="New system optimization proposal is available for review in Settings."
+                    ))
+                    logger.info(f"💡 Created optimization proposal: {description}")
             except Exception as e:
-                logger.error(f"Self-optimization cycle failed: {e}")
+                logger.error(f"Enhanced self-optimization cycle failed: {e}")
 
     def get_system_info(self) -> Dict[str, Any]:
+        enhanced_features = [
+            "Phoenix Protocol (Self-Healing)",
+            "Guardian Protocol (Quality Assurance)", 
+            "Self-Learning Module",
+            "Periodic Self-Optimization"
+        ]
+        
+        # Add enhanced features if available
+        if ENHANCED_MULTI_AGENT_AVAILABLE:
+            enhanced_features.extend([
+                "Enhanced Multi-Agent System",
+                "Advanced Agent Workflows",
+                "Collaborative Agent Execution", 
+                "Agent Learning & Adaptation",
+                "Multi-Pattern Workflow Support"
+            ])
+        
         return {
-            "version": "v5.3",
+            "version": "v6.0" if ENHANCED_MULTI_AGENT_AVAILABLE else "v5.3",
             "status": "operational",
             "llm_model": "gemini-1.5-pro",
             "database": "SQLite",
-            "observability": "enabled",
-            "phase_4_features": [
-                "Phoenix Protocol (Self-Healing)",
-                "Guardian Protocol (Quality Assurance)", 
-                "Self-Learning Module",
-                "Periodic Self-Optimization"
-            ],
+            "observability": "enhanced" if ENHANCED_MULTI_AGENT_AVAILABLE else "enabled",
+            "multi_agent_system": ENHANCED_MULTI_AGENT_AVAILABLE,
+            "real_executor": REAL_EXECUTOR_AVAILABLE,
+            "enhanced_features": enhanced_features,
             "timestamp": datetime.utcnow().isoformat()
         }
 
