@@ -66,7 +66,9 @@ function sentinelApp() {
 
         // Get events for display (limited to 10 unless showAllEvents is true)
         displayEvents() {
-            if (!this.selectedMission?.events) return [];
+            if (!this.selectedMission?.events) {
+                return [];
+            }
             
             // Sort events by timestamp (most recent first)
             const sortedEvents = [...this.selectedMission.events].sort((a, b) => {
@@ -1119,7 +1121,9 @@ function sentinelApp() {
 
         // --- ENHANCED OUTPUT FORMATTING ---
         formatMissionOutput(output) {
-            if (!output) return 'No output available';
+            if (!output) {
+                return 'No output available';
+            }
             
             try {
                 // Try to parse as JSON first
@@ -1185,7 +1189,9 @@ function sentinelApp() {
 
         // Enhanced mission result processing
         processMissionResult(mission) {
-            if (!mission.result) return null;
+            if (!mission.result) {
+                return null;
+            }
             
             const processed = {
                 raw: mission.result,
@@ -1222,7 +1228,9 @@ function sentinelApp() {
         
         // Enhanced event detail formatting
         formatEventPayload(payload) {
-            if (!payload) return 'No payload data';
+            if (!payload) {
+                return 'No payload data';
+            }
             
             if (typeof payload === 'string') {
                 try {
@@ -1744,7 +1752,9 @@ function sentinelApp() {
         },
 
         formatSentryLogs(logs) {
-            if (!logs.length) return 'No Sentry errors or issues detected for this mission.';
+            if (!logs.length) {
+                return 'No Sentry errors or issues detected for this mission.';
+            }
             
             return logs.map(log => {
                 const timestamp = new Date(log.timestamp).toLocaleString();
@@ -1753,7 +1763,9 @@ function sentinelApp() {
         },
 
         formatWeaveTraces(traces) {
-            if (!traces.length) return 'No Weave traces available for this mission.';
+            if (!traces.length) {
+                return 'No Weave traces available for this mission.';
+            }
             
             let output = '=== Weave Execution Traces ===\n\n';
             traces.forEach((trace, index) => {
@@ -1769,7 +1781,9 @@ function sentinelApp() {
         },
 
         formatWandbMetrics(metrics) {
-            if (!Object.keys(metrics).length) return 'No Wandb metrics available for this mission.';
+            if (!Object.keys(metrics).length) {
+                return 'No Wandb metrics available for this mission.';
+            }
             
             let output = '=== Wandb Performance Metrics ===\n\n';
             Object.entries(metrics).forEach(([key, value]) => {
@@ -1838,24 +1852,32 @@ function sentinelApp() {
         },
 
         formatJson(obj) {
-            if (!obj) return 'No data available';
+            if (!obj) {
+                return 'No data available';
+            }
             return JSON.stringify(obj, null, 2);
         },
 
         formatTimestamp(timestamp) {
-            if (!timestamp) return 'Unknown';
+            if (!timestamp) {
+                return 'Unknown';
+            }
             return new Date(timestamp).toLocaleString();
         },
 
         formatFileSize(bytes) {
-            if (!bytes) return '0 B';
+            if (!bytes) {
+                return '0 B';
+            }
             const sizes = ['B', 'KB', 'MB', 'GB'];
             const i = Math.floor(Math.log(bytes) / Math.log(1024));
             return `${Math.round(bytes / Math.pow(1024, i) * 100) / 100} ${sizes[i]}`;
         },
 
         formatMissionOutput(result) {
-            if (!result) return 'Mission has not produced output yet.';
+            if (!result) {
+                return 'Mission has not produced output yet.';
+            }
             
             // Enhanced formatting for different types of output
             let formatted = result;
@@ -2244,7 +2266,9 @@ function sentinelApp() {
         },
 
         formatUptime(createdAt) {
-            if (!createdAt) return 'N/A';
+            if (!createdAt) {
+                return 'N/A';
+            }
             
             const now = new Date();
             const created = new Date(createdAt);
