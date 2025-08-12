@@ -1,4 +1,3 @@
-
 import asyncio
 import json
 import time
@@ -13,6 +12,10 @@ app = FastAPI()
 @app.get("/health")
 async def health():
     return {"status": "ok"}
+
+@app.get("/status")
+async def status():
+    return {"status": "ok", "message": "SentinelAI backend is running."}
 
 logger = logging.getLogger("sentinel")
 logging.basicConfig(level=logging.INFO)
