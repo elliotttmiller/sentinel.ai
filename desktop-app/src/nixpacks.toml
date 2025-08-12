@@ -1,5 +1,6 @@
+
 [phases.setup]
-nixPkgs = ["python311", "pip"]
+nixPkgs = ["python311"]
 
 [phases.install]
 cmds = [
@@ -7,4 +8,4 @@ cmds = [
 ]
 
 [phases.start]
-cmd = "cd .. && uvicorn src.main:app --host 0.0.0.0 --port 8002"
+cmd = "uvicorn main:app --host 0.0.0.0 --port 8080"
