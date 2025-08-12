@@ -311,7 +311,7 @@ flowchart LR
 6.  **Updates:** As the agent works, it sends status updates back through the backend, which are reflected in the real-time UI.
 7.  **Completion:** Once the mission is complete, the final status is saved to the database.
 
----
+----
 
 ## 6. 📚 Additional Notes & Insights
 - **Dual Frontend:** The system appears to have two frontends: a modern, primary one in `copilotkit-frontend/` and a simpler, server-rendered one supported by `static/` and `templates/`. Understanding which one is active for development is key.
