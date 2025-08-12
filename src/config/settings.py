@@ -3,9 +3,8 @@ Configuration Settings for Cognitive Forge v6.0 - Enhanced Multi-Agent System
 Advanced configuration management with environment variable support
 """
 
-import os
 import json
-from typing import Dict, Any, Optional, List
+from typing import Optional, List
 from pydantic_settings import BaseSettings
 from pydantic import Field, field_validator
 from dotenv import load_dotenv
@@ -15,6 +14,10 @@ load_dotenv()
 
 
 class Settings(BaseSettings):
+    """
+    Centralized configuration for Cognitive Forge v6.0 - Enhanced Multi-Agent System.
+    Uses environment variables (with .env support) and Pydantic v2 best practices.
+    """
     # --- COGNITIVE FORGE v6.0 ENHANCED MULTI-AGENT FEATURES ---
     # Multi-Agent System Configuration
     MULTI_AGENT_ENABLED: bool = True
@@ -79,32 +82,27 @@ class Settings(BaseSettings):
     THRESHOLD_LEARNING_RATE: float = 0.1
     
     # --- SERVER CONFIGURATION ---
-    HOST: str = Field(default="0.0.0.0", env="HOST")
-    PORT: int = Field(default=8001, env="PORT")
-    SERVER_8001_PORT: int = 8001
-    SERVER_8002_PORT: int = 8002
-    SERVER_HOST: str = "0.0.0.0"
-    RELOAD: bool = Field(default=True, env="RELOAD")
+    HOST: str = Field(default="0.0.0.0", validation_alias="HOST")
+    PORT: int = Field(default=8001, validation_alias="PORT")
+    # Remove redundant server fields (HOST/PORT already handled above)
+    RELOAD: bool = Field(default=True, validation_alias="RELOAD")
     
     # --- LLM CONFIGURATION ---
-    GOOGLE_API_KEY: Optional[str] = Field(default=None, env="GOOGLE_API_KEY")
-    GOOGLE_APPLICATION_CREDENTIALS: Optional[str] = Field(
-        default=None, env="GOOGLE_APPLICATION_CREDENTIALS"
-    )
-    LLM_MODEL: str = Field(default="gemini-1.5-pro-latest", env="LLM_MODEL")
-    LLM_TEMPERATURE: float = Field(default=0.7, env="LLM_TEMPERATURE")
-    
+    GOOGLE_API_KEY: Optional[str] = Field(default=None, validation_alias="GOOGLE_API_KEY")
+    GOOGLE_APPLICATION_CREDENTIALS: Optional[str] = Field(default=None, validation_alias="GOOGLE_APPLICATION_CREDENTIALS")
+    LLM_MODEL: str = Field(default="gemini-1.5-pro-latest", validation_alias="LLM_MODEL")
+    LLM_TEMPERATURE: float = Field(default=0.7, validation_alias="LLM_TEMPERATURE")
     # --- DATABASE CONFIGURATION ---
-    DATABASE_URL: str = Field(default="sqlite:///db/sentinel_missions.db", env="DATABASE_URL")
-    POSTGRES_URL: Optional[str] = None
-    CHROMA_PERSIST_DIRECTORY: str = "db/chroma_memory"
-    CHROMA_PATH: str = Field(default="db/chroma_memory", env="CHROMA_PATH")
+    DATABASE_URL: str = Field(default="sqlite:///db/sentinel_missions.db", validation_alias="DATABASE_URL")
+    POSTGRES_URL: Optional[str] = Field(default=None, validation_alias="POSTGRES_URL")
+    CHROMA_PERSIST_DIRECTORY: str = Field(default="db/chroma_memory", validation_alias="CHROMA_PERSIST_DIRECTORY")
+    CHROMA_PATH: str = Field(default="db/chroma_memory", validation_alias="CHROMA_PATH")
     
     # --- LOGGING CONFIGURATION ---
-    LOG_LEVEL: str = Field(default="INFO", env="LOG_LEVEL")
-    LOG_FILE: str = Field(default="logs/cognitive_forge.log", env="LOG_FILE")
-    LOG_ROTATION: str = Field(default="10 MB", env="LOG_ROTATION")
-    LOG_RETENTION: str = Field(default="7 days", env="LOG_RETENTION")
+    LOG_LEVEL: str = Field(default="INFO", validation_alias="LOG_LEVEL")
+    LOG_FILE: str = Field(default="logs/cognitive_forge.log", validation_alias="LOG_FILE")
+    LOG_ROTATION: str = Field(default="10 MB", validation_alias="LOG_ROTATION")
+    LOG_RETENTION: str = Field(default="7 days", validation_alias="LOG_RETENTION")
     LOG_BUFFER_SIZE: int = 200
     
     # --- AGENT CONFIGURATION ---
@@ -143,58 +141,45 @@ class Settings(BaseSettings):
     AUDIT_LOGGING: bool = True
     VULNERABILITY_SCANNING: bool = True
     
-    # --- ADDITIONAL CONFIGURATION FROM ENV ---
-    # Vector DB Configuration
-    VECTOR_DB_URL: str = Field(default="http://localhost:8001", env="VECTOR_DB_URL")
-    VECTOR_DB_TYPE: str = Field(default="chromadb", env="VECTOR_DB_TYPE")
-    
-    # Logging and workspace
-    LOGS_DIR: str = Field(default="logs", env="LOGS_DIR")
-    WORKSPACE_PATH: str = Field(default=".", env="WORKSPACE_PATH")
-    
-    # Mission configuration
-    MAX_CONCURRENT_MISSIONS: int = Field(default=5, env="MAX_CONCURRENT_MISSIONS")
-    MISSION_TIMEOUT: int = Field(default=3600, env="MISSION_TIMEOUT")
-    MEMORY_RETENTION_DAYS: int = Field(default=30, env="MEMORY_RETENTION_DAYS")
-    
-    # Observability services
-    WEAVE_PROJECT_NAME: str = Field(default="cognitive-forge-v6", env="WEAVE_PROJECT_NAME")
-    WANDB_PROJECT_NAME: str = Field(default="cognitive-forge-v6", env="WANDB_PROJECT_NAME")
-    
-    # Sentry configuration
-    SENTRY_DSN: Optional[str] = Field(default=None, env="SENTRY_DSN")
-    SENTRY_AUTH_TOKEN: Optional[str] = Field(default=None, env="SENTRY_AUTH_TOKEN")
-    SENTRY_ORG_SLUG: Optional[str] = Field(default=None, env="SENTRY_ORG_SLUG")
-    SENTRY_PROJECT_ID: Optional[str] = Field(default=None, env="SENTRY_PROJECT_ID")
-    
-    # Networking
-    DESKTOP_TUNNEL_URL: Optional[str] = Field(default=None, env="DESKTOP_TUNNEL_URL")
-    
-    # Security - File and command restrictions
-    ALLOWED_FILE_EXTENSIONS: List[str] = Field(default=[".py", ".js", ".html", ".css", ".json", ".txt", ".md"], env="ALLOWED_FILE_EXTENSIONS")
-    ALLOWED_SHELL_COMMANDS: List[str] = Field(default=["ls", "dir", "pwd", "echo", "cat", "head", "tail", "grep", "find"], env="ALLOWED_SHELL_COMMANDS")
-    
-    # OpenAI API Key (for compatibility)
-    OPENAI_API_KEY: Optional[str] = Field(default=None, env="OPENAI_API_KEY")
+    # --- LOGGING & WORKSPACE ---
+    LOGS_DIR: str = Field(default="logs", validation_alias="LOGS_DIR")
+    WORKSPACE_PATH: str = Field(default=".", validation_alias="WORKSPACE_PATH")
+
+    # --- MISSION CONFIGURATION ---
+    MAX_CONCURRENT_MISSIONS: int = Field(default=5, validation_alias="MAX_CONCURRENT_MISSIONS")
+    MISSION_TIMEOUT: int = Field(default=3600, validation_alias="MISSION_TIMEOUT")
+    MEMORY_RETENTION_DAYS: int = Field(default=30, validation_alias="MEMORY_RETENTION_DAYS")
+
+    # --- NETWORKING ---
+    DESKTOP_TUNNEL_URL: Optional[str] = Field(default=None, validation_alias="DESKTOP_TUNNEL_URL")
+
+    # --- SECURITY: FILE & COMMAND RESTRICTIONS ---
+    ALLOWED_FILE_EXTENSIONS: List[str] = Field(default_factory=lambda: [".py", ".js", ".html", ".css", ".json", ".txt", ".md"], validation_alias="ALLOWED_FILE_EXTENSIONS")
+    ALLOWED_SHELL_COMMANDS: List[str] = Field(default_factory=lambda: ["ls", "dir", "pwd", "echo", "cat", "head", "tail", "grep", "find"], validation_alias="ALLOWED_SHELL_COMMANDS")
+
+    # --- OPENAI API KEY (compatibility) ---
+    OPENAI_API_KEY: Optional[str] = Field(default=None, validation_alias="OPENAI_API_KEY")
     
     @field_validator('ALLOWED_FILE_EXTENSIONS', mode='before')
     @classmethod
     def parse_allowed_extensions(cls, v):
+        """Support both JSON and comma-separated string for env var lists."""
         if isinstance(v, str):
             try:
                 return json.loads(v)
             except json.JSONDecodeError:
-                return v.split(',')
+                return [s.strip() for s in v.split(',') if s.strip()]
         return v
-    
+
     @field_validator('ALLOWED_SHELL_COMMANDS', mode='before')
     @classmethod
     def parse_allowed_commands(cls, v):
+        """Support both JSON and comma-separated string for env var lists."""
         if isinstance(v, str):
             try:
                 return json.loads(v)
             except json.JSONDecodeError:
-                return v.split(',')
+                return [s.strip() for s in v.split(',') if s.strip()]
         return v
     
     # --- WEBSOCKET CONFIGURATION ---
@@ -212,7 +197,7 @@ class Settings(BaseSettings):
     
     # --- AUTHENTICATION (Optional) ---
     ENABLE_AUTHENTICATION: bool = False
-    JWT_SECRET_KEY: str = Field(default="dev-secret-key-change-in-production", env="JWT_SECRET_KEY")
+    JWT_SECRET_KEY: str = Field(default="dev-secret-key-change-in-production", validation_alias="JWT_SECRET_KEY")
     JWT_ALGORITHM: str = "HS256"
     JWT_EXPIRE_MINUTES: int = 1440  # 24 hours
     
@@ -221,10 +206,11 @@ class Settings(BaseSettings):
     MAX_FILE_SIZE: int = 10 * 1024 * 1024  # 10MB
     ALLOWED_FILE_TYPES: List[str] = [".py", ".txt", ".md", ".json", ".yaml", ".yml", ".toml"]
     
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
-        extra = "ignore"  # Ignore extra fields from environment
+    model_config = {
+        "env_file": ".env",
+        "env_file_encoding": "utf-8",
+        "extra": "ignore"
+    }
 
 
 # Create settings instance
