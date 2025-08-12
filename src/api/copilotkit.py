@@ -11,7 +11,7 @@ import httpx
 router = APIRouter()
 
 COPILOT_API_KEY = os.getenv("COPILOT_API_KEY")
-COPILOTKIT_CLOUD_URL = "https://api.copilotkit.ai/v1"  # CopilotKit Cloud base URL (do not change unless instructed)
+COPILOTKIT_CLOUD_URL = "https://api.copilotkit.ai"  # CopilotKit Cloud base URL (do not change unless instructed)
 
 @router.api_route("/api/copilotkit", methods=["POST", "GET"])
 async def copilotkit_proxy(request: Request):
