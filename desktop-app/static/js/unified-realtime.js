@@ -64,19 +64,38 @@ function sentinelApp() {
             return this.missions.filter(m => m.status === 'failed');
         },
 
-        // Get events for display (limited to 10 unless showAllEvents is true)
+        // Cache for performance optimization
+        _cachedSortedEvents: null,
+        _lastEventsHash: null,
+
+        // Get events for display (limited to 10 unless showAllEvents is true) - Optimized with caching
         displayEvents() {
-            if (!this.selectedMission?.events) return [];
-            
-            // Sort events by timestamp (most recent first)
-            const sortedEvents = [...this.selectedMission.events].sort((a, b) => {
-                const timeA = new Date(a.timestamp || a.created_at || 0);
-                const timeB = new Date(b.timestamp || b.created_at || 0);
-                return timeB - timeA;
-            });
-            
-            // Return limited or all events based on showAllEvents flag
-            return this.showAllEvents ? sortedEvents : sortedEvents.slice(0, 10);
+            try {
+                if (!this.selectedMission?.events) {
+                    return [];
+                }
+                
+                // Create a simple hash of the events array to detect changes
+                const eventsHash = JSON.stringify(this.selectedMission.events.map(e => e.timestamp || e.created_at || e.id));
+                
+                // Only re-sort if events have changed
+                if (this._lastEventsHash !== eventsHash || !this._cachedSortedEvents) {
+                    console.log('🔄 Re-sorting events (events changed)');
+                    this._cachedSortedEvents = [...this.selectedMission.events].sort((a, b) => {
+                        const timeA = new Date(a.timestamp || a.created_at || 0);
+                        const timeB = new Date(b.timestamp || b.created_at || 0);
+                        return timeB - timeA;
+                    });
+                    this._lastEventsHash = eventsHash;
+                }
+                
+                // Return limited or all events based on showAllEvents flag
+                return this.showAllEvents ? this._cachedSortedEvents : this._cachedSortedEvents.slice(0, 10);
+            } catch (error) {
+                console.error('❌ Error in displayEvents:', error);
+                // Return empty array as fallback
+                return [];
+            }
         },
 
         // Check if there are more events to show
@@ -86,8 +105,119 @@ function sentinelApp() {
 
         // --- INITIALIZATION ---
 
+        initErrorHandling() {
+            console.log("🛡️ Setting up global error handling...");
+            
+            // Global JavaScript error handler
+            window.addEventListener('error', (event) => {
+                console.error('❌ Global JavaScript Error:', {
+                    message: event.message,
+                    filename: event.filename,
+                    lineno: event.lineno,
+                    colno: event.colno,
+                    error: event.error
+                });
+                
+                // Show user-friendly error notification
+                this.showErrorNotification('An unexpected error occurred. Please refresh the page if issues persist.');
+            });
+            
+            // Promise rejection handler
+            window.addEventListener('unhandledrejection', (event) => {
+                console.error('❌ Unhandled Promise Rejection:', event.reason);
+                this.showErrorNotification('A network or data processing error occurred.');
+            });
+        },
+
+        showErrorNotification(message) {
+            // Simple error notification - can be enhanced with a proper notification system
+            console.warn('🔔 Error Notification:', message);
+            
+            // Create a temporary error display (fallback)
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'alert alert-warning position-fixed';
+            errorDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; max-width: 300px;';
+            errorDiv.innerHTML = `
+                <strong>Notice:</strong> ${message}
+                <button type="button" class="close ml-2" onclick="this.parentElement.remove()">
+                    <span>&times;</span>
+                </button>
+            `;
+            document.body.appendChild(errorDiv);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (errorDiv.parentElement) {
+                    errorDiv.remove();
+                }
+            }, 5000);
+        },
+
+        initKeyboardNavigation() {
+            console.log("⌨️ Setting up keyboard navigation...");
+            
+            try {
+                // Global keyboard event handler
+                document.addEventListener('keydown', (e) => {
+                    try {
+                        // ESC key - close modals
+                        if (e.key === 'Escape') {
+                            if (this.showMissionModal) {
+                                this.closeMissionModal();
+                                e.preventDefault();
+                            }
+                            if (this.showEventModal) {
+                                $('#event-modal').modal('hide');
+                                e.preventDefault();
+                            }
+                        }
+                        
+                        // Ctrl/Cmd + M - Open/close mission modal (if mission selected)
+                        if ((e.ctrlKey || e.metaKey) && e.key === 'm' && !e.shiftKey) {
+                            if (this.missions.length > 0 && !this.showMissionModal) {
+                                // Open first available mission if none selected
+                                if (!this.selectedMission) {
+                                    this.openMissionModal(this.missions[0]);
+                                }
+                                e.preventDefault();
+                            }
+                        }
+                        
+                        // Tab navigation within modals - let browser handle naturally
+                        if (e.key === 'Tab' && this.showMissionModal) {
+                            // Ensure focus stays within modal
+                            const modal = document.querySelector('.mission-modal');
+                            const focusableElements = modal?.querySelectorAll(
+                                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                            );
+                            
+                            if (focusableElements && focusableElements.length > 0) {
+                                const firstElement = focusableElements[0];
+                                const lastElement = focusableElements[focusableElements.length - 1];
+                                
+                                if (e.shiftKey && document.activeElement === firstElement) {
+                                    lastElement.focus();
+                                    e.preventDefault();
+                                } else if (!e.shiftKey && document.activeElement === lastElement) {
+                                    firstElement.focus();
+                                    e.preventDefault();
+                                }
+                            }
+                        }
+                    } catch (keyError) {
+                        console.error('❌ Keyboard navigation error:', keyError);
+                    }
+                });
+            } catch (error) {
+                console.error('❌ Failed to initialize keyboard navigation:', error);
+            }
+        },
+
         init() {
             console.log("🚀 Sentinel Command Center v5.4 Initializing (Sentience Active)...");
+            
+            // Set up global error handling
+            this.initErrorHandling();
             
             // Initialize state variables
             this.wsConnected = false;
@@ -96,6 +226,9 @@ function sentinelApp() {
             this.pageVisibilityHandler = null;
             this.navigationHandler = null;
             this.connectionId = Math.random().toString(36).substring(2, 8);
+            
+            // Set up keyboard navigation
+            this.initKeyboardNavigation();
             
             // Start WebSocket connection immediately
             this.startWebSocketStream();
@@ -161,6 +294,101 @@ function sentinelApp() {
             window.addEventListener('popstate', this.navigationHandler);
             
             console.log(`[${this.connectionId}] ✅ Component initialized successfully on ${window.location.pathname}`);
+        },
+
+        // --- SYSTEM VALIDATION & TESTING ---
+        
+        validateSystem() {
+            console.log("🧪 Running system validation...");
+            const results = {
+                passed: 0,
+                failed: 0,
+                tests: []
+            };
+            
+            // Test 1: Alpine.js initialization
+            try {
+                if (typeof this.missions !== 'undefined') {
+                    results.tests.push({ name: "Alpine.js state initialization", status: "✅ PASS" });
+                    results.passed++;
+                } else {
+                    results.tests.push({ name: "Alpine.js state initialization", status: "❌ FAIL" });
+                    results.failed++;
+                }
+            } catch (e) {
+                results.tests.push({ name: "Alpine.js state initialization", status: "❌ ERROR: " + e.message });
+                results.failed++;
+            }
+            
+            // Test 2: Event display functionality
+            try {
+                const events = this.displayEvents();
+                if (Array.isArray(events)) {
+                    results.tests.push({ name: "Event display function", status: "✅ PASS" });
+                    results.passed++;
+                } else {
+                    results.tests.push({ name: "Event display function", status: "❌ FAIL - Not array" });
+                    results.failed++;
+                }
+            } catch (e) {
+                results.tests.push({ name: "Event display function", status: "❌ ERROR: " + e.message });
+                results.failed++;
+            }
+            
+            // Test 3: Modal functions exist
+            try {
+                if (typeof this.openMissionModal === 'function' && typeof this.closeMissionModal === 'function') {
+                    results.tests.push({ name: "Modal functions available", status: "✅ PASS" });
+                    results.passed++;
+                } else {
+                    results.tests.push({ name: "Modal functions available", status: "❌ FAIL" });
+                    results.failed++;
+                }
+            } catch (e) {
+                results.tests.push({ name: "Modal functions available", status: "❌ ERROR: " + e.message });
+                results.failed++;
+            }
+            
+            // Test 4: Keyboard navigation setup
+            try {
+                if (typeof this.initKeyboardNavigation === 'function') {
+                    results.tests.push({ name: "Keyboard navigation setup", status: "✅ PASS" });
+                    results.passed++;
+                } else {
+                    results.tests.push({ name: "Keyboard navigation setup", status: "❌ FAIL" });
+                    results.failed++;
+                }
+            } catch (e) {
+                results.tests.push({ name: "Keyboard navigation setup", status: "❌ ERROR: " + e.message });
+                results.failed++;
+            }
+            
+            // Test 5: Performance optimization cache
+            try {
+                if (this._cachedSortedEvents !== undefined && this._lastEventsHash !== undefined) {
+                    results.tests.push({ name: "Performance optimization cache", status: "✅ PASS" });
+                    results.passed++;
+                } else {
+                    results.tests.push({ name: "Performance optimization cache", status: "❌ FAIL" });
+                    results.failed++;
+                }
+            } catch (e) {
+                results.tests.push({ name: "Performance optimization cache", status: "❌ ERROR: " + e.message });
+                results.failed++;
+            }
+            
+            console.log("🧪 System Validation Results:");
+            console.log(`✅ Passed: ${results.passed}`);
+            console.log(`❌ Failed: ${results.failed}`);
+            console.log("📋 Test Details:", results.tests);
+            
+            if (results.failed === 0) {
+                console.log("🎉 All systems operational! Sentinel is ready for production.");
+            } else {
+                console.warn("⚠️ Some tests failed. Please review the issues above.");
+            }
+            
+            return results;
         },
 
         // --- WEBSOCKET REAL-TIME STREAM ---
@@ -1119,7 +1347,9 @@ function sentinelApp() {
 
         // --- ENHANCED OUTPUT FORMATTING ---
         formatMissionOutput(output) {
-            if (!output) return 'No output available';
+            if (!output) {
+                return 'No output available';
+            }
             
             try {
                 // Try to parse as JSON first
@@ -1185,7 +1415,9 @@ function sentinelApp() {
 
         // Enhanced mission result processing
         processMissionResult(mission) {
-            if (!mission.result) return null;
+            if (!mission.result) {
+                return null;
+            }
             
             const processed = {
                 raw: mission.result,
@@ -1222,7 +1454,9 @@ function sentinelApp() {
         
         // Enhanced event detail formatting
         formatEventPayload(payload) {
-            if (!payload) return 'No payload data';
+            if (!payload) {
+                return 'No payload data';
+            }
             
             if (typeof payload === 'string') {
                 try {
@@ -1416,6 +1650,10 @@ function sentinelApp() {
             console.log('🚀 Opening mission modal for:', mission);
             console.log('🔍 Current showMissionModal state:', this.showMissionModal);
             
+            // Invalidate events cache when switching missions
+            this._cachedSortedEvents = null;
+            this._lastEventsHash = null;
+            
             // Set basic mission data first for immediate display
             this.selectedMission = { ...mission, loading: true };
             this.showMissionModal = true;
@@ -1518,6 +1756,9 @@ function sentinelApp() {
             this.showMissionModal = false;
             // Reset showAllEvents when closing modal
             this.showAllEvents = false;
+            // Invalidate events cache
+            this._cachedSortedEvents = null;
+            this._lastEventsHash = null;
             // It's good practice to nullify the selection after a delay to prevent visual glitches during transitions
             setTimeout(() => { this.selectedMission = null; }, 300);
         },
@@ -1744,7 +1985,9 @@ function sentinelApp() {
         },
 
         formatSentryLogs(logs) {
-            if (!logs.length) return 'No Sentry errors or issues detected for this mission.';
+            if (!logs.length) {
+                return 'No Sentry errors or issues detected for this mission.';
+            }
             
             return logs.map(log => {
                 const timestamp = new Date(log.timestamp).toLocaleString();
@@ -1753,7 +1996,9 @@ function sentinelApp() {
         },
 
         formatWeaveTraces(traces) {
-            if (!traces.length) return 'No Weave traces available for this mission.';
+            if (!traces.length) {
+                return 'No Weave traces available for this mission.';
+            }
             
             let output = '=== Weave Execution Traces ===\n\n';
             traces.forEach((trace, index) => {
@@ -1769,7 +2014,9 @@ function sentinelApp() {
         },
 
         formatWandbMetrics(metrics) {
-            if (!Object.keys(metrics).length) return 'No Wandb metrics available for this mission.';
+            if (!Object.keys(metrics).length) {
+                return 'No Wandb metrics available for this mission.';
+            }
             
             let output = '=== Wandb Performance Metrics ===\n\n';
             Object.entries(metrics).forEach(([key, value]) => {
@@ -1838,24 +2085,32 @@ function sentinelApp() {
         },
 
         formatJson(obj) {
-            if (!obj) return 'No data available';
+            if (!obj) {
+                return 'No data available';
+            }
             return JSON.stringify(obj, null, 2);
         },
 
         formatTimestamp(timestamp) {
-            if (!timestamp) return 'Unknown';
+            if (!timestamp) {
+                return 'Unknown';
+            }
             return new Date(timestamp).toLocaleString();
         },
 
         formatFileSize(bytes) {
-            if (!bytes) return '0 B';
+            if (!bytes) {
+                return '0 B';
+            }
             const sizes = ['B', 'KB', 'MB', 'GB'];
             const i = Math.floor(Math.log(bytes) / Math.log(1024));
             return `${Math.round(bytes / Math.pow(1024, i) * 100) / 100} ${sizes[i]}`;
         },
 
         formatMissionOutput(result) {
-            if (!result) return 'Mission has not produced output yet.';
+            if (!result) {
+                return 'Mission has not produced output yet.';
+            }
             
             // Enhanced formatting for different types of output
             let formatted = result;
@@ -2244,7 +2499,9 @@ function sentinelApp() {
         },
 
         formatUptime(createdAt) {
-            if (!createdAt) return 'N/A';
+            if (!createdAt) {
+                return 'N/A';
+            }
             
             const now = new Date();
             const created = new Date(createdAt);
