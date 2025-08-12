@@ -6,15 +6,14 @@ import uuid
 import sys
 from datetime import datetime
 from fastapi import FastAPI, HTTPException, Depends, WebSocket, WebSocketDisconnect
-
-import asyncio
-import json
-import time
-import uuid
-import sys
-from datetime import datetime
-from fastapi import FastAPI, HTTPException, Depends, WebSocket, WebSocketDisconnect
 import logging
+
+# Health check endpoint (must be after app = FastAPI())
+app = FastAPI()
+
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
 
 # --- Minimal working system: advanced/supercharged logic is commented out ---
 
