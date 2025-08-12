@@ -16,8 +16,7 @@
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
     "serve": "^14.2.0",
-    "react-scripts": "^5.0.1",
-    "@copilotkit/react-chat": "latest"
+    "react-scripts": "^5.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",
