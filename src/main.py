@@ -107,10 +107,17 @@ async def websocket_endpoint(websocket: WebSocket):
         websocket_manager.disconnect(websocket)
 
 
-# Register the CopilotKit router for /api/copilotkit endpoint
+
+# Register the CopilotKit router for /api/copilotkit and /api/copilot endpoints
 try:
-    from src.api.copilotkit import router as copilotkit_router
+    from src.api.copilotkit import router as copilotkit_router, copilotkit_proxy
     app.include_router(copilotkit_router)
+
+    # Add /api/copilot as an alias for /api/copilotkit
+    from fastapi import Request
+    @app.api_route("/api/copilot", methods=["POST", "GET"])
+    async def copilot_alias(request: Request):
+        return await copilotkit_proxy(request)
 except Exception as e:
     logger.warning(f"CopilotKit router not registered: {e}")
 
