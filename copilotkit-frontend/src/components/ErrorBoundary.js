@@ -11,10 +11,7 @@ class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    // Log error to Sentry or backend
-    if (window.Sentry) {
-      window.Sentry.captureException(error);
-    }
+    // Optionally log error to backend here
   }
 
   render() {
