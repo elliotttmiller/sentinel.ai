@@ -106,9 +106,13 @@ async def websocket_endpoint(websocket: WebSocket):
     finally:
         websocket_manager.disconnect(websocket)
 
-# Register the CopilotKit router if available
-# if 'copilotkit_router' in globals():
-#     app.include_router(copilotkit_router)
+
+# Register the CopilotKit router for /api/copilotkit endpoint
+try:
+    from src.api.copilotkit import router as copilotkit_router
+    app.include_router(copilotkit_router)
+except Exception as e:
+    logger.warning(f"CopilotKit router not registered: {e}")
 
 # --- CopilotKit React Frontend Integration Example ---
 # In your frontend, initialize CopilotKit with your public API key:
