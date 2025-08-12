@@ -10,6 +10,22 @@ import httpx
 
 router = APIRouter()
 
+# Info endpoint for CopilotKit Cloud
+@router.get("/api/copilotkit/info")
+async def copilotkit_info():
+    return {"status": "ok", "info": "SentinelAI CopilotKit integration active."}
+"""
+Advanced FastAPI integration for CopilotKit endpoint.
+Handles chat, actions, and agent orchestration for CopilotKit clients.
+"""
+
+from fastapi import APIRouter, Request, HTTPException
+from fastapi.responses import JSONResponse
+import os
+import httpx
+
+router = APIRouter()
+
 COPILOT_API_KEY = os.getenv("COPILOT_API_KEY")
 COPILOTKIT_CLOUD_URL = "https://api.copilotkit.ai"  # CopilotKit Cloud base URL (do not change unless instructed)
 
