@@ -1,0 +1,452 @@
+
+Self Hosting (Copilot Runtime)
+Learn how to self-host the Copilot Runtime.
+
+The Copilot Runtime is the back-end component of CopilotKit, handling the communication with LLM, message history, state and more.
+
+You may choose to self-host the Copilot Runtime, or use Copilot Cloud (recommended).
+
+LLM
+Copilot Runtime
+@copilotkit/react-core
+LLM
+Copilot Runtime
+@copilotkit/react-core
+"Hey, my name is Uli."
+Request
+Response
+"Hello Uli, how can I help you?"
+Integration
+Step 1: Create an Endpoint
+Choose your provider:
+
+Google Generative AI (Gemini) logoGoogle Generative AI (Gemini)
+If you are planning to use a single LangGraph agent in agent-lock mode as your agentic backend, your LLM adapter will only be used for peripherals such as suggestions, etc.
+
+If you are not sure yet, simply ignore this note.
+
+Add your API key
+Next, add your API key to your .env file in the root of your project (unless you prefer to provide it directly to the client):
+
+.env
+
+GOOGLE_API_KEY=your_api_key_here
+Setup the Runtime Endpoint
+Serverless Function Timeouts
+When deploying to serverless platforms (Vercel, AWS Lambda, etc.), be aware that default function timeouts may be too short for CopilotKit's streaming responses:
+
+Vercel defaults: 10s (Hobby), 15s (Pro)
+AWS Lambda default: 3s
+Solution options:
+
+Increase function timeout:
+
+// vercel.json
+{
+  "functions": {
+    "api/copilotkit/**/*": {
+      "maxDuration": 60
+    }
+  }
+}
+Use Copilot Cloud to avoid timeout issues entirely
+
+Next.js App Router
+
+Next.js Pages Router
+
+Node.js Express
+
+Node.js HTTP
+
+NestJS
+Create a new route to handle the /api/copilotkit endpoint.
+
+app/api/copilotkit/route.ts
+
+import {
+  CopilotRuntime,
+  GoogleGenerativeAIAdapter,
+  copilotRuntimeNextJSAppRouterEndpoint,
+} from '@copilotkit/runtime';
+import { NextRequest } from 'next/server';
+ 
+const serviceAdapter = new GoogleGenerativeAIAdapter({ model: <optional model choice> });
+const runtime = new CopilotRuntime();
+ 
+export const POST = async (req: NextRequest) => {
+  const { handleRequest } = copilotRuntimeNextJSAppRouterEndpoint({
+    runtime,
+    serviceAdapter,
+    endpoint: '/api/copilotkit',
+  });
+ 
+  return handleRequest(req);
+};
+Your Copilot Runtime endpoint should be available at http://localhost:3000/api/copilotkit.
+
+Step 2: Get Your Copilot Cloud API Key (Optional but Recommended)
+While self-hosting, you can still leverage Copilot Cloud's enhanced features for production-ready deployments.
+
+Go to Copilot Cloud and sign up for free
+Get your API key from the dashboard
+Add it to your environment variables:
+.env
+
+COPILOT_CLOUD_PUBLIC_API_KEY=your_api_key_here
+Why add this?
+
+Free tier available - Your requests will NOT be logged
+Production-ready features - Enhanced error handling and observability
+Developer console - Better debugging and monitoring (coming soon)
+Error observability - Track and debug issues in production
+This enables CopilotKit platform features while still using your self-hosted runtime.
+
+Step 3: Configure the <CopilotKit> Provider
+layout.tsx
+
+import "./globals.css";
+import { ReactNode } from "react";
+import { CopilotKit } from "@copilotkit/react-core"; 
+ 
+export default function RootLayout({ children }: { children: ReactNode }) {
+  return (
+    <html lang="en">
+      <body> 
+        {/* Make sure to use the URL you configured in the previous step  */} // [!code highlight:4]
+        <CopilotKit runtimeUrl="/api/copilotkit"> 
+          {children}
+        </CopilotKit>
+      </body>
+    </html>
+  );
+}
+
+===========================================
+
+CopilotRuntime
+Copilot Runtime is the back-end component of CopilotKit, enabling interaction with LLMs.
+
+This is the reference for the CopilotRuntime class. For more information and example code snippets, please see Concept: Copilot Runtime.
+
+Usage
+
+import { CopilotRuntime } from "@copilotkit/runtime";
+ 
+const copilotKit = new CopilotRuntime();
+Constructor Parameters
+middleware
+Middleware
+Middleware to be used by the runtime.
+
+
+onBeforeRequest: (options: {
+  threadId?: string;
+  runId?: string;
+  inputMessages: Message[];
+  properties: any;
+}) => void | Promise<void>;
+
+onAfterRequest: (options: {
+  threadId?: string;
+  runId?: string;
+  inputMessages: Message[];
+  outputMessages: Message[];
+  properties: any;
+}) => void | Promise<void>;
+actions
+ActionsConfiguration<T>
+A list of server side actions that can be executed. Will be ignored when remoteActions are set
+
+remoteActions
+CopilotKitEndpoint[]
+Deprecated: Use remoteEndpoints.
+
+remoteEndpoints
+EndpointDefinition[]
+A list of remote actions that can be executed.
+
+langserve
+RemoteChainParameters[]
+An array of LangServer URLs.
+
+agents
+Record<string, AbstractAgent>
+A map of agent names to AGUI agents. Example agent config:
+
+
+import { AbstractAgent } from "@ag-ui/client";
+// ...
+agents: {
+  "support": new CustomerSupportAgent(),
+  "technical": new TechnicalAgent()
+}
+delegateAgentProcessingToServiceAdapter
+boolean
+Delegates agent state processing to the service adapter.
+
+When enabled, individual agent state requests will not be processed by the agent itself. Instead, all processing will be handled by the service adapter.
+
+observability_c
+CopilotObservabilityConfig
+Configuration for LLM request/response logging. Requires publicApiKey from CopilotKit component to be set:
+
+
+<CopilotKit publicApiKey="ck_pub_..." />
+Example logging config:
+
+
+logging: {
+  enabled: true, // Enable or disable logging
+  progressive: true, // Set to false for buffered logging
+  logger: {
+    logRequest: (data) => langfuse.trace({ name: "LLM Request", input: data }),
+    logResponse: (data) => langfuse.trace({ name: "LLM Response", output: data }),
+    logError: (errorData) => langfuse.trace({ name: "LLM Error", metadata: errorData }),
+  },
+}
+mcpServers
+MCPEndpointConfig[]
+Configuration for connecting to Model Context Protocol (MCP) servers. Allows fetching and using tools defined on external MCP-compliant servers. Requires providing the createMCPClient function during instantiation. @experimental
+
+createMCPClient
+CreateMCPClientFunction
+A function that creates an MCP client instance for a given endpoint configuration. This function is responsible for using the appropriate MCP client library (e.g., @copilotkit/runtime, ai) to establish a connection. Required if mcpServers is provided.
+
+
+import { experimental_createMCPClient } from "ai"; // Import from vercel ai library
+// ...
+const runtime = new CopilotRuntime({
+  mcpServers: [{ endpoint: "..." }],
+  async createMCPClient(config) {
+    return await experimental_createMCPClient({
+      transport: {
+        type: "sse",
+        url: config.endpoint,
+        headers: config.apiKey
+          ? { Authorization: `Bearer ${config.apiKey}` }
+          : undefined,
+      },
+    });
+  }
+});
+onError
+CopilotErrorHandler
+Optional error handler for comprehensive debugging and observability.
+
+Requires publicApiKey: Error handling only works when requests include a valid publicApiKey. This is a premium Copilot Cloud feature.
+
+@param errorEvent - Structured error event with rich debugging context
+
+@example
+
+
+const runtime = new CopilotRuntime({
+  onError: (errorEvent) => {
+    debugDashboard.capture(errorEvent);
+  }
+});
+processRuntimeRequest
+request: CopilotRuntimeRequest
+request
+CopilotRuntimeRequest
+required
+getAllAgents
+graphqlContext: GraphQLContext
+graphqlContext
+GraphQLContext
+required
+discoverAgentsFromEndpoints
+graphqlContext: GraphQLContext
+graphqlContext
+GraphQLContext
+required
+loadAgentState
+graphqlContext: GraphQLContext, threadId: string, agentName: string
+graphqlContext
+GraphQLContext
+required
+threadId
+string
+required
+agentName
+string
+required
+errorGraphQLError
+error: { message: string; code: string; type: string }, context: { operation: string; cloudConfigPresent: boolean; guardrailsEnabled: boolean; }
+Public method to handle GraphQL validation errors
+
+error
+{ message: string; code: string; type: string }
+required
+context
+{ operation: string; cloudConfigPresent: boolean; guardrailsEnabled: boolean; }
+required
+
+==============================================
+
+Quickstart
+Get started with CopilotKit in under 5 minutes.
+
+Using the CLI
+If you have a NextJS application, you can use our CLI to automatically bootstrap your application for use with CopilotKit.
+
+
+npx copilotkit@latest init
+Starting from scratch?
+Code-along
+If you don't have a NextJS application or just want to code-along, you can follow the steps below.
+
+Copilot Cloud (Recommended)
+
+Use our hosted backend endpoint to get started quickly.
+
+Self-hosting
+
+Learn to host CopilotKit's runtime yourself with your own backend.
+
+Install CopilotKit
+First, install the latest packages for CopilotKit.
+
+npm
+pnpm
+yarn
+bun
+
+npm install @copilotkit/react-ui @copilotkit/react-core @copilotkit/runtime
+Set up a Copilot Runtime Endpoint
+Choose your provider:
+
+Google Generative AI (Gemini) logoGoogle Generative AI (Gemini)
+If you are planning to use a single LangGraph agent in agent-lock mode as your agentic backend, your LLM adapter will only be used for peripherals such as suggestions, etc.
+
+If you are not sure yet, simply ignore this note.
+
+Add your API key
+Next, add your API key to your .env file in the root of your project (unless you prefer to provide it directly to the client):
+
+.env
+
+GOOGLE_API_KEY=your_api_key_here
+Setup the Runtime Endpoint
+Serverless Function Timeouts
+When deploying to serverless platforms (Vercel, AWS Lambda, etc.), be aware that default function timeouts may be too short for CopilotKit's streaming responses:
+
+Vercel defaults: 10s (Hobby), 15s (Pro)
+AWS Lambda default: 3s
+Solution options:
+
+Increase function timeout:
+
+// vercel.json
+{
+  "functions": {
+    "api/copilotkit/**/*": {
+      "maxDuration": 60
+    }
+  }
+}
+Use Copilot Cloud to avoid timeout issues entirely
+
+Next.js App Router
+
+Next.js Pages Router
+
+Node.js Express
+
+Node.js HTTP
+
+NestJS
+Create a new route to handle the /api/copilotkit endpoint.
+
+app/api/copilotkit/route.ts
+
+import {
+  CopilotRuntime,
+  GoogleGenerativeAIAdapter,
+  copilotRuntimeNextJSAppRouterEndpoint,
+} from '@copilotkit/runtime';
+import { NextRequest } from 'next/server';
+ 
+const serviceAdapter = new GoogleGenerativeAIAdapter({ model: <optional model choice> });
+const runtime = new CopilotRuntime();
+ 
+export const POST = async (req: NextRequest) => {
+  const { handleRequest } = copilotRuntimeNextJSAppRouterEndpoint({
+    runtime,
+    serviceAdapter,
+    endpoint: '/api/copilotkit',
+  });
+ 
+  return handleRequest(req);
+};
+Your Copilot Runtime endpoint should be available at http://localhost:3000/api/copilotkit.
+
+Get Your Copilot Cloud API Key (Optional but Recommended)
+While self-hosting, you can still leverage Copilot Cloud's enhanced features for production-ready deployments.
+
+Go to Copilot Cloud and sign up for free
+Get your API key from the dashboard
+Add it to your environment variables:
+.env
+
+COPILOT_CLOUD_PUBLIC_API_KEY=your_api_key_here
+Why add this?
+
+Free tier available - Your requests will NOT be logged
+Production-ready features - Enhanced error handling and observability
+Developer console - Better debugging and monitoring (coming soon)
+Error observability - Track and debug issues in production
+This enables CopilotKit platform features while still using your self-hosted runtime.
+
+Configure the CopilotKit Provider
+layout.tsx
+
+import "./globals.css";
+import { ReactNode } from "react";
+import { CopilotKit } from "@copilotkit/react-core"; 
+ 
+export default function RootLayout({ children }: { children: ReactNode }) {
+  return (
+    <html lang="en">
+      <body> 
+        {/* Make sure to use the URL you configured in the previous step  */} // [!code highlight:4]
+        <CopilotKit runtimeUrl="/api/copilotkit"> 
+          {children}
+        </CopilotKit>
+      </body>
+    </html>
+  );
+}
+Choose a Copilot UI
+You are almost there! Now it's time to setup your Copilot UI.
+
+First, import the default styles in your root component (typically layout.tsx) :
+
+
+import "@copilotkit/react-ui/styles.css";
+Copilot UI ships with a number of built-in UI patterns, choose whichever one you like.
+
+CopilotChat
+CopilotSidebar
+CopilotPopup
+Headless UI
+CopilotChat is a flexible chat interface component that can be placed anywhere in your app and can be resized as you desire.
+
+Popup Example
+
+import { CopilotChat } from "@copilotkit/react-ui";
+ 
+export function YourComponent() {
+  return (
+    <CopilotChat
+      instructions={"You are assisting the user as best as you can. Answer in the best way possible given the data you have."}
+      labels={{
+        title: "Your Assistant",
+        initial: "Hi! 👋 How can I assist you today?",
+      }}
+    />
+  );
+}
+Next Steps
+🎉 Congrats! You've successfully integrated a fully functional chatbot in your application! Give it a try now and see it in action. Want to take it further? Learn more about what CopilotKit has to offer!
