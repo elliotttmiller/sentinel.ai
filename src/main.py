@@ -79,6 +79,12 @@ app.add_middleware(
 # Mount static files
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
+# --- Healthcheck endpoint for Railway and CopilotKit ---
+@app.get("/health")
+def health():
+    """Basic healthcheck for Railway and load balancers."""
+    return {"status": "ok"}
+
 # Pydantic models for API requests
 class TestMissionRequest(BaseModel):
     prompt: str
