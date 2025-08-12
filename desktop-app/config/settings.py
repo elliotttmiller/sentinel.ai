@@ -18,6 +18,9 @@ class Settings(BaseSettings):
     # Hybrid Decision Engine
     ENABLE_HYBRID_MODE: bool = True
     AUTO_SWITCHING: bool = True
+
+    # --- CopilotKit Integration ---
+    COPILOT_API_KEY: Optional[str] = Field(default=None, env="COPILOT_API_KEY")
     
     # Golden Path Feature Flags
     ENABLE_FULL_WORKFLOW: bool = False
