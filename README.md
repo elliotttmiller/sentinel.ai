@@ -232,70 +232,70 @@ copilot/
 
 ### 3.1. **Frontend-Backend Interaction**
 
+```mermaid
+flowchart LR
+    A[copilotkit-frontend (React/Next.js)] -- API Request (HTTP/REST) --> B[src/ (Python Backend) (FastAPI/Flask)]
+    B -- Read/Write data --> C[db/ (Databases) (SQLite & ChromaDB)]
+    B -- API Response --> A
+    B -- Orchestrate agent --> D[agents/, core/, tools/]
+    D -- Read/Write data --> C
 ```
-+--------------------------+         +----------------------+         +---------------------+
-| copilotkit-frontend/     |         | src/ (Python Backend)|         | db/ (Databases)     |
-| (React/Next.js)          |         | (FastAPI/Flask)      |         | (SQLite & ChromaDB) |
-+--------------------------+         +----------------------+         +---------------------+
-           │                                  ▲                                ▲
-           │  1. User action (e.g.,          │                                │
-           │     create mission)             │                                │
-           ▼                                  │                                │
-+--------------------------+                  │                                │
-| API Request (HTTP/REST)  | ───────────────► | 2. API endpoint receives request |
-+--------------------------+                  │                                │
-                                              │ 3. Core logic processes request|
-                                              │    (e.g., orchestrate agent)   |
-                                              ▼                                │
-                               +---------------------------------+             │
-                               | agents/, core/, tools/          | ───────────► 4. Read/Write data
-                               +---------------------------------+
-                                              │
-           ┌──────────────────────────────────┘
-           │ 5. API sends response
-           │    back to frontend
-           ▼
-+--------------------------+
-| UI updates with new data |
-+--------------------------+
 ```
 
 ### 3.2. **Agent Memory Flow**
 
+### 3.2. **Agent Memory Flow**
+
+```mermaid
+flowchart LR
+    A[src/agents/ (Agent Logic)] --> B[src/tools/ (Vector DB Tool)]
+    B --> C[db/chroma_memory/ (ChromaDB)]
 ```
-+----------------------+      +----------------------+      +----------------------+
-| src/agents/          |      | src/tools/           |      | db/chroma_memory/    |
-| (Agent Logic)        | ───► | (Vector DB Tool)     | ───► | (ChromaDB)           |
-+----------------------+      +----------------------+      +----------------------+
-1. Agent needs to      2. Tool formats data &     3. Embeddings are stored
-   remember info.         sends to ChromaDB.         or retrieved.
 ```
 
 ---
 
 ## 4. 🖼️ Visual System Map
 
+### 4. 🖼️ Visual System Map
+
+```mermaid
+flowchart TD
+    subgraph Frontend Layer
+        FE[copilotkit-frontend\nReact/Next.js]
+    end
+    subgraph Backend Layer
+        API[src/api\nREST API]
+        CORE[src/core\nBusiness Logic]
+        AGENTS[src/agents\nAI Engine]
+        MODELS[src/models\nData Models]
+    end
+    subgraph Persistence Layer
+        DB1[db/sentinel_missions.db\nSQLite]
+        DB2[db/chroma_memory\nChromaDB]
+    end
+
+    FE -- API Calls --> API
+    API -- Logic --> CORE
+    CORE -- Orchestrates --> AGENTS
+    CORE -- Uses --> MODELS
+    CORE -- Reads/Writes --> DB1
+    AGENTS -- Vector Memory --> DB2
 ```
-+--------------------------------+       +--------------------------------+
-|         Frontend Layer         |       |         Backend Layer          |
-|--------------------------------|       |--------------------------------|
-| [copilotkit-frontend]          | ◄───► | [src/api] (REST API)           |
-|   - React/Next.js              |  API  |   - FastAPI / Flask            |
-|   - CopilotKit Components      | Calls |                                |
-|   - Real-time Dashboards       |       | [src/core] (Business Logic)    |
-+--------------------------------+       | [src/agents] (AI Engine)       |
-                                         | [src/models] (Data Models)     |
-                                         +--------------------------------+
-                                                        │
-                                                        │
-                                         +--------------------------------+
-                                         |        Persistence Layer       |
-                                         |--------------------------------|
-                                         | [db/sentinel_missions.db]      |
-                                         |   - SQLite (Relational Data)   |
-                                         | [db/chroma_memory]             |
-                                         |   - ChromaDB (Vector Memory)   |
-                                         +--------------------------------+
+
+---
+
+### 4.1. 🛠️ CI/CD & Deployment Pipeline
+
+```mermaid
+flowchart LR
+    Dev[Developer] -->|Pushes code| GitHub[GitHub Repository]
+    GitHub -->|Triggers| Actions[GitHub Actions CI]
+    Actions -->|Runs tests, builds Docker image| Docker[Docker Image]
+    Docker -->|Pushes to| Registry[Container Registry]
+    Registry -->|Deploys| Cloud[Cloud/Server (e.g., Railway, AWS, Azure)]
+    Cloud -->|Runs| System[Copilot System]
+```
 ```
 
 ---
