@@ -1,0 +1,7 @@
+[build]
+root = "copilotkit-frontend"
+buildCommand = "npm install && npm run build"
+outputDirectory = "build"
+
+[static]
+# This section tells Railway to use static site hosting for the frontend
