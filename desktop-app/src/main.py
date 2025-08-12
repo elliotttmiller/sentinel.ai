@@ -1512,6 +1512,9 @@ async def run_initial_optimization():
     except Exception as e:
         logger.error(f"❌ Initial optimization failed: {e}")
 
+# Register the CopilotKit router
+app.include_router(copilotkit_router)
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8080)
