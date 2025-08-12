@@ -34,6 +34,7 @@ try:
     from utils.guardian_protocol import guardian_protocol as GuardianProtocol
     from core.supercharged_optimizer import supercharged_optimizer
     from core.supercharged_websocket_manager import websocket_manager
+    from src.api.copilotkit import router as copilotkit_router
     logger.info("✅ Successfully imported all core modules including supercharged components")
 except ImportError as e:
     logger.error(f"❌ Failed to import core modules: {e}")
