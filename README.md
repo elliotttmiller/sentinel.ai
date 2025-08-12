@@ -293,7 +293,7 @@ flowchart LR
     GitHub -->|Triggers| Actions[GitHub Actions CI]
     Actions -->|Runs tests, builds Docker image| Docker[Docker Image]
     Docker -->|Pushes to| Registry[Container Registry]
-    Registry -->|Deploys| Cloud[Cloud/Server (e.g., Railway, AWS, Azure)]
+    Registry -->|Deploys| Cloud[Cloud/Server - Railway, AWS, Azure]
     Cloud -->|Runs| System[Copilot System]
 ```
 ```
