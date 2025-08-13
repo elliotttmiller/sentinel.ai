@@ -18,7 +18,7 @@ root.render(
         <ThemeProvider>
           <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
             <CopilotKit
-              runtimeUrl="/copilotkit"
+              runtimeUrl="http://127.0.0.1:8000/api/copilotkit"
               publicApiKey={process.env.REACT_APP_PUBLIC_API_KEY}
             >
               <App />

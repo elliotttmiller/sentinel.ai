@@ -1,3 +1,4 @@
+import { CopilotChat } from "@copilotkit/react-ui";
 export default function AdvancedAgentPanel() {
   // Observability hooks for debugging and analytics
   const observabilityHooks = {

@@ -1,10 +1,9 @@
-import { GoogleGenerativeAIAdapter } from "@copilotkit/runtime";
 
+// Adapter removed. Use CopilotKit UI/hooks to connect to backend endpoint.
+// Example usage in your main App component:
+// import { CopilotKit } from "@copilotkit/react-core";
+// import { CopilotChat } from "@copilotkit/react-ui";
 
-export const googleAdapter = new GoogleGenerativeAIAdapter({
-  model: "gemini-1.5-pro", // Match backend model
-  apiKey: process.env.REACT_APP_GOOGLE_API_KEY
-});
-
-// Example usage:
-// copilotKit.useAdapter(googleAdapter);
+// <CopilotKit runtimeUrl="/api/copilotkit">
+//   <CopilotChat instructions="You are assisting the user as best as you can." />
+// </CopilotKit>

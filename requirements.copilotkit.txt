@@ -1,0 +1,18 @@
+copilotkit>=0.1.60
+fastapi>=0.115.14
+langgraph>=0.6.4
+langchain==0.3.26
+langchain-core==0.3.74
+langsmith==0.4.14
+uvicorn>=0.23.2
+httpx>=0.28.1
+python-dotenv>=1.0.1
+google-generativeai>=0.3.0
+google-auth>=2.29.0
+# Remove conflicting packages below if present:
+# embedchain
+# langchain-community
+# langchain-experimental
+# chromadb
+# langchain-cohere
+# langchain-openai

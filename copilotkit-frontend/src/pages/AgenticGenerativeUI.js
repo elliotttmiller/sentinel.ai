@@ -1,3 +1,4 @@
+// This file has been deleted. Agentic generative UI is now integrated into the main agent chat in the dashboard.
 import React from "react";
 import "@copilotkit/react-ui/styles.css";
 import "../styles/agentic.css";

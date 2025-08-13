@@ -54,8 +54,15 @@ export default function AgenticTaskExecutor() {
   }
 
   return (
-    <div className="agentic-task-executor" style={{ margin: "2rem 0", padding: 24, border: "1px solid #e0e0e0", borderRadius: 12 }}>
-      <h2>🚀 Agentic Generative UI Task Executor</h2>
+    <div className="agentic-task-executor" style={{
+      margin: "0",
+      padding: "2rem",
+      background: "#232336",
+      borderRadius: "1.5rem",
+      boxShadow: "0 4px 24px rgba(40,40,60,0.18)",
+      color: "#e5e7eb"
+    }}>
+      <h2 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#a5b4fc", marginBottom: "1rem" }}>🚀 Agentic Generative UI Task Executor</h2>
       <form onSubmit={handleSubmit} style={{ marginBottom: 16 }}>
         <input
           type="text"

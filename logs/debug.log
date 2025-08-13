@@ -234,3 +234,185 @@ fastapi.exceptions.HTTPException: 400: No messages provided.
     raise HTTPException(status_code=400, detail="No messages provided.")
 fastapi.exceptions.HTTPException: 400: No messages provided.
 
+2025-08-13 10:47:17.418 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 10:47:17.422 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 10:47:17.422 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 10:50:09.229 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 10:50:09.229 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 10:50:09.245 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 10:50:09.245 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 10:50:09.245 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 10:50:09.245 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 10:50:22.568 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 10:50:22.568 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 10:50:22.568 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 10:52:48.001 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 10:52:48.002 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 10:52:48.003 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 10:52:48.006 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 10:52:48.006 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 10:52:48.006 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 10:53:16.358 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 10:53:16.359 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 10:53:16.363 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 10:53:16.365 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 10:53:16.366 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 10:53:16.367 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 10:53:21.955 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 10:53:21.955 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 10:53:21.955 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 10:54:51.229 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 10:54:51.229 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 10:54:51.229 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 10:54:51.229 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 10:54:51.229 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 10:54:51.236 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 10:55:00.793 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 10:55:00.793 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 10:55:00.793 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 10:55:19.054 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 10:55:19.055 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 10:55:19.057 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 10:55:19.063 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 10:55:19.068 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 10:55:19.074 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 10:56:20.386 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 10:56:20.389 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 10:56:20.392 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 10:56:20.398 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 10:56:20.399 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 10:56:20.403 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 10:56:20.568 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 10:56:20.570 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 10:56:20.572 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 10:56:20.587 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 10:56:20.589 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 10:56:20.592 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 10:56:50.277 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 10:56:50.277 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 10:56:50.278 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 10:56:50.280 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 10:56:50.280 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 10:56:50.281 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 10:56:57.159 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 10:56:57.159 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 10:56:57.159 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 10:57:37.304 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 10:57:37.306 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 10:57:37.308 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 10:57:37.334 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 10:57:37.335 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 10:57:37.338 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 11:00:09.394 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 11:00:09.394 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 11:00:09.395 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 11:00:09.395 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 11:00:09.395 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 11:00:09.395 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
+2025-08-13 11:00:21.475 | ERROR    | src.api.copilotkit:copilotkit_gemini:45 | {} | No messages provided in request body.
+2025-08-13 11:00:21.475 | ERROR    | src.api.copilotkit:copilotkit_gemini:96 | {} | HTTPException in CopilotKit handler: 400: No messages provided.
+2025-08-13 11:00:21.476 | ERROR    | src.api.copilotkit:copilotkit_gemini:97 | {} | Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\api\copilotkit.py", line 46, in copilotkit_gemini
+    raise HTTPException(status_code=400, detail="No messages provided.")
+fastapi.exceptions.HTTPException: 400: No messages provided.
+
