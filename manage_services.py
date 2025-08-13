@@ -30,7 +30,7 @@ CONFIG = {
             "copilotkit": "http://localhost:8000/api/copilotkit/info"
         },
         "frontend": {
-            "cmd": ["npm", "start"],
+            "cmd": [r"C:\\Users\\AMD\\AppData\\Roaming\\npm\\yarn.cmd", "start"],
             "cwd": "./copilotkit-frontend",
             "desc": "React Frontend",
             "health": "http://localhost:3000"
