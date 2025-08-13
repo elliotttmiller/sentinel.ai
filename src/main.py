@@ -186,4 +186,5 @@ async def global_exception_handler(request: Request, exc: Exception):
 if __name__ == "__main__":
     import uvicorn
     logger.info("Starting SentinelAI backend with advanced logging...")
-    uvicorn.run(app, host="0.0.0.0", port=8080)
+    port = int(os.getenv("PORT", "8000"))
+    uvicorn.run(app, host="0.0.0.0", port=port)

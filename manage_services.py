@@ -111,14 +111,44 @@ def main():
     print_header()
     check_env_files()
     env_vars = validate_env_vars()
-    # Determine mode from .env
-    local = env_vars.get("REDIS_MODE", "local").lower() == "local"
-    print(f"\n[INFO] Startup mode: {'Local' if local else 'Remote'} (from .env)")
-    procs = start_all_services(local=local)
+    # Interactive menu
+    print("\nChoose startup option:")
+    print("1. Full Local Startup (backend, frontend, local services)")
+    print("2. Full Remote Startup (backend, frontend, remote integrations)")
+    print("3. Backend Only")
+    print("4. Frontend Only")
+    print("5. Custom (choose services)")
+    choice = input("Enter option [1-5]: ").strip()
+    local = True
+    services_to_start = list(CONFIG["services"].keys())
+    if choice == "1":
+        local = True
+    elif choice == "2":
+        local = False
+    elif choice == "3":
+        services_to_start = ["backend"]
+    elif choice == "4":
+        services_to_start = ["frontend"]
+    elif choice == "5":
+        print("Available services:", ", ".join(CONFIG["services"].keys()))
+        custom = input("Enter comma-separated services to start: ").strip()
+        services_to_start = [s.strip() for s in custom.split(",") if s.strip() in CONFIG["services"]]
+    print(f"\n[INFO] Startup mode: {'Local' if local else 'Remote'} (from menu)")
+    print(f"[INFO] Services to start: {', '.join(services_to_start)}")
+    # Start selected services
+    procs = {}
+    for name in services_to_start:
+        if not local and name in ["redis", "postgres"]:
+            continue
+        proc = run_service(name)
+        if proc:
+            procs[name] = proc
+    print("\n[INFO] Selected services started.")
     # Health checks
     print("\nRunning health checks...")
-    for name, svc in CONFIG["services"].items():
-        if not local and name in ["redis", "postgres"]:
+    for name in services_to_start:
+        svc = CONFIG["services"].get(name)
+        if not svc:
             continue
         url = svc.get("health")
         if url:
@@ -131,7 +161,6 @@ def main():
                     print(f"[WARN] {name} unhealthy (status {resp.status_code}).")
             except Exception as e:
                 print(f"[ERROR] {name} health check failed: {e}")
-        # CopilotKit endpoint health check
         copilotkit_url = svc.get("copilotkit")
         if copilotkit_url:
             try:
@@ -144,7 +173,6 @@ def main():
             except Exception as e:
                 print(f"[ERROR] CopilotKit endpoint health check failed: {e}")
     print("\n[INFO] System startup complete. Monitor logs for status.")
-    # Optionally: add restart/stop menu, log monitoring, etc.
 
 if __name__ == "__main__":
     main()
