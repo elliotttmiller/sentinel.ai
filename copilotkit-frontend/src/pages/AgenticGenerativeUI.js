@@ -1,7 +1,7 @@
 import React from "react";
 // ...existing code...
 import "../styles/agentic.css";
-import { CopilotKit, useCoAgentStateRender } from "@copilotkit/react-core";
+import { CopilotProvider, useCoAgentStateRender } from "@copilotkit/react-core";
 import CopilotChat from "../components/CopilotChat";
 
 const AGENT_NAME = "agentic_generative_ui";
@@ -64,13 +64,13 @@ const Chat = () => {
 export default function AgenticGenerativeUI() {
   const publicApiKey = process.env.REACT_APP_PUBLIC_API_KEY;
   return (
-    <CopilotKit
+    <CopilotProvider
       runtimeUrl={RUNTIME_URL}
       showDevConsole={false}
       agent={AGENT_NAME}
       publicApiKey={publicApiKey}
     >
       <Chat />
-    </CopilotKit>
+    </CopilotProvider>
   );
 }

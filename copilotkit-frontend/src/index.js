@@ -9,7 +9,7 @@ import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 import { SentinelProvider } from "./context/SentinelContext";
-import { CopilotKit } from "@copilotkit/react-core";
+import { CopilotProvider } from "@copilotkit/react-core";
 
 root.render(
   <React.StrictMode>
@@ -17,12 +17,12 @@ root.render(
       <SentinelProvider>
         <ThemeProvider>
           <BrowserRouter>
-            <CopilotKit
+            <CopilotProvider
               runtimeUrl={process.env.REACT_APP_API_URL + "/copilotkit"}
               publicApiKey={process.env.REACT_APP_PUBLIC_API_KEY}
             >
               <App />
-            </CopilotKit>
+            </CopilotProvider>
           </BrowserRouter>
         </ThemeProvider>
       </SentinelProvider>
