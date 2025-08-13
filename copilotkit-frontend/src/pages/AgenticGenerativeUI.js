@@ -2,7 +2,6 @@ import React from "react";
 // ...existing code...
 import "../styles/agentic.css";
 import { CopilotProvider } from "@copilotkit/react-core";
-import { useCoAgentStateRender } from "@copilotkit/react-ui";
 import CopilotChat from "../components/CopilotChat";
 
 const AGENT_NAME = "agentic_generative_ui";
@@ -48,11 +47,7 @@ const AgenticSteps = ({ steps }) => {
 };
 
 const Chat = () => {
-  // useCopilotChatSuggestions removed: not compatible with React SPA
-  useCoAgentStateRender({
-    name: AGENT_NAME,
-    render: ({ state }) => <AgenticSteps steps={state.steps} />,
-  });
+  // Agent state rendering now handled directly via useCoAgent below
   return (
     <div className="flex justify-center items-center h-full w-full">
       <div className="w-8/10 h-8/10 rounded-lg">

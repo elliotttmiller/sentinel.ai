@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useCopilotReadable, useCopilotAdditionalInstructions, useCopilotChat, useCoAgentStateRender, useCoAgent, useCopilotAction } from "@copilotkit/react-core";
+import { useCopilotReadable, useCopilotAdditionalInstructions, useCopilotChat, useCoAgent, useCopilotAction } from "@copilotkit/react-core";
 import { useCopilotChatSuggestions } from "@copilotkit/react-ui";
 import { TextMessage, MessageRole } from "@copilotkit/runtime-client-gql";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -59,18 +59,7 @@ function App() {
     available: "enabled"
   }, [currentRoute]);
 
-  // Integrate useCoAgentStateRender globally
-  useCoAgentStateRender({
-    name: "basic_agent",
-    nodeName: "main_node",
-    render: ({ status, state, nodeName }) => (
-      <div style={{ padding: "8px", background: "#f5f5f5", borderRadius: "4px", margin: "8px 0" }}>
-        <strong>Agent Status:</strong> {status}<br />
-        <strong>Node:</strong> {nodeName}<br />
-        <strong>State:</strong> {state ? JSON.stringify(state) : "No state"}
-      </div>
-    ),
-  });
+  // Agent state rendering now handled directly via useCoAgent below
 
   // Integrate useCoAgent globally with a sample counter state
   const agent = useCoAgent({
