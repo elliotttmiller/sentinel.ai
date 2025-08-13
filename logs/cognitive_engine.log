@@ -18,3 +18,4 @@ ModuleNotFoundError: No module named 'src'
 [2025-08-13 04:10:21,134] [DEBUG] [sentinel] [session:N/A] [user:system] Health check endpoint called.
 [2025-08-13 04:12:06,126] [INFO] [sentinel] [session:N/A] [user:system] CopilotKit router registered successfully.
 [2025-08-13 04:12:06,170] [INFO] [sentinel] [session:N/A] [user:system] Starting SentinelAI backend with advanced logging...
+[2025-08-13 04:12:07,973] [DEBUG] [sentinel] [session:N/A] [user:system] Health check endpoint called.

@@ -118,9 +118,29 @@ def main():
     print("3. Backend Only")
     print("4. Frontend Only")
     print("5. Custom (choose services)")
-    choice = input("Enter option [1-5]: ").strip()
+    print("6. Full System Shutdown (stop all server processes)")
+    choice = input("Enter option [1-6]: ").strip()
     local = True
     services_to_start = list(CONFIG["services"].keys())
+    # Track running processes in a file
+    procs_file = Path(".sentinel_running_procs")
+    if choice == "6":
+        # Shutdown option
+        if procs_file.exists():
+            import json
+            with open(procs_file, "r") as f:
+                running = json.load(f)
+            print("\nShutting down all running server processes...")
+            for name, pid in running.items():
+                try:
+                    os.kill(pid, 9)
+                    print(f"[OK] {name} (PID {pid}) stopped.")
+                except Exception as e:
+                    print(f"[ERROR] Failed to stop {name} (PID {pid}): {e}")
+            procs_file.unlink()
+        else:
+            print("No running server processes tracked. Start services first.")
+        return
     if choice == "1":
         local = True
     elif choice == "2":
@@ -143,6 +163,11 @@ def main():
         proc = run_service(name)
         if proc:
             procs[name] = proc
+    # Save running process PIDs for shutdown
+    import json
+    running = {name: proc.pid for name, proc in procs.items()}
+    with open(procs_file, "w") as f:
+        json.dump(running, f)
     print("\n[INFO] Selected services started.")
     # Health checks
     print("\nRunning health checks...")
