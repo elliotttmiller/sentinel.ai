@@ -1,8 +1,10 @@
 // Utility to send messages to CopilotKit backend in required format
 export async function sendCopilotKitMessage(messages) {
-  // Block and log any GraphQL-style payloads
+  // Block and log any GraphQL-style payloads, show user-facing error
   if (messages && typeof messages === 'object' && !Array.isArray(messages) && messages.query && messages.operationName) {
-    console.error("CopilotKit: Attempted to send GraphQL payload to /copilotkit. This is not allowed.", messages);
+    const errorMsg = "CopilotKit: Attempted to send GraphQL payload to /copilotkit. This is not allowed. Use /api/graphql for GraphQL queries.";
+    console.error(errorMsg, messages);
+    if (window && window.alert) window.alert(errorMsg);
     throw new Error("Cannot send GraphQL payload to CopilotKit endpoint. Use the correct GraphQL endpoint.");
   }
   // Guard against empty or malformed payloads

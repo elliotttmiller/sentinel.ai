@@ -8,6 +8,15 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+// Global runtime guard: warn if CopilotKit receives a GraphQL-style payload
+window.addEventListener("copilotkit:send", (e) => {
+  const data = e.detail;
+  if (data && typeof data === 'object' && (data.query || data.operationName)) {
+    const errorMsg = "[CopilotKit] GraphQL-style payload detected at runtime. This should be sent to /api/graphql, not /api/copilotkit.";
+    console.error(errorMsg, data);
+    if (window && window.alert) window.alert(errorMsg);
+  }
+});
 import { SentinelProvider } from "./context/SentinelContext";
 import { CopilotKit } from "@copilotkit/react-core";
 
@@ -17,6 +26,7 @@ root.render(
       <SentinelProvider>
         <ThemeProvider>
           <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+            {/* CopilotKit is only for chat/agent operations. Apollo Client or similar should be used for GraphQL widgets. */}
             <CopilotKit
               runtimeUrl="http://127.0.0.1:8000/api/copilotkit"
               publicApiKey={process.env.REACT_APP_PUBLIC_API_KEY}

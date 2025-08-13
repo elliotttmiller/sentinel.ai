@@ -2,6 +2,7 @@ import React from "react";
 import { CopilotChat } from "@copilotkit/react-ui";
 import "@copilotkit/react-ui/styles.css";
 import "../styles/copilotkit-chat-modern.css";
+import "../styles/copilotkit-chat-dark.css";
 
 // Observability hooks for debugging and analytics
 const observabilityHooks = {
@@ -26,16 +27,32 @@ const renderError = (error) => (
   </div>
 );
 
+
 export default function CopilotAgent() {
   return (
-    <CopilotChat
-      labels={{
-        title: "Your Assistant",
-        initial: "Hi! 👋 How can I assist you today?",
-      }}
-      observabilityHooks={observabilityHooks}
-      renderError={renderError}
-      className="copilot-chat-panel"
-    />
+    <div style={{
+      width: "100%",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      minHeight: "800px",
+      maxWidth: "1200px",
+      margin: "0 auto",
+      padding: "3rem 0"
+    }}>
+      <CopilotChat
+        labels={{
+          title: "Sentinel AI Agent",
+          initial: "Hi! 👋 How can I assist you today? You can ask for complex tasks, analytics, or anything else.",
+        }}
+        instructions={"You are a highly advanced agent capable of executing complex generative tasks, analytics, and one-off actions. Integrate all agentic logic and respond with stepwise reasoning when needed."}
+        suggestions={["Execute a complex mission", "Show analytics", "Run a one-off task", "Summarize system status"]}
+        observabilityHooks={observabilityHooks}
+        renderError={renderError}
+        className="copilot-chat-panel"
+        style={{ minHeight: "700px", fontSize: "1.25rem", width: "100%", boxShadow: "0 8px 32px rgba(40,40,60,0.22)", borderRadius: "2rem", background: "#232336" }}
+      />
+    </div>
   );
 }

@@ -38,9 +38,9 @@ CONFIG = {
     "frontend_env_file": "./copilotkit-frontend/.env",
     "services": {
         "backend": {
-            "cmd": [sys.executable, "-m", "uvicorn", "src.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"],
+            "cmd": [sys.executable, "-m", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"],
             "cwd": "./",
-            "desc": "FastAPI Backend Server (auto-reload)",
+            "desc": "FastAPI Backend Server (CopilotKit official)",
             "health": "http://localhost:8000/health",
             "copilotkit": "http://localhost:8000/api/copilotkit/info"
         },
@@ -51,9 +51,9 @@ CONFIG = {
             "health": None
         },
         "frontend": {
-            "cmd": [r"C:\\Users\\AMD\\AppData\\Roaming\\npm\\yarn.cmd", "start"],
+            "cmd": [r"C:\\Users\\AMD\\AppData\\Roaming\\npm\\yarn.cmd", "run", "react-app-rewired", "start"],
             "cwd": "./copilotkit-frontend",
-            "desc": "React Frontend",
+            "desc": "React Frontend (CopilotKit official)",
             "health": "http://localhost:3000"
         },
         "redis": {
@@ -203,7 +203,9 @@ def main():
     procs = {}
     service_status = {}
     for name in services_to_start:
-        if not local and name in ["redis", "postgres"]:
+        if name == "postgres":
+            # Skip PostgreSQL
+            service_status[name] = "Skipped"
             continue
         proc = run_service(name)
         if proc:
@@ -219,35 +221,54 @@ def main():
     print(color_text("\n[INFO] Selected services started.", Colors.OKGREEN))
     # Health checks
     print(color_text("\n--- Running health checks ---", Colors.OKCYAN))
+    import time
+    MAX_RETRIES = 5
+    RETRY_DELAY = 2  # seconds
     for name in services_to_start:
+        if name == "postgres":
+            continue  # Skip health check for PostgreSQL
         svc = CONFIG["services"].get(name)
         if not svc:
             continue
         url = svc.get("health")
         if url:
-            try:
-                import requests
-                resp = requests.get(url, timeout=3)
-                if resp.status_code == 200:
-                    print(color_text(f"[OK] {name} healthy.", Colors.OKGREEN))
-                    service_status[name] = "Healthy"
-                else:
-                    print(color_text(f"[WARN] {name} unhealthy (status {resp.status_code}).", Colors.WARNING))
-                    service_status[name] = f"Unhealthy ({resp.status_code})"
-            except Exception as e:
-                print(color_text(f"[ERROR] {name} health check failed: {e}", Colors.FAIL))
-                service_status[name] = "Health Check Failed"
+            healthy = False
+            for attempt in range(1, MAX_RETRIES + 1):
+                try:
+                    import requests
+                    resp = requests.get(url, timeout=3)
+                    if resp.status_code == 200:
+                        print(color_text(f"[OK] {name} healthy (attempt {attempt}).", Colors.OKGREEN))
+                        service_status[name] = "Healthy"
+                        healthy = True
+                        break
+                    else:
+                        print(color_text(f"[WARN] {name} unhealthy (status {resp.status_code}) (attempt {attempt}).", Colors.WARNING))
+                        service_status[name] = f"Unhealthy ({resp.status_code})"
+                except Exception as e:
+                    print(color_text(f"[ERROR] {name} health check failed (attempt {attempt}): {e}", Colors.FAIL))
+                    service_status[name] = "Health Check Failed"
+                time.sleep(RETRY_DELAY)
+            if not healthy:
+                print(color_text(f"[FAIL] {name} did not pass health check after {MAX_RETRIES} attempts.", Colors.FAIL))
         copilotkit_url = svc.get("copilotkit")
         if copilotkit_url:
-            try:
-                import requests
-                resp = requests.get(copilotkit_url, timeout=3)
-                if resp.status_code == 200:
-                    print(color_text(f"[OK] CopilotKit endpoint healthy: {copilotkit_url}", Colors.OKGREEN))
-                else:
-                    print(color_text(f"[WARN] CopilotKit endpoint unhealthy (status {resp.status_code}): {copilotkit_url}", Colors.WARNING))
-            except Exception as e:
-                print(color_text(f"[ERROR] CopilotKit endpoint health check failed: {e}", Colors.FAIL))
+            healthy = False
+            for attempt in range(1, MAX_RETRIES + 1):
+                try:
+                    import requests
+                    resp = requests.get(copilotkit_url, timeout=3)
+                    if resp.status_code == 200:
+                        print(color_text(f"[OK] CopilotKit endpoint healthy: {copilotkit_url} (attempt {attempt}).", Colors.OKGREEN))
+                        healthy = True
+                        break
+                    else:
+                        print(color_text(f"[WARN] CopilotKit endpoint unhealthy (status {resp.status_code}): {copilotkit_url} (attempt {attempt}).", Colors.WARNING))
+                except Exception as e:
+                    print(color_text(f"[ERROR] CopilotKit endpoint health check failed (attempt {attempt}): {e}", Colors.FAIL))
+                time.sleep(RETRY_DELAY)
+            if not healthy:
+                print(color_text(f"[FAIL] CopilotKit endpoint did not pass health check after {MAX_RETRIES} attempts: {copilotkit_url}", Colors.FAIL))
     # Visual summary table
     print(color_text("\n--- Service Status Summary ---", Colors.HEADER + Colors.BOLD))
     print(color_text("+----------------+---------------------+", Colors.BOLD))

@@ -1,4 +1,8 @@
 import React, { useEffect } from "react";
+import { TopBar } from "./components/TopBar";
+import { AGUIBanner } from "./components/Banner";
+import { TailoredContentProvider } from "./hooks/TailoredContentProvider.jsx";
+import { useGoogleAnalytics } from "./hooks/useGoogleAnalytics";
 import { Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Missions from "./pages/Missions";
@@ -17,26 +21,30 @@ import { useNotification } from "./hooks/useNotification";
 
 function App() {
   const { message, clearNotification } = useNotification();
-  // Adapter registration is now handled by CopilotKit component. No need for CopilotRuntime or window.copilotKit.
-
+  useGoogleAnalytics();
   return (
-    <CopilotKit runtimeUrl="http://127.0.0.1:8000/api/copilotkit">
-      <div className="app-container">
-        <SentinelInitializer />
-        <Notification message={message} onClose={clearNotification} />
-        <NavBar />
-        {/* Custom CopilotKit Chat Widget using guaranteed payload utility */}
-        <CopilotAgent />
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/missions" element={<Missions />} />
-          <Route path="/analytics" element={<Analytics />} />
-          <Route path="/settings" element={<Settings />} />
-        {/* AgenticGenerativeUI route removed; agentic generative UI is now integrated into main chat */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
-    </CopilotKit>
+    <TailoredContentProvider>
+      {/* CopilotKit is only for chat/agent operations. Apollo Client or similar should be used for GraphQL widgets. */}
+      <CopilotKit
+        runtimeUrl="http://127.0.0.1:8000/api/copilotkit"
+        publicApiKey={process.env.REACT_APP_PUBLIC_API_KEY}
+      >
+        <div className="app-container">
+          <TopBar />
+          <AGUIBanner />
+          <SentinelInitializer />
+          <Notification message={message} onClose={clearNotification} />
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/missions" element={<Missions />} />
+            <Route path="/analytics" element={<Analytics />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+      </CopilotKit>
+    </TailoredContentProvider>
   );
 }
 

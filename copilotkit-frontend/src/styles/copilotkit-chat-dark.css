@@ -1,0 +1,47 @@
+/* Dark theme overrides for CopilotKit Chat UI */
+.copilot-chat-panel {
+  background: #18181b !important;
+  color: #e5e7eb !important;
+  border-radius: 2rem !important;
+  box-shadow: 0 8px 32px rgba(40,40,60,0.22);
+  font-size: 1.25rem !important;
+  min-height: 700px !important;
+  width: 100% !important;
+}
+.copilot-chat-panel .copilotKitInput {
+  background: #232336 !important;
+  color: #e5e7eb !important;
+  border: 1px solid #3730a3 !important;
+}
+.copilot-chat-panel .copilotKitSendButton {
+  background: #3730a3 !important;
+  color: #fff !important;
+  border-radius: 0.75rem !important;
+}
+.copilot-chat-panel .copilotKitMessage {
+  background: #232336 !important;
+  color: #e5e7eb !important;
+  border-radius: 1rem !important;
+}
+.copilot-chat-panel .copilotKitMessage.user {
+  background: #3730a3 !important;
+  color: #fff !important;
+}
+.copilot-chat-panel .copilotKitMessage.assistant {
+  background: #232336 !important;
+  color: #a5b4fc !important;
+}
+.copilot-chat-panel .copilotKitError {
+  background: #7f1d1d !important;
+  color: #fff !important;
+  border-radius: 0.5rem !important;
+}
+.copilot-chat-panel .copilotKitThumbs button {
+  background: #232336 !important;
+  color: #a5b4fc !important;
+  border-radius: 0.5rem !important;
+}
+.copilot-chat-panel .copilotKitThumbs button:hover {
+  background: #3730a3 !important;
+  color: #fff !important;
+}

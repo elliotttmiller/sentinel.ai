@@ -40,10 +40,28 @@ async def copilotkit_gemini(request: Request):
 
     try:
         data = await request.json()
+        logger.info(f"CopilotKit request body: {data}")
+        # Detect GraphQL-style payloads and return a clear error, with extra logging
+        if any(k in data for k in ["query", "operationName", "variables"]):
+            client_ip = request.client.host if request.client else "unknown"
+            logger.error(f"GraphQL-style payload detected in request body from {client_ip}: {data}")
+            logger.error(f"Request headers: {dict(request.headers)}")
+            return JSONResponse(
+                status_code=400,
+                content={
+                    "error": "GraphQL-style payload detected. This endpoint (/api/copilotkit) only accepts chat/agent requests. For GraphQL queries and mutations, use /api/graphql.",
+                    "details": {
+                        "client_ip": client_ip,
+                        "received_keys": list(data.keys()),
+                        "request_path": str(request.url.path)
+                    }
+                },
+                headers={"Access-Control-Allow-Origin": "*"}
+            )
         messages = data.get("messages") or data.get("inputMessages")
-        if not messages:
-            logger.error("No messages provided in request body.")
-            raise HTTPException(status_code=400, detail="No messages provided.")
+        if not messages or not isinstance(messages, list) or len(messages) == 0:
+            logger.error(f"No messages provided in request body: {data}")
+            return JSONResponse(status_code=400, content={"error": "No messages provided. Please send a non-empty 'messages' array."}, headers={"Access-Control-Allow-Origin": "*"})
         prompt = "\n".join([msg.get("text", "") for msg in messages if msg.get("text")])
 
         # Streaming support
