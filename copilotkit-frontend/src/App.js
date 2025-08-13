@@ -1,5 +1,4 @@
 import React from "react";
-import { CopilotKit } from "@copilotkit/react-core";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Missions from "./pages/Missions";
@@ -17,23 +16,21 @@ function App() {
   const { message, showNotification, clearNotification } = useNotification();
   // Optionally, pass showNotification to context for global use
   return (
-    <CopilotKit publicLicenseKey="ck_pub_011541242c359e759e3256628c64144b">
-      <div className="app-container">
-        <SentinelInitializer />
-        <Notification message={message} onClose={clearNotification} />
-        <NavBar />
-        {/* Global CopilotKit Chat Widget */}
-        <CopilotChat />
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/missions" element={<Missions />} />
-          <Route path="/analytics" element={<Analytics />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/agentic-generative-ui" element={<AgenticGenerativeUI />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
-    </CopilotKit>
+    <div className="app-container">
+      <SentinelInitializer />
+      <Notification message={message} onClose={clearNotification} />
+      <NavBar />
+      {/* Global CopilotKit Chat Widget */}
+      <CopilotChat />
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/missions" element={<Missions />} />
+        <Route path="/analytics" element={<Analytics />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/agentic-generative-ui" element={<AgenticGenerativeUI />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </div>
   );
 }
 
