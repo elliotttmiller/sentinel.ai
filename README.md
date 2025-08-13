@@ -29,9 +29,6 @@ copilot/
 │       └── views/               # High-level UI views/screens
 │
 ├── db/                          # Local database files for agent memory
-│   └── chroma_memory/           # ChromaDB vector storage for agent memory
-│       ├── chroma.sqlite3       # Main ChromaDB database file
-│       └── a71a6ad9-.../        # ChromaDB collection data (UUID-named folders)
 │
 ├── src/                         # Python backend source code
 │   ├── __init__.py
@@ -235,7 +232,7 @@ copilot/
 ```mermaid
 flowchart LR
     A[copilotkit-frontend (React/Next.js)] -- API Request (HTTP/REST) --> B[src/ (Python Backend) (FastAPI/Flask)]
-    B -- Read/Write data --> C[db/ (Databases) (SQLite & ChromaDB)]
+    B -- Read/Write data --> C[db/ (Databases) (SQLite)]
     B -- API Response --> A
     B -- Orchestrate agent --> D[agents/, core/, tools/]
     D -- Read/Write data --> C
@@ -248,8 +245,8 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    A[src/agents/ (Agent Logic)] --> B[src/tools/ (Vector DB Tool)]
-    B --> C[db/chroma_memory/ (ChromaDB)]
+    A[src/agents/ (Agent Logic)] --> B[src/tools/ (DB Tool)]
+    B --> C[db/sentinel_missions.db (SQLite)]
 ```
 ```
 
@@ -272,7 +269,6 @@ flowchart TD
     end
     subgraph Persistence Layer
         DB1[db/sentinel_missions.db\nSQLite]
-        DB2[db/chroma_memory\nChromaDB]
     end
 
     FE -- API Calls --> API
@@ -280,7 +276,6 @@ flowchart TD
     CORE -- Orchestrates --> AGENTS
     CORE -- Uses --> MODELS
     CORE -- Reads/Writes --> DB1
-    AGENTS -- Vector Memory --> DB2
 ```
 
 ---

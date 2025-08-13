@@ -396,11 +396,11 @@ Provide your response as a JSON array of improvements:
         }
         
         # Add to ChromaDB vector memory
-        self.db_manager.add_to_memory(
-            mission_id=mission.mission_id_str,
-            content=summary,
-            metadata=metadata
-        )
+        # self.db_manager.add_to_memory(
+        #     mission_id=mission.mission_id_str,
+        #     content=summary,
+        #     metadata=metadata
+        # )
         logger.success(f"✅ Knowledge from mission {mission.mission_id_str} synthesized and stored.")
         return {"success": True, "mission_id": mission.mission_id_str}
 

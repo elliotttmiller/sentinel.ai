@@ -53,7 +53,6 @@ mindmap
         ::icon(fas fa-database)
         - **advanced_database.py**
           - SQLite Mission Tracking
-          - ChromaDB Vector Memory
 
       🛡️ **utils (The Protocols)**
         ::icon(fas fa-shield-alt)

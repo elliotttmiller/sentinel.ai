@@ -94,9 +94,7 @@ class Settings(BaseSettings):
     LLM_TEMPERATURE: float = Field(default=0.7, validation_alias="LLM_TEMPERATURE")
     # --- DATABASE CONFIGURATION ---
     DATABASE_URL: str = Field(default="sqlite:///db/sentinel_missions.db", validation_alias="DATABASE_URL")
-    POSTGRES_URL: Optional[str] = Field(default=None, validation_alias="POSTGRES_URL")
-    CHROMA_PERSIST_DIRECTORY: str = Field(default="db/chroma_memory", validation_alias="CHROMA_PERSIST_DIRECTORY")
-    CHROMA_PATH: str = Field(default="db/chroma_memory", validation_alias="CHROMA_PATH")
+    # POSTGRES_URL: Optional[str] = Field(default=None, validation_alias="POSTGRES_URL")  # Disabled for now; using SQLite only
     
     # --- LOGGING CONFIGURATION ---
     LOG_LEVEL: str = Field(default="INFO", validation_alias="LOG_LEVEL")

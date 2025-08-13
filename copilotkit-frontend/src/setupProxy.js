@@ -4,7 +4,7 @@ module.exports = function(app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'https://sentinelai-production.up.railway.app', // Railway production backend
+      target: 'http://localhost:8000', // Local backend for development
       changeOrigin: true,
     })
   );

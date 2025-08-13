@@ -19,7 +19,7 @@ import logging
 
 # Import our AI components
 from .core.cognitive_forge_engine import cognitive_forge_engine
-from .models.advanced_database import db_manager
+from src.models.advanced_database import db_manager
 
 # --- Real-Time Logging & Streaming Setup ---
 # This is the in-memory buffer that will hold recent logs for streaming
@@ -94,10 +94,12 @@ async def log_requests(request: Request, call_next):
     start_time = time.time()
     
     # Log incoming request
+    client_host = getattr(request.client, "host", "unknown") if request.client else "unknown"
+    client_port = getattr(request.client, "port", "unknown") if request.client else "unknown"
     log_entry = {
         "timestamp": datetime.utcnow().isoformat(),
         "level": "INFO",
-        "message": f'INFO: {request.client.host}:{request.client.port} - "{request.method} {request.url.path} HTTP/{request.scope["http_version"]}"',
+        "message": f'INFO: {client_host}:{client_port} - "{request.method} {request.url.path} HTTP/{request.scope["http_version"]}"',
         "source": "http_request",
         "server_port": "8002"
     }
@@ -124,10 +126,12 @@ async def log_requests(request: Request, call_next):
         
         # Log response
         process_time = time.time() - start_time
+        client_host = getattr(request.client, "host", "unknown") if request.client else "unknown"
+        client_port = getattr(request.client, "port", "unknown") if request.client else "unknown"
         log_entry = {
             "timestamp": datetime.utcnow().isoformat(),
             "level": "INFO",
-            "message": f'INFO: {request.client.host}:{request.client.port} - "{request.method} {request.url.path} HTTP/{request.scope["http_version"]}" {response.status_code} OK',
+            "message": f'INFO: {client_host}:{client_port} - "{request.method} {request.url.path} HTTP/{request.scope["http_version"]}" {response.status_code} OK',
             "source": "http_request",
             "server_port": "8002"
         }
@@ -447,9 +451,9 @@ async def execute_mission(mission_data: Dict[str, Any]):
         def update_callback(message: str):
             logger.info(f"ENGINE: Mission {mission_id} - {message}")
         
-        # Run the mission
-        result = cognitive_forge_engine.run_mission(
-            prompt, mission_id, agent_type, update_callback
+        # Run the mission (await async)
+        result = await cognitive_forge_engine.run_mission(
+            prompt, mission_id, agent_type, False
         )
         
         mission_results[mission_id] = {
@@ -512,8 +516,8 @@ async def run_mission_background(mission_id: str, plan: Dict):
             logger.info(f"ENGINE: Background mission {mission_id} - {message}")
         
         # Run the mission
-        result = cognitive_forge_engine.run_mission(
-            prompt, mission_id, "developer", update_callback
+        result = await cognitive_forge_engine.run_mission(
+            prompt, mission_id, "developer", False
         )
         
         mission_results[mission_id] = {

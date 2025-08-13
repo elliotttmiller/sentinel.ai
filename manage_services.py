@@ -34,12 +34,6 @@ CONFIG = {
             "desc": "React Frontend",
             "health": "http://localhost:3000"
         },
-        "vector_db": {
-            "cmd": [sys.executable, "start_sentinel.py"],
-            "cwd": "./scripts",
-            "desc": "ChromaDB Vector DB",
-            "health": "http://localhost:8001"
-        },
         "redis": {
             "cmd": ["redis-server"],
             "cwd": None,

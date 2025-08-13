@@ -16,7 +16,9 @@ root.render(
       <SentinelProvider>
         <ThemeProvider>
           <BrowserRouter>
-            <App />
+            <CopilotKit runtimeUrl={process.env.REACT_APP_API_URL + "/copilotkit"} publicApiKey={process.env.REACT_APP_PUBLIC_API_KEY}>
+              <App />
+            </CopilotKit>
           </BrowserRouter>
         </ThemeProvider>
       </SentinelProvider>

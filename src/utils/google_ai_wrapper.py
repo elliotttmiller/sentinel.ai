@@ -33,6 +33,9 @@ else:
     logger.success("Google Generative AI API key loaded successfully.")
 
 class GoogleGenerativeAIWrapper(BaseChatModel):
+    @property
+    def _llm_type(self) -> str:
+        return "google_generative_ai"
     model_name: str = Field(default="gemini-1.5-pro")
     temperature: float = Field(default=0.7)
     max_tokens: Optional[int] = Field(default=None)

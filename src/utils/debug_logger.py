@@ -5,13 +5,13 @@ Provides standardized, detailed logging with context tracking and diagnostics
 """
 
 import inspect
-import json
+# import json  # Removed unused import
 import os
 import sys
 import time
 import uuid
 import threading
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, Any, Optional, List
 from contextlib import contextmanager
 from functools import wraps
@@ -39,22 +39,24 @@ def set_request_id(request_id: str) -> None:
     """Set the request ID for the current thread."""
     _request_context.request_id = request_id
 
+from typing import Generator
+
 @contextmanager
-def request_context(request_id: Optional[str] = None, **kwargs) -> None:
+def request_context(request_id: Optional[str] = None, **kwargs) -> Generator[None, None, None]:
     """Context manager to handle request context."""
     old_request_id = getattr(_request_context, 'request_id', None) if hasattr(_request_context, 'request_id') else None
-    
+
     # Set new request ID
     if request_id is None:
         request_id = f"req_{uuid.uuid4().hex[:8]}"
     set_request_id(request_id)
-    
+
     # Add any additional context
     old_context = {}
     for key, value in kwargs.items():
         old_context[key] = getattr(_request_context, key, None) if hasattr(_request_context, key) else None
         setattr(_request_context, key, value)
-    
+
     try:
         logger.bind(request_id=request_id, **kwargs).debug(f"Starting context: {request_id}")
         yield
@@ -101,44 +103,48 @@ def log_function(func):
             duration_ms = (time.time() - start_time) * 1000
             logger.bind(**context, duration_ms=round(duration_ms, 2), error=str(e), error_type=type(e).__name__).error(f"ERROR in {function_name}: {e}")
             raise
-    
     return wrapper
-
-def log_websocket_event(event_type: str, details: Dict[str, Any] = None) -> None:
+def log_websocket_event(event_type: str, details: Optional[Dict[str, Any]] = None) -> None:
     """Log WebSocket-specific events with detailed diagnostics."""
     if details is None:
         details = {}
-    
+
     context = {
         "request_id": get_request_id(),
         "event_type": event_type,
-        "timestamp": datetime.utcnow().isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         **details
     }
-    
+
     # Add diagnostics information
-    frame = inspect.currentframe().f_back
-    context["file"] = frame.f_code.co_filename
-    context["line"] = frame.f_lineno
-    context["function"] = frame.f_code.co_name
-    
-    logger.bind(**context).debug(f"WebSocket {event_type}")
+    frame = inspect.currentframe()
+    if frame is not None and frame.f_back is not None:
+        frame = frame.f_back
+        context["file"] = getattr(frame.f_code, "co_filename", "unknown")
+        context["line"] = getattr(frame, "f_lineno", "unknown")
+        context["function"] = getattr(frame.f_code, "co_name", "unknown")
+    else:
+        context["file"] = "unknown"
+        context["line"] = "unknown"
+        context["function"] = "unknown"
+
+    logger.bind(**context).debug(f"WebSocket event: {event_type}")
 
 # Create a diagnostic function to check the state of WebSockets
 def diagnose_websockets(websockets: List) -> Dict[str, Any]:
     """Create a diagnostic snapshot of all WebSocket connections."""
     diagnostics = {
-        "timestamp": datetime.utcnow().isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "total_connections": len(websockets),
         "connections": []
     }
-    
+
     for i, ws in enumerate(websockets):
         try:
             # Use our helper function to safely convert WebSocketState to string
             client_state = getattr(ws, "client_state", None)
             client_state_name = websocket_state_to_string(client_state)
-            
+
             application_state = getattr(ws, "application_state", None)
             app_state_name = websocket_state_to_string(application_state)
 
@@ -156,25 +162,22 @@ def diagnose_websockets(websockets: List) -> Dict[str, Any]:
                 "id": id(ws),
                 "error": str(e)
             })
-    
-    return diagnostics
 
-# Export the logger
-debug_logger = logger
-
-# Convenience function for advanced debug logs
-def debug_log(message: str, **kwargs):
-    """Log a debug message with contextual information."""
+    # Add call site information
     context = {
         "request_id": get_request_id(),
-        "timestamp": datetime.utcnow().isoformat(),
-        **kwargs
+        "timestamp": datetime.now(timezone.utc).isoformat(),
     }
-    
-    # Add call site information
-    frame = inspect.currentframe().f_back
-    context["file"] = os.path.basename(frame.f_code.co_filename)
-    context["line"] = frame.f_lineno
-    context["function"] = frame.f_code.co_name
-    
-    logger.bind(**context).debug(message)
+    frame = inspect.currentframe()
+    if frame is not None and frame.f_back is not None:
+        frame = frame.f_back
+        context["file"] = os.path.basename(getattr(frame.f_code, "co_filename", "unknown"))
+        context["line"] = getattr(frame, "f_lineno", "unknown")
+        context["function"] = getattr(frame.f_code, "co_name", "unknown")
+    else:
+        context["file"] = "unknown"
+        context["line"] = "unknown"
+        context["function"] = "unknown"
+
+    logger.bind(**context).debug("WebSocket diagnostics generated")
+    return diagnostics

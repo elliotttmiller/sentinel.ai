@@ -6,7 +6,7 @@ Implements the three core specialized agents for hierarchical crew architecture
 from typing import Dict, Any, List, Optional
 from loguru import logger
 from ..utils.crewai_bypass import DirectAIAgent, DirectAICrew
-from ..utils.google_ai_wrapper import create_google_ai_llm
+from ..utils.google_ai_wrapper import GoogleGenerativeAIWrapper
 
 
 class AutonomousOrchestratorAgent:
@@ -15,7 +15,7 @@ class AutonomousOrchestratorAgent:
     def __init__(self, llm=None):
         if llm is None:
             logger.info("Creating new Google AI LLM for Autonomous Orchestrator")
-            self.llm = create_google_ai_llm()
+            self.llm = GoogleGenerativeAIWrapper()
         else:
             logger.info("Using provided LLM for Autonomous Orchestrator")
             self.llm = llm
@@ -98,7 +98,7 @@ class SelfOptimizationEngineerAgent:
     """Evolutionary Prompt Engineer - Continuously improves agent performance"""
     
     def __init__(self, llm=None):
-        self.llm = llm or create_google_ai_llm()
+        self.llm = llm or GoogleGenerativeAIWrapper()
         self.agent = self._create_optimizer()
         logger.info("Self-Optimization Engineer Agent initialized")
     
@@ -177,7 +177,7 @@ class ContextSynthesisAgent:
     """Persistent Knowledge Architect - Maintains mission context across executions"""
     
     def __init__(self, llm=None):
-        self.llm = llm or create_google_ai_llm()
+        self.llm = llm or GoogleGenerativeAIWrapper()
         self.agent = self._create_synthesizer()
         logger.info("Context Synthesis Agent initialized")
     
@@ -197,11 +197,11 @@ class ContextSynthesisAgent:
                 "You extract entities/relationships from agent outputs and build temporal knowledge graphs. "
                 "You resolve contradictions by measuring statement confidence, preferring recent verified knowledge, "
                 "and preserving multiple hypotheses when uncertain. "
-                "You serve context through vector embeddings for similarity and subgraph extraction for relevant tasks."
+                "You serve context through knowledge graphs and subgraph extraction for relevant tasks."
             )
         )
     
-    def synthesize_context(self, mission_data: Dict[str, Any], historical_context: Dict[str, Any] = None) -> Dict[str, Any]:
+    def synthesize_context(self, mission_data: Dict[str, Any], historical_context: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Synthesize context from mission data and historical knowledge"""
         try:
             task_description = f"""Synthesize context from this mission data and integrate with historical knowledge:
@@ -222,8 +222,7 @@ SYNTHESIS REQUIREMENTS:
    b. Prefer recent verified knowledge
    c. Preserve multiple hypotheses when uncertain
 4. Serve context through:
-   a. Vector embeddings for similarity
-   b. Subgraph extraction for relevant tasks
+   a. Subgraph extraction for relevant tasks
 
 CONSTRAINTS:
 - Context retention: ≥6 months
@@ -259,7 +258,7 @@ class SpecializedAgentFactory:
     """Factory for creating specialized agents"""
     
     def __init__(self, llm=None):
-        self.llm = llm or create_google_ai_llm()
+        self.llm = llm or GoogleGenerativeAIWrapper()
     
     def create_autonomous_orchestrator(self) -> AutonomousOrchestratorAgent:
         """Create an Autonomous Orchestrator agent"""
