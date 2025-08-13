@@ -2,112 +2,175 @@
 
 ---
 
-## 1. 📦 Directory Structure (Root, August 2025)
-
 copilot/
 │
-This overview reflects the current, active state of your workspace. All legacy files have been excluded. This structure is based on a full scan of your workspace as of August 2025.
+copilot/
+│
+## System Directory Structure Overview
 
 ```
 copilot/
 │
-├── copilotkit-frontend/         # Modern React/Next.js frontend (CopilotKit UI)
-│   ├── .env                     # Frontend environment variables
-│   ├── package.json             # Frontend dependencies and scripts (npm/yarn)
-│   ├── README.md                # Frontend-specific documentation
-│   └── src/                     # Frontend source code
-│       ├── App.js / App.jsx     # Main React application component
-│       ├── index.js / index.css # Entry point and global styles
-│       ├── components/          # Reusable React UI components
-│       ├── context/             # React context providers for global state
-│       ├── hooks/               # Custom React hooks for component logic
-│       ├── pages/               # Next.js page components (app routes)
-│       ├── sentry.js            # Sentry integration for error tracking
-│       ├── setupProxy.js        # Proxy setup for API requests in dev
-│       ├── styles/              # Global/component stylesheets
-│       ├── utils/               # Frontend utility functions
-│       └── views/               # High-level UI views/screens
+├── .env                        # Main environment variables for backend (API keys, DB URLs, etc.)
+├── .git/                       # Git version control data
+├── .gitignore                  # Specifies files/folders to ignore in Git
+├── .vscode/                    # VS Code workspace settings
+├── COPILOTKIT_SYSTEM_OVERVIEW.md # This system overview and documentation file
+├── README.md                   # Main project documentation and onboarding guide
+├── SETUP_GUIDE.md              # Step-by-step setup instructions for the system
+├── manage_services.py          # Python script to automate starting/stopping backend/frontend services
+├── move_desktop_app_to_root.ps1 # PowerShell script for moving desktop app files
+├── requirements.txt            # Python package dependencies for backend
+├── runtime-references.txt      # Notes and references for runtime configuration
+├── setup.cfg                   # Python packaging configuration
 │
-├── db/                          # Local database files for agent memory
+├── copilotkit-frontend/        # Modern React SPA frontend (CopilotKit UI)
+│   ├── .env                    # Frontend environment variables (API keys, config)
+│   ├── build/                  # Production build output (auto-generated)
+│   ├── LICENSE                 # Project license (MIT)
+│   ├── node_modules/           # Installed frontend dependencies (auto-generated)
+│   ├── package.json            # Frontend dependencies, scripts, and metadata
+│   ├── public/                 # Static assets for frontend
+│   │   ├── favicon.ico         # App favicon
+│   │   ├── index.html          # Main HTML file
+│   │   ├── manifest.json       # Web app manifest
+│   │   └── robots.txt          # Robots exclusion file
+│   ├── README.md               # Frontend-specific documentation
+│   ├── src/                    # Main frontend source code
+│   │   ├── App.js              # Main React app entry point
+│   │   ├── App.jsx             # Alternate React app entry point
+│   │   ├── googleGenAIAdapter.js # Adapter for Google Generative AI integration
+│   │   ├── index.css           # Global styles
+│   │   ├── index.js            # React entry point
+│   │   ├── setupProxy.js       # Proxy configuration for local API requests
+│   │   ├── components/         # Reusable React UI components
+│   │   │   ├── AdvancedAgentPanel.js      # Advanced agent dashboard panel
+│   │   │   ├── AgenticTaskExecutor.js     # UI for agentic task execution
+│   │   │   ├── AnalyticsCharts.js         # Analytics chart components
+│   │   │   ├── CopilotAgent.jsx           # Main Copilot agent logic and UI
+│   │   │   ├── CopilotAgentPanel.js       # Panel for Copilot agent controls
+│   │   │   ├── CopilotChat.js             # Chat UI component (custom or placeholder)
+│   │   │   ├── CopilotMissionChat.js      # Mission-specific chat UI
+│   │   │   ├── DashboardWidgets.js        # Dashboard widget components
+│   │   │   ├── ErrorBoundary.js           # Error boundary for React error handling
+│   │   │   ├── KeyboardNavigation.js      # Keyboard navigation logic
+│   │   │   ├── MissionList.js             # Mission list UI
+│   │   │   ├── MissionModal.js            # Modal for mission details
+│   │   │   ├── NavBar.js                  # Navigation bar UI
+│   │   │   ├── Notification.js            # Notification system UI
+│   │   │   ├── SentinelInitializer.js     # Initialization logic for Sentinel frontend
+│   │   │   ├── SettingsPanel.js           # Settings panel UI
+│   │   │   ├── ThemeProvider.js           # Theme/context provider for UI
+│   │   ├── context/            # React context providers
+│   │   │   └── SentinelContext.js         # Global Sentinel context provider
+│   │   ├── hooks/              # Custom React hooks
+│   │   │   ├── useNotification.js         # Hook for notifications
+│   │   │   └── useRealtime.js             # Hook for real-time updates
+│   │   ├── pages/              # Page-level React components
+│   │   │   ├── AgenticGenerativeUI.js     # Agentic generative UI page (CopilotKit agentic chat)
+│   │   │   ├── Analytics.js               # Analytics dashboard page
+│   │   │   ├── Dashboard.js               # Main dashboard page
+│   │   │   ├── Missions.js                # Missions dashboard page
+│   │   │   ├── NotFound.js                # 404 error page
+│   │   │   ├── Settings.js                # Settings page
+│   │   ├── styles/              # CSS stylesheets
+│   │   │   └── agentic.css               # Styles for agentic generative UI
+│   │   ├── utils/               # Utility functions for frontend
+│   │   │   ├── api.js                   # API call utilities
+│   │   │   ├── index.js                 # General frontend utilities
+│   │   │   ├── llm.js                   # LLM integration utilities
+│   │   │   └── realtime.js              # Real-time update utilities
+│   │   ├── views/               # High-level UI views/screens
+│   │   │   ├── Analytics.jsx            # Analytics view
+│   │   │   ├── Dashboard.jsx            # Dashboard view
+│   │   │   ├── Missions.jsx             # Missions view
+│   │   │   ├── Settings.jsx             # Settings view
+│   │   │   └── TestMissions.jsx         # Test missions view
+│   ├── yarn.lock                # Yarn lockfile for dependency management
 │
-├── src/                         # Python backend source code
-│   ├── __init__.py
-│   ├── cognitive_engine_service.py # Core service for the cognitive/AI engine
-│   ├── main.py                  # Backend entry point (FastAPI/Flask)
-│   ├── observability_manager.py # Logging, tracing, metrics
-│   ├── agents/                  # AI agent logic
-│   │   ├── __init__.py
-│   │   ├── advanced_agents.py
-│   │   ├── ai_task_parser.py
-│   │   ├── executable_agent.py
-│   │   ├── real_mission_executor.py
-│   │   └── simple_executable_agent.py
-│   ├── api/                     # API endpoint definitions
-│   │   ├── __init__.py
-│   │   └── copilotkit.py
-│   ├── config/                  # Backend config modules
-│   │   ├── __init__.py
-│   │   └── settings.py
-│   ├── core/                    # Core business logic
-│   │   ├── __init__.py
-│   │   ├── advanced_intelligence.py
-│   │   ├── blueprint_tasks.py
-│   │   ├── cognitive_forge_engine.py
-│   │   ├── enhanced_cognitive_forge_engine.py
-│   │   ├── execution_workflow.py
-│   │   ├── hybrid_decision_engine.py
-│   │   ├── real_mission_executor.py
-│   │   ├── sandbox_executor.py
-│   │   ├── sentinel_multi_agent_integration.py
-│   │   ├── supercharged_optimizer.py
-│   │   └── supercharged_websocket_manager.py
-│   ├── models/                  # Data models and DB logic
-│   │   ├── __init__.py
-│   │   ├── advanced_database.py
-│   │   ├── fix_database_schema.py
-│   │   └── fix_railway_database.py
-│   ├── tools/                   # Tools and utilities for agents
-│   │   ├── __init__.py
-│   │   ├── advanced_tools.py
-│   │   ├── file_system_tools.py
-│   │   ├── simple_file_system_tools.py
-│   │   └── specialized_tools.py
-│   └── utils/                   # General backend utilities
-│       ├── __init__.py
-│       ├── agent_observability.py
-│       ├── automated_debugger.py
-│       ├── auto_fix.py
-│       ├── crewai_bypass.py
-│       ├── debug_killer.py
-│       ├── debug_logger.py
-│       ├── fix_ai.py
-│       ├── google_ai_wrapper.py
-│       ├── guardian_protocol.py
-│       ├── json_parser.py
-│       ├── litellm_custom_provider.py
-│       ├── llm_patch.py
-│       ├── log_collector.py
-│       ├── manage_services.py
-│       ├── onnxruntime_fix.py
-│       ├── performance_optimizer.py
-│       ├── phoenix_protocol.py
-│       ├── self_learning_module.py
-│       ├── sentry_api_client.py
-│       ├── sentry_integration.py
-│       ├── synapse_logging.py
-│       ├── system_cheatsheet.txt
-│       ├── test_mission_system.py
-│       ├── test_onnxruntime_fix.py
-│       ├── weave_observability.py
-│       └── websocket_helpers.py
+├── db/                         # Local database files for agent memory
+│   └── chroma_memory/          # ChromaDB vector database files for agent memory
+│       ├── chroma.sqlite3      # Main ChromaDB SQLite file
+│       └── a71a6ad9-eb43-41a4-b61f-877454df2314/ # ChromaDB binary data directory
 │
-├── .env                         # Environment variables (API keys, DB strings) - NOT COMMITTED
-├── copilotkit-references.txt    # Reference notes for CopilotKit
-├── pyproject.toml               # Python project configuration (PEP 621)
-├── README.md                    # This file: System overview and documentation
-├── requirements.txt             # Python dependencies
-├── setup.cfg                    # Configuration for Python packaging tools
-├── SETUP_GUIDE.md               # Setup instructions
+├── desktop-app/                # Desktop app scripts
+│   └── clean_copilotkit_workspace.ps1   # PowerShell script to clean workspace for desktop app
+│
+├── src/                        # Python backend source code
+│   ├── __init__.py             # Python package marker
+│   ├── cognitive_engine_service.py      # Core cognitive engine logic
+│   ├── main.py                 # Backend entry point (FastAPI)
+│   ├── README_WebSocket_Fixes.md        # Notes/fixes for WebSocket issues
+│   ├── agents/                 # AI agent logic and mission execution
+│   │   ├── __init__.py                 # Agents package marker
+│   │   ├── advanced_agents.py          # Advanced agent logic
+│   │   ├── ai_task_parser.py           # AI task parsing logic
+│   │   ├── executable_agent.py         # Executable agent logic
+│   │   ├── real_mission_executor.py    # Mission execution logic
+│   │   ├── simple_executable_agent.py  # Simple agent logic
+│   │   ├── specialized_agents.py       # Specialized agent logic
+│   ├── api/                    # API endpoint definitions
+│   │   ├── __init__.py                 # API package marker
+│   │   └── copilotkit.py               # CopilotKit API integration
+│   ├── config/                 # System configuration modules
+│   │   ├── __init__.py                 # Config package marker
+│   │   └── settings.py                 # System settings/configuration
+│   ├── core/                   # Core business logic and workflow engines
+│   │   ├── __init__.py                 # Core package marker
+│   │   ├── advanced_intelligence.py    # Advanced intelligence logic
+│   │   ├── blueprint_tasks.py          # Task blueprint logic
+│   │   ├── cognitive_forge_engine.py   # Cognitive forge engine logic
+│   │   ├── enhanced_cognitive_forge_engine.py # Enhanced cognitive forge engine logic
+│   │   ├── execution_workflow.py       # Workflow execution logic
+│   │   ├── hybrid_decision_engine.py   # Hybrid decision engine logic
+│   │   ├── real_mission_executor.py    # Mission execution logic
+│   │   ├── sandbox_executor.py         # Sandbox execution logic
+│   │   ├── sentinel_multi_agent_integration.py # Multi-agent integration logic
+│   │   ├── supercharged_optimizer.py   # Optimizer logic
+│   │   ├── supercharged_websocket_manager.py # WebSocket manager logic
+│   ├── models/                 # Data models and DB logic
+│   │   ├── __init__.py                 # Models package marker
+│   │   ├── advanced_database.py        # Advanced database logic
+│   │   ├── fix_database_schema.py      # Database schema fixes
+│   │   ├── fix_railway_database.py     # Railway DB fixes
+│   ├── tools/                  # Tools and utilities for agents
+│   │   ├── __init__.py                 # Tools package marker
+│   │   ├── advanced_tools.py           # Advanced tools for agents
+│   │   ├── file_system_tools.py        # File system utilities
+│   │   ├── simple_file_system_tools.py # Simple file system tools
+│   │   ├── specialized_tools.py        # Specialized agent tools
+│   └── utils/                  # General backend utilities
+│       ├── __init__.py                 # Utils package marker
+│       ├── agent_observability.py      # Observability utilities
+│       ├── auto_fix.py                 # Automated fix logic
+│       ├── automated_debugger.py       # Automated debugging logic
+│       ├── crewai_bypass.py            # CrewAI bypass logic
+│       ├── debug_killer.py             # Debugging utilities
+│       ├── debug_logger.py             # Debug logger
+│       ├── fix_ai.py                   # AI fix logic
+│       ├── google_ai_wrapper.py        # Google AI integration
+│       ├── guardian_protocol.py        # Guardian protocol logic
+│       ├── json_parser.py              # JSON parsing utilities
+│       ├── litellm_custom_provider.py  # LiteLLM provider logic
+│       ├── llm_patch.py                # LLM patch logic
+│       ├── log_collector.py            # Log collection utilities
+│       ├── manage_services.py          # Service management utilities
+│       ├── onnxruntime_fix.py          # ONNX runtime fix logic
+│       ├── performance_optimizer.py    # Performance optimization logic
+│       ├── phoenix_protocol.py         # Phoenix protocol logic
+│       ├── self_learning_module.py     # Self-learning module logic
+│       ├── sentry_api_client.py        # Sentry API client
+│       ├── sentry_integration.py       # Sentry integration logic
+│       ├── synapse_logging.py          # Synapse logging utilities
+│       ├── system_cheatsheet.txt       # System cheatsheet
+│
+├── logs/                      # (Empty or runtime logs generated during operation)
+│
+└── agentic_generative_ui/     # (legacy, now removed from main system)
+    ├── agent.py               # Legacy agentic generative UI backend logic
+    ├── page.tsx               # Legacy agentic generative UI frontend logic
+    ├── README.md              # Legacy agentic generative UI documentation
+    └── style.css              # Legacy agentic generative UI styles
 ```
 ├── scripts/                     # Automation and utility scripts
 │   ├── apply_websocket_fix.py   # Applies patches for WebSocket issues
