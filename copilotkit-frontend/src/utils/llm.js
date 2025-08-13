@@ -1,7 +1,7 @@
 
 // Utility for LLM chat/agent calls via backend
 export async function sendLLMChat(message, context = {}) {
-  const baseUrl = process.env.REACT_APP_API_URL || "https://sentinelai-production.up.railway.app/api";
+  const baseUrl = process.env.REACT_APP_API_URL;
   const response = await fetch(baseUrl + "/llm/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -12,7 +12,7 @@ export async function sendLLMChat(message, context = {}) {
 }
 
 export async function sendLLMAgentAction(action, context = {}) {
-  const baseUrl = process.env.REACT_APP_API_URL || "https://sentinelai-production.up.railway.app/api";
+  const baseUrl = process.env.REACT_APP_API_URL;
   const response = await fetch(baseUrl + "/llm/agent", {
     method: "POST",
     headers: { "Content-Type": "application/json" },

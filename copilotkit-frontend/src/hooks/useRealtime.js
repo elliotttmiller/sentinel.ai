@@ -8,7 +8,8 @@ export function useRealtime() {
   useEffect(() => {
     let ws;
     function connect() {
-      ws = new window.WebSocket("wss://sentinelai-production.up.railway.app/api/ws");
+      const apiUrl = process.env.REACT_APP_API_URL.replace(/^http/, "ws");
+      ws = new window.WebSocket(apiUrl + "/ws");
       wsRef.current = ws;
       ws.onopen = () => {
         // Optionally dispatch connection state

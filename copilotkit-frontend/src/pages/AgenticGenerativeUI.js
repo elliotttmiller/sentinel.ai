@@ -5,7 +5,7 @@ import { CopilotProvider } from "@copilotkit/react-core";
 import CopilotChat from "../components/CopilotChat";
 
 const AGENT_NAME = "agentic_generative_ui";
-const RUNTIME_URL = "https://sentinelai-production.up.railway.app/api/copilotkit";
+const RUNTIME_URL = process.env.REACT_APP_API_URL + "/copilotkit";
 
 function Spinner() {
   return (
