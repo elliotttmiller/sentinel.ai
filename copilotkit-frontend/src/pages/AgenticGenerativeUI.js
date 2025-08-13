@@ -1,7 +1,7 @@
 import React from "react";
 import "@copilotkit/react-ui/styles.css";
 import "../styles/agentic.css";
-import { useCoAgent } from "@copilotkit/react-core";
+// import { useCoAgent } from "@copilotkit/react-core";
 import { CopilotChat, useCopilotChatSuggestions } from "@copilotkit/react-ui";
 
 const initialPrompt = {
@@ -22,41 +22,9 @@ function Spinner() {
   );
 }
 
-const AgenticSteps = ({ steps }) => {
-  if (!steps || steps.length === 0) return null;
-  const firstPending = steps.findIndex((s) => s.status === "pending");
-  return (
-    <div className="flex">
-      <div className="bg-gray-100 rounded-lg w-[500px] p-4 text-black space-y-2">
-        {steps.map((step, index) => {
-          if (step.status === "completed") {
-            return (
-              <div key={index} className="text-sm">✓ {step.description}</div>
-            );
-          } else if (step.status === "pending" && index === firstPending) {
-            return (
-              <div key={index} className="text-3xl font-bold text-slate-700">
-                <Spinner /> {step.description}
-              </div>
-            );
-          } else {
-            return (
-              <div key={index} className="text-sm">
-                <Spinner /> {step.description}
-              </div>
-            );
-          }
-        })}
-      </div>
-    </div>
-  );
-};
+// AgenticSteps and agentic state rendering removed for compatibility
 
 const Chat = () => {
-  // Use useCoAgent to get agent state
-  const agent = useCoAgent({ name: AGENT_NAME });
-  const steps = agent?.state?.steps || [];
-
   useCopilotChatSuggestions({
     instructions: chatSuggestions.agenticGenerativeUI,
   });
@@ -64,8 +32,6 @@ const Chat = () => {
   return (
     <div className="flex justify-center items-center h-full w-full">
       <div className="w-8/10 h-8/10 rounded-lg">
-        {/* Render agentic steps above chat */}
-        <AgenticSteps steps={steps} />
         <CopilotChat
           className="h-full rounded-2xl"
           labels={{ initial: initialPrompt.agenticGenerativeUI }}
