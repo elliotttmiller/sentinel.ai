@@ -1,8 +1,8 @@
 import React from "react";
-import "@copilotkit/react-ui/styles.css";
+// ...existing code...
 import "../styles/agentic.css";
 import { CopilotKit, useCoAgentStateRender } from "@copilotkit/react-core";
-import { CopilotChat, useCopilotChatSuggestions } from "@copilotkit/react-ui";
+import CopilotChat from "../components/CopilotChat";
 
 const AGENT_NAME = "agentic_generative_ui";
 const RUNTIME_URL = "https://sentinelai-production.up.railway.app/api/copilotkit";
@@ -47,7 +47,7 @@ const AgenticSteps = ({ steps }) => {
 };
 
 const Chat = () => {
-  useCopilotChatSuggestions({ instructions: "Suggest complex, multi-step tasks for the agent to execute." });
+  // useCopilotChatSuggestions removed: not compatible with React SPA
   useCoAgentStateRender({
     name: AGENT_NAME,
     render: ({ state }) => <AgenticSteps steps={state.steps} />,
@@ -55,7 +55,7 @@ const Chat = () => {
   return (
     <div className="flex justify-center items-center h-full w-full">
       <div className="w-8/10 h-8/10 rounded-lg">
-        <CopilotChat className="h-full rounded-2xl" labels={{ initial: "What complex task can I help you with?" }} />
+        <CopilotChat />
       </div>
     </div>
   );

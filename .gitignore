@@ -1,3 +1,5 @@
 # Ignore environment files and secrets
 .env
 copilotkit-frontend/.env
+node_modules/
+copilotkit-frontend/node_modules/
