@@ -29,8 +29,15 @@ CONFIG = {
             "health": "http://localhost:8000/health",
             "copilotkit": "http://localhost:8000/api/copilotkit/info"
         },
+        "websocket": {
+            "cmd": [sys.executable, "src/websocket_server.py"],
+            "cwd": "./",
+            "desc": "WebSocket Status Server",
+            "health": None
+        },
         "frontend": {
-            "cmd": [r"C:\\Users\\AMD\\AppData\\Roaming\\npm\\yarn.cmd", "start"],
+            # On Windows/PowerShell, set PORT=3000 before running yarn start
+            "cmd": ["cmd", "/c", "set PORT=3000 && yarn start"],
             "cwd": "./copilotkit-frontend",
             "desc": "React Frontend",
             "health": "http://localhost:3000"
@@ -143,6 +150,8 @@ def main():
         return
     if choice == "1":
         local = True
+        # Start backend, frontend, websocket, redis, postgres
+        services_to_start = ["backend", "frontend", "websocket", "redis", "postgres"]
     elif choice == "2":
         local = False
     elif choice == "3":
@@ -153,6 +162,9 @@ def main():
         print("Available services:", ", ".join(CONFIG["services"].keys()))
         custom = input("Enter comma-separated services to start: ").strip()
         services_to_start = [s.strip() for s in custom.split(",") if s.strip() in CONFIG["services"]]
+    # Print local frontend URL if started
+    if "frontend" in services_to_start:
+        print("\n[INFO] Access your local frontend at: http://localhost:3000")
     print(f"\n[INFO] Startup mode: {'Local' if local else 'Remote'} (from menu)")
     print(f"[INFO] Services to start: {', '.join(services_to_start)}")
     # Start selected services
