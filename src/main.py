@@ -1,27 +1,78 @@
+    # ...existing code...
+
+    # ...existing code...
+
+import dotenv
+dotenv.load_dotenv()
 import asyncio
 import json
 import time
 import uuid
 import sys
 from datetime import datetime
-from fastapi import FastAPI, HTTPException, Depends, WebSocket, WebSocketDisconnect
 
+
+from fastapi import FastAPI, HTTPException, Depends, WebSocket, WebSocketDisconnect
+import os
+import traceback
+from fastapi.middleware.cors import CORSMiddleware
 import logging
 from logging.handlers import RotatingFileHandler
-import traceback
-import os
 
-# --- Advanced Logging Setup ---
+app = FastAPI()
+
+# --- Agentic Generative UI Endpoint ---
+@app.get("/api/agentic-generative-ui")
+async def agentic_generative_ui():
+    # Dummy agentic generative UI data
+    return {
+        "status": "ok",
+        "message": "Agentic Generative UI endpoint is active.",
+        "timestamp": datetime.utcnow().isoformat()
+    }
+
 LOG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'logs')
 os.makedirs(LOG_DIR, exist_ok=True)
 LOG_FILE = os.path.join(LOG_DIR, 'cognitive_engine.log')
 
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["*"],
+)
 class ContextFilter(logging.Filter):
     def filter(self, record):
         record.session_id = getattr(record, 'session_id', 'N/A')
         record.user = getattr(record, 'user', 'system')
         return True
 
+
+# --- Dashboard Endpoint ---
+@app.get("/api/dashboard")
+async def dashboard():
+    # Dummy dashboard data
+    return {
+        "system_status": "ok",
+        "active_users": 5,
+        "missions": 2,
+        "timestamp": datetime.utcnow().isoformat()
+    }
+    
+# --- Missions Endpoint ---
+@app.get("/api/missions")
+async def missions():
+    # Dummy missions data
+    return {
+        "missions": [
+            {"id": "mission_1", "name": "Test Mission 1", "status": "running"},
+            {"id": "mission_2", "name": "Test Mission 2", "status": "completed"}
+        ],
+        "timestamp": datetime.utcnow().isoformat()
+    }
 formatter = logging.Formatter(
     '[%(asctime)s] [%(levelname)s] [%(name)s] [session:%(session_id)s] [user:%(user)s] %(message)s'
 )
@@ -35,15 +86,15 @@ console_handler.setFormatter(formatter)
 console_handler.setLevel(logging.INFO)
 
 logger = logging.getLogger("sentinel")
-logger.setLevel(logging.DEBUG)
-logger.addHandler(file_handler)
-logger.addHandler(console_handler)
-logger.addFilter(ContextFilter())
+    # Enable CORS for frontend communication
+
+
+
+## Removed /api/ws alias. Use only /ws for WebSocket connections.
+
 
 def log_exception(exc: Exception, context: str = ""):
     logger.error(f"Exception in {context}: {exc}\n{traceback.format_exc()}")
-
-app = FastAPI()
 
 
 # --- Health Endpoint with Logging ---
@@ -158,13 +209,20 @@ async def websocket_endpoint(websocket: WebSocket):
 
 
 
-# Register the CopilotKit router for /api/copilotkit and /api/copilot endpoints
 try:
     from api.copilotkit import router as copilotkit_router
-    app.include_router(copilotkit_router)
-    logger.info("CopilotKit router registered successfully.")
-except Exception as e:
-    log_exception(e, context="CopilotKit router registration")
+except ImportError:
+    from src.api.copilotkit import router as copilotkit_router
+app.include_router(copilotkit_router)
+logger.info("CopilotKit router registered successfully.")
+
+# Register CopilotKitRemoteEndpoint FastAPI app for remote agent/action support
+try:
+    from api.copilotkit_remote import app as copilotkit_remote_app
+except ImportError:
+    from src.api.copilotkit_remote import app as copilotkit_remote_app
+app.mount("/copilotkit-remote", copilotkit_remote_app)
+logger.info("CopilotKitRemoteEndpoint app mounted at /copilotkit-remote.")
 
 # --- CopilotKit React Frontend Integration Example ---
 # In your frontend, initialize CopilotKit with your public API key:

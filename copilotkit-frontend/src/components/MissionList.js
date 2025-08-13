@@ -9,10 +9,10 @@ function MissionList() {
     fetch("/api/missions")
       .then((res) => res.json())
       .then((data) => {
-        dispatch({ type: "SET_MISSIONS", missions: data });
+        dispatch({ type: "SET_MISSIONS", missions: data.missions });
         setLoading(false);
       });
-    // eslint-disable-next-line
+     
   }, [dispatch]);
 
   if (loading) return <div>Loading missions...</div>;

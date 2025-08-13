@@ -8,8 +8,7 @@ export function useRealtime() {
   useEffect(() => {
     let ws;
     function connect() {
-      const apiUrl = process.env.REACT_APP_API_URL.replace(/^http/, "ws");
-      ws = new window.WebSocket(apiUrl + "/ws");
+      ws = new window.WebSocket("ws://localhost:8000/ws");
       wsRef.current = ws;
       ws.onopen = () => {
         // Optionally dispatch connection state
@@ -35,7 +34,10 @@ export function useRealtime() {
     }
     connect();
     return () => {
-      if (wsRef.current) wsRef.current.close();
+      if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+        wsRef.current.close();
+      }
+      wsRef.current = null;
     };
   }, [dispatch]);
 }

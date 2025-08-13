@@ -9,20 +9,20 @@ import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 import { SentinelProvider } from "./context/SentinelContext";
-import { CopilotProvider } from "@copilotkit/react-core";
+import { CopilotKit } from "@copilotkit/react-core";
 
 root.render(
   <React.StrictMode>
     <ErrorBoundary>
       <SentinelProvider>
         <ThemeProvider>
-          <BrowserRouter>
-            <CopilotProvider
-              runtimeUrl={process.env.REACT_APP_API_URL + "/copilotkit"}
+          <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+            <CopilotKit
+              runtimeUrl="/copilotkit"
               publicApiKey={process.env.REACT_APP_PUBLIC_API_KEY}
             >
               <App />
-            </CopilotProvider>
+            </CopilotKit>
           </BrowserRouter>
         </ThemeProvider>
       </SentinelProvider>

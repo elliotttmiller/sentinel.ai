@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useCopilotReadable, useCopilotAdditionalInstructions, useCopilotChat, useCoAgent, useCopilotAction } from "@copilotkit/react-core";
 import { useCopilotChatSuggestions } from "@copilotkit/react-ui";
-import { TextMessage, MessageRole } from "@copilotkit/runtime-client-gql";
+// ...existing code...
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dashboard from "./views/Dashboard";
 import Missions from "./views/Missions";
@@ -39,17 +39,9 @@ function App() {
   });
 
   // Integrate useCopilotChat globally
-  const { appendMessage, isLoading, reset, runChatCompletion } = useCopilotChat();
+  useCopilotChat();
 
-  // Example: Programmatically send a message to Copilot
-  const sendCopilotMessage = async (content) => {
-    await appendMessage(
-      new TextMessage({
-        role: MessageRole.User,
-        content,
-      })
-    );
-  };
+  // ...existing code...
 
   // Integrate useCopilotChatSuggestions globally
   useCopilotChatSuggestions({

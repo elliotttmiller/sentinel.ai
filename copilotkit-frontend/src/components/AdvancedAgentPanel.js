@@ -1,31 +1,39 @@
-import React from "react";
-import { useCopilotChat } from "@copilotkit/react-core";
-// ...existing code...
-
 export default function AdvancedAgentPanel() {
-  // Headless chat state
-  const { visibleMessages, appendMessage } = useCopilotChat();
+  // Observability hooks for debugging and analytics
+  const observabilityHooks = {
+    onMessageSent: (message) => {
+      console.log("AdvancedAgentPanel: Message sent:", message);
+    },
+    onThumbsUp: (message) => {
+      console.log("AdvancedAgentPanel: Thumbs up:", message);
+    },
+    onThumbsDown: (message) => {
+      console.log("AdvancedAgentPanel: Thumbs down:", message);
+    },
+  };
 
-  // Agent state sharing removed: useCoAgent not available in this version
-
-  // Streaming action removed: useCopilotAction not available in this version
+  // Custom error renderer
+  const renderError = (error) => (
+    <div style={{ color: "red", padding: 8 }}>
+      <b>Error:</b> {error.message}
+      {error.operation && <span> ({error.operation})</span>}
+      <button onClick={error.onDismiss} style={{ marginLeft: 8 }}>Dismiss</button>
+      {error.onRetry && <button onClick={error.onRetry} style={{ marginLeft: 8 }}>Retry</button>}
+    </div>
+  );
 
   return (
-    <div style={{ margin: "2rem 0" }}>
-      <h2>Advanced Agent Panel</h2>
-      {/* CopilotPopup removed: not compatible with React SPA */}
-      <div style={{ color: 'gray', margin: '1rem 0' }}>[Agent popup feature coming soon]</div>
-      <div style={{ marginTop: 16 }}>
-        <strong>Agent State:</strong> {JSON.stringify(agentState)}
-      </div>
-      <div style={{ marginTop: 16 }}>
-        <strong>Chat Messages:</strong>
-        <ul>
-          {visibleMessages.map((msg, i) => (
-            <li key={i}><b>{msg.role}:</b> {msg.content}</li>
-          ))}
-        </ul>
-      </div>
+    <div className="advanced-agent-panel">
+      <h2 style={{fontSize: "2rem", fontWeight: 700, marginBottom: "1.5rem", color: "#3730a3"}}>Advanced Agent Panel</h2>
+      <CopilotChat
+        labels={{
+          title: "Agent Chat",
+          initial: "Welcome to the advanced agent panel.",
+        }}
+        observabilityHooks={observabilityHooks}
+        renderError={renderError}
+        className="advanced-agent-panel"
+      />
     </div>
   );
 }

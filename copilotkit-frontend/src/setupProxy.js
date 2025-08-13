@@ -8,4 +8,14 @@ module.exports = function(app) {
       changeOrigin: true,
     })
   );
+  app.use(
+    '/copilotkit',
+    createProxyMiddleware({
+      target: 'http://localhost:8000',
+      changeOrigin: true,
+      pathRewrite: {
+        '^/copilotkit': '/api/copilotkit',
+      },
+    })
+  );
 };

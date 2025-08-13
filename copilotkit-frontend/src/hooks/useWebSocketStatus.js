@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function useWebSocketStatus(url = "ws://localhost:8000/ws/status") {
+export function useWebSocketStatus(url = "ws://localhost:8000/ws") {
   const [status, setStatus] = useState("");
 
   useEffect(() => {
@@ -8,7 +8,7 @@ export function useWebSocketStatus(url = "ws://localhost:8000/ws/status") {
     ws.onmessage = (event) => {
       setStatus(event.data);
     };
-    ws.onerror = (err) => {
+    ws.onerror = () => {
       setStatus("WebSocket error");
     };
     ws.onclose = () => {

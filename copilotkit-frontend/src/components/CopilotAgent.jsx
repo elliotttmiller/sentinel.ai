@@ -1,41 +1,41 @@
+import React from "react";
+import { CopilotChat } from "@copilotkit/react-ui";
+import "@copilotkit/react-ui/styles.css";
+import "../styles/copilotkit-chat-modern.css";
 
-import { CopilotProvider, useCopilotChat } from "@copilotkit/react-core";
+// Observability hooks for debugging and analytics
+const observabilityHooks = {
+  onMessageSent: (message) => {
+    console.log("Message sent:", message);
+  },
+  onThumbsUp: (message) => {
+    console.log("Thumbs up:", message);
+  },
+  onThumbsDown: (message) => {
+    console.log("Thumbs down:", message);
+  },
+};
 
-function ChatBox() {
-  const { visibleMessages, appendMessage } = useCopilotChat();
-  const [input, setInput] = React.useState("");
-
-  const handleSend = () => {
-    if (input.trim()) {
-      appendMessage({ role: "user", text: input });
-      setInput("");
-    }
-  };
-
-  return (
-    <div style={{ position: "fixed", bottom: 24, right: 24, zIndex: 1000, background: "#fff", padding: 16, borderRadius: 8, boxShadow: "0 2px 8px rgba(0,0,0,0.15)" }}>
-      <h3>Copilot Chat</h3>
-      <div style={{ maxHeight: 200, overflowY: "auto", marginBottom: 8 }}>
-        {visibleMessages.map((msg, idx) => (
-          <div key={idx}><b>{msg.role}:</b> {msg.text}</div>
-        ))}
-      </div>
-      <input
-        type="text"
-        value={input}
-        onChange={e => setInput(e.target.value)}
-        placeholder="Type your message..."
-        style={{ width: "70%", marginRight: 8 }}
-      />
-      <button onClick={handleSend}>Send</button>
-    </div>
-  );
-}
-
-const CopilotAgent = () => (
-  <CopilotProvider>
-    <ChatBox />
-  </CopilotProvider>
+// Custom error renderer
+const renderError = (error) => (
+  <div style={{ color: "red", padding: 8 }}>
+    <b>Error:</b> {error.message}
+    {error.operation && <span> ({error.operation})</span>}
+    <button onClick={error.onDismiss} style={{ marginLeft: 8 }}>Dismiss</button>
+    {error.onRetry && <button onClick={error.onRetry} style={{ marginLeft: 8 }}>Retry</button>}
+  </div>
 );
 
-export default CopilotAgent;
+export default function CopilotAgent() {
+  return (
+    <CopilotChat
+      labels={{
+        title: "Your Assistant",
+        initial: "Hi! 👋 How can I assist you today?",
+      }}
+      observabilityHooks={observabilityHooks}
+      renderError={renderError}
+      className="copilot-chat-panel"
+    />
+  );
+}

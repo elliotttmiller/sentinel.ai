@@ -1,0 +1,95 @@
+/* Modern, clean, professional chat UI for CopilotKit agent panels */
+.copilot-chat-panel, .advanced-agent-panel {
+  background: linear-gradient(135deg, #f8fafc 0%, #e3e8ee 100%);
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 2rem 2.5rem;
+  max-width: 480px;
+  margin: 2rem auto;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  color: #222;
+}
+
+.copilot-chat-panel h2, .advanced-agent-panel h2, .copilot-chat-panel h3, .advanced-agent-panel h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #2d3748;
+}
+
+.copilot-chat-panel .copilotKitInput, .advanced-agent-panel .copilotKitInput {
+  border-radius: 0.75rem;
+  border: 1px solid #cbd5e1;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  background: #f1f5f9;
+  margin-bottom: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.copilot-chat-panel .copilotKitSendButton, .advanced-agent-panel .copilotKitSendButton {
+  background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
+  color: #fff;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.copilot-chat-panel .copilotKitSendButton:hover, .advanced-agent-panel .copilotKitSendButton:hover {
+  background: linear-gradient(90deg, #4f46e5 0%, #2563eb 100%);
+}
+
+.copilot-chat-panel .copilotKitMessage, .advanced-agent-panel .copilotKitMessage {
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  color: #222;
+}
+
+.copilot-chat-panel .copilotKitMessage.user, .advanced-agent-panel .copilotKitMessage.user {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+.copilot-chat-panel .copilotKitMessage.assistant, .advanced-agent-panel .copilotKitMessage.assistant {
+  background: #f1f5f9;
+  color: #2563eb;
+}
+
+.copilot-chat-panel .copilotKitError, .advanced-agent-panel .copilotKitError {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.copilot-chat-panel .copilotKitThumbs, .advanced-agent-panel .copilotKitThumbs {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.copilot-chat-panel .copilotKitThumbs button, .advanced-agent-panel .copilotKitThumbs button {
+  background: #f1f5f9;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: #2563eb;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.copilot-chat-panel .copilotKitThumbs button:hover, .advanced-agent-panel .copilotKitThumbs button:hover {
+  background: #e0e7ff;
+}

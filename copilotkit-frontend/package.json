@@ -5,15 +5,20 @@
   "private": true,
   "description": "Sentinel CopilotKit SPA frontend",
   "scripts": {
-    "start": "serve -s build -l $PORT",
+    "postinstall": "sed -i.bak '/source-map-loader/d' node_modules/react-scripts/config/webpack.config.js",
+    "start": "react-scripts start",
     "build": "react-scripts build --max_old_space_size=4096",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "@copilotkit/react-core": "^0.5.0",
+    "@copilotkit/react-core": "^1.10.1",
     "@copilotkit/react-ui": "^1.10.1",
+    "@copilotkit/runtime": "^1.10.1",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@google/generative-ai": "^0.24.1",
+    "@mui/material": "^7.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",
@@ -22,7 +27,9 @@
   },
   "devDependencies": {
     "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0"
+    "@types/react-dom": "^18.2.0",
+    "eslint": "^9.33.0",
+    "eslint-plugin-react": "^7.37.5"
   },
   "license": "MIT",
   "browserslist": {
