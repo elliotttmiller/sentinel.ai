@@ -1,11 +1,17 @@
 import React from "react";
-// ...existing code...
+import "@copilotkit/react-ui/styles.css";
 import "../styles/agentic.css";
-import { CopilotProvider } from "@copilotkit/react-core";
-import CopilotChat from "../components/CopilotChat";
+import { useCoAgentStateRender } from "@copilotkit/react-core";
+import { CopilotChat, useCopilotChatSuggestions } from "@copilotkit/react-ui";
+
+const initialPrompt = {
+  agenticGenerativeUI: "Hi! I'm your agentic assistant. I will break down your request into actionable steps and keep you updated in real time. What would you like to do?"
+};
+const chatSuggestions = {
+  agenticGenerativeUI: "Suggest tasks that can be broken down into steps, e.g., planning, multi-stage workflows, etc."
+};
 
 const AGENT_NAME = "agentic_generative_ui";
-const RUNTIME_URL = process.env.REACT_APP_API_URL + "/copilotkit";
 
 function Spinner() {
   return (
@@ -47,26 +53,27 @@ const AgenticSteps = ({ steps }) => {
 };
 
 const Chat = () => {
-  // Agent state rendering now handled directly via useCoAgent below
+  useCoAgentStateRender({
+    name: AGENT_NAME,
+    render: ({ state }) => <AgenticSteps steps={state.steps} />,
+  });
+
+  useCopilotChatSuggestions({
+    instructions: chatSuggestions.agenticGenerativeUI,
+  });
+
   return (
     <div className="flex justify-center items-center h-full w-full">
       <div className="w-8/10 h-8/10 rounded-lg">
-        <CopilotChat />
+        <CopilotChat
+          className="h-full rounded-2xl"
+          labels={{ initial: initialPrompt.agenticGenerativeUI }}
+        />
       </div>
     </div>
   );
 };
 
 export default function AgenticGenerativeUI() {
-  const publicApiKey = process.env.REACT_APP_PUBLIC_API_KEY;
-  return (
-    <CopilotProvider
-      runtimeUrl={RUNTIME_URL}
-      showDevConsole={false}
-      agent={AGENT_NAME}
-      publicApiKey={publicApiKey}
-    >
-      <Chat />
-    </CopilotProvider>
-  );
+  return <Chat />;
 }

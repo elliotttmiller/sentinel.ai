@@ -6,7 +6,8 @@ import Analytics from "./pages/Analytics";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 import AgenticGenerativeUI from "./pages/AgenticGenerativeUI";
-import CopilotChat from "./components/CopilotChat";
+import "@copilotkit/react-ui/styles.css";
+import { CopilotChat } from "@copilotkit/react-ui";
 import NavBar from "./components/NavBar";
 import SentinelInitializer from "./components/SentinelInitializer";
 import Notification from "./components/Notification";
@@ -20,8 +21,14 @@ function App() {
       <SentinelInitializer />
       <Notification message={message} onClose={clearNotification} />
       <NavBar />
-      {/* Global CopilotKit Chat Widget */}
-      <CopilotChat />
+      {/* Official CopilotKit Chat Widget */}
+      <CopilotChat
+        instructions={"You are assisting the user as best as you can. Answer in the best way possible given the data you have."}
+        labels={{
+          title: "Your Assistant",
+          initial: "Hi! 👋 How can I assist you today?",
+        }}
+      />
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/missions" element={<Missions />} />
