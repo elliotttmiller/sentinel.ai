@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useCopilotAction } from "@copilotkit/react-core";
+// import { useCopilotAction } from "@copilotkit/react-core";
 
 export default function AgenticTaskExecutor() {
   const [input, setInput] = useState("");
@@ -8,40 +8,40 @@ export default function AgenticTaskExecutor() {
   const [status, setStatus] = useState("idle");
   const [summary, setSummary] = useState("");
 
-  useCopilotAction({
-    name: "agenticTaskExecutor",
-    description: "Executes complex tasks with real-time status updates and stepwise progress.",
-    parameters: [
-      { name: "task", type: "string", description: "The user task to execute." }
-    ],
-    render: ({ status: actionStatus, args, respond }) => {
-      // Streaming UI: update steps and current step as agent progresses
-      if (args && args.steps) setSteps(args.steps);
-      if (typeof args.currentStep === "number") setCurrentStep(args.currentStep);
-      setStatus(actionStatus);
-      if (actionStatus === "completed" && args.summary) setSummary(args.summary);
-      return null;
-    },
-    handler: async ({ task }) => {
-      // Simulate agentic breakdown and execution
-      const plan = [
-        `Analyzing task: ${task}`,
-        "Breaking down into steps...",
-        "Executing step 1...",
-        "Executing step 2...",
-        "Finalizing..."
-      ];
-      for (let i = 0; i < plan.length; i++) {
-        setSteps(plan);
-        setCurrentStep(i);
-        setStatus("executing");
-        await new Promise((r) => setTimeout(r, 1200));
-      }
-      setStatus("completed");
-      setSummary(`Task '${task}' completed successfully!`);
-      return { steps: plan, summary: `Task '${task}' completed successfully!` };
-    },
-  });
+  // useCopilotAction({
+  //   name: "agenticTaskExecutor",
+  //   description: "Executes complex tasks with real-time status updates and stepwise progress.",
+  //   parameters: [
+  //     { name: "task", type: "string", description: "The user task to execute." }
+  //   ],
+  //   render: ({ status: actionStatus, args, respond }) => {
+  //     // Streaming UI: update steps and current step as agent progresses
+  //     if (args && args.steps) setSteps(args.steps);
+  //     if (typeof args.currentStep === "number") setCurrentStep(args.currentStep);
+  //     setStatus(actionStatus);
+  //     if (actionStatus === "completed" && args.summary) setSummary(args.summary);
+  //     return null;
+  //   },
+  //   handler: async ({ task }) => {
+  //     // Simulate agentic breakdown and execution
+  //     const plan = [
+  //       `Analyzing task: ${task}`,
+  //       "Breaking down into steps...",
+  //       "Executing step 1...",
+  //       "Executing step 2...",
+  //       "Finalizing..."
+  //     ];
+  //     for (let i = 0; i < plan.length; i++) {
+  //       setSteps(plan);
+  //       setCurrentStep(i);
+  //       setStatus("executing");
+  //       await new Promise((r) => setTimeout(r, 1200));
+  //     }
+  //     setStatus("completed");
+  //     setSummary(`Task '${task}' completed successfully!`);
+  //     return { steps: plan, summary: `Task '${task}' completed successfully!` };
+  //   },
+  // });
 
   function handleSubmit(e) {
     e.preventDefault();

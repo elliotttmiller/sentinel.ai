@@ -1,0 +1,9 @@
+[2025-08-13 03:34:33,476] [ERROR] [sentinel] [session:N/A] [user:system] Exception in CopilotKit router registration: No module named 'src'
+Traceback (most recent call last):
+  File "C:\Users\AMD\copilot\src\main.py", line 163, in <module>
+    from src.api.copilotkit import router as copilotkit_router
+ModuleNotFoundError: No module named 'src'
+
+[2025-08-13 03:34:33,684] [INFO] [sentinel] [session:N/A] [user:system] Starting SentinelAI backend with advanced logging...
+[2025-08-13 03:36:20,320] [INFO] [sentinel] [session:N/A] [user:system] CopilotKit router registered successfully.
+[2025-08-13 03:36:20,364] [INFO] [sentinel] [session:N/A] [user:system] Starting SentinelAI backend with advanced logging...

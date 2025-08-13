@@ -23,10 +23,11 @@ CONFIG = {
     "frontend_env_file": "./copilotkit-frontend/.env",
     "services": {
         "backend": {
-            "cmd": [sys.executable, "start_cognitive_forge.py"],
-            "cwd": "./desktop-app",
+            "cmd": [sys.executable, "src/main.py"],
+            "cwd": "./",
             "desc": "FastAPI Backend Server",
-            "health": "http://localhost:8000/health"
+            "health": "http://localhost:8000/health",
+            "copilotkit": "http://localhost:8000/api/copilotkit/info"
         },
         "frontend": {
             "cmd": ["npm", "start"],
@@ -130,6 +131,18 @@ def main():
                     print(f"[WARN] {name} unhealthy (status {resp.status_code}).")
             except Exception as e:
                 print(f"[ERROR] {name} health check failed: {e}")
+        # CopilotKit endpoint health check
+        copilotkit_url = svc.get("copilotkit")
+        if copilotkit_url:
+            try:
+                import requests
+                resp = requests.get(copilotkit_url, timeout=3)
+                if resp.status_code == 200:
+                    print(f"[OK] CopilotKit endpoint healthy: {copilotkit_url}")
+                else:
+                    print(f"[WARN] CopilotKit endpoint unhealthy (status {resp.status_code}): {copilotkit_url}")
+            except Exception as e:
+                print(f"[ERROR] CopilotKit endpoint health check failed: {e}")
     print("\n[INFO] System startup complete. Monitor logs for status.")
     # Optionally: add restart/stop menu, log monitoring, etc.
 

@@ -160,7 +160,7 @@ async def websocket_endpoint(websocket: WebSocket):
 
 # Register the CopilotKit router for /api/copilotkit and /api/copilot endpoints
 try:
-    from src.api.copilotkit import router as copilotkit_router
+    from api.copilotkit import router as copilotkit_router
     app.include_router(copilotkit_router)
     logger.info("CopilotKit router registered successfully.")
 except Exception as e:
