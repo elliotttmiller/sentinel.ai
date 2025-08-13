@@ -1,7 +1,7 @@
 import React from "react";
 import "@copilotkit/react-ui/styles.css";
 import "../styles/agentic.css";
-import { useCoAgentStateRender } from "@copilotkit/react-core";
+import { useCoAgent } from "@copilotkit/react-core";
 import { CopilotChat, useCopilotChatSuggestions } from "@copilotkit/react-ui";
 
 const initialPrompt = {
@@ -53,10 +53,9 @@ const AgenticSteps = ({ steps }) => {
 };
 
 const Chat = () => {
-  useCoAgentStateRender({
-    name: AGENT_NAME,
-    render: ({ state }) => <AgenticSteps steps={state.steps} />,
-  });
+  // Use useCoAgent to get agent state
+  const agent = useCoAgent({ name: AGENT_NAME });
+  const steps = agent?.state?.steps || [];
 
   useCopilotChatSuggestions({
     instructions: chatSuggestions.agenticGenerativeUI,
@@ -65,6 +64,8 @@ const Chat = () => {
   return (
     <div className="flex justify-center items-center h-full w-full">
       <div className="w-8/10 h-8/10 rounded-lg">
+        {/* Render agentic steps above chat */}
+        <AgenticSteps steps={steps} />
         <CopilotChat
           className="h-full rounded-2xl"
           labels={{ initial: initialPrompt.agenticGenerativeUI }}
