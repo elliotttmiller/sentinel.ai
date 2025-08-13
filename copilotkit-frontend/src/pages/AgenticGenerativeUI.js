@@ -1,7 +1,8 @@
 import React from "react";
 // ...existing code...
 import "../styles/agentic.css";
-import { CopilotProvider, useCoAgentStateRender } from "@copilotkit/react-core";
+import { CopilotProvider } from "@copilotkit/react-core";
+import { useCoAgentStateRender } from "@copilotkit/react-ui";
 import CopilotChat from "../components/CopilotChat";
 
 const AGENT_NAME = "agentic_generative_ui";
