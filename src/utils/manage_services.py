@@ -50,7 +50,7 @@ logger.add(
 
 
 class DebugContext:
-    def __init__(self, operation: str, service: str = None):
+    def __init__(self, operation: str, service: Optional[str] = None):
         self.operation = operation
         self.service = service
         self.start_time = time.time()
@@ -183,9 +183,7 @@ SERVICES = {
         "log_file": LOG_DIR / "desktop_app.log",
     },
     "backend": {
-        "name": "Backend API (Railway)",
-        "port": None,  # No local port since it's on Railway
-        "url": "https://sentinelai-production.up.railway.app",  # Railway backend URL
+        # ...existing code...
         "health_endpoint": "/health",
         "log_file": LOG_DIR / "backend.log",
         "is_remote": True,
@@ -596,7 +594,7 @@ def get_service_status(service_name: str) -> ServiceStatus:
             },
         )
 
-        # Handle remote services (like Railway backend)
+        # ...existing code...
         if service_config.get("is_remote"):
             ctx.add_detail("service_type", "remote")
             try:
@@ -736,7 +734,7 @@ def start_service(service_name: str, background: bool = True) -> bool:
         print_error(f"Unknown service: {service_name}")
         return False
 
-    # Handle remote services (like Railway backend)
+    # ...existing code...
     if service_config.get("is_remote"):
         print_info(f"Checking remote service: {service_config['name']}")
         try:
@@ -878,8 +876,11 @@ def full_desktop_app_startup() -> Dict[str, bool]:
     # Check dependencies
     print_info("Checking system dependencies...")
     dependencies = check_dependencies()
+    required_packages_dict = dependencies.get("required_packages", {})
+    if not isinstance(required_packages_dict, dict):
+        required_packages_dict = {}
     missing_required = [
-        pkg for pkg, installed in dependencies["required_packages"].items() if not installed
+        pkg for pkg, installed in required_packages_dict.items() if not installed
     ]
 
     if missing_required:
@@ -887,14 +888,18 @@ def full_desktop_app_startup() -> Dict[str, bool]:
         print_info("Attempting to install missing dependencies...")
         if not install_missing_dependencies():
             print_error("Failed to install required dependencies. Please install manually.")
-            return {"error": "Dependency installation failed"}
+            results["startup_status"] = False
+            results["error"] = "Dependency installation failed"
+            return results
 
     # Check environment
     print_info("Validating environment configuration...")
     if not ENV_FILE.exists():
         print_error("Environment file (.env) not found!")
         print_info("Please ensure .env file exists with required configuration.")
-        return {"error": "Environment file missing"}
+        results["startup_status"] = False
+        results["error"] = "Environment file missing"
+        return results
 
     # Check database connection
     print_info("Testing database connectivity...")
@@ -926,19 +931,27 @@ def full_desktop_app_startup() -> Dict[str, bool]:
     except Exception as e:
         print_warning(f"Cognitive engine configuration check failed: {e}")
         print_info("Continuing with startup - AI features may be limited")
-
-    # Phase 2: Start core services
-    print_header("Phase 2: Starting Core Services", 2)
-
-    # Check Railway backend
-    print_info("Checking Railway Backend API...")
     results["backend"] = start_service("backend")
     if results["backend"]:
-        print_success("Railway Backend API is accessible")
+        # Backend started successfully
         time.sleep(2)  # Brief wait
     else:
-        print_warning("Railway Backend API is not accessible - continuing with desktop app")
+        # Backend failed to start
+        print_error("Backend failed to start")
+        results["startup_status"] = False
+        results["error"] = "Backend failed to start"
+        return results
 
+    # Start desktop app
+    print_info("Starting Desktop App...")
+    results["desktop_app"] = start_service("desktop_app")
+    if results["desktop_app"]:
+        print_success("Desktop App started successfully")
+    else:
+        print_error("Desktop App failed to start")
+        results["startup_status"] = False
+        results["error"] = "Desktop App failed to start"
+        return results
     # Start desktop app
     print_info("Starting Desktop App...")
     results["desktop_app"] = start_service("desktop_app")
@@ -1136,7 +1149,7 @@ def health_check_service(service_name: str) -> Dict[str, Any]:
             "cpu_usage": None,
         }
 
-        # Handle remote services (like Railway backend)
+        # ...existing code...
         if service_config.get("is_remote"):
             ctx.add_detail("service_type", "remote")
             try:
@@ -1408,8 +1421,13 @@ def install_missing_dependencies():
     dependencies = check_dependencies()
     missing_packages = []
 
+    # Ensure required_packages is a dictionary
+    required_packages_dict = dependencies.get("required_packages", {})
+    if not isinstance(required_packages_dict, dict):
+        required_packages_dict = {}
+
     # Collect missing required packages
-    for pkg, installed in dependencies["required_packages"].items():
+    for pkg, installed in required_packages_dict.items():
         if not installed:
             missing_packages.append(pkg)
 
@@ -1648,13 +1666,6 @@ def analyze_debug_logs():
         else:
             print("  No errors found")
 
-        # Look for specific Railway backend issues
-        railway_issues = [line for line in lines if "Railway" in line or "sentinel-backend" in line]
-        if railway_issues:
-            print(f"\n{Fore.YELLOW}Railway Backend Issues:{Style.RESET_ALL}")
-            for issue in railway_issues[-3:]:
-                print(f"  {issue}")
-
         # Network connectivity analysis
         network_errors = [line for line in lines if "ConnectionError" in line or "Timeout" in line]
         if network_errors:
@@ -1702,25 +1713,12 @@ def run_network_diagnostics():
         print_info("Testing DNS resolution...")
         try:
             import socket
-
-            ip = socket.gethostbyname("sentinelai-production.up.railway.app")
+            ip = socket.gethostbyname("www.google.com")
             ctx.add_detail("dns_resolution", f"OK: {ip}")
             print_success(f"✅ DNS resolution: OK ({ip})")
         except Exception as e:
             ctx.add_detail("dns_resolution", f"FAILED: {e}")
             print_error(f"❌ DNS resolution failed: {e}")
-
-        # Test Railway backend connectivity
-        print_info("Testing Railway backend connectivity...")
-        try:
-            response = debug_request(
-                "GET", "https://sentinelai-production.up.railway.app/health", timeout=10
-            )
-            ctx.add_detail("railway_connectivity", f"OK: HTTP {response.status_code}")
-            print_success(f"✅ Railway backend: OK (HTTP {response.status_code})")
-        except Exception as e:
-            ctx.add_detail("railway_connectivity", f"FAILED: {e}")
-            print_error(f"❌ Railway backend failed: {e}")
 
         # Test local services
         print_info("Testing local service connectivity...")
@@ -1744,6 +1742,7 @@ def run_network_diagnostics():
         print_info("Analyzing network interfaces...")
         try:
             import psutil
+            import socket
 
             interfaces = psutil.net_if_addrs()
             for interface, addrs in interfaces.items():
@@ -1754,10 +1753,21 @@ def run_network_diagnostics():
         except Exception as e:
             ctx.add_detail("interface_analysis_error", str(e))
             print_error(f"❌ Interface analysis failed: {e}")
+        # Network interface analysis
+        print_info("Analyzing network interfaces...")
+        try:
+            import psutil
+            import socket
 
-        print_success("Network diagnostics complete!")
-
-
+            interfaces = psutil.net_if_addrs()
+            for interface, addrs in interfaces.items():
+                for addr in addrs:
+                    if addr.family == socket.AF_INET:
+                        ctx.add_detail(f"interface_{interface}", addr.address)
+                        print_info(f"  {interface}: {addr.address}")
+        except Exception as e:
+            ctx.add_detail("interface_analysis_error", str(e))
+            print_error(f"❌ Interface analysis failed: {e}")
 # =============================================================================
 # CONFIGURATION MANAGEMENT
 # =============================================================================

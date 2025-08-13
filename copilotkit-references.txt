@@ -62,22 +62,9 @@ Install CopilotKit
 First, install the latest packages for CopilotKit.
 
 npm
-pnpm
-yarn
-bun
-
 npm install @copilotkit/react-ui @copilotkit/react-core
 Get a Copilot Cloud Public API Key
 Navigate to Copilot Cloud and follow the instructions to get a public API key - it's free!
-
-Setup the CopilotKit Provider
-The <CopilotKit> component must wrap the Copilot-aware parts of your application. For most use-cases, it's appropriate to wrap the CopilotKit provider around the entire app, e.g. in your layout.tsx.
-
-layout.tsx
-
-import "./globals.css";
-import { ReactNode } from "react";
-import { CopilotKit } from "@copilotkit/react-core"; 
  
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
@@ -92,8 +79,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   );
 }
 Choose a Copilot UI
-You are almost there! Now it's time to setup your Copilot UI.
-
 First, import the default styles in your root component (typically layout.tsx) :
 
 

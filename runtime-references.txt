@@ -11,22 +11,9 @@ Copilot Runtime
 @copilotkit/react-core
 LLM
 Copilot Runtime
-@copilotkit/react-core
-"Hey, my name is Uli."
-Request
-Response
 "Hello Uli, how can I help you?"
 Integration
 Step 1: Create an Endpoint
-Choose your provider:
-
-Google Generative AI (Gemini) logoGoogle Generative AI (Gemini)
-If you are planning to use a single LangGraph agent in agent-lock mode as your agentic backend, your LLM adapter will only be used for peripherals such as suggestions, etc.
-
-If you are not sure yet, simply ignore this note.
-
-Add your API key
-Next, add your API key to your .env file in the root of your project (unless you prefer to provide it directly to the client):
 
 .env
 
@@ -34,8 +21,6 @@ GOOGLE_API_KEY=your_api_key_here
 Setup the Runtime Endpoint
 Serverless Function Timeouts
 When deploying to serverless platforms (Vercel, AWS Lambda, etc.), be aware that default function timeouts may be too short for CopilotKit's streaming responses:
-
-Vercel defaults: 10s (Hobby), 15s (Pro)
 AWS Lambda default: 3s
 Solution options:
 
