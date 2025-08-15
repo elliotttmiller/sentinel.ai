@@ -1,0 +1,43 @@
+.agentic-ui-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+.agentic-ui-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.agentic-ui-input {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+.agentic-ui-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  background: #0070f3;
+  color: #fff;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.agentic-ui-result {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #f6f8fa;
+  border-radius: 6px;
+  font-size: 1.1rem;
+}
+.agentic-ui-steps {
+  margin-top: 2rem;
+}
+.agentic-ui-step {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}

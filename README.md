@@ -1,324 +1,217 @@
-# 🚀 COPILOT SYSTEM: FULL ARCHITECTURE & DIRECTORY OVERVIEW
 
----
+<img width="4096" height="1588" alt="header" src="https://github.com/user-attachments/assets/dd638592-fb74-4e22-8c55-49dfc4d0e462" />
 
-## 1. 📦 Directory Structure (Root, August 2025)
 
-copilot/
-│
-This overview reflects the current, active state of your workspace. All legacy files have been excluded. This structure is based on a full scan of your workspace as of August 2025.
+<br>
+  <div align="start" style="display:flex;justify-content:start;gap:16px;height:20px;margin: 0;">
+  <a href="https://www.npmjs.com/package/@copilotkit/react-core" target="_blank">
+    <img src="https://img.shields.io/npm/v/%40copilotkit%2Freact-core?logo=npm&logoColor=%23FFFFFF&label=Version&color=%236963ff" alt="NPM">
+  </a>
+
+  <a href="https://github.com/copilotkit/copilotkit/blob/main/LICENSE" target="_blank">
+    <img src="https://img.shields.io/github/license/copilotkit/copilotkit?color=%236963ff&label=License" alt="MIT">
+  </a>
+
+  <a href="https://discord.gg/6dffbvGU3D" target="_blank">
+    <img src="https://img.shields.io/discord/1122926057641742418?logo=discord&logoColor=%23FFFFFF&label=Discord&color=%236963ff" alt="Discord">
+  </a>
+  </div>
+  <br/>
+  <div>
+    <a href="https://www.producthunt.com/posts/copilotkit" target="_blank">
+    <img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=428778&theme=light&period=daily">
+  </a>
+  </div>
+
+## ⚡️ Quick Install
 
 ```
-copilot/
-│
-├── copilotkit-frontend/         # Modern React/Next.js frontend (CopilotKit UI)
-│   ├── .env                     # Frontend environment variables
-│   ├── package.json             # Frontend dependencies and scripts (npm/yarn)
-│   ├── README.md                # Frontend-specific documentation
-│   └── src/                     # Frontend source code
-│       ├── App.js / App.jsx     # Main React application component
-│       ├── index.js / index.css # Entry point and global styles
-│       ├── components/          # Reusable React UI components
-│       ├── context/             # React context providers for global state
-│       ├── hooks/               # Custom React hooks for component logic
-│       ├── pages/               # Next.js page components (app routes)
-│       ├── sentry.js            # Sentry integration for error tracking
-│       ├── setupProxy.js        # Proxy setup for API requests in dev
-│       ├── styles/              # Global/component stylesheets
-│       ├── utils/               # Frontend utility functions
-│       └── views/               # High-level UI views/screens
-│
-├── db/                          # Local database files for agent memory
-│   └── chroma_memory/           # ChromaDB vector storage for agent memory
-│       ├── chroma.sqlite3       # Main ChromaDB database file
-│       └── a71a6ad9-.../        # ChromaDB collection data (UUID-named folders)
-│
-├── src/                         # Python backend source code
-│   ├── __init__.py
-│   ├── cognitive_engine_service.py # Core service for the cognitive/AI engine
-│   ├── main.py                  # Backend entry point (FastAPI/Flask)
-│   ├── observability_manager.py # Logging, tracing, metrics
-│   ├── agents/                  # AI agent logic
-│   │   ├── __init__.py
-│   │   ├── advanced_agents.py
-│   │   ├── ai_task_parser.py
-│   │   ├── executable_agent.py
-│   │   ├── real_mission_executor.py
-│   │   └── simple_executable_agent.py
-│   ├── api/                     # API endpoint definitions
-│   │   ├── __init__.py
-│   │   └── copilotkit.py
-│   ├── config/                  # Backend config modules
-│   │   ├── __init__.py
-│   │   └── settings.py
-│   ├── core/                    # Core business logic
-│   │   ├── __init__.py
-│   │   ├── advanced_intelligence.py
-│   │   ├── blueprint_tasks.py
-│   │   ├── cognitive_forge_engine.py
-│   │   ├── enhanced_cognitive_forge_engine.py
-│   │   ├── execution_workflow.py
-│   │   ├── hybrid_decision_engine.py
-│   │   ├── real_mission_executor.py
-│   │   ├── sandbox_executor.py
-│   │   ├── sentinel_multi_agent_integration.py
-│   │   ├── supercharged_optimizer.py
-│   │   └── supercharged_websocket_manager.py
-│   ├── models/                  # Data models and DB logic
-│   │   ├── __init__.py
-│   │   ├── advanced_database.py
-│   │   ├── fix_database_schema.py
-│   │   └── fix_railway_database.py
-│   ├── tools/                   # Tools and utilities for agents
-│   │   ├── __init__.py
-│   │   ├── advanced_tools.py
-│   │   ├── file_system_tools.py
-│   │   ├── simple_file_system_tools.py
-│   │   └── specialized_tools.py
-│   └── utils/                   # General backend utilities
-│       ├── __init__.py
-│       ├── agent_observability.py
-│       ├── automated_debugger.py
-│       ├── auto_fix.py
-│       ├── crewai_bypass.py
-│       ├── debug_killer.py
-│       ├── debug_logger.py
-│       ├── fix_ai.py
-│       ├── google_ai_wrapper.py
-│       ├── guardian_protocol.py
-│       ├── json_parser.py
-│       ├── litellm_custom_provider.py
-│       ├── llm_patch.py
-│       ├── log_collector.py
-│       ├── manage_services.py
-│       ├── onnxruntime_fix.py
-│       ├── performance_optimizer.py
-│       ├── phoenix_protocol.py
-│       ├── self_learning_module.py
-│       ├── sentry_api_client.py
-│       ├── sentry_integration.py
-│       ├── synapse_logging.py
-│       ├── system_cheatsheet.txt
-│       ├── test_mission_system.py
-│       ├── test_onnxruntime_fix.py
-│       ├── weave_observability.py
-│       └── websocket_helpers.py
-│
-├── .env                         # Environment variables (API keys, DB strings) - NOT COMMITTED
-├── copilotkit-references.txt    # Reference notes for CopilotKit
-├── pyproject.toml               # Python project configuration (PEP 621)
-├── README.md                    # This file: System overview and documentation
-├── requirements.txt             # Python dependencies
-├── setup.cfg                    # Configuration for Python packaging tools
-├── SETUP_GUIDE.md               # Setup instructions
-```
-├── scripts/                     # Automation and utility scripts
-│   ├── apply_websocket_fix.py   # Applies patches for WebSocket issues
-│   ├── check_websocket_health.py# Monitors WebSocket connection health
-│   ├── fix_database_schema.py   # Migrates or repairs the DB schema
-│   ├── integration_test.py      # Runs integration tests
-│   ├── manage_services.py       # Script for managing system services
-│   ├── monitor_websockets.py    # Real-time WebSocket monitoring tool
-│   ├── start_sentinel.bat       # Windows batch script to start the system
-│   ├── start_sentinel.ps1       # PowerShell script to start the system
-│   ├── start_sentinel.py        # Python script to launch the system
-│   └── test_websocket.py        # Utility for testing WebSocket connections
-│
-├── src/                         # Python backend source code
-│   ├── __init__.py              # Makes 'src' a Python package
-│   ├── cognitive_engine_service.py # Core service for the cognitive/AI engine
-│   ├── main.py                  # Main entry point for the backend application (e.g., FastAPI/Flask)
-│   ├── observability_manager.py # Manages logging, tracing, and metrics
-│   ├── agents/                  # Logic for individual AI agents
-│   ├── api/                     # API endpoint definitions (FastAPI/Flask routers)
-│   ├── config/                  # Backend configuration modules
-│   ├── core/                    # Core business logic and services
-│   ├── models/                  # Data models (e.g., SQLAlchemy ORM models)
-│   ├── tools/                   # Tools and utilities used by agents or services
-│   └── utils/                   # General utility functions for the backend
-│
-├── static/                      # Static assets served by the backend (for simple HTML/Jinja2 frontends)
-│   ├── css/                     # CSS files
-│   ├── fonts/                   # Font files
-│   ├── images/                  # Image files
-│   └── js/                      # JavaScript files
-│
-├── templates/                   # HTML templates (e.g., Jinja2) for the simple frontend
-│   ├── ai-agents.html           # Template for the AI agents dashboard
-│   ├── analytics.html           # Template for the analytics dashboard
-│   ├── index.html               # Main landing page template
-│   ├── missions.html            # Template for the missions dashboard
-│   ├── settings.html            # Template for the settings page
-│   └── test-missions.html       # Template for testing missions
-│
-├── tests/                       # Automated tests for the backend
-│
-├── workspace/                   # Directory for temporary files, agent outputs, etc.
-│
-├── .env                         # Environment variables (API keys, DB connection strings) - NOT COMMITTED
-├── CREWAI_LLM_FIX_SUMMARY.md    # Documentation for CrewAI LLM fixes
-├── CRITICAL_FIXES_SUMMARY.md    # Summary of critical system fixes
-├── Dockerfile                   # Configuration for building a Docker container
-├── LLM_FIX_README.md            # README for LLM-related fixes
-├── README.md                    # This file: System overview and documentation
-├── SENTINEL_SYSTEM_OVERVIEW.md  # High-level overview of the Sentinel system
-├── SENTINEL_V6_INTEGRATION_COMPLETE.md # Notes on Sentinel v6 integration
-├── SETUP_GUIDE.md               # Instructions for setting up the system
-├── WEBSOCKET_DIAGNOSTIC_TOOLS.md# Documentation for WebSocket diagnostic tools
-├── WEBSOCKET_FIXES_SUMMARY.md   # Summary of WebSocket-related fixes
-├── copilot-integration.txt      # Notes on Copilot integration
-├── copilotkit-references.txt    # References for CopilotKit
-├── mission_details.json         # Example or default mission details
-├── multi_agent_config.toml      # Configuration for the multi-agent system
-├── pyproject.toml               # Python project configuration (PEP 621)
-├── railway.toml                 # Configuration for Railway deployments
-├── requirements.txt             # Python dependencies
-└── setup.cfg                    # Configuration for Python packaging tools (e.g., setuptools)
+  npx copilotkit@latest init
 ```
 
----
+<br/>
 
-## 2. 🗂️ File & Directory Explanations (In-Depth)
+<a href="https://docs.copilotkit.ai/?ref=github_readme">Read the Docs →</a>&nbsp;&nbsp;&nbsp;
+<a href="https://cloud.copilotkit.ai?ref=github_readme">Try Copilot Cloud →</a>&nbsp;&nbsp;&nbsp;
+<a href="https://discord.gg/6dffbvGU3D?ref=github_readme">Join our Discord →</a>
 
-### `copilotkit-frontend/`
-> **Purpose:** This is the main, modern user interface for the system, built with React and Next.js. It leverages the CopilotKit framework for rich, AI-powered features.
-> **How it Works:** It runs as a separate Node.js process, communicating with the Python backend via the API defined in `src/api/`. It handles all user interactions, dashboard displays, and real-time updates.
+## 🚀 Getting Started
 
-### `db/`
-> **Purpose:** Contains all local database files. This is crucial for development and testing without needing a cloud database.
-> - `sentinel_missions.db`: A simple SQLite database for storing mission data.
-> - `chroma_memory/`: A ChromaDB vector database used by AI agents to store and retrieve memories (embeddings), enabling long-term context and learning.
+1. Install: Run a simple CLI command
+1. Configure: Add CopilotKit provider to your app
+1. Customize: Use headless UI or the customizable pre-built components
+1. Deploy: You're done!
 
-### `logs/`
-> **Purpose:** Stores all runtime logs from the application. Essential for debugging and monitoring system health.
-> - `cognitive_engine.log`: Specific logs from the core AI decision-making services.
-> - `debug.log`: General-purpose debug logs.
+<br />
+  <a href="https://docs.copilotkit.ai/#get-started-now?ref=github_readme" target="_blank">
+    Complete getting started guide →
+  </a>
+<br />
+<br />
 
-### `scripts/`
-> **Purpose:** A collection of utility scripts for system management, maintenance, and testing.
-> **How it Works:** These are standalone scripts (Python, PowerShell, Batch) that can be run from the command line to perform tasks like starting services, checking health, or applying fixes.
+<img width="4096" height="2341" alt="Best in class support across the ecosystem" src="https://github.com/user-attachments/assets/bf399131-2a92-49f8-8748-38ed72353f9c" />
 
-### `src/`
-> **Purpose:** The heart of the Python backend. It contains all the core logic for the application.
-> **How it Works:** It runs a web server (like FastAPI or Flask) that exposes a REST API, orchestrates AI agents, interacts with the database, and manages the core business logic of the system.
-> - `main.py`: The entry point that starts the backend server.
-> - `agents/`: Defines the behaviors and capabilities of different AI agents.
-> - `api/`: Defines the REST API endpoints that the frontend consumes.
-> - `core/`: Contains the central business logic and service managers.
-> - `models/`: Defines the data structures (e.g., using SQLAlchemy) that map to database tables.
 
-### `static/` & `templates/`
-> **Purpose:** These directories support a simpler, server-side rendered frontend using a Python web framework like Flask or Django. The `static` folder holds assets (CSS, JS), and `templates` holds the HTML pages.
-> **Note:** This is likely a simpler or older UI. The primary, modern UI is in `copilotkit-frontend/`.
+## ✨ Why CopilotKit?
 
-### `tests/`
-> **Purpose:** Contains all automated tests for the Python backend. This ensures code quality and prevents regressions.
+- Minutes to integrate - Get started quickly with our CLI
+- Framework agnostic - Works with React, Next.js, AGUI and more
+- Production-ready UI - Use customizable components or build with headless UI
+- Built-in security - Prompt injection protection
+- Open source - Full transparency and community-driven
 
-### `workspace/`
-> **Purpose:** A temporary storage area for agents. Agents can use this directory to store intermediate files, outputs, or logs for a specific task.
+## 🧑‍💻 Real life use cases
 
-### Configuration Files (`.env`, `pyproject.toml`, `multi_agent_config.toml`)
-> **Purpose:** These files control the behavior of the system.
-> - `.env`: Stores secrets and environment-specific settings like API keys and database URLs. It is critical that this file is **not** committed to version control.
-> - `pyproject.toml`: The standard configuration file for modern Python projects. It defines dependencies, project metadata, and tool settings.
-> - `multi_agent_config.toml`: A custom configuration file for defining the settings and behaviors of the multi-agent system.
+<span>Deploy deeply-integrated AI assistants & agents that work alongside your users inside your applications.</span>
 
-### Documentation (`.md`, `.txt` files)
-> **Purpose:** A rich set of Markdown and text files that document the system's architecture, setup, and development history. This `README.md` is the central document.
+<img width="4096" height="2725" alt="Headless UI" src="https://github.com/user-attachments/assets/4dbe1e74-8b46-4798-a658-f79ee5a66189" />
 
----
 
-## 3. 🧠 System Logic & Data Flow
+## 🖥️ Code Samples
 
-### 3.1. **Frontend-Backend Interaction**
+<span>Drop in these building blocks and tailor them to your needs.</span>
 
-```mermaid
-flowchart LR
-    A[copilotkit-frontend (React/Next.js)] -- API Request (HTTP/REST) --> B[src/ (Python Backend) (FastAPI/Flask)]
-    B -- Read/Write data --> C[db/ (Databases) (SQLite & ChromaDB)]
-    B -- API Response --> A
-    B -- Orchestrate agent --> D[agents/, core/, tools/]
-    D -- Read/Write data --> C
-```
+<h3>Build with Headless APIs and Pre-Built Components</h3>
+
+```ts
+// Headless UI with full control
+const { visibleMessages, appendMessage, setMessages, ... } = useCopilotChat();
+
+// Pre-built components with deep customization options (CSS + pass custom sub-components)
+<CopilotPopup 
+  instructions={"You are assisting the user as best as you can. Answer in the best way possible given the data you have."} 
+  labels={{ title: "Popup Assistant", initial: "Need any help?" }} 
+/>
 ```
 
-### 3.2. **Agent Memory Flow**
-
-### 3.2. **Agent Memory Flow**
-
-```mermaid
-flowchart LR
-    A[src/agents/ (Agent Logic)] --> B[src/tools/ (Vector DB Tool)]
-    B --> C[db/chroma_memory/ (ChromaDB)]
-```
-```
-
----
-
-## 4. 🖼️ Visual System Map
-
-### 4. 🖼️ Visual System Map
-
-```mermaid
-flowchart TD
-    subgraph Frontend Layer
-        FE[copilotkit-frontend\nReact/Next.js]
-    end
-    subgraph Backend Layer
-        API[src/api\nREST API]
-        CORE[src/core\nBusiness Logic]
-        AGENTS[src/agents\nAI Engine]
-        MODELS[src/models\nData Models]
-    end
-    subgraph Persistence Layer
-        DB1[db/sentinel_missions.db\nSQLite]
-        DB2[db/chroma_memory\nChromaDB]
-    end
-
-    FE -- API Calls --> API
-    API -- Logic --> CORE
-    CORE -- Orchestrates --> AGENTS
-    CORE -- Uses --> MODELS
-    CORE -- Reads/Writes --> DB1
-    AGENTS -- Vector Memory --> DB2
+```ts
+// Frontend actions + generative UI, with full streaming support
+useCopilotAction({
+  name: "appendToSpreadsheet",
+  description: "Append rows to the current spreadsheet",
+  parameters: [
+    { name: "rows", type: "object[]", attributes: [{ name: "cells", type: "object[]", attributes: [{ name: "value", type: "string" }] }] }
+  ],
+  render: ({ status, args }) => <Spreadsheet data={canonicalSpreadsheetData(args.rows)} />,
+  handler: ({ rows }) => setSpreadsheet({ ...spreadsheet, rows: [...spreadsheet.rows, ...canonicalSpreadsheetData(rows)] }),
+});
 ```
 
----
+<h3>Integrate In-App CoAgents with LangGraph</h3>
 
-### 4.1. 🛠️ CI/CD & Deployment Pipeline
+```ts
+// Share state between app and agent
+const { agentState } = useCoAgent({ 
+  name: "basic_agent", 
+  initialState: { input: "NYC" } 
+});![banner](https://github.com/user-attachments/assets/b4d76fab-7439-4010-9319-a5b16546b569)
+![class-support-ecosystem](https://github.com/user-attachments/assets/65de96b7-dc12-4c3d-a704-30c2d3b0ea3c)
+![form-filling-copilot](https://github.com/user-attachments/assets/46b0ad80-33dc-4a49-94ba-f270a32fc123)
+![chat-with-your-data](https://github.com/user-attachments/assets/4ffd9b7a-86d9-4b22-9c17-148de581e7c6)
+![state-machine-copilot](https://github.com/user-attachments/assets/65581290-f4bd-4486-840b-27d3d0c77bc8)
 
-```mermaid
-flowchart LR
-    Dev[Developer] -->|Pushes code| GitHub[GitHub Repository]
-    GitHub -->|Triggers| Actions[GitHub Actions CI]
-    Actions -->|Runs tests, builds Docker image| Docker[Docker Image]
-    Docker -->|Pushes to| Registry[Container Registry]
-    Registry -->|Deploys| Cloud[Cloud/Server - Railway, AWS, Azure]
-    Cloud -->|Runs| System[Copilot System]
+
+// agentic generative UI
+useCoAgentStateRender({
+  name: "basic_agent",
+  render: ({ state }) => <WeatherDisplay {...state.final_response} />,
+});
+
+// Human in the Loop (Approval)
+useCopilotAction({
+  name: "email_tool",
+  parameters: [
+    {
+      name: "email_draft",
+      type: "string",
+      description: "The email content",
+      required: true,
+    },
+  ],
+  renderAndWaitForResponse: ({ args, status, respond }) => {
+    return (
+      <EmailConfirmation
+        emailContent={args.email_draft || ""}
+        isExecuting={status === "executing"}
+        onCancel={() => respond?.({ approved: false })}
+        onSend={() =>
+          respond?.({
+            approved: true,
+            metadata: { sentAt: new Date().toISOString() },
+          })
+        }
+      />
+    );
+  },
+});
 ```
+
+```ts
+// intermediate agent state streaming (supports both LangGraph.js + LangGraph python)
+const modifiedConfig = copilotKitCustomizeConfig(config, {
+  emitIntermediateState: [{ 
+    stateKey: "outline", 
+    tool: "set_outline", 
+    toolArgument: "outline" 
+  }],
+});
+const response = await ChatOpenAI({ model: "gpt-4o" }).invoke(messages, modifiedConfig);
 ```
+## 🏆 Featured Examples
 
----
 
-## 5. 🛠️ Key Workflows
+<p align="center">
+  <a href="https://www.copilotkit.ai/examples/form-filling-copilot">
+    <img width="290" height="304" alt="Banner 2 A" src="https://github.com/user-attachments/assets/90c42b54-8931-45ad-9c0b-53f7f67453a1" />
+  </a>
+  <a href="https://www.copilotkit.ai/examples/state-machine-copilot">
+    <img width="290" height="304" alt="Banner 2 A-1" src="https://github.com/user-attachments/assets/609c62eb-76af-4866-a353-5e3545470ec3" />
+  </a>
+  <a href="https://www.copilotkit.ai/examples/chat-with-your-data">
+    <img width="290" height="304" alt="Banner 2 A-2" src="https://github.com/user-attachments/assets/c614ac4e-d2b3-4514-9ef1-fdba04c0a082" />
+  </a>
+</p>
 
-### 5.1. **Mission Execution**
-1.  **Creation:** A user creates a new mission in the `copilotkit-frontend` UI.
-2.  **API Call:** The frontend sends a request to the backend's `/api/missions` endpoint.
-3.  **Storage:** The backend stores the new mission details in the `sentinel_missions.db`.
-4.  **Orchestration:** The `cognitive_engine_service` picks up the mission and assigns it to an appropriate agent from `src/agents/`.
-5.  **Execution:** The agent executes the task, using `src/tools/` and storing/retrieving information from `db/chroma_memory/` as needed.
-6.  **Updates:** As the agent works, it sends status updates back through the backend, which are reflected in the real-time UI.
-7.  **Completion:** Once the mission is complete, the final status is saved to the database.
+## 🖥️ AG-UI: The Agent–User Interaction Protocol
+Connect agent workflow to user-facing apps, with deep partnerships and 1st-party integrations across the agentic stack—including LangGraph, CrewAI, and more.
 
-----
 
-## 6. 📚 Additional Notes & Insights
-- **Dual Frontend:** The system appears to have two frontends: a modern, primary one in `copilotkit-frontend/` and a simpler, server-rendered one supported by `static/` and `templates/`. Understanding which one is active for development is key.
-- **Configuration is King:** The system's behavior is heavily controlled by configuration files (`.env`, `.toml`). This makes it flexible but also requires careful management of settings.
-- **Extensibility:** The architecture is highly modular. You can add new agents, tools, or API endpoints with minimal changes to the core system by adding files to the `src/agents`, `src/tools`, and `src/api` directories.
-- **Security:** The use of a `.env` file is a good security practice. Ensure it is never committed to your Git repository. Any scripts that execute shell commands should be carefully audited to prevent security vulnerabilities.
+  <a href="https://github.com/ag-ui-protocol/ag-ui" target="_blank">
+   Learn more in the AG-UI README →
+  </a>
 
----
+## 🤝 Community
+<h3>Have questions or need help?</h3>
+  <a href="https://discord.gg/6dffbvGU3D?ref=github_readme" target="_blank">
+   Join our Discord →
+  </a> </br>
+    <a href="https://docs.copilotkit.ai/?ref=github_readme" target="_blank">
+  Read the Docs →
+  </a> </br>
+    <a href="https://cloud.copilotkit.ai?ref=github_readme" target="_blank">
+   Try Copilot Cloud →
+  </a>
+<h3>Stay up to date with our latest releases!</h3>
+  <a href="https://www.linkedin.com/company/copilotkit/" target="_blank">
+   Follow us on LinkedIn →
+  </a> </br>
+    <a href="https://x.com/copilotkit" target="_blank">
+   Follow us on X →
+  </a> 
+  
+## 🙋🏽‍♂️ Contributing
 
-# END OF OVERVIEW
+Thanks for your interest in contributing to CopilotKit! 💜
+
+We value all contributions, whether it's through code, documentation, creating demo apps, or just spreading the word.
+
+Here are a few useful resources to help you get started:
+
+- For code contributions, [CONTRIBUTING.md](./CONTRIBUTING.md).
+- For documentation-related contributions, [check out the documentation contributions guide](https://docs.copilotkit.ai/contributing/docs-contributions?ref=github_readme).
+
+- Want to contribute but not sure how? [Join our Discord](https://discord.gg/6dffbvGU3D) and we'll help you out!
+
+## 📄 License
+
+This repository's source code is available under the [MIT License](https://github.com/CopilotKit/CopilotKit/blob/main/LICENSE).
